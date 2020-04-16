@@ -2,6 +2,7 @@
 /* eslint-disable */
 
 import { Codec } from '@polkadot/types/types';
+import { DefaultValues } from './poe';
 import { Balance, BalanceOf, Moment } from '@polkadot/types/interfaces/runtime';
 
 declare module '@polkadot/metadata/Decorated/consts/types' {
@@ -13,6 +14,13 @@ declare module '@polkadot/metadata/Decorated/consts/types' {
        * The minimum amount required to keep an account open.
        **/
       existentialDeposit: AugmentedConst<Balance>;
+    };
+    poe: {
+      [index: string]: AugmentedConst<object & Codec>;
+      /**
+       * Default values for the poe, like encoding scheme and hashing functions
+       **/
+      defaults: AugmentedConst<DefaultValues>;
     };
     timestamp: {
       [index: string]: AugmentedConst<object & Codec>;

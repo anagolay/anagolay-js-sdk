@@ -3,11 +3,11 @@
 
 import { AnyNumber } from '@polkadot/types/types';
 import { Compact, Option, Vec } from '@polkadot/types/codec';
-import { Bytes, u32, u64 } from '@polkadot/types/primitive';
+import { Bytes, u64 } from '@polkadot/types/primitive';
+import { Proof, Rule } from './poe';
 import { Extrinsic } from '@polkadot/types/interfaces/extrinsics';
 import { AccountId, AccountIndex, Address, Balance, Call, ChangesTrieConfiguration, KeyValue, LookupSource, Moment, Perbill } from '@polkadot/types/interfaces/runtime';
 import { Key } from '@polkadot/types/interfaces/system';
-import { Rule } from 'sensio-network/interfaces/poe';
 import { ApiTypes, SubmittableExtrinsic } from '@polkadot/api/types';
 
 declare module '@polkadot/api/types/submittable' {
@@ -68,24 +68,16 @@ declare module '@polkadot/api/types/submittable' {
        **/
       reportMisbehavior: AugmentedSubmittable<(report: Bytes | string | Uint8Array) => SubmittableExtrinsic<ApiType>>;
     };
-    poeModule: {
+    poe: {
       [index: string]: SubmittableExtrinsicFunction<ApiType>;
       /**
-       * Allow a user to claim ownership of an unclaimed proof
+       * Create proof and claim
        **/
-      createClaim: AugmentedSubmittable<(proof: Bytes | string | Uint8Array, payload: Bytes | string | Uint8Array) => SubmittableExtrinsic<ApiType>>;
+      createClaim: AugmentedSubmittable<(proofCid: Bytes | string | Uint8Array, payload: Proof | { ruleId?: any; proof?: any; creator?: any; forWhat?: any; body?: any; parent?: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>>;
       /**
-       * Create rule with type
+       * Create Rule
        **/
-      createRule: AugmentedSubmittable<(ruleCid: Bytes | string | Uint8Array, payload: Rule | { description?: any; createdAt?: any; creator?: any; version?: any; forWhat?: any; parent?: any; buildParams?: any; ops?: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>>;
-      /**
-       * create rule with decoding
-       **/
-      createRuleSimple: AugmentedSubmittable<(ruleCid: Bytes | string | Uint8Array, payload: Bytes | string | Uint8Array) => SubmittableExtrinsic<ApiType>>;
-      /**
-       * Allow the owner to revoke their claim
-       **/
-      revokeClaim: AugmentedSubmittable<(proof: Bytes | string | Uint8Array) => SubmittableExtrinsic<ApiType>>;
+      createRule: AugmentedSubmittable<(ruleCid: Bytes | string | Uint8Array, payload: Rule | { version?: any; description?: any; creator?: any; forWhat?: any; parent?: any; ops?: any; buildParams?: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>>;
     };
     sudo: {
       [index: string]: SubmittableExtrinsicFunction<ApiType>;
@@ -166,20 +158,6 @@ declare module '@polkadot/api/types/submittable' {
        * data is equal to its default value.
        **/
       suicide: AugmentedSubmittable<() => SubmittableExtrinsic<ApiType>>;
-    };
-    templateModule: {
-      [index: string]: SubmittableExtrinsicFunction<ApiType>;
-      /**
-       * Another dummy entry point.
-       * takes no parameters, attempts to increment storage value, and possibly throws an error
-       **/
-      causeError: AugmentedSubmittable<() => SubmittableExtrinsic<ApiType>>;
-      /**
-       * Just a dummy entry point.
-       * function that can be called by the external world as an extrinsics call
-       * takes a parameter of the type `AccountId`, stores it, and emits an event
-       **/
-      doSomething: AugmentedSubmittable<(something: u32 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>>;
     };
     timestamp: {
       [index: string]: SubmittableExtrinsicFunction<ApiType>;

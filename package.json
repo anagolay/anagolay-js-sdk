@@ -1,12 +1,17 @@
 {
-  "name": "code",
-  "version": "1.0.0",
   "main": "index.js",
+  "author": {
+    "email": "daniel@woss.io",
+    "name": "Daniel Maricic",
+    "url": "https://woss.io"
+  },
+  "private": true,
   "license": "MIT",
   "devDependencies": {
-    "@polkadot/dev": "^0.52.8",
     "@polkadot/typegen": "^1.9.1",
+    "@types/msgpack": "^0.0.30",
     "@types/node": "^13.11.0",
+    "@types/ramda": "^0.27.3",
     "@typescript-eslint/eslint-plugin": "^2.26.0",
     "@typescript-eslint/parser": "^2.26.0",
     "eslint": "^6.8.0",
@@ -15,17 +20,18 @@
     "prettier": "^2.0.2",
     "ts-node": "^8.8.2",
     "ts-node-dev": "^1.0.0-pre.44",
-    "typescript": "^3.8.3",
-    "webpack": "^4.42.1"
+    "typescript": "^3.8.3"
   },
   "scripts": {
-    "start": "tsnd --respawn  --watch **/*.ts ./src/index.ts",
+    "start": "tsnd --respawn --inspect  --watch ./src ./src/index.ts",
+    "dev": "yarn build:types; yarn start",
     "p:fix": "prettier --write ./**/*.{ts,tsx,js,md}",
     "l:check": "prettier --check ./**/*.{ts,tsx,js,md}",
     "l:fix": "prettier --write ./**/*.{ts,tsx,js,md}",
-    "build": "yarn generate:defs && yarn generate:meta",
-    "generate:defs": "ts-node --skip-project node_modules/.bin/polkadot-types-from-defs --package sensio-network/interfaces --input ./src/interfaces",
-    "generate:meta": "ts-node --skip-project node_modules/.bin/polkadot-types-from-chain --package sensio-network/interfaces --endpoint ./owlnet.json --output ./src/interfaces"
+    "build:types": "yarn update:owlnet; yarn generate:defs; yarn generate:meta",
+    "generate:defs": "ts-node --skip-project node_modules/.bin/polkadot-types-from-defs --package . --input ./src/interfaces",
+    "generate:meta": "ts-node --skip-project node_modules/.bin/polkadot-types-from-chain --package . --endpoint ./owlnet.json --output ./src/interfaces",
+    "update:owlnet": "rm -f owlnet.json; curl -H \"Content-Type: application/json\" -d '{\"id\":\"1\", \"jsonrpc\":\"2.0\", \"method\": \"state_getMetadata\", \"params\":[]}' http://localhost:9933 > owlnet.json"
   },
   "volta": {
     "node": "13.12.0"
@@ -40,6 +46,7 @@
     "imghash": "^0.0.6",
     "leven": "^3.1.0",
     "msgpack": "^1.0.3",
-    "multihashing-async": "^0.8.1"
+    "multihashing-async": "^0.8.1",
+    "ramda": "^0.27.0"
   }
 }

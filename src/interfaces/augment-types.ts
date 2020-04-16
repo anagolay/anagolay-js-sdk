@@ -3,6 +3,7 @@
 
 import { Compact, Option, Raw, Vec } from '@polkadot/types/codec';
 import { BitVec, Bytes, Data, Null, StorageKey, Text, Type, U256, Unconstructable, bool, i128, i16, i256, i32, i64, i8, u128, u16, u256, u32, u64, u8, usize } from '@polkadot/types/primitive';
+import { DefaultValues, ForWhat, Operation, Proof, Rule } from './poe';
 import { BlockAttestations, IncludedBlocks, MoreAttestations } from '@polkadot/types/interfaces/attestations';
 import { RawAuraPreDigest } from '@polkadot/types/interfaces/aura';
 import { ExtrinsicOrHash, ExtrinsicStatus } from '@polkadot/types/interfaces/author';
@@ -41,7 +42,6 @@ import { OpenTip, OpenTipFinder, OpenTipTip, TreasuryProposal } from '@polkadot/
 import { Multiplier } from '@polkadot/types/interfaces/txpayment';
 import { Multisig, Timepoint } from '@polkadot/types/interfaces/utility';
 import { VestingInfo } from '@polkadot/types/interfaces/vesting';
-import { Operation, Rule } from 'sensio-network/interfaces/poe';
 
 declare module '@polkadot/types/types/registry' {
   export interface InterfaceTypes {
@@ -1632,11 +1632,20 @@ declare module '@polkadot/types/types/registry' {
     StorageChangeSet: StorageChangeSet;
     'Option<StorageChangeSet>': Option<StorageChangeSet>;
     'Vec<StorageChangeSet>': Vec<StorageChangeSet>;
+    DefaultValues: DefaultValues;
+    'Option<DefaultValues>': Option<DefaultValues>;
+    'Vec<DefaultValues>': Vec<DefaultValues>;
+    ForWhat: ForWhat;
+    'Option<ForWhat>': Option<ForWhat>;
+    'Vec<ForWhat>': Vec<ForWhat>;
     Operation: Operation;
     'Option<Operation>': Option<Operation>;
     'Vec<Operation>': Vec<Operation>;
     Rule: Rule;
     'Option<Rule>': Option<Rule>;
     'Vec<Rule>': Vec<Rule>;
+    Proof: Proof;
+    'Option<Proof>': Option<Proof>;
+    'Vec<Proof>': Vec<Proof>;
   }
 }
