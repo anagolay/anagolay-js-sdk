@@ -4,13 +4,13 @@
 import { AnyNumber, ITuple } from '@polkadot/types/types';
 import { Option, Vec } from '@polkadot/types/codec';
 import { Bytes, bool, u32 } from '@polkadot/types/primitive';
+import { Proof, Rule } from './poe';
 import { AccountData, BalanceLock, ReleasesBalances } from '@polkadot/types/interfaces/balances';
 import { SetId, StoredPendingChange, StoredState } from '@polkadot/types/interfaces/grandpa';
 import { AccountId, Balance, BlockNumber, Hash, Moment, Weight } from '@polkadot/types/interfaces/runtime';
 import { SessionIndex } from '@polkadot/types/interfaces/session';
 import { AccountInfo, DigestOf, EventIndex, EventRecord, LastRuntimeUpgradeInfo, Phase } from '@polkadot/types/interfaces/system';
 import { Multiplier } from '@polkadot/types/interfaces/txpayment';
-import { Rule } from 'sensio-network/interfaces/poe';
 import { Observable } from 'rxjs';
 import { ApiTypes } from '@polkadot/api/types';
 
@@ -69,11 +69,16 @@ declare module '@polkadot/api/types/storage' {
        **/
       state: AugmentedQuery<ApiType, () => Observable<StoredState>> & QueryableStorageEntry<ApiType>;
     };
-    poeModule: {
+    poe: {
       [index: string]: QueryableStorageEntry<ApiType>;
-      proofs: AugmentedQuery<ApiType, (arg: Bytes | string | Uint8Array) => Observable<ITuple<[AccountId, BlockNumber, Hash]>>> & QueryableStorageEntry<ApiType>;
-      rules: AugmentedQuery<ApiType, (arg: Bytes | string | Uint8Array) => Observable<Rule>> & QueryableStorageEntry<ApiType>;
-      rulesSimple: AugmentedQuery<ApiType, (arg: Bytes | string | Uint8Array) => Observable<ITuple<[AccountId, Bytes]>>> & QueryableStorageEntry<ApiType>;
+      /**
+       * [proof_cid, Proof, AccountId BlockNumber]
+       **/
+      proofs: AugmentedQuery<ApiType, (arg: Hash | string | Uint8Array) => Observable<ITuple<[Bytes, Proof, AccountId, BlockNumber]>>> & QueryableStorageEntry<ApiType>;
+      /**
+       * [rule_cid, Rule, AccountId BlockNumber]
+       **/
+      rules: AugmentedQuery<ApiType, (arg: Hash | string | Uint8Array) => Observable<ITuple<[Bytes, Rule, AccountId, BlockNumber]>>> & QueryableStorageEntry<ApiType>;
     };
     randomnessCollectiveFlip: {
       [index: string]: QueryableStorageEntry<ApiType>;
@@ -160,10 +165,6 @@ declare module '@polkadot/api/types/storage' {
        * Hash of the previous block.
        **/
       parentHash: AugmentedQuery<ApiType, () => Observable<Hash>> & QueryableStorageEntry<ApiType>;
-    };
-    templateModule: {
-      [index: string]: QueryableStorageEntry<ApiType>;
-      something: AugmentedQuery<ApiType, () => Observable<Option<u32>>> & QueryableStorageEntry<ApiType>;
     };
     timestamp: {
       [index: string]: QueryableStorageEntry<ApiType>;
