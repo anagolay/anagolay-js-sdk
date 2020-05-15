@@ -2,7 +2,6 @@ import CID from 'cids';
 import { Tags } from 'exiftool-vendored';
 import { writeFileSync } from 'fs';
 import * as imghash from 'imghash';
-import leven from 'leven';
 import msgpack from 'msgpack';
 import mh from 'multihashing-async';
 
@@ -24,7 +23,10 @@ export function objectToStringMsgPack(o: Record<string, any>): string {
 }
 
 export function customTypesToJSON(types) {
-  return writeFileSync('./files/customTypes.json', JSON.stringify(types, null, 2));
+  return writeFileSync(
+    './files/customTypes.json',
+    JSON.stringify(types, null, 2),
+  );
 }
 
 /**
@@ -38,7 +40,9 @@ export function formatToUUID(uuid: string): string {
     return uuid;
   }
 
-  const r = new RegExp(/([A-Za-z0-9]{8})([A-Za-z0-9]{4})([A-Za-z0-9]{4})([A-Za-z0-9]{4})([A-Za-z0-9]{12})/gi);
+  const r = new RegExp(
+    /([A-Za-z0-9]{8})([A-Za-z0-9]{4})([A-Za-z0-9]{4})([A-Za-z0-9]{4})([A-Za-z0-9]{12})/gi,
+  );
 
   const matches = r.exec(uuid) as RegExpExecArray;
   if (matches.length !== 6) {
@@ -50,24 +54,28 @@ export function formatToUUID(uuid: string): string {
   return ret;
 }
 
-function calculateSimilarity(buf1: Buffer, buf2: Buffer): string {
-  const hash1 = imghash.hash('./img1');
-  const hash2 = imghash.hash('./img2');
+// function calculateSimilarity(buf1: Buffer, buf2: Buffer): string {
+//   const hash1 = imghash.hash('./img1');
+//   const hash2 = imghash.hash('./img2');
 
-  Promise.all([hash1, hash2]).then((results) => {
-    const dist = leven(results[0], results[1]);
-    console.log(`Distance between images is: ${dist}`);
-    if (dist <= 12) {
-      console.log('Images are similar');
-    } else {
-      console.log('Images are NOT similar');
-    }
-  });
+//   Promise.all([hash1, hash2]).then((results) => {
+//     const dist = leven(results[0], results[1]);
+//     console.log(`Distance between images is: ${dist}`);
+//     if (dist <= 12) {
+//       console.log('Images are similar');
+//     } else {
+//       console.log('Images are NOT similar');
+//     }
+//   });
 
-  return '';
-}
+//   return '';
+// }
 
-export async function calculateHash(data: Uint8Array, algo = 'blake2b', length = 256): Promise<Buffer> {
+export async function calculateHash(
+  data: Uint8Array,
+  algo = 'blake2b',
+  length = 256,
+): Promise<Buffer> {
   const hash = await mh(data, `${algo}-${length}`);
   return hash;
 }

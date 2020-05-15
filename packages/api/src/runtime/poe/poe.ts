@@ -37,7 +37,11 @@ export function createClaimTX(
             // console.log('\t', phase.toString(), `: ${section}.${method}`);
 
             if (error.isModule) {
-              const { documentation, name, section } = api.registry.findMetaError(error.asModule);
+              const {
+                documentation,
+                name,
+                section,
+              } = api.registry.findMetaError(error.asModule);
               console.error('\t', documentation.toString(), name, section);
               console.error('\tRejecting ...');
 
@@ -45,7 +49,12 @@ export function createClaimTX(
               // reject('ExtrinsicFailed');
               resolve();
             } else {
-              console.log('\t', phase.toString(), `: ${section}.${method}`, data.toString());
+              console.log(
+                '\t',
+                phase.toString(),
+                `: ${section}.${method}`,
+                data.toString(),
+              );
             }
           });
         } else if (status.isFinalized) {
@@ -96,7 +105,11 @@ export async function saveRuleToBlockchain(
             // console.log('\t', phase.toString(), `: ${section}.${method}`);
 
             if (error.isModule) {
-              const { documentation, name, section } = api.registry.findMetaError(error.asModule);
+              const {
+                documentation,
+                name,
+                section,
+              } = api.registry.findMetaError(error.asModule);
               console.error('\t', documentation.toString(), name, section);
               console.error('\tRejecting ...');
 
@@ -105,7 +118,12 @@ export async function saveRuleToBlockchain(
 
               resolve();
             } else {
-              console.log('\t', phase.toString(), `: ${section}.${method}`, data.toString());
+              console.log(
+                '\t',
+                phase.toString(),
+                `: ${section}.${method}`,
+                data.toString(),
+              );
               resolve();
             }
           });
@@ -130,7 +148,10 @@ export interface RuleInternalPayload {
   blockNumber: number;
 }
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-export async function getRules(api: ApiPromise, extended = false): Promise<RuleInternalPayload[]> {
+export async function getRules(
+  api: ApiPromise,
+  extended = false,
+): Promise<RuleInternalPayload[]> {
   const c = await api.query.poe.rules.entries();
   console.log(`FOUND ${c.length} rules`);
 
@@ -161,15 +182,21 @@ interface ProofInternalPayload {
  * @param api
  * @param extended
  */
-export async function getProofs(api: ApiPromise, extended = false): Promise<ProofInternalPayload[]> {
+export async function getProofs(
+  api: ApiPromise,
+  extended = false,
+): Promise<ProofInternalPayload[]> {
   const c = await api.query.poe.proofs.entries();
 
   console.log(`FOUND ${c.length} proofs`);
 
-  let rules: ProofInternalPayload[] = [];
+  let proofs: ProofInternalPayload[] = [];
 
-  rules = c.map(
-    ([key, [proofId, payload, accountId, blockNumber]]): ProofInternalPayload => {
+  proofs = c.map(
+    ([
+      key,
+      [proofId, payload, accountId, blockNumber],
+    ]): ProofInternalPayload => {
       if (extended) {
         console.log('KEY: ', key.args[0].toHex()); // this is the hash of the proofId
         // console.log('VALUE: ', JSON.parse(hexToString(payload.toHex())));
@@ -177,9 +204,12 @@ export async function getProofs(api: ApiPromise, extended = false): Promise<Proo
         console.log('BLOCK_NUMBER: ', blockNumber.toNumber());
       }
       // must hexToString to get the decoded value
-      return { proof: JSON.parse(hexToString(payload.toHex())), proofId: hexToString(proofId.toString()) };
+      return {
+        proof: JSON.parse(hexToString(payload.toHex())),
+        proofId: hexToString(proofId.toString()),
+      };
     },
   );
 
-  return rules;
+  return proofs;
 }

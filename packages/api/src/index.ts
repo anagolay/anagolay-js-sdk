@@ -2,9 +2,9 @@
 // import { createRulePayload } from './runtime/poe';
 
 import R from 'ramda';
+import { getAlice, setupConnection } from './api';
 import { createDefaultRules } from './runtime/poe/helpers';
 import { getProofs, getRules } from './runtime/poe/poe';
-import { getAlice, setupConnection } from './setupConnection';
 async function main(): Promise<void> {
   try {
     // await testStuff();
@@ -47,7 +47,12 @@ async function main(): Promise<void> {
 }
 
 main()
-  .catch((e) => console.error('Something went wrong with the connection or something else', e))
+  .catch((e) =>
+    console.error(
+      'Something went wrong with the connection or something else',
+      e,
+    ),
+  )
   .finally();
 /**
  *
