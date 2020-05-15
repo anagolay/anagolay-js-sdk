@@ -31,7 +31,10 @@ export async function processRule(
   const tags = await exiftool.read(filePath, []);
 
   if (writeMetadata) {
-    writeFileSync('./files/metadata/metadata-jpg.json', JSON.stringify(tags, null, 2));
+    writeFileSync(
+      './files/metadata/metadata-jpg.json',
+      JSON.stringify(tags, null, 2),
+    );
 
     writeFileSync(
       './files/metadata/metadata-jpg-raw.json',
@@ -55,7 +58,11 @@ export async function processRule(
   console.timeEnd('buildPayload took');
 
   console.time('buildPayload took');
-  const payloadString = encode(objectToString(payload), buildParams.encodeAlgo, buildParams.prefix);
+  const payloadString = encode(
+    objectToString(payload),
+    buildParams.encodeAlgo,
+    buildParams.prefix,
+  );
   console.timeEnd('buildPayload took');
 
   console.log('\n');
@@ -63,7 +70,11 @@ export async function processRule(
     payload: payloadString,
     proof: encode(
       await createCID(
-        await calculateHash(stringToU8a(payloadString), createProof.hashAlgo, createProof.hashBits),
+        await calculateHash(
+          stringToU8a(payloadString),
+          createProof.hashAlgo,
+          createProof.hashBits,
+        ),
       ).toString(),
     ),
     ruleId,
@@ -114,7 +125,11 @@ export async function processRule(
  * @param {Rule} r
  */
 
-async function executeOps(r: Rule, fileBuffer: Buffer, tags: Tags): Promise<string[]> {
+async function executeOps(
+  r: Rule,
+  fileBuffer: Buffer,
+  tags: Tags,
+): Promise<string[]> {
   const { ops } = r;
 
   return Promise.all(
@@ -130,7 +145,9 @@ async function executeOps(r: Rule, fileBuffer: Buffer, tags: Tags): Promise<stri
           mh = await calculateHash(b, hashAlgo, hashBits);
           h = await createCID(mh).toString();
           if (ops?.length) {
-            throw new Error(`ExecuteOps:: OP has more ops, we don't support that just yet.`);
+            throw new Error(
+              `ExecuteOps:: OP has more ops, we don't support that just yet.`,
+            );
           }
           ret = h;
           break;
@@ -140,7 +157,9 @@ async function executeOps(r: Rule, fileBuffer: Buffer, tags: Tags): Promise<stri
           h = await createCID(mh).toString();
 
           if (ops?.length) {
-            throw new Error(`ExecuteOps:: OP has more ops, we don't support that just yet.`);
+            throw new Error(
+              `ExecuteOps:: OP has more ops, we don't support that just yet.`,
+            );
           }
           ret = h;
           break;
@@ -148,7 +167,9 @@ async function executeOps(r: Rule, fileBuffer: Buffer, tags: Tags): Promise<stri
           const phash = await calculatePhash(fileBuffer);
           h = phash;
           if (ops?.length) {
-            throw new Error(`ExecuteOps:: OP has more ops, we don't support that just yet.`);
+            throw new Error(
+              `ExecuteOps:: OP has more ops, we don't support that just yet.`,
+            );
           }
           ret = h;
           break;
@@ -157,7 +178,9 @@ async function executeOps(r: Rule, fileBuffer: Buffer, tags: Tags): Promise<stri
           if (DocumentID) {
             h = DocumentID?.split(':')[1];
             if (ops?.length) {
-              throw new Error(`ExecuteOps:: OP has more ops, we don't support that just yet.`);
+              throw new Error(
+                `ExecuteOps:: OP has more ops, we don't support that just yet.`,
+              );
             }
             ret = h;
           }
@@ -167,7 +190,9 @@ async function executeOps(r: Rule, fileBuffer: Buffer, tags: Tags): Promise<stri
           if (OriginalDocumentID) {
             h = formatToUUID(OriginalDocumentID);
             if (ops?.length) {
-              throw new Error(`ExecuteOps:: OP has more ops, we don't support that just yet.`);
+              throw new Error(
+                `ExecuteOps:: OP has more ops, we don't support that just yet.`,
+              );
             }
             ret = h;
           }
@@ -197,7 +222,12 @@ function buildBody(rule: Rule, executedOps: string[]): PoePayload['body'] {
   return body;
 }
 
-function buildPayload(rule: Rule, ruleId: string, body: PoePayload['body'], prev = ''): PoePayload {
+function buildPayload(
+  rule: Rule,
+  ruleId: string,
+  body: PoePayload['body'],
+  prev = '',
+): PoePayload {
   // eslint-disable-next-line prefer-const
   return {
     body,

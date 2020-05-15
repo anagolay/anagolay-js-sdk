@@ -2,3 +2,5 @@ node_modules
 yarn-error.log
 files/metadata/*
 files/poe-requests/*
+build
+.env

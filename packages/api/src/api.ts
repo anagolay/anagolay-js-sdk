@@ -43,15 +43,20 @@ function showBlockInfo(api: ApiPromise): void {
  * Constants from PoE Runtime
  * @param api
  */
-export function constantsForPoe(api: ApiPromise): Promise<any> {
-  const { hashAlgo, hashBits, encodingAlgo, encodingPrefix }: DefaultValues = api.consts.poe.defaults;
+export function constantsForPoe(api: ApiPromise) {
+  const {
+    hashAlgo,
+    hashBits,
+    encodingAlgo,
+    encodingPrefix,
+  }: DefaultValues = api.consts.poe.defaults;
   const decoded = {
     hashAlgo: hexToString(hashAlgo.toHex()),
     hashBits: hashBits.toNumber(),
     encodingAlgo: hexToString(encodingAlgo.toHex()),
     encodingPrefix: hexToString(encodingPrefix.toHex()),
   };
-  console.log('Constants for poe: ', decoded);
+
   return decoded;
 }
 
@@ -70,7 +75,10 @@ export async function setupConnection(): Promise<ApiPromise> {
   // const allKnownCustomTypes = Object.assign({}, { Address: 'AccountId', LookupSource: 'AccountId' }, PoECustomTypes);
 
   // extract all types from definitions - fast and dirty approach, flatted on 'types'
-  const types = Object.values(definitions).reduce((res, { types }): object => ({ ...res, ...types }), {});
+  const types = Object.values(definitions).reduce(
+    (res, { types }): object => ({ ...res, ...types }),
+    {},
+  );
 
   // console.log('---- CUSTOM TYPES JSON ----\n');
   customTypesToJSON(types);
@@ -78,7 +86,9 @@ export async function setupConnection(): Promise<ApiPromise> {
 
   // Init the provider to connect to the local node
   // TODO put this in env or a constant
-  const provider = new WsProvider('ws://127.0.0.1:9944');
+  const provider = new WsProvider(
+    process.env.BLOCKCHAIN_PROVIDER_SOCKET || 'ws://127.0.0.1:9944',
+  );
 
   // Init the server
   api = await ApiPromise.create({
