@@ -1,7 +1,7 @@
 {
   "name": "@sensio/cli",
   "description": "Sensio CLI",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "author": "daniel@woss.io",
   "license": "Apache-2.0",
   "main": "lib/index.js",
@@ -27,8 +27,8 @@
     "@types/slug": "^0.9.1"
   },
   "dependencies": {
-    "@sensio/api": "^0.3.0",
-    "@sensio/types": "^0.3.0",
+    "@sensio/api": "^0.3.1",
+    "@sensio/types": "^0.3.1",
     "chalk": "^4.1.0",
     "clear": "^0.1.0",
     "commander": "^5.1.0",

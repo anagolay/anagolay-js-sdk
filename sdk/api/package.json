@@ -1,6 +1,6 @@
 {
   "name": "@sensio/api",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Sensio API module",
   "author": "jaksa.malisic@gmail.com",
   "main": "lib/index.js",
@@ -27,9 +27,9 @@
     "@polkadot/keyring": "^2.16.1",
     "@polkadot/util": "^3.0.1",
     "@polkadot/util-crypto": "^3.0.1",
-    "@sensio/op-sn-cid": "^0.3.0",
-    "@sensio/op-sn-json-enc": "^0.3.0",
-    "@sensio/types": "^0.3.0",
+    "@sensio/op-sn-cid": "^0.3.1",
+    "@sensio/op-sn-json-enc": "^0.3.1",
+    "@sensio/types": "^0.3.1",
     "ramda": "^0.27.0"
   },
   "scripts": {

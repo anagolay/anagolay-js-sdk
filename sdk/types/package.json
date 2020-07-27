@@ -1,12 +1,14 @@
 {
   "name": "@sensio/types",
   "description": "Sensio Custom and Auto-generated types and interfaces",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "license": "Apache-2.0",
   "author": "daniel@woss.io",
   "main": "lib/index.js",
   "types": "lib",
-  "files": ["lib/**/*"],
+  "files": [
+    "lib/**/*"
+  ],
   "directories": {
     "lib": "lib"
   },
@@ -38,6 +40,8 @@
   },
   "homepage": "https://gitlab.com/sensio_group/network-js#readme",
   "ts-standard": {
-    "ignore": ["lib"]
+    "ignore": [
+      "lib"
+    ]
   }
 }
