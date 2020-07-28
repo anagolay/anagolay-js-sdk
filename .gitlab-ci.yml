@@ -1,0 +1,22 @@
+image: node:14
+
+include:
+  - template: Dependency-Scanning.gitlab-ci.yml
+
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - node_modules/
+    - .yarn
+
+stages:
+  - test
+
+test_all_with_coverage:
+  stage: test
+  script:
+    - yarn
+    - yarn test:coverage
+  coverage: /All\sfiles.*?\s+(\d+.\d+)/
+  tags:
+    - docker

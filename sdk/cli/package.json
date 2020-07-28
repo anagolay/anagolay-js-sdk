@@ -1,0 +1,64 @@
+{
+  "name": "@sensio/cli",
+  "description": "Sensio CLI",
+  "version": "0.3.0",
+  "author": "daniel@woss.io",
+  "license": "Apache-2.0",
+  "main": "lib/index.js",
+  "types": "lib",
+  "files": [
+    "lib/**/*"
+  ],
+  "directories": {
+    "lib": "lib"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsc -b .",
+    "start": "ts-node -r tsconfig-paths/register  ./src/index.ts",
+    "dev": "ts-node-dev -r tsconfig-paths/register --watch ./src --cls --respawn ./src/index.ts",
+    "std": "ts-standard --fix"
+  },
+  "devDependencies": {
+    "@types/figlet": "^1.2.0",
+    "@types/fs-extra": "^9.0.1",
+    "@types/slug": "^0.9.1"
+  },
+  "dependencies": {
+    "@sensio/api": "^0.3.0",
+    "@sensio/types": "^0.3.0",
+    "chalk": "^4.1.0",
+    "clear": "^0.1.0",
+    "commander": "^5.1.0",
+    "figlet": "^1.4.0",
+    "fs-extra": "^9.0.1",
+    "inquirer": "^7.3.0",
+    "path": "^0.12.7",
+    "slug": "^3.3.0",
+    "ts-node-dev": "^1.0.0-pre.49",
+    "ts-standard": "^8.0.1",
+    "tsconfig-paths": "^3.9.0",
+    "typescript": "^3.9.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/sensio_group/network-js.git"
+  },
+  "bugs": {
+    "url": "https://gitlab.com/sensio_group/network-js/issues"
+  },
+  "homepage": "https://gitlab.com/sensio_group/network-js#readme",
+  "volta": {
+    "node": "14.5.0"
+  },
+  "engines": {
+    "node": "14.5.0"
+  },
+  "ts-standard": {
+    "ignore": [
+      "lib"
+    ]
+  }
+}

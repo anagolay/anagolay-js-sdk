@@ -1,0 +1,14 @@
+{
+  "files": [],
+  "references": [
+    { "path": "./snSplit" },
+    { "path": "./snCid" },
+    { "path": "./snJsonEnc" },
+    { "path": "./snJsonDec" },
+    { "path": "./snInput" },
+    { "path": "./snMatchAll" },
+    { "path": "./snMatchNone" },
+    { "path": "./snMultihash" },
+    { "path": "./snFile" }
+  ]
+}
