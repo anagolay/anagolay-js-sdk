@@ -1,0 +1,46 @@
+
+  # @sensio/op-sn-file
+
+  Blockchain Version **bafy2bzacedhpqt4cwketlhqrni6zih556dwaqfxojyqavnmkmwu3nnguxjmwc**
+  
+
+  ## Description 
+  
+  RAW file buffer for other ops to use.
+  
+  ##  Links and Repo
+
+  npm: https://www.npmjs.com/package/@sensio/op-sn-file
+  repo: [repo folder](https://gitlab.com/sensio_group/network-js/-/tree/master/operations/snFile)
+  support: [Discord server #dev channel](https://discord.gg/JsdKZ5K) 
+
+  ## Install
+  
+  ```sh
+  # install latest version
+  yarn add @sensio/op-sn-file
+
+  # or specific version
+  yarn add @sensio/op-sn-file@0.3.0
+  ```
+  
+  ## Usage
+  
+  ```ts
+  import snFile from '@sensio/op-sn-file'
+
+
+  const data = new U8intArray(7)
+  await snFile(data)
+  ```
+  
+  ## Contributing
+  
+  PRs accepted.
+  
+  ## License
+  
+  Longer version is in LICENSE file
+  
+  Apache-2.0 © [Sensio Group](https://sensio.group) 
+  

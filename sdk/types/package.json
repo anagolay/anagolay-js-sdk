@@ -1,0 +1,43 @@
+{
+  "name": "@sensio/types",
+  "description": "Sensio Custom and Auto-generated types and interfaces",
+  "version": "0.3.0",
+  "license": "Apache-2.0",
+  "author": "daniel@woss.io",
+  "main": "lib/index.js",
+  "types": "lib",
+  "files": ["lib/**/*"],
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "build": "tsc -b .",
+    "gen:types": "yarn update:owlnet; yarn gen:defs; yarn gen:meta; yarn gen:types:json; yarn std",
+    "gen:defs": "ts-node --skip-project node_modules/.bin/polkadot-types-from-defs --package . . --input ./src/interfaces",
+    "gen:meta": "ts-node --skip-project node_modules/.bin/polkadot-types-from-chain --package . . --endpoint ./sensio-network.json --output ./src/interfaces",
+    "update:owlnet": "rm -f ./sensio-network.json; curl -H \"Content-Type: application/json\" -d '{\"id\":\"1\", \"jsonrpc\":\"2.0\", \"method\": \"state_getMetadata\", \"params\":[]}' http://localhost:9933 > ./sensio-network.json",
+    "gen:types:json": "ts-node ./src/gen_types_json.ts",
+    "std": "ts-standard --fix"
+  },
+  "dependencies": {
+    "ts-standard": "^8.0.1"
+  },
+  "devDependencies": {
+    "@polkadot/typegen": "^1.21.1",
+    "typescript": "^3.9.5"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/sensio_group/network-js.git"
+  },
+  "bugs": {
+    "url": "https://gitlab.com/sensio_group/network-js/issues"
+  },
+  "homepage": "https://gitlab.com/sensio_group/network-js#readme",
+  "ts-standard": {
+    "ignore": ["lib"]
+  }
+}

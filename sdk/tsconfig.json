@@ -1,0 +1,17 @@
+{
+  "files": [],
+  "references": [
+    { "path": "api" },
+    { "path": "cli" },
+    { "path": "types" },
+    { "path": "../operations/snSplit" },
+    { "path": "../operations/snCid" },
+    { "path": "../operations/snJsonEnc" },
+    { "path": "../operations/snJsonDec" },
+    { "path": "../operations/snInput" },
+    { "path": "../operations/snMatchAll" },
+    { "path": "../operations/snMatchNone" },
+    { "path": "../operations/snMultihash" },
+    { "path": "../operations/snFile" }
+  ]
+}

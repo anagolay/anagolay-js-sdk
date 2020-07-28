@@ -1,29 +1,67 @@
 {
-  "author": {
-    "email": "daniel@woss.io",
-    "name": "Daniel Maricic",
-    "url": "https://woss.io"
-  },
+  "author": "daniel@woss.io",
   "private": true,
   "workspaces": [
-    "packages/*"
+    "sdk/*",
+    "operations/*"
   ],
-  "devDependencies": {
-    "lerna": "^3.20.2",
-    "@typescript-eslint/eslint-plugin": "^2.26.0",
-    "@typescript-eslint/parser": "^2.26.0",
-    "eslint": "^6.8.0",
-    "eslint-config-prettier": "^6.10.1",
-    "eslint-plugin-prettier": "^3.1.2",
-    "prettier": "^2.0.2"
-  },
+  "license": "Apache-2.0",
   "scripts": {
     "boot": "lerna bootstrap",
-    "start": "cd packages/app; yarn start",
-    "build:types": "lerna run build:types --scope @sensio/api",
-    "p:fix": "prettier --write ./packages/*/src/**.{ts,tsx,js,md}",
-    "l:check": "prettier --check ./packages/*/src/**.{ts,tsx,js,md}",
-    "l:fix": "prettier --write ./packages/*/src/**.{ts,tsx,js,md}"
+    "std": "lerna run std",
+    "build": "lerna run build",
+    "test": "jest --runInBand",
+    "test:watch": "jest --runInBand --watch",
+    "test:coverage": "jest --runInBand --coverage",
+    "demo": "ts-node-dev -r tsconfig-paths/register  --cls --respawn --watch ./examples/demo/src/**/*  --inspect  -- ./examples/demo/src/index.ts",
+    "demo:ops": "ts-node-dev -r tsconfig-paths/register  --cls --respawn --watch ./examples/demo/src/**/*  --inspect  -- ./examples/demo/src/index.ts ops",
+    "demo:woss": "ts-node-dev -r tsconfig-paths/register  --cls --respawn --files --debug --transpileOnly --watch ./examples/woss/src/**/* -- ./examples/woss/src/index.ts",
+    "benchmark": "lerna run bench --scope benchmark",
+    "clean": "yarn lerna clean",
+    "postinstall": "yarn boot",
+    "cli:regen-ops": "cd sdk/cli && yarn start scaffold-operations && cd ../../ && yarn std"
   },
-  "license": "Apache-2.0"
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn std",
+      "pre-push": "yarn test"
+    }
+  },
+  "volta": {
+    "node": "14.5.0"
+  },
+  "engines": {
+    "node": "14.5.0"
+  },
+  "dependencies": {
+    "@types/jest": "^26.0.4",
+    "@types/node": "^14.0.14",
+    "@typescript-eslint/eslint-plugin": "^3.7.0",
+    "@typescript-eslint/parser": "^3.7.0",
+    "concurrently": "^5.2.0",
+    "eslint": "^7.3.1",
+    "eslint-config-standard-jsx": "^8.1.0",
+    "eslint-config-standard-react": "^9.2.0",
+    "eslint-config-standard-with-typescript": "18",
+    "eslint-plugin-import": "2",
+    "eslint-plugin-node": "11",
+    "eslint-plugin-promise": "4",
+    "eslint-plugin-react": "^7.20.0",
+    "eslint-plugin-standard": "4",
+    "husky": "^4.2.5",
+    "jest": "^26.1.0",
+    "kind-of": "^6.0.3",
+    "lerna": "^3.22.1",
+    "standard-version": "^8.0.0",
+    "standardx": "^5.0.0",
+    "babel-eslint": "^10.1.0",
+    "ts-jest": "^26.1.1",
+    "ts-node-dev": "^1.0.0-pre.49",
+    "tsconfig-paths": "^3.9.0",
+    "typedoc": "^0.17.7",
+    "typescript": "^3.9.5"
+  },
+  "standardx": {
+    "parser": "babel-eslint"
+  }
 }

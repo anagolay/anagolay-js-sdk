@@ -1,0 +1,33 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@sensio/api": ["sdk/api/src"],
+      "@sensio/api/*": ["sdk/api/src/*"],
+      "@sensio/types": ["sdk/types/src"],
+      "@sensio/types/*": ["sdk/types/src/*"],
+      "@sensio/utils": ["sdk/utils/src"],
+      "@sensio/utils/*": ["sdk/utils/src/*"],
+      "@sensio/cli": ["sdk/cli/src"],
+      "@sensio/cli/*": ["sdk/cli/src/*"],
+      "@sensio/op-sn-split": ["operations/snSplit/src"],
+      "@sensio/op-sn-split/*": ["operations/snSplit/src/*"],
+      "@sensio/op-sn-cid": ["operations/snCid/src"],
+      "@sensio/op-sn-cid/*": ["operations/snCid/src/*"],
+      "@sensio/op-sn-json-enc": ["operations/snJsonEnc/src"],
+      "@sensio/op-sn-json-enc/*": ["operations/snJsonEnc/src/*"],
+      "@sensio/op-sn-json-dec": ["operations/snJsonDec/src"],
+      "@sensio/op-sn-json-dec/*": ["operations/snJsonDec/src/*"],
+      "@sensio/op-sn-input": ["operations/snInput/src"],
+      "@sensio/op-sn-input/*": ["operations/snInput/src/*"],
+      "@sensio/op-sn-match-all": ["operations/snMatchAll/src"],
+      "@sensio/op-sn-match-all/*": ["operations/snMatchAll/src/*"],
+      "@sensio/op-sn-match-none": ["operations/snMatchNone/src"],
+      "@sensio/op-sn-match-none/*": ["operations/snMatchNone/src/*"],
+      "@sensio/op-sn-multihash": ["operations/snMultihash/src"],
+      "@sensio/op-sn-multihash/*": ["operations/snMultihash/src/*"],
+      "@sensio/op-sn-file": ["operations/snFile/src"],
+      "@sensio/op-sn-file/*": ["operations/snFile/src/*"]
+    }
+  }
+}
