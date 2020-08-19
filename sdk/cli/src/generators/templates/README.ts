@@ -1,3 +1,4 @@
+/*  eslint-disable @typescript-eslint/restrict-template-expressions */
 import { stringCamelCase } from '@polkadot/util'
 import { SnOperation } from '@sensio/types'
 import { generateNpmName } from '../index'
@@ -5,7 +6,7 @@ import { generateNpmName } from '../index'
 export default function generate (op: SnOperation): string {
   const npmName = generateNpmName(op.data.name)
   const opName: string = stringCamelCase(op.data.name)
-  const version = '0.3.0'
+  const version = '0.3.1'
   return `
   # ${npmName}
 
@@ -18,9 +19,9 @@ export default function generate (op: SnOperation): string {
   
   ##  Links and Repo
 
-  npm: https://www.npmjs.com/package/${npmName}
-  repo: [repo folder](https://gitlab.com/sensio_group/network-js/-/tree/master/operations/${opName})
-  support: [Discord server #dev channel](https://discord.gg/JsdKZ5K) 
+  * npm: https://www.npmjs.com/package/${npmName}
+  * repo: [repo folder](https://gitlab.com/sensio_group/network-js/-/tree/master/operations/${opName})
+  * support: [Discord server #dev channel](https://discord.gg/JsdKZ5K) 
 
   ## Install
   

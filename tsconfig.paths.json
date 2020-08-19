@@ -2,6 +2,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
+      "@root/*": ["/*"],
       "@sensio/api": ["sdk/api/src"],
       "@sensio/api/*": ["sdk/api/src/*"],
       "@sensio/types": ["sdk/types/src"],
@@ -10,16 +11,16 @@
       "@sensio/utils/*": ["sdk/utils/src/*"],
       "@sensio/cli": ["sdk/cli/src"],
       "@sensio/cli/*": ["sdk/cli/src/*"],
+      "@sensio/op-sn-enc-hex": ["operations/snEncHex/src"],
+      "@sensio/op-sn-enc-hex/*": ["operations/snEncHex/src/*"],
       "@sensio/op-sn-split": ["operations/snSplit/src"],
       "@sensio/op-sn-split/*": ["operations/snSplit/src/*"],
-      "@sensio/op-sn-cid": ["operations/snCid/src"],
-      "@sensio/op-sn-cid/*": ["operations/snCid/src/*"],
       "@sensio/op-sn-json-enc": ["operations/snJsonEnc/src"],
       "@sensio/op-sn-json-enc/*": ["operations/snJsonEnc/src/*"],
       "@sensio/op-sn-json-dec": ["operations/snJsonDec/src"],
       "@sensio/op-sn-json-dec/*": ["operations/snJsonDec/src/*"],
-      "@sensio/op-sn-input": ["operations/snInput/src"],
-      "@sensio/op-sn-input/*": ["operations/snInput/src/*"],
+      "@sensio/op-sn-identity": ["operations/snIdentity/src"],
+      "@sensio/op-sn-identity/*": ["operations/snIdentity/src/*"],
       "@sensio/op-sn-match-all": ["operations/snMatchAll/src"],
       "@sensio/op-sn-match-all/*": ["operations/snMatchAll/src/*"],
       "@sensio/op-sn-match-none": ["operations/snMatchNone/src"],
@@ -27,7 +28,21 @@
       "@sensio/op-sn-multihash": ["operations/snMultihash/src"],
       "@sensio/op-sn-multihash/*": ["operations/snMultihash/src/*"],
       "@sensio/op-sn-file": ["operations/snFile/src"],
-      "@sensio/op-sn-file/*": ["operations/snFile/src/*"]
+      "@sensio/op-sn-file/*": ["operations/snFile/src/*"],
+      "@sensio/op-sn-cid": ["operations/snCid/src"],
+      "@sensio/op-sn-cid/*": ["operations/snCid/src/*"],
+      "@sensio/op-sn-image-metadata-hash": [
+        "operations/snImageMetadataHash/src"
+      ],
+      "@sensio/op-sn-image-metadata-hash/*": [
+        "operations/snImageMetadataHash/src/*"
+      ],
+      "@sensio/op-sn-raw-pixels-hash": ["operations/snRawPixelsHash/src"],
+      "@sensio/op-sn-raw-pixels-hash/*": ["operations/snRawPixelsHash/src/*"],
+      "@sensio/op-sn-image-metadata": ["operations/snImageMetadata/src"],
+      "@sensio/op-sn-image-metadata/*": ["operations/snImageMetadata/src/*"],
+      "@sensio/op-sn-image-phash": ["operations/snImagePhash/src"],
+      "@sensio/op-sn-image-phash/*": ["operations/snImagePhash/src/*"]
     }
   }
 }

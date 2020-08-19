@@ -1,29 +1,33 @@
 import { u8aToString, u8aToU8a } from '@polkadot/util'
-import { SnAny, SnByteArray, SnReturnParams } from '@sensio/types'
-
-interface InputParams {
-  childrenOutputs?: SnReturnParams[]
-  data: SnByteArray
-}
-
-interface ReturnParams extends SnReturnParams {
-  output: SnAny
-  decode: () => SnAny
-}
+import { SnForWhat } from '@sensio/types'
+import config from './config'
+import { InputParams, ReturnParams } from './interfaces'
 
 /**
-* @function snJsonDec
-* @description Wrapper of JSON.parse()
-* @param {InputParams} params InputParams
-* @return {Promise<ReturnParams>} output () and decoder function
-*/
-export default async function snJsonDec (params: InputParams): Promise<ReturnParams> {
-  const { data } = params
+ * @function snJsonDec
+ * @description Wrapper of JSON.parse()
+ * @param {InputParams} params InputParams
+ * @return {Promise<ReturnParams>} output () and decoder function
+ */
+export default async function snJsonDec (
+  params: InputParams
+): Promise<ReturnParams> {
+  const inputLength = config.data.input.length
+  const fcOpType = config.data.groups.includes(SnForWhat.FLOWCONTROL)
 
-  const val = JSON.parse(u8aToString(data))
+  if (!fcOpType && params.length !== inputLength) {
+    throw new Error('Got wrong amount of inputs.')
+  }
 
-  return {
-    output: u8aToU8a(val),
-    decode: () => val
+  if (inputLength === 1) {
+    const data = params[inputLength - 1]
+    const val = JSON.parse(u8aToString(data.data))
+
+    return {
+      data: u8aToU8a(val),
+      decode: () => val
+    }
+  } else {
+    throw new Error("This operation doesn't support more than one input param ")
   }
 }

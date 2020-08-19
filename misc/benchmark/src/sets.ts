@@ -3,7 +3,6 @@ import { Operation } from '@sensio/types/operations/interfaces'
 export const op: Operation = {
   id: 'ss' + Math.random().toString(),
   data: {
-    childrenOutputs: [],
     input: [
       {
         name: 'statements',

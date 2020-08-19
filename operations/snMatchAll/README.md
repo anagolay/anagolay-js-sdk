@@ -1,7 +1,7 @@
 
   # @sensio/op-sn-match-all
 
-  Blockchain Version **bafy2bzaceaywejj6dhdphszfagz33zau5zzhce7uqebixn7ldzjodhcumiqqm**
+  Blockchain Version **bafy2bzacecxvve6bdbjvokspk2ocvk6m2yvrykcguzluf6q2criwnwzz4hnnw**
   
 
   ## Description 
@@ -10,9 +10,9 @@
   
   ##  Links and Repo
 
-  npm: https://www.npmjs.com/package/@sensio/op-sn-match-all
-  repo: [repo folder](https://gitlab.com/sensio_group/network-js/-/tree/master/operations/snMatchAll)
-  support: [Discord server #dev channel](https://discord.gg/JsdKZ5K) 
+  * npm: https://www.npmjs.com/package/@sensio/op-sn-match-all
+  * repo: [repo folder](https://gitlab.com/sensio_group/network-js/-/tree/master/operations/snMatchAll)
+  * support: [Discord server #dev channel](https://discord.gg/JsdKZ5K) 
 
   ## Install
   
@@ -21,7 +21,7 @@
   yarn add @sensio/op-sn-match-all
 
   # or specific version
-  yarn add @sensio/op-sn-match-all@0.3.0
+  yarn add @sensio/op-sn-match-all@0.3.1
   ```
   
   ## Usage

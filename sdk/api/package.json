@@ -2,14 +2,8 @@
   "name": "@sensio/api",
   "version": "0.3.1",
   "description": "Sensio API module",
-  "author": "jaksa.malisic@gmail.com",
-  "main": "lib/index.js",
-  "files": [
-    "lib/**/*"
-  ],
-  "directories": {
-    "lib": "lib"
-  },
+  "author": "Daniel Maricic <daniel@woss.io>",
+  "main": "src/index",
   "publishConfig": {
     "access": "public"
   },
@@ -30,7 +24,9 @@
     "@sensio/op-sn-cid": "^0.3.1",
     "@sensio/op-sn-json-enc": "^0.3.1",
     "@sensio/types": "^0.3.1",
-    "ramda": "^0.27.0"
+    "brcast": "^3.0.2",
+    "ramda": "^0.27.0",
+    "tree-traversal": "^1.1.1"
   },
   "scripts": {
     "build": "tsc -b .",

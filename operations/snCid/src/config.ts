@@ -2,39 +2,54 @@
  * Operation specification
  */
 
-export const config = {
-  id: 'bafy2bzacebax2jywifp3h3enzj5o7vpj3yh6pmz3ez5hpfuji7h6ztpcg6gua',
+export default {
+  id: 'bafy2bzacebvd3b7upai2av3w33dwrwqkh7w7qvbon6obi6q4evw6pqe744npu',
   data: {
     name: 'sn_cid',
     desc: 'Generic CID, defaults to base32 and dag-cbor for Any kind of data.',
     input: [
       {
-        name: 'data',
-        desc: 'Any kind of data',
-        whatType: 'SnByteArray',
-        value: ''
+        data: 'SnByteArray',
+        decoded: 'SnBuffer'
       }
     ],
-    childrenOutputs: [],
     groups: [
       6
     ],
-    ops: [],
-    priority: 0,
+    priority: 1,
     output: {
-      opName: 'sn_cid',
       desc: 'CID string converted into SnByteArray',
       output: 'SnByteArray',
       decoded: 'SnString'
     },
-    hashing: {
-      bits: 256,
-      algo: 'blake2b'
-    },
-    encoding: {
-      prefix: true,
-      algo: 'hex'
-    }
+    hashingOp: '',
+    encOp: '',
+    ops: [
+      {
+        id: 'bafy2bzacea24txwqzwanzte5laqhsy3umk4wq43h3llvlvkebp7gv73kzuzsi',
+        data: {
+          name: 'sn_multihash',
+          desc: 'Generic blake2b-256 multihash operation.',
+          input: [
+            {
+              data: 'SnByteArray',
+              decoded: 'SnAny'
+            }
+          ],
+          groups: [
+            6
+          ],
+          priority: 0,
+          output: {
+            desc: 'Returns the Multihash buffer as SnByteArray.',
+            output: 'SnByteArray',
+            decoded: 'SnBuffer'
+          },
+          hashingOp: 'sn_cid',
+          encOp: 'sn_enc_hex',
+          ops: []
+        }
+      }
+    ]
   }
 }
-export default config

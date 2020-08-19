@@ -1,7 +1,7 @@
 
   # @sensio/op-sn-multihash
 
-  Blockchain Version **bafy2bzacease5ld7nzauto7flalosubmmzmztwfke2fv74nenrl7ny764v6ou**
+  Blockchain Version **bafy2bzacea24txwqzwanzte5laqhsy3umk4wq43h3llvlvkebp7gv73kzuzsi**
   
 
   ## Description 
@@ -10,9 +10,9 @@
   
   ##  Links and Repo
 
-  npm: https://www.npmjs.com/package/@sensio/op-sn-multihash
-  repo: [repo folder](https://gitlab.com/sensio_group/network-js/-/tree/master/operations/snMultihash)
-  support: [Discord server #dev channel](https://discord.gg/JsdKZ5K) 
+  * npm: https://www.npmjs.com/package/@sensio/op-sn-multihash
+  * repo: [repo folder](https://gitlab.com/sensio_group/network-js/-/tree/master/operations/snMultihash)
+  * support: [Discord server #dev channel](https://discord.gg/JsdKZ5K) 
 
   ## Install
   
@@ -21,7 +21,7 @@
   yarn add @sensio/op-sn-multihash
 
   # or specific version
-  yarn add @sensio/op-sn-multihash@0.3.0
+  yarn add @sensio/op-sn-multihash@0.3.1
   ```
   
   ## Usage

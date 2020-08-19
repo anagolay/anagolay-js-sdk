@@ -4,22 +4,15 @@
 import { Struct, Vec } from '@polkadot/types/codec'
 import { AccountId, BlockNumber } from '@polkadot/types/interfaces/runtime'
 import { Bytes, u32 } from '@polkadot/types/primitive'
-import {
-  DefaultsEncoding,
-  DefaultsHashing,
-  ForWhat,
-  GenericId
-} from '../sensio'
+import { ForWhat, GenericId } from '../sensio'
 
 /** @name ChildOutput */
 export interface ChildOutput extends Bytes {}
 
 /** @name CustomInputParam */
 export interface CustomInputParam extends Struct {
-  readonly name: Bytes
-  readonly desc: Bytes
-  readonly whatType: Bytes
-  readonly value: Bytes
+  readonly data: Bytes
+  readonly decoded: Bytes
 }
 
 /** @name Operation */
@@ -32,11 +25,10 @@ export interface Operation extends Struct {
 export interface OperationData extends Struct {
   readonly name: Bytes
   readonly desc: Bytes
-  readonly childrenOutputs: Vec<ChildOutput>
   readonly input: Vec<CustomInputParam>
   readonly output: OperationOutput
-  readonly hashing: DefaultsHashing
-  readonly encoding: DefaultsEncoding
+  readonly hashingOp: Bytes
+  readonly encOp: Bytes
   readonly groups: Vec<ForWhat>
   readonly priority: u32
   readonly ops: Vec<Operation>
@@ -51,7 +43,6 @@ export interface OperationInfo extends Struct {
 
 /** @name OperationOutput */
 export interface OperationOutput extends Struct {
-  readonly opName: Bytes
   readonly desc: Bytes
   readonly output: Bytes
   readonly decoded: Bytes

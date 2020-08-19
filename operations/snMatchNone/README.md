@@ -1,7 +1,7 @@
 
   # @sensio/op-sn-match-none
 
-  Blockchain Version **bafy2bzacedoei5dfhgu4yuyixcbjzadlsx2drpan6azwqfzowrnggru7rdynq**
+  Blockchain Version **bafy2bzaceav6aryxb4qisakn64r4irptupvljhiv5l3xxiamlxiglrh2wyq2e**
   
 
   ## Description 
@@ -10,9 +10,9 @@
   
   ##  Links and Repo
 
-  npm: https://www.npmjs.com/package/@sensio/op-sn-match-none
-  repo: [repo folder](https://gitlab.com/sensio_group/network-js/-/tree/master/operations/snMatchNone)
-  support: [Discord server #dev channel](https://discord.gg/JsdKZ5K) 
+  * npm: https://www.npmjs.com/package/@sensio/op-sn-match-none
+  * repo: [repo folder](https://gitlab.com/sensio_group/network-js/-/tree/master/operations/snMatchNone)
+  * support: [Discord server #dev channel](https://discord.gg/JsdKZ5K) 
 
   ## Install
   
@@ -21,7 +21,7 @@
   yarn add @sensio/op-sn-match-none
 
   # or specific version
-  yarn add @sensio/op-sn-match-none@0.3.0
+  yarn add @sensio/op-sn-match-none@0.3.1
   ```
   
   ## Usage

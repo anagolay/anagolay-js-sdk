@@ -4,15 +4,15 @@
     "outDir": "lib",
     "rootDir": "src"
   },
-  "include": [
-    "./src"
-  ],
-  "exclude": [
-    "lib"
-  ],
+  "include": ["./src"],
+  "exclude": ["lib"],
   "references": [
     {
       "path": "../../sdk/types"
+    },
+
+    {
+      "path": "../snMultihash"
     }
   ]
 }

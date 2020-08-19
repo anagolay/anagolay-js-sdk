@@ -2,39 +2,28 @@
  * Operation specification
  */
 
-export const config = {
-  id: 'bafy2bzacec6ftwiwlvh3unwhyfxq3dqkjely2jdpqzhh2vs33vu5zhgi5x5jc',
+export default {
+  id: 'bafy2bzacea24txwqzwanzte5laqhsy3umk4wq43h3llvlvkebp7gv73kzuzsi',
   data: {
     name: 'sn_multihash',
     desc: 'Generic blake2b-256 multihash operation.',
     input: [
       {
-        name: 'data',
-        desc: 'Any kind of data',
-        whatType: 'SnByteArray',
-        value: ''
+        data: 'SnByteArray',
+        decoded: 'SnAny'
       }
     ],
-    childrenOutputs: [],
     groups: [
       6
     ],
-    ops: [],
     priority: 0,
     output: {
-      opName: 'sn_multihash',
       desc: 'Returns the Multihash buffer as SnByteArray.',
       output: 'SnByteArray',
-      decoded: 'SnString'
+      decoded: 'SnBuffer'
     },
-    hashing: {
-      bits: 256,
-      algo: 'blake2b'
-    },
-    encoding: {
-      prefix: true,
-      algo: 'hex'
-    }
+    hashingOp: 'sn_cid',
+    encOp: 'sn_enc_hex',
+    ops: []
   }
 }
-export default config

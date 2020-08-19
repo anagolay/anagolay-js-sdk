@@ -7,16 +7,40 @@ cache:
   key: ${CI_COMMIT_REF_SLUG}
   paths:
     - node_modules/
-    - .yarn
+    # - .yarn
 
 stages:
+  - deps
   - test
+  - docs
+
+dependencies:
+  stage: deps
+  script:
+    - yarn
+
+lint:
+  stage: test
+  needs: [dependencies]
+  script:
+    - yarn std
 
 test_all_with_coverage:
   stage: test
+  needs: [dependencies]
   script:
-    - yarn
     - yarn test:coverage
   coverage: /All\sfiles.*?\s+(\d+.\d+)/
   tags:
     - docker
+
+pages:
+  stage: docs
+  needs: [dependencies]
+  script:
+    - yarn docs
+  artifacts:
+    paths:
+      - public
+  only:
+    - master

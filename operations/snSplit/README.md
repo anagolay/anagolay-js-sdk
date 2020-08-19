@@ -1,7 +1,7 @@
 
   # @sensio/op-sn-split
 
-  Blockchain Version **bafy2bzaceallxhdjmwhi4vr24lhcfroralps5qa5tv5omlv6uglzdkjzsqgyc**
+  Blockchain Version **bafy2bzacealjmcwnfurdmn2tndsv35d5cdbaempopwdq5pr5zr56yrfhuc2zk**
   
 
   ## Description 
@@ -10,9 +10,9 @@
   
   ##  Links and Repo
 
-  npm: https://www.npmjs.com/package/@sensio/op-sn-split
-  repo: [repo folder](https://gitlab.com/sensio_group/network-js/-/tree/master/operations/snSplit)
-  support: [Discord server #dev channel](https://discord.gg/JsdKZ5K) 
+  * npm: https://www.npmjs.com/package/@sensio/op-sn-split
+  * repo: [repo folder](https://gitlab.com/sensio_group/network-js/-/tree/master/operations/snSplit)
+  * support: [Discord server #dev channel](https://discord.gg/JsdKZ5K) 
 
   ## Install
   
@@ -21,7 +21,7 @@
   yarn add @sensio/op-sn-split
 
   # or specific version
-  yarn add @sensio/op-sn-split@0.3.0
+  yarn add @sensio/op-sn-split@0.3.1
   ```
   
   ## Usage
