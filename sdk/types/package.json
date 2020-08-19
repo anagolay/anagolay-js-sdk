@@ -1,20 +1,19 @@
 {
   "name": "@sensio/types",
   "description": "Sensio Custom and Auto-generated types and interfaces",
-  "version": "0.3.1",
+  "version": "0.3.0",
   "license": "Apache-2.0",
   "author": "daniel@woss.io",
-  "main": "lib/index.js",
-  "types": "lib",
+  "module": "es/index.js",
+  "main": "src/index",
   "files": [
-    "lib/**/*"
+    "lib",
+    "src",
+    "es"
   ],
-  "directories": {
-    "lib": "lib"
-  },
   "scripts": {
     "build": "tsc -b .",
-    "gen:types": "yarn update:owlnet; yarn gen:defs; yarn gen:meta; yarn gen:types:json; yarn std",
+    "genTypes": "yarn update:owlnet; yarn gen:defs; yarn gen:meta; yarn gen:types:json; yarn std",
     "gen:defs": "ts-node --skip-project node_modules/.bin/polkadot-types-from-defs --package . . --input ./src/interfaces",
     "gen:meta": "ts-node --skip-project node_modules/.bin/polkadot-types-from-chain --package . . --endpoint ./sensio-network.json --output ./src/interfaces",
     "update:owlnet": "rm -f ./sensio-network.json; curl -H \"Content-Type: application/json\" -d '{\"id\":\"1\", \"jsonrpc\":\"2.0\", \"method\": \"state_getMetadata\", \"params\":[]}' http://localhost:9933 > ./sensio-network.json",
@@ -22,6 +21,7 @@
     "std": "ts-standard --fix"
   },
   "dependencies": {
+    "exifreader": "^3.12.1",
     "ts-standard": "^8.0.1"
   },
   "devDependencies": {

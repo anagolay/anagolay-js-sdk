@@ -1,18 +1,18 @@
 
   # @sensio/op-sn-file
 
-  Blockchain Version **bafy2bzacedhpqt4cwketlhqrni6zih556dwaqfxojyqavnmkmwu3nnguxjmwc**
+  Blockchain Version **bafy2bzacea76v6e7qjc2r2p3csvjxi2j7h4o7jaentuyspaxva6wcl6o2bxac**
   
 
   ## Description 
   
-  RAW file buffer for other ops to use.
+  Reads the file from given path (data) and returns the buffer. RAW file buffer for other ops to use.
   
   ##  Links and Repo
 
-  npm: https://www.npmjs.com/package/@sensio/op-sn-file
-  repo: [repo folder](https://gitlab.com/sensio_group/network-js/-/tree/master/operations/snFile)
-  support: [Discord server #dev channel](https://discord.gg/JsdKZ5K) 
+  * npm: https://www.npmjs.com/package/@sensio/op-sn-file
+  * repo: [repo folder](https://gitlab.com/sensio_group/network-js/-/tree/master/operations/snFile)
+  * support: [Discord server #dev channel](https://discord.gg/JsdKZ5K) 
 
   ## Install
   
@@ -21,7 +21,7 @@
   yarn add @sensio/op-sn-file
 
   # or specific version
-  yarn add @sensio/op-sn-file@0.3.0
+  yarn add @sensio/op-sn-file@0.3.1
   ```
   
   ## Usage

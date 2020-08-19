@@ -1,7 +1,7 @@
 
   # @sensio/op-sn-cid
 
-  Blockchain Version **bafy2bzacebax2jywifp3h3enzj5o7vpj3yh6pmz3ez5hpfuji7h6ztpcg6gua**
+  Blockchain Version **bafy2bzacebvd3b7upai2av3w33dwrwqkh7w7qvbon6obi6q4evw6pqe744npu**
   
 
   ## Description 
@@ -10,9 +10,9 @@
   
   ##  Links and Repo
 
-  npm: https://www.npmjs.com/package/@sensio/op-sn-cid
-  repo: [repo folder](https://gitlab.com/sensio_group/network-js/-/tree/master/operations/snCid)
-  support: [Discord server #dev channel](https://discord.gg/JsdKZ5K) 
+  * npm: https://www.npmjs.com/package/@sensio/op-sn-cid
+  * repo: [repo folder](https://gitlab.com/sensio_group/network-js/-/tree/master/operations/snCid)
+  * support: [Discord server #dev channel](https://discord.gg/JsdKZ5K) 
 
   ## Install
   
@@ -21,7 +21,7 @@
   yarn add @sensio/op-sn-cid
 
   # or specific version
-  yarn add @sensio/op-sn-cid@0.3.0
+  yarn add @sensio/op-sn-cid@0.3.1
   ```
   
   ## Usage

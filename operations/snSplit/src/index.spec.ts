@@ -1,5 +1,5 @@
-import { stringToU8a, u8aToString } from '@polkadot/util'
-import { SnReturnParams } from '@sensio/types'
+import { stringToU8a, u8aToString, u8aToU8a } from '@polkadot/util'
+import { SnInputParamsImplementation } from '@sensio/types'
 import snSplit from '.'
 
 describe('SnOperation: snSplit', (): void => {
@@ -10,11 +10,24 @@ describe('SnOperation: snSplit', (): void => {
     const u1 = stringToU8a('dummy statement data')
     const u2 = stringToU8a('dummy statement data #2')
 
-    const saveStatementsOutput: SnReturnParams[] = [{ output: u1, decode: () => u8aToString(u1) }, { output: u2, decode: () => u8aToString(u2) }]
-    const res = await snSplit({
-      opName: stringToU8a('save_statements'),
-      childrenOutputs: saveStatementsOutput
-    })
+    const saveStatementsOutput: SnInputParamsImplementation[] = [
+      { data: u1, decode: () => u8aToString(u1) },
+      { data: u2, decode: () => u8aToString(u2) }
+    ]
+    const res = await snSplit([
+      {
+        data: u8aToU8a(
+          JSON.stringify({
+            opName: 'save_statements',
+            data: saveStatementsOutput
+          })
+        ),
+        decode: () => ({
+          opName: 'save_statements',
+          data: saveStatementsOutput
+        })
+      }
+    ])
 
     const expectedRes = [
       {
@@ -27,7 +40,7 @@ describe('SnOperation: snSplit', (): void => {
       }
     ]
 
-    expect(res.output.length).toEqual(2)
+    expect(res.decode().length).toEqual(2)
 
     expect(res.decode()).toContainEqual(expectedRes[0])
     expect(res.decode()).toContainEqual(expectedRes[1])
@@ -35,10 +48,19 @@ describe('SnOperation: snSplit', (): void => {
   it('should return error on missing children', async (): Promise<void> => {
     expect.assertions(1)
     try {
-      await snSplit({
-        opName: stringToU8a('save_statements'),
-        childrenOutputs: []
-      })
+      await snSplit([
+        {
+          data: u8aToU8a(
+            JSON.stringify({
+              opName: 'save_statements'
+            })
+          ),
+          decode: () => ({
+            opName: 'save_statements',
+            data: []
+          })
+        }
+      ])
     } catch (error) {
       expect(error.message).toEqual('Missing children outputs')
     }

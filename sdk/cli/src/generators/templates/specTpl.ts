@@ -9,6 +9,10 @@ const spec = (op: SnOperation): string => {
       it('is defined', (): void => {
         expect(${opName}).toBeDefined()
       })
+      it('should be 42', async (): Promise<void> => {
+        const ft = await new Promise(resolve => resolve(42))
+        expect(ft).toEqual(42)
+      })
     })`
 }
 

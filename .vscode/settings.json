@@ -1,5 +1,5 @@
 {
-  "workbench.colorTheme": "Noctis",
+  "workbench.colorTheme": "Noctis Minimus",
   "editor.codeActionsOnSave": {
     "source.fixAll": true,
     "source.organizeImports": true,
@@ -11,22 +11,21 @@
   "editor.formatOnSave": true,
   "eslint.enable": false,
   "[json]": {
-    "editor.defaultFormatter": "chenxsan.vscode-standardjs"
+    "editor.defaultFormatter": "numso.prettier-standard-vscode"
   },
   "[javascript]": {
-    "editor.defaultFormatter": "chenxsan.vscode-standardjs"
+    "editor.defaultFormatter": "numso.prettier-standard-vscode"
   },
   "[typescript]": {
-    "editor.defaultFormatter": "chenxsan.vscode-standardjs"
+    "editor.defaultFormatter": "numso.prettier-standard-vscode"
   },
   "[markdown]": {
     "editor.wordWrap": "wordWrapColumn",
     "editor.wordWrapColumn": 100,
     "editor.quickSuggestions": true,
-    "editor.defaultFormatter": "chenxsan.vscode-standardjs"
+    "editor.defaultFormatter": "numso.prettier-standard-vscode"
   },
-  "cSpell.words": ["flowcontrol"],
-
+  "cSpell.words": ["flowcontrol", "subsampling"],
   "javascript.validate.enable": false,
   "standard.enable": true,
   "standard.validate": [
@@ -35,6 +34,7 @@
     "typescript",
     "typescriptreact"
   ],
-  "standard.engine": "standardx",
-  "standard.usePackageJson": true
+  "files.associations": { "*.json": "jsonc" }
+  // "standard.engine": "standardx",
+  // "standard.usePackageJson": true
 }

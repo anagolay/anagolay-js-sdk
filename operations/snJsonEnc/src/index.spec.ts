@@ -1,4 +1,3 @@
-import { stringToU8a } from '@polkadot/util'
 import snJsonEnc from '.'
 
 describe('SnOperation: snJsonEnc', (): void => {
@@ -7,8 +6,8 @@ describe('SnOperation: snJsonEnc', (): void => {
   })
   it('should pass', async (): Promise<void> => {
     const u1 = { name: 'yo' }
-    const ba = stringToU8a(JSON.stringify(u1))
-    const res = await snJsonEnc({ data: u1 })
-    expect(res.output).toEqual(ba)
+    const ba = JSON.stringify(u1)
+    const res = await snJsonEnc([{ data: u1, decode: () => u1 }])
+    expect(res.decode()).toEqual(ba)
   })
 })

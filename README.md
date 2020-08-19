@@ -1,8 +1,6 @@
-[![pipeline status](https://gitlab.com/sensio_group/network-js/badges/6-create-operations-package-and-move-existing-ops-from-the-explorer/pipeline.svg)](https://gitlab.com/sensio_group/network-js/-/commits/6-create-operations-package-and-move-existing-ops-from-the-explorer) [![coverage report](https://gitlab.com/sensio_group/network-js/badges/6-create-operations-package-and-move-existing-ops-from-the-explorer/coverage.svg)](https://gitlab.com/sensio_group/network-js/-/commits/6-create-operations-package-and-move-existing-ops-from-the-explorer) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![pipeline status](https://gitlab.com/sensio_group/network-js/badges/master/pipeline.svg)](https://gitlab.com/sensio_group/network-js/-/commits/master) [![coverage report](https://gitlab.com/sensio_group/network-js/badges/master/coverage.svg)](https://gitlab.com/sensio_group/network-js/-/commits/master) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
-# Sensio Network JS SDK
-
-## Dev friendly blockchain sdk for Sensio Network. 👩‍💻🚀👨‍💻
+## Dev friendly blockchain SDK for Sensio Network. 👩‍💻🚀👨‍💻
 
 This is the monorepo for ALL Sensio packages. This includes following list:
 
@@ -14,7 +12,7 @@ This is the monorepo for ALL Sensio packages. This includes following list:
 
 ## Development
 
-We are using VSCod as our main IDE and for that reason we are including the recommended extensions and settings that will help you get started. Feel free to change the theme (We all love the Noctis 😍 and we really hope you will too)
+We are using VSCod as our main IDE and for that reason we are including the recommended extensions and settings that will help you get started. Feel free to change the theme (We all love the Noctis Minimus 😍 and we really hope you will too)
 
 The structure is following:
 
@@ -29,7 +27,7 @@ The structure is following:
 ├── operations
 │   ├── snCid
 │   ├── snFile
-│   ├── snInput
+│   ├── snIdentity
 │   ├── snJsonDec
 │   ├── snJsonEnc
 │   ├── snMatchAll

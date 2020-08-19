@@ -1,9 +1,9 @@
 {
   "name": "@sensio/op-sn-match-none",
-  "version": "0.3.1",
+  "version": "0.1.0",
   "license": "Apache-2.0",
   "author": "daniel@woss.io",
-  "main": "lib/index.js",
+  "main": "src/index",
   "types": "lib/index.d.ts",
   "files": [
     "lib/**/*"
@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "@polkadot/util": "^3.0.1",
-    "@sensio/types": "^0.3.1"
+    "@sensio/types": "^0.3.0"
   },
   "repository": {
     "type": "git",

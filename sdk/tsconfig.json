@@ -8,7 +8,7 @@
     { "path": "../operations/snCid" },
     { "path": "../operations/snJsonEnc" },
     { "path": "../operations/snJsonDec" },
-    { "path": "../operations/snInput" },
+    { "path": "../operations/snIdentity" },
     { "path": "../operations/snMatchAll" },
     { "path": "../operations/snMatchNone" },
     { "path": "../operations/snMultihash" },

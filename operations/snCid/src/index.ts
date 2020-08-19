@@ -1,33 +1,35 @@
 import { stringToU8a } from '@polkadot/util'
-import { SnByteArray, SnReturnParams, SnString } from '@sensio/types'
+import { SnForWhat } from '@sensio/types'
 import CID from 'cids'
-import mh from 'multihashing-async'
 import config from './config'
-
-interface InputParams {
-  childrenOutputs?: SnReturnParams[]
-  data: SnByteArray
-}
-
-interface ReturnParams extends SnReturnParams {
-  output: SnByteArray
-  decode: () => SnString
-}
-
+import { InputParams, ReturnParams } from './interfaces'
 /**
-* @function snCid
-* @description Generic CID, defaults to base32 and dag-cbor for Any kind of data.
-* @param {InputParams} params InputParams
-* @return {Promise<ReturnParams>} output (CID string converted into SnByteArray) and decoder function
-*/
-export default async function snCid (params: InputParams): Promise<ReturnParams> {
-  const { data } = params
-  const algo = `${config.data.hashing.algo}-${config.data.hashing.bits}` // blake2b-256
-  const multiHash = await mh(data, algo)
-  const cid = new CID(1, 'dag-cbor', multiHash)
+ * @function snCid
+ * @description Generic CID, defaults to base32 and dag-cbor for Any kind of data.
+ * @param {InputParam[]} params Directly passed data or gotten from child operations
+ * @return {Promise<ReturnParams>} output (CID string converted into SnByteArray) and decoder function
+ */
+export default async function snCid (
+  params: InputParams
+): Promise<ReturnParams> {
+  const inputLength = config.data.input.length
+  const fcOpType = config.data.groups.includes(SnForWhat.FLOWCONTROL)
 
-  return {
-    output: stringToU8a(cid.toV1().toString()),
-    decode: () => cid.toV1().toString()
+  // if operation is flowcontrol it can have multiple children because they are added dynamically
+
+  if (!fcOpType && params.length !== inputLength) {
+    throw new Error('Got wrong amount of inputs.')
+  }
+
+  if (inputLength === 1) {
+    const hash = params[inputLength - 1]
+    const cid = new CID(1, 'dag-cbor', hash.decode())
+
+    return {
+      data: stringToU8a(cid.toV1().toString()),
+      decode: () => cid.toV1().toString()
+    }
+  } else {
+    throw new Error("This op doesn't support more than one input param ")
   }
 }

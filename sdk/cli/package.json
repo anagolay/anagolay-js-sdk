@@ -17,7 +17,7 @@
   },
   "scripts": {
     "build": "tsc -b .",
-    "start": "ts-node -r tsconfig-paths/register  ./src/index.ts",
+    "start": "ts-node -r tsconfig-paths/register ./src/index.ts",
     "dev": "ts-node-dev -r tsconfig-paths/register --watch ./src --cls --respawn ./src/index.ts",
     "std": "ts-standard --fix"
   },
@@ -36,6 +36,7 @@
     "fs-extra": "^9.0.1",
     "inquirer": "^7.3.0",
     "path": "^0.12.7",
+    "ramda": "^0.27.1",
     "slug": "^3.3.0",
     "ts-node-dev": "^1.0.0-pre.49",
     "ts-standard": "^8.0.1",
@@ -50,12 +51,6 @@
     "url": "https://gitlab.com/sensio_group/network-js/issues"
   },
   "homepage": "https://gitlab.com/sensio_group/network-js#readme",
-  "volta": {
-    "node": "14.5.0"
-  },
-  "engines": {
-    "node": "14.5.0"
-  },
   "ts-standard": {
     "ignore": [
       "lib"

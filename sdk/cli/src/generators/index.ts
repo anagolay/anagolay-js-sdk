@@ -1,11 +1,18 @@
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
-import { stringCamelCase, stringToU8a } from '@polkadot/util'
-import { SnOperation, SnOperationData } from '@sensio/types'
-import CID from 'cids'
-import { copy, outputFile, outputJson, pathExistsSync, WriteOptions } from 'fs-extra'
-import mh from 'multihashing-async'
+import { stringCamelCase } from '@polkadot/util'
+import { resolveDependencies } from '@sensio/api/pallets/operations'
+import buildOperations from '@sensio/api/pallets/operations/buildOperations'
+import { SnOperation, SnOperationDataForCreating } from '@sensio/types'
+import {
+  copy,
+  outputFile,
+  outputJson,
+  pathExistsSync,
+  WriteOptions
+} from 'fs-extra'
 import { resolve } from 'path'
-import { defaultOperationTpl } from './templates/defaultOperationTpl'
+import configTemplate from './templates/configTpl'
+import interfacesTpl from './templates/interfacesTpl'
 import { mainFuncBodyTpl } from './templates/mainFuncBodyTpl'
 import packageJson from './templates/packageJson'
 import readmeTpl from './templates/README'
@@ -13,8 +20,7 @@ import spec from './templates/specTpl'
 import tsConfigJson from './templates/tsConfig'
 
 const JSONOptions: WriteOptions = { replacer: null, spaces: 2 }
-
-const tsPaths: {[k: string]: string[]} = {}
+const tsPaths: { [k: string]: string[] } = {}
 const tsReference: any[] = []
 
 export const genOperation = async (
@@ -31,6 +37,7 @@ export const genOperation = async (
     configJson: `${PATH}/src/config.json`,
     spec: `${PATH}/src/index.spec.ts`,
     index: `${PATH}/src/index.ts`,
+    interfaces: `${PATH}/src/interfaces.ts`,
     packageJson: `${PATH}/package.json`,
     tsConfigJson: `${PATH}/tsconfig.json`,
     readme: `${PATH}/README.md`,
@@ -40,17 +47,14 @@ export const genOperation = async (
   if (force || !pathExistsSync(paths.readme)) {
     await outputFile(resolve(__dirname, paths.readme), readmeTpl(op))
   }
-  if (force || !pathExistsSync(paths.license)) {
+  if (!pathExistsSync(paths.license)) {
     await copy(
       resolve(__dirname, './templates/LICENSE'),
       resolve(__dirname, paths.license)
     )
   }
   if (force || !pathExistsSync(paths.configTs)) {
-    await outputFile(
-      resolve(__dirname, paths.configTs),
-      defaultOperationTpl(op)
-    )
+    await outputFile(resolve(__dirname, paths.configTs), configTemplate(op))
   }
 
   if (!pathExistsSync(paths.spec)) {
@@ -60,8 +64,11 @@ export const genOperation = async (
   if (!pathExistsSync(paths.index)) {
     await outputFile(resolve(__dirname, paths.index), mainFuncBodyTpl(op))
   }
+  if (force || !pathExistsSync(paths.interfaces)) {
+    await outputFile(resolve(__dirname, paths.interfaces), interfacesTpl(op))
+  }
 
-  if (!pathExistsSync(paths.packageJson)) {
+  if (force || !pathExistsSync(paths.packageJson)) {
     await outputJson(
       resolve(__dirname, paths.packageJson),
       packageJson(op),
@@ -73,7 +80,7 @@ export const genOperation = async (
     await outputJson(resolve(__dirname, paths.configJson), op, JSONOptions)
   }
 
-  if (force || !pathExistsSync(paths.tsConfigJson)) {
+  if (!pathExistsSync(paths.tsConfigJson)) {
     await outputJson(
       resolve(__dirname, paths.tsConfigJson),
       tsConfigJson(),
@@ -92,7 +99,7 @@ export const genDefaultOpsFile = async (ops: SnOperation[]): Promise<void> => {
   const PATH = resolve(__dirname, '../defaultOps.ts')
   const contents = ops
     .map(
-      (op) =>
+      op =>
         `export const ${stringCamelCase(op.data.name)} = ${JSON.stringify(
           op,
           null,
@@ -108,13 +115,17 @@ export const genDefaultOpsFile = async (ops: SnOperation[]): Promise<void> => {
  * Main function for scaffolding the ops
  * @param originalOperations
  */
-export async function regenerateOperations (
-  originalOperations: SnOperationData[]
+export async function regenerateDefaultOperations (
+  originalOperations: SnOperationDataForCreating[]
 ): Promise<SnOperation[]> {
   const defaultOps = await parseOriginalOperations(originalOperations)
-  await Promise.all(defaultOps.map(async (o) => await genOperation(o)))
+
+  await Promise.all(defaultOps.map(async o => await genOperation(o, true)))
   console.log('tsconfig.paths', tsPaths)
-  console.log('tsconfig.references', tsReference)
+  console.log('operations/tsconfig.references', tsReference)
+
+  // console.log(JSON.stringify(defaultOps))
+
   return defaultOps
 }
 
@@ -125,8 +136,10 @@ export async function regenerateOperations (
 export function generateTsConfigPaths (op: SnOperation): void {
   const camelCasedName: string = stringCamelCase(op.data.name)
 
-  tsPaths[generateNpmName(op.data.name)] = [`"operations/${camelCasedName}/src"`]
-  tsPaths[generateNpmName(op.data.name) + '/*'] = [`"operations/${camelCasedName}/src/*"`]
+  tsPaths[generateNpmName(op.data.name)] = [`operations/${camelCasedName}/src`]
+  tsPaths[generateNpmName(op.data.name) + '/*'] = [
+    `operations/${camelCasedName}/src/*`
+  ]
 }
 /**
  * Generate tsconfig reference paths
@@ -141,11 +154,12 @@ export function generateTsConfigReferencePaths (op: SnOperation): void {
  * @param opsRaw
  */
 async function parseOriginalOperations (
-  opsRaw: SnOperationData[]
+  allOps: SnOperationDataForCreating[]
 ): Promise<SnOperation[]> {
-  return await Promise.all(
-    opsRaw.map(async (op): Promise<SnOperation> => await makeOperation(op))
-  )
+  const depsResolved = await resolveDependencies(allOps)
+  const res = await buildOperations(depsResolved)
+
+  return res
 }
 
 /**
@@ -155,17 +169,4 @@ async function parseOriginalOperations (
  */
 export function generateNpmName (opName: string): string {
   return `@sensio/op-${opName.replace(/_/g, '-')}`
-}
-
-/**
- * Better to keep this decoupled from operations (i.e. snCid which does the same job)
- * @param data
- */
-async function makeOperation (data: SnOperationData): Promise<SnOperation> {
-  const algo = `${data.hashing.algo}-${data.hashing.bits}`
-  const multiHash = await mh(stringToU8a(JSON.stringify(data)), algo)
-  const cid = new CID(1, 'dag-cbor', multiHash)
-  const id = cid.toV1().toString()
-
-  return { id, data }
 }

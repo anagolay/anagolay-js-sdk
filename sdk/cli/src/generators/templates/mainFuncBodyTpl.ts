@@ -6,47 +6,55 @@ import { SnOperation } from '@sensio/types'
 export const mainFuncBodyTpl = (op: SnOperation): string => {
   const { data } = op
 
+  // let types: string[] = []
+
+  // types = data.input.map(i => `${i.decoded}`)
+  // types = types.concat(data.input.map(i => `${i.data}`))
+  // types.push(data.output.output)
+  // types.push(data.output.decoded)
+
+  // const dedupe = [...new Set(types)]
+
   // collect the input output types
-  let types: string[] = []
 
-  types = data.input.map((i) => `${i.whatType}`)
-  types.push(data.output.output)
-  if (data.output.decoded) {
-    types.push(data.output.decoded)
-  }
-  const dedupe = [...new Set(types)]
-
-  return `import { SnReturnParams, ${dedupe
-    .map((t) => (t.includes('[]') ? t.split('[]')[0] : t))
-    .join(', ')} } from "@sensio/types"
-     import config from './config'
-     import * as util from '@polkadot/util'
-
-interface InputParams {
-  childrenOutputs?: SnReturnParams[] 
-  ${op.data.input.map((i) => `${i.name}: ${i.whatType}`).join(';\n')}
-}
-
-interface ReturnParams extends SnReturnParams extends SnReturnParams {
-  output: ${op.data.output.output}
-  decode: () => ${op.data.output.decoded}
-}
-
+  return `
+  import { SnForWhat } from '@sensio/types'
+  import { InputParams, ReturnParams } from './interfaces'
+  import config from './config'
+ 
 /**
 * @function ${stringCamelCase(data.name)}
 * @description ${data.desc}
 * @param {InputParams} params InputParams
-* @return {Promise<ReturnParams>} output (${data.output.desc}) and decoder function
+* @return {Promise<ReturnParams>} output (${
+    data.output.desc
+  }) and decoder function
 */
-export default async function ${stringCamelCase(data.name)}(params: InputParams):  Promise<ReturnParams> {
+export async function ${stringCamelCase(
+    data.name
+  )}( params: InputParams): Promise<ReturnParams> {
   ${formatOps(data.ops)}
-  console.error('IMPLEMENT ME', params, config)
-  return {
-    output: new Uint8Array(7),
-    decode: () => 'CHANGE_ME'
+  const inputLength = config.data.input.length
+  const fcOpType = config.data.groups.includes(SnForWhat.FLOWCONTROL)
+
+  if (!fcOpType && params.length !== inputLength) {
+    throw new Error('Got wrong amount of inputs.')
   }
-  
-}`
+  if (inputLength === 1) {
+    // start implementation here
+    console.log('${stringCamelCase(data.name)}', params)
+    const data = params[inputLength - 1]
+    return {
+      data: data.data,
+      decode: () => 'CHANGE_ME'
+    }
+  } else {
+    throw new Error("This operation doesn't support more than one input param ")
+  }
+}
+
+export default ${stringCamelCase(data.name)}
+`
 }
 
 function formatOps (ops: SnOperation[]): string {

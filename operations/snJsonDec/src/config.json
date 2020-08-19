@@ -1,35 +1,25 @@
 {
-  "id": "bafy2bzaceayucsvyckhcmo32fy4goskeueluvix4eu4lvit2q4k633bcbh3lc",
+  "id": "bafy2bzaced7rpfi7k4atlkdaz5x6dmztvzm2jwz7on6lcykdswuf5s2jn4yo4",
   "data": {
     "name": "sn_json_dec",
     "desc": "Wrapper of JSON.parse()",
     "input": [
       {
-        "name": "data",
-        "desc": "Any kind of data.",
-        "whatType": "SnByteArray",
-        "value": ""
+        "data": "SnByteArray",
+        "decoded": "SnAny"
       }
     ],
-    "childrenOutputs": [],
     "groups": [
       6
     ],
-    "ops": [],
     "priority": 0,
     "output": {
-      "opName": "sn_json_dec",
       "desc": "",
-      "output": "SnAny",
+      "output": "SnByteArray",
       "decoded": "SnAny"
     },
-    "hashing": {
-      "bits": 256,
-      "algo": "blake2b"
-    },
-    "encoding": {
-      "prefix": true,
-      "algo": "hex"
-    }
+    "hashingOp": "sn_cid",
+    "encOp": "sn_enc_hex",
+    "ops": []
   }
 }

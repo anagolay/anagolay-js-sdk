@@ -1,7 +1,7 @@
 
   # @sensio/op-sn-json-enc
 
-  Blockchain Version **bafy2bzacedsbv2ekwamc7345h2tr6a46zvhvcpoaj76edrytgm4jrdhbptjzg**
+  Blockchain Version **bafy2bzacebc64bhgsj24ad53pkgxb7xi3zdedshiozl33nqplv7t5y27tii2u**
   
 
   ## Description 
@@ -10,9 +10,9 @@
   
   ##  Links and Repo
 
-  npm: https://www.npmjs.com/package/@sensio/op-sn-json-enc
-  repo: [repo folder](https://gitlab.com/sensio_group/network-js/-/tree/master/operations/snJsonEnc)
-  support: [Discord server #dev channel](https://discord.gg/JsdKZ5K) 
+  * npm: https://www.npmjs.com/package/@sensio/op-sn-json-enc
+  * repo: [repo folder](https://gitlab.com/sensio_group/network-js/-/tree/master/operations/snJsonEnc)
+  * support: [Discord server #dev channel](https://discord.gg/JsdKZ5K) 
 
   ## Install
   
@@ -21,7 +21,7 @@
   yarn add @sensio/op-sn-json-enc
 
   # or specific version
-  yarn add @sensio/op-sn-json-enc@0.3.0
+  yarn add @sensio/op-sn-json-enc@0.3.1
   ```
   
   ## Usage

@@ -3,8 +3,9 @@ import chalk from 'chalk'
 import clear from 'clear'
 import commander from 'commander'
 import figlet from 'figlet'
-import defaultOps from './defaultOps'
-import { regenerateOperations } from './generators'
+import { regenerateDefaultOperations } from './generators'
+import defaultOps from './generators/fixtures/defaultOps'
+import { operationsFromChain, saveOpsToChain } from './handlers'
 
 clear()
 console.log(
@@ -15,12 +16,31 @@ const program = commander.createCommand()
 program.version('0.1.0')
 
 program
-  .command('scaffold-operations')
+  .command('regen-default-ops')
   .description(
     'Connects to the chain and retrieves the operations without NODEJS implementation'
   )
   .action(async () => {
-    await regenerateOperations(defaultOps)
+    await regenerateDefaultOperations(defaultOps)
+  })
+program
+  .command('save-ops-to-network')
+  .description(
+    'Connects to the chain and retrieves the operations without NODEJS implementation'
+  )
+  .action(async () => {
+    await saveOpsToChain()
+  })
+program
+  .command('list-all-ops')
+  .description(
+    'Connects to the chain and retrieves the operations without NODEJS implementation'
+  )
+  .action(async () => {
+    await operationsFromChain()
   })
 
-program.parseAsync().then().catch(console.error)
+program
+  .parseAsync()
+  .then()
+  .catch(console.error)

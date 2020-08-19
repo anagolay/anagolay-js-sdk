@@ -5,10 +5,10 @@
     "rootDir": "src"
   },
   "include": ["./src"],
-  "exclude": ["lib", "**/*/*.spec.ts"],
+  "exclude": ["lib"],
   "references": [
-    { "path": "../types" },
-    { "path": "../../operations/snCid" },
-    { "path": "../../operations/snJsonEnc" }
+    { "path": "../types" }
+    // { "path": "../../operations/snCid" },
+    // { "path": "../../operations/snJsonEnc" }
   ]
 }

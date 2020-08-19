@@ -4,3 +4,5 @@ lib
 .env
 coverage
 tsconfig.tsbuildinfo
+docs
+public

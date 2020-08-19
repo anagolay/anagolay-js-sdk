@@ -2,15 +2,13 @@
   "Address": "AccountId",
   "LookupSource": "AccountId",
   "CustomInputParam": {
-    "name": "Vec<u8>",
-    "desc": "Vec<u8>",
-    "whatType": "Vec<u8>",
-    "value": "Vec<u8>"
+    "data": "Vec<u8>",
+    "decoded": "Vec<u8>"
   },
   "OperationOutput": {
-    "opName": "Vec<u8>",
     "desc": "Vec<u8>",
-    "output": "Vec<u8>"
+    "output": "Vec<u8>",
+    "decoded": "Vec<u8>"
   },
   "OperationInfo": {
     "operation": "Operation",
@@ -24,11 +22,10 @@
   "OperationData": {
     "name": "Vec<u8>",
     "desc": "Vec<u8>",
-    "childrenOutputs": "Vec<ChildOutput>",
     "input": "Vec<CustomInputParam>",
     "output": "OperationOutput",
-    "hashing": "DefaultsHashing",
-    "encoding": "DefaultsEncoding",
+    "hashingOp": "Vec<u8>",
+    "encOp": "Vec<u8>",
     "groups": "Vec<ForWhat>",
     "priority": "u32",
     "ops": "Vec<Operation>"

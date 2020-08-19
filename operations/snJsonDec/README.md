@@ -1,7 +1,7 @@
 
   # @sensio/op-sn-json-dec
 
-  Blockchain Version **bafy2bzaceayucsvyckhcmo32fy4goskeueluvix4eu4lvit2q4k633bcbh3lc**
+  Blockchain Version **bafy2bzaced7rpfi7k4atlkdaz5x6dmztvzm2jwz7on6lcykdswuf5s2jn4yo4**
   
 
   ## Description 
@@ -10,9 +10,9 @@
   
   ##  Links and Repo
 
-  npm: https://www.npmjs.com/package/@sensio/op-sn-json-dec
-  repo: [repo folder](https://gitlab.com/sensio_group/network-js/-/tree/master/operations/snJsonDec)
-  support: [Discord server #dev channel](https://discord.gg/JsdKZ5K) 
+  * npm: https://www.npmjs.com/package/@sensio/op-sn-json-dec
+  * repo: [repo folder](https://gitlab.com/sensio_group/network-js/-/tree/master/operations/snJsonDec)
+  * support: [Discord server #dev channel](https://discord.gg/JsdKZ5K) 
 
   ## Install
   
@@ -21,7 +21,7 @@
   yarn add @sensio/op-sn-json-dec
 
   # or specific version
-  yarn add @sensio/op-sn-json-dec@0.3.0
+  yarn add @sensio/op-sn-json-dec@0.3.1
   ```
   
   ## Usage

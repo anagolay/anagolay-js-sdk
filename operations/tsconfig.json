@@ -1,14 +1,20 @@
 {
   "files": [],
   "references": [
+    { "path": "./snEncHex" },
     { "path": "./snSplit" },
     { "path": "./snCid" },
     { "path": "./snJsonEnc" },
     { "path": "./snJsonDec" },
-    { "path": "./snInput" },
+    { "path": "./snIdentity" },
     { "path": "./snMatchAll" },
     { "path": "./snMatchNone" },
     { "path": "./snMultihash" },
-    { "path": "./snFile" }
+    { "path": "./snFile" },
+    { "path": "./snCid" },
+    { "path": "./snImageMetadataHash" },
+    { "path": "./snRawPixelsHash" },
+    { "path": "./snImageMetadata" },
+    { "path": "./snImagePhash" }
   ]
 }
