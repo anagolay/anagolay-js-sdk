@@ -30,3 +30,5 @@ export function decodeOperationFromChain (op: Operation): any {
   }
   return decoded
 }
+
+export default decodeOperationFromChain

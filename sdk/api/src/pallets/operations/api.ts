@@ -18,8 +18,7 @@ import {
 import { EventEmitter } from 'events'
 import { map } from 'ramda'
 import { EVENT_NAME_BATCH, EVENT_NAME_ERROR, EVENT_NAME_SINGLE } from './config'
-import { decodeOperationFromChain } from './decodeOperationFromChain'
-
+import decodeOperationStorage from './decodeOperationStorage'
 /**
  * Save a single operation to the chain
  * {@link SnOperation}
@@ -85,7 +84,7 @@ export async function saveOperationsBulk (
  * Get All operations from the chain, encoded using SCALE codec
  * @returns [Promise<[StorageKey, OperationInfo][]] encoded Storage
  */
-export async function getAll (): Promise<Array<[StorageKey, OperationInfo]>> {
+export async function getAll (): Promise<[StorageKey, OperationInfo][]> {
   const api = getApi()
 
   // get them from the network
@@ -101,18 +100,7 @@ export async function getAllDecoded (): Promise<SnOperationWithStorage[]> {
   // get them from the network
   const ops = await getAll()
 
-  const decodedOps: SnOperationWithStorage[] = ops.map(
-    ([storageKey, operationInfo]) => {
-      return {
-        storageKey: storageKey.toString(),
-        operationInfo: {
-          operation: decodeOperationFromChain(operationInfo.operation),
-          accountId: operationInfo.accountId.toString(),
-          blockNumber: operationInfo.blockNumber.toNumber()
-        }
-      }
-    }
-  )
+  const decodedOps = map(decodeOperationStorage, ops)
 
   return decodedOps
 }
