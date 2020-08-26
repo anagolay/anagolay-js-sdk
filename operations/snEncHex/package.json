@@ -24,7 +24,8 @@
   },
   "dependencies": {
     "@polkadot/util": "^3.0.1",
-    "@sensio/types": "^0.3.0"
+    "@sensio/types": "^0.3.0",
+    "@sensio/core": "^0.1.0"
   },
   "repository": {
     "type": "git",

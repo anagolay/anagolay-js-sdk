@@ -1,32 +1,35 @@
 import { bufferToU8a } from '@polkadot/util'
-import { SnForWhat } from '@sensio/types'
-import { readFileSync } from 'fs'
+import { executeOperation } from '@sensio/core/execution'
+import { SnOperation } from '@sensio/types'
+import { readFile } from 'fs'
+import { promisify } from 'util'
 import config from './config'
 import { InputParams, ReturnParams } from './interfaces'
 
+const readFilePromised = promisify(readFile)
+
 /**
- * @function snFile
- * @description Reads the file from given path (data) and returns the buffer. RAW file buffer for other ops to use.
- * @param {InputParams} params InputParams
- * @return {Promise<ReturnParams>} output (Returns the File Buffer.) and decoder function
+ * Reads the file from given path (data) and returns the buffer. RAW file buffer for other ops to use.
+ * @typeParam T Type `T` is generic and it is used to get the latest child operation. With default export use generic type so this operation can be executed from the leaf child
+ * @return  output (Returns the File Buffer.) and decoder function
  */
-export async function snFile (params: InputParams): Promise<ReturnParams> {
+export default async function execute<T> (params: T): Promise<ReturnParams> {
   const inputLength = config.data.input.length
-  const fcOpType = config.data.groups.includes(SnForWhat.FLOWCONTROL)
 
-  if (!fcOpType && params.length !== inputLength) {
-    throw new Error('Got wrong amount of inputs.')
-  }
   if (inputLength === 1) {
-    const data = params[inputLength - 1]
-    const file = readFileSync(data.data)
-
-    return {
-      data: bufferToU8a(file),
-      decode: () => file
-    }
+    const c: SnOperation = config
+    return executeOperation<T, ReturnParams>(c, params)
   } else {
     throw new Error("This operation doesn't support more than one input param ")
   }
 }
-export default snFile
+export async function snFile (params: InputParams): Promise<ReturnParams> {
+  const inputLength = config.data.input.length
+  const data = params[inputLength - 1]
+  const file = await readFilePromised(data.decode())
+
+  return {
+    data: bufferToU8a(file),
+    decode: () => file
+  }
+}

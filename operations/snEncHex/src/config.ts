@@ -1,16 +1,17 @@
 /**
  * Operation specification
  */
+import { SnOperation } from '@sensio/types'
 
-export default {
-  id: 'bafy2bzacec257yn2vfyex55dyw646bka2hfimf7owipofd74237dpicebcxfi',
+export const op: SnOperation = {
+  id: 'bafy2bzaceanqw2xwjawh4zdrn6lct7pi63fndib5jhcx7hfe5y7g6iwwrwqka',
   data: {
     name: 'sn_enc_hex',
     desc: 'Encode arbitrary data to HEX with 0x prefix ',
     input: [
       {
         data: 'SnByteArray',
-        decoded: 'SnString'
+        decoded: 'SnAny'
       }
     ],
     groups: [
@@ -27,3 +28,5 @@ export default {
     ops: []
   }
 }
+
+export default op

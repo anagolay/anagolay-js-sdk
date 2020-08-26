@@ -1,7 +1,5 @@
 /* eslint-disable @typescript-eslint/restrict-plus-operands */
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
-import { IncompatibleInputParamChildOperationError } from '@sensio/api/errors/IncompatibleInputParamChildOperation'
-import { calculateOperationId } from '@sensio/api/utils/hashing'
 import {
   SnForWhat,
   SnInputParamsDefinition,
@@ -22,6 +20,8 @@ import {
   sortBy,
   sum
 } from 'ramda'
+import { IncompatibleInputParamChildOperationError } from './errors/IncompatibleInputParamChildOperation'
+import { calculateOperationId } from './util/hashing'
 
 /**
  * First version of Resolving operation dependencies, input param creation and priority calculation.

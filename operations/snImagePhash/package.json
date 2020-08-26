@@ -23,9 +23,12 @@
     "typescript": "^3.9.5"
   },
   "dependencies": {
+    "@canvas/image": "^1.0.1",
     "@polkadot/util": "^3.0.1",
+    "@sensio/core": "^0.1.0",
+    "@sensio/op-sn-file": "^0.3.1",
     "@sensio/types": "^0.3.0",
-    "@sensio/op-sn-file": "^0.1.0"
+    "blockhash-core": "^0.1.0"
   },
   "repository": {
     "type": "git",

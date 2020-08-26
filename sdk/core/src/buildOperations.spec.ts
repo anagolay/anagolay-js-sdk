@@ -1,8 +1,8 @@
 import { SnOperation, SnOperationDataForCreating } from '@sensio/types'
-import { calculateOperationId } from '../../utils/hashing'
 import buildOperations from './buildOperations'
 import { multipleOnSameLevelOps } from './fixtures/testOps'
 import { resolveDependencies } from './resolveDependencies'
+import { calculateOperationId } from './util/hashing'
 
 let depsResolved: SnOperationDataForCreating[] = []
 let testOps: SnOperation[] = []
@@ -12,7 +12,7 @@ beforeAll(async () => {
   testOps = await buildOperations(depsResolved)
 })
 
-describe('Pallets::Operation - operationBuilder', (): void => {
+describe('Core::Operation - operationBuilder', (): void => {
   it('is buildOperations defined', (): void => {
     expect(buildOperations).toBeDefined()
   })

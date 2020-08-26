@@ -7,5 +7,9 @@
   },
   "include": ["./src"],
   "exclude": ["lib"],
-  "references": [{ "path": "../api" }, { "path": "../types" }]
+  "references": [
+    { "path": "../core" },
+    { "path": "../api" },
+    { "path": "../types" }
+  ]
 }

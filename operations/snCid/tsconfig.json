@@ -13,6 +13,9 @@
 
     {
       "path": "../snMultihash"
+    },
+    {
+      "path": "../../sdk/core"
     }
   ]
 }

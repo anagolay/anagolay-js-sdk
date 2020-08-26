@@ -24,8 +24,10 @@
   },
   "dependencies": {
     "@polkadot/util": "^3.0.1",
+    "@sensio/core": "^0.1.0",
+    "@sensio/op-sn-multihash": "^0.3.1",
     "@sensio/types": "^0.3.0",
-    "@sensio/op-sn-multihash": "^0.1.0"
+    "ramda": "^0.27.1"
   },
   "repository": {
     "type": "git",

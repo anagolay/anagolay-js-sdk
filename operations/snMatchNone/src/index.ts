@@ -2,10 +2,9 @@ import { uniq } from 'ramda'
 import { InputParams, ReturnParams } from './interfaces'
 
 /**
- * @function snMatchNone
- * @description This operation must have children ops. **NONE** the outputs of children ops must be the same in order to proceed.
+ * This operation must have children ops. **NONE** the outputs of children ops must be the same in order to proceed.
  * @param {InputParams} params InputParams
- * @return {Promise<ReturnParams>} output (Returns true, if none match or throws an error if some match.) and decoder function
+ * @return  output (Returns true, if none match or throws an error if some match.) and decoder function
  */
 export default async function snMatchNone (
   params: InputParams

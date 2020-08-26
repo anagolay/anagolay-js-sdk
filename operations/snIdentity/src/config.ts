@@ -2,7 +2,9 @@
  * Operation specification
  */
 
-export default {
+import { SnOperation } from '@sensio/types'
+
+export const op: SnOperation = {
   id: 'bafy2bzacecc2mmjx3nltb7pkdbtvjf64pjoswimxrcowguwi5jxn34blzb44s',
   data: {
     name: 'sn_identity',
@@ -27,3 +29,5 @@ export default {
     ops: []
   }
 }
+
+export default op

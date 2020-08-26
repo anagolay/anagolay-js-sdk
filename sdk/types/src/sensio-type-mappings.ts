@@ -23,6 +23,7 @@ export type outputDecoded =
   | 'SnGenericId'
   | 'SnBoolean'
   | 'SnNull'
+  | 'SnImageData'
 
 export type outputImplementation =
   | SnByteArray
@@ -41,6 +42,7 @@ export type outputDecodedImplementation =
   | SnString
   | SnAny
   | SnImageMetadata
+  | SnImageData
 
 export interface ExifFile {
   'Bits Per Sample': {
@@ -78,6 +80,12 @@ export type SnBoolean = boolean
 export type SnString = string
 export type SnAny = any // TODO: SnByteArray | SnStatement | SnStatements ... any sensio type
 export type SnNull = null
+
+export interface SnImageData {
+  width: number
+  height: number
+  data: Uint8Array | Uint8ClampedArray | number[]
+}
 
 export interface SnSplitParams {
   data: SnInputParamsImplementation[]

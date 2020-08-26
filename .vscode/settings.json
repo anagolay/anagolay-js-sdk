@@ -34,7 +34,21 @@
     "typescript",
     "typescriptreact"
   ],
-  "files.associations": { "*.json": "jsonc" }
+  "files.associations": { "*.json": "jsonc" },
+  "todohighlight.keywords": [
+    {
+      "text": "@FUCK",
+      "color": "#ffffff",
+      "backgroundColor": "#a3104f",
+      "overviewRulerColor": "grey"
+    },
+    {
+      "text": "@TODO",
+      "color": "#ffffff",
+      "backgroundColor": "#1a30d8",
+      "overviewRulerColor": "grey"
+    }
+  ]
   // "standard.engine": "standardx",
   // "standard.usePackageJson": true
 }

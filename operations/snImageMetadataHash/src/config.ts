@@ -2,7 +2,9 @@
  * Operation specification
  */
 
-export default {
+import { SnOperation } from '@sensio/types'
+
+export const op: SnOperation = {
   id: 'bafy2bzaceaglcxavkrh4ucymmbpaaex7l6zxp5renumgxo4obw2pqbgdbekhe',
   data: {
     name: 'sn_image_metadata_hash',
@@ -80,3 +82,5 @@ export default {
     ]
   }
 }
+
+export default op

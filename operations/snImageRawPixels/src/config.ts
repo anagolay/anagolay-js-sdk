@@ -1,12 +1,13 @@
 /**
  * Operation specification
  */
+import { SnOperation } from '@sensio/types'
 
-export default {
-  id: 'bafy2bzacecbxw2mexfwsheofuogi2jt3th3snnpv4h4cksvqrdciswqpdazbu',
+export const op: SnOperation = {
+  id: 'bafy2bzacedqy3ujv2rspfzregegvst3ix4kk7qwi5n4sq2awjh7xsvrs2j3ce',
   data: {
-    desc: 'RAW PIXELS of the photo',
-    name: 'sn_raw_pixels_hash',
+    desc: 'Extract Only Raw pixels from the image',
+    name: 'sn_image_raw_pixels',
     input: [
       {
         data: 'SnByteArray',
@@ -14,9 +15,9 @@ export default {
       }
     ],
     output: {
-      desc: 'RAW PIXELS of the photo',
+      desc: 'Returns the raw pixel bytes without metadata`',
       output: 'SnByteArray',
-      decoded: 'SnFileBuffer'
+      decoded: 'SnImageData'
     },
     groups: [
       6
@@ -54,3 +55,5 @@ export default {
     ]
   }
 }
+
+export default op

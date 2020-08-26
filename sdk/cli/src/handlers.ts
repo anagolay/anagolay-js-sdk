@@ -1,9 +1,13 @@
 import api from '@sensio/api'
 import { EVENT_NAME_BATCH } from '@sensio/api/pallets/operations/config'
 import { getAlice } from '@sensio/api/utils/accounts'
+import { getLogger } from '@sensio/core/logger'
 import { SnOperation, SnOperationWithStorage } from '@sensio/types'
 import { compose, descend, map, prop, sort } from 'ramda'
 import ops from './generators/fixtures/ops'
+
+const logger = getLogger('sensio:core:execution')
+
 /**
  * Save the ops TS file to network
  */
@@ -26,7 +30,7 @@ export async function operationsFromChain (): Promise<void> {
   await api.api()
 
   const opsFromChain = await api.pallets.operations.getAllDecoded()
-
+  logger.info('getting stuff from chain')
   interface TableRowItem {
     id: string
     name: string

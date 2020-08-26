@@ -1,46 +1,42 @@
+# @sensio/op-sn-image-phash
 
-  # @sensio/op-sn-image-phash
+Blockchain Version **bafy2bzacedkhosdvceus24i27lsec4hdtmkwrjidy4flknb3fstxzun5cdcnk**
 
-  Blockchain Version **bafy2bzacedkhosdvceus24i27lsec4hdtmkwrjidy4flknb3fstxzun5cdcnk**
-  
+## Description
 
-  ## Description 
-  
-  Perceptual hash calculation, currently implementing http://blockhash.io/
-  
-  ##  Links and Repo
+Perceptual hash calculation, currently implementing http://blockhash.io/
 
-  * npm: https://www.npmjs.com/package/@sensio/op-sn-image-phash
-  * repo: [repo folder](https://gitlab.com/sensio_group/network-js/-/tree/master/operations/snImagePhash)
-  * support: [Discord server #dev channel](https://discord.gg/JsdKZ5K) 
+## Links and Repo
 
-  ## Install
-  
-  ```sh
-  # install latest version
-  yarn add @sensio/op-sn-image-phash
+- npm: https://www.npmjs.com/package/@sensio/op-sn-image-phash
+- repo: [repo folder](https://gitlab.com/sensio_group/network-js/-/tree/master/operations/snImagePhash)
+- support: [Discord server #dev channel](https://discord.gg/RQ9g29y)
 
-  # or specific version
-  yarn add @sensio/op-sn-image-phash@0.3.1
-  ```
-  
-  ## Usage
-  
-  ```ts
-  import snImagePhash from '@sensio/op-sn-image-phash'
+## Install
 
+```sh
+# install latest version
+yarn add @sensio/op-sn-image-phash
 
-  const data = new U8intArray(7)
-  await snImagePhash(data)
-  ```
-  
-  ## Contributing
-  
-  PRs accepted.
-  
-  ## License
-  
-  Longer version is in LICENSE file
-  
-  Apache-2.0 © [Sensio Group](https://sensio.group) 
-  
+# or specific version
+yarn add @sensio/op-sn-image-phash@0.3.1
+```
+
+## Usage
+
+```ts
+import snImagePhash from '@sensio/op-sn-image-phash'
+
+const data = new U8intArray(7)
+await snImagePhash(data)
+```
+
+## Contributing
+
+PRs accepted.
+
+## License
+
+Longer version is in LICENSE file
+
+Apache-2.0 © [Sensio Group](https://sensio.group)
