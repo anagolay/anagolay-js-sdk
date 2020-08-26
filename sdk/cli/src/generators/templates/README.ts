@@ -6,7 +6,7 @@ import { generateNpmName } from '../index'
 export default function generate (op: SnOperation): string {
   const npmName = generateNpmName(op.data.name)
   const opName: string = stringCamelCase(op.data.name)
-  const version = '0.3.1'
+  const version = '0.1.0'
   return `
   # ${npmName}
 
@@ -20,7 +20,7 @@ export default function generate (op: SnOperation): string {
   ##  Links and Repo
 
   * npm: https://www.npmjs.com/package/${npmName}
-  * repo: [repo folder](https://gitlab.com/sensio_group/network-js/-/tree/master/operations/${opName})
+  * repo: [repo folder](https://gitlab.com/sensio_group/network-js-sdk/-/tree/master/operations/${opName})
   * support: [Discord server #public-support channel](https://discord.gg/RQ9g29y) 
 
   ## Install

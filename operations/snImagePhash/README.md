@@ -9,7 +9,7 @@ Perceptual hash calculation, currently implementing http://blockhash.io/
 ## Links and Repo
 
 - npm: https://www.npmjs.com/package/@sensio/op-sn-image-phash
-- repo: [repo folder](https://gitlab.com/sensio_group/network-js/-/tree/master/operations/snImagePhash)
+- repo: [repo folder](https://gitlab.com/sensio_group/network-js-sdk/-/tree/master/operations/snImagePhash)
 - support: [Discord server #public-support channel](https://discord.gg/RQ9g29y)
 
 ## Install

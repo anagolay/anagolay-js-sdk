@@ -9,7 +9,7 @@ This operation must have children ops. **NONE** the outputs of children ops must
 ## Links and Repo
 
 - npm: https://www.npmjs.com/package/@sensio/op-sn-match-none
-- repo: [repo folder](https://gitlab.com/sensio_group/network-js/-/tree/master/operations/snMatchNone)
+- repo: [repo folder](https://gitlab.com/sensio_group/network-js-sdk/-/tree/master/operations/snMatchNone)
 - support: [Discord server #public-support channel](https://discord.gg/RQ9g29y)
 
 ## Install

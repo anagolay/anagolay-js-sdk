@@ -29,7 +29,7 @@
     "std": "ts-standard --fix"
   },
   "bugs": {
-    "url": "https://gitlab.com/sensio_group/network-js/issues"
+    "url": "https://gitlab.com/sensio_group/network-js-sdk/issues"
   },
   "devDependencies": {
     "@sensio/op-sn-cid": "0.3.0",

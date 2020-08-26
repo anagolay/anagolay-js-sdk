@@ -306,7 +306,7 @@ const ops: SnOperationDataForCreating[] = [
       }
     ],
     output: {
-      desc: 'Returns the raw pixel bytes without metadata`',
+      desc: 'Returns the raw pixel bytes without metadata',
       output: 'SnByteArray',
       decoded: 'SnImageData'
     },

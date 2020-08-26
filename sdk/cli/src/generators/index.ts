@@ -23,13 +23,7 @@ const JSONOptions: WriteOptions = { replacer: null, spaces: 2 }
 const tsPaths: { [k: string]: string[] } = {}
 const tsReference: any[] = []
 
-export const genOperation = async (
-  op: SnOperation,
-  force = false
-): Promise<void> => {
-  generateTsConfigPaths(op)
-  generateTsConfigReferencePaths(op)
-  console.log(force)
+export const genOperation = async (op: SnOperation): Promise<void> => {
   const opName: string = stringCamelCase(op.data.name)
   const PATH = resolve(__dirname, `../../../../operations/${opName}`)
   const paths = {
@@ -44,51 +38,53 @@ export const genOperation = async (
     license: `${PATH}/LICENSE`
   }
 
-  if (!pathExistsSync(paths.readme)) {
-    await outputFile(resolve(__dirname, paths.readme), readmeTpl(op))
+  // should we create the operation
+  let shouldCreate = true
+
+  if (pathExistsSync(paths.configTs)) {
+    const { id }: SnOperation = (await import(paths.configTs)).default
+    if (id === op.id) {
+      shouldCreate = false
+    }
   }
-  if (!pathExistsSync(paths.license)) {
-    await copy(
-      resolve(__dirname, './templates/LICENSE'),
-      resolve(__dirname, paths.license)
-    )
-  }
-  if (!pathExistsSync(paths.configTs)) {
+
+  if (shouldCreate) {
+    generateTsConfigPaths(op)
+    generateTsConfigReferencePaths(op)
+
     await outputFile(resolve(__dirname, paths.configTs), configTemplate(op))
-  }
-
-  if (!pathExistsSync(paths.spec)) {
-    await outputFile(resolve(__dirname, paths.spec), spec(op))
-  }
-
-  if (!pathExistsSync(paths.index)) {
-    await outputFile(resolve(__dirname, paths.index), mainFuncBodyTpl(op))
-  }
-  if (!pathExistsSync(paths.interfaces)) {
-    await outputFile(resolve(__dirname, paths.interfaces), interfacesTpl(op))
-  }
-
-  if (!pathExistsSync(paths.packageJson)) {
-    await outputJson(
-      resolve(__dirname, paths.packageJson),
-      packageJson(op),
-      JSONOptions
-    )
-  }
-
-  if (!pathExistsSync(paths.configJson)) {
     await outputJson(resolve(__dirname, paths.configJson), op, JSONOptions)
-  }
-
-  if (!pathExistsSync(paths.tsConfigJson)) {
+    await outputFile(resolve(__dirname, paths.interfaces), interfacesTpl(op))
+    await outputFile(resolve(__dirname, paths.readme), readmeTpl(op))
     await outputJson(
       resolve(__dirname, paths.tsConfigJson),
       tsConfigJson(),
       JSONOptions
     )
-  }
+    await copy(
+      resolve(__dirname, './templates/LICENSE'),
+      resolve(__dirname, paths.license)
+    )
 
-  console.log(`SUCCESS: ${generateNpmName(op.data.name)} generated at ${PATH}`)
+    if (!pathExistsSync(paths.spec)) {
+      await outputFile(resolve(__dirname, paths.spec), spec(op))
+    }
+
+    if (!pathExistsSync(paths.index)) {
+      await outputFile(resolve(__dirname, paths.index), mainFuncBodyTpl(op))
+    }
+
+    if (!pathExistsSync(paths.packageJson)) {
+      await outputJson(
+        resolve(__dirname, paths.packageJson),
+        packageJson(op),
+        JSONOptions
+      )
+    }
+    console.log(
+      `SUCCESS: ${generateNpmName(op.data.name)} generated with CID ${op.id}`
+    )
+  }
 }
 
 /**
@@ -120,7 +116,7 @@ export async function regenerateDefaultOperations (
 ): Promise<SnOperation[]> {
   const defaultOps = await parseOriginalOperations(originalOperations)
 
-  await Promise.all(defaultOps.map(async o => await genOperation(o, true)))
+  await Promise.all(defaultOps.map(async o => await genOperation(o)))
   console.log('tsconfig.paths', tsPaths)
   console.log('operations/tsconfig.references', tsReference)
 

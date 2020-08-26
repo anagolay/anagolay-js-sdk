@@ -9,7 +9,7 @@ Generic CID, defaults to base32 and dag-cbor for Any kind of data.
 ## Links and Repo
 
 - npm: https://www.npmjs.com/package/@sensio/op-sn-cid
-- repo: [repo folder](https://gitlab.com/sensio_group/network-js/-/tree/master/operations/snCid)
+- repo: [repo folder](https://gitlab.com/sensio_group/network-js-sdk/-/tree/master/operations/snCid)
 - support: [Discord server #public-support channel](https://discord.gg/RQ9g29y)
 
 ## Install

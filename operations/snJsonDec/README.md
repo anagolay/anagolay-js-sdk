@@ -9,7 +9,7 @@ Wrapper of JSON.parse()
 ## Links and Repo
 
 - npm: https://www.npmjs.com/package/@sensio/op-sn-json-dec
-- repo: [repo folder](https://gitlab.com/sensio_group/network-js/-/tree/master/operations/snJsonDec)
+- repo: [repo folder](https://gitlab.com/sensio_group/network-js-sdk/-/tree/master/operations/snJsonDec)
 - support: [Discord server #public-support channel](https://discord.gg/RQ9g29y)
 
 ## Install

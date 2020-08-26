@@ -1,6 +1,6 @@
 # @sensio/op-sn-image-raw-pixels-hash
 
-Blockchain Version **bafy2bzaceccv7y7hj3ehyclju4m6pb7d623xfo5nbda4xbjfxinbftb52bmqa**
+Blockchain Version **bafy2bzacea6kohhgigqeh3r6dilji2x2uumwnhopbihayehe3quedeocq7xya**
 
 ## Description
 
@@ -9,7 +9,7 @@ Calculate content id of the raw pixels
 ## Links and Repo
 
 - npm: https://www.npmjs.com/package/@sensio/op-sn-image-raw-pixels-hash
-- repo: [repo folder](https://gitlab.com/sensio_group/network-js/-/tree/master/operations/snImageRawPixelsHash)
+- repo: [repo folder](https://gitlab.com/sensio_group/network-js-sdk/-/tree/master/operations/snImageRawPixelsHash)
 - support: [Discord server #public-support channel](https://discord.gg/RQ9g29y)
 
 ## Install
@@ -19,7 +19,7 @@ Calculate content id of the raw pixels
 yarn add @sensio/op-sn-image-raw-pixels-hash
 
 # or specific version
-yarn add @sensio/op-sn-image-raw-pixels-hash@0.3.1
+yarn add @sensio/op-sn-image-raw-pixels-hash@0.1.0
 ```
 
 ## Usage

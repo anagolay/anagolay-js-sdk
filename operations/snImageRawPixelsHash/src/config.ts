@@ -4,7 +4,7 @@
 import { SnOperation } from '@sensio/types'
 
 export const op: SnOperation = {
-  id: 'bafy2bzaceccv7y7hj3ehyclju4m6pb7d623xfo5nbda4xbjfxinbftb52bmqa',
+  id: 'bafy2bzacea6kohhgigqeh3r6dilji2x2uumwnhopbihayehe3quedeocq7xya',
   data: {
     desc: 'Calculate content id of the raw pixels',
     name: 'sn_image_raw_pixels_hash',
@@ -27,7 +27,7 @@ export const op: SnOperation = {
     encOp: 'sn_enc_hex',
     ops: [
       {
-        id: 'bafy2bzacedqy3ujv2rspfzregegvst3ix4kk7qwi5n4sq2awjh7xsvrs2j3ce',
+        id: 'bafy2bzacebtungyir7sr2ciw4nx7ngrdlp5ibh3nlimxhqiwnpuzk4t3wtlw4',
         data: {
           desc: 'Extract Only Raw pixels from the image',
           name: 'sn_image_raw_pixels',
@@ -38,7 +38,7 @@ export const op: SnOperation = {
             }
           ],
           output: {
-            desc: 'Returns the raw pixel bytes without metadata`',
+            desc: 'Returns the raw pixel bytes without metadata',
             output: 'SnByteArray',
             decoded: 'SnImageData'
           },
