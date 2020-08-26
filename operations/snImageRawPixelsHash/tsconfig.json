@@ -4,15 +4,13 @@
     "outDir": "lib",
     "rootDir": "src"
   },
-  "include": ["./src"],
-  "exclude": ["lib"],
+  "include": [
+    "./src"
+  ],
+  "exclude": [
+    "lib"
+  ],
   "references": [
-    {
-      "path": "../snCid"
-    },
-    {
-      "path": "../snEncHex"
-    },
     {
       "path": "../../sdk/types"
     },

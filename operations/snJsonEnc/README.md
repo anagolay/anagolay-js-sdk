@@ -9,7 +9,7 @@ Wrapper of JSON.stringify().
 ## Links and Repo
 
 - npm: https://www.npmjs.com/package/@sensio/op-sn-json-enc
-- repo: [repo folder](https://gitlab.com/sensio_group/network-js/-/tree/master/operations/snJsonEnc)
+- repo: [repo folder](https://gitlab.com/sensio_group/network-js-sdk/-/tree/master/operations/snJsonEnc)
 - support: [Discord server #public-support channel](https://discord.gg/RQ9g29y)
 
 ## Install

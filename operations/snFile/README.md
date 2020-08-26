@@ -9,7 +9,7 @@ Reads the file from given path (data) and returns the buffer. RAW file buffer fo
 ## Links and Repo
 
 - npm: https://www.npmjs.com/package/@sensio/op-sn-file
-- repo: [repo folder](https://gitlab.com/sensio_group/network-js/-/tree/master/operations/snFile)
+- repo: [repo folder](https://gitlab.com/sensio_group/network-js-sdk/-/tree/master/operations/snFile)
 - support: [Discord server #public-support channel](https://discord.gg/RQ9g29y)
 
 ## Install

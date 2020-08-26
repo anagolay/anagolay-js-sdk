@@ -1,4 +1,4 @@
-[![pipeline status](https://gitlab.com/sensio_group/network-js/badges/master/pipeline.svg)](https://gitlab.com/sensio_group/network-js/-/commits/master) [![coverage report](https://gitlab.com/sensio_group/network-js/badges/master/coverage.svg)](https://gitlab.com/sensio_group/network-js/-/commits/master) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![pipeline status](https://gitlab.com/sensio_group/network-js-sdk/badges/master/pipeline.svg)](https://gitlab.com/sensio_group/network-js-sdk/-/commits/master) [![coverage report](https://gitlab.com/sensio_group/network-js-sdk/badges/master/coverage.svg)](https://gitlab.com/sensio_group/network-js-sdk/-/commits/master) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 ## Dev friendly blockchain SDK for Sensio Network. 👩‍💻🚀👨‍💻
 
@@ -6,9 +6,9 @@ This is the monorepo for ALL Sensio packages. This includes following list:
 
 1. Definitions of operations located under `<root>/operations`
 2. Sensio Network API located under `<root>/sdk/api`
-3. Sensio Network CLI located under `<root>/sdk/cli`
-4. Sensio Network Types located under `<root>/sdk/types`
-5. Sensio React hooks and components located under `<root>/react`
+3. Sensio Network Core located under `<root>/sdk/core`
+4. Sensio Network CLI located under `<root>/sdk/cli`
+5. Sensio Network Types located under `<root>/sdk/types`
 
 ## Development
 
@@ -34,9 +34,9 @@ The structure is following:
 │   ├── snMatchNone
 │   ├── snMultihash
 │   └── snSplit
-├── react
 └── sdk
     ├── api
+    ├── core
     ├── cli
     └── types
 
@@ -52,7 +52,7 @@ Pretty much everything that has no special place, like benchmarking.
 
 **operations**
 
-HEre you can find Javascript implementation of Sensio Operation. To find out more about Sensio Operation please visit the [Operation wiki page](https://wiki.sensio.dev)
+HEre you can find Javascript implementation of Sensio Operation. To find out more about Sensio Operation please visit the [Operation wiki page](https://sensio.dev)
 
 **rect**
 

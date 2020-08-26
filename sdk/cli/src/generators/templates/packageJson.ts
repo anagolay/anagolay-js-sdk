@@ -57,9 +57,9 @@ const packageJson = (op: SnOperation): Object => {
       url: 'git+https://gitlab.com/sensio_group/network-js-sdk.git'
     },
     bugs: {
-      url: 'https://gitlab.com/sensio_group/network-js/issues'
+      url: 'https://gitlab.com/sensio_group/network-js-sdk/issues'
     },
-    homepage: 'https://gitlab.com/sensio_group/network-js#readme',
+    homepage: 'https://gitlab.com/sensio_group/network-js-sdk#readme',
     'ts-standard': {
       ignore: ['lib']
     }

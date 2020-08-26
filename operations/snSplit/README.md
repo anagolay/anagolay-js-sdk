@@ -9,7 +9,7 @@ Takes in the operation name and its outputs, then splits in to N copies of the s
 ## Links and Repo
 
 - npm: https://www.npmjs.com/package/@sensio/op-sn-split
-- repo: [repo folder](https://gitlab.com/sensio_group/network-js/-/tree/master/operations/snSplit)
+- repo: [repo folder](https://gitlab.com/sensio_group/network-js-sdk/-/tree/master/operations/snSplit)
 - support: [Discord server #public-support channel](https://discord.gg/RQ9g29y)
 
 ## Install
