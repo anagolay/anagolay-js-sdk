@@ -18,8 +18,6 @@ dependencies:
   stage: deps
   script:
     - yarn
-  only:
-    - merge_requests
 
 lint:
   stage: test
