@@ -2,7 +2,9 @@
  * Operation specification
  */
 
-export default {
+import { SnOperation } from '@sensio/types'
+
+export const op: SnOperation = {
   id: 'bafy2bzacedq5zlaca4xq4zou7ctovepnx3doegwcii37prgrzvhdhoqthmpii',
   data: {
     desc: 'Extract All Image Metadata',
@@ -54,3 +56,5 @@ export default {
     ]
   }
 }
+
+export default op

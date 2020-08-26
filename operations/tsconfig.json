@@ -3,7 +3,6 @@
   "references": [
     { "path": "./snEncHex" },
     { "path": "./snSplit" },
-    { "path": "./snCid" },
     { "path": "./snJsonEnc" },
     { "path": "./snJsonDec" },
     { "path": "./snIdentity" },
@@ -13,8 +12,9 @@
     { "path": "./snFile" },
     { "path": "./snCid" },
     { "path": "./snImageMetadataHash" },
-    { "path": "./snRawPixelsHash" },
     { "path": "./snImageMetadata" },
-    { "path": "./snImagePhash" }
+    { "path": "./snImagePhash" },
+    { "path": "./snImageRawPixelsHash" },
+    { "path": "./snImageRawPixels" }
   ]
 }

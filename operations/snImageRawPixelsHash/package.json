@@ -1,5 +1,5 @@
 {
-  "name": "@sensio/op-sn-raw-pixels-hash",
+  "name": "@sensio/op-sn-image-raw-pixels-hash",
   "version": "0.1.0",
   "license": "Apache-2.0",
   "author": "daniel@woss.io",
@@ -24,8 +24,11 @@
   },
   "dependencies": {
     "@polkadot/util": "^3.0.1",
+    "@sensio/core": "^0.1.0",
     "@sensio/types": "^0.3.0",
-    "@sensio/op-sn-file": "^0.1.0"
+    "@sensio/op-sn-image-raw-pixels": "^0.1.0",
+    "@sensio/op-sn-enc-hex": "^0.1.0",
+    "@sensio/op-sn-cid": "^0.3.0"
   },
   "repository": {
     "type": "git",

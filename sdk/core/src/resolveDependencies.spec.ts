@@ -1,5 +1,5 @@
-import { IncompatibleInputParamChildOperationError } from '@sensio/api/errors/IncompatibleInputParamChildOperation'
 import { SnOperationDataForCreating } from '@sensio/types'
+import { IncompatibleInputParamChildOperationError } from './errors/IncompatibleInputParamChildOperation'
 import { multipleOnSameLevelOps, ops, resolvedOpDeps } from './fixtures/testOps'
 import resolveDependencies, {
   createInputFromOutput
@@ -9,7 +9,7 @@ let depsResolved: SnOperationDataForCreating[] = []
 
 beforeAll(async () => (depsResolved = await resolveDependencies(ops)))
 
-describe('Pallets::Operation - resolveDependencies', (): void => {
+describe('Core::Operation - resolveDependencies', (): void => {
   it('is defined', (): void => {
     expect(resolveDependencies).toBeDefined()
   })

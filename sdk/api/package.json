@@ -10,7 +10,7 @@
   "license": "Apache-2.0",
   "devDependencies": {
     "@types/node": "^14.0.14",
-    "@types/ramda": "^0.27.6",
+    "@types/ramda": "https://github.com/woss/ramda-types.git",
     "ts-node": "^8.10.2",
     "ts-node-dev": "^1.0.0-pre.49",
     "ts-standard": "^8.0.1",
@@ -18,15 +18,13 @@
   },
   "dependencies": {
     "@polkadot/api": "^1.21.1",
-    "@polkadot/keyring": "^2.16.1",
     "@polkadot/util": "^3.0.1",
     "@polkadot/util-crypto": "^3.0.1",
     "@sensio/op-sn-cid": "^0.3.1",
     "@sensio/op-sn-json-enc": "^0.3.1",
     "@sensio/types": "^0.3.1",
-    "brcast": "^3.0.2",
     "ramda": "^0.27.0",
-    "tree-traversal": "^1.1.1"
+    "@sensio/core": "^0.1.0"
   },
   "scripts": {
     "build": "tsc -b .",

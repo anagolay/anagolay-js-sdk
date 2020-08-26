@@ -1,3 +1,6 @@
 {
-  "recommendations": ["numso.prettier-standard-vscode"]
+  "recommendations": [
+    "numso.prettier-standard-vscode",
+    "wayou.vscode-todo-highlight"
+  ]
 }

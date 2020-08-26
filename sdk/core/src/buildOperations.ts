@@ -9,7 +9,7 @@ import { generateOperation } from './resolveDependencies'
 async function visitNode (
   node: SnOperationDataForCreating
 ): Promise<SnOperation> {
-  // Anon function for the recursion
+  // function for the recursion
   async function visit (
     node: SnOperationDataForCreating
   ): Promise<SnOperation> {

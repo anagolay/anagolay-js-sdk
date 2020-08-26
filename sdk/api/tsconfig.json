@@ -4,11 +4,12 @@
     "outDir": "lib",
     "rootDir": "src"
   },
-  "include": ["./src"],
+  "include": ["./src", "../core/src/util/hashing.ts"],
   "exclude": ["lib"],
   "references": [
-    { "path": "../types" }
-    // { "path": "../../operations/snCid" },
-    // { "path": "../../operations/snJsonEnc" }
+    { "path": "../core" },
+    { "path": "../types" },
+    { "path": "../../operations/snCid" },
+    { "path": "../../operations/snJsonEnc" }
   ]
 }

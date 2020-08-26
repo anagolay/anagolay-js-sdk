@@ -37,6 +37,7 @@
     "cli:regen-custom-ops": "cd sdk/cli && yarn start regen-custom-ops && cd ../../ && yarn std",
     "lerna:publish": "export GPG_TTY=$TTY && yarn lerna publish",
     "docs": "yarn typedoc --sourcefile-url-prefix \"https://gitlab.com/sensio_group/network-js/-/tree/master/\"",
+    "core": "yarn workspace @sensio/core",
     "api": "yarn workspace @sensio/api",
     "cli": "yarn workspace @sensio/cli",
     "types": "yarn workspace @sensio/types"

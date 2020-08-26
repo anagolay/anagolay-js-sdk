@@ -6,7 +6,14 @@ const tsConfigJson = (): Object => ({
   },
   include: ['./src'],
   exclude: ['lib'],
-  references: [{ path: '../../sdk/types' }]
+  references: [
+    {
+      path: '../../sdk/types'
+    },
+    {
+      path: '../../sdk/core'
+    }
+  ]
 })
 
 export default tsConfigJson

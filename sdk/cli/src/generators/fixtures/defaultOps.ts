@@ -7,7 +7,7 @@ const ops: SnOperationDataForCreating[] = [
     input: [
       {
         data: 'SnByteArray',
-        decoded: 'SnString'
+        decoded: 'SnAny'
       }
     ],
     groups: [SnForWhat.SYS],
@@ -230,27 +230,7 @@ const ops: SnOperationDataForCreating[] = [
     ops: [],
     opNames: ['sn_image_metadata']
   },
-  {
-    desc: 'RAW PIXELS of the photo',
-    name: 'sn_raw_pixels_hash',
-    input: [
-      {
-        data: 'SnByteArray',
-        decoded: 'SnFileBuffer'
-      }
-    ],
-    output: {
-      desc: 'RAW PIXELS of the photo',
-      output: 'SnByteArray',
-      decoded: 'SnFileBuffer'
-    },
-    groups: [SnForWhat.SYS],
-    priority: 1,
-    hashingOp: 'sn_cid',
-    encOp: 'sn_enc_hex',
-    ops: [],
-    opNames: ['sn_file']
-  },
+
   {
     desc: 'Extract All Image Metadata',
     name: 'sn_image_metadata',
@@ -287,6 +267,48 @@ const ops: SnOperationDataForCreating[] = [
       desc: 'Return binary representation of phash 0011101011',
       output: 'SnByteArray',
       decoded: 'SnString'
+    },
+    groups: [SnForWhat.SYS],
+    priority: 1,
+    hashingOp: 'sn_cid',
+    encOp: 'sn_enc_hex',
+    ops: [],
+    opNames: ['sn_file']
+  },
+  {
+    desc: 'Calculate content id of the raw pixels',
+    name: 'sn_image_raw_pixels_hash',
+    input: [
+      {
+        data: 'SnByteArray',
+        decoded: 'SnImageData'
+      }
+    ],
+    output: {
+      desc: 'Return content id of the raw pixels',
+      output: 'SnByteArray',
+      decoded: 'SnString'
+    },
+    groups: [SnForWhat.SYS],
+    priority: 1,
+    hashingOp: 'sn_cid',
+    encOp: 'sn_enc_hex',
+    ops: [],
+    opNames: ['sn_image_raw_pixels']
+  },
+  {
+    desc: 'Extract Only Raw pixels from the image',
+    name: 'sn_image_raw_pixels',
+    input: [
+      {
+        data: 'SnByteArray',
+        decoded: 'SnFileBuffer'
+      }
+    ],
+    output: {
+      desc: 'Returns the raw pixel bytes without metadata`',
+      output: 'SnByteArray',
+      decoded: 'SnImageData'
     },
     groups: [SnForWhat.SYS],
     priority: 1,

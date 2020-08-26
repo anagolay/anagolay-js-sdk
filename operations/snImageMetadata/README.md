@@ -1,46 +1,42 @@
+# @sensio/op-sn-image-metadata
 
-  # @sensio/op-sn-image-metadata
+Blockchain Version **bafy2bzacedq5zlaca4xq4zou7ctovepnx3doegwcii37prgrzvhdhoqthmpii**
 
-  Blockchain Version **bafy2bzacedq5zlaca4xq4zou7ctovepnx3doegwcii37prgrzvhdhoqthmpii**
-  
+## Description
 
-  ## Description 
-  
-  Extract All Image Metadata
-  
-  ##  Links and Repo
+Extract All Image Metadata
 
-  * npm: https://www.npmjs.com/package/@sensio/op-sn-image-metadata
-  * repo: [repo folder](https://gitlab.com/sensio_group/network-js/-/tree/master/operations/snImageMetadata)
-  * support: [Discord server #dev channel](https://discord.gg/JsdKZ5K) 
+## Links and Repo
 
-  ## Install
-  
-  ```sh
-  # install latest version
-  yarn add @sensio/op-sn-image-metadata
+- npm: https://www.npmjs.com/package/@sensio/op-sn-image-metadata
+- repo: [repo folder](https://gitlab.com/sensio_group/network-js/-/tree/master/operations/snImageMetadata)
+- support: [Discord server #dev channel](https://discord.gg/RQ9g29y)
 
-  # or specific version
-  yarn add @sensio/op-sn-image-metadata@0.3.1
-  ```
-  
-  ## Usage
-  
-  ```ts
-  import snImageMetadata from '@sensio/op-sn-image-metadata'
+## Install
 
+```sh
+# install latest version
+yarn add @sensio/op-sn-image-metadata
 
-  const data = new U8intArray(7)
-  await snImageMetadata(data)
-  ```
-  
-  ## Contributing
-  
-  PRs accepted.
-  
-  ## License
-  
-  Longer version is in LICENSE file
-  
-  Apache-2.0 © [Sensio Group](https://sensio.group) 
-  
+# or specific version
+yarn add @sensio/op-sn-image-metadata@0.3.1
+```
+
+## Usage
+
+```ts
+import snImageMetadata from '@sensio/op-sn-image-metadata'
+
+const data = new U8intArray(7)
+await snImageMetadata(data)
+```
+
+## Contributing
+
+PRs accepted.
+
+## License
+
+Longer version is in LICENSE file
+
+Apache-2.0 © [Sensio Group](https://sensio.group)

@@ -2,7 +2,9 @@
  * Operation specification
  */
 
-export default {
+import { SnOperation } from '@sensio/types'
+
+export const op: SnOperation = {
   id: 'bafy2bzacedkhosdvceus24i27lsec4hdtmkwrjidy4flknb3fstxzun5cdcnk',
   data: {
     desc: 'Perceptual hash calculation, currently implementing http://blockhash.io/',
@@ -54,3 +56,5 @@ export default {
     ]
   }
 }
+
+export default op

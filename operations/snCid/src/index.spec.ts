@@ -1,20 +1,25 @@
 import { stringToU8a, u8aToU8a } from '@polkadot/util'
 import snMultihash from '@sensio/op-sn-multihash'
 import CID from 'cids'
-import snCid from '.'
+import execute, { snCid } from './index'
+
+const demo = {
+  text: 'demo',
+  cid: 'bafy2bzacedwrfzn6mrudj5dlhzncjts3s2yg76vc7cxwge6lnzdjhl2gkxii6'
+}
 
 describe('Operation: snCid', (): void => {
-  it('is defined', (): void => {
+  it('is defined, snCid', (): void => {
     expect(snCid).toBeDefined()
   })
   it('should be correct CID', async (): Promise<void> => {
-    const hash = await snMultihash([
+    const cid = await execute([
       {
-        data: stringToU8a('demo'),
-        decode: () => 'demo'
+        data: stringToU8a(demo.text),
+        decode: () => Buffer.from(demo.text)
       }
     ])
-    const cid = await snCid([hash])
+    expect(cid.decode()).toEqual(demo.cid)
 
     // lets generate the same CID based on the buffer so we can test teh correct values
     const { codec, version, multibaseName } = new CID(cid.decode())
@@ -25,21 +30,23 @@ describe('Operation: snCid', (): void => {
   it('should be correct multihash', async (): Promise<void> => {
     const hash = await snMultihash([
       {
-        data: stringToU8a('demo'),
-        decode: () => 'demo'
+        data: stringToU8a(demo.text),
+        decode: () => demo.text
       }
     ])
 
-    const cid = await snCid([hash])
+    const cid = await execute([hash])
 
     const t = new CID(cid.decode())
     // for now bafy is one what we need
     const isBafy = t.toString().startsWith('bafy')
     expect(isBafy).toEqual(true)
   })
-  it('should fail on wrong multihash', async (): Promise<void> => {
+  it('should fail on wrong multihash with direct passing the params', async (): Promise<
+  void
+  > => {
     expect.assertions(1)
-    const buff = Buffer.from('ss')
+    const buff = Buffer.from(demo.text)
     try {
       await snCid([
         {

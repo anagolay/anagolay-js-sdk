@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 import { stringCamelCase } from '@polkadot/util'
-import { resolveDependencies } from '@sensio/api/pallets/operations'
-import buildOperations from '@sensio/api/pallets/operations/buildOperations'
+import buildOperations from '@sensio/core/buildOperations'
+import { resolveDependencies } from '@sensio/core/resolveDependencies'
 import { SnOperation, SnOperationDataForCreating } from '@sensio/types'
 import {
   copy,
@@ -29,7 +29,7 @@ export const genOperation = async (
 ): Promise<void> => {
   generateTsConfigPaths(op)
   generateTsConfigReferencePaths(op)
-
+  console.log(force)
   const opName: string = stringCamelCase(op.data.name)
   const PATH = resolve(__dirname, `../../../../operations/${opName}`)
   const paths = {
@@ -44,7 +44,7 @@ export const genOperation = async (
     license: `${PATH}/LICENSE`
   }
 
-  if (force || !pathExistsSync(paths.readme)) {
+  if (!pathExistsSync(paths.readme)) {
     await outputFile(resolve(__dirname, paths.readme), readmeTpl(op))
   }
   if (!pathExistsSync(paths.license)) {
@@ -53,7 +53,7 @@ export const genOperation = async (
       resolve(__dirname, paths.license)
     )
   }
-  if (force || !pathExistsSync(paths.configTs)) {
+  if (!pathExistsSync(paths.configTs)) {
     await outputFile(resolve(__dirname, paths.configTs), configTemplate(op))
   }
 
@@ -64,11 +64,11 @@ export const genOperation = async (
   if (!pathExistsSync(paths.index)) {
     await outputFile(resolve(__dirname, paths.index), mainFuncBodyTpl(op))
   }
-  if (force || !pathExistsSync(paths.interfaces)) {
+  if (!pathExistsSync(paths.interfaces)) {
     await outputFile(resolve(__dirname, paths.interfaces), interfacesTpl(op))
   }
 
-  if (force || !pathExistsSync(paths.packageJson)) {
+  if (!pathExistsSync(paths.packageJson)) {
     await outputJson(
       resolve(__dirname, paths.packageJson),
       packageJson(op),
@@ -76,7 +76,7 @@ export const genOperation = async (
     )
   }
 
-  if (force || !pathExistsSync(paths.configJson)) {
+  if (!pathExistsSync(paths.configJson)) {
     await outputJson(resolve(__dirname, paths.configJson), op, JSONOptions)
   }
 

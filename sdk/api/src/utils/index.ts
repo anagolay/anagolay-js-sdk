@@ -1,5 +1,4 @@
 export * as accounts from './accounts'
 export * as capitalize from './capitalize'
-export * as hashing from './hashing'
 export { default as networkCallback } from './networkCallback'
 export * as nonce from './nonce'

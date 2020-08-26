@@ -1,4 +1,4 @@
-import { stringToU8a } from '@polkadot/util'
+import { stringToU8a, u8aToU8a } from '@polkadot/util'
 import snEncHex from '.'
 
 describe('SnOperation: snEncHex', (): void => {
@@ -16,5 +16,13 @@ describe('SnOperation: snEncHex', (): void => {
     ])
 
     expect(res.decode()).toEqual(encoded)
+    const res2 = await snEncHex([
+      {
+        data: u8aToU8a(Buffer.from(str)),
+        decode: () => Buffer.from(str)
+      }
+    ])
+
+    expect(res2.decode()).toEqual(encoded)
   })
 })

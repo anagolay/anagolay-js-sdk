@@ -1,16 +1,32 @@
 import snFile from '@sensio/op-sn-file'
 import { resolve } from 'path'
-import snImageMetadata from '.'
+import execute, { snImageMetadata } from '.'
+
+const testImage = resolve(__dirname, '../../../assets/test-images/01.jpg')
 
 describe('SnOperation: snImageMetadata', (): void => {
   it('is defined', (): void => {
     expect(snImageMetadata).toBeDefined()
   })
   it('should return correct metadata', async (): Promise<void> => {
+    const res = await execute([
+      {
+        data: testImage,
+        decode: () => testImage
+      }
+    ])
+    const decoded = res.decode()
+
+    expect(decoded.exif?.Make.description).toBe('Canon')
+    expect(decoded.exif?.Make.value).toEqual(['Canon'])
+  })
+  it('should return correct metadata for main function', async (): Promise<
+  void
+  > => {
     const file = await snFile([
       {
-        data: resolve(__dirname, '../../../assets/test-images/01.jpg'),
-        decode: () => resolve(__dirname, '../../../assets/test-images/01.jpg')
+        data: testImage,
+        decode: () => testImage
       }
     ])
     const res = await snImageMetadata([file])

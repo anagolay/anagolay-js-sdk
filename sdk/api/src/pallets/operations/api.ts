@@ -84,7 +84,7 @@ export async function saveOperationsBulk (
  * Get All operations from the chain, encoded using SCALE codec
  * @returns [Promise<[StorageKey, OperationInfo][]] encoded Storage
  */
-export async function getAll (): Promise<[StorageKey, OperationInfo][]> {
+export async function getAll (): Promise<Array<[StorageKey, OperationInfo]>> {
   const api = getApi()
 
   // get them from the network

@@ -2,7 +2,9 @@
  * Operation specification
  */
 
-export default {
+import { SnOperation } from '@sensio/types'
+
+export const op: SnOperation = {
   id: 'bafy2bzacebvd3b7upai2av3w33dwrwqkh7w7qvbon6obi6q4evw6pqe744npu',
   data: {
     name: 'sn_cid',
@@ -13,9 +15,7 @@ export default {
         decoded: 'SnBuffer'
       }
     ],
-    groups: [
-      6
-    ],
+    groups: [6],
     priority: 1,
     output: {
       desc: 'CID string converted into SnByteArray',
@@ -36,9 +36,7 @@ export default {
               decoded: 'SnAny'
             }
           ],
-          groups: [
-            6
-          ],
+          groups: [6],
           priority: 0,
           output: {
             desc: 'Returns the Multihash buffer as SnByteArray.',
@@ -53,3 +51,5 @@ export default {
     ]
   }
 }
+
+export default op

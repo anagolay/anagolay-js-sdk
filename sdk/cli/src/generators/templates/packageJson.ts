@@ -1,4 +1,5 @@
 import { SnOperation } from '@sensio/types'
+import { isEmpty } from 'ramda'
 import { generateNpmName } from '..'
 
 const packageJson = (op: SnOperation): Object => {
@@ -8,6 +9,17 @@ const packageJson = (op: SnOperation): Object => {
     const opName = generateNpmName(o.data.name)
     deps[opName] = '^0.1.0'
   })
+
+  const encodingDeps: string[] = []
+  const hashingDep: string[] = []
+
+  if (!isEmpty(op.data.encOp)) {
+    encodingDeps.push(`"${generateNpmName(op.data.encOp)}":"^0.1.0"`)
+  }
+
+  if (!isEmpty(op.data.hashingOp)) {
+    hashingDep.push(`"${generateNpmName(op.data.hashingOp)}":"^0.1.0"`)
+  }
 
   return {
     name: generateNpmName(op.data.name),
@@ -33,8 +45,11 @@ const packageJson = (op: SnOperation): Object => {
     },
     dependencies: {
       '@polkadot/util': '^3.0.1',
+      '@sensio/core': '^0.1.0',
       '@sensio/types': '^0.3.0',
-      ...deps
+      ...deps,
+      ...encodingDeps,
+      ...hashingDep
     },
 
     repository: {

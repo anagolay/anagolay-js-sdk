@@ -21,7 +21,7 @@ export default function generate (op: SnOperation): string {
 
   * npm: https://www.npmjs.com/package/${npmName}
   * repo: [repo folder](https://gitlab.com/sensio_group/network-js/-/tree/master/operations/${opName})
-  * support: [Discord server #dev channel](https://discord.gg/JsdKZ5K) 
+  * support: [Discord server #dev channel](https://discord.gg/RQ9g29y) 
 
   ## Install
   
