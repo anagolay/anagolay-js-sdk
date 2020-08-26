@@ -10,7 +10,7 @@ What comes in that comes out, identity function, must be a parent of the USER op
 
 - npm: https://www.npmjs.com/package/@sensio/op-sn-identity
 - repo: [repo folder](https://gitlab.com/sensio_group/network-js/-/tree/master/operations/snIdentity)
-- support: [Discord server #dev channel](https://discord.gg/RQ9g29y)
+- support: [Discord server #public-support channel](https://discord.gg/RQ9g29y)
 
 ## Install
 

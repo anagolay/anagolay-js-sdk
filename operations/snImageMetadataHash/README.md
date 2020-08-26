@@ -10,7 +10,7 @@ Hash of full unchanged metadata buffer (or similar). Without raw pixels. The has
 
 - npm: https://www.npmjs.com/package/@sensio/op-sn-image-metadata-hash
 - repo: [repo folder](https://gitlab.com/sensio_group/network-js/-/tree/master/operations/snImageMetadataHash)
-- support: [Discord server #dev channel](https://discord.gg/RQ9g29y)
+- support: [Discord server #public-support channel](https://discord.gg/RQ9g29y)
 
 ## Install
 

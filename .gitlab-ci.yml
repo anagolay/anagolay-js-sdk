@@ -18,12 +18,16 @@ dependencies:
   stage: deps
   script:
     - yarn
+  only:
+    - merge_requests
 
 lint:
   stage: test
   needs: [dependencies]
   script:
     - yarn std
+  only:
+    - merge_requests
 
 test_all_with_coverage:
   stage: test
@@ -33,6 +37,8 @@ test_all_with_coverage:
   coverage: /All\sfiles.*?\s+(\d+.\d+)/
   tags:
     - docker
+  only:
+    - merge_requests
 
 pages:
   stage: docs

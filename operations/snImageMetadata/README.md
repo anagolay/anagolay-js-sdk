@@ -10,7 +10,7 @@ Extract All Image Metadata
 
 - npm: https://www.npmjs.com/package/@sensio/op-sn-image-metadata
 - repo: [repo folder](https://gitlab.com/sensio_group/network-js/-/tree/master/operations/snImageMetadata)
-- support: [Discord server #dev channel](https://discord.gg/RQ9g29y)
+- support: [Discord server #public-support channel](https://discord.gg/RQ9g29y)
 
 ## Install
 

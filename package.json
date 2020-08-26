@@ -8,12 +8,12 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://gitlab.com/sensio_group/network-js.git"
+    "url": "git+https://gitlab.com/sensio_group/network-js-sdk.git"
   },
   "bugs": {
-    "url": "https://gitlab.com/sensio_group/network-js/issues"
+    "url": "https://gitlab.com/sensio_group/network-js-sdk/issues"
   },
-  "homepage": "https://gitlab.com/sensio_group/network-js#readme",
+  "homepage": "https://gitlab.com/sensio_group/network-js-sdk#readme",
   "license": "Apache-2.0",
   "scripts": {
     "boot": "lerna bootstrap",
@@ -36,7 +36,7 @@
     "cli:regen-default-ops": "cd sdk/cli && yarn start regen-default-ops && cd ../../ && yarn std",
     "cli:regen-custom-ops": "cd sdk/cli && yarn start regen-custom-ops && cd ../../ && yarn std",
     "lerna:publish": "export GPG_TTY=$TTY && yarn lerna publish",
-    "docs": "yarn typedoc --sourcefile-url-prefix \"https://gitlab.com/sensio_group/network-js/-/tree/master/\"",
+    "docs": "yarn typedoc --sourcefile-url-prefix \"https://gitlab.com/sensio_group/network-js-sdk/-/tree/master/\"",
     "core": "yarn workspace @sensio/core",
     "api": "yarn workspace @sensio/api",
     "cli": "yarn workspace @sensio/cli",

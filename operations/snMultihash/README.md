@@ -10,7 +10,7 @@ Generic blake2b-256 multihash operation.
 
 - npm: https://www.npmjs.com/package/@sensio/op-sn-multihash
 - repo: [repo folder](https://gitlab.com/sensio_group/network-js/-/tree/master/operations/snMultihash)
-- support: [Discord server #dev channel](https://discord.gg/RQ9g29y)
+- support: [Discord server #public-support channel](https://discord.gg/RQ9g29y)
 
 ## Install
 
