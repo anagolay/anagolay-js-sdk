@@ -54,7 +54,7 @@ const packageJson = (op: SnOperation): Object => {
 
     repository: {
       type: 'git',
-      url: 'git+https://gitlab.com/sensio_group/network-js.git'
+      url: 'git+https://gitlab.com/sensio_group/network-js-sdk.git'
     },
     bugs: {
       url: 'https://gitlab.com/sensio_group/network-js/issues'
