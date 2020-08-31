@@ -1,28 +1,32 @@
 image: node:14
 
+workflow:
+  rules:
+    - if: $CI_MERGE_REQUEST_IID
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+
 include:
   - template: Dependency-Scanning.gitlab-ci.yml
-  - template: Workflows/MergeRequest-Pipelines.gitlab-ci.yml
 
 cache:
   key: ${CI_COMMIT_REF_SLUG}
   paths:
     - node_modules/
-    # - .yarn
 
 stages:
-  - deps
+  - dependencies
   - test
+  - lint
   - docs
 
 dependencies:
-  stage: deps
+  stage: dependencies
   script:
     - yarn
 
 lint:
-  stage: test
-  needs: [dependencies]
+  stage: lint
+  needs: [dependencies, test_all_with_coverage]
   script:
     - yarn std
 
