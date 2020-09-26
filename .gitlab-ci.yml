@@ -24,7 +24,6 @@ stages:
   - lint
   - docs
   - build
-  - release
 
 dependencies:
   stage: dependencies
@@ -64,11 +63,3 @@ build:
     - yarn build
   only:
     - merge_requests
-
-release-to-npm:
-  stage: release
-  needs: [build]
-  script:
-    - echo "i will run on the master only"
-  only:
-    - master
