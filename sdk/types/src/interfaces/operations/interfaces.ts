@@ -7,14 +7,9 @@ import {
   output,
   outputDecoded,
   SnInputParamsDefinition,
-  SnString
+  SnString,
 } from '../../sensio-type-mappings'
-import {
-  SnAccountId,
-  SnBlockNumber,
-  SnForWhat,
-  SnGenericId
-} from '../sensio/interfaces'
+import { SnAccountId, SnBlockNumber, SnForWhat, SnGenericId } from '../sensio/interfaces'
 
 export interface SnOperationOutput {
   desc: string

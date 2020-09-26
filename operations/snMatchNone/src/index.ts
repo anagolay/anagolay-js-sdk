@@ -6,13 +6,11 @@ import { InputParams, ReturnParams } from './interfaces'
  * @param {InputParams} params InputParams
  * @return  output (Returns true, if none match or throws an error if some match.) and decoder function
  */
-export default async function snMatchNone (
-  params: InputParams
-): Promise<ReturnParams> {
+export default async function snMatchNone(params: InputParams): Promise<ReturnParams> {
   if (params.length === 0) {
     throw new Error('This operation cannot have zero operations')
   }
-  const u = params.map(z => z.data)
+  const u = params.map((z) => z.data)
   const neq = uniq(u)
 
   if (neq.length !== params.length) {
@@ -21,6 +19,6 @@ export default async function snMatchNone (
 
   return {
     data: true,
-    decode: () => true
+    decode: () => true,
   }
 }

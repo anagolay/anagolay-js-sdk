@@ -10,7 +10,9 @@
     {
       "path": "../../sdk/types"
     },
-
+    {
+      "path": "../../sdk/core"
+    },
     {
       "path": "../snFile"
     }

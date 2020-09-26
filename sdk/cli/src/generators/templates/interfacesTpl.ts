@@ -1,28 +1,27 @@
 /*  eslint-disable @typescript-eslint/restrict-template-expressions */
-import {
-  SnInputParamsDefinition,
-  SnOperation,
-  SnOperationData
-} from '@sensio/types'
+import { SnInputParamsDefinition, SnOperation, SnOperationData } from '@sensio/types'
 import { isEmpty, prop } from 'ramda'
 /**
  * Generate main interface file
  * @param op [SnOperation]
  * @return string
  */
-export default function interfacesTpl (op: SnOperation): string {
+export default function interfacesTpl(op: SnOperation): string {
   const { data } = op
   let types: string[] = []
 
-  types = data.input.map(i => `${i.decoded}`)
-  types = types.concat(data.input.map(i => `${i.data}`))
+  types = data.input.map((i) => `${i.decoded}`)
+  types = types.concat(data.input.map((i) => `${i.data}`))
+
+  // @FUCK bug here with the output declaration of `[SnSensioClaim[],SnSensioSignatures[]]`
+  // https://gitlab.com/sensio_group/network-js-sdk/-/issues/65
   types.push(data.output.output)
   types.push(data.output.decoded)
   const dedupe = [...new Set(types)]
 
   return `
   import { SnInputParamsImplementation, ${dedupe
-    .map(t => (t.includes('[]') ? t.split('[]')[0] : t))
+    .map((t) => (t.includes('[]') ? t.split('[]')[0] : t))
     .join(', ')} } from "@sensio/types"
   
   export interface ReturnParams extends SnInputParamsImplementation {
@@ -40,9 +39,7 @@ export default function interfacesTpl (op: SnOperation): string {
  * @param inputs [SnInputParamsDefinition]
  * @return string
  */
-export function generateInputParamList (
-  inputs: SnInputParamsDefinition[]
-): string {
+export function generateInputParamList(inputs: SnInputParamsDefinition[]): string {
   return inputs
     .map((i, k) => {
       return `export interface InputParam${k} extends SnInputParamsImplementation {
@@ -50,7 +47,7 @@ export function generateInputParamList (
       decode: () => ${i.decoded}
     }`
     })
-    .join('/n')
+    .join('\n')
 }
 
 /**
@@ -58,7 +55,7 @@ export function generateInputParamList (
  * @param inputs [SnInputParamsDefinition]
  * @return string
  */
-export function generateInputParams (data: SnOperationData): string {
+export function generateInputParams(data: SnOperationData): string {
   const inputs = prop('input', data)
 
   const res: string[] = ['export type InputParams', '=']

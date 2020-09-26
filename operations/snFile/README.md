@@ -1,6 +1,6 @@
 # @sensio/op-sn-file
 
-Blockchain Version **bafy2bzacea76v6e7qjc2r2p3csvjxi2j7h4o7jaentuyspaxva6wcl6o2bxac**
+Blockchain Version **bafy2bzaced67meyosnnt6dmvsp4sjro5mo5ufu3ntoqamouttsa4tlqo6ta2m**
 
 ## Description
 
@@ -19,7 +19,7 @@ Reads the file from given path (data) and returns the buffer. RAW file buffer fo
 yarn add @sensio/op-sn-file
 
 # or specific version
-yarn add @sensio/op-sn-file@0.3.1
+yarn add @sensio/op-sn-file@0.1.0
 ```
 
 ## Usage
@@ -27,8 +27,9 @@ yarn add @sensio/op-sn-file@0.3.1
 ```ts
 import snFile from '@sensio/op-sn-file'
 
-const data = new U8intArray(7)
-await snFile(data)
+const dataAsUintArray = new U8intArray(7)
+const dataAsBuffer = Buffer.from(7)
+await snFile([{ data: dataAsUintArray, decode: () => dataAsBuffer }])
 ```
 
 ## Contributing

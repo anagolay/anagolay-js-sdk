@@ -1,9 +1,6 @@
 import { find, pathEq } from 'ramda'
-import ops from '../fixtures/ops'
-import interfacesTpl, {
-  generateInputParamList,
-  generateInputParams
-} from './interfacesTpl'
+import ops from '../../fixtures/ops'
+import interfacesTpl, { generateInputParamList, generateInputParams } from './interfacesTpl'
 
 describe('templates::interfaces', () => {
   it('should be defined', () => {
@@ -14,9 +11,7 @@ describe('templates::interfaces', () => {
   it('should create correct input interface', () => {
     const snMatchAll = find(pathEq(['data', 'name'], 'sn_match_all'))(ops)
     const generated1 = generateInputParams(snMatchAll.data)
-    expect(generated1).toEqual(
-      'export type InputParams = SnInputParamsImplementation [ ]'
-    )
+    expect(generated1).toEqual('export type InputParams = SnInputParamsImplementation [ ]')
 
     const snCid = find(pathEq(['data', 'name'], 'sn_cid'))(ops)
     const generated2 = generateInputParams(snCid.data)

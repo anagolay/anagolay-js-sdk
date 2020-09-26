@@ -1,4 +1,3 @@
-
 import { SnInputParamsImplementation, SnAny, SnByteArray, SnString } from '@sensio/types'
 
 export interface ReturnParams extends SnInputParamsImplementation {
@@ -10,4 +9,4 @@ export interface InputParam0 extends SnInputParamsImplementation {
   data: SnByteArray
   decode: () => SnAny
 }
-export type InputParams = [ InputParam0 ]
+export type InputParams = [InputParam0]

@@ -3,7 +3,7 @@ import { stringCamelCase } from '@polkadot/util'
 import { SnOperation } from '@sensio/types'
 import { generateNpmName } from '../index'
 
-export default function generate (op: SnOperation): string {
+export default function generate(op: SnOperation): string {
   const npmName = generateNpmName(op.data.name)
   const opName: string = stringCamelCase(op.data.name)
   const version = '0.1.0'
@@ -38,9 +38,9 @@ export default function generate (op: SnOperation): string {
   \`\`\`ts
   import ${opName} from '${npmName}'
 
-
-  const data = new U8intArray(7)
-  await ${opName}(data)
+  const dataAsUintArray = new U8intArray(7)
+  const dataAsBuffer = Buffer.from(7)
+  await ${opName}([{data: dataAsUintArray, decode: ()=> dataAsBuffer}])
   \`\`\`
   
   ## Contributing

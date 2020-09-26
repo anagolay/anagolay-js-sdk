@@ -1,4 +1,3 @@
-
 import { SnInputParamsImplementation, SnBoolean } from '@sensio/types'
 
 export interface ReturnParams extends SnInputParamsImplementation {
@@ -6,4 +5,4 @@ export interface ReturnParams extends SnInputParamsImplementation {
   decode: () => SnBoolean // value of `data.output.decoded`
 }
 
-export type InputParams = SnInputParamsImplementation [ ]
+export type InputParams = SnInputParamsImplementation[]

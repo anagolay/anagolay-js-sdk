@@ -11,8 +11,8 @@ describe('Operation: snFile', (): void => {
     const s = await snFile([
       {
         data: resolve(__dirname, './index.ts'),
-        decode: () => resolve(__dirname, './index.ts')
-      }
+        decode: () => resolve(__dirname, './index.ts'),
+      },
     ])
 
     expect(s.data.length).toBe(file.length)

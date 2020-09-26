@@ -5,7 +5,7 @@ import {
   SnInputParamsDefinition,
   SnOperation,
   SnOperationData,
-  SnOperationDataForCreating
+  SnOperationDataForCreating,
 } from '@sensio/types'
 import {
   compose,
@@ -18,7 +18,7 @@ import {
   prop,
   propEq,
   sortBy,
-  sum
+  sum,
 } from 'ramda'
 import { IncompatibleInputParamChildOperationError } from './errors/IncompatibleInputParamChildOperation'
 import { calculateOperationId } from './util/hashing'
@@ -28,8 +28,8 @@ import { calculateOperationId } from './util/hashing'
  * @param ops
  * @returns List of SnOperationDataForCreating with dependencies resolved
  */
-export async function resolveDependencies (
-  ops: SnOperationDataForCreating[]
+export async function resolveDependencies(
+  ops: SnOperationDataForCreating[],
 ): Promise<SnOperationDataForCreating[]> {
   const count = (arr: string[]): number => arr.length
   const sortByDependencies = sortBy(compose(count, prop('opNames')))
@@ -38,10 +38,8 @@ export async function resolveDependencies (
    * Resolve a single Operation with its dependencies
    * @param op
    */
-  async function resolve (
-    op: SnOperationDataForCreating
-  ): Promise<SnOperationDataForCreating> {
-    const opNames = prop('opNames', op)
+  async function resolve(op: SnOperationDataForCreating): Promise<SnOperationDataForCreating> {
+    const opNames: string[] = prop('opNames', op)
 
     if (isNil(opNames)) {
       throw new Error('opNames param missing for ' + op.name)
@@ -51,25 +49,21 @@ export async function resolveDependencies (
       return op
     } else {
       if (includes(op.name, opNames)) {
-        throw new Error(
-          'Circular reference are not allowed for direct children.'
-        )
+        throw new Error('Circular reference are not allowed for direct children.')
       }
 
       const children = await Promise.all(
-        opNames.map(async o => {
+        opNames.map(async (o) => {
           if (isEmpty(o)) {
             throw new Error('Dependency must have a name, not an empty string')
           }
           // find the operation in the list of sorted ops
-          const directDep = find(propEq('name', o))(
-            sorted
-          ) as SnOperationDataForCreating
+          const directDep = find(propEq('name', o))(sorted) as SnOperationDataForCreating
           return await resolve(directDep)
-        })
+        }),
       )
 
-      const childrenInputs = children.map(m => {
+      const childrenInputs = children.map((m) => {
         const potentialInput = createInputFromOutput(m)
         if (isEmpty(op.input) && includes(SnForWhat.FLOWCONTROL, op.groups)) {
           return potentialInput
@@ -79,7 +73,7 @@ export async function resolveDependencies (
               op.name,
               m.name,
               op.input,
-              potentialInput
+              potentialInput,
             )
           } else {
             return potentialInput
@@ -90,15 +84,15 @@ export async function resolveDependencies (
       return calculatePriority({
         ...op,
         ops: children,
-        input: [...childrenInputs]
+        input: [...childrenInputs],
       })
     }
   }
 
   const parsed = await Promise.all(
-    sorted.map(async s => {
+    sorted.map(async (s) => {
       return await resolve(s)
-    })
+    }),
   )
 
   return parsed
@@ -112,16 +106,14 @@ export async function resolveDependencies (
  * @param node
  * @returns New SnOperationDataForCreating object
  */
-export function calculatePriority (
-  node: SnOperationDataForCreating
-): SnOperationDataForCreating {
+export function calculatePriority(node: SnOperationDataForCreating): SnOperationDataForCreating {
   const { ops } = node
-  const childPriority = sum(map(o => o.priority, ops))
+  const childPriority = sum(map((o) => o.priority, ops))
   const priority = length(ops) + childPriority
 
   return {
     ...node,
-    priority
+    priority,
   }
 }
 
@@ -129,12 +121,10 @@ export function calculatePriority (
  * Create SnOperation
  * @param op
  */
-export async function generateOperation (
-  op: SnOperationData
-): Promise<SnOperation> {
+export async function generateOperation(op: SnOperationData): Promise<SnOperation> {
   return {
     id: await calculateOperationId(op),
-    data: op
+    data: op,
   }
 }
 
@@ -142,12 +132,12 @@ export async function generateOperation (
  * Generate Input param for the parent operation from given child operation
  * @param op
  */
-export function createInputFromOutput (
-  childOp: SnOperationDataForCreating
+export function createInputFromOutput(
+  childOp: SnOperationDataForCreating,
 ): SnInputParamsDefinition {
   return {
     data: childOp.output.output,
-    decoded: childOp.output.decoded
+    decoded: childOp.output.decoded,
   }
 }
 

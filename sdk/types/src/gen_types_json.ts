@@ -5,17 +5,14 @@ import * as CustomTypes from './interfaces/definitions'
 /**
  * Generate Custom Types JSON file so we can easily import it to other projects
  */
-async function main (): Promise<void> {
+async function main(): Promise<void> {
   let t = {
     Address: 'AccountId',
-    LookupSource: 'AccountId'
+    LookupSource: 'AccountId',
   }
 
-  Object.keys(CustomTypes).map(pallet => {
-    console.log(
-      `\n Processing pallet :: ${pallet}`,
-      JSON.stringify(CustomTypes[pallet])
-    )
+  Object.keys(CustomTypes).map((pallet) => {
+    console.log(`\n Processing pallet :: ${pallet}`, JSON.stringify(CustomTypes[pallet]))
     t = { ...t, ...CustomTypes[pallet].types }
   })
   const realPath = resolve(__dirname, './NetworkCustomTypes.json')

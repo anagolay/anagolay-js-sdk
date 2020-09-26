@@ -1,60 +1,56 @@
 /**
  * Operation specification
  */
-
 import { SnOperation } from '@sensio/types'
 
 export const op: SnOperation = {
-  id: 'bafy2bzacedq5zlaca4xq4zou7ctovepnx3doegwcii37prgrzvhdhoqthmpii',
+  id: 'bafy2bzacedk46pihe5gr44l6liofvga6umxyhy27hwp4treiq32y6cdywsxzm',
   data: {
     desc: 'Extract All Image Metadata',
     name: 'sn_image_metadata',
     input: [
       {
         data: 'SnByteArray',
-        decoded: 'SnFileBuffer'
-      }
+        decoded: 'SnFileBuffer',
+      },
     ],
     output: {
-      desc: 'Returns the metadata as SnByteArray and decoded as SnImageMetadata. Accessible as `[exif|iptc|xmp|icc].TAG_NAME`',
+      desc:
+        'Returns the metadata as SnByteArray and decoded as SnImageMetadata. Accessible as `[exif|iptc|xmp|icc].TAG_NAME`',
       output: 'SnByteArray',
-      decoded: 'SnImageMetadata'
+      decoded: 'SnImageMetadata',
     },
-    groups: [
-      6
-    ],
+    groups: [6],
     priority: 1,
     hashingOp: 'sn_cid',
     encOp: 'sn_enc_hex',
     ops: [
       {
-        id: 'bafy2bzacea76v6e7qjc2r2p3csvjxi2j7h4o7jaentuyspaxva6wcl6o2bxac',
+        id: 'bafy2bzaced67meyosnnt6dmvsp4sjro5mo5ufu3ntoqamouttsa4tlqo6ta2m',
         data: {
           name: 'sn_file',
-          desc: 'Reads the file from given path (data) and returns the buffer. RAW file buffer for other ops to use.',
+          desc:
+            'Reads the file from given path (data) and returns the buffer. RAW file buffer for other ops to use.',
           input: [
             {
-              data: 'SnString',
-              decoded: 'SnString'
-            }
+              data: 'StringOrBuffer',
+              decoded: 'StringOrBuffer',
+            },
           ],
-          groups: [
-            6,
-            1
-          ],
+          groups: [6, 1],
           priority: 0,
           output: {
             desc: 'Returns the File Buffer.',
             output: 'SnByteArray',
-            decoded: 'SnFileBuffer'
+            decoded: 'SnFileBuffer',
           },
           hashingOp: 'sn_cid',
           encOp: 'sn_enc_hex',
-          ops: []
-        }
-      }
-    ]
-  }
+          ops: [],
+        },
+      },
+    ],
+  },
 }
 
 export default op

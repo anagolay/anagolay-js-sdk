@@ -1,6 +1,6 @@
 {
   "name": "@sensio/core",
-  "version": "0.1.0",
+  "version": "0.4.4-alpha.0",
   "description": "Sensio's core functionality. Execution flow, operation dependency building and much more",
   "keywords": [
     "sensio",
@@ -8,12 +8,9 @@
     "sdk"
   ],
   "author": "Daniel Maricic <daniel@woss.io>",
-  "homepage": "https://gitlab.com/sensio_group/network-js/sdk/core#readme",
+  "homepage": "https://gitlab.com/sensio_group/network-js/-/tree/master/sdk/core#readme",
   "license": "Apache-2.0",
-  "main": "src/index",
-  "directories": {
-    "lib": "lib"
-  },
+  "main": "lib/index",
   "files": [
     "lib"
   ],
@@ -22,36 +19,28 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@gitlab.com/sensio_group/network-js.git"
+    "url": "https://gitlab.com/sensio_group/network-js-sdk.git",
+    "directory": "sdk/core"
   },
   "scripts": {
-    "build": "tsc -b .",
-    "std": "ts-standard --fix"
+    "build": "tsc -b ."
   },
   "bugs": {
     "url": "https://gitlab.com/sensio_group/network-js-sdk/issues"
   },
   "devDependencies": {
-    "@sensio/op-sn-cid": "0.3.0",
-    "@sensio/op-sn-multihash": "0.3.0",
     "@types/node": "^14.0.14",
     "@types/ramda": "https://github.com/woss/ramda-types.git",
     "ts-node": "^8.10.2",
     "ts-node-dev": "^1.0.0-pre.49",
-    "ts-standard": "^8.0.1",
-    "typescript": "^3.9.5"
+    "typescript": "^4.0.3"
   },
   "dependencies": {
     "@polkadot/util": "^3.0.1",
     "@polkadot/util-crypto": "^3.0.1",
-    "@sensio/types": "^0.3.1",
+    "@sensio/types": "^0.4.4-alpha.0",
+    "multihashing": "^0.3.3",
     "ramda": "^0.27.0",
-    "tree-traversal": "^1.1.1",
     "winston": "^3.3.3"
-  },
-  "ts-standard": {
-    "ignore": [
-      "lib"
-    ]
   }
 }

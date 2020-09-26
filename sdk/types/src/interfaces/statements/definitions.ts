@@ -3,25 +3,25 @@ export const RulesCustomTypes = {
     /// Proportion sign, can be %
     sign: 'Vec<u8>',
     name: 'Vec<u8>',
-    value: 'Vec<u8>'
+    value: 'Vec<u8>',
   },
   Validity: {
     /// When the validity starts, this should be DATE_TIME
     from: 'Vec<u8>',
     /// When validity ends, this is calculate Validity.from + Expiration.value
-    until: 'Vec<u8>'
+    until: 'Vec<u8>',
   },
   ExpirationType: {
-    _enum: ['FOREVER', 'YEARS', 'MONTHS', 'DAYS', 'MINUTES', 'SECONDS']
+    _enum: ['FOREVER', 'YEARS', 'MONTHS', 'DAYS', 'MINUTES', 'SECONDS'],
   },
   Expiration: {
     /// Proportion sign, can be %
-    expiration_type: 'ExpirationType',
+    expirationType: 'ExpirationType',
     /// How long is the expiration, if  ExpirationType::FOREVER then this is empty
-    value: 'Vec<u8>'
+    value: 'Vec<u8>',
   },
   SensioClaimType: {
-    _enum: ['COPYRIGHT', 'OWNERSHIP']
+    _enum: ['COPYRIGHT', 'OWNERSHIP'],
   },
   SensioClaim: {
     /// Prev Sensio Statement id in case this statement is revoked or changed
@@ -45,7 +45,7 @@ export const RulesCustomTypes = {
     /// Setting when the statement should end
     expiration: 'Expiration',
     /// What happens after the expiration? this is default rule or smart contract that automatically does stuff, like move it to the public domain, transfer to relatives etc... need better definition
-    on_expiration: 'Vec<u8>'
+    onExpiration: 'Vec<u8>',
   },
   SensioSignature: {
     /// signing key in urn/did format 'urn:pgp:9cdf8dd38531511968c8d8cb524036585b62f15b'
@@ -54,29 +54,29 @@ export const RulesCustomTypes = {
     // https://gitlab.com/sensio_group/sensio-faas/-/blob/master/sp-api/src/plugins/copyright/helpers.ts#L76
     sig: 'Vec<u8>',
     /// Content identifier of the sig field -- CID(sig)
-    hash: 'GenericId'
+    cid: 'GenericId',
   },
   SensioSignatures: {
     holder: 'SensioSignature',
-    issuer: 'SensioSignature'
+    issuer: 'SensioSignature',
   },
   StatementData: {
     signatures: 'SensioSignatures',
-    claim: 'SensioClaim'
+    claim: 'SensioClaim',
   },
   SensioStatement: {
     id: 'GenericId',
-    data: 'StatementData'
+    data: 'StatementData',
   },
   StatementInfo: {
     statement: 'SensioStatement',
     accountId: 'AccountId',
-    blockNumber: 'BlockNumber'
-  }
+    blockNumber: 'BlockNumber',
+  },
 }
 
 export default {
   types: {
-    ...RulesCustomTypes
-  }
+    ...RulesCustomTypes,
+  },
 }

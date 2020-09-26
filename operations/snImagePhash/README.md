@@ -1,6 +1,6 @@
 # @sensio/op-sn-image-phash
 
-Blockchain Version **bafy2bzacedkhosdvceus24i27lsec4hdtmkwrjidy4flknb3fstxzun5cdcnk**
+Blockchain Version **bafy2bzaceafhfdbh4r6fmmnudwqehqedhf632dbafl7fnmbkbpjnv2miacdza**
 
 ## Description
 
@@ -19,7 +19,7 @@ Perceptual hash calculation, currently implementing http://blockhash.io/
 yarn add @sensio/op-sn-image-phash
 
 # or specific version
-yarn add @sensio/op-sn-image-phash@0.3.1
+yarn add @sensio/op-sn-image-phash@0.1.0
 ```
 
 ## Usage
@@ -27,8 +27,9 @@ yarn add @sensio/op-sn-image-phash@0.3.1
 ```ts
 import snImagePhash from '@sensio/op-sn-image-phash'
 
-const data = new U8intArray(7)
-await snImagePhash(data)
+const dataAsUintArray = new U8intArray(7)
+const dataAsBuffer = Buffer.from(7)
+await snImagePhash([{ data: dataAsUintArray, decode: () => dataAsBuffer }])
 ```
 
 ## Contributing

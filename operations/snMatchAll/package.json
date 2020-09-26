@@ -1,43 +1,38 @@
 {
   "name": "@sensio/op-sn-match-all",
-  "version": "0.1.0",
+  "version": "0.4.4-alpha.0",
   "license": "Apache-2.0",
   "author": "daniel@woss.io",
-  "main": "src/index",
-  "types": "lib/index.d.ts",
+  "main": "lib/index",
   "files": [
-    "lib/**/*"
+    "lib"
   ],
-  "directories": {
-    "lib": "lib"
-  },
+  "keywords": [
+    "sensio",
+    "operation",
+    "flow"
+  ],
   "publishConfig": {
     "access": "public"
   },
   "scripts": {
-    "build": "tsc -b .",
-    "std": "ts-standard --fix"
+    "build": "tsc -b ."
   },
   "devDependencies": {
-    "ts-standard": "^8.0.1",
-    "typescript": "^3.9.5"
+    "typescript": "^4.0.3"
   },
   "dependencies": {
     "@polkadot/util": "^3.0.1",
-    "@sensio/core": "^0.1.0",
-    "@sensio/types": "^0.3.0"
+    "@sensio/core": "^0.4.4-alpha.0",
+    "@sensio/types": "^0.4.4-alpha.0"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://gitlab.com/sensio_group/network-js-sdk.git"
+    "url": "https://gitlab.com/sensio_group/network-js-sdk.git",
+    "directory": "operations/snMatchAll"
   },
   "bugs": {
     "url": "https://gitlab.com/sensio_group/network-js-sdk/issues"
   },
-  "homepage": "https://gitlab.com/sensio_group/network-js-sdk#readme",
-  "ts-standard": {
-    "ignore": [
-      "lib"
-    ]
-  }
+  "homepage": "https://gitlab.com/sensio_group/network-js-sdk/-/tree/master/operations/snMatchAll#readme"
 }

@@ -12,22 +12,20 @@ export const op: SnOperation = {
     input: [
       {
         data: 'SnByteArray',
-        decoded: 'SnAny'
-      }
+        decoded: 'SnAny',
+      },
     ],
-    groups: [
-      6
-    ],
+    groups: [6],
     priority: 0,
     output: {
       desc: 'Returns the Multihash buffer as SnByteArray.',
       output: 'SnByteArray',
-      decoded: 'SnBuffer'
+      decoded: 'SnBuffer',
     },
     hashingOp: 'sn_cid',
     encOp: 'sn_enc_hex',
-    ops: []
-  }
+    ops: [],
+  },
 }
 
 export default op

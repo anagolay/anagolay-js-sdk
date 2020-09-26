@@ -15,6 +15,11 @@
     { "path": "./snImageMetadata" },
     { "path": "./snImagePhash" },
     { "path": "./snImageRawPixelsHash" },
-    { "path": "./snImageRawPixels" }
+    { "path": "./snImageRawPixels" },
+    { "path": "./snCreateQrcode" },
+    { "path": "./snCreateOwnershipClaims" },
+    { "path": "./snSaveStatements" },
+    { "path": "./snUserSignClaims" },
+    { "path": "./snTakePhotoAndUploadQrcode" }
   ]
 }

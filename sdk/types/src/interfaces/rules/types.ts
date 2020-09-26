@@ -3,8 +3,8 @@
 
 import { Struct, Vec } from '@polkadot/types/codec'
 import { Bytes, u32 } from '@polkadot/types/primitive'
-import { Operation } from '../operations'
-import { CreatorId, ForWhat, GenericId } from '../sensio'
+import { Operation } from '@sensio/types/interfaces/operations'
+import { CreatorId, ForWhat, GenericId } from '@sensio/types/interfaces/sensio'
 
 /** @name Rule */
 export interface Rule extends Struct {

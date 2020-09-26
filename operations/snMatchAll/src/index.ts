@@ -5,9 +5,7 @@ import { InputParams, ReturnParams } from './interfaces'
  * @param {InputParams} params InputParams
  * @return  output (Returns true, if all match or throws an error if some match.) and decoder function
  */
-export default async function snMatchAll (
-  params: InputParams
-): Promise<ReturnParams> {
+export default async function snMatchAll(params: InputParams): Promise<ReturnParams> {
   if (params.length === 0) {
     throw new Error('This operation cannot have zero operations')
   }
@@ -19,6 +17,6 @@ export default async function snMatchAll (
   }
   return {
     data: true,
-    decode: () => true
+    decode: () => true,
   }
 }

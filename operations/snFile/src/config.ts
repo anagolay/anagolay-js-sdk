@@ -1,34 +1,31 @@
 /**
  * Operation specification
  */
-
 import { SnOperation } from '@sensio/types'
 
 export const op: SnOperation = {
-  id: 'bafy2bzacea76v6e7qjc2r2p3csvjxi2j7h4o7jaentuyspaxva6wcl6o2bxac',
+  id: 'bafy2bzaced67meyosnnt6dmvsp4sjro5mo5ufu3ntoqamouttsa4tlqo6ta2m',
   data: {
     name: 'sn_file',
-    desc: 'Reads the file from given path (data) and returns the buffer. RAW file buffer for other ops to use.',
+    desc:
+      'Reads the file from given path (data) and returns the buffer. RAW file buffer for other ops to use.',
     input: [
       {
-        data: 'SnString',
-        decoded: 'SnString'
-      }
+        data: 'StringOrBuffer',
+        decoded: 'StringOrBuffer',
+      },
     ],
-    groups: [
-      6,
-      1
-    ],
+    groups: [6, 1],
     priority: 0,
     output: {
       desc: 'Returns the File Buffer.',
       output: 'SnByteArray',
-      decoded: 'SnFileBuffer'
+      decoded: 'SnFileBuffer',
     },
     hashingOp: 'sn_cid',
     encOp: 'sn_enc_hex',
-    ops: []
-  }
+    ops: [],
+  },
 }
 
 export default op

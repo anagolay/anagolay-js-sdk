@@ -17,8 +17,8 @@ describe('SnOperation: snImageRawPixels', (): void => {
     const res = await execute([
       {
         data: testImage,
-        decode: () => testImage
-      }
+        decode: () => testImage,
+      },
     ])
     const decoded = res.decode()
     const expectedImageBuffer = await imageFromBuffer(readFileSync(testImage))
@@ -26,16 +26,14 @@ describe('SnOperation: snImageRawPixels', (): void => {
 
     expect(decoded).toEqual(expectedImage)
   })
-  it('should return correct error on file does not exist', async (): Promise<
-  void
-  > => {
+  it('should return correct error on file does not exist', async (): Promise<void> => {
     expect.assertions(1)
     try {
       await execute([
         {
           data: testImage + '1',
-          decode: () => testImage + '1'
-        }
+          decode: () => testImage + '1',
+        },
       ])
     } catch (error) {
       expect(error.message).toContain('no such file or directory')
@@ -47,8 +45,8 @@ describe('SnOperation: snImageRawPixels', (): void => {
       await execute([
         {
           data: resolve(__dirname, './index.ts'),
-          decode: () => resolve(__dirname, './index.ts')
-        }
+          decode: () => resolve(__dirname, './index.ts'),
+        },
       ])
     } catch (error) {
       expect(error.message).toContain('Unknown file format')

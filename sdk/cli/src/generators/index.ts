@@ -3,13 +3,7 @@ import { stringCamelCase } from '@polkadot/util'
 import buildOperations from '@sensio/core/buildOperations'
 import { resolveDependencies } from '@sensio/core/resolveDependencies'
 import { SnOperation, SnOperationDataForCreating } from '@sensio/types'
-import {
-  copy,
-  outputFile,
-  outputJson,
-  pathExistsSync,
-  WriteOptions
-} from 'fs-extra'
+import { copy, outputFile, outputJson, pathExistsSync, WriteOptions } from 'fs-extra'
 import { resolve } from 'path'
 import configTemplate from './templates/configTpl'
 import interfacesTpl from './templates/interfacesTpl'
@@ -35,7 +29,7 @@ export const genOperation = async (op: SnOperation): Promise<void> => {
     packageJson: `${PATH}/package.json`,
     tsConfigJson: `${PATH}/tsconfig.json`,
     readme: `${PATH}/README.md`,
-    license: `${PATH}/LICENSE`
+    license: `${PATH}/LICENSE`,
   }
 
   // should we create the operation
@@ -56,15 +50,8 @@ export const genOperation = async (op: SnOperation): Promise<void> => {
     await outputJson(resolve(__dirname, paths.configJson), op, JSONOptions)
     await outputFile(resolve(__dirname, paths.interfaces), interfacesTpl(op))
     await outputFile(resolve(__dirname, paths.readme), readmeTpl(op))
-    await outputJson(
-      resolve(__dirname, paths.tsConfigJson),
-      tsConfigJson(),
-      JSONOptions
-    )
-    await copy(
-      resolve(__dirname, './templates/LICENSE'),
-      resolve(__dirname, paths.license)
-    )
+    await outputJson(resolve(__dirname, paths.tsConfigJson), tsConfigJson(), JSONOptions)
+    await copy(resolve(__dirname, './templates/LICENSE'), resolve(__dirname, paths.license))
 
     if (!pathExistsSync(paths.spec)) {
       await outputFile(resolve(__dirname, paths.spec), spec(op))
@@ -75,15 +62,9 @@ export const genOperation = async (op: SnOperation): Promise<void> => {
     }
 
     if (!pathExistsSync(paths.packageJson)) {
-      await outputJson(
-        resolve(__dirname, paths.packageJson),
-        packageJson(op),
-        JSONOptions
-      )
+      await outputJson(resolve(__dirname, paths.packageJson), packageJson(op), JSONOptions)
     }
-    console.log(
-      `SUCCESS: ${generateNpmName(op.data.name)} generated with CID ${op.id}`
-    )
+    console.log(`SUCCESS: ${generateNpmName(op.data.name)} generated with CID ${op.id}`)
   }
 }
 
@@ -94,14 +75,7 @@ export const genOperation = async (op: SnOperation): Promise<void> => {
 export const genDefaultOpsFile = async (ops: SnOperation[]): Promise<void> => {
   const PATH = resolve(__dirname, '../defaultOps.ts')
   const contents = ops
-    .map(
-      op =>
-        `export const ${stringCamelCase(op.data.name)} = ${JSON.stringify(
-          op,
-          null,
-          2
-        )}`
-    )
+    .map((op) => `export const ${stringCamelCase(op.data.name)} = ${JSON.stringify(op, null, 2)}`)
     .join('\n \n')
 
   await outputFile(resolve(__dirname, PATH), contents)
@@ -111,12 +85,12 @@ export const genDefaultOpsFile = async (ops: SnOperation[]): Promise<void> => {
  * Main function for scaffolding the ops
  * @param originalOperations
  */
-export async function regenerateDefaultOperations (
-  originalOperations: SnOperationDataForCreating[]
+export async function regenerateDefaultOperations(
+  originalOperations: SnOperationDataForCreating[],
 ): Promise<SnOperation[]> {
   const defaultOps = await parseOriginalOperations(originalOperations)
 
-  await Promise.all(defaultOps.map(async o => await genOperation(o)))
+  await Promise.all(defaultOps.map(async (o) => await genOperation(o)))
   console.log('tsconfig.paths', tsPaths)
   console.log('operations/tsconfig.references', tsReference)
 
@@ -129,19 +103,17 @@ export async function regenerateDefaultOperations (
  * Generate tsconfig paths
  * @param op
  */
-export function generateTsConfigPaths (op: SnOperation): void {
+export function generateTsConfigPaths(op: SnOperation): void {
   const camelCasedName: string = stringCamelCase(op.data.name)
 
   tsPaths[generateNpmName(op.data.name)] = [`operations/${camelCasedName}/src`]
-  tsPaths[generateNpmName(op.data.name) + '/*'] = [
-    `operations/${camelCasedName}/src/*`
-  ]
+  tsPaths[generateNpmName(op.data.name) + '/*'] = [`operations/${camelCasedName}/src/*`]
 }
 /**
  * Generate tsconfig reference paths
  * @param op
  */
-export function generateTsConfigReferencePaths (op: SnOperation): void {
+export function generateTsConfigReferencePaths(op: SnOperation): void {
   tsReference.push({ path: `./${stringCamelCase(op.data.name)}` })
 }
 
@@ -149,8 +121,8 @@ export function generateTsConfigReferencePaths (op: SnOperation): void {
  *
  * @param opsRaw
  */
-async function parseOriginalOperations (
-  allOps: SnOperationDataForCreating[]
+async function parseOriginalOperations(
+  allOps: SnOperationDataForCreating[],
 ): Promise<SnOperation[]> {
   const depsResolved = await resolveDependencies(allOps)
   const res = await buildOperations(depsResolved)
@@ -163,6 +135,29 @@ async function parseOriginalOperations (
  * @param {string} opName
  * @return {string}
  */
-export function generateNpmName (opName: string): string {
+export function generateNpmName(opName: string): string {
   return `@sensio/op-${opName.replace(/_/g, '-')}`
+}
+
+/**
+ * Convert the name excluding sn as keywords for package.json
+ * @param opName
+ */
+export function nameToKeywords(opName: string): string[] {
+  const ar = opName.split('_')
+  return ar.slice(1, ar.length)
+}
+
+/**
+ * Creates camelCase string from any string, character that are after numbers are not camelized
+ ```ts
+  const list = ['sn came case', 'Sn Camel case', 'sn-camel-case', 'sn_camel_case']
+  const l = list.map(l=>stringToCamelCase(l))
+  // ["snCameCase", "snCamelCase", "snCamelCase", "snCamelCase"]
+  ```
+ *
+ * @param str String to make camelCase out of
+ */
+export function stringToCamelCase(str: string): string {
+  return str.toLowerCase().replace(/[^a-zA-Z0-9]+(.)/g, (_m, chr) => chr.toUpperCase())
 }

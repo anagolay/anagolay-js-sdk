@@ -11,16 +11,16 @@ describe('SnOperation: snEncHex', (): void => {
     const res = await snEncHex([
       {
         data: stringToU8a(str),
-        decode: () => str
-      }
+        decode: () => str,
+      },
     ])
 
     expect(res.decode()).toEqual(encoded)
     const res2 = await snEncHex([
       {
         data: u8aToU8a(Buffer.from(str)),
-        decode: () => Buffer.from(str)
-      }
+        decode: () => Buffer.from(str),
+      },
     ])
 
     expect(res2.decode()).toEqual(encoded)

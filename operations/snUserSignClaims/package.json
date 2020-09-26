@@ -1,0 +1,45 @@
+{
+  "name": "@sensio/op-sn-user-sign-claims",
+  "version": "0.4.4-alpha.0",
+  "license": "Apache-2.0",
+  "author": "daniel@woss.io",
+  "description": "Sign the claims and return the tuple of claims and their signatures",
+  "main": "lib/index",
+  "files": [
+    "lib"
+  ],
+  "keywords": [
+    "sensio",
+    "operation",
+    "blockchain",
+    "signing",
+    "user"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsc -b ."
+  },
+  "devDependencies": {
+    "typescript": "^4.0.3"
+  },
+  "dependencies": {
+    "@polkadot/util": "^3.0.1",
+    "@sensio/api": "^0.4.4-alpha.0",
+    "@sensio/core": "^0.4.4-alpha.0",
+    "@sensio/op-sn-cid": "^0.4.4-alpha.0",
+    "@sensio/op-sn-enc-hex": "^0.4.4-alpha.0",
+    "@sensio/op-sn-json-enc": "^0.4.4-alpha.0",
+    "@sensio/types": "^0.4.4-alpha.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.com/sensio_group/network-js-sdk.git",
+    "directory": "operations/snUserSignClaims"
+  },
+  "bugs": {
+    "url": "https://gitlab.com/sensio_group/network-js-sdk/issues"
+  },
+  "homepage": "https://gitlab.com/sensio_group/network-js-sdk/-/tree/master/operations/snUserSignClaims#readme"
+}

@@ -12,15 +12,15 @@ export const op: SnOperation = {
     input: [
       {
         data: 'SnByteArray',
-        decoded: 'SnBuffer'
-      }
+        decoded: 'SnBuffer',
+      },
     ],
     groups: [6],
     priority: 1,
     output: {
       desc: 'CID string converted into SnByteArray',
       output: 'SnByteArray',
-      decoded: 'SnString'
+      decoded: 'SnString',
     },
     hashingOp: '',
     encOp: '',
@@ -33,23 +33,23 @@ export const op: SnOperation = {
           input: [
             {
               data: 'SnByteArray',
-              decoded: 'SnAny'
-            }
+              decoded: 'SnAny',
+            },
           ],
           groups: [6],
           priority: 0,
           output: {
             desc: 'Returns the Multihash buffer as SnByteArray.',
             output: 'SnByteArray',
-            decoded: 'SnBuffer'
+            decoded: 'SnBuffer',
           },
           hashingOp: 'sn_cid',
           encOp: 'sn_enc_hex',
-          ops: []
-        }
-      }
-    ]
-  }
+          ops: [],
+        },
+      },
+    ],
+  },
 }
 
 export default op

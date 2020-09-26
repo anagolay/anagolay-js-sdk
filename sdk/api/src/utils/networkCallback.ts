@@ -28,10 +28,10 @@ interface EventNameTypes {
  * @param broadcast EventEmitter instance
  * @param eventName the event name for each pallet. available in `./config.ts`
  */
-export function networkCallback (
+export function networkCallback(
   params: any,
   broadcast: EventEmitter,
-  eventNames: EventNameTypes
+  eventNames: EventNameTypes,
 ): void {
   const api = getApi()
 
@@ -40,12 +40,12 @@ export function networkCallback (
   const { events = [], status, isError } = params
 
   broadcast.emit(successEventName, {
-    message: `Transaction status:${status.type}`
+    message: `Transaction status:${status.type}`,
   })
 
   if (status.isInBlock) {
     broadcast.emit(successEventName, {
-      message: `Included at block hash ${status.asInBlock.toHex()}`
+      message: `Included at block hash ${status.asInBlock.toHex()}`,
     })
 
     events.forEach(({ event }) => {
@@ -53,34 +53,40 @@ export function networkCallback (
       const [error] = data
 
       broadcast.emit(successEventName, {
-        message: `${section}.${method}::${data.toString() as string}`
+        message: `${section}.${method}::${data.toString() as string}`,
       })
       if (error && !isNil(prop('isModule', error))) {
-        const { documentation, name, section } = api.registry.findMetaError(
-          error.asModule
-        )
+        const { documentation, name, section } = api.registry.findMetaError(error.asModule)
         broadcast.emit(successEventName, {
-          error: { doc: documentation.toString(), name, section }
+          error: { doc: documentation.toString(), name, section },
         })
       } else {
-        broadcast.emit(successEventName, {
-          message: `${section}.${method}::${data.toString() as string}`
-        })
+        if (method === 'ExtrinsicSuccess') {
+          broadcast.emit(successEventName, {
+            message: `${section}.${method}::${data.toString() as string}`,
+            done: true,
+          })
+        } else if (method === 'BatchInterrupted') {
+          broadcast.emit(successEventName, {
+            error: `${section}.${method}::${data.toString() as string}`,
+          })
+        } else {
+          broadcast.emit(successEventName, {
+            message: `${section}.${method}::${data.toString() as string}`,
+          })
+        }
       }
     })
   } else if (status.isFinalized) {
     broadcast.emit(successEventName, {
       message: `Finalized block hash ${status.asFinalized.toHex()}`,
-      finalized: true
+      finalized: true,
     })
-    broadcast.removeListener(successEventName, () =>
-      console.log('listener removed')
-    )
+    broadcast.removeListener(errorEventName, () => console.log('listener removed'))
+    broadcast.removeListener(successEventName, () => console.log('listener removed'))
   } else if (isError) {
     broadcast.emit(errorEventName, { error: status })
-    broadcast.removeListener(errorEventName, () =>
-      console.log('listener removed')
-    )
+    broadcast.removeListener(errorEventName, () => console.log('listener removed'))
   }
 }
 

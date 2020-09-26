@@ -1,0 +1,14 @@
+{
+  "extends": "../tsconfig.json",
+  "references": [
+    {
+      "path": "../sdk/core"
+    },
+    {
+      "path": "../operations/snCid"
+    },
+    {
+      "path": "../operations/snMultihash"
+    }
+  ]
+}

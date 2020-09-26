@@ -11,8 +11,8 @@ class CustomEventEmitter extends EventEmitter {}
   ```
  * @returns EventEmitter
  */
-export default function createEventEmitter (): EventEmitter {
+export default function createEventEmitter(): EventEmitter {
   return new CustomEventEmitter({
-    captureRejections: true
+    captureRejections: true,
   })
 }

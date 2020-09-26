@@ -25,10 +25,15 @@ yarn add @sensio/op-sn-cid@0.3.1
 ## Usage
 
 ```ts
+import { stringToU8a } from '@polkadot/util'
 import snCid from '@sensio/op-sn-cid'
 
-const data = new U8intArray(7)
-await snCid(data)
+await snCid([
+  {
+    data: stringToU8a('demo'),
+    decode: () => Buffer.from('demo')
+  }
+])
 ```
 
 ## Contributing

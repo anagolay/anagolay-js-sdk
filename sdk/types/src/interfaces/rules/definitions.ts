@@ -1,7 +1,7 @@
 export const RulesCustomTypes = {
   Rule: {
     id: 'GenericId',
-    data: 'RuleData'
+    data: 'RuleData',
   },
   RuleData: {
     version: 'u32',
@@ -10,12 +10,12 @@ export const RulesCustomTypes = {
     creator: 'CreatorId',
     groups: 'Vec<ForWhat>',
     parentId: 'GenericId',
-    ops: 'Vec<Operation>'
-  }
+    ops: 'Vec<Operation>',
+  },
 }
 
 export default {
   types: {
-    ...RulesCustomTypes
-  }
+    ...RulesCustomTypes,
+  },
 }

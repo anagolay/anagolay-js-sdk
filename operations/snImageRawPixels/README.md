@@ -1,6 +1,6 @@
 # @sensio/op-sn-image-raw-pixels
 
-Blockchain Version **bafy2bzacebtungyir7sr2ciw4nx7ngrdlp5ibh3nlimxhqiwnpuzk4t3wtlw4**
+Blockchain Version **bafy2bzacecjrerw6cnuyj3ta7ntsvleq43vxgt4otgdvf2wjjpdg5almrzd4y**
 
 ## Description
 
@@ -27,8 +27,9 @@ yarn add @sensio/op-sn-image-raw-pixels@0.1.0
 ```ts
 import snImageRawPixels from '@sensio/op-sn-image-raw-pixels'
 
-const data = new U8intArray(7)
-await snImageRawPixels(data)
+const dataAsUintArray = new U8intArray(7)
+const dataAsBuffer = Buffer.from(7)
+await snImageRawPixels([{ data: dataAsUintArray, decode: () => dataAsBuffer }])
 ```
 
 ## Contributing

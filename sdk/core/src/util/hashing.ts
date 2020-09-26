@@ -1,6 +1,6 @@
 import { SnOperationData } from '@sensio/types'
 import CID from 'cids'
-import mh from 'multihashing-async'
+import mh from 'multihashing'
 
 /**
  * Calculates Multihash for current defaults
@@ -8,16 +8,21 @@ import mh from 'multihashing-async'
  * @param algo
  * @param length
  */
-export async function calculateHash (
+export async function calculateHash(
   data: Uint8Array,
   algo = 'blake2b',
-  length = 256
+  length = 256,
 ): Promise<Buffer> {
   const hash = await mh(data, `${algo}-${length}`)
   return hash
 }
 
-export function createCID (data: Buffer, codec = 'dag-cbor'): CID {
+/**
+ * Create Content address ID based ont the network defaults
+ * @param data
+ * @param codec
+ */
+export function createCID(data: Buffer, codec = 'dag-cbor'): CID {
   return new CID(1, codec, data)
 }
 
@@ -25,10 +30,6 @@ export function createCID (data: Buffer, codec = 'dag-cbor'): CID {
  * Calculate the content identifier for the given operation data
  * @param op OperationData
  */
-export async function calculateOperationId (
-  op: SnOperationData
-): Promise<string> {
-  return createCID(
-    await calculateHash(Buffer.from(JSON.stringify(op)))
-  ).toString()
+export async function calculateOperationId(op: SnOperationData): Promise<string> {
+  return createCID(await calculateHash(Buffer.from(JSON.stringify(op)))).toString()
 }

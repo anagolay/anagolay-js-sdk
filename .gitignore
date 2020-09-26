@@ -6,3 +6,4 @@ coverage
 tsconfig.tsbuildinfo
 docs
 public
+lerna-debug.log

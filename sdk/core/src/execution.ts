@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 import { stringCamelCase } from '@polkadot/util'
 import { SnOperation } from '@sensio/types'
@@ -16,10 +17,7 @@ import { composeWith, flatten, isEmpty, length, reverse } from 'ramda'
  * @typeParam T  Type `T`, in the calling of this function this will be InputParams
  * @typeParam R  Type `R` is the generic type of the result of the called function that is passed to other function
  */
-export async function executeOperation<T, R> (
-  config: SnOperation,
-  params: T
-): Promise<R> {
+export async function executeOperation<T, R>(config: SnOperation, params: T): Promise<R> {
   // console.time(`executeOperation:${config.data.name}`)
   // build the exec flow from dependent operations
   const methods = buildExec(config)
@@ -28,11 +26,11 @@ export async function executeOperation<T, R> (
   let composedMethods: any[] = []
   if (!isEmpty(config.data.ops)) {
     composedMethods = await Promise.all(
-      methods.map(async op => {
+      methods.map(async (op) => {
         const imported = await import(generateNpmName(op.data.name))
 
         return imported[stringCamelCase(op.data.name)]
-      })
+      }),
     )
   } else {
     const imported = await import(generateNpmName(config.data.name))
@@ -55,7 +53,7 @@ export async function executeOperation<T, R> (
       } else {
         return fn([await res])
       }
-    }
+    },
   )
 
   // @TODO fix the typing when you can
@@ -70,17 +68,17 @@ export async function executeOperation<T, R> (
  * Build execution flow of dependent children, good starting point for building the segments
  * @param op
  */
-function buildExec (op: SnOperation): SnOperation[] {
+function buildExec(op: SnOperation): SnOperation[] {
   /**
    * Visit a single operation and recurse it to build the exec array
    * @param op
    */
-  function visit (op: SnOperation): SnOperation[] {
+  function visit(op: SnOperation): SnOperation[] {
     // ops we don't need, the rest yes
     const { ops: _unusedOps, ...rest } = op.data
 
     // recurse from the LEAF node
-    const d = op.data.ops.map(o => buildExec(o))
+    const d = op.data.ops.map((o) => buildExec(o))
 
     // need to flatten this, because the result is like [[op,op]]
     // Returns a new list by pulling every item out of it (and all its sub-arrays) and putting them in a new array, depth-first.
@@ -99,6 +97,6 @@ function buildExec (op: SnOperation): SnOperation[] {
  * @param {string} opName
  * @return {string}
  */
-export function generateNpmName (opName: string): string {
+export function generateNpmName(opName: string): string {
   return `@sensio/op-${opName.replace(/_/g, '-')}`
 }

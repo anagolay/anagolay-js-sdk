@@ -125,7 +125,7 @@
     ]
   },
   "Expiration": {
-    "expiration_type": "ExpirationType",
+    "expirationType": "ExpirationType",
     "value": "Vec<u8>"
   },
   "SensioClaimType": {
@@ -145,12 +145,12 @@
     "claimType": "SensioClaimType",
     "valid": "Validity",
     "expiration": "Expiration",
-    "on_expiration": "Vec<u8>"
+    "onExpiration": "Vec<u8>"
   },
   "SensioSignature": {
     "sigKey": "Vec<u8>",
     "sig": "Vec<u8>",
-    "hash": "GenericId"
+    "cid": "GenericId"
   },
   "SensioSignatures": {
     "holder": "SensioSignature",

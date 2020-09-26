@@ -4,7 +4,13 @@
  */
 
 import { SnOperation } from '../operations/interfaces'
-import { SnCreatorId, SnForWhat, SnGenericId } from '../sensio/interfaces'
+import {
+  SnAccountId,
+  SnBlockNumber,
+  SnCreatorId,
+  SnForWhat,
+  SnGenericId,
+} from '../sensio/interfaces'
 
 export interface SnRule {
   id: SnGenericId
@@ -19,4 +25,15 @@ export interface SnRuleData {
   groups: SnForWhat[]
   parentId: SnGenericId
   ops: SnOperation[]
+}
+
+export interface SnRuleWithStorage {
+  storageKey: string
+  ruleInfo: SnRuleInfo
+}
+
+export interface SnRuleInfo {
+  rule: SnRule
+  accountId: SnAccountId
+  blockNumber: SnBlockNumber
 }

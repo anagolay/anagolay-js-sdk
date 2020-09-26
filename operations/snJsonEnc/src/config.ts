@@ -12,22 +12,20 @@ export const op: SnOperation = {
     input: [
       {
         data: 'SnAny',
-        decoded: 'SnAny'
-      }
+        decoded: 'SnAny',
+      },
     ],
-    groups: [
-      6
-    ],
+    groups: [6],
     priority: 0,
     output: {
       desc: 'Returns SnByteArray of json string.',
       output: 'SnByteArray',
-      decoded: 'SnString'
+      decoded: 'SnString',
     },
     hashingOp: 'sn_cid',
     encOp: 'sn_enc_hex',
-    ops: []
-  }
+    ops: [],
+  },
 }
 
 export default op

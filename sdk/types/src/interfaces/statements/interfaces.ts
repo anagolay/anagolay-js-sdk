@@ -1,9 +1,4 @@
-import {
-  SnAccountId,
-  SnBlockNumber,
-  SnCreatorId,
-  SnGenericId
-} from '../sensio/interfaces'
+import { SnAccountId, SnBlockNumber, SnCreatorId, SnGenericId } from '../sensio/interfaces'
 
 export interface SnProportion {
   /// Proportion sign, can be %
@@ -25,7 +20,7 @@ export enum SnExpirationType {
   MONTHS,
   DAYS,
   MINUTES,
-  SECONDS
+  SECONDS,
 }
 
 export interface SnExpiration {
@@ -37,7 +32,7 @@ export interface SnExpiration {
 
 export enum SnSensioClaimType {
   COPYRIGHT,
-  OWNERSHIP
+  OWNERSHIP,
 }
 
 export interface SnSensioClaim {
@@ -56,13 +51,21 @@ export interface SnSensioClaim {
   /// ATM this is the did representation of the substrate based account in format 'did:substrate:Hcd78R7frJfUZHsqgpPEBLeiCZxV29uyyyURaPxB71ojNjy/sensio-network', @NOTE this is part of the SENSIO ID which will come later this year
   issuer: string
   /// Generic type, ATM is Copyright or Ownership
-  claim_type: SnSensioClaimType
+  claimType: SnSensioClaimType
   /// How long this statement is valid
   valid: SnValidity
   /// Setting when the statement should end
   expiration: SnExpiration
   /// What happens after the expiration? this is default rule or smart contract that automatically does stuff, like move it to the public domain, transfer to relatives etc... need better definition
-  on_expiration: string
+  onExpiration: string
+}
+
+export interface SnSensioOwnershipClaim extends SnSensioClaim {
+  claimType: SnSensioClaimType.OWNERSHIP
+}
+
+export interface SnSensioCopyrightClaim extends SnSensioClaim {
+  claimType: SnSensioClaimType.COPYRIGHT
 }
 
 export interface SnSensioSignature {
@@ -72,7 +75,7 @@ export interface SnSensioSignature {
   // https://gitlab.com/sensio_group/sensio-faas/-/blob/master/sp-api/src/plugins/copyright/helpers.ts#L76
   sig: string
   /// Content identifier of the sig field -- CID(sig)
-  hash: SnGenericId
+  cid: SnGenericId
 }
 
 export interface SnSensioSignatures {
@@ -91,7 +94,12 @@ export interface SnSensioStatement {
 }
 
 export interface SnStatementInfo {
-  data: SnSensioStatement
-  account_id: SnAccountId
-  block_number: SnBlockNumber
+  statement: SnSensioStatement
+  accountId: SnAccountId
+  blockNumber: SnBlockNumber
+}
+
+export interface SnStatementWithStorage {
+  storageKey: string
+  statementInfo: SnStatementInfo
 }

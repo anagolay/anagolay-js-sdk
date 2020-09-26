@@ -17,5 +17,7 @@ describe('api::connection ', () => {
       expect(error.message).toContain('Please init the api instance first')
     }
   })
-  it.skip('should return correct api instance', async (): Promise<void> => {})
+  it.skip('should return correct api instance', async (): Promise<void> => {
+    expect(true).toBe(true)
+  })
 })
