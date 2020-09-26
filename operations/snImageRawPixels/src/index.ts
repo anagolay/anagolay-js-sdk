@@ -10,15 +10,9 @@ import { InputParams, ReturnParams } from './interfaces'
  * @typeParam T Type `T` is generic and it is used to get the latest child operation. With default export use generic type so this operation can be executed from the leaf child
  * @return  output (Returns the raw pixel bytes without metadata`) and decoder function
  */
-export default async function execute<T> (params: T): Promise<ReturnParams> {
-  const inputLength = config.data.input.length
-
-  if (inputLength === 1) {
-    const c: SnOperation = config
-    return executeOperation<T, ReturnParams>(c, params)
-  } else {
-    throw new Error("This operation doesn't support more than one input param ")
-  }
+export default async function execute<T>(params: T): Promise<ReturnParams> {
+  const c: SnOperation = config
+  return executeOperation<T, ReturnParams>(c, params)
 }
 
 /**
@@ -26,9 +20,7 @@ export default async function execute<T> (params: T): Promise<ReturnParams> {
  * @param {InputParams} params InputParams
  * @return  output (Returns the raw pixel bytes without metadata`) and decoder function
  */
-export async function snImageRawPixels (
-  params: InputParams
-): Promise<ReturnParams> {
+export async function snImageRawPixels(params: InputParams): Promise<ReturnParams> {
   const inputLength = config.data.input.length
 
   const data = params[inputLength - 1]
@@ -44,6 +36,6 @@ export async function snImageRawPixels (
    */
   return {
     data: stringToU8a(JSON.stringify(imageData)),
-    decode: () => imageData
+    decode: () => imageData,
   }
 }

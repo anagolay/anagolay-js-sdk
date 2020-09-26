@@ -14,8 +14,8 @@ describe('SnOperation: snImageRawPixelsHash', (): void => {
     const params = [
       {
         data: path,
-        decode: () => path
-      }
+        decode: () => path,
+      },
     ]
     const res = await execute(params)
     const cidOfTheFile = await snCid(params)

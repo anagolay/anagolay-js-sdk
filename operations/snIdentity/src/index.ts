@@ -1,4 +1,3 @@
-import config from './config'
 import { InputParams, ReturnParams } from './interfaces'
 
 /**
@@ -6,16 +5,7 @@ import { InputParams, ReturnParams } from './interfaces'
  * @param {InputParams} params InputParams
  * @return  output () and decoder function
  */
-export default async function snIdentity (
-  params: InputParams
-): Promise<ReturnParams> {
-  const inputLength = config.data.input.length
-
-  if (inputLength === 1) {
-    // start implementation here
-    const data = params[inputLength - 1]
-    return data
-  } else {
-    throw new Error("This operation doesn't support more than one input param ")
-  }
+export default async function snIdentity(params: InputParams): Promise<ReturnParams> {
+  const data = params[0]
+  return data
 }

@@ -7,20 +7,20 @@ export class IncompatibleInputParamChildOperationError extends Error {
   /**
    * Extra data
    */
-  public extra: {}
+  public extra: Record<string, unknown>
 
-  constructor (
+  constructor(
     operationName: string,
     childOperationName: string,
     input: SnInputParamsDefinition[],
-    output: SnInputParamsDefinition
+    output: SnInputParamsDefinition,
   ) {
     const message = `Incompatible ${operationName} input -> ${childOperationName} output`
     super(message)
     this.name = 'IncompatibleInputParamChildOperationError'
     this.extra = {
       input,
-      output
+      output,
     }
   }
 }

@@ -4,12 +4,10 @@ import { InputParams, ReturnParams } from './interfaces'
 
 /**
  * Wrapper of JSON.stringify().
- * @param {InputParams} params InputParams
- * @return  output (Returns SnByteArray of json string.) and decoder function
+ * @param params InputParams
+ * @returns  output (Returns SnByteArray of json string.) and decoder function
  */
-export default async function snJsonEnc (
-  params: InputParams
-): Promise<ReturnParams> {
+export default async function snJsonEnc(params: InputParams): Promise<ReturnParams> {
   const inputLength = config.data.input.length
 
   if (inputLength === 1) {
@@ -18,7 +16,7 @@ export default async function snJsonEnc (
     const val = JSON.stringify(data.data)
     return {
       data: stringToU8a(val),
-      decode: () => val
+      decode: () => val,
     }
   } else {
     throw new Error("This operation doesn't support more than one input param ")

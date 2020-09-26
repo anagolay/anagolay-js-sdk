@@ -1,47 +1,41 @@
 {
   "name": "@sensio/types",
   "description": "Sensio Custom and Auto-generated types and interfaces",
-  "version": "0.3.0",
+  "version": "0.4.4-alpha.0",
   "license": "Apache-2.0",
   "author": "daniel@woss.io",
-  "module": "es/index.js",
-  "main": "src/index",
+  "main": "lib/index",
+  "keywords": [
+    "sensio",
+    "blockchain",
+    "network"
+  ],
   "files": [
-    "lib",
-    "src",
-    "es"
+    "lib"
   ],
   "scripts": {
     "build": "tsc -b .",
-    "genTypes": "yarn update:owlnet; yarn gen:defs; yarn gen:meta; yarn gen:types:json; yarn std",
-    "gen:defs": "ts-node --skip-project node_modules/.bin/polkadot-types-from-defs --package . . --input ./src/interfaces",
-    "gen:meta": "ts-node --skip-project node_modules/.bin/polkadot-types-from-chain --package . . --endpoint ./sensio-network.json --output ./src/interfaces",
+    "generate": "yarn update:owlnet; yarn gen:defs; yarn gen:meta; yarn gen:types:json; yarn std; ./fix-the-files.sh",
+    "gen:defs": "ts-node --skip-project node_modules/.bin/polkadot-types-from-defs --package @sensio/types/interfaces . --input ./src/interfaces",
+    "gen:meta": "ts-node --skip-project node_modules/.bin/polkadot-types-from-chain --package @sensio/types/interfaces . --endpoint ./sensio-network.json --output ./src/interfaces",
     "update:owlnet": "rm -f ./sensio-network.json; curl -H \"Content-Type: application/json\" -d '{\"id\":\"1\", \"jsonrpc\":\"2.0\", \"method\": \"state_getMetadata\", \"params\":[]}' http://localhost:9933 > ./sensio-network.json",
-    "gen:types:json": "ts-node ./src/gen_types_json.ts",
-    "std": "ts-standard --fix"
-  },
-  "dependencies": {
-    "exifreader": "^3.12.1",
-    "ts-standard": "^8.0.1"
+    "gen:types:json": "ts-node ./src/gen_types_json.ts"
   },
   "devDependencies": {
-    "@polkadot/typegen": "^1.21.1",
-    "typescript": "^3.9.5"
+    "@polkadot/typegen": "^1.32.1",
+    "exifreader": "^3.12.1",
+    "typescript": "^4.0.3"
   },
   "publishConfig": {
     "access": "public"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://gitlab.com/sensio_group/network-js-sdk.git"
+    "url": "https://gitlab.com/sensio_group/network-js-sdk.git",
+    "directory": "sdk/types"
   },
   "bugs": {
     "url": "https://gitlab.com/sensio_group/network-js-sdk/issues"
   },
-  "homepage": "https://gitlab.com/sensio_group/network-js-sdk#readme",
-  "ts-standard": {
-    "ignore": [
-      "lib"
-    ]
-  }
+  "homepage": "https://gitlab.com/sensio_group/network-js-sdk/-/tree/master/sdk/types#readme"
 }

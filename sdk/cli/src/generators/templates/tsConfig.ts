@@ -1,19 +1,19 @@
-const tsConfigJson = (): Object => ({
+const tsConfigJson = (): unknown => ({
   extends: '../../tsconfig.json',
   compilerOptions: {
     outDir: 'lib',
-    rootDir: 'src'
+    rootDir: 'src',
   },
   include: ['./src'],
   exclude: ['lib'],
   references: [
     {
-      path: '../../sdk/types'
+      path: '../../sdk/types',
     },
     {
-      path: '../../sdk/core'
-    }
-  ]
+      path: '../../sdk/core',
+    },
+  ],
 })
 
 export default tsConfigJson

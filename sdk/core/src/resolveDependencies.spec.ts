@@ -1,9 +1,7 @@
 import { SnOperationDataForCreating } from '@sensio/types'
 import { IncompatibleInputParamChildOperationError } from './errors/IncompatibleInputParamChildOperation'
 import { multipleOnSameLevelOps, ops, resolvedOpDeps } from './fixtures/testOps'
-import resolveDependencies, {
-  createInputFromOutput
-} from './resolveDependencies'
+import resolveDependencies, { createInputFromOutput } from './resolveDependencies'
 
 let depsResolved: SnOperationDataForCreating[] = []
 
@@ -19,9 +17,7 @@ describe('Core::Operation - resolveDependencies', (): void => {
   it('should match the hard defined ops', (): void => {
     expect(depsResolved).toMatchObject(resolvedOpDeps)
   })
-  it('should fail on empty string for dependency name', async (): Promise<
-  void
-  > => {
+  it('should fail on empty string for dependency name', async (): Promise<void> => {
     expect.assertions(1)
     const op: SnOperationDataForCreating[] = [
       {
@@ -35,19 +31,17 @@ describe('Core::Operation - resolveDependencies', (): void => {
         output: {
           desc: 'Returns the File Buffer.',
           output: 'SnByteArray',
-          decoded: 'SnFileBuffer'
+          decoded: 'SnFileBuffer',
         },
         hashingOp: '',
         encOp: '',
-        opNames: ['']
-      }
+        opNames: [''],
+      },
     ]
     try {
       await resolveDependencies(op)
     } catch (e) {
-      expect(e.message).toEqual(
-        'Dependency must have a name, not an empty string'
-      )
+      expect(e.message).toEqual('Dependency must have a name, not an empty string')
     }
   })
   it('should fail on circular dependency', async (): Promise<void> => {
@@ -64,19 +58,17 @@ describe('Core::Operation - resolveDependencies', (): void => {
         output: {
           desc: 'Returns the File Buffer.',
           output: 'SnByteArray',
-          decoded: 'SnFileBuffer'
+          decoded: 'SnFileBuffer',
         },
         hashingOp: '',
         encOp: '',
-        opNames: ['sn_file']
-      }
+        opNames: ['sn_file'],
+      },
     ]
     try {
       await resolveDependencies(op)
     } catch (e) {
-      expect(e.message).toEqual(
-        'Circular reference are not allowed for direct children.'
-      )
+      expect(e.message).toEqual('Circular reference are not allowed for direct children.')
     }
   })
   it('should have correct priority fields', (): void => {
@@ -91,9 +83,7 @@ describe('Core::Operation - resolveDependencies', (): void => {
     const opOutputFirstDirectChild = op.ops[0].output
 
     expect(opOutputFirstDirectChild.output).toBe(opInputFirstDirectChild.data)
-    expect(opOutputFirstDirectChild.decoded).toBe(
-      opInputFirstDirectChild.decoded
-    )
+    expect(opOutputFirstDirectChild.decoded).toBe(opInputFirstDirectChild.decoded)
   })
   it('should have correct amount of input params', async (): Promise<void> => {
     const op: SnOperationDataForCreating[] = [
@@ -108,11 +98,11 @@ describe('Core::Operation - resolveDependencies', (): void => {
         output: {
           desc: 'Returns the File Buffer.',
           output: 'SnByteArray',
-          decoded: 'SnFileBuffer'
+          decoded: 'SnFileBuffer',
         },
         hashingOp: '',
         encOp: '',
-        opNames: []
+        opNames: [],
       },
       {
         name: 'sn_file_copy',
@@ -125,12 +115,12 @@ describe('Core::Operation - resolveDependencies', (): void => {
         output: {
           desc: 'Returns the File Buffer.',
           output: 'SnByteArray',
-          decoded: 'SnFileBuffer'
+          decoded: 'SnFileBuffer',
         },
         hashingOp: '',
         encOp: '',
-        opNames: ['sn_file']
-      }
+        opNames: ['sn_file'],
+      },
     ]
     const depsResolved = await resolveDependencies(op)
     const correctOpForInput = depsResolved[0]
@@ -138,16 +128,12 @@ describe('Core::Operation - resolveDependencies', (): void => {
     expect(correctOpForInput.input.length).toBe(1)
     expect(incorrectOpForInput.input.length).toBe(1)
   })
-  it('should have correct amount of children on the same level', async (): Promise<
-  void
-  > => {
+  it('should have correct amount of children on the same level', async (): Promise<void> => {
     const depsResolved = await resolveDependencies(multipleOnSameLevelOps)
     const correctOp = depsResolved[3].ops[0]
     expect(correctOp.ops.length).toBe(2)
   })
-  it('should fail for wrong type of operation input <-> output', async (): Promise<
-  void
-  > => {
+  it('should fail for wrong type of operation input <-> output', async (): Promise<void> => {
     expect.assertions(3)
 
     const op: SnOperationDataForCreating[] = [
@@ -162,11 +148,11 @@ describe('Core::Operation - resolveDependencies', (): void => {
         output: {
           desc: 'Returns the File Buffer.',
           output: 'SnByteArray',
-          decoded: 'SnFileBuffer'
+          decoded: 'SnFileBuffer',
         },
         hashingOp: '',
         encOp: '',
-        opNames: []
+        opNames: [],
       },
       {
         name: 'sn_file_copy',
@@ -179,12 +165,12 @@ describe('Core::Operation - resolveDependencies', (): void => {
         output: {
           desc: 'Returns the File Buffer.',
           output: 'SnByteArray',
-          decoded: 'SnFileBuffer'
+          decoded: 'SnFileBuffer',
         },
         hashingOp: '',
         encOp: '',
-        opNames: ['sn_file']
-      }
+        opNames: ['sn_file'],
+      },
     ]
 
     try {
@@ -196,14 +182,12 @@ describe('Core::Operation - resolveDependencies', (): void => {
         input: op[1].input,
         output: {
           data: op[0].output.output,
-          decoded: op[0].output.decoded
-        }
+          decoded: op[0].output.decoded,
+        },
       })
     }
   })
-  it('should succeed FlowControl operation with multiple children', async (): Promise<
-  void
-  > => {
+  it('should succeed FlowControl operation with multiple children', async (): Promise<void> => {
     const op: SnOperationDataForCreating[] = [
       {
         name: 'sn_match_all',
@@ -216,11 +200,11 @@ describe('Core::Operation - resolveDependencies', (): void => {
         output: {
           desc: 'Returns true, if all match or throws an error if some match.',
           output: 'SnBoolean',
-          decoded: 'SnBoolean'
+          decoded: 'SnBoolean',
         },
         hashingOp: '',
         encOp: '',
-        opNames: ['sn_file', 'sn_file_copy']
+        opNames: ['sn_file', 'sn_file_copy'],
       },
       {
         name: 'sn_file',
@@ -233,11 +217,11 @@ describe('Core::Operation - resolveDependencies', (): void => {
         output: {
           desc: 'Returns the File Buffer.',
           output: 'SnByteArray',
-          decoded: 'SnFileBuffer'
+          decoded: 'SnFileBuffer',
         },
         hashingOp: '',
         encOp: '',
-        opNames: []
+        opNames: [],
       },
       {
         name: 'sn_file_copy',
@@ -250,12 +234,12 @@ describe('Core::Operation - resolveDependencies', (): void => {
         output: {
           desc: 'Returns the File Buffer.',
           output: 'SnByteArray',
-          decoded: 'SnFileBuffer'
+          decoded: 'SnFileBuffer',
         },
         hashingOp: '',
         encOp: '',
-        opNames: ['sn_file']
-      }
+        opNames: ['sn_file'],
+      },
     ]
 
     const deps = await resolveDependencies(op)

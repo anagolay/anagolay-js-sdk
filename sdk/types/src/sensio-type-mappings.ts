@@ -1,12 +1,19 @@
-import { ExpandedTags } from 'exifreader'
+import ImageMetadataTags from './imageMetadata'
 import { SnProofParams as OriginalSnProofParams } from './interfaces/poe/interfaces'
-import { SnSensioStatement } from './interfaces/statements/interfaces'
+import { SnGenericId } from './interfaces/sensio/interfaces'
+import {
+  SnSensioCopyrightClaim,
+  SnSensioOwnershipClaim,
+  SnSensioStatement,
+} from './interfaces/statements/interfaces'
+
 export type output =
   | 'SnByteArray'
   | 'SnProofParams[]'
   | 'SnBoolean'
   | 'SnString'
   | 'SnAny'
+  | 'StringOrBuffer'
 
 export type outputDecoded =
   | 'SnBuffer'
@@ -24,12 +31,21 @@ export type outputDecoded =
   | 'SnBoolean'
   | 'SnNull'
   | 'SnImageData'
+  | 'SnOwnershipClaims'
+  | 'SnCopyrightClaims'
+  | 'SnGenericIds'
+  | 'SnSensioClaim[]'
+  | 'SnSensioSignatures[]'
+  | 'SnSigner'
+  | '[SnSensioClaim[],SnSensioSignatures[]]'
+  | 'StringOrBuffer'
 
-export type outputImplementation =
-  | SnByteArray
-  | SnBoolean
-  | SnProofParams[]
-  | SnString
+export type outputImplementation = SnByteArray | SnBoolean | SnProofParams[] | SnString
+
+/**
+ * ATM workaround for the potential OR incoming params
+ */
+export type StringOrBuffer = SnString | SnBuffer
 
 export type outputDecodedImplementation =
   | SnBuffer
@@ -43,6 +59,11 @@ export type outputDecodedImplementation =
   | SnAny
   | SnImageMetadata
   | SnImageData
+
+/**
+ * This should be correct signer interfaces, ATM is just any type but it should be a defined interface with `.sign()` method. For now it's KeyringPair
+ */
+export type SnSigner = any
 
 export interface ExifFile {
   'Bits Per Sample': {
@@ -66,19 +87,23 @@ export interface ExifFile {
     description: string
   }
 }
-export interface SnImageMetadata extends ExpandedTags {
+
+export interface SnImageMetadata extends ImageMetadataTags {
   file: ExifFile
 }
 
+export type SnGenericIds = SnGenericId[]
 export type SnBuffer = Buffer
 export type SnByteArray = Uint8Array
 export type SnFileBuffer = Buffer
 export type SnStatement = SnSensioStatement
 export type SnStatements = SnSensioStatement[]
+export type SnCopyrightClaims = SnSensioCopyrightClaim[]
+export type SnOwnershipClaims = SnSensioOwnershipClaim[]
 export type SnProofParams = OriginalSnProofParams
 export type SnBoolean = boolean
 export type SnString = string
-export type SnAny = any // TODO: SnByteArray | SnStatement | SnStatements ... any sensio type
+export type SnAny = any // @TODO: SnByteArray | SnStatement | SnStatements ... any sensio type
 export type SnNull = null
 
 export interface SnImageData {

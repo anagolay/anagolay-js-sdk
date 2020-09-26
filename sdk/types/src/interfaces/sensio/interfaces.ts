@@ -37,5 +37,5 @@ export enum SnForWhat {
   'SMARTPHONE',
   'USER',
   'SYS',
-  'FLOWCONTROL'
+  'FLOWCONTROL',
 }

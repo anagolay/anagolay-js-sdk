@@ -2,10 +2,10 @@
 /* eslint-disable */
 
 import { Struct, Vec } from '@polkadot/types/codec'
-import { AccountId, BlockNumber } from '@polkadot/types/interfaces/runtime'
 import { Bytes } from '@polkadot/types/primitive'
-import { Rule } from '../rules'
-import { CreatorId, ForWhat, GenericId } from '../sensio'
+import { AccountId, BlockNumber } from '@polkadot/types/interfaces/runtime'
+import { Rule } from '@sensio/types/interfaces/rules'
+import { CreatorId, ForWhat, GenericId } from '@sensio/types/interfaces/sensio'
 
 /** @name PhashInfo */
 export interface PhashInfo extends Struct {

@@ -8,9 +8,7 @@ import '@sensio/types/interfaces/augment-types'
  * Constants from PoE Runtime
  * @param api
  */
-export default async function constantsForSensio (
-  api: ApiPromise
-): Promise<DefaultValues> {
+export default async function constantsForSensio(api: ApiPromise): Promise<DefaultValues> {
   const defaultValues: DefaultValues = await api.consts.sensio.defaults
 
   return defaultValues

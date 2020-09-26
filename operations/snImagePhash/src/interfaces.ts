@@ -1,9 +1,4 @@
-import {
-  SnByteArray,
-  SnFileBuffer,
-  SnInputParamsImplementation,
-  SnString
-} from '@sensio/types'
+import { SnByteArray, SnFileBuffer, SnInputParamsImplementation, SnString } from '@sensio/types'
 
 export interface ReturnParams extends SnInputParamsImplementation {
   data: SnByteArray // value of `data.output.output`

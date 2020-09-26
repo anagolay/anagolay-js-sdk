@@ -12,32 +12,32 @@ describe('SnOperation: snSplit', (): void => {
 
     const saveStatementsOutput: SnInputParamsImplementation[] = [
       { data: u1, decode: () => u8aToString(u1) },
-      { data: u2, decode: () => u8aToString(u2) }
+      { data: u2, decode: () => u8aToString(u2) },
     ]
     const res = await snSplit([
       {
         data: u8aToU8a(
           JSON.stringify({
             opName: 'save_statements',
-            data: saveStatementsOutput
-          })
+            data: saveStatementsOutput,
+          }),
         ),
         decode: () => ({
           opName: 'save_statements',
-          data: saveStatementsOutput
-        })
-      }
+          data: saveStatementsOutput,
+        }),
+      },
     ])
 
     const expectedRes = [
       {
         k: 'save_statements',
-        v: 'dummy statement data'
+        v: 'dummy statement data',
       },
       {
         k: 'save_statements',
-        v: 'dummy statement data #2'
-      }
+        v: 'dummy statement data #2',
+      },
     ]
 
     expect(res.decode().length).toEqual(2)
@@ -52,14 +52,14 @@ describe('SnOperation: snSplit', (): void => {
         {
           data: u8aToU8a(
             JSON.stringify({
-              opName: 'save_statements'
-            })
+              opName: 'save_statements',
+            }),
           ),
           decode: () => ({
             opName: 'save_statements',
-            data: []
-          })
-        }
+            data: [],
+          }),
+        },
       ])
     } catch (error) {
       expect(error.message).toEqual('Missing children outputs')

@@ -13,23 +13,26 @@ const readFilePromised = promisify(readFile)
  * @typeParam T Type `T` is generic and it is used to get the latest child operation. With default export use generic type so this operation can be executed from the leaf child
  * @return  output (Returns the File Buffer.) and decoder function
  */
-export default async function execute<T> (params: T): Promise<ReturnParams> {
-  const inputLength = config.data.input.length
-
-  if (inputLength === 1) {
-    const c: SnOperation = config
-    return executeOperation<T, ReturnParams>(c, params)
-  } else {
-    throw new Error("This operation doesn't support more than one input param ")
-  }
+export default async function execute<T>(params: T): Promise<ReturnParams> {
+  const c: SnOperation = config
+  return executeOperation<T, ReturnParams>(c, params)
 }
-export async function snFile (params: InputParams): Promise<ReturnParams> {
+
+export async function snFile(params: InputParams): Promise<ReturnParams> {
   const inputLength = config.data.input.length
   const data = params[inputLength - 1]
-  const file = await readFilePromised(data.decode())
+  const decoded = data.decode()
+
+  let file: Buffer
+
+  if (Buffer.isBuffer(decoded)) {
+    file = decoded
+  } else {
+    file = await readFilePromised(data.decode())
+  }
 
   return {
     data: bufferToU8a(file),
-    decode: () => file
+    decode: () => file,
   }
 }

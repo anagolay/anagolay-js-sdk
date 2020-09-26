@@ -2,7 +2,7 @@
   "extends": "./tsconfig.paths.json",
   "compilerOptions": {
     "target": "ES2019",
-    "module": "ESNext",
+    "module": "commonjs",
     "declaration": true,
     "declarationMap": true,
     "sourceMap": true,
@@ -32,6 +32,6 @@
     "isolatedModules": true,
     "forceConsistentCasingInFileNames": true
   },
-  "exclude": ["node_modules"],
-  "include": ["**/*/src/**/*"]
+  "exclude": ["node_modules", "assets"],
+  "typeRoots": ["typings", "node_modules/@types"]
 }

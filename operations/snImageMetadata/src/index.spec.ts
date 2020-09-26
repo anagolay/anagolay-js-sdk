@@ -12,22 +12,20 @@ describe('SnOperation: snImageMetadata', (): void => {
     const res = await execute([
       {
         data: testImage,
-        decode: () => testImage
-      }
+        decode: () => testImage,
+      },
     ])
     const decoded = res.decode()
 
     expect(decoded.exif?.Make.description).toBe('Canon')
     expect(decoded.exif?.Make.value).toEqual(['Canon'])
   })
-  it('should return correct metadata for main function', async (): Promise<
-  void
-  > => {
+  it('should return correct metadata for main function', async (): Promise<void> => {
     const file = await snFile([
       {
         data: testImage,
-        decode: () => testImage
-      }
+        decode: () => testImage,
+      },
     ])
     const res = await snImageMetadata([file])
     const decoded = res.decode()
@@ -39,9 +37,8 @@ describe('SnOperation: snImageMetadata', (): void => {
     const file = await snFile([
       {
         data: resolve(__dirname, '../../../assets/test-images/no-metadata.jpg'),
-        decode: () =>
-          resolve(__dirname, '../../../assets/test-images/no-metadata.jpg')
-      }
+        decode: () => resolve(__dirname, '../../../assets/test-images/no-metadata.jpg'),
+      },
     ])
     const res = await snImageMetadata([file])
     const decoded = res.decode()
@@ -60,9 +57,8 @@ describe('SnOperation: snImageMetadata', (): void => {
     const file = await snFile([
       {
         data: resolve(__dirname, '../../../assets/test-images/notAnImage.jpg'),
-        decode: () =>
-          resolve(__dirname, '../../../assets/test-images/notAnImage.jpg')
-      }
+        decode: () => resolve(__dirname, '../../../assets/test-images/notAnImage.jpg'),
+      },
     ])
     try {
       await snImageMetadata([file])

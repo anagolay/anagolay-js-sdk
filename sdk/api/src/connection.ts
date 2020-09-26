@@ -7,14 +7,14 @@ import * as CustomTypes from '@sensio/types/interfaces/definitions'
 import { isNil } from 'ramda'
 
 // Cached API connection
-let api: ApiPromise | null = null
+let api: ApiPromise
 
-function buildTypes (): RegistryTypes {
+function buildTypes(): RegistryTypes {
   let types: RegistryTypes = {
     Address: 'AccountId',
-    LookupSource: 'AccountId'
+    LookupSource: 'AccountId',
   }
-  Object.keys(CustomTypes).map(pallet => {
+  Object.keys(CustomTypes).map((pallet) => {
     types = { ...types, ...CustomTypes[pallet].types }
   })
 
@@ -25,44 +25,61 @@ function buildTypes (): RegistryTypes {
  * Connect to Sensio Network API
  *
  * ```ts
- * import {api} from '@sensio/api';
- * const connection = api()
+ * import setupConnection from '@sensio/api/connection'
+ * const connection = setupConnection()
  * ```
  */
-export default async function setupConnection (
-  socket = 'ws://127.0.0.1:9944'
-): Promise<ApiPromise> {
-  // Init the provider to connect to the local node
-  const provider = new WsProvider(socket)
+export async function setupConnection(socket?: string): Promise<ApiPromise> {
+  try {
+    let realSocket = socket
 
-  const types = buildTypes()
-  if (isNil(api)) {
-    // Init the server
-    api = await ApiPromise.create({
-      types: {
-        ...types,
+    if (isNil(realSocket)) {
+      realSocket = process.env.SENSIO_NODE_URL ?? 'ws://127.0.0.1:9944'
+    }
 
-        // chain-specific overrides
-        Address: 'AccountId',
-        LookupSource: 'AccountId'
-      },
-      provider
-    })
-    return api
-  } else {
-    return getApi()
+    console.log('API::connection to %s', realSocket)
+
+    const provider = new WsProvider(realSocket)
+    const types = buildTypes()
+    if (isNil(api)) {
+      // Init the server
+      api = await ApiPromise.create({
+        types: {
+          ...types,
+
+          // chain-specific overrides
+          Address: 'AccountId',
+          LookupSource: 'AccountId',
+        },
+        provider,
+      })
+
+      return api
+    } else {
+      return getApi()
+    }
+  } catch (error) {
+    console.error(error)
+    throw new Error(error.message)
   }
 }
 
 /**
  * Getter for the API cached connection
  */
-export function getApi (): ApiPromise {
+export function getApi(): ApiPromise {
   if (isNil(api)) {
-    throw new Error(
-      'Please init the api instance first, usually that would be *api.api()* '
-    )
+    throw new Error('Please init the api instance first, usually that would be *api.api()* ')
   } else {
     return api
   }
 }
+
+/**
+ * Close the api connection, disconnect
+ */
+export async function disconnect(): Promise<void> {
+  return await api.disconnect()
+}
+
+export default setupConnection

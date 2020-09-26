@@ -5,7 +5,7 @@ import execute, { snCid } from './index'
 
 const demo = {
   text: 'demo',
-  cid: 'bafy2bzacedwrfzn6mrudj5dlhzncjts3s2yg76vc7cxwge6lnzdjhl2gkxii6'
+  cid: 'bafy2bzacedwrfzn6mrudj5dlhzncjts3s2yg76vc7cxwge6lnzdjhl2gkxii6',
 }
 
 describe('Operation: snCid', (): void => {
@@ -16,8 +16,8 @@ describe('Operation: snCid', (): void => {
     const cid = await execute([
       {
         data: stringToU8a(demo.text),
-        decode: () => Buffer.from(demo.text)
-      }
+        decode: () => Buffer.from(demo.text),
+      },
     ])
     expect(cid.decode()).toEqual(demo.cid)
 
@@ -31,8 +31,8 @@ describe('Operation: snCid', (): void => {
     const hash = await snMultihash([
       {
         data: stringToU8a(demo.text),
-        decode: () => demo.text
-      }
+        decode: () => demo.text,
+      },
     ])
 
     const cid = await execute([hash])
@@ -42,17 +42,15 @@ describe('Operation: snCid', (): void => {
     const isBafy = t.toString().startsWith('bafy')
     expect(isBafy).toEqual(true)
   })
-  it('should fail on wrong multihash with direct passing the params', async (): Promise<
-  void
-  > => {
+  it('should fail on wrong multihash with direct passing the params', async (): Promise<void> => {
     expect.assertions(1)
     const buff = Buffer.from(demo.text)
     try {
       await snCid([
         {
           data: u8aToU8a(buff),
-          decode: () => buff
-        }
+          decode: () => buff,
+        },
       ])
     } catch (error) {
       expect(error.message).toContain('multihash unknown function code')

@@ -4,7 +4,7 @@
     "outDir": "lib",
     "rootDir": "src"
   },
-  "include": ["./src", "../core/src/util/hashing.ts"],
+  "include": ["src"],
   "exclude": ["lib"],
   "references": [
     { "path": "../core" },

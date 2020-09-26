@@ -2,9 +2,9 @@
 /* eslint-disable */
 
 import { Struct, Vec } from '@polkadot/types/codec'
-import { AccountId, BlockNumber } from '@polkadot/types/interfaces/runtime'
 import { Bytes, u32 } from '@polkadot/types/primitive'
-import { ForWhat, GenericId } from '../sensio'
+import { AccountId, BlockNumber } from '@polkadot/types/interfaces/runtime'
+import { ForWhat, GenericId } from '@sensio/types/interfaces/sensio'
 
 /** @name ChildOutput */
 export interface ChildOutput extends Bytes {}

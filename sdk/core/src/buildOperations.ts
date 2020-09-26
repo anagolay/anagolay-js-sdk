@@ -6,13 +6,9 @@ import { generateOperation } from './resolveDependencies'
  * @param node
  * @returns full SnOperation with its children
  */
-async function visitNode (
-  node: SnOperationDataForCreating
-): Promise<SnOperation> {
+async function visitNode(node: SnOperationDataForCreating): Promise<SnOperation> {
   // function for the recursion
-  async function visit (
-    node: SnOperationDataForCreating
-  ): Promise<SnOperation> {
+  async function visit(node: SnOperationDataForCreating): Promise<SnOperation> {
     // this is the way how to use _unusedWithCamelCase
     const { opNames: _unusedOpNames, ops: _unusedOps, ...rest } = node
 
@@ -20,9 +16,7 @@ async function visitNode (
     const newNode: SnOperation = { id: '', data: { ...rest, ops: [] } }
 
     // Let's iterate over the node's child operations first. this will give us the LAST(a LEAF) operation in the tree
-    newNode.data.ops = await Promise.all(
-      node.ops.map(async o => await visitNode(o))
-    )
+    newNode.data.ops = await Promise.all(node.ops.map(async (o) => await visitNode(o)))
 
     // populate the ops and data from the recursion call
     return await generateOperation({ ...rest, ...newNode.data })
@@ -36,12 +30,12 @@ async function visitNode (
  * @param [SnOperationDataForCreating[]] ops
  * @returns List of SnOperation objects
  */
-export default async function buildOperations (
-  ops: SnOperationDataForCreating[]
+export default async function buildOperations(
+  ops: SnOperationDataForCreating[],
 ): Promise<SnOperation[]> {
   return await Promise.all(
-    ops.map(async o => {
+    ops.map(async (o) => {
       return await visitNode(o)
-    })
+    }),
   )
 }

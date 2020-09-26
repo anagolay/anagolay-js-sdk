@@ -2,13 +2,13 @@
 /* eslint-disable */
 
 import { Enum, Struct } from '@polkadot/types/codec'
-import { AccountId, BlockNumber } from '@polkadot/types/interfaces/runtime'
 import { Bytes } from '@polkadot/types/primitive'
-import { CreatorId, GenericId } from '../sensio'
+import { AccountId, BlockNumber } from '@polkadot/types/interfaces/runtime'
+import { CreatorId, GenericId } from '@sensio/types/interfaces/sensio'
 
 /** @name Expiration */
 export interface Expiration extends Struct {
-  readonly expiration_type: ExpirationType
+  readonly expirationType: ExpirationType
   readonly value: Bytes
 }
 
@@ -41,7 +41,7 @@ export interface SensioClaim extends Struct {
   readonly claimType: SensioClaimType
   readonly valid: Validity
   readonly expiration: Expiration
-  readonly on_expiration: Bytes
+  readonly onExpiration: Bytes
 }
 
 /** @name SensioClaimType */
@@ -54,7 +54,7 @@ export interface SensioClaimType extends Enum {
 export interface SensioSignature extends Struct {
   readonly sigKey: Bytes
   readonly sig: Bytes
-  readonly hash: GenericId
+  readonly cid: GenericId
 }
 
 /** @name SensioSignatures */

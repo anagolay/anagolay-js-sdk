@@ -9,9 +9,7 @@ import { InputParams, ReturnParams } from './interfaces'
  * @param {InputParams} params InputParams
  * @return  output (Returns the object with *k* and *v* keys, where *k* is op name and *v* the output value.) and decoder function
  */
-export default async function snSplit (
-  params: InputParams
-): Promise<ReturnParams> {
+export default async function snSplit(params: InputParams): Promise<ReturnParams> {
   const inputLength = config.data.input.length
 
   if (inputLength === 1) {
@@ -22,16 +20,16 @@ export default async function snSplit (
       throw new Error('Missing children outputs')
     }
 
-    const res: SnProofParams[] = decoded.data.map(child => {
+    const res: SnProofParams[] = decoded.data.map((child) => {
       return {
         k: decoded.opName,
-        v: child.decode()
+        v: child.decode(),
       }
     })
 
     return {
       data: stringToU8a(JSON.stringify(res)),
-      decode: () => res
+      decode: () => res,
     }
   } else {
     throw new Error("This operation doesn't support more than one input param ")

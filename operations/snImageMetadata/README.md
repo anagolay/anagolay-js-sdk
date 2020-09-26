@@ -1,6 +1,6 @@
 # @sensio/op-sn-image-metadata
 
-Blockchain Version **bafy2bzacedq5zlaca4xq4zou7ctovepnx3doegwcii37prgrzvhdhoqthmpii**
+Blockchain Version **bafy2bzacedk46pihe5gr44l6liofvga6umxyhy27hwp4treiq32y6cdywsxzm**
 
 ## Description
 
@@ -19,7 +19,7 @@ Extract All Image Metadata
 yarn add @sensio/op-sn-image-metadata
 
 # or specific version
-yarn add @sensio/op-sn-image-metadata@0.3.1
+yarn add @sensio/op-sn-image-metadata@0.1.0
 ```
 
 ## Usage
@@ -27,8 +27,9 @@ yarn add @sensio/op-sn-image-metadata@0.3.1
 ```ts
 import snImageMetadata from '@sensio/op-sn-image-metadata'
 
-const data = new U8intArray(7)
-await snImageMetadata(data)
+const dataAsUintArray = new U8intArray(7)
+const dataAsBuffer = Buffer.from(7)
+await snImageMetadata([{ data: dataAsUintArray, decode: () => dataAsBuffer }])
 ```
 
 ## Contributing

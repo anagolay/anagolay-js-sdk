@@ -9,5 +9,5 @@ export { ApiPromise } from '@polkadot/api'
 export default {
   pallets,
   api,
-  utils
+  utils,
 }

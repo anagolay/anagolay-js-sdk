@@ -1,69 +1,71 @@
 import { SnOperation } from '@sensio/types'
 import { isEmpty } from 'ramda'
-import { generateNpmName } from '..'
+import { generateNpmName, nameToKeywords, stringToCamelCase } from '..'
 
-const packageJson = (op: SnOperation): Object => {
+const packageJson = (op: SnOperation): unknown => {
   const deps: { [k: string]: string } = {}
-
-  op.data.ops.forEach(o => {
+  op.data.ops.forEach((o) => {
     const opName = generateNpmName(o.data.name)
     deps[opName] = '^0.1.0'
   })
 
-  const encodingDeps: string[] = []
-  const hashingDep: string[] = []
+  const encodingDeps: { [k: string]: string } = {}
+  const hashingDep: { [k: string]: string } = {}
 
   if (!isEmpty(op.data.encOp)) {
-    encodingDeps.push(`"${generateNpmName(op.data.encOp)}":"^0.1.0"`)
+    const opName = generateNpmName(op.data.encOp)
+    encodingDeps[opName] = '^0.1.0'
   }
 
   if (!isEmpty(op.data.hashingOp)) {
-    hashingDep.push(`"${generateNpmName(op.data.hashingOp)}":"^0.1.0"`)
+    const opName = generateNpmName(op.data.hashingOp)
+    hashingDep[opName] = '^0.1.0'
   }
 
-  return {
+  const ret = {
     name: generateNpmName(op.data.name),
     version: '0.1.0',
     license: 'Apache-2.0',
     author: 'daniel@woss.io',
-    main: 'src/index',
-    types: 'lib/index.d.ts',
-    files: ['lib/**/*'],
-    directories: {
-      lib: 'lib'
-    },
+    description: op.data.desc,
+    main: 'lib/index',
+    files: ['lib'],
+    keywords: ['sensio', 'operations', ...nameToKeywords(op.data.name)],
     publishConfig: {
-      access: 'public'
+      access: 'public',
     },
     scripts: {
       build: 'tsc -b .',
-      std: 'ts-standard --fix'
+      std: 'ts-standard --fix',
     },
     devDependencies: {
       'ts-standard': '^8.0.1',
-      typescript: '^3.9.5'
+      typescript: '^3.9.5',
     },
     dependencies: {
       '@polkadot/util': '^3.0.1',
       '@sensio/core': '^0.1.0',
-      '@sensio/types': '^0.3.0',
+      '@sensio/types': '^0.1.0',
       ...deps,
       ...encodingDeps,
-      ...hashingDep
+      ...hashingDep,
     },
-
     repository: {
       type: 'git',
-      url: 'git+https://gitlab.com/sensio_group/network-js-sdk.git'
+      url: 'https://gitlab.com/sensio_group/network-js-sdk.git',
+      directory: `operations/${stringToCamelCase(op.data.name)}`,
     },
     bugs: {
-      url: 'https://gitlab.com/sensio_group/network-js-sdk/issues'
+      url: 'https://gitlab.com/sensio_group/network-js-sdk/issues',
     },
-    homepage: 'https://gitlab.com/sensio_group/network-js-sdk#readme',
+    homepage: `https://gitlab.com/sensio_group/network-js-sdk/-/tree/master/operations/${stringToCamelCase(
+      op.data.name,
+    )}#readme`,
     'ts-standard': {
-      ignore: ['lib']
-    }
+      ignore: ['lib'],
+    },
   }
+  return ret
 }
 
 export default packageJson

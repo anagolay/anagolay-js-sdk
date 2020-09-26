@@ -10,6 +10,6 @@ import { replace, toUpper } from 'ramda'
  * @param word
  * @returns New copy of the string
  */
-export default function capitalize (word: string): string {
+export default function capitalize(word: string): string {
   return replace(/^./, toUpper)(word)
 }

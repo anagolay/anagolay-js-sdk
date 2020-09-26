@@ -3,7 +3,7 @@ interface Slug extends String {
   __value__: never
 }
 
-export function parseSlug (str: string, maxLen?: number): Slug {
+export function parseSlug(str: string, maxLen?: number): Slug {
   if (maxLen !== null && maxLen !== undefined) {
     checkStrMaxLen(str, maxLen)
   }
@@ -11,11 +11,11 @@ export function parseSlug (str: string, maxLen?: number): Slug {
   return (slugify(str) as unknown) as Slug
 }
 
-export function slugify (str: string): string {
+export function slugify(str: string): string {
   return str.toLowerCase().replace(/ /g, '_')
 }
 
-export function checkStrMaxLen (str: string, maxLen: number): void {
+export function checkStrMaxLen(str: string, maxLen: number): void {
   if (str.length > maxLen) {
     // we can also trim the string here and not throw error
     throw new Error(`Given string is longer than allowed (${maxLen} chars)`)

@@ -2,8 +2,7 @@ import { readFileSync } from 'fs'
 import { resolve } from 'path'
 import createPhash, { binaryToHex, createRawHash, hexToBinary } from './phash'
 
-const defaultBinaryPhash =
-  '1111111000010000111111110000000001000000110111111100000011101110'
+const defaultBinaryPhash = '1111111000010000111111110000000001000000110111111100000011101110'
 
 const defaultHexPhash = 'fe10ff0040dfc0ee'
 
@@ -41,7 +40,7 @@ describe('SnOperation:snImagePhash:phash', () => {
     try {
       hexToBinary(defaultHexPhash + 'z')
     } catch (error) {
-      expect(error.message).toContain('doesn\'t exist in the hex lookup table')
+      expect(error.message).toContain("doesn't exist in the hex lookup table")
     }
   })
   it('should fail properly on convert to hex', (): void => {
@@ -49,7 +48,7 @@ describe('SnOperation:snImagePhash:phash', () => {
     try {
       binaryToHex(defaultBinaryPhash + 'z')
     } catch (error) {
-      expect(error.message).toContain('doesn\'t exist in the bin lookup table')
+      expect(error.message).toContain("doesn't exist in the bin lookup table")
     }
   })
 })

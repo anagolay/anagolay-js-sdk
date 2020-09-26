@@ -3,44 +3,42 @@ import chalk from 'chalk'
 import clear from 'clear'
 import commander from 'commander'
 import figlet from 'figlet'
+import defaultOps from './fixtures/defaultOps'
 import { regenerateDefaultOperations } from './generators'
-import defaultOps from './generators/fixtures/defaultOps'
-import { operationsFromChain, saveOpsToChain } from './handlers'
+import { installFixtures, operationsFromChain, saveOpsToChain } from './handlers'
 
 clear()
-console.log(
-  chalk.red(figlet.textSync('Sensio CLI', { horizontalLayout: 'full' }))
-)
+console.log(chalk.red(figlet.textSync('Sensio CLI', { horizontalLayout: 'full' })))
 
 const program = commander.createCommand()
 program.version('0.1.0')
 
 program
   .command('regen-default-ops')
-  .description(
-    'Connects to the chain and retrieves the operations without NODEJS implementation'
-  )
+  .description('re-generate operation implementations')
   .action(async () => {
     await regenerateDefaultOperations(defaultOps)
   })
+
 program
   .command('save-ops-to-network')
-  .description(
-    'Connects to the chain and retrieves the operations without NODEJS implementation'
-  )
+  .description('Save all ops to the network')
   .action(async () => {
     await saveOpsToChain()
   })
+
 program
   .command('list-all-ops')
-  .description(
-    'Connects to the chain and retrieves the operations without NODEJS implementation'
-  )
+  .description('List all operations')
   .action(async () => {
     await operationsFromChain()
   })
 
 program
-  .parseAsync()
-  .then()
-  .catch(console.error)
+  .command('init-chain-fixtures')
+  .description('Initialize the chain with the fixture')
+  .action(async () => {
+    await installFixtures()
+  })
+
+program.parseAsync().then().catch(console.error)

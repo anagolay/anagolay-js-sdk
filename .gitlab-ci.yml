@@ -4,9 +4,14 @@ workflow:
   rules:
     - if: $CI_MERGE_REQUEST_IID
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+variables:
+  NODE_ENV: ci
 
 include:
-  - template: Dependency-Scanning.gitlab-ci.yml
+  - template: Security/Dependency-Scanning.gitlab-ci.yml
+  - template: Security/License-Scanning.gitlab-ci.yml
+  - template: Security/SAST.gitlab-ci.yml
+  - template: Security/Secret-Detection.gitlab-ci.yml
 
 cache:
   key: ${CI_COMMIT_REF_SLUG}
@@ -18,6 +23,8 @@ stages:
   - test
   - lint
   - docs
+  - build
+  - release
 
 dependencies:
   stage: dependencies
@@ -26,11 +33,11 @@ dependencies:
 
 lint:
   stage: lint
-  needs: [dependencies, test_all_with_coverage]
+  needs: [dependencies]
   script:
-    - yarn std
+    - yarn lint
 
-test_all_with_coverage:
+test:
   stage: test
   needs: [dependencies]
   script:
@@ -47,5 +54,21 @@ pages:
   artifacts:
     paths:
       - public
+  only:
+    - master
+
+build:
+  stage: build
+  needs: [dependencies, test]
+  script:
+    - yarn build
+  only:
+    - merge_requests
+
+release-to-npm:
+  stage: release
+  needs: [build]
+  script:
+    - echo "i will run on the master only"
   only:
     - master

@@ -1,5 +1,5 @@
 import { bufferToU8a, stringToU8a } from '@polkadot/util'
-import mh from 'multihashing-async'
+import mh from 'multihashing'
 import snMultihash from '.'
 
 describe('SnOperation: snMultihash', (): void => {
@@ -14,8 +14,8 @@ describe('SnOperation: snMultihash', (): void => {
     const res = await snMultihash([
       {
         data: stringToU8a(testParam),
-        decode: () => testParam
-      }
+        decode: () => testParam,
+      },
     ])
     expect(res.data).toEqual(verifMh)
   })

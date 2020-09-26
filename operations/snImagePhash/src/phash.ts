@@ -1,3 +1,4 @@
+/* eslint-disable no-loops/no-loops */
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 
 import { getImageData, imageFromBuffer } from '@canvas/image'
@@ -9,7 +10,7 @@ import { readFileSync } from 'fs'
  */
 export enum PhashOutputFormat {
   HEX,
-  BINARY
+  BINARY,
 }
 
 /**
@@ -18,10 +19,10 @@ export enum PhashOutputFormat {
  * @param bits
  * @param format
  */
-export default async function createPhash (
+export default async function createPhash(
   pathOrBuffer: string | Buffer,
   bits = 8,
-  format = PhashOutputFormat.BINARY
+  format = PhashOutputFormat.BINARY,
 ): Promise<string> {
   if (bits % 4 !== 0) throw new Error('Invalid bit length')
 
@@ -56,10 +57,7 @@ export default async function createPhash (
  * @param data
  * @param bits
  */
-export function createRawHash (
-  data: blockhash.ImageData,
-  bits: number
-): string {
+export function createRawHash(data: blockhash.ImageData, bits: number): string {
   return blockhash.bmvbhash(data, bits)
 }
 
@@ -67,7 +65,7 @@ export function createRawHash (
  * Convert the HEX to BINARY string
  * @param [string] s
  */
-export function hexToBinary (s: string): string {
+export function hexToBinary(s: string): string {
   const lookup: { [key in number | string]: string } = {
     0: '0000',
     1: '0001',
@@ -90,7 +88,7 @@ export function hexToBinary (s: string): string {
     C: '1100',
     D: '1101',
     E: '1110',
-    F: '1111'
+    F: '1111',
   }
   let ret = ''
   for (let i = 0; i < s.length; i++) {
@@ -108,7 +106,7 @@ export function hexToBinary (s: string): string {
  * Convert BINARY to HEX
  * @param s
  */
-export function binaryToHex (s: string): string {
+export function binaryToHex(s: string): string {
   const lookup: { [key in number | string]: string } = {
     '0000': '0',
     '0001': '1',
@@ -125,7 +123,7 @@ export function binaryToHex (s: string): string {
     1100: 'c',
     1101: 'd',
     1110: 'e',
-    1111: 'f'
+    1111: 'f',
   }
   let ret = ''
   for (let i = 0; i < s.length; i += 4) {

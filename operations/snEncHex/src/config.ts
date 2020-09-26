@@ -11,22 +11,20 @@ export const op: SnOperation = {
     input: [
       {
         data: 'SnByteArray',
-        decoded: 'SnAny'
-      }
+        decoded: 'SnAny',
+      },
     ],
-    groups: [
-      6
-    ],
+    groups: [6],
     priority: 0,
     output: {
       desc: 'Returns prefixed hex encoded string. Example 0x11211221',
       output: 'SnByteArray',
-      decoded: 'SnString'
+      decoded: 'SnString',
     },
     hashingOp: '',
     encOp: '',
-    ops: []
-  }
+    ops: [],
+  },
 }
 
 export default op

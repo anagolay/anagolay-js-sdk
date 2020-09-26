@@ -3,13 +3,12 @@
  * THE POLKADOT API TYPES ARE IN THE definitions.ts file
  */
 
-import { SnRule } from '../rules/interfaces'
 import {
   SnAccountId,
   SnBlockNumber,
   SnCreatorId,
   SnForWhat,
-  SnGenericId
+  SnGenericId,
 } from '../sensio/interfaces'
 
 export interface SnProofParams {
@@ -36,13 +35,12 @@ export interface SnProofData {
   params: SnProofParams[]
 }
 
-export interface SnRuleInfo {
-  rule: SnRule
-  accountId: SnAccountId
-  blockNumber: SnBlockNumber
-}
-
 export interface SnPhashInfo {
   pHash: string
   proofId: SnGenericId
+}
+
+export interface SnProofWithStorage {
+  storageKey: string
+  proofInfo: SnProofInfo
 }
