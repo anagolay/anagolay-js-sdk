@@ -1,4 +1,11 @@
-import { createSubmittableExtrinsic, getAll, getAllDecoded, save, saveBulk } from './api'
+import {
+  createSubmittableExtrinsic,
+  createSubmittableExtrinsics,
+  getAll,
+  getAllDecoded,
+  save,
+  saveBulk,
+} from './api'
 describe('pallet::rules::api::definitions', () => {
   it('should be defined :: save', () => {
     expect(save).toBeDefined()
@@ -15,5 +22,8 @@ describe('pallet::rules::api::definitions', () => {
   })
   it('should be defined :: createSubmittableExtrinsic', () => {
     expect(createSubmittableExtrinsic).toBeDefined()
+  })
+  it('should be defined :: createSubmittableExtrinsics', () => {
+    expect(createSubmittableExtrinsics).toBeDefined()
   })
 })

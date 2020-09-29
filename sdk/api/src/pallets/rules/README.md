@@ -1,1 +1,3 @@
-# sensio poe pallet
+# API for the Sensio Network Rule pallet
+
+@TODO

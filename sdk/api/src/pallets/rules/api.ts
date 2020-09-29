@@ -1,9 +1,5 @@
 /* eslint-disable no-case-declarations */
-/**
- * Pallet's api and rpc methods
- * @packageDocumentation
- *
- */
+
 import { SubmittableExtrinsic } from '@polkadot/api/types'
 import { KeyringPair } from '@polkadot/keyring/types'
 import { getApi } from '@sensio/api/connection'
@@ -16,8 +12,8 @@ import { EVENT_NAME_BATCH, EVENT_NAME_ERROR, EVENT_NAME_SINGLE } from './config'
 import decodeFromStorage, { IncomingParam } from './decodeStorage'
 /**
  * Save a single rule to the chain
- * {@link SnStatement}
- * @param d Statement d that we want to save to the chain.
+ * {@link SnRule}
+ * @param d Rule that we want to save to the chain.
  * @param signer Account that will be owner of the transaction and ones who pays the fees
  */
 export async function save(d: SnRule, signer: KeyringPair): Promise<EventEmitter> {
@@ -48,16 +44,16 @@ export async function createSubmittableExtrinsics(
   return txs
 }
 /**
- * Save many statements in single transaction. It uses the `batch` capability of the chain
- * @param d
- * @param signer
+ * Save many rules in single transaction. It uses the `batch` capability of the chain
+ * @param d List of Rule objects
+ * @param signer Account that will be owner of the transaction and ones who pays the fees
  *
  * ```ts
   await api.api()
 
-  const statements: SnProof[] = proofs
+  const r: SnRule[] = rules
   const signer = getAlice()
-  const o = await api.pallets.statements.saveBulk(statements, signer)
+  const o = await api.pallets.rules.saveBulk(r, signer)
 
   o.on(EVENT_NAME_BATCH, p => console.log(p.message))
   ```
@@ -80,9 +76,10 @@ export async function saveBulk(d: SnRule[], signer: KeyringPair): Promise<EventE
 }
 
 /**
- * Get all Rules  from the chain, encoded using SCALE codec.
- * @param items
- * @returns Return item maps SCALE codec encoded
+ * Get all Rules from the chain, encoded using SCALE codec. For the large sets, this might be slow and resource intensive
+ * {@link StorageKey}
+ * {@link RuleInfo}
+ * @returns List of `[StorageKey, RuleInfo]` SCALE codec encoded
  */
 export async function getAll(): Promise<IncomingParam[]> {
   const api = getApi()
@@ -91,8 +88,10 @@ export async function getAll(): Promise<IncomingParam[]> {
 
 /**
  * Get a Rule from the chain, encoded using SCALE codec.
+ * {@link StorageKey}
+ * {@link RuleInfo}
  * @param items
- * @returns Return item maps SCALE codec encoded
+ * @returns Item `[StorageKey, RuleInfo]` SCALE codec encoded
  */
 export async function getRule(item: SnGenericId): Promise<IncomingParam[]> {
   const api = getApi()
@@ -100,20 +99,21 @@ export async function getRule(item: SnGenericId): Promise<IncomingParam[]> {
 }
 
 /**
- * Get all PoE proofs from the network then return the list of the Decoded proofs
- * @param items
- * @returns Return item maps SCALE codec decoded
+ * Get all Rules from the network then return the list of the Decoded rules
+ * @param items list of Rule IDs
+ * @returns List of `[StorageKey, RuleInfo]` SCALE codec decoded
  */
 export async function getAllDecoded(items: SnGenericIds = []): Promise<SnRuleWithStorage[]> {
   const d = await Promise.all(items.map(async (i) => await getRule(i)))
   if (d.length > 1) {
-    console.error('ERROR IN THE GETTING THE POE')
+    throw new Error('ERROR IN THE GETTING THE POE, got more than 1 record')
   }
+
   return map(decodeFromStorage, d[0])
 }
 
 /**
- * Helper function for creating the Submittable result. This can be easily used in the `ramda.map` function with the list of SnRule. Returns the Submittable statement object
+ * Helper function for creating the Submittable result. This can be easily used in the `ramda.map` function with the list of SnRule. Returns the Submittable rules object
  *
  * ```ts
  * import { map } from 'ramda'
@@ -121,7 +121,7 @@ export async function getAllDecoded(items: SnGenericIds = []): Promise<SnRuleWit
  *  ```
  *
  * @param d Typescript native SnRule
- *
+ * @returns Substrate SubmittableExtrinsic promise unresolved
  */
 export function createSubmittableExtrinsic(d: SnRule): SubmittableExtrinsic<'promise'> {
   const api = getApi()
