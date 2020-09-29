@@ -2,9 +2,10 @@ import decodeHexToString from '@sensio/api/utils/decodeHexToString'
 import { Rule, SnRule } from '@sensio/types'
 import { map } from 'ramda'
 import decodeOperationFromChain from '../operations/decodeFromChain'
+
 /**
  * Decodes the rule from the chain to readable object
- * @param d Rule from the Network
+ * @param d Rule from the Network, SCALE codec encoded
  */
 export function decodeFromChain(d: Rule): SnRule {
   const { data } = d

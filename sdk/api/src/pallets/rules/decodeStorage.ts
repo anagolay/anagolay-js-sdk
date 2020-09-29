@@ -3,12 +3,12 @@ import { RuleInfo, SnRuleWithStorage } from '@sensio/types'
 import decodeFromChain from './decodeFromChain'
 
 export type IncomingParam = [StorageKey, RuleInfo]
+
 /**
  * Decode PoE Query result from the chain
  * @param d Map of StorageKey and ProofInfo, `[StorageKey, ProofInfo]`
  * @returns Decoded PoE with typescript native types and values
  */
-
 export function decodeFromStatementStorage(d: IncomingParam): SnRuleWithStorage {
   const [storageKey, ruleInfo] = d
   return {
