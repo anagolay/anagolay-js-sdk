@@ -2,7 +2,7 @@
 module.exports = {
   mode: 'modules',
   out: 'public',
-  exclude: ['**/node_modules/**', '**/*.spec.ts', 'examples/**', 'misc/**'],
+  exclude: ['**/node_modules/**', '**/*.spec.ts'],
   name: 'Sensio Network SDK for nodejs and javascript',
   readme: 'README.md',
 }

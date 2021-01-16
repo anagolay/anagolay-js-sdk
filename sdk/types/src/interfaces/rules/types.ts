@@ -1,10 +1,14 @@
 // Auto-generated via `yarn polkadot-types-from-defs`, do not edit
 /* eslint-disable */
 
-import { Struct, Vec } from '@polkadot/types/codec'
-import { Bytes, u32 } from '@polkadot/types/primitive'
-import { Operation } from '@sensio/types/interfaces/operations'
-import { CreatorId, ForWhat, GenericId } from '@sensio/types/interfaces/sensio'
+import type { Bytes, Struct, Vec, u32 } from '@polkadot/types'
+import type { CreatorId, ForWhat, GenericId } from '@sensio/types/interfaces/sensio'
+
+/** @name OperationReference */
+export interface OperationReference extends Struct {
+  readonly id: GenericId
+  readonly children: Vec<OperationReference>
+}
 
 /** @name Rule */
 export interface Rule extends Struct {
@@ -20,7 +24,7 @@ export interface RuleData extends Struct {
   readonly creator: CreatorId
   readonly groups: Vec<ForWhat>
   readonly parentId: GenericId
-  readonly ops: Vec<Operation>
+  readonly ops: Vec<OperationReference>
 }
 
 export type PHANTOM_RULES = 'rules'

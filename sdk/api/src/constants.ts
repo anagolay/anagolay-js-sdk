@@ -9,7 +9,7 @@ import '@sensio/types/interfaces/augment-types'
  * @param api
  */
 export default async function constantsForSensio(api: ApiPromise): Promise<DefaultValues> {
-  const defaultValues: DefaultValues = await api.consts.sensio.defaults
+  const defaultValues: DefaultValues = api.consts.sensio.defaults
 
   return defaultValues
 }

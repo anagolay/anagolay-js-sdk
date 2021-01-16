@@ -1,35 +1,34 @@
 {
   "name": "@sensio/op-sn-save-statements",
-  "version": "0.4.4-alpha.0",
+  "version": "0.4.8-alpha.4",
   "license": "Apache-2.0",
   "author": "daniel@woss.io",
   "description": "Save the given statements to the Sensio Network. This operation waits until the records are in finalized state. Accepts the list of claims with the list of signatures for each claim. Mapping is done with the index of the list so `param1[0]` and `param2[0]`. If there are mismatches in the either of the params this operation will fail. Meaning that `param1.length === param2.length`",
-  "main": "lib/index",
-  "files": [
-    "lib"
-  ],
+  "main": "index",
+  "publishConfig": {
+    "access": "public",
+    "directory": "lib"
+  },
   "keywords": [
     "sensio",
     "operation",
     "statements",
     "blockchain"
   ],
-  "publishConfig": {
-    "access": "public"
-  },
   "scripts": {
+    "prepublish": "./scripts/prepublish.sh",
     "build": "tsc -b ."
   },
   "devDependencies": {
-    "typescript": "^4.0.3"
+    "typescript": "4.1.2"
   },
   "dependencies": {
-    "@polkadot/util": "^3.0.1",
-    "@sensio/api": "^0.4.4-alpha.0",
-    "@sensio/core": "^0.4.4-alpha.0",
-    "@sensio/op-sn-cid": "^0.4.4-alpha.0",
-    "@sensio/op-sn-enc-hex": "^0.4.4-alpha.0",
-    "@sensio/types": "^0.4.4-alpha.0"
+    "@polkadot/util": "5.0.1",
+    "@sensio/api": "^0.4.8-alpha.4",
+    "@sensio/core": "^0.4.8-alpha.4",
+    "@sensio/op-sn-cid": "^0.4.8-alpha.4",
+    "@sensio/op-sn-enc-hex": "^0.4.8-alpha.4",
+    "@sensio/types": "0.4.8-alpha.3"
   },
   "repository": {
     "type": "git",

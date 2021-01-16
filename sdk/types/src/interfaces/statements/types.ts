@@ -1,10 +1,9 @@
 // Auto-generated via `yarn polkadot-types-from-defs`, do not edit
 /* eslint-disable */
 
-import { Enum, Struct } from '@polkadot/types/codec'
-import { Bytes } from '@polkadot/types/primitive'
-import { AccountId, BlockNumber } from '@polkadot/types/interfaces/runtime'
-import { CreatorId, GenericId } from '@sensio/types/interfaces/sensio'
+import type { Bytes, Enum, Struct } from '@polkadot/types'
+import type { AccountId, BlockNumber } from '@polkadot/types/interfaces/runtime'
+import type { CreatorId, GenericId } from '@sensio/types/interfaces/sensio'
 
 /** @name Expiration */
 export interface Expiration extends Struct {

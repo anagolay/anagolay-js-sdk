@@ -9,16 +9,31 @@ import { KeyringPair } from '@polkadot/keyring/types'
 import { getApi } from '@sensio/api/connection'
 import createEventEmitter from '@sensio/api/events'
 import { networkCallback } from '@sensio/api/utils'
+import cleanArray from '@sensio/core/util/cleanArray'
 import { SnGenericId, SnGenericIds, SnProof, SnProofWithStorage } from '@sensio/types'
 import { EventEmitter } from 'events'
-import { map } from 'ramda'
-import { EVENT_NAME_BATCH, EVENT_NAME_ERROR, EVENT_NAME_SINGLE } from './config'
+import { isEmpty, map } from 'ramda'
+import { EVENT_NAME_BATCH, EVENT_NAME_SINGLE } from './config'
 import decodeFromStorage, { IncomingParam } from './decodeStorage'
 
 /**
- * Save a single poe to the chain
- * @param d Statement d that we want to save to the chain.
+ * Save a single poe to the chain. You need to provide the data, the ID is calculated before saving.
+ *
+ * @NOTE calculating the ID inside allows us to decouple the ID generation from the rest of the code and potentially the calculation of the ID on the chain
+ * @param data Proof data that we want to save to the chain.
  * @param signer Account that will be owner of the transaction and ones who pays the fees
+ * @returns the Broadcast and the built proof payload
+ * Example:
+ * ```ts
+ * const { broadcast: b, payload } = await SensioApi.pallets.poe.save(data, signer)
+ *
+ * b.on(SensioApi.pallets.poe.config.EVENT_NAME_SINGLE, (p) => {
+ *   console.log('batch', p.message)
+ *   if (p.finalized) {
+ *     process.exit(0)
+ *   }
+ * })
+ * ```
  */
 export async function save(d: SnProof, signer: KeyringPair): Promise<EventEmitter> {
   const broadcast = createEventEmitter()
@@ -26,10 +41,7 @@ export async function save(d: SnProof, signer: KeyringPair): Promise<EventEmitte
   // @TODO if we need nonce in the future, this doesn't work
   // const nonce = await api.rpc.system.accountNextIndex(signer.address)
   await createSubmittableExtrinsic(d).signAndSend(signer, {}, (params) =>
-    networkCallback(params, broadcast, {
-      success: EVENT_NAME_SINGLE,
-      error: EVENT_NAME_ERROR,
-    }),
+    networkCallback(params, broadcast, EVENT_NAME_SINGLE),
   )
 
   // return the event emitter
@@ -69,12 +81,9 @@ export async function saveBulk(d: SnProof[], signer: KeyringPair): Promise<Event
   const txs = map(createSubmittableExtrinsic, d)
   // @TODO if we need nonce in the future, this doesn't work
   // const nonce = await api.rpc.system.accountNextIndex(signer.address)
-  await api.tx.utility.batch(txs).signAndSend(signer, {}, (params) =>
-    networkCallback(params, broadcast, {
-      success: EVENT_NAME_BATCH,
-      error: EVENT_NAME_ERROR,
-    }),
-  )
+  await api.tx.utility
+    .batch(txs)
+    .signAndSend(signer, {}, (params) => networkCallback(params, broadcast, EVENT_NAME_BATCH))
 
   // return the event emitter
   return broadcast
@@ -91,13 +100,18 @@ export async function getAll(): Promise<IncomingParam[]> {
 }
 
 /**
- * Get all or some Poe from the chain, encoded using SCALE codec.
+ * Get one Poe from the chain, encoded using SCALE codec.
  * @param items
  * @returns Return item maps SCALE codec encoded
  */
-export async function getPoe(item: SnGenericId): Promise<IncomingParam[]> {
+export async function getPoe(item: SnGenericId): Promise<IncomingParam | undefined> {
   const api = getApi()
-  return await api.query.poe.proofs.entries(item)
+  const networkItem = await api.query.poe.proofs.entries(item)
+  if (isEmpty(networkItem)) {
+    return undefined
+  } else {
+    return networkItem[0]
+  }
 }
 
 /**
@@ -106,7 +120,8 @@ export async function getPoe(item: SnGenericId): Promise<IncomingParam[]> {
  */
 export async function getAllDecoded(): Promise<SnProofWithStorage[]> {
   const d = await getAll()
-  return map(decodeFromStorage, d)
+  const cleanedArray = cleanArray<IncomingParam>(d)
+  return map(decodeFromStorage, cleanedArray)
 }
 /**
  * Get some PoE proofs from the network then return the list of the Decoded proofs
@@ -114,9 +129,9 @@ export async function getAllDecoded(): Promise<SnProofWithStorage[]> {
  * @returns Return item maps SCALE codec decoded
  */
 export async function getSomeDecoded(items: SnGenericIds = []): Promise<SnProofWithStorage[]> {
-  const d = await Promise.all(items.map(async (i) => await getPoe(i)))
-
-  return map(decodeFromStorage, d[0])
+  const d = await Promise.all(items.map(async (i) => await getPoe(i))) // this will return [[record]]
+  const cleanedArray = cleanArray<IncomingParam>(d)
+  return map(decodeFromStorage, cleanedArray)
 }
 
 /**

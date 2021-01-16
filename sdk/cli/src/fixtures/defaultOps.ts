@@ -374,7 +374,7 @@ const ops: SnOperationDataForCreating[] = [
     output: {
       desc: 'Return the List of signed statement IDs',
       output: 'SnByteArray',
-      decoded: 'SnGenericIds',
+      decoded: 'SaveStatementReturn[]',
     },
     groups: [SnForWhat.SYS],
     priority: 0,

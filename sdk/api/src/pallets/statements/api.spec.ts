@@ -1,6 +1,7 @@
 import {
   createSubmittableExtrinsicOfCopyright,
   createSubmittableExtrinsicOfOwnership,
+  createSubmittableExtrinsicRevoke,
   getAll,
   getAllDecoded,
   saveCopyright,
@@ -32,5 +33,8 @@ describe('pallet::statement::api::definitions', () => {
   })
   it('should be defined :: createSubmittableExtrinsicOfOwnership', () => {
     expect(createSubmittableExtrinsicOfOwnership).toBeDefined()
+  })
+  it('should be defined :: createSubmittableExtrinsicRevoke', () => {
+    expect(createSubmittableExtrinsicRevoke).toBeDefined()
   })
 })

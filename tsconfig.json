@@ -32,6 +32,6 @@
     "isolatedModules": true,
     "forceConsistentCasingInFileNames": true
   },
-  "exclude": ["node_modules", "assets"],
+  "exclude": ["node_modules", "assets", "*.spec.ts"],
   "typeRoots": ["typings", "node_modules/@types"]
 }

@@ -2,14 +2,11 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "outDir": "lib",
-    "rootDir": "src"
+    "rootDir": "src",
+    "lib": ["DOM"]
   },
-  "include": [
-    "./src"
-  ],
-  "exclude": [
-    "lib"
-  ],
+  "include": ["./src"],
+  "exclude": ["lib"],
   "references": [
     {
       "path": "../../sdk/types"

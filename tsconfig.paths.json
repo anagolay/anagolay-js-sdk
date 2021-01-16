@@ -2,7 +2,6 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@root/*": ["/*"],
       "@polkadot/api/augment": ["sdk/types/src/interfaces/augment-api.ts"],
       "@polkadot/types/augment": ["sdk/types/src/interfaces/augment-types.ts"],
       "@sensio/core": ["sdk/core/src"],
@@ -35,39 +34,25 @@
       "@sensio/op-sn-file/*": ["operations/snFile/src/*"],
       "@sensio/op-sn-cid": ["operations/snCid/src"],
       "@sensio/op-sn-cid/*": ["operations/snCid/src/*"],
-      "@sensio/op-sn-image-metadata-hash": [
-        "operations/snImageMetadataHash/src"
-      ],
-      "@sensio/op-sn-image-metadata-hash/*": [
-        "operations/snImageMetadataHash/src/*"
-      ],
+      "@sensio/op-sn-image-metadata-hash": ["operations/snImageMetadataHash/src"],
+      "@sensio/op-sn-image-metadata-hash/*": ["operations/snImageMetadataHash/src/*"],
       "@sensio/op-sn-image-metadata": ["operations/snImageMetadata/src"],
       "@sensio/op-sn-image-metadata/*": ["operations/snImageMetadata/src/*"],
       "@sensio/op-sn-image-phash": ["operations/snImagePhash/src"],
       "@sensio/op-sn-image-phash/*": ["operations/snImagePhash/src/*"],
-      "@sensio/op-sn-image-raw-pixels-hash": [
-        "operations/snImageRawPixelsHash/src"
-      ],
-      "@sensio/op-sn-image-raw-pixels-hash/*": [
-        "operations/snImageRawPixelsHash/src/*"
-      ],
+      "@sensio/op-sn-image-raw-pixels-hash": ["operations/snImageRawPixelsHash/src"],
+      "@sensio/op-sn-image-raw-pixels-hash/*": ["operations/snImageRawPixelsHash/src/*"],
       "@sensio/op-sn-image-raw-pixels": ["operations/snImageRawPixels/src"],
       "@sensio/op-sn-image-raw-pixels/*": ["operations/snImageRawPixels/src/*"],
       "@sensio/op-sn-create-qrcode": ["operations/snCreateQrcode/src"],
       "@sensio/op-sn-create-qrcode/*": ["operations/snCreateQrcode/src/*"],
-      "@sensio/op-sn-create-ownership-claims": [
-        "operations/snCreateOwnershipClaims/src"
-      ],
-      "@sensio/op-sn-create-ownership-claims/*": [
-        "operations/snCreateOwnershipClaims/src/*"
-      ],
+      "@sensio/op-sn-create-ownership-claims": ["operations/snCreateOwnershipClaims/src"],
+      "@sensio/op-sn-create-ownership-claims/*": ["operations/snCreateOwnershipClaims/src/*"],
       "@sensio/op-sn-save-statements": ["operations/snSaveStatements/src"],
       "@sensio/op-sn-save-statements/*": ["operations/snSaveStatements/src/*"],
       "@sensio/op-sn-user-sign-claims": ["operations/snUserSignClaims/src"],
       "@sensio/op-sn-user-sign-claims/*": ["operations/snUserSignClaims/src/*"],
-      "@sensio/op-sn-take-photo-and-upload-qrcode": [
-        "operations/snTakePhotoAndUploadQrcode/src"
-      ],
+      "@sensio/op-sn-take-photo-and-upload-qrcode": ["operations/snTakePhotoAndUploadQrcode/src"],
       "@sensio/op-sn-take-photo-and-upload-qrcode/*": [
         "operations/snTakePhotoAndUploadQrcode/src/*"
       ]

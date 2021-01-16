@@ -1,13 +1,10 @@
-import snIdentity from '.'
+import snIdentity, { config } from '.'
 
 describe('SnOperation: snIdentity', (): void => {
-  it('is defined', (): void => {
+  it('is snIdentity defined', (): void => {
     expect(snIdentity).toBeDefined()
   })
-  it('should pass', async (): Promise<void> => {
-    const u1 = new Uint8Array(1)
-
-    const t = await snIdentity([{ data: u1, decode: () => u1 }])
-    expect(t.data).toEqual(u1)
+  it('is config defined', (): void => {
+    expect(config).toBeDefined()
   })
 })

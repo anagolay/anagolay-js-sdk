@@ -7,6 +7,11 @@ import {
   SnSensioStatement,
 } from './interfaces/statements/interfaces'
 
+export interface SaveStatementReturn {
+  statement_id: SnGenericId
+  poe_id: SnGenericId
+}
+
 export type output =
   | 'SnByteArray'
   | 'SnProofParams[]'
@@ -39,6 +44,7 @@ export type outputDecoded =
   | 'SnSigner'
   | '[SnSensioClaim[],SnSensioSignatures[]]'
   | 'StringOrBuffer'
+  | 'SaveStatementReturn[]'
 
 export type outputImplementation = SnByteArray | SnBoolean | SnProofParams[] | SnString
 
@@ -63,6 +69,7 @@ export type outputDecodedImplementation =
 /**
  * This should be correct signer interfaces, ATM is just any type but it should be a defined interface with `.sign()` method. For now it's KeyringPair
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type SnSigner = any
 
 export interface ExifFile {
@@ -103,6 +110,7 @@ export type SnOwnershipClaims = SnSensioOwnershipClaim[]
 export type SnProofParams = OriginalSnProofParams
 export type SnBoolean = boolean
 export type SnString = string
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type SnAny = any // @TODO: SnByteArray | SnStatement | SnStatements ... any sensio type
 export type SnNull = null
 
@@ -111,6 +119,8 @@ export interface SnImageData {
   height: number
   data: Uint8Array | Uint8ClampedArray | number[]
 }
+
+// export type SnImageData = SnBuffer
 
 export interface SnSplitParams {
   data: SnInputParamsImplementation[]

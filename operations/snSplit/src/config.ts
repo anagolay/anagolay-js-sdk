@@ -1,7 +1,6 @@
 /**
  * Operation specification
  */
-
 import { SnOperation } from '@sensio/types'
 
 export const op: SnOperation = {

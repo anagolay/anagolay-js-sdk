@@ -7,7 +7,7 @@ import * as CustomTypes from '@sensio/types/interfaces/definitions'
 import { isNil } from 'ramda'
 
 // Cached API connection
-let api: ApiPromise
+let api: ApiPromise | null = null
 
 function buildTypes(): RegistryTypes {
   let types: RegistryTypes = {
@@ -36,8 +36,9 @@ export async function setupConnection(socket?: string): Promise<ApiPromise> {
     if (isNil(realSocket)) {
       realSocket = process.env.SENSIO_NODE_URL ?? 'ws://127.0.0.1:9944'
     }
-
-    console.log('API::connection to %s', realSocket)
+    if (process.env.NODE_ENV !== 'test') {
+      console.log('API::connection to %s', realSocket)
+    }
 
     const provider = new WsProvider(realSocket)
     const types = buildTypes()
@@ -69,7 +70,7 @@ export async function setupConnection(socket?: string): Promise<ApiPromise> {
  */
 export function getApi(): ApiPromise {
   if (isNil(api)) {
-    throw new Error('Please init the api instance first, usually that would be *api.api()* ')
+    throw new Error('Please init the api instance first, usually that would be *api.api()*')
   } else {
     return api
   }
@@ -79,7 +80,13 @@ export function getApi(): ApiPromise {
  * Close the api connection, disconnect
  */
 export async function disconnect(): Promise<void> {
-  return await api.disconnect()
+  if (process.env.NODE_ENV !== 'test') {
+    console.log('Disconnecting the API')
+  }
+  if (!isNil(api)) {
+    await api.disconnect()
+  }
+  api = null
 }
 
 export default setupConnection

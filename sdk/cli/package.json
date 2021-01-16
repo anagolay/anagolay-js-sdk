@@ -1,44 +1,42 @@
 {
   "name": "@sensio/cli",
   "description": "Sensio CLI",
-  "version": "0.4.4-alpha.0",
+  "version": "0.4.8-alpha.4",
   "author": "daniel@woss.io",
   "license": "Apache-2.0",
-  "main": "lib/index",
-  "files": [
-    "lib"
-  ],
+  "main": "index",
+  "publishConfig": {
+    "access": "public",
+    "directory": "lib"
+  },
   "keywords": [
     "sensio",
     "cli",
     "blockchain"
   ],
-  "publishConfig": {
-    "access": "public"
-  },
   "scripts": {
+    "prepublish": "./scripts/prepublish.sh",
     "build": "tsc -b .",
     "start": "ts-node -r tsconfig-paths/register ./src/index.ts",
     "dev": "ts-node-dev --trace-warnings -r tsconfig-paths/register --watch ./src --cls --respawn ./src/index.ts"
   },
   "devDependencies": {
-    "@types/figlet": "^1.2.0",
-    "@types/fs-extra": "^9.0.1",
+    "@types/figlet": "^1.2.1",
+    "@types/fs-extra": "^9.0.4",
     "@types/slug": "^0.9.1",
     "ts-node-dev": "^1.0.0-pre.49",
     "tsconfig-paths": "^3.9.0",
-    "typescript": "^4.0.3"
+    "typescript": "^4.1.2"
   },
   "dependencies": {
-    "@sensio/api": "^0.4.4-alpha.0",
-    "@sensio/core": "^0.4.4-alpha.0",
-    "@sensio/types": "^0.4.4-alpha.0",
+    "@sensio/api": "^0.4.8-alpha.4",
+    "@sensio/core": "^0.4.8-alpha.4",
+    "@sensio/types": "^0.4.8-alpha.3",
     "chalk": "^4.1.0",
     "clear": "^0.1.0",
-    "commander": "^5.1.0",
-    "figlet": "^1.4.0",
+    "commander": "^6.2.0",
+    "figlet": "^1.5.0",
     "fs-extra": "^9.0.1",
-    "inquirer": "^7.3.0",
     "path": "^0.12.7",
     "ramda": "^0.27.1",
     "slug": "^3.3.0"

@@ -1,13 +1,11 @@
 // Auto-generated via `yarn polkadot-types-from-chain`, do not edit
 /* eslint-disable */
-/* @ts-nocheck */
 
-import { AnyNumber } from '@polkadot/types/types'
-import { Compact, Option, Vec } from '@polkadot/types/codec'
-import { Bytes, u16, u32, u64 } from '@polkadot/types/primitive'
-import { Extrinsic } from '@polkadot/types/interfaces/extrinsics'
-import { GrandpaEquivocationProof, KeyOwnerProof } from '@polkadot/types/interfaces/grandpa'
-import {
+import type { Bytes, Compact, Option, Vec, u16, u32, u64 } from '@polkadot/types'
+import type { AnyNumber } from '@polkadot/types/types'
+import type { Extrinsic } from '@polkadot/types/interfaces/extrinsics'
+import type { GrandpaEquivocationProof, KeyOwnerProof } from '@polkadot/types/interfaces/grandpa'
+import type {
   AccountId,
   AccountIndex,
   Address,
@@ -20,12 +18,13 @@ import {
   Perbill,
   Weight,
 } from '@polkadot/types/interfaces/runtime'
-import { Key } from '@polkadot/types/interfaces/system'
-import { Operation } from '@sensio/types/interfaces/operations'
-import { PhashInfo, Proof } from '@sensio/types/interfaces/poe'
-import { Rule } from '@sensio/types/interfaces/rules'
-import { SensioStatement } from '@sensio/types/interfaces/statements'
-import { ApiTypes, SubmittableExtrinsic } from '@polkadot/api/types'
+import type { Key } from '@polkadot/types/interfaces/system'
+import type { Operation } from '@sensio/types/interfaces/operations'
+import type { PhashInfo, Proof } from '@sensio/types/interfaces/poe'
+import type { Rule } from '@sensio/types/interfaces/rules'
+import type { GenericId } from '@sensio/types/interfaces/sensio'
+import type { SensioStatement } from '@sensio/types/interfaces/statements'
+import type { ApiTypes, SubmittableExtrinsic } from '@polkadot/api/types'
 
 declare module '@polkadot/api/types/submittable' {
   export interface AugmentedSubmittables<ApiType> {
@@ -41,22 +40,8 @@ declare module '@polkadot/api/types/submittable' {
        **/
       forceTransfer: AugmentedSubmittable<
         (
-          source:
-            | LookupSource
-            | Address
-            | AccountId
-            | AccountIndex
-            | LookupSource
-            | string
-            | Uint8Array,
-          dest:
-            | LookupSource
-            | Address
-            | AccountId
-            | AccountIndex
-            | LookupSource
-            | string
-            | Uint8Array,
+          source: LookupSource | Address | AccountId | AccountIndex | string | Uint8Array,
+          dest: LookupSource | Address | AccountId | AccountIndex | string | Uint8Array,
           value: Compact<Balance> | AnyNumber | Uint8Array,
         ) => SubmittableExtrinsic<ApiType>
       >
@@ -82,14 +67,7 @@ declare module '@polkadot/api/types/submittable' {
        **/
       setBalance: AugmentedSubmittable<
         (
-          who:
-            | LookupSource
-            | Address
-            | AccountId
-            | AccountIndex
-            | LookupSource
-            | string
-            | Uint8Array,
+          who: LookupSource | Address | AccountId | AccountIndex | string | Uint8Array,
           newFree: Compact<Balance> | AnyNumber | Uint8Array,
           newReserved: Compact<Balance> | AnyNumber | Uint8Array,
         ) => SubmittableExtrinsic<ApiType>
@@ -125,14 +103,7 @@ declare module '@polkadot/api/types/submittable' {
        **/
       transfer: AugmentedSubmittable<
         (
-          dest:
-            | LookupSource
-            | Address
-            | AccountId
-            | AccountIndex
-            | LookupSource
-            | string
-            | Uint8Array,
+          dest: LookupSource | Address | AccountId | AccountIndex | string | Uint8Array,
           value: Compact<Balance> | AnyNumber | Uint8Array,
         ) => SubmittableExtrinsic<ApiType>
       >
@@ -151,14 +122,7 @@ declare module '@polkadot/api/types/submittable' {
        **/
       transferKeepAlive: AugmentedSubmittable<
         (
-          dest:
-            | LookupSource
-            | Address
-            | AccountId
-            | AccountIndex
-            | LookupSource
-            | string
-            | Uint8Array,
+          dest: LookupSource | Address | AccountId | AccountIndex | string | Uint8Array,
           value: Compact<Balance> | AnyNumber | Uint8Array,
         ) => SubmittableExtrinsic<ApiType>
       >
@@ -255,6 +219,12 @@ declare module '@polkadot/api/types/submittable' {
           statement: SensioStatement | { id?: any; data?: any } | string | Uint8Array,
         ) => SubmittableExtrinsic<ApiType>
       >
+      /**
+       * Allow the owner to revoke their statement.
+       **/
+      revoke: AugmentedSubmittable<
+        (statementId: GenericId | string | Uint8Array) => SubmittableExtrinsic<ApiType>
+      >
     }
     sudo: {
       [key: string]: SubmittableExtrinsicFunction<ApiType>
@@ -271,14 +241,7 @@ declare module '@polkadot/api/types/submittable' {
        **/
       setKey: AugmentedSubmittable<
         (
-          updated:
-            | LookupSource
-            | Address
-            | AccountId
-            | AccountIndex
-            | LookupSource
-            | string
-            | Uint8Array,
+          updated: LookupSource | Address | AccountId | AccountIndex | string | Uint8Array,
         ) => SubmittableExtrinsic<ApiType>
       >
       /**
@@ -313,14 +276,7 @@ declare module '@polkadot/api/types/submittable' {
        **/
       sudoAs: AugmentedSubmittable<
         (
-          who:
-            | LookupSource
-            | Address
-            | AccountId
-            | AccountIndex
-            | LookupSource
-            | string
-            | Uint8Array,
+          who: LookupSource | Address | AccountId | AccountIndex | string | Uint8Array,
           call: Call | { callIndex?: any; args?: any } | string | Uint8Array,
         ) => SubmittableExtrinsic<ApiType>
       >

@@ -9,8 +9,7 @@
   "editor.wordWrapColumn": 100,
   "editor.rulers": [100],
   "editor.formatOnSave": true,
-  "editor.formatOnPaste": true,
-  // "eslint.enable": false,
+  "editor.formatOnPaste": false,
   "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
@@ -26,7 +25,7 @@
     "editor.quickSuggestions": true,
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "cSpell.words": ["flowcontrol", "subsampling"],
+  "cSpell.words": ["flowcontrol", "poclo", "subsampling"],
   "javascript.validate.enable": false,
   "files.associations": { "*.json": "jsonc" },
   "todohighlight.keywords": [

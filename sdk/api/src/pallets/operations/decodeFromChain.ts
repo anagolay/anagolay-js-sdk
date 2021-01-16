@@ -26,7 +26,7 @@ export function decodeFromChain(op: Operation): SnOperation {
       } as SnOperationOutput,
       hashingOp: decodeHexToString(op.data.hashingOp),
       encOp: decodeHexToString(op.data.encOp),
-      ops: map(decodeFromChain, op.data.ops.map),
+      ops: map(decodeFromChain, op.data.ops),
     },
   }
   return decoded

@@ -1,10 +1,9 @@
 // Auto-generated via `yarn polkadot-types-from-chain`, do not edit
 /* eslint-disable */
 
-import { Codec } from '@polkadot/types/types'
-import { Vec } from '@polkadot/types/codec'
-import { u32 } from '@polkadot/types/primitive'
-import {
+import type { Vec, u32 } from '@polkadot/types'
+import type { Codec } from '@polkadot/types/types'
+import type {
   Balance,
   BalanceOf,
   BlockNumber,
@@ -12,9 +11,9 @@ import {
   RuntimeDbWeight,
   Weight,
 } from '@polkadot/types/interfaces/runtime'
-import { WeightToFeeCoefficient } from '@polkadot/types/interfaces/support'
-import { DefaultValues } from '@sensio/types/interfaces/sensio'
-import { ApiTypes } from '@polkadot/api/types'
+import type { WeightToFeeCoefficient } from '@polkadot/types/interfaces/support'
+import type { DefaultValues } from '@sensio/types/interfaces/sensio'
+import type { ApiTypes } from '@polkadot/api/types'
 
 declare module '@polkadot/api/types/consts' {
   export interface AugmentedConsts<ApiType> {

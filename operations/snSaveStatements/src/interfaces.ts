@@ -1,14 +1,14 @@
 import {
-  SnByteArray,
-  SnGenericIds,
   SnInputParamsImplementation,
   SnSensioClaim,
   SnSensioSignatures,
+  SnByteArray,
+  SaveStatementReturn,
 } from '@sensio/types'
 
 export interface ReturnParams extends SnInputParamsImplementation {
   data: SnByteArray // value of `data.output.output`
-  decode: () => SnGenericIds // value of `data.output.decoded`
+  decode: () => SaveStatementReturn[] // value of `data.output.decoded`
 }
 
 export interface InputParam0 extends SnInputParamsImplementation {

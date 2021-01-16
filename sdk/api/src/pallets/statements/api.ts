@@ -6,22 +6,22 @@
  */
 import { SubmittableExtrinsic } from '@polkadot/api/types'
 import { KeyringPair } from '@polkadot/keyring/types'
-import { StorageKey } from '@polkadot/types'
 import { getApi } from '@sensio/api/connection'
 import createEventEmitter from '@sensio/api/events'
 import { networkCallback } from '@sensio/api/utils'
+import { encodeTheGenericId } from '@sensio/api/utils/transformations'
+import cleanArray from '@sensio/core/util/cleanArray'
 import {
-  SnSensioClaim,
+  SnGenericId,
   SnSensioClaimType,
   SnSensioStatement,
-  SnStatement,
   SnStatementWithStorage,
-  StatementInfo,
 } from '@sensio/types'
 import { EventEmitter } from 'events'
-import { map } from 'ramda'
-import { EVENT_NAME_BATCH, EVENT_NAME_ERROR, EVENT_NAME_SINGLE } from './config'
-import decodeFromStatementStorage from './decodeStorage'
+import { isEmpty, map } from 'ramda'
+import { CustomEventEmitter } from '../../events'
+import { EVENT_NAME_BATCH, EVENT_NAME_SINGLE } from './config'
+import decodeFromStorage, { IncomingParam } from './decodeStorage'
 
 /**
  * Save the statement, a wrapper around the current saving methods
@@ -45,7 +45,10 @@ export async function save(d: SnSensioStatement, signer: KeyringPair): Promise<E
  * @param d Statements that will be saved
  * @param signer Who will be signing the transaction and paying fees?
  */
-export async function saveBulk(d: SnSensioStatement[], signer: KeyringPair): Promise<EventEmitter> {
+export async function saveBulk(
+  d: SnSensioStatement[],
+  signer: KeyringPair,
+): Promise<CustomEventEmitter> {
   // need to group the statements by type then save them in bulk
 
   const api = getApi()
@@ -53,12 +56,9 @@ export async function saveBulk(d: SnSensioStatement[], signer: KeyringPair): Pro
   const txs = map(createCorrectSubmittableExtrinsic, d)
   // @TODO if we need nonce in the future, this doesn't work
   // const nonce = await api.rpc.system.accountNextIndex(signer.address)
-  await api.tx.utility.batch(txs).signAndSend(signer, {}, (params) =>
-    networkCallback(params, broadcast, {
-      success: EVENT_NAME_BATCH,
-      error: EVENT_NAME_ERROR,
-    }),
-  )
+  await api.tx.utility
+    .batch(txs)
+    .signAndSend(signer, {}, (params) => networkCallback(params, broadcast, EVENT_NAME_BATCH))
 
   // return the event emitter
   return broadcast
@@ -100,10 +100,7 @@ export async function saveCopyright(
   // @TODO if we need nonce in the future, this doesn't work
   // const nonce = await api.rpc.system.accountNextIndex(signer.address)
   await createSubmittableExtrinsicOfCopyright(d).signAndSend(signer, {}, (params) =>
-    networkCallback(params, broadcast, {
-      success: EVENT_NAME_SINGLE,
-      error: EVENT_NAME_ERROR,
-    }),
+    networkCallback(params, broadcast, EVENT_NAME_SINGLE),
   )
 
   // return the event emitter
@@ -124,10 +121,7 @@ export async function saveOwnership(
   // @TODO if we need nonce in the future, this doesn't work
   // const nonce = await api.rpc.system.accountNextIndex(signer.address)
   await createSubmittableExtrinsicOfOwnership(d).signAndSend(signer, {}, (params) =>
-    networkCallback(params, broadcast, {
-      success: EVENT_NAME_SINGLE,
-      error: EVENT_NAME_ERROR,
-    }),
+    networkCallback(params, broadcast, EVENT_NAME_SINGLE),
   )
 
   // return the event emitter
@@ -167,7 +161,7 @@ export async function createSubmittableExtrinsicsForOwnership(
  * ```ts
   await api.api()
 
-  const statements: SnStatement[] = stmts
+  const statements: SnStatement[] = statements
   const signer = getAlice()
   const o = await api.pallets.statements.saveCopyrightsBulk(statements, signer)
 
@@ -183,12 +177,9 @@ export async function saveCopyrightsBulk(
   const txs = map(createSubmittableExtrinsicOfCopyright, d)
   // @TODO if we need nonce in the future, this doesn't work
   // const nonce = await api.rpc.system.accountNextIndex(signer.address)
-  await api.tx.utility.batch(txs).signAndSend(signer, {}, (params) =>
-    networkCallback(params, broadcast, {
-      success: EVENT_NAME_BATCH,
-      error: EVENT_NAME_ERROR,
-    }),
-  )
+  await api.tx.utility
+    .batch(txs)
+    .signAndSend(signer, {}, (params) => networkCallback(params, broadcast, EVENT_NAME_BATCH))
 
   // return the event emitter
   return broadcast
@@ -201,7 +192,7 @@ export async function saveCopyrightsBulk(
  * ```ts
   await api.api()
 
-  const statements: SnStatement[] = stmts
+  const statements: SnStatement[] = statements
   const signer = getAlice()
   const o = await api.pallets.statements.saveOwnershipsBulk(statements, signer)
 
@@ -217,21 +208,33 @@ export async function saveOwnershipsBulk(
   const txs = map(createSubmittableExtrinsicOfOwnership, d)
   // @TODO if we need nonce in the future, this doesn't work
   // const nonce = await api.rpc.system.accountNextIndex(signer.address)
-  await api.tx.utility.batch(txs).signAndSend(signer, {}, (params) =>
-    networkCallback(params, broadcast, {
-      success: EVENT_NAME_BATCH,
-      error: EVENT_NAME_ERROR,
-    }),
-  )
+  await api.tx.utility
+    .batch(txs)
+    .signAndSend(signer, {}, (params) => networkCallback(params, broadcast, EVENT_NAME_BATCH))
 
   // return the event emitter
   return broadcast
 }
 
 /**
+ * Get one Statement from the chain, encoded using SCALE codec.
+ * @param items
+ * @returns Return item maps SCALE codec encoded
+ */
+export async function getOne(item: SnGenericId): Promise<IncomingParam | undefined> {
+  const api = getApi()
+  const networkItem = await api.query.statements.statements.entries(encodeTheGenericId(item))
+  if (isEmpty(networkItem)) {
+    return
+  } else {
+    return networkItem[0]
+  }
+}
+
+/**
  * Get All statements from the chain, encoded using SCALE codec. Return polkadot encoded Storage
  */
-export async function getAll(): Promise<Array<[StorageKey, StatementInfo]>> {
+export async function getAll(): Promise<IncomingParam[]> {
   const api = getApi()
   // get them from the network
   return api.query.statements.statements.entries()
@@ -243,7 +246,18 @@ export async function getAll(): Promise<Array<[StorageKey, StatementInfo]>> {
 export async function getAllDecoded(): Promise<SnStatementWithStorage[]> {
   // get them from the network
   const d = await getAll()
-  return map(decodeFromStatementStorage, d)
+  return map(decodeFromStorage, d)
+}
+
+/**
+ * Get some PoE proofs from the network then return the list of the Decoded proofs
+ * @param items
+ * @returns Return item maps SCALE codec decoded
+ */
+export async function getSomeDecoded(items: SnGenericId[] = []): Promise<SnStatementWithStorage[]> {
+  const d = await Promise.all(items.map(async (i) => await getOne(i))) // this will return [[record]]
+  const cleanedArray = cleanArray<IncomingParam>(d)
+  return map(decodeFromStorage, cleanedArray)
 }
 
 /**
@@ -279,11 +293,33 @@ export function createSubmittableExtrinsicOfOwnership(
   return api.tx.statements.createOwnership(d)
 }
 
-export async function createClaimSignatures(
-  claims: SnSensioClaim[],
-  holder: KeyringPair,
-  issuer: KeyringPair,
-): Promise<SnStatement> {
-  console.log(claims, holder, issuer)
-  return ('' as unknown) as SnStatement
+/**
+ * Revoke the statement
+ * @param statementId
+ */
+export function createSubmittableExtrinsicRevoke(
+  statementId: SnGenericId,
+): SubmittableExtrinsic<'promise'> {
+  const api = getApi()
+  return api.tx.statements.revoke(encodeTheGenericId(statementId))
+}
+
+/**
+ * Revoke All statements @FUCK remove this at some point
+ */
+export async function revokeStatementsBulk(
+  d: SnGenericId[],
+  signer: KeyringPair,
+): Promise<EventEmitter> {
+  const api = getApi()
+  const broadcast = createEventEmitter()
+  const txs = map(createSubmittableExtrinsicRevoke, d)
+  // @TODO if we need nonce in the future, this doesn't work
+  // const nonce = await api.rpc.system.accountNextIndex(signer.address)
+  await api.tx.utility
+    .batch(txs)
+    .signAndSend(signer, {}, (params) => networkCallback(params, broadcast, EVENT_NAME_BATCH))
+
+  // return the event emitter
+  return broadcast
 }

@@ -5,7 +5,7 @@ import decodeFromChain from './decodeFromChain'
 export type IncomingParam = [StorageKey, RuleInfo]
 
 /**
- * Decode PoE Query result from the chain
+ * Decode Rule Query result from the chain
  * @param d Map of StorageKey and ProofInfo, `[StorageKey, ProofInfo]`
  * @returns Decoded PoE with typescript native types and values
  */
