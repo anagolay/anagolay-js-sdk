@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable no-loops/no-loops */
 /* eslint-disable @typescript-eslint/no-floating-promises */
 import { ApiPromise } from '@polkadot/api'

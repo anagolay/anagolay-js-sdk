@@ -1,0 +1,40 @@
+{
+  "name": "@sensio/rule-sn-poclo",
+  "version": "0.4.4-alpha.0",
+  "license": "Apache-2.0",
+  "author": "daniel@woss.io",
+  "main": "index",
+  "publishConfig": {
+    "access": "public",
+    "directory": "lib"
+  },
+  "keywords": [
+    "sensio",
+    "rule",
+    "poclo",
+    "camera",
+    "lens",
+    "ownership"
+  ],
+  "scripts": {
+    "prepublish": "./scripts/prepublish.sh",
+    "build": "tsc -b ."
+  },
+  "devDependencies": {
+    "typescript": "^4.1.2"
+  },
+  "dependencies": {
+    "@sensio/core": "^0.4.6-alpha.0",
+    "@sensio/types": "^0.4.6-alpha.0",
+    "ramda": "^0.27.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.com/sensio_group/network-js-sdk.git",
+    "directory": "rules/snPoCLO"
+  },
+  "bugs": {
+    "url": "https://gitlab.com/sensio_group/network-js-sdk/issues"
+  },
+  "homepage": "https://gitlab.com/sensio_group/network-js-sdk/-/tree/master/rules/snPoCLO#readme"
+}

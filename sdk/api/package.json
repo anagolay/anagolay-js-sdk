@@ -1,35 +1,38 @@
 {
   "name": "@sensio/api",
-  "version": "0.4.4-alpha.0",
+  "version": "0.4.8-alpha.4",
+  "license": "Apache-2.0",
   "description": "Sensio API module",
   "author": "Daniel Maricic <daniel@woss.io>",
-  "main": "lib/index",
-  "files": [
-    "lib"
-  ],
+  "main": "index",
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "directory": "lib"
   },
-  "license": "Apache-2.0",
-  "devDependencies": {
-    "@types/node": "^14.0.14",
-    "@types/ramda": "https://github.com/woss/ramda-types.git",
-    "ts-node": "^8.10.2",
-    "ts-node-dev": "^1.0.0-pre.49",
-    "typescript": "^4.0.3"
+  "keywords": [
+    "sensio",
+    "substrate",
+    "blockchain"
+  ],
+  "scripts": {
+    "prepublish": "./scripts/prepublish.sh",
+    "build": "tsc -b ."
   },
   "dependencies": {
-    "@polkadot/api": "^1.32.1",
-    "@polkadot/util": "^3.0.1",
-    "@polkadot/util-crypto": "^3.0.1",
-    "@sensio/core": "^0.4.4-alpha.0",
-    "@sensio/op-sn-cid": "^0.4.4-alpha.0",
-    "@sensio/op-sn-json-enc": "^0.4.4-alpha.0",
-    "@sensio/types": "^0.4.4-alpha.0",
-    "ramda": "^0.27.0"
+    "@polkadot/api": "^3.0.1",
+    "@polkadot/keyring": "^5.0.1",
+    "@sensio/core": "^0.4.8-alpha.4",
+    "@sensio/op-sn-cid": "^0.4.8-alpha.4",
+    "@sensio/op-sn-json-enc": "^0.4.8-alpha.4",
+    "@sensio/types": "^0.4.8-alpha.3",
+    "ramda": "^0.27.1"
   },
-  "scripts": {
-    "build": "tsc -b ."
+  "devDependencies": {
+    "@types/node": "^14.14.11",
+    "@types/ramda": "https://github.com/woss/ramda-types.git",
+    "ts-node": "^9.1.1",
+    "ts-node-dev": "^1.0.0-pre.49",
+    "typescript": "^4.1.2"
   },
   "repository": {
     "type": "git",
@@ -39,10 +42,5 @@
   "bugs": {
     "url": "https://gitlab.com/sensio_group/network-js-sdk/issues"
   },
-  "homepage": "https://gitlab.com/sensio_group/network-js-sdk/-/tree/master/sdk/api#readme",
-  "keywords": [
-    "sensio",
-    "substrate",
-    "blockchain"
-  ]
+  "homepage": "https://gitlab.com/sensio_group/network-js-sdk/-/tree/master/sdk/api#readme"
 }

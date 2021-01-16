@@ -3,13 +3,10 @@
   "compilerOptions": {
     "module": "CommonJS",
     "outDir": "lib",
-    "rootDir": "src"
+    // "rootDir": "src",
+    "resolveJsonModule": true
   },
-  "include": ["./src"],
+  "include": ["src", "./package.json"],
   "exclude": ["lib"],
-  "references": [
-    { "path": "../core" },
-    { "path": "../api" },
-    { "path": "../types" }
-  ]
+  "references": [{ "path": "../core" }, { "path": "../api" }, { "path": "../types" }]
 }

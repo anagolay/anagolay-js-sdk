@@ -1,12 +1,11 @@
 // Auto-generated via `yarn polkadot-types-from-chain`, do not edit
 /* eslint-disable */
 
-import { AnyNumber, ITuple, Observable } from '@polkadot/types/types'
-import { Option, Vec } from '@polkadot/types/codec'
-import { Bytes, bool, u128, u32, u64 } from '@polkadot/types/primitive'
-import { AccountData, BalanceLock } from '@polkadot/types/interfaces/balances'
-import { SetId, StoredPendingChange, StoredState } from '@polkadot/types/interfaces/grandpa'
-import {
+import type { Bytes, Option, Vec, bool, u128, u32, u64 } from '@polkadot/types'
+import type { AnyNumber, ITuple, Observable } from '@polkadot/types/types'
+import type { AccountData, BalanceLock } from '@polkadot/types/interfaces/balances'
+import type { SetId, StoredPendingChange, StoredState } from '@polkadot/types/interfaces/grandpa'
+import type {
   AccountId,
   Balance,
   BlockNumber,
@@ -15,8 +14,8 @@ import {
   Moment,
   Releases,
 } from '@polkadot/types/interfaces/runtime'
-import { SessionIndex } from '@polkadot/types/interfaces/session'
-import {
+import type { SessionIndex } from '@polkadot/types/interfaces/session'
+import type {
   AccountInfo,
   DigestOf,
   EventIndex,
@@ -24,12 +23,12 @@ import {
   LastRuntimeUpgradeInfo,
   Phase,
 } from '@polkadot/types/interfaces/system'
-import { Multiplier } from '@polkadot/types/interfaces/txpayment'
-import { OperationInfo } from '@sensio/types/interfaces/operations'
-import { PhashInfo, ProofInfo, RuleInfo } from '@sensio/types/interfaces/poe'
-import { GenericId } from '@sensio/types/interfaces/sensio'
-import { StatementInfo } from '@sensio/types/interfaces/statements'
-import { ApiTypes } from '@polkadot/api/types'
+import type { Multiplier } from '@polkadot/types/interfaces/txpayment'
+import type { OperationInfo } from '@sensio/types/interfaces/operations'
+import type { PhashInfo, ProofInfo, RuleInfo } from '@sensio/types/interfaces/poe'
+import type { GenericId } from '@sensio/types/interfaces/sensio'
+import type { StatementInfo } from '@sensio/types/interfaces/statements'
+import type { ApiTypes } from '@polkadot/api/types'
 
 declare module '@polkadot/api/types/storage' {
   export interface AugmentedQueries<ApiType> {
@@ -194,58 +193,12 @@ declare module '@polkadot/api/types/storage' {
     statements: {
       [key: string]: QueryableStorageEntry<ApiType>
       /**
-       * ALL Copyrights
+       * List of the statements connected to the Proof. If the statement claim is 100% then there will be only one entry, if it's not then as many entries is needed to get to 100%
        **/
-      copyrights: AugmentedQuery<ApiType, () => Observable<Vec<GenericId>>> &
-        QueryableStorageEntry<ApiType>
-      /**
-       * Amount of saved Copyrights
-       **/
-      copyrightsCount: AugmentedQuery<ApiType, () => Observable<u128>> &
-        QueryableStorageEntry<ApiType>
-      /**
-       * Maps the proof and copyright statement
-       **/
-      copyrightStatementToProof: AugmentedQuery<ApiType, () => Observable<Vec<GenericId>>> &
-        QueryableStorageEntry<ApiType>
-      /**
-       * Count of all user copyright statements
-       **/
-      countUserCopyrightStatements: AugmentedQuery<
+      proofValidStatements: AugmentedQuery<
         ApiType,
-        (arg: AccountId | string | Uint8Array) => Observable<u128>
+        (arg: GenericId | string | Uint8Array) => Observable<Vec<GenericId>>
       > &
-        QueryableStorageEntry<ApiType>
-      /**
-       * Count of all user ownership statements
-       **/
-      countUserOwnershipStatements: AugmentedQuery<
-        ApiType,
-        (arg: AccountId | string | Uint8Array) => Observable<u128>
-      > &
-        QueryableStorageEntry<ApiType>
-      /**
-       * Count of all user statements
-       **/
-      countUserStatements: AugmentedQuery<
-        ApiType,
-        (arg: AccountId | string | Uint8Array) => Observable<u128>
-      > &
-        QueryableStorageEntry<ApiType>
-      /**
-       * All Ownerships
-       **/
-      ownerships: AugmentedQuery<ApiType, () => Observable<Vec<GenericId>>> &
-        QueryableStorageEntry<ApiType>
-      /**
-       * Amount of saved Ownerships
-       **/
-      ownershipsCount: AugmentedQuery<ApiType, () => Observable<u128>> &
-        QueryableStorageEntry<ApiType>
-      /**
-       * Maps the proof and ownership statement
-       **/
-      ownershipStatementToProof: AugmentedQuery<ApiType, () => Observable<Vec<GenericId>>> &
         QueryableStorageEntry<ApiType>
       /**
        * ALL statements
@@ -259,17 +212,9 @@ declare module '@polkadot/api/types/storage' {
       > &
         QueryableStorageEntry<ApiType>
       /**
-       * Amount of saved Copyrights
+       * Amount of saved Statements
        **/
       statementsCount: AugmentedQuery<ApiType, () => Observable<u128>> &
-        QueryableStorageEntry<ApiType>
-      /**
-       * User statements
-       **/
-      userStatements: AugmentedQuery<
-        ApiType,
-        (arg: AccountId | string | Uint8Array) => Observable<Vec<GenericId>>
-      > &
         QueryableStorageEntry<ApiType>
     }
     sudo: {

@@ -3,7 +3,6 @@
  * THE POLKADOT API TYPES ARE IN THE definitions.ts file
  */
 
-import { SnOperation } from '../operations/interfaces'
 import {
   SnAccountId,
   SnBlockNumber,
@@ -17,6 +16,11 @@ export interface SnRule {
   data: SnRuleData
 }
 
+export interface SnOperationReference {
+  id: SnGenericId
+  children: SnOperationReference[]
+}
+
 export interface SnRuleData {
   version: number
   name: string
@@ -24,7 +28,7 @@ export interface SnRuleData {
   creator: SnCreatorId
   groups: SnForWhat[]
   parentId: SnGenericId
-  ops: SnOperation[]
+  ops: SnOperationReference[]
 }
 
 export interface SnRuleWithStorage {

@@ -1,11 +1,10 @@
 // Auto-generated via `yarn polkadot-types-from-defs`, do not edit
 /* eslint-disable */
 
-import { Struct, Vec } from '@polkadot/types/codec'
-import { Bytes } from '@polkadot/types/primitive'
-import { AccountId, BlockNumber } from '@polkadot/types/interfaces/runtime'
-import { Rule } from '@sensio/types/interfaces/rules'
-import { CreatorId, ForWhat, GenericId } from '@sensio/types/interfaces/sensio'
+import type { Bytes, Struct, Vec } from '@polkadot/types'
+import type { AccountId, BlockNumber } from '@polkadot/types/interfaces/runtime'
+import type { Rule } from '@sensio/types/interfaces/rules'
+import type { CreatorId, ForWhat, GenericId } from '@sensio/types/interfaces/sensio'
 
 /** @name PhashInfo */
 export interface PhashInfo extends Struct {

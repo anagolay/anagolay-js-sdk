@@ -1,8 +1,7 @@
 // Auto-generated via `yarn polkadot-types-from-defs`, do not edit
 /* eslint-disable */
 
-import { Enum, Struct } from '@polkadot/types/codec'
-import { Bytes, bool, u32, u8 } from '@polkadot/types/primitive'
+import type { Bytes, Enum, Struct, bool, u32, u8 } from '@polkadot/types'
 
 /** @name CreatorId */
 export interface CreatorId extends Bytes {}

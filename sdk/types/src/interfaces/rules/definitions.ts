@@ -3,6 +3,10 @@ export const RulesCustomTypes = {
     id: 'GenericId',
     data: 'RuleData',
   },
+  OperationReference: {
+    id: 'GenericId',
+    children: 'Vec<OperationReference>',
+  },
   RuleData: {
     version: 'u32',
     name: 'Vec<u8>',
@@ -10,7 +14,7 @@ export const RulesCustomTypes = {
     creator: 'CreatorId',
     groups: 'Vec<ForWhat>',
     parentId: 'GenericId',
-    ops: 'Vec<Operation>',
+    ops: 'Vec<OperationReference>',
   },
 }
 

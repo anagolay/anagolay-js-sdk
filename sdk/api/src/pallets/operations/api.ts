@@ -6,15 +6,14 @@
  */
 import { SubmittableExtrinsic } from '@polkadot/api/types'
 import { KeyringPair } from '@polkadot/keyring/types'
-import { StorageKey } from '@polkadot/types'
 import { getApi } from '@sensio/api/connection'
 import createEventEmitter from '@sensio/api/events'
 import { networkCallback } from '@sensio/api/utils'
-import { OperationInfo, SnOperation, SnOperationWithStorage } from '@sensio/types'
-import { EventEmitter } from 'events'
+import { SnGenericId, SnOperation, SnOperationWithStorage } from '@sensio/types'
 import { map } from 'ramda'
-import { EVENT_NAME_BATCH, EVENT_NAME_ERROR, EVENT_NAME_SINGLE } from './config'
-import decodeOperationStorage from './decodeStorage'
+import { CustomEventEmitter } from '../../events'
+import { EVENT_NAME_BATCH, EVENT_NAME_SINGLE } from './config'
+import decodeOperationStorage, { IncomingParam } from './decodeStorage'
 
 /**
  * Save a single operation to the chain
@@ -22,16 +21,13 @@ import decodeOperationStorage from './decodeStorage'
  * @param op Operation data that we want to save to the chain.
  * @param signer Account that will be owner of the transaction and ones who pays the fees
  */
-export async function save(op: SnOperation, signer: KeyringPair): Promise<EventEmitter> {
+export async function save(op: SnOperation, signer: KeyringPair): Promise<CustomEventEmitter> {
   const broadcast = createEventEmitter()
 
   // @TODO if we need nonce in the future, this doesn't work
   // const nonce = await api.rpc.system.accountNextIndex(signer.address)
   await createNetworkTx(op).signAndSend(signer, {}, (params) =>
-    networkCallback(params, broadcast, {
-      success: EVENT_NAME_SINGLE,
-      error: EVENT_NAME_ERROR,
-    }),
+    networkCallback(params, broadcast, EVENT_NAME_SINGLE),
   )
 
   // return the event emitter
@@ -68,28 +64,27 @@ export async function createSubmittableExtrinsics(
 export async function saveOperationsBulk(
   ops: SnOperation[],
   signer: KeyringPair,
-): Promise<EventEmitter> {
+): Promise<CustomEventEmitter> {
   const api = getApi()
   const broadcast = createEventEmitter()
   const txs = map(createNetworkTx, ops)
   // @TODO if we need nonce in the future, this doesn't work
   // const nonce = await api.rpc.system.accountNextIndex(signer.address)
-  await api.tx.utility.batch(txs).signAndSend(signer, {}, (params) =>
-    networkCallback(params, broadcast, {
-      success: EVENT_NAME_BATCH,
-      error: EVENT_NAME_ERROR,
-    }),
-  )
+  // console.log('nonce', nonce)
+
+  await api.tx.utility
+    .batch(txs)
+    .signAndSend(signer, {}, (params) => networkCallback(params, broadcast, EVENT_NAME_BATCH))
 
   // return the event emitter
   return broadcast
 }
 
 /**
- * Get All operations from the chain, encoded using SCALE codec
- * @returns [Promise<[StorageKey, OperationInfo][]] encoded Storage
+ * Get All operations from the chain
+ * @returns Promise list of a map SCALE encoded Storage
  */
-export async function getAll(): Promise<Array<[StorageKey, OperationInfo]>> {
+export async function getAll(): Promise<Array<IncomingParam>> {
   const api = getApi()
 
   // get them from the network
@@ -108,6 +103,39 @@ export async function getAllDecoded(): Promise<SnOperationWithStorage[]> {
   const decodedOps = map(decodeOperationStorage, ops)
 
   return decodedOps
+}
+
+/**
+ * Get All operations from the chain
+ * @returns Promise list of a map SCALE encoded Storage
+ */
+export async function getOperation(item: SnGenericId): Promise<IncomingParam> {
+  const api = getApi()
+
+  // get them from the network
+  return (await api.query.operations.operations.entries(item))[0]
+}
+
+/**
+ * Get some Operations from the network
+ *
+ * @params items List of Operation IDs
+ * @returns the list of the Decoded operations as they are stored.
+ */
+export async function getSome(items: SnGenericId[]): Promise<IncomingParam[]> {
+  return Promise.all(items.map(async (i) => await getOperation(i)))
+}
+
+/**
+ * Get some Operations from the network then decode them
+ *
+ * @params items List of Operation IDs
+ * @returns the list of the Decoded operations decoded
+ */
+export async function getSomeDecoded(items: SnGenericId[]): Promise<SnOperationWithStorage[]> {
+  // get them from the network
+  const ops = await getSome(items)
+  return map(decodeOperationStorage, ops)
 }
 
 /**

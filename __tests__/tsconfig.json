@@ -5,10 +5,13 @@
       "path": "../sdk/core"
     },
     {
-      "path": "../operations/snCid"
+      "path": "../sdk/cli"
     },
     {
-      "path": "../operations/snMultihash"
+      "path": "../sdk/types"
+    },
+    {
+      "path": "../operations"
     }
   ]
 }

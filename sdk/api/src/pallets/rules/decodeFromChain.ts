@@ -1,7 +1,7 @@
 import decodeHexToString from '@sensio/api/utils/decodeHexToString'
 import { Rule, SnRule } from '@sensio/types'
 import { map } from 'ramda'
-import decodeOperationFromChain from '../operations/decodeFromChain'
+import decodeOperationReferenceFromChain from './decodeOperationReferenceFromChain'
 
 /**
  * Decodes the rule from the chain to readable object
@@ -18,7 +18,7 @@ export function decodeFromChain(d: Rule): SnRule {
       creator: decodeHexToString(data.creator),
       groups: data.groups.map((g) => g.toNumber()),
       parentId: decodeHexToString(data.parentId),
-      ops: map(decodeOperationFromChain, data.ops),
+      ops: map(decodeOperationReferenceFromChain, data.ops),
     },
   }
   return decoded

@@ -1,5 +1,6 @@
 import { StorageKey } from '@polkadot/types'
 import { ProofInfo } from '@sensio/types'
+
 import { SnProofWithStorage } from '../../../../types/src/interfaces/poe/interfaces'
 import decodeFromChain from './decodeFromChain'
 

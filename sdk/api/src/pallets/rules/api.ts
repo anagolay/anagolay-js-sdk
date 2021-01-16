@@ -5,10 +5,10 @@ import { KeyringPair } from '@polkadot/keyring/types'
 import { getApi } from '@sensio/api/connection'
 import createEventEmitter from '@sensio/api/events'
 import { networkCallback } from '@sensio/api/utils'
-import { SnGenericId, SnGenericIds, SnRule, SnRuleWithStorage } from '@sensio/types'
+import { SnGenericId, SnRule, SnRuleWithStorage } from '@sensio/types'
 import { EventEmitter } from 'events'
 import { map } from 'ramda'
-import { EVENT_NAME_BATCH, EVENT_NAME_ERROR, EVENT_NAME_SINGLE } from './config'
+import { EVENT_NAME_BATCH, EVENT_NAME_SINGLE } from './config'
 import decodeFromStorage, { IncomingParam } from './decodeStorage'
 /**
  * Save a single rule to the chain
@@ -22,10 +22,7 @@ export async function save(d: SnRule, signer: KeyringPair): Promise<EventEmitter
   // @TODO if we need nonce in the future, this doesn't work
   // const nonce = await api.rpc.system.accountNextIndex(signer.address)
   await createSubmittableExtrinsic(d).signAndSend(signer, {}, (params) =>
-    networkCallback(params, broadcast, {
-      success: EVENT_NAME_SINGLE,
-      error: EVENT_NAME_ERROR,
-    }),
+    networkCallback(params, broadcast, EVENT_NAME_SINGLE),
   )
 
   // return the event emitter
@@ -64,12 +61,9 @@ export async function saveBulk(d: SnRule[], signer: KeyringPair): Promise<EventE
   const txs = map(createSubmittableExtrinsic, d)
   // @TODO if we need nonce in the future, this doesn't work
   // const nonce = await api.rpc.system.accountNextIndex(signer.address)
-  await api.tx.utility.batch(txs).signAndSend(signer, {}, (params) =>
-    networkCallback(params, broadcast, {
-      success: EVENT_NAME_BATCH,
-      error: EVENT_NAME_ERROR,
-    }),
-  )
+  await api.tx.utility
+    .batch(txs)
+    .signAndSend(signer, {}, (params) => networkCallback(params, broadcast, EVENT_NAME_BATCH))
 
   // return the event emitter
   return broadcast
@@ -91,11 +85,23 @@ export async function getAll(): Promise<IncomingParam[]> {
  * {@link StorageKey}
  * {@link RuleInfo}
  * @param items
+ * @returns Item `[StorageKey, RuleInfo]` SCALE codec decoded
+ */
+export async function getRule(item: SnGenericId): Promise<IncomingParam> {
+  const api = getApi()
+  return (await api.query.rules.rules.entries(item))[0]
+}
+/**
+ * Get a Rule from the chain, decoded
+ * {@link StorageKey}
+ * {@link RuleInfo}
+ * @param item
  * @returns Item `[StorageKey, RuleInfo]` SCALE codec encoded
  */
-export async function getRule(item: SnGenericId): Promise<IncomingParam[]> {
-  const api = getApi()
-  return await api.query.rules.rules.entries(item)
+export async function getRuleDecoded(item: SnGenericId): Promise<SnRuleWithStorage> {
+  const rule = await getRule(item)
+
+  return decodeFromStorage(rule)
 }
 
 /**
@@ -103,13 +109,11 @@ export async function getRule(item: SnGenericId): Promise<IncomingParam[]> {
  * @param items list of Rule IDs
  * @returns List of `[StorageKey, RuleInfo]` SCALE codec decoded
  */
-export async function getAllDecoded(items: SnGenericIds = []): Promise<SnRuleWithStorage[]> {
-  const d = await Promise.all(items.map(async (i) => await getRule(i)))
-  if (d.length > 1) {
-    throw new Error('ERROR IN THE GETTING THE POE, got more than 1 record')
-  }
+export async function getAllDecoded(): Promise<SnRuleWithStorage[]> {
+  const rules = await getAll()
+  const decoded = map(decodeFromStorage, rules)
 
-  return map(decodeFromStorage, d[0])
+  return decoded
 }
 
 /**

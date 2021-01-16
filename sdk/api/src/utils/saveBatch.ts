@@ -29,12 +29,9 @@ export default async function saveBatch(
 
   // @TODO if we need nonce in the future, this doesn't work
   // const nonce = await api.rpc.system.accountNextIndex(signer.address)
-  await api.tx.utility.batch(txs).signAndSend(signer, {}, (params) =>
-    networkCallback(params, broadcast, {
-      success: 'utils::txs::batch',
-      error: 'utils::txs::error',
-    }),
-  )
+  await api.tx.utility
+    .batch(txs)
+    .signAndSend(signer, {}, (params) => networkCallback(params, broadcast, 'utils::txs::batch'))
 
   // return the event emitter
   return broadcast

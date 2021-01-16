@@ -1,7 +1,7 @@
 /* eslint-disable no-loops/no-loops */
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 
-import { getImageData, imageFromBuffer } from '@canvas/image'
+import Image, { getImageData, imageFromBuffer } from '@canvas/image'
 import blockhash from 'blockhash-core'
 import { readFileSync } from 'fs'
 
@@ -26,13 +26,15 @@ export default async function createPhash(
 ): Promise<string> {
   if (bits % 4 !== 0) throw new Error('Invalid bit length')
 
-  let image: any = ''
+  let image: Image
 
   if (Buffer.isBuffer(pathOrBuffer)) {
     image = await imageFromBuffer(pathOrBuffer)
   } else if (typeof pathOrBuffer === 'string') {
     const content = readFileSync(pathOrBuffer)
     image = await imageFromBuffer(content)
+  } else {
+    throw new Error(`Input not supported, ${pathOrBuffer}`)
   }
 
   const imageData = getImageData(image)

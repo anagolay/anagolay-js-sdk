@@ -1,13 +1,14 @@
 {
   "name": "@sensio/op-sn-take-photo-and-upload-qrcode",
-  "version": "0.4.4-alpha.0",
+  "version": "0.4.8-alpha.4",
   "license": "Apache-2.0",
   "author": "daniel@woss.io",
   "description": "Take the photo of the QRCode and do the verification of equality. If the verification is a successes the coperation will continue, if not user will be asked to resubmit the image.",
-  "main": "lib/index",
-  "files": [
-    "lib"
-  ],
+  "main": "index",
+  "publishConfig": {
+    "access": "public",
+    "directory": "lib"
+  },
   "keywords": [
     "sensio",
     "operation",
@@ -16,25 +17,23 @@
     "upload",
     "react"
   ],
-  "publishConfig": {
-    "access": "public"
-  },
   "scripts": {
+    "prepublish": "./scripts/prepublish.sh",
     "build": "tsc -b ."
   },
   "devDependencies": {
-    "typescript": "^4.0.3"
+    "typescript": "4.1.2"
   },
   "dependencies": {
-    "@polkadot/util": "^3.0.1",
-    "@sensio/core": "^0.4.4-alpha.0",
-    "@sensio/op-sn-cid": "^0.4.4-alpha.0",
-    "@sensio/op-sn-enc-hex": "^0.4.4-alpha.0",
-    "@sensio/op-sn-image-metadata": "^0.4.4-alpha.0",
-    "@sensio/types": "^0.4.4-alpha.0",
-    "exifreader": "^3.12.2",
-    "jimp": "^0.16.1",
-    "jsqr": "^1.3.1"
+    "@polkadot/util": "5.0.1",
+    "@sensio/core": "^0.4.8-alpha.4",
+    "@sensio/op-sn-cid": "^0.4.8-alpha.4",
+    "@sensio/op-sn-enc-hex": "^0.4.8-alpha.4",
+    "@sensio/op-sn-image-metadata": "^0.4.8-alpha.4",
+    "@sensio/types": "0.4.8-alpha.3",
+    "exifreader": "3.12.2",
+    "jimp": "0.16.1",
+    "jsqr": "1.3.1"
   },
   "repository": {
     "type": "git",

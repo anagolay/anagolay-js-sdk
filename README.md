@@ -107,13 +107,13 @@ Lerna is awesome when it comes to the publishing BUT it really doesn't like the 
 
 At the moment we are using the CLI to generate scaffold operation folder under `operations/` with decent defaults. One thing that needs manual input is making sure that `operations/tsconfig.json` and `./tsconfig.json` are correctly set up.
 
-```
+```sh
 #Delete local tags.
 git tag -l | xargs git tag -d
 #Fetch remote tags.
 git fetch
 #Delete remote tags.
 git tag -l | xargs -n 1 git push --no-verify --delete origin
-#Delete local tasg.
+#Delete local tags.
 git tag -l | xargs git tag -d
 ```
