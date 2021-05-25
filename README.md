@@ -1,4 +1,4 @@
-[![pipeline status](https://gitlab.com/anagolay/network-js-sdk/badges/master/pipeline.svg)](https://gitlab.com/anagolay/network-js-sdk/-/commits/master) [![coverage report](https://gitlab.com/anagolay/network-js-sdk/badges/master/coverage.svg)](https://gitlab.com/anagolay/network-js-sdk/-/commits/master) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![pipeline status](https://gitlab.com/anagolay/network-js-sdk/badges/main/pipeline.svg)](https://gitlab.com/anagolay/network-js-sdk/-/commits/main) [![coverage report](https://gitlab.com/anagolay/network-js-sdk/badges/main/coverage.svg)](https://gitlab.com/anagolay/network-js-sdk/-/commits/main)
 
 ## Dev friendly blockchain SDK for Anagolay Network. 👩‍💻🚀👨‍💻
 
