@@ -1,6 +1,12 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { SnGenericId } from '@sensio/types'
 import { length } from 'ramda'
+
+import { AnGenericId } from '@anagolay/types'
+
 import generateNpmName from './util/generateNpmName'
 
 /**
@@ -25,8 +31,10 @@ export default async function replaceOperationNames(ops: any[]): Promise<any> {
     const imported = await import(generateNpmName(opName) + '/config')
     const processedChildren = await Promise.all(children.map(async (o: any) => await resolveOp(o)))
 
-    const ret: { id: SnGenericId; children: any[] } = { id: imported.id, children: [] }
+    const ret: { id: AnGenericId; children: any[] } = { id: imported.id, children: [] }
+
     if (length(processedChildren) > 0) ret.children = processedChildren
+
     return ret
   }
 

@@ -1,30 +1,32 @@
 /*  eslint-disable @typescript-eslint/restrict-template-expressions */
-import { SnInputParamsDefinition, SnOperation, SnOperationData } from '@sensio/types'
 import { isEmpty, prop } from 'ramda'
+
+import { AnInputParamsDefinition, AnOperation, AnOperationData } from '@anagolay/types'
+
 /**
  * Generate main interface file
- * @param op [SnOperation]
+ * @param op [AnOperation]
  * @return string
  */
-export default function interfacesTpl(op: SnOperation): string {
+export default function interfacesTpl(op: AnOperation): string {
   const { data } = op
   let types: string[] = []
 
   types = data.input.map((i) => `${i.decoded}`)
   types = types.concat(data.input.map((i) => `${i.data}`))
 
-  // @FUCK bug here with the output declaration of `[SnSensioClaim[],SnSensioSignatures[]]`
-  // https://gitlab.com/sensio_group/network-js-sdk/-/issues/65
+  // @FUCK bug here with the output declaration of `[AnAnagolayClaim[],AnAnagolaySignatures[]]`
+  // https://gitlab.com/anagolay/network-js-sdk/-/issues/65
   types.push(data.output.output)
   types.push(data.output.decoded)
   const dedupe = [...new Set(types)]
 
   return `
-  import { SnInputParamsImplementation, ${dedupe
+  import { AnInputParamsImplementation, ${dedupe
     .map((t) => (t.includes('[]') ? t.split('[]')[0] : t))
-    .join(', ')} } from "@sensio/types"
+    .join(', ')} } from "@anagolay/types"
   
-  export interface ReturnParams extends SnInputParamsImplementation {
+  export interface ReturnParams extends AnInputParamsImplementation {
     data: ${data.output.output} // value of \`data.output.output\`
     decode: () => ${data.output.decoded} // value of \`data.output.decoded\`
   }
@@ -39,10 +41,10 @@ export default function interfacesTpl(op: SnOperation): string {
  * @param inputs [SnInputParamsDefinition]
  * @return string
  */
-export function generateInputParamList(inputs: SnInputParamsDefinition[]): string {
+export function generateInputParamList(inputs: AnInputParamsDefinition[]): string {
   return inputs
     .map((i, k) => {
-      return `export interface InputParam${k} extends SnInputParamsImplementation {
+      return `export interface InputParam${k} extends AnInputParamsImplementation {
       data: ${i.data}
       decode: () => ${i.decoded}
     }`
@@ -55,7 +57,7 @@ export function generateInputParamList(inputs: SnInputParamsDefinition[]): strin
  * @param inputs [SnInputParamsDefinition]
  * @return string
  */
-export function generateInputParams(data: SnOperationData): string {
+export function generateInputParams(data: AnOperationData): string {
   const inputs = prop('input', data)
 
   const res: string[] = ['export type InputParams', '=']
@@ -63,12 +65,14 @@ export function generateInputParams(data: SnOperationData): string {
   const parts = inputs.map((_i, k) => `InputParam${k}`).join(',')
 
   if (isEmpty(parts)) {
-    res.push('SnInputParamsImplementation')
+    res.push('AnInputParamsImplementation')
     res.push('[')
   } else {
     res.push('[')
     res.push(parts)
   }
+
   res.push(']')
+
   return res.join(' ')
 }

@@ -2,9 +2,11 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "outDir": "lib",
-    "rootDir": "src"
+    "rootDir": "src",
+    "lib": ["DOM", "DOM.Iterable", "ES2016"],
+    "skipLibCheck": true
   },
-  "include": ["src"],
+  "include": ["src/**/*.ts"],
   "exclude": ["lib"],
   "references": [
     {

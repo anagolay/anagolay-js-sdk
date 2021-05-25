@@ -1,4 +1,4 @@
-import { SnInputParamsDefinition } from '@sensio/types'
+import { AnInputParamsDefinition } from '@anagolay/types'
 
 /**
  * Custom error for wrong input <- output params
@@ -12,10 +12,11 @@ export class IncompatibleInputParamChildOperationError extends Error {
   constructor(
     operationName: string,
     childOperationName: string,
-    input: SnInputParamsDefinition[],
-    output: SnInputParamsDefinition,
+    input: AnInputParamsDefinition[],
+    output: AnInputParamsDefinition,
   ) {
     const message = `Incompatible ${operationName} input -> ${childOperationName} output`
+
     super(message)
     this.name = 'IncompatibleInputParamChildOperationError'
     this.extra = {

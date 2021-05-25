@@ -1,0 +1,39 @@
+import { stringToU8a } from '@anagolay/util'
+import { beforeEach, jest } from '@jest/globals'
+import execute, { createQrcode } from '.'
+
+beforeEach(() => {
+  jest.useFakeTimers()
+})
+
+const demoData = {
+  data: JSON.stringify([
+    'bafk2bzaceb55dtoijdmjnl64buqjilfqq4udovnb75klh5x6lwvnt6qrbyulm',
+    'bafk2bzaceanq3yniwfbb6gdcpefvks4mpguvvxlg4iu4thcevxqdqgjkuuesq',
+  ]),
+  qrcodeString:
+    'data:image/png;base64,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',
+}
+
+describe('AnOperation: createQrcode', (): void => {
+  it.skip('should execute default op', async (): Promise<void> => {
+    const data = await execute([
+      {
+        data: stringToU8a(demoData.data),
+        decode: () => demoData.data,
+      },
+    ])
+
+    expect(data.decode()).toEqual(demoData.qrcodeString)
+  }, 10000)
+  it.skip('should execute createQrcode op', async (): Promise<void> => {
+    const data = await createQrcode([
+      {
+        data: stringToU8a(demoData.data),
+        decode: () => demoData.data,
+      },
+    ])
+
+    expect(data.decode()).toEqual(demoData.qrcodeString)
+  }, 10000)
+})

@@ -1,13 +1,6 @@
 /* eslint-disable @typescript-eslint/restrict-plus-operands */
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import {
-  SnForWhat,
-  SnInputParamsDefinition,
-  SnOperation,
-  SnOperationData,
-  SnOperationDataForCreating,
-} from '@sensio/types'
-import {
   compose,
   find,
   includes,
@@ -20,28 +13,42 @@ import {
   sortBy,
   sum,
 } from 'ramda'
+
+import {
+  AnForWhat,
+  AnInputParamsDefinition,
+  AnOperation,
+  AnOperationData,
+  AnOperationDataForCreating,
+} from '@anagolay/types'
+
 import { IncompatibleInputParamChildOperationError } from './errors/IncompatibleInputParamChildOperation'
 import { calculateOperationId } from './util/hashing'
 
 /**
  * First version of Resolving operation dependencies, input param creation and priority calculation.
  * @param ops
- * @returns List of SnOperationDataForCreating with dependencies resolved
+ * @returns List of AnOperationDataForCreating with dependencies resolved
  */
 export async function resolveDependencies(
-  ops: SnOperationDataForCreating[],
-): Promise<SnOperationDataForCreating[]> {
+  ops: AnOperationDataForCreating[],
+): Promise<AnOperationDataForCreating[]> {
   const count = (arr: string[]): number => arr.length
-  const sortByDependencies = sortBy(compose(count, prop('opNames')))
-  const sorted: SnOperationDataForCreating[] = sortByDependencies(ops)
+  const sortByDependencies = sortBy<AnOperationDataForCreating>(
+    compose(count, prop('opNames') as never),
+  )
+
+  const sorted: AnOperationDataForCreating[] = sortByDependencies(ops)
+
   /**
    * Resolve a single Operation with its dependencies
    * @param op
    */
-  async function resolve(op: SnOperationDataForCreating): Promise<SnOperationDataForCreating> {
+  async function resolve(op: AnOperationDataForCreating): Promise<AnOperationDataForCreating> {
     const opNames: string[] = prop('opNames', op)
 
     if (isNil(opNames)) {
+      console.log(op)
       throw new Error('opNames param missing for ' + op.name)
     }
 
@@ -57,15 +64,18 @@ export async function resolveDependencies(
           if (isEmpty(o)) {
             throw new Error('Dependency must have a name, not an empty string')
           }
+
           // find the operation in the list of sorted ops
-          const directDep = find(propEq('name', o))(sorted) as SnOperationDataForCreating
+          const directDep = find(propEq('name', o))(sorted) as AnOperationDataForCreating
+
           return await resolve(directDep)
         }),
       )
 
       const childrenInputs = children.map((m) => {
         const potentialInput = createInputFromOutput(m)
-        if (isEmpty(op.input) && includes(SnForWhat.FLOWCONTROL, op.groups)) {
+
+        if (isEmpty(op.input) && includes(AnForWhat.FLOWCONTROL, op.groups)) {
           return potentialInput
         } else {
           if (!includes(potentialInput, op.input)) {
@@ -104,9 +114,9 @@ export async function resolveDependencies(
  * operationPriority = sum(children.priority) + children.length
  * ```
  * @param node
- * @returns New SnOperationDataForCreating object
+ * @returns New AnOperationDataForCreating object
  */
-export function calculatePriority(node: SnOperationDataForCreating): SnOperationDataForCreating {
+export function calculatePriority(node: AnOperationDataForCreating): AnOperationDataForCreating {
   const { ops } = node
   const childPriority = sum(map((o) => o.priority, ops))
   const priority = length(ops) + childPriority
@@ -118,10 +128,10 @@ export function calculatePriority(node: SnOperationDataForCreating): SnOperation
 }
 
 /**
- * Create SnOperation
+ * Create AnOperation
  * @param op
  */
-export async function generateOperation(op: SnOperationData): Promise<SnOperation> {
+export async function generateOperation(op: AnOperationData): Promise<AnOperation> {
   return {
     id: await calculateOperationId(op),
     data: op,
@@ -133,8 +143,8 @@ export async function generateOperation(op: SnOperationData): Promise<SnOperatio
  * @param op
  */
 export function createInputFromOutput(
-  childOp: SnOperationDataForCreating,
-): SnInputParamsDefinition {
+  childOp: AnOperationDataForCreating,
+): AnInputParamsDefinition {
   return {
     data: childOp.output.output,
     decoded: childOp.output.decoded,

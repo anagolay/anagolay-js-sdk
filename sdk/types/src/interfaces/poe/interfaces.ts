@@ -4,43 +4,43 @@
  */
 
 import {
-  SnAccountId,
-  SnBlockNumber,
-  SnCreatorId,
-  SnForWhat,
-  SnGenericId,
-} from '../sensio/interfaces'
+  AnAccountId,
+  AnBlockNumber,
+  AnCreatorId,
+  AnForWhat,
+  AnGenericId,
+} from '../anagolay/interfaces'
 
-export interface SnProofParams {
+export interface AnProofParams {
   k: string
   v: string
 }
 
-export interface SnProofInfo {
-  proof: SnProof
-  accountId: SnAccountId
-  blockNumber: SnBlockNumber
+export interface AnProofInfo {
+  proof: AnProof
+  accountId: AnAccountId
+  blockNumber: AnBlockNumber
 }
 
-export interface SnProof {
-  id: SnGenericId
-  data: SnProofData
+export interface AnProof {
+  id: AnGenericId
+  data: AnProofData
 }
 
-export interface SnProofData {
-  ruleId: SnGenericId
-  prevId: SnGenericId
-  creator: SnCreatorId
-  groups: SnForWhat[]
-  params: SnProofParams[]
+export interface AnProofData {
+  ruleId: AnGenericId
+  prevId: AnGenericId
+  creator: AnCreatorId
+  groups: AnForWhat[]
+  params: AnProofParams[]
 }
 
-export interface SnPhashInfo {
+export interface AnPhashInfo {
   pHash: string
-  proofId: SnGenericId
+  proofId: AnGenericId
 }
 
-export interface SnProofWithStorage {
+export interface AnProofWithStorage {
   storageKey: string
-  proofInfo: SnProofInfo
+  proofInfo: AnProofInfo
 }

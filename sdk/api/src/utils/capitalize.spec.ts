@@ -1,4 +1,5 @@
 import capitalize from './capitalize'
+
 describe('utils:: capitalize', () => {
   it('is defined', () => {
     expect(capitalize).toBeDefined()

@@ -1,9 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable prettier/prettier */
 
-import { SnForWhat, SnRuleData } from '@sensio/types'
+import { AnForWhat, AnRuleData } from '@anagolay/types'
+
 import { defaultCreator } from '../testFixtures'
-type SnRuleWithoutOps = Omit<SnRuleData, 'ops'>
+
+type SnRuleWithoutOps = Omit<AnRuleData, 'ops'>
 
 // tuple
 // type OperationDep<T> = [string, []] | [string, T[]] | [string, T[][]]
@@ -14,38 +16,37 @@ export interface SnRuleForCLI extends SnRuleWithoutOps {
 }
 export const rule: SnRuleForCLI = {
   creator: defaultCreator,
-  desc:
-    'Proof of Camera and Lens Ownership. Implementing this rule we can say with certainty that user owns the mentioned equipment',
-  groups: [SnForWhat.CAMERA, SnForWhat.LENS],
-  name: 'Sensio PoCLO rule',
+  desc: 'Proof of Camera and Lens Ownership. Implementing this rule we can say with certainty that user owns the mentioned equipment',
+  groups: [AnForWhat.CAMERA, AnForWhat.LENS],
+  name: 'Anagolay PoCLO rule',
   parentId: '',
   version: 1,
   ops: [
     [
-      'sn_split',
+      'split',
       [
         [
-          'sn_save_statements',
+          'save_statements',
           [
             [
-              'sn_identity',
+              'identity',
               [
                 [
-                  'sn_user_sign_claims',
+                  'user_sign_claims',
                   [
                     [
-                      'sn_create_ownership_claims',
+                      'create_ownership_claims',
                       [
                         [
-                          'sn_match_all',
+                          'match_all',
                           [
-                            ['sn_cid', []],
+                            ['cid', []],
                             [
-                              'sn_identity',
+                              'identity',
                               [
                                 [
-                                  'sn_take_photo_and_upload_qrcode',
-                                  [['sn_create_qrcode', [['sn_cid', []]]]],
+                                  'take_photo_and_upload_qrcode',
+                                  [['create_qrcode', [['cid', []]]]],
                                 ],
                               ],
                             ],

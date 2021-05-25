@@ -1,14 +1,14 @@
-[![pipeline status](https://gitlab.com/sensio_group/network-js-sdk/badges/master/pipeline.svg)](https://gitlab.com/sensio_group/network-js-sdk/-/commits/master) [![coverage report](https://gitlab.com/sensio_group/network-js-sdk/badges/master/coverage.svg)](https://gitlab.com/sensio_group/network-js-sdk/-/commits/master) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![pipeline status](https://gitlab.com/anagolay/network-js-sdk/badges/master/pipeline.svg)](https://gitlab.com/anagolay/network-js-sdk/-/commits/master) [![coverage report](https://gitlab.com/anagolay/network-js-sdk/badges/master/coverage.svg)](https://gitlab.com/anagolay/network-js-sdk/-/commits/master) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
-## Dev friendly blockchain SDK for Sensio Network. 👩‍💻🚀👨‍💻
+## Dev friendly blockchain SDK for Anagolay Network. 👩‍💻🚀👨‍💻
 
-This is the monorepo for ALL Sensio packages. This includes following list:
+This is the monorepo for ALL Anagolay packages. This includes following list:
 
 1. Definitions of operations located under `<root>/operations`
-2. Sensio Network API located under `<root>/sdk/api`
-3. Sensio Network Core located under `<root>/sdk/core`
-4. Sensio Network CLI located under `<root>/sdk/cli`
-5. Sensio Network Types located under `<root>/sdk/types`
+2. Anagolay Network API located under `<root>/sdk/api`
+3. Anagolay Network Core located under `<root>/sdk/core`
+4. Anagolay Network CLI located under `<root>/sdk/cli`
+5. Anagolay Network Types located under `<root>/sdk/types`
 
 ## Development
 
@@ -25,15 +25,15 @@ The structure is following:
 ├── misc
 │   └── benchmark
 ├── operations
-│   ├── snCid
-│   ├── snFile
-│   ├── snIdentity
-│   ├── snJsonDec
-│   ├── snJsonEnc
-│   ├── snMatchAll
-│   ├── snMatchNone
-│   ├── snMultihash
-│   └── snSplit
+│   ├── cid
+│   ├── file
+│   ├── identity
+│   ├── jsonDec
+│   ├── jsonEnc
+│   ├── matchAll
+│   ├── matchNone
+│   ├── multihash
+│   └── split
 └── sdk
     ├── api
     ├── core
@@ -52,7 +52,7 @@ Pretty much everything that has no special place, like benchmarking.
 
 **operations**
 
-HEre you can find Javascript implementation of Sensio Operation. To find out more about Sensio Operation please visit the [Operation wiki page](https://sensio.dev)
+HEre you can find Javascript implementation of Anagolay Operation. To find out more about Anagolay Operation please visit the [Operation wiki page](https://anagolay.dev)
 
 **rect**
 
@@ -60,15 +60,15 @@ React specific hooks and components.
 
 **sdk/api**
 
-Main entry point for communicating with Sensio Network. For more info please read the [API README.md](./sdk/api/README.md)
+Main entry point for communicating with Anagolay Network. For more info please read the [API README.md](./sdk/api/README.md)
 
 **sdk/cli**
 
-Generic CLI for Sensio Network. Current use is limited only to creation default operations.
+Generic CLI for Anagolay Network. Current use is limited only to creation default operations.
 
 **sdk/types**
 
-Sensio Network has decent amount of custom types, both on the chain and mapped types for Typescript. All these types, interfaces and api augmentations can be found here. This is the repo which should be the first to install when making new implementation of the operation.
+Anagolay Network has decent amount of custom types, both on the chain and mapped types for Typescript. All these types, interfaces and api augmentations can be found here. This is the repo which should be the first to install when making new implementation of the operation.
 
 ### Linting
 
@@ -81,7 +81,7 @@ yarn std
 
 ### Building && Publishing
 
-This repo is a monorepo for all our packages that are related to the Sensio Network SDK. Each package is in charge of its own build process, which we are tying to standardize.
+This repo is a monorepo for all our packages that are related to the Anagolay Network SDK. Each package is in charge of its own build process, which we are tying to standardize.
 
 Sometimes is good to see will the packages build BEFORE the publishing, to do so, run the command below and if it passes then all builds are successful and you should be ready for publishing.
 

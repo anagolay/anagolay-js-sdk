@@ -1,14 +1,14 @@
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
-import { stringCamelCase } from '@polkadot/util'
-import { SnOperation } from '@sensio/types'
+import { AnOperation } from '@anagolay/types'
+import { stringCamelCase } from '@anagolay/util'
 
-export const mainFuncBodyTpl = (op: SnOperation): string => {
+export const mainFuncBodyTpl = (op: AnOperation): string => {
   const { data } = op
 
   return `import { InputParams, ReturnParams } from './interfaces'
-  import { executeOperation } from '@sensio/core/execution'
-  import { SnOperation } from '@sensio/types'
+  import { executeOperation } from '@anagolay/core/execution'
+  import { AnOperation } from '@anagolay/types'
   import config from './config'
  
 /**
@@ -24,7 +24,7 @@ export default async function execute<T> (params: T[]): Promise<ReturnParams> {
     throw new Error("This operation doesn't support more than one input param ")
   }
 
-  const c: SnOperation = config
+  const c: AnOperation = config
   return executeOperation<T, ReturnParams>(c,params)
 }
 
@@ -46,6 +46,6 @@ export async function ${stringCamelCase(data.name)} (params: InputParams): Promi
 `
 }
 
-function formatOps(ops: SnOperation[]): string {
+function formatOps(ops: AnOperation[]): string {
   return ops.length > 0 ? `console.log('we have ${ops.length} child ops')` : ''
 }

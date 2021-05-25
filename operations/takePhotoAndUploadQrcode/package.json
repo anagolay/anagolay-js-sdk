@@ -1,0 +1,46 @@
+{
+  "name": "@anagolay/op-take-photo-and-upload-qrcode",
+  "version": "0.4.8-alpha.4",
+  "license": "Apache-2.0",
+  "author": "daniel@woss.io",
+  "description": "Take the photo of the QRCode and do the verification of equality. If the verification is a successes the coperation will continue, if not user will be asked to resubmit the image.",
+  "main": "index",
+  "publishConfig": {
+    "access": "public",
+    "directory": "lib"
+  },
+  "keywords": [
+    "anagolay",
+    "operation",
+    "qrcode",
+    "image",
+    "upload",
+    "react"
+  ],
+  "scripts": {
+    "build": "tsc -b ."
+  },
+  "devDependencies": {
+    "typescript": "4.1.2"
+  },
+  "dependencies": {
+    "@anagolay/types": "workspace:*",
+    "@anagolay/util": "workspace:*",
+    "@anagolay/core": "workspace:*",
+    "@anagolay/op-cid": "workspace:*",
+    "@anagolay/op-enc-hex": "workspace:*",
+    "@anagolay/op-image-metadata": "workspace:*",
+    "exifreader": "3.12.2",
+    "jimp": "0.16.1",
+    "jsqr": "1.3.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.com/anagolay/network-js-sdk.git",
+    "directory": "operations/takePhotoAndUploadQrcode"
+  },
+  "bugs": {
+    "url": "https://gitlab.com/anagolay/network-js-sdk/issues"
+  },
+  "homepage": "https://gitlab.com/anagolay/network-js-sdk/-/tree/master/operations/takePhotoAndUploadQrcode#readme"
+}

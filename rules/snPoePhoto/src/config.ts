@@ -2,15 +2,15 @@
  * Rule specification
  */
 
-import { SnRule } from '@sensio/types'
+import { AnRule } from '@anagolay/types'
 
-export const rule: SnRule = {
+export const rule: AnRule = {
   id: 'bafy2bzacedx33reiyw5cf7u3b6mq6o6p7pz2zk5lcqodqwnq4zfvwloudeqw6',
   data: {
     creator: 'did:substrate:5HnKtosumdYfHSifYKBHhNmoXvhDANCU8j8v7tc4p4pY7MMP/sensio-network',
     desc: 'Proof of existence for a photo.',
     groups: [1],
-    name: 'Sensio Photo PoE rule',
+    name: 'Anagolay Photo PoE rule',
     parentId: '',
     version: 1,
     ops: [

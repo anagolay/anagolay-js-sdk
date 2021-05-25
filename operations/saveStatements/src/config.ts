@@ -1,0 +1,34 @@
+/**
+ * Operation specification
+ */
+import { AnOperation } from '@anagolay/types'
+
+export const op: AnOperation = {
+  id: 'bafymbzacidc3zzmpifydaldi634bplfdfs6tm4mysutuij3dy7dt7usneaefaugbij2taizokcl5c55a5yigqifuzdxqq4vca2vqysflpga6pv3z',
+  data: {
+    desc: 'Save the given statements to the Anagolay Network. This operation waits until the records are in finalized state. Accepts the list of claims with the list of signatures for each claim. Mapping is done with the index of the list so `param1[0]` and `param2[0]`. If there are mismatches in the either of the params this operation will fail. Meaning that `param1.length === param2.length`',
+    name: 'save_statements',
+    input: [
+      {
+        data: 'AnByteArray',
+        decoded: 'AnAnagolayClaim[]',
+      },
+      {
+        data: 'AnByteArray',
+        decoded: 'AnAnagolaySignatures[]',
+      },
+    ],
+    output: {
+      desc: 'Return the List of signed statement IDs',
+      output: 'AnByteArray',
+      decoded: 'SaveStatementReturn[]',
+    },
+    groups: [6],
+    priority: 0,
+    hashingOp: 'cid',
+    encOp: 'enc_hex',
+    ops: [],
+  },
+}
+
+export default op

@@ -1,14 +1,15 @@
-import { SnGenericId, SnRule, SnRuleData } from '@sensio/types'
+import { AnGenericId, AnRule, AnRuleData } from '@anagolay/types'
+
 /**
  * Abstract Rule class, ALL rules must implement this class
  * @NOTE also this is testing for the different approach, Operations might benefit from this
  */
 export default abstract class BaseRule {
-  private ruleId: SnGenericId
-  private data: SnRuleData
+  private ruleId: AnGenericId
+  private data: AnRuleData
   private flow: (string | string[])[][]
 
-  constructor(config: SnRule) {
+  constructor(config: AnRule) {
     this.ruleId = config.id
     this.data = config.data
     this.flow = []
@@ -16,13 +17,13 @@ export default abstract class BaseRule {
   /**
    * Return rule id
    */
-  getRuleId(): SnGenericId {
+  getRuleId(): AnGenericId {
     return this.ruleId
   }
   /**
    * Return the rule data
    */
-  getData(): SnRuleData {
+  getData(): AnRuleData {
     return this.data
   }
   /**
@@ -48,15 +49,15 @@ export default abstract class BaseRule {
 
   const execOpFlowArray: PrepOpsForExec = [
   // Segment 1 --  block  before the User Interaction op
-  ['sn_cid', 'create_qr_code'],
+  ['cid', 'create_qr_code'],
   // Segment 2 --  user interaction block
   ['take_photo_and_upload_qrcode'], // take_photo_and_upload_qrcode(generateQrCodeOutput)
   // Segment 3 --  block  after the User Interaction op
-  [['sn_input', 'sn_cid'], 'sn_match_all', 'sn_prepare_ownership_statements'],
+  [['input', 'cid'], 'match_all', 'prepare_ownership_statements'],
   // Segment 4 -- user interaction block
   ['user_sign'],
   // Segment 5 -- non user interaction block
-  ['sn_input', 'sn_save_statements'],
+  ['input', 'save_statements'],
 ];
    */
   // async buildFlow(): Promise<string[][]> {
@@ -65,7 +66,7 @@ export default abstract class BaseRule {
   //    * Visit the Operation ref and get the npm and executable array
   //    * @param op
   //    */
-  //   async function visit(op: SnOperationReference): Promise<string> {
+  //   async function visit(op: AnOperationReference): Promise<string> {
   //     const { id, children } = op
   //     const { name } = find(propEq('id', id))(operationNamesWithIds) as OperationNameId
   //     const processedChildren = await Promise.all(children.map(async (o) => await visit(o)))
@@ -104,11 +105,13 @@ export default abstract class BaseRule {
    */
   *executeFlow(): IterableIterator<(string | string[])[]> {
     let iterationCount = 0
+
     // eslint-disable-next-line no-loops/no-loops
     for (let i = 0; i < this.flow.length; i += 1) {
       iterationCount++
       yield this.flow[i]
     }
+
     return iterationCount
   }
 }

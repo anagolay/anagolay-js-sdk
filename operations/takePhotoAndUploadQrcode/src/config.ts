@@ -1,0 +1,30 @@
+/**
+ * Operation specification
+ */
+import { AnOperation } from '@anagolay/types'
+
+export const op: AnOperation = {
+  id: 'bafymbzacidjhaxefbq6y7rkwabk2ken2wk7ax7or5ngikivjiayt2wcdctl366xr63o57pvdrwiwo44xzdnajouklezbeaawsxuijdci6x5jfgxq',
+  data: {
+    desc: 'Take the photo of the QRCode and do the verification of equality. If the verification is a successes the coperation will continue, if not user will be asked to resubmit the image. The photo taken MUST NOT BE MODIFIED, RESIZED AND MUST BE IN JPG OR JPEG. Medium or low size is better than large 10MB files. You can choose that in the camera settings',
+    name: 'take_photo_and_upload_qrcode',
+    input: [
+      {
+        data: 'AnByteArray',
+        decoded: 'AnString',
+      },
+    ],
+    output: {
+      desc: 'Return the QRCode data if it passes the decoding and verification.',
+      output: 'AnByteArray',
+      decoded: 'AnString',
+    },
+    groups: [5],
+    priority: 0,
+    hashingOp: 'cid',
+    encOp: 'enc_hex',
+    ops: [],
+  },
+}
+
+export default op

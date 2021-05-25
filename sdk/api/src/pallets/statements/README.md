@@ -1,1 +1,1 @@
-# sensio statement pallet
+# anagolay statement pallet

@@ -1,0 +1,42 @@
+{
+  "name": "@anagolay/op-save-statements",
+  "version": "0.4.8-alpha.4",
+  "license": "Apache-2.0",
+  "author": "daniel@woss.io",
+  "description": "Save the given statements to the Anagolay Network. This operation waits until the records are in finalized state. Accepts the list of claims with the list of signatures for each claim. Mapping is done with the index of the list so `param1[0]` and `param2[0]`. If there are mismatches in the either of the params this operation will fail. Meaning that `param1.length === param2.length`",
+  "main": "index",
+  "publishConfig": {
+    "access": "public",
+    "directory": "lib"
+  },
+  "keywords": [
+    "anagolay",
+    "operation",
+    "statements",
+    "blockchain"
+  ],
+  "scripts": {
+    "build": "tsc -b ."
+  },
+  "devDependencies": {
+    "typescript": "4.2.4",
+    "@anagolay/op-create-ownership-claims": "workspace:*"
+  },
+  "dependencies": {
+    "@anagolay/types": "workspace:*",
+    "@anagolay/util": "workspace:*",
+    "@anagolay/api": "workspace:*",
+    "@anagolay/core": "workspace:*",
+    "@anagolay/op-cid": "workspace:*",
+    "@anagolay/op-enc-hex": "workspace:*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.com/anagolay/network-js-sdk.git",
+    "directory": "operations/saveStatements"
+  },
+  "bugs": {
+    "url": "https://gitlab.com/anagolay/network-js-sdk/issues"
+  },
+  "homepage": "https://gitlab.com/anagolay/network-js-sdk/-/tree/master/operations/saveStatements#readme"
+}

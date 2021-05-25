@@ -1,10 +1,8 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
 /**
- * Creates camelCase string from any string, character that are after numbers are not camelized
- ```ts
-  const list = ['sn came case', 'Sn Camel case', 'sn-camel-case', 'sn_camel_case']
-  const l = list.map(l=>stringToCamelCase(l))
-  // ["snCameCase", "snCamelCase", "snCamelCase", "snCamelCase"]
-  ```
+ * Creates camelCase string from any string, character that are after numbers are not affected
  *
  * @param str String to make camelCase out of
  */

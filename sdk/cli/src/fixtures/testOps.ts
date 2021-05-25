@@ -1,35 +1,34 @@
-import { SnForWhat, SnOperationDataForCreating } from '@sensio/types'
+import { AnForWhat, AnOperationDataForCreating } from '@anagolay/types'
 
-export const ops: SnOperationDataForCreating[] = [
+export const ops: AnOperationDataForCreating[] = [
   {
     desc: 'Perceptual hash calculation, currently implementing http://blockhash.io/',
-    name: 'sn_image_phash',
+    name: 'image_phash',
     input: [
       {
-        data: 'SnByteArray',
-        decoded: 'SnFileBuffer',
+        data: 'AnByteArray',
+        decoded: 'AnFileBuffer',
       },
     ],
     output: {
       desc: 'Return binary representation of phash 0011101011',
-      output: 'SnByteArray',
-      decoded: 'SnString',
+      output: 'AnByteArray',
+      decoded: 'AnString',
     },
-    groups: [SnForWhat.SYS],
+    groups: [AnForWhat.SYS],
     priority: 1,
-    hashingOp: 'sn_cid',
-    encOp: 'sn_enc_hex',
+    hashingOp: 'cid',
+    encOp: 'enc_hex',
     ops: [],
-    opNames: ['sn_file'],
+    opNames: ['file'],
   },
   {
-    name: 'sn_file',
-    desc:
-      'Reads the file from given path (data) and returns the buffer. RAW file buffer for other ops to use.',
+    name: 'file',
+    desc: 'Reads the file from given path (data) and returns the buffer. RAW file buffer for other ops to use.',
     input: [
       {
-        data: 'SnByteArray',
-        decoded: 'SnString',
+        data: 'AnByteArray',
+        decoded: 'AnString',
       },
     ],
     groups: [6, 1],
@@ -37,33 +36,32 @@ export const ops: SnOperationDataForCreating[] = [
     priority: 0,
     output: {
       desc: 'Returns the File Buffer.',
-      output: 'SnByteArray',
-      decoded: 'SnFileBuffer',
+      output: 'AnByteArray',
+      decoded: 'AnFileBuffer',
     },
-    hashingOp: 'sn_cid',
-    encOp: 'sn_enc_hex',
+    hashingOp: 'cid',
+    encOp: 'enc_hex',
     opNames: [],
   },
   {
-    name: 'sn_image_metadata_hash',
-    desc:
-      'Hash of full unchanged metadata buffer (or similar). Without raw pixels. The hashing is done via multihash using the hashing key to create a hash. Figure out how to do it with the ops that are not children, like use snCid',
+    name: 'image_metadata_hash',
+    desc: 'Hash of full unchanged metadata buffer (or similar). Without raw pixels. The hashing is done via multihash using the hashing key to create a hash. Figure out how to do it with the ops that are not children, like use cid',
     input: [
       {
-        data: 'SnByteArray',
-        decoded: 'SnImageMetadata',
+        data: 'AnByteArray',
+        decoded: 'AnImageMetadata',
       },
     ],
     output: {
       desc: 'Hash of full unchanged metadata buffer (or similar). Without raw pixels',
-      output: 'SnByteArray',
-      decoded: 'SnGenericId',
+      output: 'AnByteArray',
+      decoded: 'AnGenericId',
     },
-    groups: [SnForWhat.SYS],
+    groups: [AnForWhat.SYS],
     priority: 1,
-    hashingOp: 'sn_cid',
-    encOp: 'sn_enc_hex',
+    hashingOp: 'cid',
+    encOp: 'enc_hex',
     ops: [],
-    opNames: ['sn_image_metadata'],
+    opNames: ['image_metadata'],
   },
 ]

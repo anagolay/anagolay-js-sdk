@@ -1,5 +1,7 @@
 import { StorageKey } from '@polkadot/types'
-import { OperationInfo, SnOperationWithStorage } from '@sensio/types'
+
+import { AnOperationWithStorage, OperationInfo } from '@anagolay/types'
+
 import decodeFromChain from './decodeFromChain'
 
 export type IncomingParam = [StorageKey, OperationInfo]
@@ -8,7 +10,7 @@ export type IncomingParam = [StorageKey, OperationInfo]
  * Decode Operation Query result from the chain
  * @param op
  */
-export function decodeStorage(op: IncomingParam): SnOperationWithStorage {
+export function decodeStorage(op: IncomingParam): AnOperationWithStorage {
   const [storageKey, operationInfo] = op
 
   return {

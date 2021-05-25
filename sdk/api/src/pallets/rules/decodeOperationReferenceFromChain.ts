@@ -1,6 +1,7 @@
-import decodeHexToString from '@sensio/api/utils/decodeHexToString'
-import { OperationReference, SnOperationReference } from '@sensio/types'
 import { map } from 'ramda'
+
+import decodeHexToString from '@anagolay/api/utils/decodeHexToString'
+import { AnOperationReference, OperationReference } from '@anagolay/types'
 
 /**
  * Decode the OperationReference from the chain
@@ -8,7 +9,7 @@ import { map } from 'ramda'
  */
 export default function decodeOperationReferenceFromChain(
   d: OperationReference,
-): SnOperationReference {
+): AnOperationReference {
   return {
     id: decodeHexToString(d.id),
     children: map(decodeOperationReferenceFromChain, d.children),

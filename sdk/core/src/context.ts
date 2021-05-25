@@ -1,14 +1,15 @@
-import { SnGenericId } from '@sensio/types'
 import { isNil } from 'ramda'
 
-const LOCAL_STORAGE_CURRENT_RULE_ID_KEY = 'sn::exec:currentRuleID'
+import { AnGenericId } from '@anagolay/types'
+
+const LOCAL_STORAGE_CURRENT_RULE_ID_KEY = 'an::exec:currentRuleID'
 
 interface ContextParams {
-  ruleId: SnGenericId
+  ruleId: AnGenericId
 }
 
-interface ConntextReturn {
-  ruleId: SnGenericId
+interface ContextReturn {
+  ruleId: AnGenericId
   executor: () => string
 }
 
@@ -17,17 +18,19 @@ interface ConntextReturn {
  */
 export function getCurrentRuleId(): string {
   const r = localStorage.getItem(LOCAL_STORAGE_CURRENT_RULE_ID_KEY)
+
   if (isNil(r)) {
     throw new Error('No cached ruleID, did you forget to create the context?')
+  } else {
+    return r
   }
-  return r
 }
 
 /**
  * Create the Context for the processing the rule for the browser
  * @param params
  */
-export function createBrowserContext(params: ContextParams): ConntextReturn {
+export function createBrowserContext(params: ContextParams): ContextReturn {
   if (typeof localStorage === 'undefined') {
     throw new Error('localStorage is not defined')
   }

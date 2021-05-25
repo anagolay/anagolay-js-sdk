@@ -4,7 +4,7 @@
     "creator": "did:substrate:5HnKtosumdYfHSifYKBHhNmoXvhDANCU8j8v7tc4p4pY7MMP/sensio-network",
     "desc": "Proof of existence for a photo.",
     "groups": [1],
-    "name": "Sensio Photo PoE rule",
+    "name": "Anagolay Photo PoE rule",
     "parentId": "",
     "version": 1,
     "ops": [

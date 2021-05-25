@@ -1,6 +1,6 @@
 import run from './index'
 
-describe('Rule: snPoCLO', (): void => {
+describe('Rule: PoCLO', (): void => {
   it('is default defined, run function', (): void => {
     expect(run).toBeDefined()
   })

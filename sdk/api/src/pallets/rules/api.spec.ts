@@ -6,6 +6,7 @@ import {
   save,
   saveBulk,
 } from './api'
+
 describe('pallet::rules::api::definitions', () => {
   it('should be defined :: save', () => {
     expect(save).toBeDefined()

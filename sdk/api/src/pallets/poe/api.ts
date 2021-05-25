@@ -6,13 +6,15 @@
  */
 import { SubmittableExtrinsic } from '@polkadot/api/types'
 import { KeyringPair } from '@polkadot/keyring/types'
-import { getApi } from '@sensio/api/connection'
-import createEventEmitter from '@sensio/api/events'
-import { networkCallback } from '@sensio/api/utils'
-import cleanArray from '@sensio/core/util/cleanArray'
-import { SnGenericId, SnGenericIds, SnProof, SnProofWithStorage } from '@sensio/types'
 import { EventEmitter } from 'events'
 import { isEmpty, map } from 'ramda'
+
+import { getApi } from '@anagolay/api/connection'
+import createEventEmitter from '@anagolay/api/events'
+import { networkCallback } from '@anagolay/api/utils'
+import cleanArray from '@anagolay/core/util/cleanArray'
+import { AnGenericId, AnGenericIds, AnProof, AnProofWithStorage } from '@anagolay/types'
+
 import { EVENT_NAME_BATCH, EVENT_NAME_SINGLE } from './config'
 import decodeFromStorage, { IncomingParam } from './decodeStorage'
 
@@ -35,7 +37,7 @@ import decodeFromStorage, { IncomingParam } from './decodeStorage'
  * })
  * ```
  */
-export async function save(d: SnProof, signer: KeyringPair): Promise<EventEmitter> {
+export async function save(d: AnProof, signer: KeyringPair): Promise<EventEmitter> {
   const broadcast = createEventEmitter()
 
   // @TODO if we need nonce in the future, this doesn't work
@@ -53,7 +55,7 @@ export async function save(d: SnProof, signer: KeyringPair): Promise<EventEmitte
  * @param d
  */
 export async function createSubmittableExtrinsics(
-  d: SnProof[],
+  d: AnProof[],
 ): Promise<Array<SubmittableExtrinsic<'promise'>>> {
   const txs = map(createSubmittableExtrinsic, d)
 
@@ -75,10 +77,11 @@ export async function createSubmittableExtrinsics(
   o.on(EVENT_NAME_BATCH, p => console.log(p.message))
   ```
  */
-export async function saveBulk(d: SnProof[], signer: KeyringPair): Promise<EventEmitter> {
+export async function saveBulk(d: AnProof[], signer: KeyringPair): Promise<EventEmitter> {
   const api = getApi()
   const broadcast = createEventEmitter()
   const txs = map(createSubmittableExtrinsic, d)
+
   // @TODO if we need nonce in the future, this doesn't work
   // const nonce = await api.rpc.system.accountNextIndex(signer.address)
   await api.tx.utility
@@ -96,6 +99,7 @@ export async function saveBulk(d: SnProof[], signer: KeyringPair): Promise<Event
  */
 export async function getAll(): Promise<IncomingParam[]> {
   const api = getApi()
+
   return await api.query.poe.proofs.entries()
 }
 
@@ -104,9 +108,10 @@ export async function getAll(): Promise<IncomingParam[]> {
  * @param items
  * @returns Return item maps SCALE codec encoded
  */
-export async function getPoe(item: SnGenericId): Promise<IncomingParam | undefined> {
+export async function getPoe(item: AnGenericId): Promise<IncomingParam | undefined> {
   const api = getApi()
   const networkItem = await api.query.poe.proofs.entries(item)
+
   if (isEmpty(networkItem)) {
     return undefined
   } else {
@@ -118,19 +123,22 @@ export async function getPoe(item: SnGenericId): Promise<IncomingParam | undefin
  * Get all PoE proofs from the network then return the list of the Decoded proofs
  * @returns Return item maps SCALE codec decoded
  */
-export async function getAllDecoded(): Promise<SnProofWithStorage[]> {
+export async function getAllDecoded(): Promise<AnProofWithStorage[]> {
   const d = await getAll()
   const cleanedArray = cleanArray<IncomingParam>(d)
+
   return map(decodeFromStorage, cleanedArray)
 }
+
 /**
  * Get some PoE proofs from the network then return the list of the Decoded proofs
  * @param items
  * @returns Return item maps SCALE codec decoded
  */
-export async function getSomeDecoded(items: SnGenericIds = []): Promise<SnProofWithStorage[]> {
+export async function getSomeDecoded(items: AnGenericIds = []): Promise<AnProofWithStorage[]> {
   const d = await Promise.all(items.map(async (i) => await getPoe(i))) // this will return [[record]]
   const cleanedArray = cleanArray<IncomingParam>(d)
+
   return map(decodeFromStorage, cleanedArray)
 }
 
@@ -145,7 +153,8 @@ export async function getSomeDecoded(items: SnGenericIds = []): Promise<SnProofW
  * @param d Typescript native SnProof
  *
  */
-export function createSubmittableExtrinsic(d: SnProof): SubmittableExtrinsic<'promise'> {
+export function createSubmittableExtrinsic(d: AnProof): SubmittableExtrinsic<'promise'> {
   const api = getApi()
+
   return api.tx.poe.createProof(d)
 }

@@ -4,40 +4,40 @@
  */
 
 import {
-  SnAccountId,
-  SnBlockNumber,
-  SnCreatorId,
-  SnForWhat,
-  SnGenericId,
-} from '../sensio/interfaces'
+  AnAccountId,
+  AnBlockNumber,
+  AnCreatorId,
+  AnForWhat,
+  AnGenericId,
+} from '../anagolay/interfaces'
 
-export interface SnRule {
-  id: SnGenericId
-  data: SnRuleData
+export interface AnRule {
+  id: AnGenericId
+  data: AnRuleData
 }
 
-export interface SnOperationReference {
-  id: SnGenericId
-  children: SnOperationReference[]
+export interface AnOperationReference {
+  id: AnGenericId
+  children: AnOperationReference[]
 }
 
-export interface SnRuleData {
+export interface AnRuleData {
   version: number
   name: string
   desc: string
-  creator: SnCreatorId
-  groups: SnForWhat[]
-  parentId: SnGenericId
-  ops: SnOperationReference[]
+  creator: AnCreatorId
+  groups: AnForWhat[]
+  parentId: AnGenericId
+  ops: AnOperationReference[]
 }
 
-export interface SnRuleWithStorage {
+export interface AnRuleWithStorage {
   storageKey: string
-  ruleInfo: SnRuleInfo
+  ruleInfo: AnRuleInfo
 }
 
-export interface SnRuleInfo {
-  rule: SnRule
-  accountId: SnAccountId
-  blockNumber: SnBlockNumber
+export interface AnRuleInfo {
+  rule: AnRule
+  accountId: AnAccountId
+  blockNumber: AnBlockNumber
 }

@@ -9,6 +9,7 @@ import {
   saveOwnership,
   saveOwnershipsBulk,
 } from './api'
+
 describe('pallet::statement::api::definitions', () => {
   it('should be defined :: saveCopyright', () => {
     expect(saveCopyright).toBeDefined()

@@ -1,11 +1,12 @@
-import { stringCamelCase } from '@polkadot/util'
-import { SnOperation } from '@sensio/types'
+import { AnOperation } from '@anagolay/types'
+import { stringCamelCase } from '@anagolay/util'
 
-const specIndex = (op: SnOperation): string => {
+const specIndex = (op: AnOperation): string => {
   const opName: string = stringCamelCase(op.data.name)
+
   return `import execute, {${opName}, config} from '.'
   
-    describe('SnOperation: ${opName}', (): void => {
+    describe('AnOperation: ${opName}', (): void => {
       it('is default defined', (): void => {
         expect(execute).toBeDefined()
       })

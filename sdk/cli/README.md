@@ -1,3 +1,3 @@
-# @sensio/cli
+# @anagolay/cli
 
 TODO

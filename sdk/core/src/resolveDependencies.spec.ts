@@ -1,9 +1,10 @@
-import { SnOperationDataForCreating } from '@sensio/types'
+import { AnOperationDataForCreating } from '@anagolay/types'
+
 import { IncompatibleInputParamChildOperationError } from './errors/IncompatibleInputParamChildOperation'
 import { multipleOnSameLevelOps, ops, resolvedOpDeps } from './fixtures/testOps'
 import resolveDependencies, { createInputFromOutput } from './resolveDependencies'
 
-let depsResolved: SnOperationDataForCreating[] = []
+let depsResolved: AnOperationDataForCreating[] = []
 
 beforeAll(async () => (depsResolved = await resolveDependencies(ops)))
 
@@ -19,25 +20,25 @@ describe('Core::Operation - resolveDependencies', (): void => {
   })
   it('should fail on empty string for dependency name', async (): Promise<void> => {
     expect.assertions(1)
-    const op: SnOperationDataForCreating[] = [
+    const op: AnOperationDataForCreating[] = [
       {
-        name: 'sn_file',
-        desc:
-          'Reads the file from given path (data) and returns the buffer. RAW file buffer for other ops to use.',
-        input: [{ data: 'SnByteArray', decoded: 'SnFileBuffer' }],
+        name: 'file',
+        desc: 'Reads the file from given path (data) and returns the buffer. RAW file buffer for other ops to use.',
+        input: [{ data: 'AnByteArray', decoded: 'AnFileBuffer' }],
         groups: [6, 1],
         ops: [],
         priority: 0,
         output: {
           desc: 'Returns the File Buffer.',
-          output: 'SnByteArray',
-          decoded: 'SnFileBuffer',
+          output: 'AnByteArray',
+          decoded: 'AnFileBuffer',
         },
         hashingOp: '',
         encOp: '',
         opNames: [''],
       },
     ]
+
     try {
       await resolveDependencies(op)
     } catch (e) {
@@ -46,25 +47,25 @@ describe('Core::Operation - resolveDependencies', (): void => {
   })
   it('should fail on circular dependency', async (): Promise<void> => {
     expect.assertions(1)
-    const op: SnOperationDataForCreating[] = [
+    const op: AnOperationDataForCreating[] = [
       {
-        name: 'sn_file',
-        desc:
-          'Reads the file from given path (data) and returns the buffer. RAW file buffer for other ops to use.',
-        input: [{ data: 'SnByteArray', decoded: 'SnFileBuffer' }],
+        name: 'file',
+        desc: 'Reads the file from given path (data) and returns the buffer. RAW file buffer for other ops to use.',
+        input: [{ data: 'AnByteArray', decoded: 'AnFileBuffer' }],
         groups: [6, 1],
         ops: [],
         priority: 0,
         output: {
           desc: 'Returns the File Buffer.',
-          output: 'SnByteArray',
-          decoded: 'SnFileBuffer',
+          output: 'AnByteArray',
+          decoded: 'AnFileBuffer',
         },
         hashingOp: '',
         encOp: '',
-        opNames: ['sn_file'],
+        opNames: ['file'],
       },
     ]
+
     try {
       await resolveDependencies(op)
     } catch (e) {
@@ -86,90 +87,88 @@ describe('Core::Operation - resolveDependencies', (): void => {
     expect(opOutputFirstDirectChild.decoded).toBe(opInputFirstDirectChild.decoded)
   })
   it('should have correct amount of input params', async (): Promise<void> => {
-    const op: SnOperationDataForCreating[] = [
+    const op: AnOperationDataForCreating[] = [
       {
-        name: 'sn_file',
-        desc:
-          'Reads the file from given path (data) and returns the buffer. RAW file buffer for other ops to use.',
-        input: [{ data: 'SnByteArray', decoded: 'SnFileBuffer' }],
+        name: 'file',
+        desc: 'Reads the file from given path (data) and returns the buffer. RAW file buffer for other ops to use.',
+        input: [{ data: 'AnByteArray', decoded: 'AnFileBuffer' }],
         groups: [6, 1],
         ops: [],
         priority: 0,
         output: {
           desc: 'Returns the File Buffer.',
-          output: 'SnByteArray',
-          decoded: 'SnFileBuffer',
+          output: 'AnByteArray',
+          decoded: 'AnFileBuffer',
         },
         hashingOp: '',
         encOp: '',
         opNames: [],
       },
       {
-        name: 'sn_file_copy',
-        desc:
-          'Reads the file from given path (data) and returns the buffer. RAW file buffer for other ops to use.',
-        input: [{ data: 'SnByteArray', decoded: 'SnFileBuffer' }],
+        name: 'file_copy',
+        desc: 'Reads the file from given path (data) and returns the buffer. RAW file buffer for other ops to use.',
+        input: [{ data: 'AnByteArray', decoded: 'AnFileBuffer' }],
         groups: [6, 1],
         ops: [],
         priority: 0,
         output: {
           desc: 'Returns the File Buffer.',
-          output: 'SnByteArray',
-          decoded: 'SnFileBuffer',
+          output: 'AnByteArray',
+          decoded: 'AnFileBuffer',
         },
         hashingOp: '',
         encOp: '',
-        opNames: ['sn_file'],
+        opNames: ['file'],
       },
     ]
     const depsResolved = await resolveDependencies(op)
     const correctOpForInput = depsResolved[0]
     const incorrectOpForInput = depsResolved[1]
+
     expect(correctOpForInput.input.length).toBe(1)
     expect(incorrectOpForInput.input.length).toBe(1)
   })
   it('should have correct amount of children on the same level', async (): Promise<void> => {
     const depsResolved = await resolveDependencies(multipleOnSameLevelOps)
     const correctOp = depsResolved[3].ops[0]
+
     expect(correctOp.ops.length).toBe(2)
   })
   it('should fail for wrong type of operation input <-> output', async (): Promise<void> => {
     expect.assertions(3)
 
-    const op: SnOperationDataForCreating[] = [
+    const op: AnOperationDataForCreating[] = [
       {
-        name: 'sn_file',
-        desc:
-          'Reads the file from given path (data) and returns the buffer. RAW file buffer for other ops to use.',
-        input: [{ data: 'SnByteArray', decoded: 'SnFileBuffer' }],
+        name: 'file',
+        desc: 'Reads the file from given path (data) and returns the buffer. RAW file buffer for other ops to use.',
+        input: [{ data: 'AnByteArray', decoded: 'AnFileBuffer' }],
         groups: [6, 1],
         ops: [],
         priority: 0,
         output: {
           desc: 'Returns the File Buffer.',
-          output: 'SnByteArray',
-          decoded: 'SnFileBuffer',
+          output: 'AnByteArray',
+          decoded: 'AnFileBuffer',
         },
         hashingOp: '',
         encOp: '',
         opNames: [],
       },
       {
-        name: 'sn_file_copy',
-        desc:
-          'Reads the file from given path (data) and returns the buffer. RAW file buffer for other ops to use.',
-        input: [{ data: 'SnByteArray', decoded: 'SnString' }],
+        name: 'file_copy',
+        desc: 'Reads the file from given path (data) and returns the buffer. RAW file buffer for other ops to use.',
+        input: [{ data: 'AnByteArray', decoded: 'AnString' }],
         groups: [6, 1],
         ops: [],
         priority: 0,
         output: {
           desc: 'Returns the File Buffer.',
-          output: 'SnByteArray',
-          decoded: 'SnFileBuffer',
+          output: 'AnByteArray',
+          decoded: 'AnFileBuffer',
         },
         hashingOp: '',
         encOp: '',
-        opNames: ['sn_file'],
+        opNames: ['file'],
       },
     ]
 
@@ -188,57 +187,54 @@ describe('Core::Operation - resolveDependencies', (): void => {
     }
   })
   it('should succeed FlowControl operation with multiple children', async (): Promise<void> => {
-    const op: SnOperationDataForCreating[] = [
+    const op: AnOperationDataForCreating[] = [
       {
-        name: 'sn_match_all',
-        desc:
-          'This operation must have children ops. **ALL** the outputs of children ops must be the same in order to proceed.',
+        name: 'match_all',
+        desc: 'This operation must have children ops. **ALL** the outputs of children ops must be the same in order to proceed.',
         input: [],
         groups: [6, 7],
         ops: [],
         priority: 0,
         output: {
           desc: 'Returns true, if all match or throws an error if some match.',
-          output: 'SnBoolean',
-          decoded: 'SnBoolean',
+          output: 'AnBoolean',
+          decoded: 'AnBoolean',
         },
         hashingOp: '',
         encOp: '',
-        opNames: ['sn_file', 'sn_file_copy'],
+        opNames: ['file', 'file_copy'],
       },
       {
-        name: 'sn_file',
-        desc:
-          'Reads the file from given path (data) and returns the buffer. RAW file buffer for other ops to use.',
-        input: [{ data: 'SnByteArray', decoded: 'SnFileBuffer' }],
+        name: 'file',
+        desc: 'Reads the file from given path (data) and returns the buffer. RAW file buffer for other ops to use.',
+        input: [{ data: 'AnByteArray', decoded: 'AnFileBuffer' }],
         groups: [6, 1],
         ops: [],
         priority: 0,
         output: {
           desc: 'Returns the File Buffer.',
-          output: 'SnByteArray',
-          decoded: 'SnFileBuffer',
+          output: 'AnByteArray',
+          decoded: 'AnFileBuffer',
         },
         hashingOp: '',
         encOp: '',
         opNames: [],
       },
       {
-        name: 'sn_file_copy',
-        desc:
-          'Reads the file from given path (data) and returns the buffer. RAW file buffer for other ops to use.',
-        input: [{ data: 'SnByteArray', decoded: 'SnFileBuffer' }],
+        name: 'file_copy',
+        desc: 'Reads the file from given path (data) and returns the buffer. RAW file buffer for other ops to use.',
+        input: [{ data: 'AnByteArray', decoded: 'AnFileBuffer' }],
         groups: [6, 1],
         ops: [],
         priority: 0,
         output: {
           desc: 'Returns the File Buffer.',
-          output: 'SnByteArray',
-          decoded: 'SnFileBuffer',
+          output: 'AnByteArray',
+          decoded: 'AnFileBuffer',
         },
         hashingOp: '',
         encOp: '',
-        opNames: ['sn_file'],
+        opNames: ['file'],
       },
     ]
 
@@ -250,6 +246,7 @@ describe('Core::Operation - resolveDependencies', (): void => {
     expect(fcOp.input.length).toBe(2)
 
     const inputs = fcOp.ops.map(createInputFromOutput)
+
     expect(inputs).toEqual(fcOp.input)
   })
 })

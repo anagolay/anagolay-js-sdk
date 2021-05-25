@@ -1,15 +1,17 @@
-import decodeHexToString from '@sensio/api/utils/decodeHexToString'
-import { Rule, SnRule } from '@sensio/types'
 import { map } from 'ramda'
+
+import decodeHexToString from '@anagolay/api/utils/decodeHexToString'
+import { AnRule, Rule } from '@anagolay/types'
+
 import decodeOperationReferenceFromChain from './decodeOperationReferenceFromChain'
 
 /**
  * Decodes the rule from the chain to readable object
  * @param d Rule from the Network, SCALE codec encoded
  */
-export function decodeFromChain(d: Rule): SnRule {
+export function decodeFromChain(d: Rule): AnRule {
   const { data } = d
-  const decoded: SnRule = {
+  const decoded: AnRule = {
     id: decodeHexToString(d.id),
     data: {
       version: data.version.toNumber(),
@@ -21,6 +23,7 @@ export function decodeFromChain(d: Rule): SnRule {
       ops: map(decodeOperationReferenceFromChain, data.ops),
     },
   }
+
   return decoded
 }
 

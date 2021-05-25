@@ -1,3 +1,3 @@
-# API for the Sensio Network Rule pallet
+# API for the Anagolay Network Rule pallet
 
 @TODO

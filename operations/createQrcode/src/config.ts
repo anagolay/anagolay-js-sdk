@@ -1,0 +1,30 @@
+/**
+ * Operation specification
+ */
+import { AnOperation } from '@anagolay/types'
+
+export const op: AnOperation = {
+  id: 'bafymbzacic67m7kcriqfpm6ilmlfdbkvx2vasjq4db5jgmgijubub6o323kutxuvkcc2ktkmlane2dogsnqv55od4u45sow4xcbqfrjmxpyloxbc',
+  data: {
+    desc: 'Create QR Code',
+    name: 'create_qrcode',
+    input: [
+      {
+        data: 'AnByteArray',
+        decoded: 'AnAny',
+      },
+    ],
+    output: {
+      desc: 'Return QRCode image',
+      output: 'AnByteArray',
+      decoded: 'AnString',
+    },
+    groups: [6],
+    priority: 0,
+    hashingOp: 'cid',
+    encOp: 'enc_hex',
+    ops: [],
+  },
+}
+
+export default op
