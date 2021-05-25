@@ -1,5 +1,7 @@
 import { StorageKey } from '@polkadot/types'
-import { SnStatementWithStorage, StatementInfo } from '@sensio/types'
+
+import { AnStatementWithStorage, StatementInfo } from '@anagolay/types'
+
 import decodeFromChain from './decodeFromChain'
 
 export type IncomingParam = [StorageKey, StatementInfo]
@@ -9,7 +11,7 @@ export type IncomingParam = [StorageKey, StatementInfo]
  * @param d
  */
 
-export function decodeFromStatementStorage(d: IncomingParam): SnStatementWithStorage {
+export function decodeFromStatementStorage(d: IncomingParam): AnStatementWithStorage {
   const [storageKey, statementInfo] = d
 
   return {

@@ -1,0 +1,43 @@
+{
+  "name": "@anagolay/op-user-sign-claims",
+  "version": "0.4.8-alpha.4",
+  "license": "Apache-2.0",
+  "author": "daniel@woss.io",
+  "description": "Sign the claims and return the tuple of claims and their signatures",
+  "main": "index",
+  "publishConfig": {
+    "access": "public",
+    "directory": "lib"
+  },
+  "keywords": [
+    "anagolay",
+    "operation",
+    "blockchain",
+    "signing",
+    "user"
+  ],
+  "scripts": {
+    "build": "tsc -b ."
+  },
+  "devDependencies": {
+    "typescript": "4.1.2"
+  },
+  "dependencies": {
+    "@anagolay/types": "workspace:*",
+    "@anagolay/util": "workspace:*",
+    "@anagolay/api": "workspace:*",
+    "@anagolay/core": "workspace:*",
+    "@anagolay/op-cid": "workspace:*",
+    "@anagolay/op-enc-hex": "workspace:*",
+    "@anagolay/op-json-enc": "workspace:*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.com/anagolay/network-js-sdk.git",
+    "directory": "operations/userSignClaims"
+  },
+  "bugs": {
+    "url": "https://gitlab.com/anagolay/network-js-sdk/issues"
+  },
+  "homepage": "https://gitlab.com/anagolay/network-js-sdk/-/tree/master/operations/userSignClaims#readme"
+}

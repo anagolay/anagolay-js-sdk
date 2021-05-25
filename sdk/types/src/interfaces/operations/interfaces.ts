@@ -4,56 +4,56 @@
  */
 
 import {
+  AnInputParamsDefinition,
+  AnString,
   output,
   outputDecoded,
-  SnInputParamsDefinition,
-  SnString,
-} from '../../sensio-type-mappings'
-import { SnAccountId, SnBlockNumber, SnForWhat, SnGenericId } from '../sensio/interfaces'
+} from '../../anagolay-type-mappings'
+import { AnAccountId, AnBlockNumber, AnForWhat, AnGenericId } from '../anagolay/interfaces'
 
-export interface SnOperationOutput {
+export interface AnOperationOutput {
   desc: string
   output: output
   decoded: outputDecoded
 }
 
-export interface SnOperationInfo {
-  operation: SnOperation
-  accountId: SnAccountId
-  blockNumber: SnBlockNumber
+export interface AnOperationInfo {
+  operation: AnOperation
+  accountId: AnAccountId
+  blockNumber: AnBlockNumber
 }
 
-export interface SnOperationWithStorage {
+export interface AnOperationWithStorage {
   storageKey: string
-  operationInfo: SnOperationInfo
+  operationInfo: AnOperationInfo
 }
 
-export interface SnOperation {
-  id: SnGenericId
-  data: SnOperationData
+export interface AnOperation {
+  id: AnGenericId
+  data: AnOperationData
 }
 
-export interface SnOperationData {
+export interface AnOperationData {
   name: string
   desc: string
-  input: SnInputParamsDefinition[]
-  output: SnOperationOutput
-  hashingOp: SnString
-  encOp: SnString
-  groups: SnForWhat[]
+  input: AnInputParamsDefinition[]
+  output: AnOperationOutput
+  hashingOp: AnString
+  encOp: AnString
+  groups: AnForWhat[]
   priority: number
-  ops: SnOperation[]
+  ops: AnOperation[]
 }
 
-export interface SnOperationDataForCreating {
+export interface AnOperationDataForCreating {
   opNames: string[]
   name: string
   desc: string
-  input: SnInputParamsDefinition[]
-  output: SnOperationOutput
-  hashingOp: SnString
-  encOp: SnString
-  groups: SnForWhat[]
+  input: AnInputParamsDefinition[]
+  output: AnOperationOutput
+  hashingOp: AnString
+  encOp: AnString
+  groups: AnForWhat[]
   priority: number
-  ops: SnOperationDataForCreating[]
+  ops: AnOperationDataForCreating[]
 }

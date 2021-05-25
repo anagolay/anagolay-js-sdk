@@ -1,0 +1,38 @@
+{
+  "name": "@anagolay/op-file",
+  "version": "0.4.8-alpha.4",
+  "license": "Apache-2.0",
+  "author": "daniel@woss.io",
+  "type": "module",
+  "main": "index",
+  "publishConfig": {
+    "access": "public",
+    "directory": "lib"
+  },
+  "keywords": [
+    "anagolay",
+    "operation",
+    "file",
+    "readfile"
+  ],
+  "scripts": {
+    "build": "tsc -b ."
+  },
+  "devDependencies": {
+    "typescript": "4.1.2"
+  },
+  "dependencies": {
+    "@anagolay/util": "workspace:*",
+    "@anagolay/core": "workspace:*",
+    "@anagolay/types": "workspace:*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.com/anagolay/network-js-sdk.git",
+    "directory": "operations/file"
+  },
+  "bugs": {
+    "url": "https://gitlab.com/anagolay/network-js-sdk/issues"
+  },
+  "homepage": "https://gitlab.com/anagolay/network-js-sdk/-/tree/master/operations/file#readme"
+}

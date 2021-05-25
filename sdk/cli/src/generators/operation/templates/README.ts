@@ -1,12 +1,13 @@
 /*  eslint-disable @typescript-eslint/restrict-template-expressions */
-import generateNpmName from '@sensio/core/util/generateNpmName'
-import stringToCamelCase from '@sensio/core/util/stringToCamelCase'
-import { SnOperation } from '@sensio/types'
+import generateNpmName from '@anagolay/core/util/generateNpmName'
+import stringToCamelCase from '@anagolay/core/util/stringToCamelCase'
+import { AnOperation } from '@anagolay/types'
 
-export default function generate(op: SnOperation): string {
+export default function generate(op: AnOperation): string {
   const npmName = generateNpmName(op.data.name)
   const opName: string = stringToCamelCase(op.data.name)
   const version = '0.1.0'
+
   return `
   # ${npmName}
 
@@ -20,7 +21,7 @@ export default function generate(op: SnOperation): string {
   ##  Links and Repo
 
   * npm: https://www.npmjs.com/package/${npmName}
-  * repo: [repo folder](https://gitlab.com/sensio_group/network-js-sdk/-/tree/master/operations/${opName})
+  * repo: [repo folder](https://gitlab.com/anagolay/network-js-sdk/-/tree/master/operations/${opName})
   * support: [Discord server #public-support channel](https://discord.gg/RQ9g29y) 
 
   ## Install

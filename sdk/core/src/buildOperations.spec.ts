@@ -1,11 +1,12 @@
-import { SnOperation, SnOperationDataForCreating } from '@sensio/types'
-import buildOperations from './buildOperations'
-import { multipleOnSameLevelOps } from './fixtures/testOps'
-import { resolveDependencies } from './resolveDependencies'
-import { calculateOperationId } from './util/hashing'
+import { AnOperation, AnOperationDataForCreating } from '@anagolay/types'
 
-let depsResolved: SnOperationDataForCreating[] = []
-let testOps: SnOperation[] = []
+import { multipleOnSameLevelOps } from './fixtures/testOps'
+import { calculateOperationId } from './util/hashing'
+import buildOperations from './buildOperations'
+import { resolveDependencies } from './resolveDependencies'
+
+let depsResolved: AnOperationDataForCreating[] = []
+let testOps: AnOperation[] = []
 
 beforeAll(async () => {
   depsResolved = await resolveDependencies(multipleOnSameLevelOps)
@@ -23,16 +24,19 @@ describe('Core::Operation - operationBuilder', (): void => {
     // deep children
     const testOp1 = testOps[3].data.ops[0].data.ops[0]
     const test1 = await calculateOperationId(testOp1.data)
+
     expect(test1).toBe(testOp1.id)
 
     // one step up
     const testOp2 = testOps[3].data.ops[0]
     const test2 = await calculateOperationId(testOp2.data)
+
     expect(test2).toBe(testOp2.id)
 
     // one step up  === ROOT
     const testOp3 = testOps[3]
     const test3 = await calculateOperationId(testOp3.data)
+
     expect(test3).toBe(testOp3.id)
   })
 })

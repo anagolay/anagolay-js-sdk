@@ -1,14 +1,14 @@
-# All Sensio Network custom types and interfaces
+# All Anagolay Network custom types and interfaces
 
-This module cantinas ALL custom types for interaction with the Sensio Network and the Sensio Network API.
+This module cantinas ALL custom types for interaction with the Anagolay Network and the Anagolay Network API.
 
 ## Generation
 
 This module is built on excellent `polkadot-types-from-defs` and `polkadot-types-from-chain` plus some of our magic for mapping the Generic Types into the Javascript friendly interfaces.
 
-Full list of `Sensio*` Generic Types to -> Javascript native types can be found in `sensio-type-mappings.ts` file.
+Full list of `Anagolay*` Generic Types to -> Javascript native types can be found in `anagolay-type-mappings.ts` file.
 
-To generate new types and api augmentations you must have Sensio Network chain running. Check how to do that HERE.
+To generate new types and api augmentations you must have Anagolay Network chain running. Check how to do that HERE.
 
 ```sh
 yarn gen:types
@@ -17,9 +17,9 @@ yarn gen:types
 This will connect to the chain and generate:
 
 - create interfaces and augmentations for the standard substrate chain
-- create constants, types and augmentations for the Sensio [Pallets](https://gitlab.com/sensio_group/network-js/-/tree/6-create-operations-package-and-move-existing-ops-from-the-explorer/sdk/api/src/pallets)
+- create constants, types and augmentations for the Anagolay [Pallets](https://gitlab.com/anagolay/network-js/-/tree/6-create-operations-package-and-move-existing-ops-from-the-explorer/sdk/api/src/pallets)
 - create `NetworkCustomTypes.json` which can be pasted into the PolkadotJs app
-- save the chain metadata in the `sensio-network.json` file
+- save the chain metadata in the `anagolay-network.json` file
 
 **At the moment you have to go to all pallets `types.ts` file and change the `./` into `../`. There is a unresolved issue with the path. **
 
@@ -57,12 +57,12 @@ The interface structure looks like this:
 │   ├── index.ts
 │   ├── interfaces.ts
 │   └── types.ts
-├── sensio
+├── anagolay
 │   ├── definitions.ts
 │   ├── index.ts
 │   ├── interfaces.ts
 │   └── types.ts
-├── sensio-type-mappings.ts
+├── anagolay-type-mappings.ts
 ├── statements
 │   ├── definitions.ts
 │   ├── index.ts

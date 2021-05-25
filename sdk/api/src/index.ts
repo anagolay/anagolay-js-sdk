@@ -1,5 +1,6 @@
-import '@sensio/types/interfaces/augment-api'
-import '@sensio/types/interfaces/augment-types'
+import '@anagolay/types/interfaces/augment-api'
+import '@anagolay/types/interfaces/augment-types'
+
 import api from './api'
 import * as pallets from './pallets'
 import * as utils from './utils'
@@ -11,3 +12,5 @@ export default {
   api,
   utils,
 }
+
+export {}

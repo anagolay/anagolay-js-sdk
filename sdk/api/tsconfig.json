@@ -4,12 +4,12 @@
     "outDir": "lib",
     "rootDir": "src"
   },
-  "include": ["src"],
+  "include": ["src/**/*.ts"],
   "exclude": ["lib"],
   "references": [
     { "path": "../core" },
     { "path": "../types" },
-    { "path": "../../operations/snCid" },
-    { "path": "../../operations/snJsonEnc" }
+    { "path": "../../operations/cid" },
+    { "path": "../../operations/jsonEnc" }
   ]
 }

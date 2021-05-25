@@ -1,23 +1,26 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable no-console */
-import { stringToHex } from '@polkadot/util'
-import api from '@sensio/api'
-import { EVENT_NAME_BATCH as operatonEventName } from '@sensio/api/pallets/operations/config'
-import { getAlice } from '@sensio/api/utils/accounts'
-import calculateRecordCid from '@sensio/api/utils/calculateRecordCid'
-import saveBatch from '@sensio/api/utils/saveBatch'
-import replaceOperationNames from '@sensio/core/replaceOperationNames'
+import api from '@anagolay/api'
+import { EVENT_NAME_BATCH as operationEventName } from '@anagolay/api/pallets/operations/config'
+import { getAlice } from '@anagolay/api/utils/accounts'
+import calculateRecordCid from '@anagolay/api/utils/calculateRecordCid'
+import saveBatch from '@anagolay/api/utils/saveBatch'
+import replaceOperationNames from '@anagolay/core/replaceOperationNames'
 import {
-  SnOperation,
-  SnOperationWithStorage,
-  SnProof,
-  SnProofData,
-  SnRule,
-  SnRuleWithStorage,
-  SnSensioClaim,
-  SnStatement,
-  SnStatementData,
-  SnStatementWithStorage,
-} from '@sensio/types'
+  AnAnagolayClaim,
+  AnOperation,
+  AnOperationWithStorage,
+  AnProof,
+  AnProofData,
+  AnProofWithStorage,
+  AnRule,
+  AnRuleWithStorage,
+  AnStatement,
+  AnStatementData,
+  AnStatementWithStorage,
+} from '@anagolay/types'
+import { stringToHex } from '@anagolay/util'
 import { compose, descend, map, prop, sort } from 'ramda'
 import ops from './fixtures/allOperations'
 import * as testData from './fixtures/testFixtures'
@@ -29,15 +32,16 @@ export async function saveOpsToChain(): Promise<void> {
   // init the api
   await api.api.setupConnection()
 
-  const operations: SnOperation[] = ops
+  const operations: AnOperation[] = ops
 
   const signer = getAlice()
   const o = await api.pallets.operations.saveOperationsBulk(operations, signer)
 
-  o.on(operatonEventName, (p) => {
+  o.on(operationEventName, (p) => {
     if (p.error) {
       console.error(p)
     }
+
     if (p.finalized) {
       process.exit(0)
     }
@@ -52,6 +56,7 @@ export async function operationsFromChain(): Promise<void> {
   await api.api.setupConnection()
 
   const opsFromChain = await api.pallets.operations.getAllDecoded()
+
   console.info('getting stuff from chain')
   interface TableRowItem {
     id: string
@@ -60,7 +65,7 @@ export async function operationsFromChain(): Promise<void> {
     priority: number
   }
 
-  function makeTableRow(o: SnOperationWithStorage): TableRowItem {
+  function makeTableRow(o: AnOperationWithStorage): TableRowItem {
     return {
       id: o.operationInfo.operation.id,
       name: o.operationInfo.operation.data.name,
@@ -74,6 +79,35 @@ export async function operationsFromChain(): Promise<void> {
   console.table(compose(sortByPriority, map(makeTableRow))(opsFromChain))
   process.exit(0)
 }
+
+/**
+ * Get All PoE from the chain
+ */
+export async function proofsFromChain(): Promise<void> {
+  // init the api
+  await api.api.setupConnection()
+
+  const data = await api.pallets.poe.getAllDecoded()
+
+  console.info('getting stuff from chain')
+  interface TableRowItem {
+    idHex: string
+    id?: string
+    accountId?: string
+  }
+
+  function makeTableRow(o: AnProofWithStorage): TableRowItem {
+    return {
+      // id: o.proofInfo.proof.id,
+      idHex: stringToHex(o.proofInfo.proof.id),
+      // accountId: o.proofInfo.accountId,
+    }
+  }
+
+  console.table(map(makeTableRow)(data))
+  process.exit(0)
+}
+
 /**
  * Get All rules from the chain
  */
@@ -92,7 +126,7 @@ export async function rulesFromChain(): Promise<void> {
     hexId: string
   }
 
-  function makeTableRow(o: SnRuleWithStorage): TableRowItem {
+  function makeTableRow(o: AnRuleWithStorage): TableRowItem {
     return {
       id: o.ruleInfo.rule.id,
       name: o.ruleInfo.rule.data.name,
@@ -105,6 +139,7 @@ export async function rulesFromChain(): Promise<void> {
   console.table(map(makeTableRow)(rules))
   process.exit(0)
 }
+
 /**
  * Get All statements from the chain
  */
@@ -123,7 +158,7 @@ export async function statementsFromChain(): Promise<void> {
     hexId: string
   }
 
-  function makeTableRow(o: SnStatementWithStorage): TableRowItem {
+  function makeTableRow(o: AnStatementWithStorage): TableRowItem {
     return {
       id: o.statementInfo.statement.id,
       poeId: o.statementInfo.statement.data.claim.poeId,
@@ -136,6 +171,7 @@ export async function statementsFromChain(): Promise<void> {
   console.table(map(makeTableRow)(statements))
   process.exit(0)
 }
+
 /**
  * Revoke All statements
  */
@@ -147,8 +183,10 @@ export async function revokeAllStatements(): Promise<void> {
   const ids = statements.map((s) => s.statementInfo.statement.id)
   const signer = getAlice()
   const o = await api.pallets.statements.revokeStatementsBulk(ids, signer)
-  o.on(operatonEventName, (p) => {
+
+  o.on(operationEventName, (p) => {
     console.log(p.message)
+
     if (p.finalized) {
       process.exit(0)
     }
@@ -162,15 +200,16 @@ export async function installFixtures(): Promise<void> {
     const signer = getAlice()
 
     // 1. create ops
-    const operations: SnOperation[] = ops
+    const operations: AnOperation[] = ops
 
     const o = await api.pallets.operations.createSubmittableExtrinsics(operations)
 
     // 2. create rules
-    const rules: SnRule[] = await Promise.all(
+    const rules: AnRule[] = await Promise.all(
       testData.testRules.map(async (r) => {
         const ops = await replaceOperationNames(r.ops)
         const data = { ...r, ops }
+
         return {
           id: await calculateRecordCid(data),
           data,
@@ -181,12 +220,13 @@ export async function installFixtures(): Promise<void> {
     const r = await api.pallets.rules.createSubmittableExtrinsics(rules)
 
     // 3. create poe
-    const proofs: SnProof[] = await Promise.all(
+    const proofs: AnProof[] = await Promise.all(
       testData.testPoe.map(async (r) => {
-        const data: SnProofData = {
+        const data: AnProofData = {
           ...r,
-          ruleId: rules[r.ruleId.split(':')[1]].id,
+          ruleId: rules[parseInt(r.ruleId.split(':')[1])].id,
         }
+
         return {
           id: await calculateRecordCid(data),
           data,
@@ -196,18 +236,19 @@ export async function installFixtures(): Promise<void> {
     const p = await api.pallets.poe.createSubmittableExtrinsics(proofs)
 
     // 4. add ownership statements
-    const statements: SnStatement[] = await Promise.all(
+    const statements: AnStatement[] = await Promise.all(
       testData.testStatements.map(async (r) => {
-        const claim: SnSensioClaim = {
+        const claim: AnAnagolayClaim = {
           ...r.claim,
-          poeId: proofs[r.claim.poeId.split(':')[1]].id,
-          ruleId: rules[r.claim.ruleId.split(':')[1]].id,
+          poeId: proofs[parseInt(r.claim.poeId.split(':')[1])].id,
+          ruleId: rules[parseInt(r.claim.ruleId.split(':')[1])].id,
         }
 
-        const data: SnStatementData = {
+        const data: AnStatementData = {
           claim,
           signatures: r.signatures,
         }
+
         return {
           id: await calculateRecordCid(data),
           data,
@@ -218,8 +259,10 @@ export async function installFixtures(): Promise<void> {
 
     const txs = [...o, ...r, ...p, ...s]
     const b = await saveBatch(txs, signer)
+
     b.on('utils::txs::batch', (p) => {
       console.log('batch', p.message)
+
       if (p.finalized) {
         process.exit(0)
       }

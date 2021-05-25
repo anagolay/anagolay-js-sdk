@@ -1,4 +1,4 @@
-image: node:14
+image: woss/pnpm
 
 workflow:
   rules:
@@ -13,10 +13,21 @@ include:
   - template: Security/SAST.gitlab-ci.yml
   - template: Security/Secret-Detection.gitlab-ci.yml
 
-cache:
+cache: &global_cache
   key: ${CI_COMMIT_REF_SLUG}
   paths:
     - node_modules/
+    - .pnpm-store
+  policy: pull-push
+
+.before_script_install_deps_template:
+  cache:
+    # inherit all global cache settings
+    <<: *global_cache
+    # override the policy
+    policy: pull
+  before_script:
+    - pnpm i
 
 stages:
   - dependencies
@@ -27,39 +38,41 @@ stages:
 
 dependencies:
   stage: dependencies
+  before_script:
+    - pnpm config set store-dir .pnpm-store
   script:
-    - yarn
-
-lint:
-  stage: lint
-  needs: [dependencies]
-  script:
-    - yarn lint
+    - pnpm i
+# lint:
+#   extends: .before_script_install_deps_template
+#   stage: lint
+#   needs: [dependencies]
+#   script:
+#     - pnpm lint
 
 test:
+  extends: .before_script_install_deps_template
   stage: test
   needs: [dependencies]
   script:
-    - yarn test:coverage
+    - pnpm i && pnpm test:coverage -- --testPathIgnorePatterns operations
   coverage: /All\sfiles.*?\s+(\d+.\d+)/
   tags:
     - docker
+# pages:
+#   stage: docs
+#   needs: [dependencies]
+#   script:
+#     - pnpm docs
+#   artifacts:
+#     paths:
+#       - public
+#   only:
+#     - master
 
-pages:
-  stage: docs
-  needs: [dependencies]
-  script:
-    - yarn docs
-  artifacts:
-    paths:
-      - public
-  only:
-    - master
-
-build:
-  stage: build
-  needs: [dependencies, test]
-  script:
-    - yarn build
-  only:
-    - merge_requests
+# build:
+#   stage: build
+#   needs: [dependencies, test]
+#   script:
+#     - pnpm build
+#   only:
+#     - merge_requests

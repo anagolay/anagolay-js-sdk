@@ -1,1 +1,1 @@
-# `@sensio/core`
+# `@anagolay/core`

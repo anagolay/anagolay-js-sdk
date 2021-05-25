@@ -1,9 +1,12 @@
+/* eslint-disable @typescript-eslint/no-floating-promises */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
-import { stringCamelCase } from '@polkadot/util'
-import buildOperations from '@sensio/core/buildOperations'
-import { resolveDependencies } from '@sensio/core/resolveDependencies'
-import generateNpmName from '@sensio/core/util/generateNpmName'
-import { SnOperation, SnOperationDataForCreating } from '@sensio/types'
+import buildOperations from '@anagolay/core/buildOperations'
+import { resolveDependencies } from '@anagolay/core/resolveDependencies'
+import generateNpmName from '@anagolay/core/util/generateNpmName'
+import { AnOperation, AnOperationDataForCreating } from '@anagolay/types'
+import { stringCamelCase } from '@anagolay/util'
 import { copy, outputFile, outputJson, pathExistsSync, WriteOptions } from 'fs-extra'
 import { writeFile } from 'fs/promises'
 import { resolve } from 'path'
@@ -17,12 +20,19 @@ import readmeTpl from './templates/README'
 import specModule from './templates/specModule'
 import tsConfigJson from './templates/tsConfig'
 
+// import { fileURLToPath } from 'url'
+// import { dirname } from 'path'
+
+// // https://nodejs.org/docs/latest-v15.x/api/esm.html#esm_no_filename_or_dirname
+// // const __filename = fileURLToPath(import.meta.url)
+// // const __dirname = dirname(__filename)
+
 const JSONOptions: WriteOptions = { replacer: null, spaces: 2 }
 const tsPaths: { [k: string]: string[] } = {}
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const tsReference: any[] = []
 
-export const genOperation = async (op: SnOperation): Promise<void> => {
+export const genOperation = async (op: AnOperation): Promise<void> => {
   const opName: string = stringCamelCase(op.data.name)
   const PATH = resolve(__dirname, `../../../../../operations/${opName}`)
   const paths = {
@@ -44,7 +54,8 @@ export const genOperation = async (op: SnOperation): Promise<void> => {
   // let shouldCreate = false
 
   if (pathExistsSync(paths.configTs)) {
-    const { id }: SnOperation = (await import(paths.configTs)).default
+    const { id }: AnOperation = (await import(paths.configTs)).default
+
     if (id === op.id) {
       shouldCreate = !shouldCreate
     }
@@ -68,6 +79,7 @@ export const genOperation = async (op: SnOperation): Promise<void> => {
     if (!pathExistsSync(paths.tsConfigJson)) {
       await outputJson(resolve(__dirname, paths.tsConfigJson), tsConfigJson(), JSONOptions)
     }
+
     if (!pathExistsSync(paths.license)) {
       await copy(resolve(__dirname, './templates/LICENSE'), resolve(__dirname, paths.license))
     }
@@ -91,6 +103,7 @@ export const genOperation = async (op: SnOperation): Promise<void> => {
     if (!pathExistsSync(paths.packageJson)) {
       await outputJson(resolve(__dirname, paths.packageJson), packageJson(op), JSONOptions)
     }
+
     console.log(`SUCCESS: ${generateNpmName(op.data.name)} generated with CID ${op.id}`)
   }
 }
@@ -99,7 +112,7 @@ export const genOperation = async (op: SnOperation): Promise<void> => {
  * Generate operations file
  * @param ops
  */
-export const genDefaultOpsFile = async (ops: SnOperation[]): Promise<void> => {
+export const genDefaultOpsFile = async (ops: AnOperation[]): Promise<void> => {
   const PATH = resolve(__dirname, '../defaultOps.ts')
   const contents = ops
     .map((op) => `export const ${stringCamelCase(op.data.name)} = ${JSON.stringify(op, null, 2)}`)
@@ -108,13 +121,14 @@ export const genDefaultOpsFile = async (ops: SnOperation[]): Promise<void> => {
   await outputFile(resolve(__dirname, PATH), contents)
   console.log(`SUCCESS: defaultOps file generated at ${PATH}`)
 }
+
 /**
  * Main function for scaffolding the ops
  * @param originalOperations
  */
 export async function regenerateDefaultOperations(
-  originalOperations: SnOperationDataForCreating[],
-): Promise<SnOperation[]> {
+  originalOperations: AnOperationDataForCreating[],
+): Promise<AnOperation[]> {
   const defaultOps = await parseOriginalOperations(originalOperations)
 
   await Promise.all(defaultOps.map(async (o) => await genOperation(o)))
@@ -146,17 +160,18 @@ export async function regenerateDefaultOperations(
  * Generate tsconfig paths
  * @param op
  */
-export function generateTsConfigPaths(op: SnOperation): void {
+export function generateTsConfigPaths(op: AnOperation): void {
   const camelCasedName: string = stringCamelCase(op.data.name)
 
   tsPaths[generateNpmName(op.data.name)] = [`operations/${camelCasedName}/src`]
   tsPaths[generateNpmName(op.data.name) + '/*'] = [`operations/${camelCasedName}/src/*`]
 }
+
 /**
  * Generate tsconfig reference paths
  * @param op
  */
-export function generateTsConfigReferencePaths(op: SnOperation): void {
+export function generateTsConfigReferencePaths(op: AnOperation): void {
   tsReference.push({ path: `./${stringCamelCase(op.data.name)}` })
 }
 
@@ -165,8 +180,8 @@ export function generateTsConfigReferencePaths(op: SnOperation): void {
  * @param opsRaw
  */
 async function parseOriginalOperations(
-  allOps: SnOperationDataForCreating[],
-): Promise<SnOperation[]> {
+  allOps: AnOperationDataForCreating[],
+): Promise<AnOperation[]> {
   const depsResolved = await resolveDependencies(allOps)
   const res = await buildOperations(depsResolved)
 
@@ -179,5 +194,6 @@ async function parseOriginalOperations(
  */
 export function nameToKeywords(opName: string): string[] {
   const ar = opName.split('_')
+
   return ar.slice(1, ar.length)
 }

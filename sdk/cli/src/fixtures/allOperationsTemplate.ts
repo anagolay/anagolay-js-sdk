@@ -1,5 +1,5 @@
-import { SnOperation } from '@sensio/types'
+import { AnOperation } from '@anagolay/types'
 
-const ops: SnOperation[] = []
+const ops: AnOperation[] = []
 
 export default ops

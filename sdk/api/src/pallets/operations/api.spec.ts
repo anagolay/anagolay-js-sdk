@@ -1,4 +1,5 @@
 import { createNetworkTx, getAll, getAllDecoded, save, saveOperationsBulk } from './api'
+
 describe('pallet::operation::api::definitions', () => {
   it('should be defined :: save', () => {
     expect(save).toBeDefined()

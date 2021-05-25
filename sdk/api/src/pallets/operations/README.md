@@ -1,1 +1,1 @@
-# sensio operation pallet
+# anagolay operation pallet

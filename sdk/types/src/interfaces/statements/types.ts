@@ -1,90 +1,90 @@
 // Auto-generated via `yarn polkadot-types-from-defs`, do not edit
 /* eslint-disable */
 
-import type { Bytes, Enum, Struct } from '@polkadot/types'
-import type { AccountId, BlockNumber } from '@polkadot/types/interfaces/runtime'
-import type { CreatorId, GenericId } from '@sensio/types/interfaces/sensio'
+import type { Bytes, Enum, Struct } from '@polkadot/types';
+import type { CreatorId, GenericId } from '@anagolay/types/interfaces/anagolay';
+import type { AccountId, BlockNumber } from '@polkadot/types/interfaces/runtime';
+
+/** @name AnagolayClaim */
+export interface AnagolayClaim extends Struct {
+  readonly prevId: GenericId;
+  readonly poeId: GenericId;
+  readonly ruleId: GenericId;
+  readonly proportion: Proportion;
+  readonly subjectId: GenericId;
+  readonly holder: CreatorId;
+  readonly issuer: Bytes;
+  readonly claimType: AnagolayClaimType;
+  readonly valid: Validity;
+  readonly expiration: Expiration;
+  readonly onExpiration: Bytes;
+}
+
+/** @name AnagolayClaimType */
+export interface AnagolayClaimType extends Enum {
+  readonly isCopyright: boolean;
+  readonly isOwnership: boolean;
+}
+
+/** @name AnagolaySignature */
+export interface AnagolaySignature extends Struct {
+  readonly sigKey: Bytes;
+  readonly sig: Bytes;
+  readonly cid: GenericId;
+}
+
+/** @name AnagolaySignatures */
+export interface AnagolaySignatures extends Struct {
+  readonly holder: AnagolaySignature;
+  readonly issuer: AnagolaySignature;
+}
+
+/** @name AnagolayStatement */
+export interface AnagolayStatement extends Struct {
+  readonly id: GenericId;
+  readonly data: StatementData;
+}
 
 /** @name Expiration */
 export interface Expiration extends Struct {
-  readonly expirationType: ExpirationType
-  readonly value: Bytes
+  readonly expirationType: ExpirationType;
+  readonly value: Bytes;
 }
 
 /** @name ExpirationType */
 export interface ExpirationType extends Enum {
-  readonly isForever: boolean
-  readonly isYears: boolean
-  readonly isMonths: boolean
-  readonly isDays: boolean
-  readonly isMinutes: boolean
-  readonly isSeconds: boolean
+  readonly isForever: boolean;
+  readonly isYears: boolean;
+  readonly isMonths: boolean;
+  readonly isDays: boolean;
+  readonly isMinutes: boolean;
+  readonly isSeconds: boolean;
 }
 
 /** @name Proportion */
 export interface Proportion extends Struct {
-  readonly sign: Bytes
-  readonly name: Bytes
-  readonly value: Bytes
-}
-
-/** @name SensioClaim */
-export interface SensioClaim extends Struct {
-  readonly prevId: GenericId
-  readonly poeId: GenericId
-  readonly ruleId: GenericId
-  readonly proportion: Proportion
-  readonly subjectId: GenericId
-  readonly holder: CreatorId
-  readonly issuer: Bytes
-  readonly claimType: SensioClaimType
-  readonly valid: Validity
-  readonly expiration: Expiration
-  readonly onExpiration: Bytes
-}
-
-/** @name SensioClaimType */
-export interface SensioClaimType extends Enum {
-  readonly isCopyright: boolean
-  readonly isOwnership: boolean
-}
-
-/** @name SensioSignature */
-export interface SensioSignature extends Struct {
-  readonly sigKey: Bytes
-  readonly sig: Bytes
-  readonly cid: GenericId
-}
-
-/** @name SensioSignatures */
-export interface SensioSignatures extends Struct {
-  readonly holder: SensioSignature
-  readonly issuer: SensioSignature
-}
-
-/** @name SensioStatement */
-export interface SensioStatement extends Struct {
-  readonly id: GenericId
-  readonly data: StatementData
+  readonly sign: Bytes;
+  readonly name: Bytes;
+  readonly value: Bytes;
 }
 
 /** @name StatementData */
 export interface StatementData extends Struct {
-  readonly signatures: SensioSignatures
-  readonly claim: SensioClaim
+  readonly signatures: AnagolaySignatures;
+  readonly claim: AnagolayClaim;
 }
 
 /** @name StatementInfo */
 export interface StatementInfo extends Struct {
-  readonly statement: SensioStatement
-  readonly accountId: AccountId
-  readonly blockNumber: BlockNumber
+  readonly statement: AnagolayStatement;
+  readonly accountId: AccountId;
+  readonly blockNumber: BlockNumber;
 }
 
 /** @name Validity */
 export interface Validity extends Struct {
-  readonly from: Bytes
-  readonly until: Bytes
+  readonly from: Bytes;
+  readonly until: Bytes;
 }
 
-export type PHANTOM_STATEMENTS = 'statements'
+export type PHANTOM_STATEMENTS = 'statements';

@@ -1,5 +1,5 @@
 {
-  "name": "@sensio/rule-sn-poe-photo",
+  "name": "@anagolay/rule-sn-poe-photo",
   "version": "0.1.0",
   "license": "Apache-2.0",
   "author": "daniel@woss.io",
@@ -8,7 +8,7 @@
     "directory": "lib"
   },
   "keywords": [
-    "sensio",
+    "anagolay",
     "rule",
     "poclo",
     "camera",
@@ -16,7 +16,6 @@
     "ownership"
   ],
   "scripts": {
-    "prepublish": "./scripts/prepublish.sh",
     "build": "tsc -b .",
     "dev": "ts-node-dev --trace-warnings -r tsconfig-paths/register --watch ./src --cls --respawn ./src/cli.ts"
   },
@@ -25,17 +24,17 @@
     "typescript": "^4.1.2"
   },
   "dependencies": {
-    "@sensio/core": "^0.4.6-alpha.0",
-    "@sensio/types": "^0.4.6-alpha.0",
-    "ramda": "^0.27.1"
+    "@anagolay/types": "workspace:*",
+    "@anagolay/core": "workspace:*",
+    "ramda": "0.27.1"
   },
   "repository": {
     "type": "git",
-    "url": "https://gitlab.com/sensio_group/network-js-sdk.git",
-    "directory": "rules/snPoCLO"
+    "url": "https://gitlab.com/anagolay/network-js-sdk.git",
+    "directory": "rules/PoCLO"
   },
   "bugs": {
-    "url": "https://gitlab.com/sensio_group/network-js-sdk/issues"
+    "url": "https://gitlab.com/anagolay/network-js-sdk/issues"
   },
-  "homepage": "https://gitlab.com/sensio_group/network-js-sdk/-/tree/master/rules/snPoCLO#readme"
+  "homepage": "https://gitlab.com/anagolay/network-js-sdk/-/tree/master/rules/PoCLO#readme"
 }

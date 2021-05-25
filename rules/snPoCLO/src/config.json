@@ -4,7 +4,7 @@
     "creator": "did:substrate:5HnKtosumdYfHSifYKBHhNmoXvhDANCU8j8v7tc4p4pY7MMP/sensio-network",
     "desc": "Proof of Camera and Lens Ownership. Implementing this rule we can say with certainty that user owns the mentioned equipment",
     "groups": [2, 3],
-    "name": "Sensio PoCLO rule",
+    "name": "Anagolay PoCLO rule",
     "parentId": "",
     "version": 1,
     "ops": [

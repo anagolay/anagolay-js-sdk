@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 root=$(dirname $(dirname $(realpath $0)))
+mkdir ./lib
 libDir="$root/lib"
 
 mkdir $libDir

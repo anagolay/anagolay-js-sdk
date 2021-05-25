@@ -1,15 +1,17 @@
 /* eslint-disable no-console */
-import BaseRule from '@sensio/core/BaseRule'
-import generateNpmName from '@sensio/core/util/generateNpmName'
-import { SnRule } from '@sensio/types'
 import { ImportCall } from 'typescript'
+
+import BaseRule from '@anagolay/core/BaseRule'
+import generateNpmName from '@anagolay/core/util/generateNpmName'
+import { AnRule } from '@anagolay/types'
+
 import config from './config'
 
 /**
  * Rule class with all methods you will need
  */
 class Rule extends BaseRule {
-  constructor(config: SnRule) {
+  constructor(config: AnRule) {
     super(config)
   }
   /**
@@ -19,9 +21,9 @@ class Rule extends BaseRule {
   async buildFlow(): Promise<any[]> {
     const flowStatic = [
       // Segment 1 --  block  before the User Interaction op
-      ['sn_image_raw_pixels_hash'],
-      ['sn_image_phash'],
-      ['sn_image_metadata_hash'],
+      ['image_raw_pixels_hash'],
+      ['image_phash'],
+      ['image_metadata_hash'],
     ]
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const imported: any[] = []
@@ -37,25 +39,33 @@ class Rule extends BaseRule {
             // single level of the execution flow
             if (Array.isArray(i)) {
               const firstArray = await Promise.all(i.map(async (ff) => await importModule(ff)))
+
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
               imported[k1][k2] = firstArray
             } else {
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
               imported[k1][k2] = await importModule(i)
               // console.log(imported)
             }
+
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-return
             return imported
           }),
         )
+
         return rows
       }),
     )
     // console.log('imported', imported)
 
     this.setFlow(flow)
+
     return flow
   }
 }
 
 export async function importModule(name: string): Promise<ImportCall> {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
   return await import(generateNpmName(name))
 }
 
@@ -65,6 +75,8 @@ export async function importModule(name: string): Promise<ImportCall> {
  */
 export default async function run(): Promise<Rule> {
   const rule = new Rule(config)
+
   await rule.buildFlow()
+
   return rule
 }

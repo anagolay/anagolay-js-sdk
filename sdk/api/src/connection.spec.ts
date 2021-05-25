@@ -1,6 +1,8 @@
-import setupConnection, { getApi, disconnect } from './connection'
+import { expect, it } from '@jest/globals'
 
-describe('api::connection ', () => {
+import setupConnection, { disconnect, getApi } from './connection'
+
+describe('api::connection', () => {
   it('should be defined, setupConnection', () => {
     expect(setupConnection).toBeDefined()
   })
@@ -11,6 +13,7 @@ describe('api::connection ', () => {
   it('should fail on no api instance', async (): Promise<void> => {
     expect.assertions(1)
     await disconnect()
+
     try {
       getApi()
     } catch (error) {

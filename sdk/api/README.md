@@ -1,4 +1,4 @@
-# @sensio/api
+# @anagolay/api
 
 ## Type generation and augmentation
 
@@ -12,20 +12,20 @@ Maintaining the types is done in the corresponding folder under `interfaces/pall
 
 ## Introduction
 
-Along with [methods supported by Polkadot](https://polkadot.js.org/api/start/basics.html#metadata) this module internally uses custom pallets in the following format `api.pallets.<pallet_name>` and exposes functions for **creating proofs, rules and operations** . Note that any library specific code will not be included in order to retain the possibility to develop library specific packages eg . `@sensio/react`.
+Along with [methods supported by Polkadot](https://polkadot.js.org/api/start/basics.html#metadata) this module internally uses custom pallets in the following format `api.pallets.<pallet_name>` and exposes functions for **creating proofs, rules and operations** . Note that any library specific code will not be included in order to retain the possibility to develop library specific packages eg . `@anagolay/react`.
 
 ## Usage
 
 Install the module:
 
-`yarn add @sensio/api`
+`yarn add @anagolay/api`
 
 > This module is built using Typescript so there is no need to install additional types. :fire:
 
 ```ts
-import { api } from '@sensio/api'
+import { api } from '@anagolay/api'
 ;(async () => {
-  // Connect to Sensio Network API
+  // Connect to Anagolay Network API
   const connection = await api()
 })()
 ```

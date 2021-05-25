@@ -1,7 +1,8 @@
 import { StorageKey } from '@polkadot/types'
-import { ProofInfo } from '@sensio/types'
 
-import { SnProofWithStorage } from '../../../../types/src/interfaces/poe/interfaces'
+import { ProofInfo } from '@anagolay/types'
+
+import { AnProofWithStorage } from '../../../../types/src/interfaces/poe/interfaces'
 import decodeFromChain from './decodeFromChain'
 
 export type IncomingParam = [StorageKey, ProofInfo]
@@ -11,8 +12,9 @@ export type IncomingParam = [StorageKey, ProofInfo]
  * @returns Decoded PoE with typescript native types and values
  */
 
-export function decodeFromStatementStorage(d: IncomingParam): SnProofWithStorage {
+export function decodeFromStatementStorage(d: IncomingParam): AnProofWithStorage {
   const [storageKey, proofInfo] = d
+
   return {
     storageKey: storageKey.toString(),
     proofInfo: {

@@ -1,9 +1,10 @@
 import { SubmittableExtrinsic } from '@polkadot/api/types'
 import { KeyringPair } from '@polkadot/keyring/types'
-import { getApi } from '@sensio/api/connection'
-import createEventEmitter from '@sensio/api/events'
-import { networkCallback } from '@sensio/api/utils'
 import { EventEmitter } from 'events'
+
+import { getApi } from '@anagolay/api/connection'
+import createEventEmitter from '@anagolay/api/events'
+import { networkCallback } from '@anagolay/api/utils'
 
 /**
  * Save many submittable tx in single transaction. It uses the `batch` capability of the chain

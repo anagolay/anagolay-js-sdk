@@ -1,8 +1,8 @@
 /**
- * Generate @sensio/op-snake-name-operation
+ * Generate @anagolay/op-snake-name-operation
  * @param {string} opName
  * @return {string}
  */
 export default function generateNpmName(opName: string): string {
-  return `@sensio/op-${opName.replace(/_/g, '-')}`
+  return `@anagolay/op-${opName.replace(/_/g, '-')}`
 }

@@ -20,11 +20,11 @@ export const RulesCustomTypes = {
     /// How long is the expiration, if  ExpirationType::FOREVER then this is empty
     value: 'Vec<u8>',
   },
-  SensioClaimType: {
+  AnagolayClaimType: {
     _enum: ['COPYRIGHT', 'OWNERSHIP'],
   },
-  SensioClaim: {
-    /// Prev Sensio Statement id in case this statement is revoked or changed
+  AnagolayClaim: {
+    /// Prev Anagolay Statement id in case this statement is revoked or changed
     prevId: 'GenericId',
     /// PoE id of the record in question.
     poeId: 'GenericId',
@@ -39,7 +39,7 @@ export const RulesCustomTypes = {
     /// ATM this is the did representation of the substrate based account in format 'did:substrate:Hcd78R7frJfUZHsqgpPEBLeiCZxV29uyyyURaPxB71ojNjy/sensio-network', @NOTE this is part of the SENSIO ID which will come later this year
     issuer: 'Vec<u8>',
     /// Generic type, ATM is Copyright or Ownership
-    claimType: 'SensioClaimType',
+    claimType: 'AnagolayClaimType',
     /// How long this statement is valid
     valid: 'Validity',
     /// Setting when the statement should end
@@ -47,29 +47,29 @@ export const RulesCustomTypes = {
     /// What happens after the expiration? this is default rule or smart contract that automatically does stuff, like move it to the public domain, transfer to relatives etc... need better definition
     onExpiration: 'Vec<u8>',
   },
-  SensioSignature: {
+  AnagolaySignature: {
     /// signing key in urn/did format 'urn:pgp:9cdf8dd38531511968c8d8cb524036585b62f15b'
     sigKey: 'Vec<u8>',
     /// Signature sign(prepared_statement, pvtKey(sigKey)) and encoded using multibase
-    // https://gitlab.com/sensio_group/sensio-faas/-/blob/master/sp-api/src/plugins/copyright/helpers.ts#L76
+    // https://gitlab.com/anagolay/sensio-faas/-/blob/master/sp-api/src/plugins/copyright/helpers.ts#L76
     sig: 'Vec<u8>',
     /// Content identifier of the sig field -- CID(sig)
     cid: 'GenericId',
   },
-  SensioSignatures: {
-    holder: 'SensioSignature',
-    issuer: 'SensioSignature',
+  AnagolaySignatures: {
+    holder: 'AnagolaySignature',
+    issuer: 'AnagolaySignature',
   },
   StatementData: {
-    signatures: 'SensioSignatures',
-    claim: 'SensioClaim',
+    signatures: 'AnagolaySignatures',
+    claim: 'AnagolayClaim',
   },
-  SensioStatement: {
+  AnagolayStatement: {
     id: 'GenericId',
     data: 'StatementData',
   },
   StatementInfo: {
-    statement: 'SensioStatement',
+    statement: 'AnagolayStatement',
     accountId: 'AccountId',
     blockNumber: 'BlockNumber',
   },

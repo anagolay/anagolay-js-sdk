@@ -1,6 +1,6 @@
+import { stringToU8a } from '@anagolay/util'
 import { Keyring } from '@polkadot/keyring'
 import { KeyringPair } from '@polkadot/keyring/types'
-import { stringToU8a } from '@polkadot/util'
 
 // https://polkadot.js.org/api/start/keyring.html
 
@@ -13,6 +13,7 @@ export function getAlice(): KeyringPair {
 
   // Add Alice to our keyring with a hard-derived path (empty phrase, so uses dev)
   const alice = keyring.addFromUri('//Alice')
+
   return alice
 }
 
@@ -25,11 +26,12 @@ export function getAliceEd25519(): KeyringPair {
 
   // Add Alice to our keyring with a hard-derived path (empty phrase, so uses dev)
   const alice = keyring.addFromUri('//AliceEd25519')
+
   return alice
 }
 
 /**
- * Get the Sensio account
+ * Get the Anagolay account
  */
 export function getSensio(): KeyringPair {
   // Construct the keying after the API (crypto has an async init)
@@ -37,6 +39,7 @@ export function getSensio(): KeyringPair {
 
   // Add Alice to our keyring with a hard-derived path (empty phrase, so uses dev)
   const acc = keyring.addFromUri('//Sensio')
+
   return acc
 }
 
@@ -49,6 +52,7 @@ export function getBob(): KeyringPair {
 
   // Add Bob to our keyring with a hard-derived path (empty phrase, so uses dev)
   const bob = keyring.addFromUri('//Bob')
+
   return bob
 }
 
@@ -59,6 +63,7 @@ export function getLocalAccount(name: string): KeyringPair {
   // Construct the keying after the API (crypto has an async init)
   const keyring = new Keyring()
   const pair = keyring.addFromSeed(stringToU8a(name))
+
   console.log(
     `Created keyring pair for Local Account with address: ${keyring.getPair(pair.address).address}`,
   )

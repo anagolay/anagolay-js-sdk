@@ -6,19 +6,21 @@
  */
 import { SubmittableExtrinsic } from '@polkadot/api/types'
 import { KeyringPair } from '@polkadot/keyring/types'
-import { getApi } from '@sensio/api/connection'
-import createEventEmitter from '@sensio/api/events'
-import { networkCallback } from '@sensio/api/utils'
-import { encodeTheGenericId } from '@sensio/api/utils/transformations'
-import cleanArray from '@sensio/core/util/cleanArray'
-import {
-  SnGenericId,
-  SnSensioClaimType,
-  SnSensioStatement,
-  SnStatementWithStorage,
-} from '@sensio/types'
 import { EventEmitter } from 'events'
 import { isEmpty, map } from 'ramda'
+
+import { getApi } from '@anagolay/api/connection'
+import createEventEmitter from '@anagolay/api/events'
+import { networkCallback } from '@anagolay/api/utils'
+import { encodeTheGenericId } from '@anagolay/api/utils/transformations'
+import cleanArray from '@anagolay/core/util/cleanArray'
+import {
+  AnAnagolayClaimType,
+  AnAnagolayStatement,
+  AnGenericId,
+  AnStatementWithStorage,
+} from '@anagolay/types'
+
 import { CustomEventEmitter } from '../../events'
 import { EVENT_NAME_BATCH, EVENT_NAME_SINGLE } from './config'
 import decodeFromStorage, { IncomingParam } from './decodeStorage'
@@ -28,25 +30,26 @@ import decodeFromStorage, { IncomingParam } from './decodeStorage'
  * @param d Statement that will be saved
  * @param signer Who will be signing the transaction and paying fees?
  */
-export async function save(d: SnSensioStatement, signer: KeyringPair): Promise<EventEmitter> {
+export async function save(d: AnAnagolayStatement, signer: KeyringPair): Promise<EventEmitter> {
   switch (d.data.claim.claimType) {
-    case SnSensioClaimType.COPYRIGHT:
+    case AnAnagolayClaimType.COPYRIGHT:
       return await saveCopyright(d, signer)
 
-    case SnSensioClaimType.OWNERSHIP:
+    case AnAnagolayClaimType.OWNERSHIP:
       return await saveOwnership(d, signer)
 
     default:
       throw new Error('Default case for the claim type is not defined')
   }
 }
+
 /**
  * Save the statements, a wrapper around the current bulk saving methods
  * @param d Statements that will be saved
  * @param signer Who will be signing the transaction and paying fees?
  */
 export async function saveBulk(
-  d: SnSensioStatement[],
+  d: AnAnagolayStatement[],
   signer: KeyringPair,
 ): Promise<CustomEventEmitter> {
   // need to group the statements by type then save them in bulk
@@ -54,6 +57,7 @@ export async function saveBulk(
   const api = getApi()
   const broadcast = createEventEmitter()
   const txs = map(createCorrectSubmittableExtrinsic, d)
+
   // @TODO if we need nonce in the future, this doesn't work
   // const nonce = await api.rpc.system.accountNextIndex(signer.address)
   await api.tx.utility
@@ -73,12 +77,12 @@ export async function saveBulk(
  * @param d list of any Statement object
  */
 export function createCorrectSubmittableExtrinsic(
-  d: SnSensioStatement,
+  d: AnAnagolayStatement,
 ): SubmittableExtrinsic<'promise'> {
   switch (d.data.claim.claimType) {
-    case SnSensioClaimType.COPYRIGHT:
+    case AnAnagolayClaimType.COPYRIGHT:
       return createSubmittableExtrinsicOfCopyright(d)
-    case SnSensioClaimType.OWNERSHIP:
+    case AnAnagolayClaimType.OWNERSHIP:
       return createSubmittableExtrinsicOfOwnership(d)
     default:
       throw new Error('Default case for the claim type is not defined')
@@ -92,7 +96,7 @@ export function createCorrectSubmittableExtrinsic(
  * @param signer Account that will be owner of the transaction and ones who pays the fees
  */
 export async function saveCopyright(
-  d: SnSensioStatement,
+  d: AnAnagolayStatement,
   signer: KeyringPair,
 ): Promise<EventEmitter> {
   const broadcast = createEventEmitter()
@@ -106,6 +110,7 @@ export async function saveCopyright(
   // return the event emitter
   return broadcast
 }
+
 /**
  * Save a single operation to the chain
  * {@link SnStatement}
@@ -113,7 +118,7 @@ export async function saveCopyright(
  * @param signer Account that will be owner of the transaction and ones who pays the fees
  */
 export async function saveOwnership(
-  d: SnSensioStatement,
+  d: AnAnagolayStatement,
   signer: KeyringPair,
 ): Promise<EventEmitter> {
   const broadcast = createEventEmitter()
@@ -137,16 +142,17 @@ export async function saveOwnership(
  * @param d list of the typescript native Copyright Statement objects
  */
 export async function createSubmittableExtrinsicsForCopyright(
-  d: SnSensioStatement[],
+  d: AnAnagolayStatement[],
 ): Promise<Array<SubmittableExtrinsic<'promise'>>> {
   return map(createSubmittableExtrinsicOfCopyright, d)
 }
+
 /**
  * Create Submittable transactions
  * @param d
  */
 export async function createSubmittableExtrinsicsForOwnership(
-  d: SnSensioStatement[],
+  d: AnAnagolayStatement[],
 ): Promise<Array<SubmittableExtrinsic<'promise'>>> {
   const txs = map(createSubmittableExtrinsicOfOwnership, d)
 
@@ -169,12 +175,13 @@ export async function createSubmittableExtrinsicsForOwnership(
   ```
  */
 export async function saveCopyrightsBulk(
-  d: SnSensioStatement[],
+  d: AnAnagolayStatement[],
   signer: KeyringPair,
 ): Promise<EventEmitter> {
   const api = getApi()
   const broadcast = createEventEmitter()
   const txs = map(createSubmittableExtrinsicOfCopyright, d)
+
   // @TODO if we need nonce in the future, this doesn't work
   // const nonce = await api.rpc.system.accountNextIndex(signer.address)
   await api.tx.utility
@@ -184,6 +191,7 @@ export async function saveCopyrightsBulk(
   // return the event emitter
   return broadcast
 }
+
 /**
  * Save many statements in single transaction. It uses the `batch` capability of the chain
  * @param ops
@@ -200,12 +208,13 @@ export async function saveCopyrightsBulk(
   ```
  */
 export async function saveOwnershipsBulk(
-  d: SnSensioStatement[],
+  d: AnAnagolayStatement[],
   signer: KeyringPair,
 ): Promise<EventEmitter> {
   const api = getApi()
   const broadcast = createEventEmitter()
   const txs = map(createSubmittableExtrinsicOfOwnership, d)
+
   // @TODO if we need nonce in the future, this doesn't work
   // const nonce = await api.rpc.system.accountNextIndex(signer.address)
   await api.tx.utility
@@ -221,9 +230,10 @@ export async function saveOwnershipsBulk(
  * @param items
  * @returns Return item maps SCALE codec encoded
  */
-export async function getOne(item: SnGenericId): Promise<IncomingParam | undefined> {
+export async function getOne(item: AnGenericId): Promise<IncomingParam | undefined> {
   const api = getApi()
   const networkItem = await api.query.statements.statements.entries(encodeTheGenericId(item))
+
   if (isEmpty(networkItem)) {
     return
   } else {
@@ -236,6 +246,7 @@ export async function getOne(item: SnGenericId): Promise<IncomingParam | undefin
  */
 export async function getAll(): Promise<IncomingParam[]> {
   const api = getApi()
+
   // get them from the network
   return api.query.statements.statements.entries()
 }
@@ -243,9 +254,10 @@ export async function getAll(): Promise<IncomingParam[]> {
 /**
  * Get all Statements from the network then return the list of the Decoded statements as they are stored.
  */
-export async function getAllDecoded(): Promise<SnStatementWithStorage[]> {
+export async function getAllDecoded(): Promise<AnStatementWithStorage[]> {
   // get them from the network
   const d = await getAll()
+
   return map(decodeFromStorage, d)
 }
 
@@ -254,9 +266,10 @@ export async function getAllDecoded(): Promise<SnStatementWithStorage[]> {
  * @param items
  * @returns Return item maps SCALE codec decoded
  */
-export async function getSomeDecoded(items: SnGenericId[] = []): Promise<SnStatementWithStorage[]> {
+export async function getSomeDecoded(items: AnGenericId[] = []): Promise<AnStatementWithStorage[]> {
   const d = await Promise.all(items.map(async (i) => await getOne(i))) // this will return [[record]]
   const cleanedArray = cleanArray<IncomingParam>(d)
+
   return map(decodeFromStorage, cleanedArray)
 }
 
@@ -271,11 +284,13 @@ export async function getSomeDecoded(items: SnGenericId[] = []): Promise<SnState
  *
  */
 export function createSubmittableExtrinsicOfCopyright(
-  d: SnSensioStatement,
+  d: AnAnagolayStatement,
 ): SubmittableExtrinsic<'promise'> {
   const api = getApi()
+
   return api.tx.statements.createCopyright(d)
 }
+
 /**
  * Helper function for creating the Submittable result. This can be easily used in the `ramda.map` function with the list of SnSensioStatement. Returns the Submittable statement object
  *
@@ -287,9 +302,10 @@ export function createSubmittableExtrinsicOfCopyright(
  * @param op
  */
 export function createSubmittableExtrinsicOfOwnership(
-  d: SnSensioStatement,
+  d: AnAnagolayStatement,
 ): SubmittableExtrinsic<'promise'> {
   const api = getApi()
+
   return api.tx.statements.createOwnership(d)
 }
 
@@ -298,9 +314,10 @@ export function createSubmittableExtrinsicOfOwnership(
  * @param statementId
  */
 export function createSubmittableExtrinsicRevoke(
-  statementId: SnGenericId,
+  statementId: AnGenericId,
 ): SubmittableExtrinsic<'promise'> {
   const api = getApi()
+
   return api.tx.statements.revoke(encodeTheGenericId(statementId))
 }
 
@@ -308,12 +325,13 @@ export function createSubmittableExtrinsicRevoke(
  * Revoke All statements @FUCK remove this at some point
  */
 export async function revokeStatementsBulk(
-  d: SnGenericId[],
+  d: AnGenericId[],
   signer: KeyringPair,
 ): Promise<EventEmitter> {
   const api = getApi()
   const broadcast = createEventEmitter()
   const txs = map(createSubmittableExtrinsicRevoke, d)
+
   // @TODO if we need nonce in the future, this doesn't work
   // const nonce = await api.rpc.system.accountNextIndex(signer.address)
   await api.tx.utility

@@ -1,20 +1,20 @@
-import { SnAccountId, SnBlockNumber, SnCreatorId, SnGenericId } from '../sensio/interfaces'
+import { AnAccountId, AnBlockNumber, AnCreatorId, AnGenericId } from '../anagolay/interfaces'
 
-export interface SnProportion {
+export interface AnProportion {
   /// Proportion sign, can be %
   sign: string
   name: string
   value: string
 }
 
-export interface SnValidity {
+export interface AnValidity {
   /// When the validity starts, this should be DATE_TIME
   from: string
   /// When validity ends, this is calculate Validity.from + Expiration.value
   until: string
 }
 
-export enum SnExpirationType {
+export enum AnExpirationType {
   FOREVER,
   YEARS,
   MONTHS,
@@ -23,83 +23,83 @@ export enum SnExpirationType {
   SECONDS,
 }
 
-export interface SnExpiration {
+export interface AnExpiration {
   /// Proportion sign, can be %
-  expirationType: SnExpirationType
+  expirationType: AnExpirationType
   /// How long is the expiration, if  ExpirationType::FOREVER then this is empty
   value: string
 }
 
-export enum SnSensioClaimType {
+export enum AnAnagolayClaimType {
   COPYRIGHT,
   OWNERSHIP,
 }
 
-export interface SnSensioClaim {
+export interface AnAnagolayClaim {
   /// Prev Sensio Statement id in case this statement is revoked or changed
-  prevId: SnGenericId
+  prevId: AnGenericId
   /// PoE id of the record in question.
-  poeId: SnGenericId
+  poeId: AnGenericId
   /// Implemented rule
-  ruleId: SnGenericId
+  ruleId: AnGenericId
   /// In which proportion the statement is held
-  proportion: SnProportion
+  proportion: AnProportion
   /// ATM this is the same as poeId @TODO this should be unique representation of the subject that is NOT poe
-  subjectId: SnGenericId
+  subjectId: AnGenericId
   /// ATM this is the did representation of the substrate based account in format 'did:substrate:5EJA1oSrTx7xYMBerrUHLNktA3P89YHJBeTrevotTQab6gEY/sensio-network', @NOTE this is part of the SENSIO ID which will come later this year
-  holder: SnCreatorId
+  holder: AnCreatorId
   /// ATM this is the did representation of the substrate based account in format 'did:substrate:Hcd78R7frJfUZHsqgpPEBLeiCZxV29uyyyURaPxB71ojNjy/sensio-network', @NOTE this is part of the SENSIO ID which will come later this year
   issuer: string
   /// Generic type, ATM is Copyright or Ownership
-  claimType: SnSensioClaimType
+  claimType: AnAnagolayClaimType
   /// How long this statement is valid
-  valid: SnValidity
+  valid: AnValidity
   /// Setting when the statement should end
-  expiration: SnExpiration
+  expiration: AnExpiration
   /// What happens after the expiration? this is default rule or smart contract that automatically does stuff, like move it to the public domain, transfer to relatives etc... need better definition
   onExpiration: string
 }
 
-export interface SnSensioOwnershipClaim extends SnSensioClaim {
-  claimType: SnSensioClaimType.OWNERSHIP
+export interface AnAnagolayOwnershipClaim extends AnAnagolayClaim {
+  claimType: AnAnagolayClaimType.OWNERSHIP
 }
 
-export interface SnSensioCopyrightClaim extends SnSensioClaim {
-  claimType: SnSensioClaimType.COPYRIGHT
+export interface AnAnagolayCopyrightClaim extends AnAnagolayClaim {
+  claimType: AnAnagolayClaimType.COPYRIGHT
 }
 
-export interface SnSensioSignature {
+export interface AnAnagolaySignature {
   /// signing key in urn/did format 'urn:pgp:9cdf8dd38531511968c8d8cb524036585b62f15b'
   sigKey: string
   /// Signature sign(prepared_statement, pvtKey(sigKey)) and encoded using multibase
-  // https://gitlab.com/sensio_group/sensio-faas/-/blob/master/sp-api/src/plugins/copyright/helpers.ts#L76
+  // https://gitlab.com/anagolay/sensio-faas/-/blob/master/sp-api/src/plugins/copyright/helpers.ts#L76
   sig: string
   /// Content identifier of the sig field -- CID(sig)
-  cid: SnGenericId
+  cid: AnGenericId
 }
 
-export interface SnSensioSignatures {
-  holder: SnSensioSignature
-  issuer: SnSensioSignature
+export interface AnAnagolaySignatures {
+  holder: AnAnagolaySignature
+  issuer: AnAnagolaySignature
 }
 
-export interface SnStatementData {
-  signatures: SnSensioSignatures
-  claim: SnSensioClaim
+export interface AnStatementData {
+  signatures: AnAnagolaySignatures
+  claim: AnAnagolayClaim
 }
 
-export interface SnSensioStatement {
-  id: SnGenericId
-  data: SnStatementData
+export interface AnAnagolayStatement {
+  id: AnGenericId
+  data: AnStatementData
 }
 
-export interface SnStatementInfo {
-  statement: SnSensioStatement
-  accountId: SnAccountId
-  blockNumber: SnBlockNumber
+export interface AnStatementInfo {
+  statement: AnAnagolayStatement
+  accountId: AnAccountId
+  blockNumber: AnBlockNumber
 }
 
-export interface SnStatementWithStorage {
+export interface AnStatementWithStorage {
   storageKey: string
-  statementInfo: SnStatementInfo
+  statementInfo: AnStatementInfo
 }

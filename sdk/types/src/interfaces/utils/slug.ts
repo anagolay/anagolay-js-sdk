@@ -8,7 +8,7 @@ export function parseSlug(str: string, maxLen?: number): Slug {
     checkStrMaxLen(str, maxLen)
   }
 
-  return (slugify(str) as unknown) as Slug
+  return slugify(str) as unknown as Slug
 }
 
 export function slugify(str: string): string {

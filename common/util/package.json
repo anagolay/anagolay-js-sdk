@@ -1,0 +1,22 @@
+{
+  "name": "@anagolay/util",
+  "author": "daniel@woss.io",
+  "type": "module",
+  "version": "0.1.0",
+  "description": "Various utils needed for Anagolay Network. They are carefully written to be fast and work in browser and nodejs env.",
+  "main": "index.js",
+  "scripts": {},
+  "dependencies": {
+    "@polkadot/util": "6.5.1"
+  },
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.com/anagolay/network-js-sdk.git",
+    "directory": "common/util"
+  },
+  "bugs": {
+    "url": "https://gitlab.com/anagolay/network-js-sdk/issues"
+  },
+  "homepage": "https://gitlab.com/anagolay/network-js-sdk/-/tree/master/common/util#readme"
+}

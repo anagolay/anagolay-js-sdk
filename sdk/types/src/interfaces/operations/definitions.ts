@@ -1,8 +1,8 @@
 export const OperationsCustomTypes = {
   CustomInputParam: {
-    /// 'SnByteArray' | 'ProofParams[]' | 'SnBoolean'
+    /// 'AnByteArray' | 'ProofParams[]' | 'AnBoolean'
     data: 'Vec<u8>',
-    /// The real data type check the outputDecoded in sensio SDK, for more info check the https://gitlab.com/sensio_group/network-node/-/issues/27
+    /// The real data type check the outputDecoded in sensio SDK, for more info check the https://gitlab.com/anagolay/network-node/-/issues/27
     decoded: 'Vec<u8>',
   },
   OperationOutput: {
@@ -26,7 +26,7 @@ export const OperationsCustomTypes = {
     desc: 'Vec<u8>',
     /// List of children outputs as an input to the parent method
     input: 'Vec<CustomInputParam>',
-    // what operation returns. ATM is SnByteArray === Uint8Array or Vec<u8>
+    // what operation returns. ATM is AnByteArray === Uint8Array or Vec<u8>
     output: 'OperationOutput',
     hashingOp: 'Vec<u8>',
     encOp: 'Vec<u8>',

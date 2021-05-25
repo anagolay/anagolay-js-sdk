@@ -1,0 +1,11 @@
+version: '3'
+services:
+  verdaccio:
+    image: verdaccio/verdaccio
+    restart: always
+    ports:
+      - 4873:4873
+    volumes:
+      - verdaccio-storage:/verdaccio/storage
+volumes:
+  verdaccio-storage:

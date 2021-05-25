@@ -1,13 +1,13 @@
-import decodeHexToString from '@sensio/api/utils/decodeHexToString'
-import { Proof, SnProof } from '@sensio/types'
+import decodeHexToString from '@anagolay/api/utils/decodeHexToString'
+import { AnProof, Proof } from '@anagolay/types'
 
 /**
  * Decodes the Proof-of-Existence from the chain to readable object
  * @param d PoE from the Network
  */
-export function decodeFromChain(d: Proof): SnProof {
+export function decodeFromChain(d: Proof): AnProof {
   const { data } = d
-  const decoded: SnProof = {
+  const decoded: AnProof = {
     id: decodeHexToString(d.id),
     data: {
       ruleId: decodeHexToString(data.ruleId),
@@ -20,6 +20,7 @@ export function decodeFromChain(d: Proof): SnProof {
       })),
     },
   }
+
   return decoded
 }
 

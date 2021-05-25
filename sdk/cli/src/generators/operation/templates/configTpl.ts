@@ -1,12 +1,12 @@
-import { SnOperation } from '@sensio/types'
+import { AnOperation } from '@anagolay/types'
 
-export const configTemplate = (op: SnOperation): string =>
+export const configTemplate = (op: AnOperation): string =>
   `/**
  * Operation specification
  */
-import { SnOperation } from '@sensio/types'
+import { AnOperation } from '@anagolay/types'
 
-export const op:SnOperation = ${JSON.stringify(op, null, 2)}
+export const op: AnOperation = ${JSON.stringify(op, null, 2)}
 
 export default op
 `
