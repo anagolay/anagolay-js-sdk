@@ -94,17 +94,9 @@ declare module '@polkadot/api/types/errors' {
     poe: {
       [key: string]: AugmentedError<ApiType>;
       /**
-       * Value was None
-       **/
-      NoneValue: AugmentedError<ApiType>;
-      /**
        * The proof does not exist, so it cannot be revoked
        **/
       NoSuchProof: AugmentedError<ApiType>;
-      /**
-       * The proof is claimed by another account, so caller can't revoke it
-       **/
-      NotProofOwner: AugmentedError<ApiType>;
       /**
        * PHash + ProofId already exist
        **/
@@ -114,83 +106,35 @@ declare module '@polkadot/api/types/errors' {
        **/
       ProofAlreadyClaimed: AugmentedError<ApiType>;
       /**
-       * Proof Belongs to another account
-       **/
-      ProofBelongsToAnotherAccount: AugmentedError<ApiType>;
-      /**
        * ForWhat mismatch
        **/
       ProofRuleTypeMismatch: AugmentedError<ApiType>;
-      /**
-       * Value reached maximum and cannot be incremented further
-       **/
-      StorageOverflow: AugmentedError<ApiType>;
     };
     rules: {
       [key: string]: AugmentedError<ApiType>;
       /**
-       * Value was None
-       **/
-      NoneValue: AugmentedError<ApiType>;
-      /**
-       * Rule doesn't exits, create one.
-       **/
-      NoSuchRule: AugmentedError<ApiType>;
-      /**
        * Rule already exists
        **/
       RuleAlreadyCreated: AugmentedError<ApiType>;
-      /**
-       * Value reached maximum and cannot be incremented further
-       **/
-      StorageOverflow: AugmentedError<ApiType>;
     };
     statements: {
       [key: string]: AugmentedError<ApiType>;
-      /**
-       * Copyright already exists
-       **/
-      CopyrightAlreadyCreated: AugmentedError<ApiType>;
-      /**
-       * Copyright doesn't exist
-       **/
-      CopyrightDoesntExist: AugmentedError<ApiType>;
       /**
        * Create child statement is not yet supported
        **/
       CreatingChildStatementNotSupported: AugmentedError<ApiType>;
       /**
-       * Value was None
-       **/
-      NoneValue: AugmentedError<ApiType>;
-      /**
-       * Copyright doesn't exits, create one.
-       **/
-      NoSuchCopyright: AugmentedError<ApiType>;
-      /**
        * Statement doesn't exits.
        **/
       NoSuchStatement: AugmentedError<ApiType>;
-      /**
-       * Ownership already exists
-       **/
-      OwnershipAlreadyCreated: AugmentedError<ApiType>;
       /**
        * Proof already has this statement
        **/
       ProofHasStatement: AugmentedError<ApiType>;
       /**
-       * Statement already exist
-       **/
-      StatementExist: AugmentedError<ApiType>;
-      /**
-       * Statement has child statement and ite cannot be revoked
+       * Statement has child statement and it cannot be revoked
        **/
       StatementHasChildStatement: AugmentedError<ApiType>;
-      /**
-       * Value reached maximum and cannot be incremented further
-       **/
-      StorageOverflow: AugmentedError<ApiType>;
       /**
        * Wrong claim type
        **/

@@ -134,14 +134,14 @@ declare module '@polkadot/api/types/submittable' {
       /**
        * Create Operation
        **/
-      create: AugmentedSubmittable<(data: Operation | { id?: any; data?: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [Operation]>;
+      create: AugmentedSubmittable<(operation: Operation | { id?: any; data?: any; extra?: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [Operation]>;
     };
     poe: {
       [key: string]: SubmittableExtrinsicFunction<ApiType>;
       /**
        * Create proof and claim
        **/
-      createProof: AugmentedSubmittable<(proof: Proof | { id?: any; data?: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [Proof]>;
+      createProof: AugmentedSubmittable<(proof: Proof | { id?: any; data?: any; extra?: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [Proof]>;
       /**
        * INDEX storage, save the connection phash <-> proofId for hamming/leven distance calc. Eventually refactor this, for now leave it
        **/
@@ -152,26 +152,22 @@ declare module '@polkadot/api/types/submittable' {
       /**
        * Create Rule
        **/
-      createRule: AugmentedSubmittable<(rule: Rule | { id?: any; data?: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [Rule]>;
+      createRule: AugmentedSubmittable<(rule: Rule | { id?: any; data?: any; extra?: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [Rule]>;
     };
     statements: {
       [key: string]: SubmittableExtrinsicFunction<ApiType>;
       /**
        * Create Copyright
        **/
-      createCopyright: AugmentedSubmittable<(statement: AnagolayStatement | { id?: any; data?: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [AnagolayStatement]>;
+      createCopyright: AugmentedSubmittable<(statement: AnagolayStatement | { id?: any; data?: any; extra?: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [AnagolayStatement]>;
       /**
        * Create Ownership
        **/
-      createOwnership: AugmentedSubmittable<(statement: AnagolayStatement | { id?: any; data?: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [AnagolayStatement]>;
+      createOwnership: AugmentedSubmittable<(statement: AnagolayStatement | { id?: any; data?: any; extra?: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [AnagolayStatement]>;
       /**
        * Allow the owner to revoke their statement.
        **/
       revoke: AugmentedSubmittable<(statementId: GenericId | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [GenericId]>;
-      /**
-       * Revoke ALL statements -- test only
-       **/
-      revokeAll: AugmentedSubmittable<() => SubmittableExtrinsic<ApiType>, []>;
     };
     sudo: {
       [key: string]: SubmittableExtrinsicFunction<ApiType>;

@@ -1,7 +1,7 @@
 // Auto-generated via `yarn polkadot-types-from-defs`, do not edit
 /* eslint-disable */
 
-import type { Bytes, Struct, Vec, u32 } from '@polkadot/types';
+import type { Bytes, Option, Struct, Vec, u32 } from '@polkadot/types';
 import type { CreatorId, ForWhat, GenericId } from '@anagolay/types/interfaces/anagolay';
 
 /** @name OperationReference */
@@ -14,6 +14,7 @@ export interface OperationReference extends Struct {
 export interface Rule extends Struct {
   readonly id: GenericId;
   readonly data: RuleData;
+  readonly extra: Option<RuleExtra>;
 }
 
 /** @name RuleData */
@@ -26,5 +27,8 @@ export interface RuleData extends Struct {
   readonly parentId: GenericId;
   readonly ops: Vec<OperationReference>;
 }
+
+/** @name RuleExtra */
+export interface RuleExtra extends Struct {}
 
 export type PHANTOM_RULES = 'rules';

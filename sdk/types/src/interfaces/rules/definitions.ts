@@ -2,6 +2,7 @@ export const RulesCustomTypes = {
   Rule: {
     id: 'GenericId',
     data: 'RuleData',
+    extra: 'Option<RuleExtra>',
   },
   OperationReference: {
     id: 'GenericId',
@@ -16,6 +17,7 @@ export const RulesCustomTypes = {
     parentId: 'GenericId',
     ops: 'Vec<OperationReference>',
   },
+  RuleExtra: {},
 }
 
 export default {

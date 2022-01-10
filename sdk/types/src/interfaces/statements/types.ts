@@ -1,7 +1,7 @@
 // Auto-generated via `yarn polkadot-types-from-defs`, do not edit
 /* eslint-disable */
 
-import type { Bytes, Enum, Struct } from '@polkadot/types';
+import type { Bytes, Enum, Option, Struct } from '@polkadot/types';
 import type { CreatorId, GenericId } from '@anagolay/types/interfaces/anagolay';
 import type { AccountId, BlockNumber } from '@polkadot/types/interfaces/runtime';
 
@@ -43,6 +43,7 @@ export interface AnagolaySignatures extends Struct {
 export interface AnagolayStatement extends Struct {
   readonly id: GenericId;
   readonly data: StatementData;
+  readonly extra: Option<StatementExtra>;
 }
 
 /** @name Expiration */
@@ -73,6 +74,9 @@ export interface StatementData extends Struct {
   readonly signatures: AnagolaySignatures;
   readonly claim: AnagolayClaim;
 }
+
+/** @name StatementExtra */
+export interface StatementExtra extends Struct {}
 
 /** @name StatementInfo */
 export interface StatementInfo extends Struct {

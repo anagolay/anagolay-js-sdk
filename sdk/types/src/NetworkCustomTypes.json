@@ -49,7 +49,8 @@
   },
   "Operation": {
     "id": "GenericId",
-    "data": "OperationData"
+    "data": "OperationData",
+    "extra": "Option<OperationExtra>"
   },
   "OperationData": {
     "name": "Vec<u8>",
@@ -62,6 +63,7 @@
     "priority": "u32",
     "ops": "Vec<Operation>"
   },
+  "OperationExtra": {},
   "ChildOutput": "Vec<u8>",
   "ProofParams": {
     "k": "Vec<u8>",
@@ -74,7 +76,8 @@
   },
   "Proof": {
     "id": "GenericId",
-    "data": "ProofData"
+    "data": "ProofData",
+    "extra": "Option<ProofExtra>"
   },
   "ProofData": {
     "ruleId": "GenericId",
@@ -83,6 +86,7 @@
     "groups": "Vec<ForWhat>",
     "params": "Vec<ProofParams>"
   },
+  "ProofExtra": {},
   "RuleInfo": {
     "rule": "Rule",
     "accountId": "AccountId",
@@ -94,7 +98,8 @@
   },
   "Rule": {
     "id": "GenericId",
-    "data": "RuleData"
+    "data": "RuleData",
+    "extra": "Option<RuleExtra>"
   },
   "OperationReference": {
     "id": "GenericId",
@@ -109,6 +114,7 @@
     "parentId": "GenericId",
     "ops": "Vec<OperationReference>"
   },
+  "RuleExtra": {},
   "Proportion": {
     "sign": "Vec<u8>",
     "name": "Vec<u8>",
@@ -164,9 +170,11 @@
     "signatures": "AnagolaySignatures",
     "claim": "AnagolayClaim"
   },
+  "StatementExtra": {},
   "AnagolayStatement": {
     "id": "GenericId",
-    "data": "StatementData"
+    "data": "StatementData",
+    "extra": "Option<StatementExtra>"
   },
   "StatementInfo": {
     "statement": "AnagolayStatement",

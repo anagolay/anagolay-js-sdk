@@ -18,6 +18,7 @@ export const OperationsCustomTypes = {
   Operation: {
     id: 'GenericId',
     data: 'OperationData',
+    extra: 'Option<OperationExtra>',
   },
   OperationData: {
     /// max 128(0.12kb) characters, slugify to use _
@@ -35,6 +36,7 @@ export const OperationsCustomTypes = {
     priority: 'u32',
     ops: 'Vec<Operation>',
   },
+  OperationExtra: {},
   ChildOutput: 'Vec<u8>',
 }
 

@@ -64,9 +64,11 @@ export const RulesCustomTypes = {
     signatures: 'AnagolaySignatures',
     claim: 'AnagolayClaim',
   },
+  StatementExtra: {},
   AnagolayStatement: {
     id: 'GenericId',
     data: 'StatementData',
+    extra: 'Option<StatementExtra>',
   },
   StatementInfo: {
     statement: 'AnagolayStatement',
