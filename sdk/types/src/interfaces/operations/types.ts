@@ -1,7 +1,7 @@
 // Auto-generated via `yarn polkadot-types-from-defs`, do not edit
 /* eslint-disable */
 
-import type { Bytes, Struct, Vec, u32 } from '@polkadot/types';
+import type { Bytes, Option, Struct, Vec, u32 } from '@polkadot/types';
 import type { ForWhat, GenericId } from '@anagolay/types/interfaces/anagolay';
 import type { AccountId, BlockNumber } from '@polkadot/types/interfaces/runtime';
 
@@ -18,6 +18,7 @@ export interface CustomInputParam extends Struct {
 export interface Operation extends Struct {
   readonly id: GenericId;
   readonly data: OperationData;
+  readonly extra: Option<OperationExtra>;
 }
 
 /** @name OperationData */
@@ -32,6 +33,9 @@ export interface OperationData extends Struct {
   readonly priority: u32;
   readonly ops: Vec<Operation>;
 }
+
+/** @name OperationExtra */
+export interface OperationExtra extends Struct {}
 
 /** @name OperationInfo */
 export interface OperationInfo extends Struct {

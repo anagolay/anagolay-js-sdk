@@ -11,6 +11,7 @@ export const PoECustomTypes = {
   Proof: {
     id: 'GenericId',
     data: 'ProofData',
+    extra: 'Option<ProofExtra>'
   },
   ProofData: {
     ruleId: 'GenericId',
@@ -19,6 +20,7 @@ export const PoECustomTypes = {
     groups: 'Vec<ForWhat>',
     params: 'Vec<ProofParams>',
   },
+  ProofExtra: {},
   RuleInfo: {
     rule: 'Rule',
     accountId: 'AccountId',

@@ -1,7 +1,7 @@
 // Auto-generated via `yarn polkadot-types-from-chain`, do not edit
 /* eslint-disable */
 
-import type { u32, u64 } from '@polkadot/types';
+import type { u32 } from '@polkadot/types';
 import type { GenericId } from '@anagolay/types/interfaces/anagolay';
 import type { BalanceStatus } from '@polkadot/types/interfaces/balances';
 import type { AuthorityList } from '@polkadot/types/interfaces/grandpa';
@@ -76,22 +76,18 @@ declare module '@polkadot/api/types/events' {
     operations: {
       [key: string]: AugmentedEvent<ApiType>;
       /**
-       * Default Operations Created
-       **/
-      DefaultOperationCreated: AugmentedEvent<ApiType, [AccountId, u64]>;
-      /**
-       * Operation Created
+       * Operation Created. \[ who, OperationId \]
        **/
       OperationCreated: AugmentedEvent<ApiType, [AccountId, GenericId]>;
     };
     poe: {
       [key: string]: AugmentedEvent<ApiType>;
       /**
-       * Phash is created
+       * Phash is created. \{owner, pHash}\
        **/
       PhashCreated: AugmentedEvent<ApiType, [AccountId, Hash]>;
       /**
-       * Proof is created and claimed
+       * Proof is created and claimed . \{owner, cid}\
        **/
       ProofCreated: AugmentedEvent<ApiType, [AccountId, GenericId]>;
     };
@@ -105,27 +101,15 @@ declare module '@polkadot/api/types/events' {
     statements: {
       [key: string]: AugmentedEvent<ApiType>;
       /**
-       * Copyright is created
+       * Copyright is created. [who, CID]
        **/
       CopyrightCreated: AugmentedEvent<ApiType, [AccountId, GenericId]>;
       /**
-       * Copyright exists
-       **/
-      CopyrightExists: AugmentedEvent<ApiType, [AccountId, GenericId]>;
-      /**
-       * Ownership is created
+       * Ownership is created. [who, CID]
        **/
       OwnershipCreated: AugmentedEvent<ApiType, [AccountId, GenericId]>;
       /**
-       * Ownership exists
-       **/
-      OwnershipExists: AugmentedEvent<ApiType, [AccountId, GenericId]>;
-      /**
-       * Statement is created
-       **/
-      StatementCreated: AugmentedEvent<ApiType, [AccountId, GenericId]>;
-      /**
-       * Statement revoked
+       * Statement revoked. [who, CID]
        **/
       StatementRevoked: AugmentedEvent<ApiType, [AccountId, GenericId]>;
     };

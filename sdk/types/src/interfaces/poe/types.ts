@@ -1,7 +1,7 @@
 // Auto-generated via `yarn polkadot-types-from-defs`, do not edit
 /* eslint-disable */
 
-import type { Bytes, Struct, Vec } from '@polkadot/types';
+import type { Bytes, Option, Struct, Vec } from '@polkadot/types';
 import type { CreatorId, ForWhat, GenericId } from '@anagolay/types/interfaces/anagolay';
 import type { Rule } from '@anagolay/types/interfaces/rules';
 import type { AccountId, BlockNumber } from '@polkadot/types/interfaces/runtime';
@@ -16,6 +16,7 @@ export interface PhashInfo extends Struct {
 export interface Proof extends Struct {
   readonly id: GenericId;
   readonly data: ProofData;
+  readonly extra: Option<ProofExtra>;
 }
 
 /** @name ProofData */
@@ -26,6 +27,9 @@ export interface ProofData extends Struct {
   readonly groups: Vec<ForWhat>;
   readonly params: Vec<ProofParams>;
 }
+
+/** @name ProofExtra */
+export interface ProofExtra extends Struct {}
 
 /** @name ProofInfo */
 export interface ProofInfo extends Struct {

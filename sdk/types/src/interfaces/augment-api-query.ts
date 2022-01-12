@@ -4,9 +4,7 @@
 import type { Bytes, Option, Vec, bool, u128, u32, u64 } from '@polkadot/types';
 import type { AnyNumber, ITuple, Observable } from '@polkadot/types/types';
 import type { GenericId } from '@anagolay/types/interfaces/anagolay';
-import type { OperationInfo } from '@anagolay/types/interfaces/operations';
-import type { PhashInfo, ProofInfo, RuleInfo } from '@anagolay/types/interfaces/poe';
-import type { StatementInfo } from '@anagolay/types/interfaces/statements';
+import type { PhashInfo } from '@anagolay/types/interfaces/poe';
 import type { AccountData, BalanceLock } from '@polkadot/types/interfaces/balances';
 import type { SetId, StoredPendingChange, StoredState } from '@polkadot/types/interfaces/grandpa';
 import type { AccountId, Balance, BlockNumber, Hash, Moment, Releases } from '@polkadot/types/interfaces/runtime';
@@ -78,11 +76,14 @@ declare module '@polkadot/api/types/storage' {
     };
     operations: {
       [key: string]: QueryableStorageEntry<ApiType>;
+      /**
+       * Total amount of the stored operations
+       **/
       operationCount: AugmentedQuery<ApiType, () => Observable<u64>, []> & QueryableStorageEntry<ApiType, []>;
       /**
-       * Operations
+       * Operations storage. Double map storage where the index is `[OperationId, OwnerAccountId]`.
        **/
-      operations: AugmentedQueryDoubleMap<ApiType, (key1: GenericId | string | Uint8Array, key2: AccountId | string | Uint8Array) => Observable<OperationInfo>, [GenericId, AccountId]> & QueryableStorageEntry<ApiType, [GenericId, AccountId]>;
+      operations: AugmentedQueryDoubleMap<ApiType, (key1: GenericId | string | Uint8Array, key2: AccountId | string | Uint8Array) => Observable<AnagolayRecord>, [GenericId, AccountId]> & QueryableStorageEntry<ApiType, [GenericId, AccountId]>;
     };
     poe: {
       [key: string]: QueryableStorageEntry<ApiType>;
@@ -97,7 +98,7 @@ declare module '@polkadot/api/types/storage' {
       /**
        * PoE Proofs
        **/
-      proofs: AugmentedQueryDoubleMap<ApiType, (key1: GenericId | string | Uint8Array, key2: AccountId | string | Uint8Array) => Observable<ProofInfo>, [GenericId, AccountId]> & QueryableStorageEntry<ApiType, [GenericId, AccountId]>;
+      proofs: AugmentedQueryDoubleMap<ApiType, (key1: GenericId | string | Uint8Array, key2: AccountId | string | Uint8Array) => Observable<AnagolayRecord>, [GenericId, AccountId]> & QueryableStorageEntry<ApiType, [GenericId, AccountId]>;
       /**
        * Proofs count
        **/
@@ -121,24 +122,26 @@ declare module '@polkadot/api/types/storage' {
       /**
        * Rules
        **/
-      rules: AugmentedQueryDoubleMap<ApiType, (key1: GenericId | string | Uint8Array, key2: AccountId | string | Uint8Array) => Observable<RuleInfo>, [GenericId, AccountId]> & QueryableStorageEntry<ApiType, [GenericId, AccountId]>;
+      rules: AugmentedQueryDoubleMap<ApiType, (key1: GenericId | string | Uint8Array, key2: AccountId | string | Uint8Array) => Observable<AnagolayRecord>, [GenericId, AccountId]> & QueryableStorageEntry<ApiType, [GenericId, AccountId]>;
     };
     statements: {
       [key: string]: QueryableStorageEntry<ApiType>;
       /**
-       * List of the statements connected to the Proof. If the statement claim is 100% then there will be only one entry, if it's not then as many entries is needed to get to 100%
+       * List of the statements connected to the Proof. If the statement claim is 100% then there
+       * will be only one entry, if it's not then as many entries is needed to get to 100%
        **/
       proofValidStatements: AugmentedQuery<ApiType, (arg: GenericId | string | Uint8Array) => Observable<Vec<GenericId>>, [GenericId]> & QueryableStorageEntry<ApiType, [GenericId]>;
       /**
        * ALL statements
        **/
-      statements: AugmentedQueryDoubleMap<ApiType, (key1: GenericId | string | Uint8Array, key2: AccountId | string | Uint8Array) => Observable<StatementInfo>, [GenericId, AccountId]> & QueryableStorageEntry<ApiType, [GenericId, AccountId]>;
+      statements: AugmentedQueryDoubleMap<ApiType, (key1: GenericId | string | Uint8Array, key2: AccountId | string | Uint8Array) => Observable<AnagolayRecord>, [GenericId, AccountId]> & QueryableStorageEntry<ApiType, [GenericId, AccountId]>;
       /**
        * Amount of saved statements
        **/
       statementsCount: AugmentedQuery<ApiType, () => Observable<u128>, []> & QueryableStorageEntry<ApiType, []>;
       /**
-       * Statement to previous statement index table for quick check. The StatementB has a parent StatementA in `prev_id` field this will be
+       * Statement to previous statement index table for quick check.
+       * The StatementB has a parent StatementA in `prev_id` field this will be
        * Example:
        * ```ts
        * const aStatement = {
@@ -148,10 +151,10 @@ declare module '@polkadot/api/types/storage' {
        * const bStatement = {
        * //  ... normal as the rest,
        * prev_id: aStatement.id
-       * }
-       * ```
+       * }```
        * so this will be a map of bStatement.GenericId => aStatement.GenericId
-       * And now we try to revoke the `aStatement` it will fail, because it is the part of the `bStatement`
+       * And now if we try to revoke the `aStatement` it will fail,
+       * because it is the part of the `bStatement`
        **/
       statementToPrevious: AugmentedQuery<ApiType, (arg: GenericId | string | Uint8Array) => Observable<GenericId>, [GenericId]> & QueryableStorageEntry<ApiType, [GenericId]>;
     };
