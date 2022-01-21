@@ -3,7 +3,6 @@
 
 import type { Bytes, Option, Struct, Vec } from '@polkadot/types';
 import type { CreatorId, ForWhat, GenericId } from '@anagolay/types/interfaces/anagolay';
-import type { Rule } from '@anagolay/types/interfaces/rules';
 import type { AccountId, BlockNumber } from '@polkadot/types/interfaces/runtime';
 
 /** @name PhashInfo */
@@ -31,22 +30,15 @@ export interface ProofData extends Struct {
 /** @name ProofExtra */
 export interface ProofExtra extends Struct {}
 
-/** @name ProofInfo */
-export interface ProofInfo extends Struct {
-  readonly proof: Proof;
-  readonly accountId: AccountId;
-  readonly blockNumber: BlockNumber;
-}
-
 /** @name ProofParams */
 export interface ProofParams extends Struct {
   readonly k: Bytes;
   readonly v: Bytes;
 }
 
-/** @name RuleInfo */
-export interface RuleInfo extends Struct {
-  readonly rule: Rule;
+/** @name ProofRecord */
+export interface ProofRecord extends Struct {
+  readonly record: Proof;
   readonly accountId: AccountId;
   readonly blockNumber: BlockNumber;
 }

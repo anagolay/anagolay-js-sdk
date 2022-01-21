@@ -1,6 +1,7 @@
 export const AnagolayCustomTypes = {
   GenericId: 'Vec<u8>',
   CreatorId: 'Vec<u8>',
+  Characters: 'Vec<u8>',
   DefaultsHashing: {
     algo: 'Vec<u8>',
     bits: 'u32',

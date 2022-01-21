@@ -3,6 +3,7 @@
 
 import type { Bytes, Option, Struct, Vec, u32 } from '@polkadot/types';
 import type { CreatorId, ForWhat, GenericId } from '@anagolay/types/interfaces/anagolay';
+import type { AccountId, BlockNumber } from '@polkadot/types/interfaces/runtime';
 
 /** @name OperationReference */
 export interface OperationReference extends Struct {
@@ -30,5 +31,12 @@ export interface RuleData extends Struct {
 
 /** @name RuleExtra */
 export interface RuleExtra extends Struct {}
+
+/** @name RuleRecord */
+export interface RuleRecord extends Struct {
+  readonly rule: Rule;
+  readonly accountId: AccountId;
+  readonly blockNumber: BlockNumber;
+}
 
 export type PHANTOM_RULES = 'rules';

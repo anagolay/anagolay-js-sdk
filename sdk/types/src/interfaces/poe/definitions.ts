@@ -3,15 +3,15 @@ export const PoECustomTypes = {
     k: 'Vec<u8>',
     v: 'Vec<u8>',
   },
-  ProofInfo: {
-    proof: 'Proof',
+  ProofRecord: {
+    record: 'Proof',
     accountId: 'AccountId',
     blockNumber: 'BlockNumber',
   },
   Proof: {
     id: 'GenericId',
     data: 'ProofData',
-    extra: 'Option<ProofExtra>'
+    extra: 'Option<ProofExtra>',
   },
   ProofData: {
     ruleId: 'GenericId',
@@ -21,11 +21,6 @@ export const PoECustomTypes = {
     params: 'Vec<ProofParams>',
   },
   ProofExtra: {},
-  RuleInfo: {
-    rule: 'Rule',
-    accountId: 'AccountId',
-    blockNumber: 'BlockNumber',
-  },
   PhashInfo: {
     pHash: 'Vec<u8>',
     proofId: 'GenericId',

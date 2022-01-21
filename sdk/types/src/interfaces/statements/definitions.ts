@@ -60,6 +60,11 @@ export const RulesCustomTypes = {
     holder: 'AnagolaySignature',
     issuer: 'AnagolaySignature',
   },
+  AnagolayStatementRecord: {
+    record: 'AnagolayStatement',
+    accountId: 'AccountId',
+    blockNumber: 'BlockNumber',
+  },
   StatementData: {
     signatures: 'AnagolaySignatures',
     claim: 'AnagolayClaim',
@@ -69,11 +74,6 @@ export const RulesCustomTypes = {
     id: 'GenericId',
     data: 'StatementData',
     extra: 'Option<StatementExtra>',
-  },
-  StatementInfo: {
-    statement: 'AnagolayStatement',
-    accountId: 'AccountId',
-    blockNumber: 'BlockNumber',
   },
 }
 
