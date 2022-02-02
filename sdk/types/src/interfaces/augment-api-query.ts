@@ -4,7 +4,10 @@
 import type { Bytes, Option, Vec, bool, u128, u32, u64 } from '@polkadot/types';
 import type { AnyNumber, ITuple, Observable } from '@polkadot/types/types';
 import type { GenericId } from '@anagolay/types/interfaces/anagolay';
-import type { PhashInfo } from '@anagolay/types/interfaces/poe';
+import type { OperationRecord, OperationVersionRecord } from '@anagolay/types/interfaces/operations';
+import type { PhashInfo, ProofRecord } from '@anagolay/types/interfaces/poe';
+import type { RuleRecord } from '@anagolay/types/interfaces/rules';
+import type { AnagolayStatementRecord } from '@anagolay/types/interfaces/statements';
 import type { AccountData, BalanceLock } from '@polkadot/types/interfaces/balances';
 import type { SetId, StoredPendingChange, StoredState } from '@polkadot/types/interfaces/grandpa';
 import type { AccountId, Balance, BlockNumber, Hash, Moment, Releases } from '@polkadot/types/interfaces/runtime';
@@ -77,13 +80,25 @@ declare module '@polkadot/api/types/storage' {
     operations: {
       [key: string]: QueryableStorageEntry<ApiType>;
       /**
-       * Total amount of the stored operations
+       * Manifests storage. Double map storage where the index is `[IPFSCid, OperationId]`.
+       **/
+      manifests: AugmentedQueryDoubleMap<ApiType, (key1: GenericId | string | Uint8Array, key2: GenericId | string | Uint8Array) => Observable<Bytes>, [GenericId, GenericId]> & QueryableStorageEntry<ApiType, [GenericId, GenericId]>;
+      /**
+       * Total amount of the stored Operations
        **/
       operationCount: AugmentedQuery<ApiType, () => Observable<u64>, []> & QueryableStorageEntry<ApiType, []>;
       /**
-       * Operations storage. Double map storage where the index is `[OperationId, OwnerAccountId]`.
+       * Operations storage. Double map storage where the index is `[OwnerAccountId, OperationId]`.
        **/
-      operations: AugmentedQueryDoubleMap<ApiType, (key1: GenericId | string | Uint8Array, key2: AccountId | string | Uint8Array) => Observable<AnagolayRecord>, [GenericId, AccountId]> & QueryableStorageEntry<ApiType, [GenericId, AccountId]>;
+      operations: AugmentedQueryDoubleMap<ApiType, (key1: AccountId | string | Uint8Array, key2: GenericId | string | Uint8Array) => Observable<OperationRecord>, [AccountId, GenericId]> & QueryableStorageEntry<ApiType, [AccountId, GenericId]>;
+      /**
+       * Operation Version storage. Map storage where index is `OperationId`
+       **/
+      operationVersions: AugmentedQuery<ApiType, (arg: GenericId | string | Uint8Array) => Observable<Vec<GenericId>>, [GenericId]> & QueryableStorageEntry<ApiType, [GenericId]>;
+      /**
+       * Operation Version storage. Map storage where index is `OperationId`
+       **/
+      versions: AugmentedQuery<ApiType, (arg: GenericId | string | Uint8Array) => Observable<OperationVersionRecord>, [GenericId]> & QueryableStorageEntry<ApiType, [GenericId]>;
     };
     poe: {
       [key: string]: QueryableStorageEntry<ApiType>;
@@ -98,7 +113,7 @@ declare module '@polkadot/api/types/storage' {
       /**
        * PoE Proofs
        **/
-      proofs: AugmentedQueryDoubleMap<ApiType, (key1: GenericId | string | Uint8Array, key2: AccountId | string | Uint8Array) => Observable<AnagolayRecord>, [GenericId, AccountId]> & QueryableStorageEntry<ApiType, [GenericId, AccountId]>;
+      proofs: AugmentedQueryDoubleMap<ApiType, (key1: GenericId | string | Uint8Array, key2: AccountId | string | Uint8Array) => Observable<ProofRecord>, [GenericId, AccountId]> & QueryableStorageEntry<ApiType, [GenericId, AccountId]>;
       /**
        * Proofs count
        **/
@@ -122,7 +137,7 @@ declare module '@polkadot/api/types/storage' {
       /**
        * Rules
        **/
-      rules: AugmentedQueryDoubleMap<ApiType, (key1: GenericId | string | Uint8Array, key2: AccountId | string | Uint8Array) => Observable<AnagolayRecord>, [GenericId, AccountId]> & QueryableStorageEntry<ApiType, [GenericId, AccountId]>;
+      rules: AugmentedQueryDoubleMap<ApiType, (key1: GenericId | string | Uint8Array, key2: AccountId | string | Uint8Array) => Observable<RuleRecord>, [GenericId, AccountId]> & QueryableStorageEntry<ApiType, [GenericId, AccountId]>;
     };
     statements: {
       [key: string]: QueryableStorageEntry<ApiType>;
@@ -134,7 +149,7 @@ declare module '@polkadot/api/types/storage' {
       /**
        * ALL statements
        **/
-      statements: AugmentedQueryDoubleMap<ApiType, (key1: GenericId | string | Uint8Array, key2: AccountId | string | Uint8Array) => Observable<AnagolayRecord>, [GenericId, AccountId]> & QueryableStorageEntry<ApiType, [GenericId, AccountId]>;
+      statements: AugmentedQueryDoubleMap<ApiType, (key1: GenericId | string | Uint8Array, key2: AccountId | string | Uint8Array) => Observable<AnagolayStatementRecord>, [GenericId, AccountId]> & QueryableStorageEntry<ApiType, [GenericId, AccountId]>;
       /**
        * Amount of saved statements
        **/

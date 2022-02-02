@@ -79,6 +79,10 @@ declare module '@polkadot/api/types/events' {
        * Operation Created. \[ who, OperationId \]
        **/
       OperationCreated: AugmentedEvent<ApiType, [AccountId, GenericId]>;
+      /**
+       * Operation Updated. \[ who, OperationId \]
+       **/
+      OperationUpdated: AugmentedEvent<ApiType, [AccountId, GenericId]>;
     };
     poe: {
       [key: string]: AugmentedEvent<ApiType>;

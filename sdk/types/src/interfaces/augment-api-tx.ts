@@ -4,7 +4,7 @@
 import type { Bytes, Compact, Option, Vec, u16, u32, u64 } from '@polkadot/types';
 import type { AnyNumber } from '@polkadot/types/types';
 import type { GenericId } from '@anagolay/types/interfaces/anagolay';
-import type { Operation } from '@anagolay/types/interfaces/operations';
+import type { Operation, OperationVersion } from '@anagolay/types/interfaces/operations';
 import type { PhashInfo, Proof } from '@anagolay/types/interfaces/poe';
 import type { Rule } from '@anagolay/types/interfaces/rules';
 import type { AnagolayStatement } from '@anagolay/types/interfaces/statements';
@@ -132,9 +132,17 @@ declare module '@polkadot/api/types/submittable' {
     operations: {
       [key: string]: SubmittableExtrinsicFunction<ApiType>;
       /**
-       * Create Operation
+       * Create initial Operation Version.
        **/
-      create: AugmentedSubmittable<(operation: Operation | { id?: any; data?: any; extra?: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [Operation]>;
+      createInitialVersion: AugmentedSubmittable<(operationVersion: OperationVersion | { id?: any; data?: any; extra?: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [OperationVersion]>;
+      /**
+       * Create Operation manifest
+       **/
+      createManifest: AugmentedSubmittable<(operation: Operation | { id?: any; data?: any; extra?: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [Operation]>;
+      /**
+       * Approve Operation Version
+       **/
+      versionApprove: AugmentedSubmittable<(operation: Operation | { id?: any; data?: any; extra?: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [Operation]>;
     };
     poe: {
       [key: string]: SubmittableExtrinsicFunction<ApiType>;

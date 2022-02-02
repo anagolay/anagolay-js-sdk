@@ -2,11 +2,11 @@
 /* eslint-disable */
 
 import type { BitVec, Bool, Bytes, Compact, Data, DoNotConstruct, I128, I16, I256, I32, I64, I8, Json, Null, Option, Raw, StorageKey, Text, Type, U128, U16, U256, U32, U64, U8, USize, Vec, bool, i128, i16, i256, i32, i64, i8, u128, u16, u256, u32, u64, u8, usize } from '@polkadot/types';
-import type { CreatorId, DefaultValues, DefaultsCid, DefaultsEncoding, DefaultsHashing, ForWhat, GenericId } from '@anagolay/types/interfaces/anagolay';
-import type { ChildOutput, CustomInputParam, Operation, OperationData, OperationExtra, OperationInfo, OperationOutput } from '@anagolay/types/interfaces/operations';
-import type { PhashInfo, Proof, ProofData, ProofExtra, ProofInfo, ProofParams, RuleInfo } from '@anagolay/types/interfaces/poe';
-import type { OperationReference, Rule, RuleData, RuleExtra } from '@anagolay/types/interfaces/rules';
-import type { AnagolayClaim, AnagolayClaimType, AnagolaySignature, AnagolaySignatures, AnagolayStatement, Expiration, ExpirationType, Proportion, StatementData, StatementExtra, StatementInfo, Validity } from '@anagolay/types/interfaces/statements';
+import type { Characters, CreatorId, DefaultValues, DefaultsCid, DefaultsEncoding, DefaultsHashing, ForWhat, GenericId } from '@anagolay/types/interfaces/anagolay';
+import type { Operation, OperationData, OperationExtra, OperationRecord, OperationVersion, OperationVersionData, OperationVersionDataExtra, OperationVersionPackage, OperationVersionRecord, PackageType, TypeName } from '@anagolay/types/interfaces/operations';
+import type { PhashInfo, Proof, ProofData, ProofExtra, ProofParams, ProofRecord } from '@anagolay/types/interfaces/poe';
+import type { OperationReference, Rule, RuleData, RuleExtra, RuleRecord } from '@anagolay/types/interfaces/rules';
+import type { AnagolayClaim, AnagolayClaimType, AnagolaySignature, AnagolaySignatures, AnagolayStatement, AnagolayStatementRecord, Expiration, ExpirationType, Proportion, StatementData, StatementExtra, Validity } from '@anagolay/types/interfaces/statements';
 import type { AssetApproval, AssetApprovalKey, AssetBalance, AssetDestroyWitness, AssetDetails, AssetMetadata, TAssetBalance, TAssetDepositBalance } from '@polkadot/types/interfaces/assets';
 import type { BlockAttestations, IncludedBlocks, MoreAttestations } from '@polkadot/types/interfaces/attestations';
 import type { RawAuraPreDigest } from '@polkadot/types/interfaces/aura';
@@ -186,6 +186,7 @@ declare module '@polkadot/types/types/registry' {
     'Option<AnagolaySignature>': Option<AnagolaySignature>;
     'Option<AnagolaySignatures>': Option<AnagolaySignatures>;
     'Option<AnagolayStatement>': Option<AnagolayStatement>;
+    'Option<AnagolayStatementRecord>': Option<AnagolayStatementRecord>;
     'Option<AnySignature>': Option<AnySignature>;
     'Option<ApiId>': Option<ApiId>;
     'Option<ApplyExtrinsicResult>': Option<ApplyExtrinsicResult>;
@@ -272,7 +273,7 @@ declare module '@polkadot/types/types/registry' {
     'Option<ChainType>': Option<ChainType>;
     'Option<ChangesTrieConfiguration>': Option<ChangesTrieConfiguration>;
     'Option<ChangesTrieSignal>': Option<ChangesTrieSignal>;
-    'Option<ChildOutput>': Option<ChildOutput>;
+    'Option<Characters>': Option<Characters>;
     'Option<CodecHash>': Option<CodecHash>;
     'Option<CodeHash>': Option<CodeHash>;
     'Option<CollatorId>': Option<CollatorId>;
@@ -332,7 +333,6 @@ declare module '@polkadot/types/types/registry' {
     'Option<CoreOccupied>': Option<CoreOccupied>;
     'Option<CreatedBlock>': Option<CreatedBlock>;
     'Option<CreatorId>': Option<CreatorId>;
-    'Option<CustomInputParam>': Option<CustomInputParam>;
     'Option<Data>': Option<Data>;
     'Option<DefaultsCid>': Option<DefaultsCid>;
     'Option<DefaultsEncoding>': Option<DefaultsEncoding>;
@@ -662,9 +662,13 @@ declare module '@polkadot/types/types/registry' {
     'Option<Operation>': Option<Operation>;
     'Option<OperationData>': Option<OperationData>;
     'Option<OperationExtra>': Option<OperationExtra>;
-    'Option<OperationInfo>': Option<OperationInfo>;
-    'Option<OperationOutput>': Option<OperationOutput>;
+    'Option<OperationRecord>': Option<OperationRecord>;
     'Option<OperationReference>': Option<OperationReference>;
+    'Option<OperationVersion>': Option<OperationVersion>;
+    'Option<OperationVersionData>': Option<OperationVersionData>;
+    'Option<OperationVersionDataExtra>': Option<OperationVersionDataExtra>;
+    'Option<OperationVersionPackage>': Option<OperationVersionPackage>;
+    'Option<OperationVersionRecord>': Option<OperationVersionRecord>;
     'Option<Origin>': Option<Origin>;
     'Option<OriginCaller>': Option<OriginCaller>;
     'Option<OutboundHrmpMessage>': Option<OutboundHrmpMessage>;
@@ -672,6 +676,7 @@ declare module '@polkadot/types/types/registry' {
     'Option<Outcome>': Option<Outcome>;
     'Option<OverweightIndex>': Option<OverweightIndex>;
     'Option<Owner>': Option<Owner>;
+    'Option<PackageType>': Option<PackageType>;
     'Option<PageCounter>': Option<PageCounter>;
     'Option<PageIndexData>': Option<PageIndexData>;
     'Option<PalletId>': Option<PalletId>;
@@ -731,8 +736,8 @@ declare module '@polkadot/types/types/registry' {
     'Option<Proof>': Option<Proof>;
     'Option<ProofData>': Option<ProofData>;
     'Option<ProofExtra>': Option<ProofExtra>;
-    'Option<ProofInfo>': Option<ProofInfo>;
     'Option<ProofParams>': Option<ProofParams>;
+    'Option<ProofRecord>': Option<ProofRecord>;
     'Option<PropIndex>': Option<PropIndex>;
     'Option<Proportion>': Option<Proportion>;
     'Option<Proposal>': Option<Proposal>;
@@ -796,7 +801,7 @@ declare module '@polkadot/types/types/registry' {
     'Option<Rule>': Option<Rule>;
     'Option<RuleData>': Option<RuleData>;
     'Option<RuleExtra>': Option<RuleExtra>;
-    'Option<RuleInfo>': Option<RuleInfo>;
+    'Option<RuleRecord>': Option<RuleRecord>;
     'Option<RuntimeDbWeight>': Option<RuntimeDbWeight>;
     'Option<RuntimeDispatchInfo>': Option<RuntimeDispatchInfo>;
     'Option<RuntimeVersion>': Option<RuntimeVersion>;
@@ -876,7 +881,6 @@ declare module '@polkadot/types/types/registry' {
     'Option<Statement>': Option<Statement>;
     'Option<StatementData>': Option<StatementData>;
     'Option<StatementExtra>': Option<StatementExtra>;
-    'Option<StatementInfo>': Option<StatementInfo>;
     'Option<StatementKind>': Option<StatementKind>;
     'Option<StorageChangeSet>': Option<StorageChangeSet>;
     'Option<StorageData>': Option<StorageData>;
@@ -937,6 +941,7 @@ declare module '@polkadot/types/types/registry' {
     'Option<TrieId>': Option<TrieId>;
     'Option<TrieIndex>': Option<TrieIndex>;
     'Option<Type>': Option<Type>;
+    'Option<TypeName>': Option<TypeName>;
     'Option<u128>': Option<u128>;
     'Option<U128>': Option<U128>;
     'Option<u16>': Option<u16>;
@@ -1066,6 +1071,7 @@ declare module '@polkadot/types/types/registry' {
     'Vec<AnagolaySignature>': Vec<AnagolaySignature>;
     'Vec<AnagolaySignatures>': Vec<AnagolaySignatures>;
     'Vec<AnagolayStatement>': Vec<AnagolayStatement>;
+    'Vec<AnagolayStatementRecord>': Vec<AnagolayStatementRecord>;
     'Vec<AnySignature>': Vec<AnySignature>;
     'Vec<ApiId>': Vec<ApiId>;
     'Vec<ApplyExtrinsicResult>': Vec<ApplyExtrinsicResult>;
@@ -1152,7 +1158,7 @@ declare module '@polkadot/types/types/registry' {
     'Vec<ChainType>': Vec<ChainType>;
     'Vec<ChangesTrieConfiguration>': Vec<ChangesTrieConfiguration>;
     'Vec<ChangesTrieSignal>': Vec<ChangesTrieSignal>;
-    'Vec<ChildOutput>': Vec<ChildOutput>;
+    'Vec<Characters>': Vec<Characters>;
     'Vec<CodecHash>': Vec<CodecHash>;
     'Vec<CodeHash>': Vec<CodeHash>;
     'Vec<CollatorId>': Vec<CollatorId>;
@@ -1212,7 +1218,6 @@ declare module '@polkadot/types/types/registry' {
     'Vec<CoreOccupied>': Vec<CoreOccupied>;
     'Vec<CreatedBlock>': Vec<CreatedBlock>;
     'Vec<CreatorId>': Vec<CreatorId>;
-    'Vec<CustomInputParam>': Vec<CustomInputParam>;
     'Vec<Data>': Vec<Data>;
     'Vec<DefaultsCid>': Vec<DefaultsCid>;
     'Vec<DefaultsEncoding>': Vec<DefaultsEncoding>;
@@ -1542,9 +1547,13 @@ declare module '@polkadot/types/types/registry' {
     'Vec<Operation>': Vec<Operation>;
     'Vec<OperationData>': Vec<OperationData>;
     'Vec<OperationExtra>': Vec<OperationExtra>;
-    'Vec<OperationInfo>': Vec<OperationInfo>;
-    'Vec<OperationOutput>': Vec<OperationOutput>;
+    'Vec<OperationRecord>': Vec<OperationRecord>;
     'Vec<OperationReference>': Vec<OperationReference>;
+    'Vec<OperationVersion>': Vec<OperationVersion>;
+    'Vec<OperationVersionData>': Vec<OperationVersionData>;
+    'Vec<OperationVersionDataExtra>': Vec<OperationVersionDataExtra>;
+    'Vec<OperationVersionPackage>': Vec<OperationVersionPackage>;
+    'Vec<OperationVersionRecord>': Vec<OperationVersionRecord>;
     'Vec<Origin>': Vec<Origin>;
     'Vec<OriginCaller>': Vec<OriginCaller>;
     'Vec<OutboundHrmpMessage>': Vec<OutboundHrmpMessage>;
@@ -1552,6 +1561,7 @@ declare module '@polkadot/types/types/registry' {
     'Vec<Outcome>': Vec<Outcome>;
     'Vec<OverweightIndex>': Vec<OverweightIndex>;
     'Vec<Owner>': Vec<Owner>;
+    'Vec<PackageType>': Vec<PackageType>;
     'Vec<PageCounter>': Vec<PageCounter>;
     'Vec<PageIndexData>': Vec<PageIndexData>;
     'Vec<PalletId>': Vec<PalletId>;
@@ -1611,8 +1621,8 @@ declare module '@polkadot/types/types/registry' {
     'Vec<Proof>': Vec<Proof>;
     'Vec<ProofData>': Vec<ProofData>;
     'Vec<ProofExtra>': Vec<ProofExtra>;
-    'Vec<ProofInfo>': Vec<ProofInfo>;
     'Vec<ProofParams>': Vec<ProofParams>;
+    'Vec<ProofRecord>': Vec<ProofRecord>;
     'Vec<PropIndex>': Vec<PropIndex>;
     'Vec<Proportion>': Vec<Proportion>;
     'Vec<Proposal>': Vec<Proposal>;
@@ -1676,7 +1686,7 @@ declare module '@polkadot/types/types/registry' {
     'Vec<Rule>': Vec<Rule>;
     'Vec<RuleData>': Vec<RuleData>;
     'Vec<RuleExtra>': Vec<RuleExtra>;
-    'Vec<RuleInfo>': Vec<RuleInfo>;
+    'Vec<RuleRecord>': Vec<RuleRecord>;
     'Vec<RuntimeDbWeight>': Vec<RuntimeDbWeight>;
     'Vec<RuntimeDispatchInfo>': Vec<RuntimeDispatchInfo>;
     'Vec<RuntimeVersion>': Vec<RuntimeVersion>;
@@ -1756,7 +1766,6 @@ declare module '@polkadot/types/types/registry' {
     'Vec<Statement>': Vec<Statement>;
     'Vec<StatementData>': Vec<StatementData>;
     'Vec<StatementExtra>': Vec<StatementExtra>;
-    'Vec<StatementInfo>': Vec<StatementInfo>;
     'Vec<StatementKind>': Vec<StatementKind>;
     'Vec<StorageChangeSet>': Vec<StorageChangeSet>;
     'Vec<StorageData>': Vec<StorageData>;
@@ -1817,6 +1826,7 @@ declare module '@polkadot/types/types/registry' {
     'Vec<TrieId>': Vec<TrieId>;
     'Vec<TrieIndex>': Vec<TrieIndex>;
     'Vec<Type>': Vec<Type>;
+    'Vec<TypeName>': Vec<TypeName>;
     'Vec<u128>': Vec<u128>;
     'Vec<U128>': Vec<U128>;
     'Vec<u16>': Vec<u16>;
@@ -1946,6 +1956,7 @@ declare module '@polkadot/types/types/registry' {
     AnagolaySignature: AnagolaySignature;
     AnagolaySignatures: AnagolaySignatures;
     AnagolayStatement: AnagolayStatement;
+    AnagolayStatementRecord: AnagolayStatementRecord;
     AnySignature: AnySignature;
     ApiId: ApiId;
     ApplyExtrinsicResult: ApplyExtrinsicResult;
@@ -2032,7 +2043,7 @@ declare module '@polkadot/types/types/registry' {
     ChainType: ChainType;
     ChangesTrieConfiguration: ChangesTrieConfiguration;
     ChangesTrieSignal: ChangesTrieSignal;
-    ChildOutput: ChildOutput;
+    Characters: Characters;
     CodecHash: CodecHash;
     CodeHash: CodeHash;
     CollatorId: CollatorId;
@@ -2092,7 +2103,6 @@ declare module '@polkadot/types/types/registry' {
     CoreOccupied: CoreOccupied;
     CreatedBlock: CreatedBlock;
     CreatorId: CreatorId;
-    CustomInputParam: CustomInputParam;
     Data: Data;
     DefaultsCid: DefaultsCid;
     DefaultsEncoding: DefaultsEncoding;
@@ -2422,9 +2432,13 @@ declare module '@polkadot/types/types/registry' {
     Operation: Operation;
     OperationData: OperationData;
     OperationExtra: OperationExtra;
-    OperationInfo: OperationInfo;
-    OperationOutput: OperationOutput;
+    OperationRecord: OperationRecord;
     OperationReference: OperationReference;
+    OperationVersion: OperationVersion;
+    OperationVersionData: OperationVersionData;
+    OperationVersionDataExtra: OperationVersionDataExtra;
+    OperationVersionPackage: OperationVersionPackage;
+    OperationVersionRecord: OperationVersionRecord;
     Origin: Origin;
     OriginCaller: OriginCaller;
     OutboundHrmpMessage: OutboundHrmpMessage;
@@ -2432,6 +2446,7 @@ declare module '@polkadot/types/types/registry' {
     Outcome: Outcome;
     OverweightIndex: OverweightIndex;
     Owner: Owner;
+    PackageType: PackageType;
     PageCounter: PageCounter;
     PageIndexData: PageIndexData;
     PalletId: PalletId;
@@ -2491,8 +2506,8 @@ declare module '@polkadot/types/types/registry' {
     Proof: Proof;
     ProofData: ProofData;
     ProofExtra: ProofExtra;
-    ProofInfo: ProofInfo;
     ProofParams: ProofParams;
+    ProofRecord: ProofRecord;
     PropIndex: PropIndex;
     Proportion: Proportion;
     Proposal: Proposal;
@@ -2556,7 +2571,7 @@ declare module '@polkadot/types/types/registry' {
     Rule: Rule;
     RuleData: RuleData;
     RuleExtra: RuleExtra;
-    RuleInfo: RuleInfo;
+    RuleRecord: RuleRecord;
     RuntimeDbWeight: RuntimeDbWeight;
     RuntimeDispatchInfo: RuntimeDispatchInfo;
     RuntimeVersion: RuntimeVersion;
@@ -2636,7 +2651,6 @@ declare module '@polkadot/types/types/registry' {
     Statement: Statement;
     StatementData: StatementData;
     StatementExtra: StatementExtra;
-    StatementInfo: StatementInfo;
     StatementKind: StatementKind;
     StorageChangeSet: StorageChangeSet;
     StorageData: StorageData;
@@ -2697,6 +2711,7 @@ declare module '@polkadot/types/types/registry' {
     TrieId: TrieId;
     TrieIndex: TrieIndex;
     Type: Type;
+    TypeName: TypeName;
     u128: u128;
     U128: U128;
     u16: u16;

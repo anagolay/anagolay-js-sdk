@@ -1,17 +1,7 @@
 export const OperationsCustomTypes = {
-  CustomInputParam: {
-    /// 'AnByteArray' | 'ProofParams[]' | 'AnBoolean'
-    data: 'Vec<u8>',
-    /// The real data type check the outputDecoded in sensio SDK, for more info check the https://gitlab.com/anagolay/network-node/-/issues/27
-    decoded: 'Vec<u8>',
-  },
-  OperationOutput: {
-    desc: 'Vec<u8>',
-    output: 'Vec<u8>',
-    decoded: 'Vec<u8>',
-  },
-  OperationInfo: {
-    operation: 'Operation',
+  TypeName: 'Vec<u8>',
+  OperationRecord: {
+    record: 'Operation',
     accountId: 'AccountId',
     blockNumber: 'BlockNumber',
   },
@@ -22,22 +12,48 @@ export const OperationsCustomTypes = {
   },
   OperationData: {
     /// max 128(0.12kb) characters, slugify to use _
-    name: 'Vec<u8>',
+    name: 'Characters',
     /// max 512(0.5kb) or 1024(1kb) chars, can be markdown but not html
-    desc: 'Vec<u8>',
-    /// List of children outputs as an input to the parent method
-    input: 'Vec<CustomInputParam>',
-    // what operation returns. ATM is AnByteArray === Uint8Array or Vec<u8>
-    output: 'OperationOutput',
-    hashingOp: 'Vec<u8>',
-    encOp: 'Vec<u8>',
+    description: 'Characters',
+    /// What operation accepts in the implementation. these are the params of the function with the types
+    input: 'Vec<TypeName>',
+    /// A map where keys are names of configuration parameters and values are collections of strings representing allowed values
+    config: 'BTreeMap<Characters, Vec<Characters>>',
+    /// A switch used to generate the Workflow segments
     groups: 'Vec<ForWhat>',
-    /// this is the sum of all ops and the ops of the ops. tells how many operations this operation has. Based on this number we will decide which op is going to be executed first. This also tells which op has the longest chain or the deepest child op
-    priority: 'u32',
-    ops: 'Vec<Operation>',
+    /// Data type name defining the operation output
+    output: 'Vec<TypeName>',
+    /// The fully qualified URL for the repository, this can be any public repo URL
+    repository: 'Characters',
+    /// Short name of the license, like "Apache-2.0"
+    license: 'Characters',
   },
   OperationExtra: {},
-  ChildOutput: 'Vec<u8>',
+  OperationVersionRecord: {
+    record: 'OperationVersion',
+    accountId: 'AccountId',
+    blockNumber: 'BlockNumber',
+  },
+  OperationVersion: {
+    id: 'GenericId',
+    data: 'OperationVersionData',
+    extra: 'Option<OperationVersionDataExtra>',
+  },
+  PackageType: {
+    _enum: ['Crate', 'Wasm', 'Esm'],
+  },
+  OperationVersionPackage: {
+    package_type: 'PackageType',
+    file_url: 'Characters',
+    ipfs_cid: 'GenericId',
+  },
+  OperationVersionData: {
+    operation_id: 'GenericId',
+    parent_id: 'GenericId',
+    rehosted_repo: 'Characters',
+    packages: 'Vec<OperationVersionPackage>',
+  },
+  OperationVersionDataExtra: {},
 }
 
 // For the Network

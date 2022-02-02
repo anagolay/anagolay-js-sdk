@@ -87,9 +87,21 @@ declare module '@polkadot/api/types/errors' {
     operations: {
       [key: string]: AugmentedError<ApiType>;
       /**
-       * Operation Already exists
+       * Operation already exists when creating an Operation
        **/
       OperationAlreadyExists: AugmentedError<ApiType>;
+      /**
+       * Operation does not exist when updating an Operation
+       **/
+      OperationDoesNotExists: AugmentedError<ApiType>;
+      /**
+       * Operation Version already exists when creating an Operation Version
+       **/
+      OperationVersionAlreadyExists: AugmentedError<ApiType>;
+      /**
+       * Operation Version package already exists when creating an Operation Version
+       **/
+      OperationVersionPackageAlreadyExists: AugmentedError<ApiType>;
     };
     poe: {
       [key: string]: AugmentedError<ApiType>;

@@ -3,6 +3,9 @@
 
 import type { Bytes, Enum, Struct, bool, u32, u8 } from '@polkadot/types';
 
+/** @name Characters */
+export interface Characters extends Bytes {}
+
 /** @name CreatorId */
 export interface CreatorId extends Bytes {}
 

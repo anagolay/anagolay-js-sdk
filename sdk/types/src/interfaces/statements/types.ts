@@ -46,6 +46,13 @@ export interface AnagolayStatement extends Struct {
   readonly extra: Option<StatementExtra>;
 }
 
+/** @name AnagolayStatementRecord */
+export interface AnagolayStatementRecord extends Struct {
+  readonly record: AnagolayStatement;
+  readonly accountId: AccountId;
+  readonly blockNumber: BlockNumber;
+}
+
 /** @name Expiration */
 export interface Expiration extends Struct {
   readonly expirationType: ExpirationType;
@@ -77,13 +84,6 @@ export interface StatementData extends Struct {
 
 /** @name StatementExtra */
 export interface StatementExtra extends Struct {}
-
-/** @name StatementInfo */
-export interface StatementInfo extends Struct {
-  readonly statement: AnagolayStatement;
-  readonly accountId: AccountId;
-  readonly blockNumber: BlockNumber;
-}
 
 /** @name Validity */
 export interface Validity extends Struct {

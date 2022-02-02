@@ -4,6 +4,11 @@ export const RulesCustomTypes = {
     data: 'RuleData',
     extra: 'Option<RuleExtra>',
   },
+  RuleRecord: {
+    rule: 'Rule',
+    accountId: 'AccountId',
+    blockNumber: 'BlockNumber',
+  },
   OperationReference: {
     id: 'GenericId',
     children: 'Vec<OperationReference>',
