@@ -13,6 +13,8 @@ cache:
 
 workflow:
   rules:
+    - if: $CI_COMMIT_MESSAGE =~ /-draft$/
+      when: never
     - if: $CI_MERGE_REQUEST_IID
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
 
@@ -72,8 +74,9 @@ upload-cli-to-ipfs:
     - echo "Uploading CLI to IPFS ..."
     - ipfs add --cid-version=1 --pin=true --recursive --quieter sdk/cli/dist/anagolay.js > ANAGOLAY_CLI_CID
     - echo "The CLI is published with the CID:" && cat ANAGOLAY_CLI_CID
-  only:
-    - main
+  rules:
+    - if: $CI_COMMIT_MESSAGE =~ /^.*\[build_all\].*$/s
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
 upload-custom-types-to-ipfs:
   stage: release
   <<: *install-ipfs-and-setup
@@ -81,10 +84,11 @@ upload-custom-types-to-ipfs:
     - set -e
 
     - echo "Uploading Custom types to IPFS ..."
-    - ipfs add --cid-version=1 --pin=true --recursive --quieter sdk/types/customTypes.json > ANAGOLAY_CUSTOM_TYPES_CID
+    - ipfs add --cid-version=1 --pin=true --recursive --quieter sdk/types/src/customTypes.json > ANAGOLAY_CUSTOM_TYPES_CID
     - echo "The Custom Types are published with the CID:" && cat ANAGOLAY_CUSTOM_TYPES_CID
-  only:
-    - main
+  rules:
+    - if: $CI_COMMIT_MESSAGE =~ /^.*\[build_all\].*$/s
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
   # artifacts:
   #   paths:
   #     - ANAGOLAY_CUSTOM_TYPES_CID
