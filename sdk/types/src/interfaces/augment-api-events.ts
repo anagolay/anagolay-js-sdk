@@ -1,27 +1,17 @@
 // Auto-generated via `yarn polkadot-types-from-chain`, do not edit
 /* eslint-disable */
 
-import type { u32 } from '@polkadot/types';
 import type { GenericId } from '@anagolay/types/interfaces/anagolay';
+import type { ApiTypes } from '@polkadot/api-base/types';
+import type { u32 } from '@polkadot/types-codec';
 import type { BalanceStatus } from '@polkadot/types/interfaces/balances';
 import type { AuthorityList } from '@polkadot/types/interfaces/grandpa';
 import type { AccountId, Balance, Hash } from '@polkadot/types/interfaces/runtime';
 import type { DispatchError, DispatchInfo, DispatchResult } from '@polkadot/types/interfaces/system';
-import type { ApiTypes } from '@polkadot/api/types';
 
-declare module '@polkadot/api/types/events' {
-  export interface AugmentedEvents<ApiType> {
-    anagolay: {
-      [key: string]: AugmentedEvent<ApiType>;
-      /**
-       * Just a dummy event.
-       * Event `Something` is declared with a parameter of the type `u32` and `AccountId`
-       * To emit this event, we call the deposit function, from our runtime functions
-       **/
-      SomethingStored: AugmentedEvent<ApiType, [u32, AccountId]>;
-    };
+declare module '@polkadot/api-base/types/events' {
+  export interface AugmentedEvents<ApiType extends ApiTypes> {
     balances: {
-      [key: string]: AugmentedEvent<ApiType>;
       /**
        * A balance was set by root. \[who, free, reserved\]
        **/
@@ -57,9 +47,12 @@ declare module '@polkadot/api/types/events' {
        * Some balance was unreserved (moved from reserved to free). \[who, value\]
        **/
       Unreserved: AugmentedEvent<ApiType, [AccountId, Balance]>;
+      /**
+       * Generic event
+       **/
+      [key: string]: AugmentedEvent<ApiType>;
     };
     grandpa: {
-      [key: string]: AugmentedEvent<ApiType>;
       /**
        * New authority set has been applied. \[authority_set\]
        **/
@@ -72,20 +65,22 @@ declare module '@polkadot/api/types/events' {
        * Current authority set has been resumed.
        **/
       Resumed: AugmentedEvent<ApiType, []>;
+      /**
+       * Generic event
+       **/
+      [key: string]: AugmentedEvent<ApiType>;
     };
     operations: {
-      [key: string]: AugmentedEvent<ApiType>;
       /**
-       * Operation Created. \[ who, OperationId \]
+       * Operation created. \[ AccountId, OperationId \]
        **/
       OperationCreated: AugmentedEvent<ApiType, [AccountId, GenericId]>;
       /**
-       * Operation Updated. \[ who, OperationId \]
+       * Generic event
        **/
-      OperationUpdated: AugmentedEvent<ApiType, [AccountId, GenericId]>;
+      [key: string]: AugmentedEvent<ApiType>;
     };
     poe: {
-      [key: string]: AugmentedEvent<ApiType>;
       /**
        * Phash is created. \{owner, pHash}\
        **/
@@ -94,16 +89,22 @@ declare module '@polkadot/api/types/events' {
        * Proof is created and claimed . \{owner, cid}\
        **/
       ProofCreated: AugmentedEvent<ApiType, [AccountId, GenericId]>;
+      /**
+       * Generic event
+       **/
+      [key: string]: AugmentedEvent<ApiType>;
     };
     rules: {
-      [key: string]: AugmentedEvent<ApiType>;
       /**
        * Rule is created
        **/
       RuleCreated: AugmentedEvent<ApiType, [AccountId, GenericId]>;
+      /**
+       * Generic event
+       **/
+      [key: string]: AugmentedEvent<ApiType>;
     };
     statements: {
-      [key: string]: AugmentedEvent<ApiType>;
       /**
        * Copyright is created. [who, CID]
        **/
@@ -116,9 +117,12 @@ declare module '@polkadot/api/types/events' {
        * Statement revoked. [who, CID]
        **/
       StatementRevoked: AugmentedEvent<ApiType, [AccountId, GenericId]>;
+      /**
+       * Generic event
+       **/
+      [key: string]: AugmentedEvent<ApiType>;
     };
     sudo: {
-      [key: string]: AugmentedEvent<ApiType>;
       /**
        * The \[sudoer\] just switched identity; the old key is supplied.
        **/
@@ -131,9 +135,12 @@ declare module '@polkadot/api/types/events' {
        * A sudo just took place. \[result\]
        **/
       SudoAsDone: AugmentedEvent<ApiType, [DispatchResult]>;
+      /**
+       * Generic event
+       **/
+      [key: string]: AugmentedEvent<ApiType>;
     };
     system: {
-      [key: string]: AugmentedEvent<ApiType>;
       /**
        * `:code` was updated.
        **/
@@ -154,9 +161,12 @@ declare module '@polkadot/api/types/events' {
        * A new \[account\] was created.
        **/
       NewAccount: AugmentedEvent<ApiType, [AccountId]>;
+      /**
+       * Generic event
+       **/
+      [key: string]: AugmentedEvent<ApiType>;
     };
     utility: {
-      [key: string]: AugmentedEvent<ApiType>;
       /**
        * Batch of dispatches completed fully with no error.
        **/
@@ -166,10 +176,10 @@ declare module '@polkadot/api/types/events' {
        * well as the error. \[index, error\]
        **/
       BatchInterrupted: AugmentedEvent<ApiType, [u32, DispatchError]>;
+      /**
+       * Generic event
+       **/
+      [key: string]: AugmentedEvent<ApiType>;
     };
-  }
-
-  export interface DecoratedEvents<ApiType extends ApiTypes> extends AugmentedEvents<ApiType> {
-    [key: string]: ModuleEvents<ApiType>;
-  }
-}
+  } // AugmentedEvents
+} // declare module

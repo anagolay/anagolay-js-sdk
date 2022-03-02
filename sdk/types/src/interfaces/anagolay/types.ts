@@ -1,7 +1,7 @@
 // Auto-generated via `yarn polkadot-types-from-defs`, do not edit
 /* eslint-disable */
 
-import type { Bytes, Enum, Struct, bool, u32, u8 } from '@polkadot/types';
+import type { Bytes, Enum, Struct, bool, u32, u8 } from '@polkadot/types-codec';
 
 /** @name Characters */
 export interface Characters extends Bytes {}
@@ -45,6 +45,7 @@ export interface ForWhat extends Enum {
   readonly isUser: boolean;
   readonly isSys: boolean;
   readonly isFlowcontrol: boolean;
+  readonly type: 'Generic' | 'Photo' | 'Camera' | 'Lens' | 'Smartphone' | 'User' | 'Sys' | 'Flowcontrol';
 }
 
 /** @name GenericId */

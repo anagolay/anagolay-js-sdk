@@ -1,4 +1,5 @@
-export const RulesCustomTypes = {
+import { RegistryTypes } from '@polkadot/types/types';
+export const RulesCustomTypes: RegistryTypes = {
   Rule: {
     id: 'GenericId',
     data: 'RuleData',
@@ -23,10 +24,10 @@ export const RulesCustomTypes = {
     ops: 'Vec<OperationReference>',
   },
   RuleExtra: {},
-}
+};
 
 export default {
   types: {
     ...RulesCustomTypes,
   },
-}
+};

@@ -1,15 +1,15 @@
-import { AnGenericId } from './interfaces/anagolay/interfaces'
-import { AnProofParams as OriginalSnProofParams } from './interfaces/poe/interfaces'
+import ImageMetadataTags from './imageMetadata';
+import { AnGenericId } from './interfaces/anagolay/interfaces';
+import { AnProofParams as OriginalSnProofParams } from './interfaces/poe/interfaces';
 import {
   AnAnagolayCopyrightClaim,
   AnAnagolayOwnershipClaim,
   AnAnagolayStatement,
-} from './interfaces/statements/interfaces'
-import ImageMetadataTags from './imageMetadata'
+} from './interfaces/statements/interfaces';
 
 export interface SaveStatementReturn {
-  statement_id: AnGenericId
-  poe_id: AnGenericId
+  statement_id: AnGenericId;
+  poe_id: AnGenericId;
 }
 
 export type output =
@@ -18,7 +18,7 @@ export type output =
   | 'AnBoolean'
   | 'AnString'
   | 'AnAny'
-  | 'StringOrBuffer'
+  | 'StringOrBuffer';
 
 export type outputDecoded =
   | 'AnBuffer'
@@ -44,14 +44,14 @@ export type outputDecoded =
   | 'AnSigner'
   | '[AnAnagolayClaim[],AnAnagolaySignatures[]]'
   | 'StringOrBuffer'
-  | 'SaveStatementReturn[]'
+  | 'SaveStatementReturn[]';
 
-export type outputImplementation = AnByteArray | AnBoolean | AnProofParams[] | AnString
+export type outputImplementation = AnByteArray | AnBoolean | AnProofParams[] | AnString;
 
 /**
  * ATM workaround for the potential OR incoming params
  */
-export type StringOrBuffer = AnString | AnBuffer
+export type StringOrBuffer = AnString | AnBuffer;
 
 export type outputDecodedImplementation =
   | AnBuffer
@@ -64,88 +64,90 @@ export type outputDecodedImplementation =
   | AnString
   | AnAny
   | AnImageMetadata
-  | AnImageData
+  | AnImageData;
 
 /**
  * This should be correct signer interfaces, ATM is just any type but it should be a defined interface with `.sign()` method. For now it's KeyringPair
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type AnSigner = any
+export type AnSigner = any;
 
 export interface ExifFile {
   'Bits Per Sample': {
-    value: number
-    description: string
-  }
+    value: number;
+    description: string;
+  };
   'Image Height': {
-    value: number
-    description: string
-  }
+    value: number;
+    description: string;
+  };
   'Image Width': {
-    value: number
-    description: string
-  }
+    value: number;
+    description: string;
+  };
   'Color Components': {
-    value: number
-    description: string
-  }
+    value: number;
+    description: string;
+  };
   Subsampling: {
-    value: number[]
-    description: string
-  }
+    value: number[];
+    description: string;
+  };
 }
 
 export interface AnImageMetadata extends ImageMetadataTags {
-  file: ExifFile
+  file: ExifFile;
 }
 
-export type AnGenericIds = AnGenericId[]
-export type AnBuffer = Buffer
-export type AnByteArray = Uint8Array
-export type AnFileBuffer = Buffer
-export type AnStatement = AnAnagolayStatement
-export type AnStatements = AnAnagolayStatement[]
-export type AnCopyrightClaims = AnAnagolayCopyrightClaim[]
-export type AnOwnershipClaims = AnAnagolayOwnershipClaim[]
-export type AnProofParams = OriginalSnProofParams
-export type AnBoolean = boolean
-export type AnString = string
+export type AnGenericIds = AnGenericId[];
+export type AnBuffer = Buffer;
+export type AnByteArray = Uint8Array;
+export type AnFileBuffer = Buffer;
+export type AnStatement = AnAnagolayStatement;
+export type AnStatements = AnAnagolayStatement[];
+export type AnCopyrightClaims = AnAnagolayCopyrightClaim[];
+export type AnOwnershipClaims = AnAnagolayOwnershipClaim[];
+export type AnProofParams = OriginalSnProofParams;
+export type AnBoolean = boolean;
+export type AnString = string;
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type AnAny = any // @TODO: AnByteArray | AnStatement | AnStatements ... any anagolay type
-export type AnNull = null
+export type AnAny = any; // @TODO: AnByteArray | AnStatement | AnStatements ... any anagolay type
+
+// eslint-disable-next-line @rushstack/no-new-null
+export type AnNull = null;
 
 export interface AnImageData {
-  width: number
-  height: number
-  data: Uint8Array | Uint8ClampedArray | number[]
+  width: number;
+  height: number;
+  data: Uint8Array | Uint8ClampedArray | number[];
 }
 
 // export type AnImageData = AnBuffer
 
 export interface AnSplitParams {
-  data: AnInputParamsImplementation[]
-  opName: AnString
+  data: AnInputParamsImplementation[];
+  opName: AnString;
 }
 
 /**
  * This interface is used for implementation purpose
  */
 export interface AnInputParamsImplementation {
-  data: outputImplementation
-  decode: () => outputDecodedImplementation
+  data: outputImplementation;
+  decode: () => outputDecodedImplementation;
 }
 
 /**
  * This interface is used for definition
  */
 export interface AnInputParamsDefinition {
-  data: output
-  decoded: outputDecoded
+  data: output;
+  decoded: outputDecoded;
 }
 
-export * from './interfaces/anagolay/interfaces'
-export * from './interfaces/operations/interfaces'
-export * from './interfaces/poe/interfaces'
-export * from './interfaces/rules/interfaces'
-export * from './interfaces/statements/interfaces'
+export * from './interfaces/anagolay/interfaces';
+export * from './interfaces/operations/interfaces';
+export * from './interfaces/poe/interfaces';
+export * from './interfaces/rules/interfaces';
+export * from './interfaces/statements/interfaces';

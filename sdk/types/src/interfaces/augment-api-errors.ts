@@ -1,23 +1,11 @@
 // Auto-generated via `yarn polkadot-types-from-chain`, do not edit
 /* eslint-disable */
 
-import type { ApiTypes } from '@polkadot/api/types';
+import type { ApiTypes } from '@polkadot/api-base/types';
 
-declare module '@polkadot/api/types/errors' {
-  export interface AugmentedErrors<ApiType> {
-    anagolay: {
-      [key: string]: AugmentedError<ApiType>;
-      /**
-       * Value was None
-       **/
-      NoneValue: AugmentedError<ApiType>;
-      /**
-       * Value reached maximum and cannot be incremented further
-       **/
-      StorageOverflow: AugmentedError<ApiType>;
-    };
+declare module '@polkadot/api-base/types/errors' {
+  export interface AugmentedErrors<ApiType extends ApiTypes> {
     balances: {
-      [key: string]: AugmentedError<ApiType>;
       /**
        * Beneficiary account must pre-exist
        **/
@@ -50,9 +38,12 @@ declare module '@polkadot/api/types/errors' {
        * Vesting balance too high to send value
        **/
       VestingBalance: AugmentedError<ApiType>;
+      /**
+       * Generic error
+       **/
+      [key: string]: AugmentedError<ApiType>;
     };
     grandpa: {
-      [key: string]: AugmentedError<ApiType>;
       /**
        * Attempt to signal GRANDPA change with one already pending.
        **/
@@ -83,28 +74,30 @@ declare module '@polkadot/api/types/errors' {
        * Cannot signal forced change so soon after last.
        **/
       TooSoon: AugmentedError<ApiType>;
+      /**
+       * Generic error
+       **/
+      [key: string]: AugmentedError<ApiType>;
     };
     operations: {
-      [key: string]: AugmentedError<ApiType>;
       /**
-       * Operation already exists when creating an Operation
+       * Operation Manifest already exists.
        **/
       OperationAlreadyExists: AugmentedError<ApiType>;
       /**
-       * Operation does not exist when updating an Operation
+       * The Operation already has an initial Version and cannot be published again.
        **/
-      OperationDoesNotExists: AugmentedError<ApiType>;
+      OperationAlreadyInitialized: AugmentedError<ApiType>;
       /**
-       * Operation Version already exists when creating an Operation Version
-       **/
-      OperationVersionAlreadyExists: AugmentedError<ApiType>;
-      /**
-       * Operation Version package already exists when creating an Operation Version
+       * Version pacakge already exists. If you think this is a bug in our system let us know [here](https://matrix.to/#/!FJvAuDoWRoMVuOFYwL:matrix.org?via=matrix.org).
        **/
       OperationVersionPackageAlreadyExists: AugmentedError<ApiType>;
+      /**
+       * Generic error
+       **/
+      [key: string]: AugmentedError<ApiType>;
     };
     poe: {
-      [key: string]: AugmentedError<ApiType>;
       /**
        * The proof does not exist, so it cannot be revoked
        **/
@@ -121,16 +114,22 @@ declare module '@polkadot/api/types/errors' {
        * ForWhat mismatch
        **/
       ProofRuleTypeMismatch: AugmentedError<ApiType>;
+      /**
+       * Generic error
+       **/
+      [key: string]: AugmentedError<ApiType>;
     };
     rules: {
-      [key: string]: AugmentedError<ApiType>;
       /**
        * Rule already exists
        **/
       RuleAlreadyCreated: AugmentedError<ApiType>;
+      /**
+       * Generic error
+       **/
+      [key: string]: AugmentedError<ApiType>;
     };
     statements: {
-      [key: string]: AugmentedError<ApiType>;
       /**
        * Create child statement is not yet supported
        **/
@@ -151,19 +150,25 @@ declare module '@polkadot/api/types/errors' {
        * Wrong claim type
        **/
       WrongClaimType: AugmentedError<ApiType>;
+      /**
+       * Generic error
+       **/
+      [key: string]: AugmentedError<ApiType>;
     };
     sudo: {
-      [key: string]: AugmentedError<ApiType>;
       /**
        * Sender must be the Sudo account
        **/
       RequireSudo: AugmentedError<ApiType>;
+      /**
+       * Generic error
+       **/
+      [key: string]: AugmentedError<ApiType>;
     };
     system: {
-      [key: string]: AugmentedError<ApiType>;
       /**
        * Failed to extract the runtime version from the new runtime.
-       * 
+       *
        * Either calling `Core_version` or decoding `RuntimeVersion` failed.
        **/
       FailedToExtractRuntimeVersion: AugmentedError<ApiType>;
@@ -185,10 +190,10 @@ declare module '@polkadot/api/types/errors' {
        * and the new runtime.
        **/
       SpecVersionNeedsToIncrease: AugmentedError<ApiType>;
+      /**
+       * Generic error
+       **/
+      [key: string]: AugmentedError<ApiType>;
     };
-  }
-
-  export interface DecoratedErrors<ApiType extends ApiTypes> extends AugmentedErrors<ApiType> {
-    [key: string]: ModuleErrors<ApiType>;
-  }
-}
+  } // AugmentedErrors
+} // declare module

@@ -1,4 +1,5 @@
-export const RulesCustomTypes = {
+import { RegistryTypes } from '@polkadot/types/types';
+export const RulesCustomTypes: RegistryTypes = {
   Proportion: {
     /// Proportion sign, can be %
     sign: 'Vec<u8>',
@@ -75,10 +76,10 @@ export const RulesCustomTypes = {
     data: 'StatementData',
     extra: 'Option<StatementExtra>',
   },
-}
+};
 
 export default {
   types: {
     ...RulesCustomTypes,
   },
-}
+};

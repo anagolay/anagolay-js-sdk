@@ -1,0 +1,50 @@
+{
+  "name": "Anagolay Js-SDK",
+  "dockerComposeFile": "../docker-compose.yml",
+  "service": "code",
+  "workspaceFolder": "/workspace",
+  "settings": {
+    "terminal.integrated.profiles.linux": {
+      "zsh": {
+        "path": "/usr/bin/zsh"
+      }
+    },
+    "terminal.integrated.defaultProfile.linux": "zsh"
+  },
+  "extensions": [
+    "PKief.material-icon-theme",
+    "esbenp.prettier-vscode",
+    "dbaeumer.vscode-eslint",
+    "mongodb.mongodb-vscode",
+    "foxundermoon.shell-format",
+    "be5invis.toml",
+    "streetsidesoftware.code-spell-checker",
+    "mhutchie.git-graph",
+    "PKief.material-icon-theme",
+    "ms-azuretools.vscode-docker",
+    "eg2.vscode-npm-script",
+    "pflannery.vscode-versionlens",
+    "yzhang.markdown-all-in-one",
+    "eriklynd.json-tools",
+    "oliversturm.fix-json",
+    "GitLab.gitlab-workflow"
+  ],
+  "overrideCommand": false,
+  "features": {
+    "docker-from-docker": {
+      "version": "latest",
+      "moby": true
+    },
+    "rust": {
+      "version": "latest",
+      "profile": "default"
+    },
+    "git-lfs": "latest",
+    "node": {
+      "version": "16",
+      "nodeGypDependencies": true
+    }
+  },
+  "remoteUser": "node",
+  "postCreateCommand": "bash .devcontainer/install-deps.sh"
+}

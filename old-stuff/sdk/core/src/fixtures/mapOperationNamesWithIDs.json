@@ -1,0 +1,82 @@
+[
+  {
+    "id": "bafymbzacichnplphoeurdvhk6l2krdptbpjvqcxs6l4jceydr5flninemi7nnkdso477l3clfjuftx7itf3h666m4kftpm7mm2ndpch2uycg6zw4",
+    "name": "@anagolay/op-enc-hex"
+  },
+  {
+    "id": "bafymbzaciccufb5g23rrlbqrvdbagcvzuy6xhmt64nsxj4d5j32ikogfb4jmm7ycs2v4y3zqorrbtkmv6kot3hsyf7c2suefx546jjigyotvzeio",
+    "name": "@anagolay/op-split"
+  },
+  {
+    "id": "bafymbzacibloddrmip337xyqv7ds26thulyocavlgm6xlivkf2fbxsmo64ccbbvwubecp6ds7wdjfljb2zjwqxlkzwm73zxehq7t2jpcb4cerxec",
+    "name": "@anagolay/op-json-enc"
+  },
+  {
+    "id": "bafymbzaciaa6qnszmifhy4awgdyvn65gqeuvzmu4drerxb6pjutodfvuojmmhtmsu72unrmnrbxnclqbmnf2ep4dv6qveecksubrsdvrf5byjpwi",
+    "name": "@anagolay/op-json-dec"
+  },
+  {
+    "id": "bafymbzaciaricmtpsg5hratxfke4ysw5wdrtrztiqjjjshyz3rgnq4bcseoaf6rqbcdma52744osxznat3sbvzx2mpuvsm722kmg2bailbcnyizg",
+    "name": "@anagolay/op-identity"
+  },
+  {
+    "id": "bafymbzaciaiqndlgf6au3ftfnpfifzqrgf3qj47hfypj6q3vpvq5zujmydkpdumliyg2b56w3tempf2px2vvugw5th5iedxqqbky7khy25rvu256",
+    "name": "@anagolay/op-match-all"
+  },
+  {
+    "id": "bafymbzaciabyxyycn3a2gf2ek6ehe5hxnga47cvuxeenmp65jh2tzkqa4apir75ybm4szbjl5nxtuvszdgc6n37nzi3jzwji44sqivj3kxm342wx",
+    "name": "@anagolay/op-match-none"
+  },
+  {
+    "id": "bafymbzaciblqfohl5zvrptml7qgoihozctdaw3sj5sp37hjj4kzgnhusretoetgquhgdloomtcz4kac7f722ajjlbdcr2tvbbkvk4dwmpdi5ykdo",
+    "name": "@anagolay/op-multihash"
+  },
+  {
+    "id": "bafymbzacidlcfuzfgebefbik37c47655r3r426tcjgzbrct27tx2umsgax6v5somvlnrtqxi3tqcm6llr4wbrrefdpv2wt3abvq5evh4lvttydya",
+    "name": "@anagolay/op-file"
+  },
+  {
+    "id": "bafymbzacic67m7kcriqfpm6ilmlfdbkvx2vasjq4db5jgmgijubub6o323kutxuvkcc2ktkmlane2dogsnqv55od4u45sow4xcbqfrjmxpyloxbc",
+    "name": "@anagolay/op-create-qrcode"
+  },
+  {
+    "id": "bafymbzacidj7kxaldhy3wockslweavsz3ogdmve4djsig3ghkunuy6gpuqctxh5ybjjoaba5koje2nxerna6fsmh2muwczmzxvl2pagm4iwtzg2r",
+    "name": "@anagolay/op-create-ownership-claims"
+  },
+  {
+    "id": "bafymbzacidc3zzmpifydaldi634bplfdfs6tm4mysutuij3dy7dt7usneaefaugbij2taizokcl5c55a5yigqifuzdxqq4vca2vqysflpga6pv3z",
+    "name": "@anagolay/op-save-statements"
+  },
+  {
+    "id": "bafymbzacibu7zklvaxvz3efvcmnbkxipzquwqjuze7gcoo3dmbsu3axhmdqy53klevdal5vy3qggrzwqkf3tc33lcbargrcrtv3egg5abranyczp",
+    "name": "@anagolay/op-user-sign-claims"
+  },
+  {
+    "id": "bafymbzacidjhaxefbq6y7rkwabk2ken2wk7ax7or5ngikivjiayt2wcdctl366xr63o57pvdrwiwo44xzdnajouklezbeaawsxuijdci6x5jfgxq",
+    "name": "@anagolay/op-take-photo-and-upload-qrcode"
+  },
+  {
+    "id": "bafymbzacidtsdjfehszh2vqudmraf5phevmqbjl5fnlfhpc6eqwopdzninhdov3r64mpnaoyeu6hjulnrmgttha4pddyny3zyjv6utoddozql3p7",
+    "name": "@anagolay/op-cid"
+  },
+  {
+    "id": "bafymbzacicuqxa54sfqahqis7pswv4edyqrcvf7gj2hcvwikmibl3z6cfsirx3bqq6dfowcawspuzbobexjscmpnikttcvej3vdsotqacujzblbb",
+    "name": "@anagolay/op-image-metadata-hash"
+  },
+  {
+    "id": "bafymbzacicdfstmrb555hb6yhhtaznotphlhtf64fdutmbw773syngw4i37je4hz7po6shnwdrzywe5ip4lx5hzzjleo4vslruhsucku5p2f4l5h",
+    "name": "@anagolay/op-image-metadata"
+  },
+  {
+    "id": "bafymbzacic4pchdgdzwdvep6xlbgbqa2lzd4gwspe4vrstdlsfjc7wd73bvfoadfj5bvle4pkhst4ikvwqqgsqt6eesjugsyjcd3yfp2q4pp6b23",
+    "name": "@anagolay/op-image-phash"
+  },
+  {
+    "id": "bafymbzacia3f2qxlda6d5jx4joghg3mazjdnhtxug7kwbd3degej36ikgukqp47re6xqfhbpav7lesjlxmstzkitfoc4m4oeuemf44b2dquxi6ii",
+    "name": "@anagolay/op-image-raw-pixels-hash"
+  },
+  {
+    "id": "bafymbzacic5p24bwizfnn75joc3tg3anx5gjbrzwzhnkmraz2hgbek4zeqxkjxk4vpkzyd4r5zeykxvnllnf27ynyvhfxytunbklne5nde4xbgqd",
+    "name": "@anagolay/op-image-raw-pixels"
+  }
+]

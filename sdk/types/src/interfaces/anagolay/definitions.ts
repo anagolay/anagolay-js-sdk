@@ -1,4 +1,5 @@
-export const AnagolayCustomTypes = {
+import { RegistryTypes } from '@polkadot/types/types';
+export const AnagolayCustomTypes: RegistryTypes = {
   GenericId: 'Vec<u8>',
   CreatorId: 'Vec<u8>',
   Characters: 'Vec<u8>',
@@ -23,10 +24,10 @@ export const AnagolayCustomTypes = {
   ForWhat: {
     _enum: ['GENERIC', 'PHOTO', 'CAMERA', 'LENS', 'SMARTPHONE', 'USER', 'SYS', 'FLOWCONTROL'],
   },
-}
+};
 
 export default {
   types: {
     ...AnagolayCustomTypes,
   },
-}
+};

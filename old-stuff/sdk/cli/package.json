@@ -1,0 +1,55 @@
+{
+  "name": "@anagolay/cli",
+  "description": "Anagolay CLI",
+  "version": "0.4.8-alpha.4",
+  "author": "daniel@woss.io",
+  "license": "Apache-2.0",
+  "main": "index",
+  "publishConfig": {
+    "access": "public",
+    "directory": "lib"
+  },
+  "keywords": [
+    "anagolay",
+    "cli",
+    "blockchain"
+  ],
+  "scripts": {
+    "build": "tsc -b .",
+    "start": "ts-node -r tsconfig-paths/register ./src/index.ts",
+    "dev": "ts-node-dev --trace-warnings -r tsconfig-paths/register --watch ./src --cls --respawn ./src/index.ts"
+  },
+  "devDependencies": {
+    "@types/figlet": "^1.2.1",
+    "@types/fs-extra": "^9.0.4",
+    "@types/ramda": "^0.27.40",
+    "@types/slug": "^0.9.1",
+    "ts-node-dev": "1.1.6",
+    "tsconfig-paths": "^3.9.0",
+    "typescript": "4.2.4"
+  },
+  "dependencies": {
+    "@anagolay/api": "workspace:*",
+    "@anagolay/core": "workspace:*",
+    "@anagolay/types": "workspace:*",
+    "@anagolay/util": "workspace:*",
+    "@types/clear": "^0.1.1",
+    "chalk": "^4.1.0",
+    "clear": "^0.1.0",
+    "commander": "^6.2.0",
+    "figlet": "^1.5.0",
+    "fs-extra": "^9.0.1",
+    "path": "^0.12.7",
+    "ramda": "0.27.1",
+    "slug": "^3.3.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.com/anagolay/network-js-sdk.git",
+    "directory": "sdk/cli"
+  },
+  "bugs": {
+    "url": "https://gitlab.com/anagolay/network-js-sdk/issues"
+  },
+  "homepage": "https://gitlab.com/anagolay/network-js-sdk/-/tree/master/sdk/cli#readme"
+}

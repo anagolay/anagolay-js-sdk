@@ -1,8 +1,8 @@
 // Auto-generated via `yarn polkadot-types-from-defs`, do not edit
 /* eslint-disable */
 
-import type { Bytes, Enum, Option, Struct } from '@polkadot/types';
 import type { CreatorId, GenericId } from '@anagolay/types/interfaces/anagolay';
+import type { Bytes, Enum, Option, Struct } from '@polkadot/types-codec';
 import type { AccountId, BlockNumber } from '@polkadot/types/interfaces/runtime';
 
 /** @name AnagolayClaim */
@@ -24,6 +24,7 @@ export interface AnagolayClaim extends Struct {
 export interface AnagolayClaimType extends Enum {
   readonly isCopyright: boolean;
   readonly isOwnership: boolean;
+  readonly type: 'Copyright' | 'Ownership';
 }
 
 /** @name AnagolaySignature */
@@ -67,6 +68,7 @@ export interface ExpirationType extends Enum {
   readonly isDays: boolean;
   readonly isMinutes: boolean;
   readonly isSeconds: boolean;
+  readonly type: 'Forever' | 'Years' | 'Months' | 'Days' | 'Minutes' | 'Seconds';
 }
 
 /** @name Proportion */
