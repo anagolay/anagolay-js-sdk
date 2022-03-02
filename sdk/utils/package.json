@@ -10,7 +10,7 @@
   "scripts": {
     "test": "heft test",
     "build": "heft test --clean",
-    "watch": "nodemon -w ./src --exec heft build"
+    "watch": "nodemon --watch ./src --ext ts --exec heft build"
   },
   "dependencies": {
     "@polkadot/util": "8.4.1",
@@ -37,11 +37,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://gitlab.com/anagolay/network-js-sdk.git",
+    "url": "https://gitlab.com/anagolay/anagolay-js.git",
     "directory": "sdk/util"
   },
   "bugs": {
-    "url": "https://gitlab.com/anagolay/network-js-sdk/issues"
+    "url": "https://gitlab.com/anagolay/anagolay-js/issues"
   },
-  "homepage": "https://gitlab.com/anagolay/network-js-sdk/-/tree/main/sdk/util#readme"
+  "homepage": "https://gitlab.com/anagolay/anagolay-js/-/tree/main/sdk/util#readme"
 }

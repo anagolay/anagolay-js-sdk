@@ -11,6 +11,8 @@ export {
   isDirty,
   lastRevision,
   normalizeUrlPathname,
+  parseURL,
+  urlForRemote,
 } from './git';
 export { hexToString } from './hex/hex';
 export { createFileLogger, createLogger, Logger } from './logger';

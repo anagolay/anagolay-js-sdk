@@ -17,7 +17,7 @@ import { PromiseWithChild } from 'child_process';
 export function allCommitsPushed(cwd: string): Promise<boolean>;
 
 // @public
-export function cloneRepo(options: IGitCloneOptions, log: Logger_2): Promise<{
+export function cloneRepo(options: IGitCloneOptions, log?: Logger_2): Promise<{
     repoPath: string;
 }>;
 
@@ -89,7 +89,13 @@ export type Logger = Logger_2;
 // @public
 export function normalizeUrlPathname(pathName: string): string;
 
+// @public
+export function parseURL(sourceURL: string): string;
+
 export { polkadot_utils }
+
+// @public
+export function urlForRemote(remote?: string): Promise<string>;
 
 // (No @packageDocumentation comment for this package)
 
