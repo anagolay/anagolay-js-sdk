@@ -1,11 +1,12 @@
 {
-  "extends": "../../tsconfig.json",
+  "extends": "./node_modules/@rushstack/heft-node-rig/profiles/default/tsconfig-base.json",
   "compilerOptions": {
-    "outDir": "lib",
-    "module": "CommonJS",
-    "rootDir": "src"
-  },
-  "include": ["src/**/*.ts"],
-  "exclude": ["lib"],
-  "references": [{ "path": "../core" }, { "path": "../api" }, { "path": "../types" }]
+    "types": ["heft-jest", "node", "webpack-env"],
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "paths": {
+      "@polkadot/api/augment": ["./@anagolay/types/lib/interfaces/augment-api.ts"],
+      "@polkadot/types/augment": ["./@anagolay/types/lib/interfaces/augment-types.ts"]
+    }
+  }
 }

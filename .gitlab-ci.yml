@@ -1,11 +1,20 @@
-image: woss/pnpm
+# https://docs.gitlab.com/ee/ci/jobs/job_control.html
+image: node:16-bullseye
+stages:
+  - test
+  - release
+
+cache:
+  key: $CI_COMMIT_REF_SLUG
+  paths:
+    - common/temp/
+    - ANAGOLAY_CLI_CID
+    - ANAGOLAY_CUSTOM_TYPES_CID
 
 workflow:
   rules:
     - if: $CI_MERGE_REQUEST_IID
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
-variables:
-  NODE_ENV: ci
 
 include:
   - template: Security/Dependency-Scanning.gitlab-ci.yml
@@ -13,66 +22,88 @@ include:
   - template: Security/SAST.gitlab-ci.yml
   - template: Security/Secret-Detection.gitlab-ci.yml
 
-cache: &global_cache
-  key: ${CI_COMMIT_REF_SLUG}
-  paths:
-    - node_modules/
-    - .pnpm-store
-  policy: pull-push
-
-.before_script_install_deps_template:
-  cache:
-    # inherit all global cache settings
-    <<: *global_cache
-    # override the policy
-    policy: pull
+.install-ipfs-and-setup: &install-ipfs-and-setup
+  variables:
+    IPFS_PATH: .ipfs
   before_script:
-    - pnpm i
+    - echo "Downloading the go-ipfs binary v0.12.0 from our IPFS node"
+    - |
+      curl https://ipfs.anagolay.network/ipfs/bafybeih63m5xkkskklntu3ufd6kyjgkvqot4bcre3evquindven7i6yxse > /usr/local/bin/ipfs
+      chmod +x /usr/local/bin/ipfs
+      mkdir $IPFS_PATH
+      echo "/ip4/${ANAGOLAY_MAIN_IPFS_IP}/tcp/${ANAGOLAY_MAIN_IPFS_PORT}" > $IPFS_PATH/api
 
-stages:
-  - dependencies
-  - test
-  - lint
-  - docs
-  - build
-
-dependencies:
-  stage: dependencies
+.install-pnpm: &install-pnpm
   before_script:
-    - pnpm config set store-dir .pnpm-store
-  script:
-    - pnpm i
-# lint:
-#   extends: .before_script_install_deps_template
-#   stage: lint
-#   needs: [dependencies]
-#   script:
-#     - pnpm lint
+    - |
+      curl https://ipfs.anagolay.network/ipfs/QmeCUX9cK4YKdTbNVq3jg5cJPvz8uQiQmb4AKKd7niy4kY > /usr/local/bin/pnpm
+      chmod +x /usr/local/bin/pnpm
+      node --version
+      pnpm --version
+      git --version
 
-test:
-  extends: .before_script_install_deps_template
+test-and-build:
   stage: test
-  needs: [dependencies]
+  <<: *install-pnpm
   script:
-    - pnpm i && pnpm test:coverage -- --testPathIgnorePatterns operations
-  coverage: /All\sfiles.*?\s+(\d+.\d+)/
-  tags:
-    - docker
-# pages:
-#   stage: docs
-#   needs: [dependencies]
-#   script:
-#     - pnpm docs
-#   artifacts:
-#     paths:
-#       - public
-#   only:
-#     - master
+    - set -e
 
-# build:
-#   stage: build
-#   needs: [dependencies, test]
+    - echo 'Installing rush...'
+    - node common/scripts/install-run-rush.js install
+
+    # - echo 'Checking for missing change logs...'
+    # - node common/scripts/install-run-rush.js change -v
+
+    - echo 'Building and testing all packages...'
+    - node common/scripts/install-run-rush.js rebuild --verbose
+
+upload-cli-to-ipfs:
+  stage: release
+  <<: *install-ipfs-and-setup
+  script:
+    - set -e
+
+    - echo 'Installing rush...'
+    - node common/scripts/install-run-rush.js install
+
+    - echo 'Building from CLI ...'
+    - node common/scripts/install-run-rush.js rebuild --from @anagolay/cli
+
+    - echo "Uploading CLI to IPFS ..."
+    - ipfs add --cid-version=1 --pin=true --recursive --quieter sdk/cli/dist/anagolay.js > ANAGOLAY_CLI_CID
+    - echo "The CLI is published with the CID:" && cat ANAGOLAY_CLI_CID
+  only:
+    - main
+upload-custom-types-to-ipfs:
+  stage: release
+  <<: *install-ipfs-and-setup
+  script:
+    - set -e
+
+    - echo "Uploading Custom types to IPFS ..."
+    - ipfs add --cid-version=1 --pin=true --recursive --quieter sdk/types/customTypes.json > ANAGOLAY_CUSTOM_TYPES_CID
+    - echo "The Custom Types are published with the CID:" && cat ANAGOLAY_CUSTOM_TYPES_CID
+  only:
+    - main
+  # artifacts:
+  #   paths:
+  #     - ANAGOLAY_CUSTOM_TYPES_CID
+## there is no point in releasing it like this. the release process should use the rehost or republish service then make a tag
+
+# release-sdk:
+#   stage: release
+#   image: registry.gitlab.com/gitlab-org/release-cli:latest
+#   needs:
+#     - job: upload-cli-to-ipfs
 #   script:
-#     - pnpm build
-#   only:
-#     - merge_requests
+#     - echo 'Releasing the sdk'
+#     - cat ANAGOLAY_CLI_CID
+#   release:
+#     name: 'Release $CI_COMMIT_SHA'
+#     description: 'Created using the release-cli $EXTRA_DESCRIPTION' # $EXTRA_DESCRIPTION and the $TAG
+#     tag_name: '$CI_COMMIT_SHA' # variables must be defined elsewhere
+#     ref: '$CI_COMMIT_SHA' # in the pipeline. For example, in the
+#     assets:
+#       links:
+#         - name: 'anagolay'
+#           url: 'https://ipfs.anagolay.network/ipfs/$ANAGOLAY_CLI_CID'

@@ -1,0 +1,25 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    // "paths": {
+    //   "@polkadot/api/augment": ["./src/interfaces/augment-api.ts"],
+    //   "@polkadot/types/augment": ["./src/interfaces/augment-types.ts"],
+    //   "@anagolay/types": ["sdk/types/src"],
+    //   "@anagolay/types/*": ["sdk/types/src/*"]
+    // },
+    "module": "CommonJS",
+    // "baseUrl": ".",
+    "declaration": true,
+    "strict": true,
+    "noImplicitAny": true,
+    "noUnusedLocals": true,
+    "noImplicitReturns": true,
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "outDir": "lib",
+    "rootDir": "src"
+  },
+  "include": ["src"]
+}

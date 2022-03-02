@@ -1,4 +1,5 @@
-export const PoECustomTypes = {
+import { RegistryTypes } from '@polkadot/types/types';
+export const PoECustomTypes: RegistryTypes = {
   ProofParams: {
     k: 'Vec<u8>',
     v: 'Vec<u8>',
@@ -25,10 +26,10 @@ export const PoECustomTypes = {
     pHash: 'Vec<u8>',
     proofId: 'GenericId',
   },
-}
+};
 
 export default {
   types: {
     ...PoECustomTypes,
   },
-}
+};

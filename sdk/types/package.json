@@ -1,37 +1,53 @@
 {
   "name": "@anagolay/types",
-  "version": "0.4.8-alpha.3",
-  "license": "Apache-2.0",
+  "version": "0.7.0",
+  "license": "GPL3",
+  "licenseFile": "./LICENSE",
   "description": "Anagolay Custom and Auto-generated types and interfaces",
-  "author": "daniel@woss.io",
-  "main": "index",
-  "publishConfig": {
-    "access": "public",
-    "directory": "lib"
-  },
+  "author": "did:substrate:GHm6gp6khjcxQvnbnSsHdYejsFK1nNVxcGyGAsbDfsymtLr",
+  "main": "./lib/index.js",
+  "types": "./lib/index.d.ts",
   "keywords": [
     "anagolay",
     "blockchain",
     "network"
   ],
   "scripts": {
-    "build": "tsc -b .",
-    "generate": "pnpm update:owlnet && pnpm gen:defs && pnpm gen:meta && pnpm gen:types:json",
-    "gen:defs": "ts-node --skip-project node_modules/@polkadot/typegen/scripts/polkadot-types-from-defs.cjs --package @anagolay/types/interfaces . --input ./src/interfaces",
-    "gen:meta": "ts-node --skip-project node_modules/@polkadot/typegen/scripts/polkadot-types-from-chain.cjs --package @anagolay/types/interfaces . --endpoint ./anagolay-network.json --output ./src/interfaces",
-    "update:owlnet": "rm -f ./anagolay-network.json; curl -H \"Content-Type: application/json\" -d '{\"id\":\"1\", \"jsonrpc\":\"2.0\", \"method\": \"state_getMetadata\", \"params\":[]}' http://localhost:9933 > ./anagolay-network.json",
-    "gen:types:json": "ts-node ./src/gen_types_json.ts"
+    "generate": "pnpm update:anagolay && pnpm gen:defs && pnpm gen:meta && pnpm gen:types",
+    "build": "heft test --clean",
+    "watch": "heft build --clean --watch",
+    "lint:fix": "eslint ./src --ext .js,.jsx,.ts,.tsx --fix",
+    "gen:defs": "ts-node --skip-project node_modules/@polkadot/typegen/scripts/polkadot-types-from-defs.cjs --package @anagolay/types/interfaces  --input ./src/interfaces -- endpoint ./anagolay.json",
+    "gen:meta": "ts-node --skip-project node_modules/@polkadot/typegen/scripts/polkadot-types-from-chain.cjs --package @anagolay/types/interfaces --endpoint ./anagolay.json --output ./src/interfaces",
+    "update:anagolay": "rm -f ./anagolay.json; curl -H \"Content-Type: application/json\" -d '{\"id\":\"1\", \"jsonrpc\":\"2.0\", \"method\": \"state_getMetadata\", \"params\":[]}' http://host.docker.internal:9933 > ./anagolay.json",
+    "gen:types": "ts-node ./src/generateTypesFile.ts; pnpm lint:fix"
   },
   "dependencies": {
-    "@polkadot/api": "4.10.1",
-    "@polkadot/metadata": "^4.10.1",
-    "@polkadot/rpc-core": "^4.10.1"
+    "@polkadot/api": "7.8.1",
+    "@polkadot/metadata": "4.17.1",
+    "@polkadot/rpc-core": "7.8.1",
+    "@polkadot/types": "~7.8.1",
+    "@polkadot/api-base": "~7.8.1",
+    "@polkadot/typegen": "7.8.1",
+    "@polkadot/types-codec": "~7.8.1"
   },
   "devDependencies": {
-    "@polkadot/typegen": "4.10.1",
     "exifreader": "^3.12.6",
-    "typescript": "4.2.4",
-    "@anagolay/types": "workspace:*"
+    "tslib": "~2.3.1",
+    "typescript": "~4.5.5",
+    "@rushstack/heft-node-rig": "~1.7.1",
+    "@microsoft/api-extractor": "~7.19.4",
+    "@rushstack/eslint-config": "~2.5.1",
+    "@rushstack/heft": "~0.44.2",
+    "@rushstack/heft-jest-plugin": "~0.2.2",
+    "@rushstack/heft-web-rig": "~0.7.2",
+    "@types/heft-jest": "~1.0.2",
+    "@types/node": "16.11.7",
+    "eslint": "8.8.0",
+    "eslint-plugin-simple-import-sort": "~7.0.0",
+    "eslint-plugin-unused-imports": "~2.0.0",
+    "@types/signale": "~1.4.4",
+    "ts-node": "~10.5.0"
   },
   "repository": {
     "type": "git",

@@ -1,9 +1,0 @@
-{
-  "recommendations": [
-    "esbenp.prettier-vscode",
-    "wayou.vscode-todo-highlight",
-    "dbaeumer.vscode-eslint",
-    "wayou.vscode-todo-highlight",
-    "nonylene.dark-molokai-theme"
-  ]
-}

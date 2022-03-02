@@ -1,11 +1,14 @@
-version: '3'
+version: '3.5'
 services:
-  verdaccio:
-    image: verdaccio/verdaccio
-    restart: always
-    ports:
-      - 4873:4873
+  code:
+    image: mcr.microsoft.com/vscode/devcontainers/typescript-node:16-bullseye
+    user: $UID
     volumes:
-      - verdaccio-storage:/verdaccio/storage
-volumes:
-  verdaccio-storage:
+      - ./:/workspace:cached
+      # Uncomment the next line to use Docker from inside the container. See https://aka.ms/vscode-remote/samples/docker-from-docker-compose for details.
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: sleep infinity
+    env_file: ./.env
+    restart: unless-stopped
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'

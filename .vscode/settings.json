@@ -1,51 +1,34 @@
 {
   "editor.codeActionsOnSave": {
-    "source.fixAll": true,
-    "source.organizeImports": true,
-    "source.fixAll.eslint": true
+    "source.fixAll": true
   },
   "eslint.format.enable": true,
   "editor.wordWrap": "bounded",
-  "editor.wordWrapColumn": 100,
-  "editor.rulers": [100],
+  "editor.wordWrapColumn": 110,
+  "editor.rulers": [110],
   "editor.formatOnSave": true,
   "editor.formatOnPaste": false,
   "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[javascript]": {
-    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[typescript]": {
-    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[markdown]": {
     "editor.wordWrap": "wordWrapColumn",
-    "editor.wordWrapColumn": 100,
+    "editor.wordWrapColumn": 110,
     "editor.quickSuggestions": true,
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "javascript.validate.enable": false,
-  // "files.associations": { "*.json": "jsonc" },
-  "files.associations": { "*.cjs": "javascript" },
-  "todohighlight.keywords": [
-    {
-      "text": "@FUCK",
-      "color": "#ffffff",
-      "backgroundColor": "#a3104f",
-      "overviewRulerColor": "grey"
-    },
-    {
-      "text": "@TODO",
-      "color": "#ffffff",
-      "backgroundColor": "#1a30d8",
-      "overviewRulerColor": "grey"
-    }
-  ],
+  "files.associations": {
+    "*.json": "jsonc",
+    "*.cjs": "javascript"
+  },
   "npm.packageManager": "pnpm",
-  "npm-intellisense.packageSubfoldersIntellisense": true,
-  "npm-intellisense.scanDevDependencies": true,
-  "npm-intellisense.showBuildInLibs": true,
   "cSpell.words": [
     "anagolay",
     "bafy",
@@ -54,6 +37,7 @@
     "multihashes",
     "pnpm",
     "pnpx",
+    "rehosted",
     "subsampling"
   ]
 }

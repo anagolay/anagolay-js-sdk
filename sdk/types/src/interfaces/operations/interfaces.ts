@@ -3,57 +3,87 @@
  * THE POLKADOT API TYPES ARE IN THE definitions.ts file
  */
 
-import {
-  AnInputParamsDefinition,
-  AnString,
-  output,
-  outputDecoded,
-} from '../../anagolay-type-mappings'
-import { AnAccountId, AnBlockNumber, AnForWhat, AnGenericId } from '../anagolay/interfaces'
+import { AnBoolean } from '../..';
+import { AnAccountId, AnBlockNumber, AnForWhat, AnGenericId } from '../anagolay/interfaces';
 
-export interface AnOperationOutput {
-  desc: string
-  output: output
-  decoded: outputDecoded
+export type AnTypeName = string;
+
+/// Alias for string
+export type AnCharacters = string;
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type AnOperationExtra = Record<string, any>;
+
+export interface AnOperation {
+  id: AnGenericId;
+  data: AnOperationData;
+  extra?: AnOperationExtra;
 }
 
-export interface AnOperationInfo {
-  operation: AnOperation
-  accountId: AnAccountId
-  blockNumber: AnBlockNumber
+export interface AnOperationRecord {
+  record: AnOperation;
+  accountId: AnAccountId;
+  blockNumber: AnBlockNumber;
 }
 
 export interface AnOperationWithStorage {
-  storageKey: string
-  operationInfo: AnOperationInfo
-}
-
-export interface AnOperation {
-  id: AnGenericId
-  data: AnOperationData
+  storageKey: string;
+  operationInfo: AnOperationRecord;
 }
 
 export interface AnOperationData {
-  name: string
-  desc: string
-  input: AnInputParamsDefinition[]
-  output: AnOperationOutput
-  hashingOp: AnString
-  encOp: AnString
-  groups: AnForWhat[]
-  priority: number
-  ops: AnOperation[]
+  name: AnCharacters;
+  description: AnCharacters;
+  inputs: AnTypeName[];
+  output: AnTypeName;
+  repository: AnCharacters;
+  license: AnCharacters;
+  groups: AnForWhat[];
+  config: Map<AnCharacters, AnCharacters[]>;
+  nostd: AnBoolean;
 }
 
-export interface AnOperationDataForCreating {
-  opNames: string[]
-  name: string
-  desc: string
-  input: AnInputParamsDefinition[]
-  output: AnOperationOutput
-  hashingOp: AnString
-  encOp: AnString
-  groups: AnForWhat[]
-  priority: number
-  ops: AnOperationDataForCreating[]
+// Operation Version
+
+export interface AnOperationVersion {
+  id: AnGenericId;
+  data: AnOperationVersionData;
+  extra?: AnOperationVersionExtra;
 }
+
+export interface AnOperationVersionRecord {
+  record: AnOperationVersion;
+  accountId: AnAccountId;
+  blockNumber: AnBlockNumber;
+}
+
+export interface AnOperationVersionExtra {
+  createdAt: number;
+}
+
+export interface AnOperationVersionPackage {
+  packageType: AnPackageType;
+  fileUrl: AnCharacters;
+  ipfsCid: AnGenericId;
+}
+
+export interface AnOperationVersionData {
+  operationId: AnGenericId;
+  parentId: AnGenericId;
+  documentationId: AnGenericId;
+  rehostedRepoId: AnGenericId;
+  packages: AnOperationVersionPackage[];
+}
+
+// the order is VERY important, must be the SAME as in the rust code. remember what SCALE abbreviates
+export enum AnPackageType {
+  'CRATE',
+  'CJS',
+  'WASM',
+  'ESM',
+  'WEB',
+}
+
+export type AnOperationId = AnGenericId;
+export type AnVersionId = AnGenericId;
+export type AnPackageId = AnGenericId;

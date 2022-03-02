@@ -1,8 +1,8 @@
 // Auto-generated via `yarn polkadot-types-from-defs`, do not edit
 /* eslint-disable */
 
-import type { Bytes, Option, Struct, Vec, u32 } from '@polkadot/types';
 import type { CreatorId, ForWhat, GenericId } from '@anagolay/types/interfaces/anagolay';
+import type { Bytes, Option, Struct, Vec, u32 } from '@polkadot/types-codec';
 import type { AccountId, BlockNumber } from '@polkadot/types/interfaces/runtime';
 
 /** @name OperationReference */
