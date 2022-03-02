@@ -18,15 +18,8 @@ import {
   AnPackageType,
   AnTypeName,
 } from '@anagolay/types';
-import {
-  allCommitsPushed,
-  createFileLogger,
-  exec,
-  isFalse,
-  isTrue,
-  lastRevision,
-  Logger,
-} from '@anagolay/utils';
+import { allCommitsPushed, createFileLogger, isFalse, isTrue, lastRevision, Logger } from '@anagolay/utils';
+import { urlForRemote } from '@anagolay/utils';
 import { ApiPromise } from '@polkadot/api';
 import { KeyringPair } from '@polkadot/keyring/types';
 import { hexToString } from '@polkadot/util';
@@ -171,8 +164,13 @@ async function publishSubcmd(_args: any[]): Promise<void> {
   spinSanityCheck.stop();
   signale.success('Sanity checks, done!');
 
-  const repository = await chooseRemote();
-
+  let repository: string;
+  try {
+    repository = await urlForRemote();
+  } catch (error) {
+    signale.error(error);
+    process.exit(1);
+  }
   const responsePublishService = await callPublishOperationService(repository);
 
   const chain = await connectToAnagolayChain();
@@ -348,25 +346,6 @@ async function submitTheExtrinsicCall(
 }
 
 /**
- * Ask user to choose the remote if more than one is present
- * @internal
- */
-async function chooseRemote(remote: string = 'origin'): Promise<string> {
-  try {
-    const { stdout: repo } = await exec(`git remote get-url --all ${remote}`, { cwd: process.cwd() });
-
-    const repoChunks = repo.split(':');
-    const repoNameWithUser = repoChunks[1];
-    const repoHostname = repoChunks[0].split('@')[1];
-    const httpsRepo = `https://${repoHostname}/${repoNameWithUser}`.trim();
-    return httpsRepo;
-  } catch (error) {
-    console.error(`Remote ${remote} doesn't exist`);
-    process.exit(1);
-  }
-}
-
-/**
  * This calls the API and returns the correct payload.
  * @returns
  */
@@ -455,16 +434,16 @@ async function callPublishOperationService(repository: string): Promise<any> {
     } catch (error) {
       spinPublishOperation.stop();
       if (axios.isAxiosError(error)) {
-        log.error(error.response?.data);
-        signale.error(error.response?.data);
-        reject(error.response?.data);
-        console.error(error.code);
+        // log.error(error.response?.data);
+        // signale.error(error.response?.data);
+        // reject(error.response?.data);
+        console.error(error.message);
         process.exit(1);
       } else {
-        console.error('Not axios error', error);
+        console.error('Not axios error', (error as Error).message);
         // log.error(error);
         // signale.error(error);
-        reject(error);
+        reject((error as Error).message);
         process.exit(1);
       }
     }

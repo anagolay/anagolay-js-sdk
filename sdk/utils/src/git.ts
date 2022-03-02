@@ -98,7 +98,7 @@ export async function gitCloneBare(options: IGitCloneBareOptions): Promise<strin
  */
 export async function cloneRepo(
   options: IGitCloneOptions,
-  log: Logger
+  log?: Logger
 ): Promise<{
   repoPath: string;
 }> {
@@ -114,7 +114,8 @@ export async function cloneRepo(
   // log(await exec(`git clone --quiet --bare ${url.href} ${repoPath}`, { ...execOptions, cwd: tmp }))
   // for some reason the failed jobs cannot create the empty dir
 
-  log.info(`Cloning the repo ${url.href}`);
+  console.log(`Cloning the repo ${url.href}`);
+  log?.info(`Cloning the repo ${url.href}`);
 
   await exec(`git clone ${url.href} ${repoPath}`);
 
@@ -122,13 +123,13 @@ export async function cloneRepo(
     cwd: repoPath,
   });
 
-  log.info(`Repo cloned ${repoPath}`);
+  log?.info(`Repo cloned ${repoPath}`);
   return { repoPath };
 }
 
 /**
  * If there are modified or untracked files consider this a very _`dirty`_ repository
- * @param path string
+ * @param path string - Local path
  * @returns `{
   dirty: boolean;
   changes: string;
@@ -170,4 +171,52 @@ export async function allCommitsPushed(cwd: string): Promise<boolean> {
   const { stdout } = await exec(`git --no-pager diff origin/main`, { cwd });
   const trimmedStdout = trim(stdout);
   return trimmedStdout.length === 0;
+}
+
+/**
+ * Return the remote URL
+ * @param remote string [default `origin`] - An origin as defined in the .git/config
+ * @public
+ */
+export async function urlForRemote(remote: string = 'origin'): Promise<string> {
+  const { stdout: repo } = await exec(`git remote get-url --all ${remote}`, { cwd: process.cwd() });
+  const httpRepo = parseURL(repo.trim());
+  return httpRepo.trim();
+}
+
+/**
+ * Parse git supported url to https, Always https.
+ *
+ * See `git.test.ts` for the examples.
+ * @param sourceURL string - Any of the [git supported url scheme](https://git-scm.com/docs/git-clone#_git_urls)
+ * @public
+ */
+
+export function parseURL(sourceURL: string): string {
+  // host[:/]n1/n2
+  const RE = /^([^:\/]+)[:\/](.+)$/i;
+
+  let url: string = sourceURL;
+
+  if (url.indexOf('@') >= 0) {
+    url = url.replace(/^[^@]+@/, ''); // `git@`` || `https://woss@` => ""
+  }
+
+  url = url
+    .replace(/^[\w+]+:\/\//, '') // `git://` || `git+https://` => ""
+    .replace(/\.git$/, ''); // .git => ""
+
+  const item = RE.exec(url);
+
+  if (!item) {
+    return sourceURL;
+  }
+
+  const host = item[1];
+
+  // p1/p2/.../pn[.xxx]
+  const isContainGit = /\.git$/.test(sourceURL);
+  url = isContainGit ? item[2] : item[2].split('/', 2).join('/');
+
+  return `https://${host}/${url}`;
 }
