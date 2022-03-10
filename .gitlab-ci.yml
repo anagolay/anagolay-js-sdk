@@ -47,6 +47,7 @@ include:
 
 test-and-build:
   stage: test
+  coverage: /All\sfiles.*?\s+(\d+.\d+)/
   before_script:
     - *install-pnpm
   script:

@@ -10,6 +10,7 @@
   "scripts": {
     "test:watch": "heft test --watch",
     "build": "heft test --clean",
+    "cc": "heft test",
     "watch": "nodemon --watch ./src --ext ts --exec heft build"
   },
   "dependencies": {
