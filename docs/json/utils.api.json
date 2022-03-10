@@ -161,7 +161,7 @@
   },
   "kind": "Package",
   "canonicalReference": "@anagolay/utils!",
-  "docComment": "",
+  "docComment": "/**\n * A Utility library for anagolay js\n *\n * @remarks\n *\n * We will re-export some of the packages that everbody will need.\n *\n * One of those libraries is `@polkadot/util` re-exported as `polkadot_util`.\n *\n * @packageDocumentation\n */\n",
   "name": "@anagolay/utils",
   "members": [
     {
@@ -220,7 +220,7 @@
         {
           "kind": "Function",
           "canonicalReference": "@anagolay/utils!cloneRepo:function(1)",
-          "docComment": "/**\n * Clone repo and return path\n *\n * @param repo - \n *\n * @returns \n */\n",
+          "docComment": "/**\n * Clone repo as non-bare and return path\n *\n * @param options - {@link IGitCloneOptions}\n *\n * @param log - Optional {@link Logger}\n *\n * @returns the local cloned path, usually in the `/temp/anagolay` directory\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
@@ -1096,7 +1096,7 @@
         {
           "kind": "Function",
           "canonicalReference": "@anagolay/utils!parseURL:function(1)",
-          "docComment": "/**\n * Parse git supported url to https, Always https.\n *\n * See `git.test.ts` for the examples.\n *\n * @param sourceURL - string - Any of the [git supported url scheme](https://git-scm.com/docs/git-clone#_git_urls)\n *\n * @public\n */\n",
+          "docComment": "/**\n * Parse git supported url to https scheme\n *\n * @remarks\n *\n * See `git.test.ts` for the examples\n *\n * @param sourceURL - string - Any of the [git supported url scheme](https://git-scm.com/docs/git-clone#_git_urls)\n *\n * @public\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
@@ -1139,7 +1139,7 @@
         {
           "kind": "Function",
           "canonicalReference": "@anagolay/utils!urlForRemote:function(1)",
-          "docComment": "/**\n * Return the remote URL\n *\n * @param remote - string [default `origin`] - An origin as defined in the .git/config\n *\n * @public\n */\n",
+          "docComment": "/**\n * Return the URL for the git remote.  @remark This function is using the `git remote get-url --all` then invokes the {@link parseURL}\n *\n * @param remote - An origin as defined in the .git/config\n *\n * @defaultValue\n *\n * for `remote` param is `origin`\n *\n * @public\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",

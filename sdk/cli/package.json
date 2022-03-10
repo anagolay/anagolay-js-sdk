@@ -50,8 +50,7 @@
     "@rushstack/heft-webpack5-plugin": "~0.5.0",
     "webpack-node-externals": "~3.0.0",
     "@types/webpack-env": "1.16.3",
-    "ts-loader": "~9.2.6",
-    "pino-pretty": "~7.5.1"
+    "ts-loader": "~9.2.6"
   },
   "dependencies": {
     "@anagolay/utils": "workspace:*",

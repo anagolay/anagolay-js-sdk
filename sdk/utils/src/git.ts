@@ -92,9 +92,10 @@ export async function gitCloneBare(options: IGitCloneBareOptions): Promise<strin
 }
 
 /**
- * Clone repo and return path
- * @param repo
- * @returns
+ * Clone repo as non-bare and return path
+ * @param options - {@link IGitCloneOptions}
+ * @param log - Optional {@link Logger}
+ * @returns the local cloned path, usually in the `/temp/anagolay` directory
  */
 export async function cloneRepo(
   options: IGitCloneOptions,
@@ -174,8 +175,11 @@ export async function allCommitsPushed(cwd: string): Promise<boolean> {
 }
 
 /**
- * Return the remote URL
- * @param remote string [default `origin`] - An origin as defined in the .git/config
+ * Return the URL for the git remote.
+ * @remark This function is using the `git remote get-url --all` then invokes the {@link parseURL}
+ * @param remote - An origin as defined in the .git/config
+ * @defaultValue for `remote` param is `origin`
+
  * @public
  */
 export async function urlForRemote(remote: string = 'origin'): Promise<string> {
@@ -185,10 +189,16 @@ export async function urlForRemote(remote: string = 'origin'): Promise<string> {
 }
 
 /**
- * Parse git supported url to https, Always https.
+ * Parse git supported url to https scheme
  *
- * See `git.test.ts` for the examples.
+ * @remarks
+ * See `git.test.ts` for the examples
+ *
+ * @privateRemarks
+ * We need to refactor this code, I (woss) took it from somewhere and patched.
+ *
  * @param sourceURL string - Any of the [git supported url scheme](https://git-scm.com/docs/git-clone#_git_urls)
+ *
  * @public
  */
 

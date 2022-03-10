@@ -1,14 +1,6 @@
-import { cloneRepo } from '.';
 import { parseURL, urlForRemote } from './git';
 
 describe('Test git.ts', () => {
-  it('cloneRepo should be able to clone the repo', async () => {
-    const cloneIt = await cloneRepo({
-      repo: 'https://gitlab.com/anagolay/op-file',
-      rev: '684faf2aa441c46b95bf039e51b356d927d46e5b',
-    });
-    console.log(cloneIt);
-  });
   it('urlForRemote should correctly handle the origin ', async () => {
     expect(await urlForRemote('origin')).toEqual('https://gitlab.com/anagolay/anagolay-js');
 

@@ -10,7 +10,7 @@ import { DestinationStream } from 'pino';
 import { ExecOptions } from 'child_process';
 import { Logger as Logger_2 } from 'pino';
 import { LoggerOptions } from 'pino';
-import * as polkadot_utils from '@polkadot/util';
+import * as polkadot_util from '@polkadot/util';
 import { PromiseWithChild } from 'child_process';
 
 // @public
@@ -92,11 +92,9 @@ export function normalizeUrlPathname(pathName: string): string;
 // @public
 export function parseURL(sourceURL: string): string;
 
-export { polkadot_utils }
+export { polkadot_util }
 
 // @public
 export function urlForRemote(remote?: string): Promise<string>;
-
-// (No @packageDocumentation comment for this package)
 
 ```

@@ -8,7 +8,7 @@
   "main": "./lib/index.js",
   "types": "./lib/utils.d.ts",
   "scripts": {
-    "test": "heft test",
+    "test:watch": "heft test --watch",
     "build": "heft test --clean",
     "watch": "nodemon --watch ./src --ext ts --exec heft build"
   },

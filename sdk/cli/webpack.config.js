@@ -80,7 +80,7 @@ const config = {
     ],
   },
   devtool: 'source-map',
-  // ignoreWarnings: [(warning) => true],
+  ignoreWarnings: [(warning) => true],
 };
 
 module.exports = config;
