@@ -4,339 +4,259 @@
   "packages": [
     {
       "name": "@anagolay/api",
-      "allowedCategories": [
-        "libraries"
-      ]
+      "allowedCategories": [ "libraries" ]
     },
     {
       "name": "@anagolay/core",
-      "allowedCategories": [
-        "libraries"
-      ]
+      "allowedCategories": [ "libraries" ]
     },
     {
       "name": "@anagolay/op-cid",
-      "allowedCategories": [
-        "libraries"
-      ]
+      "allowedCategories": [ "libraries" ]
     },
     {
       "name": "@anagolay/op-json-enc",
-      "allowedCategories": [
-        "libraries"
-      ]
+      "allowedCategories": [ "libraries" ]
     },
     {
       "name": "@anagolay/types",
-      "allowedCategories": [
-        "libraries"
-      ]
+      "allowedCategories": [ "libraries" ]
     },
     {
       "name": "@anagolay/util",
-      "allowedCategories": [
-        "libraries"
-      ]
+      "allowedCategories": [ "libraries" ]
     },
     {
       "name": "@anagolay/utils",
-      "allowedCategories": [
-        "libraries"
-      ]
+      "allowedCategories": [ "libraries" ]
+    },
+    {
+      "name": "@docusaurus/core",
+      "allowedCategories": [ "websites" ]
+    },
+    {
+      "name": "@docusaurus/preset-classic",
+      "allowedCategories": [ "websites" ]
+    },
+    {
+      "name": "@mdx-js/react",
+      "allowedCategories": [ "websites" ]
     },
     {
       "name": "@microsoft/api-extractor",
-      "allowedCategories": [
-        "libraries"
-      ]
+      "allowedCategories": [ "libraries" ]
     },
     {
       "name": "@polkadot/api",
-      "allowedCategories": [
-        "libraries"
-      ]
+      "allowedCategories": [ "libraries" ]
     },
     {
       "name": "@polkadot/api-base",
-      "allowedCategories": [
-        "libraries"
-      ]
+      "allowedCategories": [ "libraries" ]
     },
     {
       "name": "@polkadot/keyring",
-      "allowedCategories": [
-        "libraries"
-      ]
+      "allowedCategories": [ "libraries" ]
     },
     {
       "name": "@polkadot/metadata",
-      "allowedCategories": [
-        "libraries"
-      ]
+      "allowedCategories": [ "libraries" ]
     },
     {
       "name": "@polkadot/rpc-core",
-      "allowedCategories": [
-        "libraries"
-      ]
+      "allowedCategories": [ "libraries" ]
     },
     {
       "name": "@polkadot/typegen",
-      "allowedCategories": [
-        "libraries"
-      ]
+      "allowedCategories": [ "libraries" ]
     },
     {
       "name": "@polkadot/types",
-      "allowedCategories": [
-        "libraries"
-      ]
+      "allowedCategories": [ "libraries" ]
     },
     {
       "name": "@polkadot/types-codec",
-      "allowedCategories": [
-        "libraries"
-      ]
+      "allowedCategories": [ "libraries" ]
     },
     {
       "name": "@polkadot/util",
-      "allowedCategories": [
-        "libraries"
-      ]
+      "allowedCategories": [ "libraries" ]
     },
     {
       "name": "@polkadot/util-crypto",
-      "allowedCategories": [
-        "libraries"
-      ]
+      "allowedCategories": [ "libraries" ]
     },
     {
       "name": "@rushstack/eslint-config",
-      "allowedCategories": [
-        "libraries"
-      ]
+      "allowedCategories": [ "libraries" ]
     },
     {
       "name": "@rushstack/heft",
-      "allowedCategories": [
-        "libraries"
-      ]
+      "allowedCategories": [ "libraries" ]
     },
     {
       "name": "@rushstack/heft-jest-plugin",
-      "allowedCategories": [
-        "libraries"
-      ]
+      "allowedCategories": [ "libraries" ]
     },
     {
       "name": "@rushstack/heft-node-rig",
-      "allowedCategories": [
-        "libraries"
-      ]
+      "allowedCategories": [ "libraries" ]
     },
     {
       "name": "@rushstack/heft-web-rig",
-      "allowedCategories": [
-        "libraries"
-      ]
+      "allowedCategories": [ "libraries" ]
     },
     {
       "name": "@rushstack/heft-webpack5-plugin",
-      "allowedCategories": [
-        "libraries"
-      ]
+      "allowedCategories": [ "libraries" ]
     },
     {
       "name": "axios",
-      "allowedCategories": [
-        "libraries"
-      ]
+      "allowedCategories": [ "libraries" ]
     },
     {
       "name": "chalk",
-      "allowedCategories": [
-        "libraries"
-      ]
+      "allowedCategories": [ "libraries" ]
     },
     {
       "name": "cids",
-      "allowedCategories": [
-        "libraries"
-      ]
+      "allowedCategories": [ "libraries" ]
     },
     {
       "name": "clear",
-      "allowedCategories": [
-        "libraries"
-      ]
+      "allowedCategories": [ "libraries" ]
     },
     {
       "name": "cli-color",
-      "allowedCategories": [
-        "libraries"
-      ]
+      "allowedCategories": [ "libraries" ]
     },
     {
       "name": "cli-cursor",
-      "allowedCategories": [
-        "libraries"
-      ]
+      "allowedCategories": [ "libraries" ]
+    },
+    {
+      "name": "cli-spinner",
+      "allowedCategories": [ "libraries" ]
+    },
+    {
+      "name": "clsx",
+      "allowedCategories": [ "websites" ]
     },
     {
       "name": "clui",
-      "allowedCategories": [
-        "libraries"
-      ]
+      "allowedCategories": [ "libraries" ]
     },
     {
       "name": "commander",
-      "allowedCategories": [
-        "libraries"
-      ]
+      "allowedCategories": [ "libraries" ]
     },
     {
       "name": "env-cmd",
-      "allowedCategories": [
-        "libraries"
-      ]
+      "allowedCategories": [ "libraries" ]
     },
     {
       "name": "eslint",
-      "allowedCategories": [
-        "libraries"
-      ]
+      "allowedCategories": [ "libraries" ]
     },
     {
       "name": "eslint-plugin-simple-import-sort",
-      "allowedCategories": [
-        "libraries"
-      ]
+      "allowedCategories": [ "libraries" ]
     },
     {
       "name": "eslint-plugin-unused-imports",
-      "allowedCategories": [
-        "libraries"
-      ]
+      "allowedCategories": [ "libraries" ]
     },
     {
       "name": "exifreader",
-      "allowedCategories": [
-        "libraries"
-      ]
+      "allowedCategories": [ "libraries" ]
     },
     {
       "name": "figlet",
-      "allowedCategories": [
-        "libraries"
-      ]
+      "allowedCategories": [ "libraries" ]
     },
     {
       "name": "fs-extra",
-      "allowedCategories": [
-        "libraries"
-      ]
+      "allowedCategories": [ "libraries" ]
     },
     {
       "name": "inquirer",
-      "allowedCategories": [
-        "libraries"
-      ]
+      "allowedCategories": [ "libraries" ]
     },
     {
       "name": "multihashing-async",
-      "allowedCategories": [
-        "libraries"
-      ]
+      "allowedCategories": [ "libraries" ]
     },
     {
       "name": "nodemon",
-      "allowedCategories": [
-        "libraries"
-      ]
+      "allowedCategories": [ "libraries" ]
     },
     {
       "name": "ora",
-      "allowedCategories": [
-        "libraries"
-      ]
+      "allowedCategories": [ "libraries" ]
     },
     {
       "name": "path",
-      "allowedCategories": [
-        "libraries"
-      ]
+      "allowedCategories": [ "libraries" ]
     },
     {
       "name": "pino",
-      "allowedCategories": [
-        "libraries"
-      ]
+      "allowedCategories": [ "libraries" ]
+    },
+    {
+      "name": "prism-react-renderer",
+      "allowedCategories": [ "websites" ]
     },
     {
       "name": "ramda",
-      "allowedCategories": [
-        "libraries"
-      ]
+      "allowedCategories": [ "libraries" ]
+    },
+    {
+      "name": "react",
+      "allowedCategories": [ "websites" ]
+    },
+    {
+      "name": "react-dom",
+      "allowedCategories": [ "websites" ]
     },
     {
       "name": "signale",
-      "allowedCategories": [
-        "libraries"
-      ]
+      "allowedCategories": [ "libraries" ]
     },
     {
       "name": "slug",
-      "allowedCategories": [
-        "libraries"
-      ]
+      "allowedCategories": [ "libraries" ]
     },
     {
       "name": "ts-loader",
-      "allowedCategories": [
-        "libraries"
-      ]
+      "allowedCategories": [ "libraries" ]
     },
     {
       "name": "ts-node",
-      "allowedCategories": [
-        "libraries"
-      ]
+      "allowedCategories": [ "libraries" ]
     },
     {
       "name": "ts-node-dev",
-      "allowedCategories": [
-        "libraries"
-      ]
+      "allowedCategories": [ "libraries" ]
     },
     {
       "name": "tsconfig-paths",
-      "allowedCategories": [
-        "libraries"
-      ]
+      "allowedCategories": [ "libraries" ]
     },
     {
       "name": "tslib",
-      "allowedCategories": [
-        "libraries"
-      ]
+      "allowedCategories": [ "libraries" ]
     },
     {
       "name": "typescript",
-      "allowedCategories": [
-        "libraries"
-      ]
+      "allowedCategories": [ "libraries" ]
     },
     {
       "name": "webpack",
-      "allowedCategories": [
-        "libraries"
-      ]
+      "allowedCategories": [ "libraries" ]
     },
     {
       "name": "webpack-node-externals",
-      "allowedCategories": [
-        "libraries"
-      ]
+      "allowedCategories": [ "libraries" ]
     }
   ]
 }

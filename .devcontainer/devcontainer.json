@@ -46,5 +46,6 @@
     }
   },
   "remoteUser": "node",
-  "postCreateCommand": "bash .devcontainer/install-deps.sh"
+  "postCreateCommand": "bash .devcontainer/install-deps.sh",
+  "postStartCommand": "rush update"
 }
