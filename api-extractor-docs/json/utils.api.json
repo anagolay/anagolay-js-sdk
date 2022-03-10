@@ -543,7 +543,7 @@
         {
           "kind": "Function",
           "canonicalReference": "@anagolay/utils!hexToString:function(1)",
-          "docComment": "/**\n * Take a 0x prefixed string or not and return the actual value.  @remark Uses the ramda.js\n *\n * @returns Decoded hex string output.\n *\n * @public\n */\n",
+          "docComment": "/**\n * Take a 0x prefixed string or not and return the actual value.\n *\n * @remarks\n *\n * Uses the ramda.js\n *\n * @returns Decoded hex string output.\n *\n * @public\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
@@ -1139,7 +1139,7 @@
         {
           "kind": "Function",
           "canonicalReference": "@anagolay/utils!urlForRemote:function(1)",
-          "docComment": "/**\n * Return the URL for the git remote.  @remark This function is using the `git remote get-url --all` then invokes the {@link parseURL}\n *\n * @param remote - An origin as defined in the .git/config\n *\n * @defaultValue\n *\n * for `remote` param is `origin`\n *\n * @public\n */\n",
+          "docComment": "/**\n * Return the URL for the git remote.\n *\n * @remarks\n *\n * This function is using the `git remote get-url --all` then invokes the {@link parseURL}\n *\n * @param remote - An origin as defined in the .git/config\n *\n * @defaultValue\n *\n * for `remote` param is `origin`\n *\n * @public\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
