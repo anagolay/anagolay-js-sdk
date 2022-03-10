@@ -176,7 +176,7 @@ export async function allCommitsPushed(cwd: string): Promise<boolean> {
 
 /**
  * Return the URL for the git remote.
- * @remark This function is using the `git remote get-url --all` then invokes the {@link parseURL}
+ * @remarks This function is using the `git remote get-url --all` then invokes the {@link parseURL}
  * @param remote - An origin as defined in the .git/config
  * @defaultValue for `remote` param is `origin`
 

@@ -2,7 +2,7 @@ import { length, startsWith, takeLast } from 'ramda';
 
 /**
  * Take a 0x prefixed string or not and return the actual value.
- * @remark
+ * @remarks
  * Uses the ramda.js
  * @returns Decoded hex string output.
  * @public
