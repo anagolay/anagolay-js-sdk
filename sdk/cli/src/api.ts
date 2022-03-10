@@ -29,7 +29,7 @@ const COEFFICIENT_FOR_CONVERTING_TO_UNIT: number = 1000000000000;
 
 /**
  * Connect to the API -- aka Anagolay Network -
- * @remark
+ * @remarks
  * Default value for the connection is 'ws://127.0.0.1:9944', it can be overwritten by setting the `ANAGOLAY_CHAIN_URL` environment variable
  * @param log { Signale } - Optional logging to stdout
  * @returns
@@ -161,7 +161,7 @@ export function createKeyringPairFromSeed(params: { seed: string; type: KeypairT
 /**
  * Sign and send the extrinsic
  * @param params
- * @remark Error response is 
+ * @remarks Error response is 
  * 
  * ```ts
  * export interface ISignSubmitErrorReturn {
@@ -248,7 +248,7 @@ export async function signAndSubmit(params: ISignAndSubmitParams): Promise<ISign
 /**
  * Is a dispatch error or not
  *
- * @remark Shamelessly taken from the https://github.com/polkadot-js/apps/blob/master/packages/react-params/src/Param/DispatchError.tsx#L25 because i couldn't find in their docs HOW to deal with the errors. now i know and it is weird
+ * @remarks Shamelessly taken from the https://github.com/polkadot-js/apps/blob/master/packages/react-params/src/Param/DispatchError.tsx#L25 because i couldn't find in their docs HOW to deal with the errors. now i know and it is weird
  * @param value
  * @returns
  */

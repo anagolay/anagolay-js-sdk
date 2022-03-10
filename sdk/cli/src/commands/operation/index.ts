@@ -42,6 +42,7 @@ import {
   signAndSubmit,
   transferToAccount,
 } from '../../api';
+import { askStarterQuestions } from '../../commonQuestions/common';
 import { logsDir } from '../../utils';
 
 // http Agent for the Axios
@@ -137,19 +138,10 @@ export default async function makeCommand(): Promise<Command> {
  * ```bash
  * anagolay operation publish
  * ```
- * @param _args
  * @public
  */
-async function publishSubcmd(_args: any[]): Promise<void> {
-  const startAnswers = await inquirer.prompt({
-    type: 'confirm',
-    name: 'proceedWithPublish',
-    message: 'Do you want to proceed?',
-    default: true,
-  });
-  if (!startAnswers.proceedWithPublish) {
-    process.exit(0);
-  }
+async function publishSubcmd(): Promise<void> {
+  await askStarterQuestions();
 
   const spinSanityCheck = new Spinner('Performing sanity checks ...');
   spinSanityCheck.start();

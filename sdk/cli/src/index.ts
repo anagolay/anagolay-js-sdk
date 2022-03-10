@@ -9,17 +9,22 @@
 import { Command } from 'commander';
 
 import makeOperationCommand from './commands/operation';
+import makeWorkflowCommand from './commands/workflow';
 
 /**
  * Main entrypoint for the CLI
  */
 async function main(): Promise<void> {
   // const program = commander.createCommand();
-  const program = new Command('main');
-  program.version('0.7.0').description('Welcome to Anagolay CLI');
-  program.addCommand(await makeOperationCommand());
+  const cmd = new Command();
 
-  await program.parseAsync();
+  cmd.version('0.7.0').description('Welcome to Anagolay CLI');
+
+  /// HERE we start with adding the 1st level commands
+  cmd.addCommand(await makeOperationCommand());
+  cmd.addCommand(await makeWorkflowCommand());
+
+  await cmd.parseAsync();
   // program.commands.map((cmd1) => {
   //   cmd1.commands.map((cmd2) => {
   //     console.log(`anagolay ${cmd1.command.name} ${cmd2.command.name}`);
