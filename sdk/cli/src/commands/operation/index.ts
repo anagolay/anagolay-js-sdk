@@ -41,8 +41,8 @@ import {
   ISignSubmitSuccessReturn,
   signAndSubmit,
   transferToAccount,
-} from '../api';
-import { logsDir } from '../utils';
+} from '../../api';
+import { logsDir } from '../../utils';
 
 // http Agent for the Axios
 const httpAgent: Agent = new Agent({ keepAlive: true });

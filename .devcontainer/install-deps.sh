@@ -28,7 +28,7 @@ fi
 if [ ! -f "$HOME/.tmux.conf" ]; then
 	# wget https://ipfs.anagolay.network/ipfs/QmdZFrnc6NwzKSQdxkZfxHaBXMDH3ndhtwSm7dB7L1NXvM -O $HOME/.tmux.conf
 
-	ln -s /workspace/.devcontainer/.tmux.conf $HOME/.tmux.conf
+	ln -fs /workspace/.devcontainer/.tmux.conf $HOME/.tmux.conf
 fi
 
 TEST_REPOS_PATH=$HOME/test-repos
