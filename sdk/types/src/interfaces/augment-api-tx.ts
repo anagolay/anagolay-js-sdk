@@ -1,11 +1,9 @@
 // Auto-generated via `yarn polkadot-types-from-chain`, do not edit
 /* eslint-disable */
 
-import type { GenericId } from '@anagolay/types/interfaces/anagolay';
+import type { OperationId } from '@anagolay/types/interfaces/anagolay';
 import type { OperationData, OperationVersionData } from '@anagolay/types/interfaces/operations';
-import type { PhashInfo, Proof } from '@anagolay/types/interfaces/poe';
-import type { Rule } from '@anagolay/types/interfaces/rules';
-import type { AnagolayStatement } from '@anagolay/types/interfaces/statements';
+import type { WorkflowData, WorkflowVersionData } from '@anagolay/types/interfaces/workflows';
 import type { ApiTypes } from '@polkadot/api-base/types';
 import type { Bytes, Compact, Option, Vec, u16, u32, u64 } from '@polkadot/types-codec';
 import type { AnyNumber } from '@polkadot/types-codec/types';
@@ -242,13 +240,27 @@ declare module '@polkadot/api-base/types/submittable' {
     };
     operations: {
       /**
-       * Create Operation manifest and a Version.
+       * Create Operation manifest and the initial Version.
        *
-       * Once you have created the Manifest this extrinsic will always fail with at least 3 different errors,
-       * each depend on the parts of the structure.
-       * There is a check that a user cannot cheat and create new pacakge if the package is
+       * Once you have created the Manifest this extrinsic will always fail with 3 different
+       * errors, each depend on the parts of the structure.
+       * There is a check that a user cannot cheat and create new package if the package is
        * connected to other Operation or any other Version.
        *
+       * # Arguments
+       * * origin - the call origin
+       * * operation_data - the data section of the Operation manifest
+       * * version_data - the data section of the Version manifest
+       *
+       * # Errors
+       * * `OperationAlreadyExists` - if an Operation with the same manifest was already created by
+       * the caller or by another user
+       * * `OperationAlreadyInitialized` - if the Operation already has an initial Version
+       * * `OperationVersionPackageAlreadyExists` - one of the packages of the Version is already
+       * registered to another Operation
+       *
+       * # Return
+       * `DispatchResultWithPostInfo` containing Unit type
        **/
       create: AugmentedSubmittable<
         (
@@ -269,13 +281,7 @@ declare module '@polkadot/api-base/types/submittable' {
             | Uint8Array,
           versionData:
             | OperationVersionData
-            | {
-                operationId?: any;
-                parentId?: any;
-                documentationId?: any;
-                rehostedRepoId?: any;
-                packages?: any;
-              }
+            | { entityId?: any; parentId?: any; artifacts?: any }
             | string
             | Uint8Array
         ) => SubmittableExtrinsic<ApiType>,
@@ -289,32 +295,8 @@ declare module '@polkadot/api-base/types/submittable' {
        * * operation_id - The id of the Operation to approve
        **/
       versionApprove: AugmentedSubmittable<
-        (operationId: GenericId | string | Uint8Array) => SubmittableExtrinsic<ApiType>,
-        [GenericId]
-      >;
-      /**
-       * Generic tx
-       **/
-      [key: string]: SubmittableExtrinsicFunction<ApiType>;
-    };
-    poe: {
-      /**
-       * Create proof and claim
-       **/
-      createProof: AugmentedSubmittable<
-        (
-          proof: Proof | { id?: any; data?: any; extra?: any } | string | Uint8Array
-        ) => SubmittableExtrinsic<ApiType>,
-        [Proof]
-      >;
-      /**
-       * INDEX storage, save the connection phash <-> proofId for hamming/leven distance calc. Eventually refactor this, for now leave it
-       **/
-      savePhash: AugmentedSubmittable<
-        (
-          payloadData: PhashInfo | { pHash?: any; proofId?: any } | string | Uint8Array
-        ) => SubmittableExtrinsic<ApiType>,
-        [PhashInfo]
+        (operationId: OperationId | string | Uint8Array) => SubmittableExtrinsic<ApiType>,
+        [OperationId]
       >;
       /**
        * Generic tx
@@ -322,52 +304,6 @@ declare module '@polkadot/api-base/types/submittable' {
       [key: string]: SubmittableExtrinsicFunction<ApiType>;
     };
     randomnessCollectiveFlip: {
-      /**
-       * Generic tx
-       **/
-      [key: string]: SubmittableExtrinsicFunction<ApiType>;
-    };
-    rules: {
-      /**
-       * Create Rule
-       **/
-      createRule: AugmentedSubmittable<
-        (
-          rule: Rule | { id?: any; data?: any; extra?: any } | string | Uint8Array
-        ) => SubmittableExtrinsic<ApiType>,
-        [Rule]
-      >;
-      /**
-       * Generic tx
-       **/
-      [key: string]: SubmittableExtrinsicFunction<ApiType>;
-    };
-    statements: {
-      /**
-       * Create Copyright
-       **/
-      createCopyright: AugmentedSubmittable<
-        (
-          statement: AnagolayStatement | { id?: any; data?: any; extra?: any } | string | Uint8Array
-        ) => SubmittableExtrinsic<ApiType>,
-        [AnagolayStatement]
-      >;
-      /**
-       * Create Ownership
-       **/
-      createOwnership: AugmentedSubmittable<
-        (
-          statement: AnagolayStatement | { id?: any; data?: any; extra?: any } | string | Uint8Array
-        ) => SubmittableExtrinsic<ApiType>,
-        [AnagolayStatement]
-      >;
-      /**
-       * Allow the owner to revoke their statement.
-       **/
-      revoke: AugmentedSubmittable<
-        (statementId: GenericId | string | Uint8Array) => SubmittableExtrinsic<ApiType>,
-        [GenericId]
-      >;
       /**
        * Generic tx
        **/
@@ -699,6 +635,50 @@ declare module '@polkadot/api-base/types/submittable' {
           calls: Vec<Call> | (Call | { callIndex?: any; args?: any } | string | Uint8Array)[]
         ) => SubmittableExtrinsic<ApiType>,
         [Vec<Call>]
+      >;
+      /**
+       * Generic tx
+       **/
+      [key: string]: SubmittableExtrinsicFunction<ApiType>;
+    };
+    workflows: {
+      /**
+       * Create Workflow manifest and the initial Version.
+       *
+       * Once you have created the Manifest this extrinsic will always fail with 3 different
+       * errors, each depend on the parts of the structure.
+       * There is a check that a user cannot cheat and create new package if the package is
+       * connected to other Workflow or any other Version.
+       *
+       * # Arguments
+       * * origin - the call origin
+       * * operation_data - the data section of the Workflow manifest
+       * * version_data - the data section of the Version manifest
+       *
+       * # Errors
+       * * `WorkflowAlreadyExists` - if an Workflow with the same manifest was already created by the
+       * caller or by another user
+       * * `WorkflowAlreadyInitialized` - if the Workflow already has an initial Version
+       * * `WorkflowVersionPackageAlreadyExists` - one of the packages of the Version is already
+       * registered to another Workflow
+       *
+       * # Return
+       * `DispatchResultWithPostInfo` containing Unit type
+       **/
+      create: AugmentedSubmittable<
+        (
+          workflowData:
+            | WorkflowData
+            | { name?: any; creator?: any; description?: any; groups?: any; segments?: any }
+            | string
+            | Uint8Array,
+          versionData:
+            | WorkflowVersionData
+            | { entityId?: any; parentId?: any; artifacts?: any }
+            | string
+            | Uint8Array
+        ) => SubmittableExtrinsic<ApiType>,
+        [WorkflowData, WorkflowVersionData]
       >;
       /**
        * Generic tx

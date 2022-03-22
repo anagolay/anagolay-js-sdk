@@ -2,30 +2,29 @@
 /* eslint-disable */
 
 import type {
+  AnagolayVersionExtra,
+  ArtifactId,
   Characters,
   CreatorId,
-  DefaultValues,
-  DefaultsCid,
-  DefaultsEncoding,
-  DefaultsHashing,
+  DocsArtifactSubType,
   ForWhat,
   GenericId,
+  OperationId,
+  VersionId,
+  WasmArtifactSubType,
+  WorkflowId,
 } from '@anagolay/types/interfaces/anagolay';
 import type {
   Operation,
+  OperationArtifactStructure,
+  OperationArtifactType,
   OperationData,
   OperationExtra,
-  OperationId,
   OperationRecord,
   OperationVersion,
   OperationVersionData,
-  OperationVersionExtra,
-  OperationVersionPackage,
   OperationVersionRecord,
-  PackageId,
-  PackageType,
   TypeName,
-  VersionId,
 } from '@anagolay/types/interfaces/operations';
 import type {
   PhashInfo,
@@ -35,13 +34,6 @@ import type {
   ProofParams,
   ProofRecord,
 } from '@anagolay/types/interfaces/poe';
-import type {
-  OperationReference,
-  Rule,
-  RuleData,
-  RuleExtra,
-  RuleRecord,
-} from '@anagolay/types/interfaces/rules';
 import type {
   AnagolayClaim,
   AnagolayClaimType,
@@ -56,6 +48,19 @@ import type {
   StatementExtra,
   Validity,
 } from '@anagolay/types/interfaces/statements';
+import type {
+  OperationVersionReference,
+  Workflow,
+  WorkflowArtifactStructure,
+  WorkflowArtifactType,
+  WorkflowData,
+  WorkflowExtra,
+  WorkflowRecord,
+  WorkflowSegment,
+  WorkflowVersion,
+  WorkflowVersionData,
+  WorkflowVersionRecord,
+} from '@anagolay/types/interfaces/workflows';
 import type { Data, StorageKey } from '@polkadot/types';
 import type {
   BitVec,
@@ -1187,12 +1192,14 @@ declare module '@polkadot/types/types/registry' {
     AnagolaySignatures: AnagolaySignatures;
     AnagolayStatement: AnagolayStatement;
     AnagolayStatementRecord: AnagolayStatementRecord;
+    AnagolayVersionExtra: AnagolayVersionExtra;
     AnySignature: AnySignature;
     ApiId: ApiId;
     ApplyExtrinsicResult: ApplyExtrinsicResult;
     ApprovalFlag: ApprovalFlag;
     Approvals: Approvals;
     ArithmeticError: ArithmeticError;
+    ArtifactId: ArtifactId;
     AssetApproval: AssetApproval;
     AssetApprovalKey: AssetApprovalKey;
     AssetBalance: AssetBalance;
@@ -1388,10 +1395,6 @@ declare module '@polkadot/types/types/registry' {
     CreatedBlock: CreatedBlock;
     CreatorId: CreatorId;
     Data: Data;
-    DefaultsCid: DefaultsCid;
-    DefaultsEncoding: DefaultsEncoding;
-    DefaultsHashing: DefaultsHashing;
-    DefaultValues: DefaultValues;
     DeferredOffenceOf: DeferredOffenceOf;
     DefunctVoter: DefunctVoter;
     DelayKind: DelayKind;
@@ -1422,6 +1425,7 @@ declare module '@polkadot/types/types/registry' {
     DisputeState: DisputeState;
     DisputeStatement: DisputeStatement;
     DisputeStatementSet: DisputeStatementSet;
+    DocsArtifactSubType: DocsArtifactSubType;
     DoubleEncodedCall: DoubleEncodedCall;
     DoubleVoteReport: DoubleVoteReport;
     DownwardMessage: DownwardMessage;
@@ -1764,16 +1768,16 @@ declare module '@polkadot/types/types/registry' {
     OpenTipTo225: OpenTipTo225;
     OperatingMode: OperatingMode;
     Operation: Operation;
+    OperationArtifactStructure: OperationArtifactStructure;
+    OperationArtifactType: OperationArtifactType;
     OperationData: OperationData;
     OperationExtra: OperationExtra;
     OperationId: OperationId;
     OperationRecord: OperationRecord;
-    OperationReference: OperationReference;
     OperationVersion: OperationVersion;
     OperationVersionData: OperationVersionData;
-    OperationVersionExtra: OperationVersionExtra;
-    OperationVersionPackage: OperationVersionPackage;
     OperationVersionRecord: OperationVersionRecord;
+    OperationVersionReference: OperationVersionReference;
     Origin: Origin;
     OriginCaller: OriginCaller;
     OriginKindV0: OriginKindV0;
@@ -1787,8 +1791,6 @@ declare module '@polkadot/types/types/registry' {
     Outcome: Outcome;
     OverweightIndex: OverweightIndex;
     Owner: Owner;
-    PackageId: PackageId;
-    PackageType: PackageType;
     PageCounter: PageCounter;
     PageIndexData: PageIndexData;
     PalletCallMetadataLatest: PalletCallMetadataLatest;
@@ -1938,10 +1940,6 @@ declare module '@polkadot/types/types/registry' {
     RoundSnapshot: RoundSnapshot;
     RoundState: RoundState;
     RpcMethods: RpcMethods;
-    Rule: Rule;
-    RuleData: RuleData;
-    RuleExtra: RuleExtra;
-    RuleRecord: RuleRecord;
     RuntimeDbWeight: RuntimeDbWeight;
     RuntimeDispatchInfo: RuntimeDispatchInfo;
     RuntimeVersion: RuntimeVersion;
@@ -2205,6 +2203,7 @@ declare module '@polkadot/types/types/registry' {
     VrfData: VrfData;
     VrfOutput: VrfOutput;
     VrfProof: VrfProof;
+    WasmArtifactSubType: WasmArtifactSubType;
     Weight: Weight;
     WeightLimitV2: WeightLimitV2;
     WeightMultiplier: WeightMultiplier;
@@ -2225,6 +2224,17 @@ declare module '@polkadot/types/types/registry' {
     WinningData10: WinningData10;
     WinningDataEntry: WinningDataEntry;
     WithdrawReasons: WithdrawReasons;
+    Workflow: Workflow;
+    WorkflowArtifactStructure: WorkflowArtifactStructure;
+    WorkflowArtifactType: WorkflowArtifactType;
+    WorkflowData: WorkflowData;
+    WorkflowExtra: WorkflowExtra;
+    WorkflowId: WorkflowId;
+    WorkflowRecord: WorkflowRecord;
+    WorkflowSegment: WorkflowSegment;
+    WorkflowVersion: WorkflowVersion;
+    WorkflowVersionData: WorkflowVersionData;
+    WorkflowVersionRecord: WorkflowVersionRecord;
     Xcm: Xcm;
     XcmAssetId: XcmAssetId;
     XcmError: XcmError;

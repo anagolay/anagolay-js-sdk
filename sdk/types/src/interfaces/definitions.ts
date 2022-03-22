@@ -6,17 +6,17 @@
 // import anagolay from './anagolay/definitions'
 // import operations from './operations/definitions'
 // import poe from './poe/definitions'
-// import rules from './rules/definitions'
+// import workflows from './workflows/definitions'
 // import statements from './statements/definitions'
 // export default {
 //   anagolay,
 //   operations,
 //   poe,
-//   rules,
+//   workflows,
 //   statements,
 // }
 export { default as anagolay } from './anagolay/definitions';
 export { default as operations } from './operations/definitions';
 export { default as poe } from './poe/definitions';
-export { default as rules } from './rules/definitions';
 export { default as statements } from './statements/definitions';
+export { default as workflows } from './workflows/definitions';

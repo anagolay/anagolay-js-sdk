@@ -1,19 +1,11 @@
 // Auto-generated via `yarn polkadot-types-from-chain`, do not edit
 /* eslint-disable */
 
-import type { GenericId } from '@anagolay/types/interfaces/anagolay';
-import type {
-  OperationId,
-  OperationRecord,
-  OperationVersionRecord,
-  PackageId,
-  VersionId,
-} from '@anagolay/types/interfaces/operations';
-import type { PhashInfo, ProofRecord } from '@anagolay/types/interfaces/poe';
-import type { RuleRecord } from '@anagolay/types/interfaces/rules';
-import type { AnagolayStatementRecord } from '@anagolay/types/interfaces/statements';
+import type { OperationId, VersionId, WorkflowId } from '@anagolay/types/interfaces/anagolay';
+import type { OperationRecord, OperationVersionRecord } from '@anagolay/types/interfaces/operations';
+import type { WorkflowRecord, WorkflowVersionRecord } from '@anagolay/types/interfaces/workflows';
 import type { ApiTypes } from '@polkadot/api-base/types';
-import type { Bytes, Option, Vec, bool, u128, u32, u64 } from '@polkadot/types-codec';
+import type { Bytes, Option, Vec, bool, u32, u64 } from '@polkadot/types-codec';
 import type { AnyNumber, ITuple } from '@polkadot/types-codec/types';
 import type { AccountData, BalanceLock } from '@polkadot/types/interfaces/balances';
 import type { SetId, StoredPendingChange, StoredState } from '@polkadot/types/interfaces/grandpa';
@@ -125,77 +117,37 @@ declare module '@polkadot/api-base/types/storage' {
       /**
        * Retrieve the Operation Manifest with the AccountId ( which is the owner ) and OperationId.
        **/
-      operations: AugmentedQuery<
+      operationsByOperationIdAndAccountId: AugmentedQuery<
         ApiType,
         (
-          arg1: AccountId | string | Uint8Array,
-          arg2: OperationId | string | Uint8Array
+          arg1: OperationId | string | Uint8Array,
+          arg2: AccountId | string | Uint8Array
         ) => Observable<OperationRecord>,
-        [AccountId, OperationId]
+        [OperationId, AccountId]
       > &
-        QueryableStorageEntry<ApiType, [AccountId, OperationId]>;
+        QueryableStorageEntry<ApiType, [OperationId, AccountId]>;
       /**
-       * Total amount Operations.
+       * Total amount of Operations.
        **/
-      operationTotal: AugmentedQuery<ApiType, () => Observable<u64>, []> & QueryableStorageEntry<ApiType, []>;
-      /**
-       * All published pacakges will appear here. Note that this list will be quite large, be aware of qeurying this without proper limits!
-       **/
-      packages: AugmentedQuery<ApiType, () => Observable<Vec<PackageId>>, []> &
-        QueryableStorageEntry<ApiType, []>;
-      /**
-       * Retrieve the Version.
-       **/
-      versions: AugmentedQuery<
-        ApiType,
-        (arg: VersionId | string | Uint8Array) => Observable<OperationVersionRecord>,
-        [VersionId]
-      > &
-        QueryableStorageEntry<ApiType, [VersionId]>;
+      total: AugmentedQuery<ApiType, () => Observable<u64>, []> & QueryableStorageEntry<ApiType, []>;
       /**
        * Retrieve all Versions for a single Operation Manifest.
        **/
-      versionsViaOperationId: AugmentedQuery<
+      versionsByOperationId: AugmentedQuery<
         ApiType,
         (arg: OperationId | string | Uint8Array) => Observable<Vec<VersionId>>,
         [OperationId]
       > &
         QueryableStorageEntry<ApiType, [OperationId]>;
       /**
-       * Generic query
+       * Retrieve the Version.
        **/
-      [key: string]: QueryableStorageEntry<ApiType>;
-    };
-    poe: {
-      /**
-       * PHashes count
-       **/
-      pHashCount: AugmentedQuery<ApiType, () => Observable<u128>, []> & QueryableStorageEntry<ApiType, []>;
-      /**
-       * Perceptual hash finder hash(phash) : (PerceptualHash, ProofId)
-       **/
-      pHashes: AugmentedQuery<
+      versionsByVersionId: AugmentedQuery<
         ApiType,
-        (arg1: Hash | string | Uint8Array, arg2: AccountId | string | Uint8Array) => Observable<PhashInfo>,
-        [Hash, AccountId]
+        (arg: VersionId | string | Uint8Array) => Observable<OperationVersionRecord>,
+        [VersionId]
       > &
-        QueryableStorageEntry<ApiType, [Hash, AccountId]>;
-      /**
-       * PoE Proofs
-       **/
-      proofs: AugmentedQuery<
-        ApiType,
-        (
-          arg1: GenericId | string | Uint8Array,
-          arg2: AccountId | string | Uint8Array
-        ) => Observable<ProofRecord>,
-        [GenericId, AccountId]
-      > &
-        QueryableStorageEntry<ApiType, [GenericId, AccountId]>;
-      /**
-       * Proofs count
-       **/
-      proofsCount: AugmentedQuery<ApiType, () => Observable<u128>, []> & QueryableStorageEntry<ApiType, []>;
+        QueryableStorageEntry<ApiType, [VersionId]>;
       /**
        * Generic query
        **/
@@ -209,84 +161,6 @@ declare module '@polkadot/api-base/types/storage' {
        **/
       randomMaterial: AugmentedQuery<ApiType, () => Observable<Vec<Hash>>, []> &
         QueryableStorageEntry<ApiType, []>;
-      /**
-       * Generic query
-       **/
-      [key: string]: QueryableStorageEntry<ApiType>;
-    };
-    rules: {
-      /**
-       * Amount of saved rules
-       **/
-      ruleCount: AugmentedQuery<ApiType, () => Observable<u32>, []> & QueryableStorageEntry<ApiType, []>;
-      /**
-       * Rules
-       **/
-      rules: AugmentedQuery<
-        ApiType,
-        (
-          arg1: GenericId | string | Uint8Array,
-          arg2: AccountId | string | Uint8Array
-        ) => Observable<RuleRecord>,
-        [GenericId, AccountId]
-      > &
-        QueryableStorageEntry<ApiType, [GenericId, AccountId]>;
-      /**
-       * Generic query
-       **/
-      [key: string]: QueryableStorageEntry<ApiType>;
-    };
-    statements: {
-      /**
-       * List of the statements connected to the Proof. If the statement claim is 100% then there
-       * will be only one entry, if it's not then as many entries is needed to get to 100%
-       **/
-      proofValidStatements: AugmentedQuery<
-        ApiType,
-        (arg: GenericId | string | Uint8Array) => Observable<Vec<GenericId>>,
-        [GenericId]
-      > &
-        QueryableStorageEntry<ApiType, [GenericId]>;
-      /**
-       * ALL statements
-       **/
-      statements: AugmentedQuery<
-        ApiType,
-        (
-          arg1: GenericId | string | Uint8Array,
-          arg2: AccountId | string | Uint8Array
-        ) => Observable<AnagolayStatementRecord>,
-        [GenericId, AccountId]
-      > &
-        QueryableStorageEntry<ApiType, [GenericId, AccountId]>;
-      /**
-       * Amount of saved statements
-       **/
-      statementsCount: AugmentedQuery<ApiType, () => Observable<u128>, []> &
-        QueryableStorageEntry<ApiType, []>;
-      /**
-       * Statement to previous statement index table for quick check.
-       * The StatementB has a parent StatementA in `prev_id` field this will be
-       * Example:
-       * ```ts
-       * const aStatement = {
-       * //   ... normal as the rest,
-       * prev_id: ''
-       * }
-       * const bStatement = {
-       * //  ... normal as the rest,
-       * prev_id: aStatement.id
-       * }```
-       * so this will be a map of bStatement.GenericId => aStatement.GenericId
-       * And now if we try to revoke the `aStatement` it will fail,
-       * because it is the part of the `bStatement`
-       **/
-      statementToPrevious: AugmentedQuery<
-        ApiType,
-        (arg: GenericId | string | Uint8Array) => Observable<GenericId>,
-        [GenericId]
-      > &
-        QueryableStorageEntry<ApiType, [GenericId]>;
       /**
        * Generic query
        **/
@@ -430,6 +304,46 @@ declare module '@polkadot/api-base/types/storage' {
         QueryableStorageEntry<ApiType, []>;
       storageVersion: AugmentedQuery<ApiType, () => Observable<Releases>, []> &
         QueryableStorageEntry<ApiType, []>;
+      /**
+       * Generic query
+       **/
+      [key: string]: QueryableStorageEntry<ApiType>;
+    };
+    workflows: {
+      /**
+       * Amount of saved workflows
+       **/
+      total: AugmentedQuery<ApiType, () => Observable<u32>, []> & QueryableStorageEntry<ApiType, []>;
+      /**
+       * Retrieve the Version.
+       **/
+      versionsByVersionId: AugmentedQuery<
+        ApiType,
+        (arg: VersionId | string | Uint8Array) => Observable<WorkflowVersionRecord>,
+        [VersionId]
+      > &
+        QueryableStorageEntry<ApiType, [VersionId]>;
+      /**
+       * Retrieve all Versions for a single Workflow Manifest.
+       **/
+      versionsByWorkflowId: AugmentedQuery<
+        ApiType,
+        (arg: WorkflowId | string | Uint8Array) => Observable<Vec<VersionId>>,
+        [WorkflowId]
+      > &
+        QueryableStorageEntry<ApiType, [WorkflowId]>;
+      /**
+       * Retrieve the Workflow Manifest with the AccountId ( which is the owner ) and WorkflowId.
+       **/
+      workflowsByWorkflowIdAndAccountId: AugmentedQuery<
+        ApiType,
+        (
+          arg1: WorkflowId | string | Uint8Array,
+          arg2: AccountId | string | Uint8Array
+        ) => Observable<WorkflowRecord>,
+        [WorkflowId, AccountId]
+      > &
+        QueryableStorageEntry<ApiType, [WorkflowId, AccountId]>;
       /**
        * Generic query
        **/

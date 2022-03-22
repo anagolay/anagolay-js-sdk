@@ -89,67 +89,9 @@ declare module '@polkadot/api-base/types/errors' {
        **/
       OperationAlreadyInitialized: AugmentedError<ApiType>;
       /**
-       * Version pacakge already exists. If you think this is a bug in our system let us know [here](https://matrix.to/#/!FJvAuDoWRoMVuOFYwL:matrix.org?via=matrix.org).
+       * Version package already exists. If you think this is a bug in our system let us know [here](https://matrix.to/#/!FJvAuDoWRoMVuOFYwL:matrix.org?via=matrix.org).
        **/
       OperationVersionPackageAlreadyExists: AugmentedError<ApiType>;
-      /**
-       * Generic error
-       **/
-      [key: string]: AugmentedError<ApiType>;
-    };
-    poe: {
-      /**
-       * The proof does not exist, so it cannot be revoked
-       **/
-      NoSuchProof: AugmentedError<ApiType>;
-      /**
-       * PHash + ProofId already exist
-       **/
-      PHashAndProofIdComboAlreadyExist: AugmentedError<ApiType>;
-      /**
-       * This proof has already been claimed
-       **/
-      ProofAlreadyClaimed: AugmentedError<ApiType>;
-      /**
-       * ForWhat mismatch
-       **/
-      ProofRuleTypeMismatch: AugmentedError<ApiType>;
-      /**
-       * Generic error
-       **/
-      [key: string]: AugmentedError<ApiType>;
-    };
-    rules: {
-      /**
-       * Rule already exists
-       **/
-      RuleAlreadyCreated: AugmentedError<ApiType>;
-      /**
-       * Generic error
-       **/
-      [key: string]: AugmentedError<ApiType>;
-    };
-    statements: {
-      /**
-       * Create child statement is not yet supported
-       **/
-      CreatingChildStatementNotSupported: AugmentedError<ApiType>;
-      /**
-       * Statement doesn't exits.
-       **/
-      NoSuchStatement: AugmentedError<ApiType>;
-      /**
-       * Proof already has this statement
-       **/
-      ProofHasStatement: AugmentedError<ApiType>;
-      /**
-       * Statement has child statement and it cannot be revoked
-       **/
-      StatementHasChildStatement: AugmentedError<ApiType>;
-      /**
-       * Wrong claim type
-       **/
-      WrongClaimType: AugmentedError<ApiType>;
       /**
        * Generic error
        **/
@@ -190,6 +132,24 @@ declare module '@polkadot/api-base/types/errors' {
        * and the new runtime.
        **/
       SpecVersionNeedsToIncrease: AugmentedError<ApiType>;
+      /**
+       * Generic error
+       **/
+      [key: string]: AugmentedError<ApiType>;
+    };
+    workflows: {
+      /**
+       * Workflow Manifest already exists.
+       **/
+      WorkflowAlreadyExists: AugmentedError<ApiType>;
+      /**
+       * The Workflow already has an initial Version and cannot be published again.
+       **/
+      WorkflowAlreadyInitialized: AugmentedError<ApiType>;
+      /**
+       * Version package already exists. If you think this is a bug in our system let us know [here](https://matrix.to/#/!FJvAuDoWRoMVuOFYwL:matrix.org?via=matrix.org).
+       **/
+      WorkflowVersionPackageAlreadyExists: AugmentedError<ApiType>;
       /**
        * Generic error
        **/

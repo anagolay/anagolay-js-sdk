@@ -149,5 +149,5 @@ export interface AnInputParamsDefinition {
 export * from './interfaces/anagolay/interfaces';
 export * from './interfaces/operations/interfaces';
 export * from './interfaces/poe/interfaces';
-export * from './interfaces/rules/interfaces';
 export * from './interfaces/statements/interfaces';
+export * from './interfaces/workflows/interfaces';

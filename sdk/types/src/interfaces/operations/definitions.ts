@@ -1,20 +1,7 @@
 import { RegistryTypes } from '@polkadot/types/types';
 
 export const OperationsCustomTypes: RegistryTypes = {
-  OperationId: 'GenericId',
-  VersionId: 'GenericId',
-  PackageId: 'GenericId',
   TypeName: 'Vec<u8>',
-  OperationRecord: {
-    record: 'Operation',
-    accountId: 'AccountId',
-    blockNumber: 'BlockNumber',
-  },
-  Operation: {
-    id: 'GenericId',
-    data: 'OperationData',
-    extra: 'Option<OperationExtra>',
-  },
   OperationData: {
     /// max 128(0.12kb) characters, slugify to use _
     name: 'Characters',
@@ -36,33 +23,42 @@ export const OperationsCustomTypes: RegistryTypes = {
     nostd: 'bool',
   },
   OperationExtra: {},
+  Operation: {
+    id: 'GenericId',
+    data: 'OperationData',
+    extra: 'Option<OperationExtra>',
+  },
+  OperationRecord: {
+    record: 'Operation',
+    accountId: 'AccountId',
+    blockNumber: 'BlockNumber',
+  },
   OperationVersionRecord: {
     record: 'OperationVersion',
     accountId: 'AccountId',
     blockNumber: 'BlockNumber',
   },
-  OperationVersion: {
-    id: 'GenericId',
-    data: 'OperationVersionData',
-    extra: 'Option<OperationVersionExtra>',
+  OperationArtifactType: {
+    _enum: {
+      CRATE: null,
+      WASM: 'WasmArtifactSubType',
+      DOCS: 'DocsArtifactSubType',
+      GIT: null,
+    },
   },
-  PackageType: {
-    _enum: ['CRATE', 'CJS', 'WASM', 'ESM', 'WEB'],
-  },
-  OperationVersionPackage: {
-    packageType: 'PackageType',
-    fileUrl: 'Characters',
+  OperationArtifactStructure: {
+    artifactType: 'OperationArtifactType',
     ipfsCid: 'GenericId',
   },
   OperationVersionData: {
-    operationId: 'GenericId',
-    parentId: 'Option<GenericId>',
-    documentationId: 'GenericId',
-    rehostedRepoId: 'GenericId',
-    packages: 'Vec<OperationVersionPackage>',
+    entityId: 'OperationId',
+    parentId: 'Option<VersionId>',
+    artifacts: 'Vec<OperationArtifactStructure>',
   },
-  OperationVersionExtra: {
-    createdAt: 'u64',
+  OperationVersion: {
+    id: 'VersionId',
+    data: 'OperationVersionData',
+    extra: 'Option<AnagolayVersionExtra>',
   },
 };
 

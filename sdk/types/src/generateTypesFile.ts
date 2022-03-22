@@ -13,7 +13,7 @@ async function main(): Promise<void> {
     ...CustomTypes.anagolay.types,
     ...CustomTypes.operations.types,
     ...CustomTypes.poe.types,
-    ...CustomTypes.rules.types,
+    ...CustomTypes.workflows.types,
     ...CustomTypes.statements.types,
   };
 

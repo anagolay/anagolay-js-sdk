@@ -1,38 +1,26 @@
 // Auto-generated via `yarn polkadot-types-from-defs`, do not edit
 /* eslint-disable */
 
-import type { Bytes, Enum, Struct, bool, u32, u8 } from '@polkadot/types-codec';
+import type { Bytes, Enum, Struct, u64 } from '@polkadot/types-codec';
+
+/** @name AnagolayVersionExtra */
+export interface AnagolayVersionExtra extends Struct {
+  readonly createdAt: u64;
+}
+
+/** @name ArtifactId */
+export interface ArtifactId extends GenericId {}
 
 /** @name Characters */
-export interface Characters extends Bytes {}
+export interface Characters extends GenericId {}
 
 /** @name CreatorId */
-export interface CreatorId extends Bytes {}
+export interface CreatorId extends GenericId {}
 
-/** @name DefaultsCid */
-export interface DefaultsCid extends Struct {
-  readonly version: u8;
-  readonly base: Bytes;
-  readonly codec: Bytes;
-}
-
-/** @name DefaultsEncoding */
-export interface DefaultsEncoding extends Struct {
-  readonly algo: Bytes;
-  readonly prefix: bool;
-}
-
-/** @name DefaultsHashing */
-export interface DefaultsHashing extends Struct {
-  readonly algo: Bytes;
-  readonly bits: u32;
-}
-
-/** @name DefaultValues */
-export interface DefaultValues extends Struct {
-  readonly hashing: DefaultsHashing;
-  readonly encoding: DefaultsEncoding;
-  readonly cid: DefaultsCid;
+/** @name DocsArtifactSubType */
+export interface DocsArtifactSubType extends Enum {
+  readonly isRustdoc: boolean;
+  readonly type: 'Rustdoc';
 }
 
 /** @name ForWhat */
@@ -50,5 +38,23 @@ export interface ForWhat extends Enum {
 
 /** @name GenericId */
 export interface GenericId extends Bytes {}
+
+/** @name OperationId */
+export interface OperationId extends GenericId {}
+
+/** @name VersionId */
+export interface VersionId extends GenericId {}
+
+/** @name WasmArtifactSubType */
+export interface WasmArtifactSubType extends Enum {
+  readonly isCjs: boolean;
+  readonly isWasm: boolean;
+  readonly isEsm: boolean;
+  readonly isWeb: boolean;
+  readonly type: 'Cjs' | 'Wasm' | 'Esm' | 'Web';
+}
+
+/** @name WorkflowId */
+export interface WorkflowId extends GenericId {}
 
 export type PHANTOM_ANAGOLAY = 'anagolay';

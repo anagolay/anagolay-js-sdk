@@ -52,7 +52,7 @@ The interface structure looks like this:
 │   ├── index.ts
 │   ├── interfaces.ts
 │   └── types.ts
-├── rules
+├── workflows
 │   ├── definitions.ts
 │   ├── index.ts
 │   ├── interfaces.ts
