@@ -457,12 +457,12 @@
       "projectFolder": "sdk/types",
       "reviewCategory": "libraries",
       "shouldPublish": false
-    },
-    {
-      "packageName": "anagolay.dev",
-      "projectFolder": "apps/anagolay.dev",
-      "reviewCategory": "websites",
-      "shouldPublish": false
     }
+    // {
+    //   "packageName": "anagolay.dev",
+    //   "projectFolder": "apps/anagolay.dev",
+    //   "reviewCategory": "websites",
+    //   "shouldPublish": false
+    // }
   ]
 }

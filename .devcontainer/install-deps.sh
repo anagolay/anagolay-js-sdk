@@ -35,7 +35,7 @@ TEST_REPOS_PATH=$HOME/test-repos
 
 if [ ! -d $TEST_REPOS_PATH/op-file ]; then
 	echo "Cloning the Op-File to the root for testing"
-	git clone git@gitlab.com:anagolay/op-file.git $TEST_REPOS_PATH/op-file
+	git clone git@gitlab.com:anagolay/operations/op-file.git $TEST_REPOS_PATH/op-file
 fi
 
 # # set the pnpm store path to the rush one so we can just pnpm stuff

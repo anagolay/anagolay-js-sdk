@@ -111,6 +111,14 @@
       "allowedCategories": [ "libraries" ]
     },
     {
+      "name": "@sentry/node",
+      "allowedCategories": [ "libraries" ]
+    },
+    {
+      "name": "@sentry/tracing",
+      "allowedCategories": [ "libraries" ]
+    },
+    {
       "name": "axios",
       "allowedCategories": [ "libraries" ]
     },
