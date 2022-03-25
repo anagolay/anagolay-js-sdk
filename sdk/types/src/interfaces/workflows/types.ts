@@ -11,7 +11,7 @@ import type {
   VersionId,
   WasmArtifactSubType,
   WorkflowId,
-} from '@anagolay/types/interfaces/anagolay';
+} from '@anagolay/types/interfaces/anagolaySupport';
 import type { BTreeMap, Bytes, Enum, Option, Struct, Vec } from '@polkadot/types-codec';
 import type { AccountId, BlockNumber } from '@polkadot/types/interfaces/runtime';
 
@@ -23,7 +23,7 @@ export interface OperationVersionReference extends Struct {
 
 /** @name Workflow */
 export interface Workflow extends Struct {
-  readonly id: GenericId;
+  readonly id: WorkflowId;
   readonly data: WorkflowData;
   readonly extra: Option<WorkflowExtra>;
 }

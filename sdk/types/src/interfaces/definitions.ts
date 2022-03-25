@@ -15,7 +15,7 @@
 //   workflows,
 //   statements,
 // }
-export { default as anagolay } from './anagolay/definitions';
+export { default as anagolaySupport } from './anagolaySupport/definitions';
 export { default as operations } from './operations/definitions';
 export { default as poe } from './poe/definitions';
 export { default as statements } from './statements/definitions';

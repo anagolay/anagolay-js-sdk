@@ -2,7 +2,7 @@
   "Address": "AccountId",
   "LookupSource": "AccountId",
   "GenericId": "Vec<u8>",
-  "Characters": "GenericId",
+  "Characters": "Vec<u8>",
   "CreatorId": "GenericId",
   "ArtifactId": "GenericId",
   "OperationId": "GenericId",
@@ -43,11 +43,6 @@
     "accountId": "AccountId",
     "blockNumber": "BlockNumber"
   },
-  "OperationVersionRecord": {
-    "record": "OperationVersion",
-    "accountId": "AccountId",
-    "blockNumber": "BlockNumber"
-  },
   "OperationArtifactType": {
     "_enum": {
       "CRATE": null,
@@ -69,6 +64,11 @@
     "id": "VersionId",
     "data": "OperationVersionData",
     "extra": "Option<AnagolayVersionExtra>"
+  },
+  "OperationVersionRecord": {
+    "record": "OperationVersion",
+    "accountId": "AccountId",
+    "blockNumber": "BlockNumber"
   },
   "ProofParams": {
     "k": "Vec<u8>",
@@ -113,7 +113,7 @@
   },
   "WorkflowExtra": {},
   "Workflow": {
-    "id": "GenericId",
+    "id": "WorkflowId",
     "data": "WorkflowData",
     "extra": "Option<WorkflowExtra>"
   },

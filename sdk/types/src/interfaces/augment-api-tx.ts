@@ -1,7 +1,7 @@
 // Auto-generated via `yarn polkadot-types-from-chain`, do not edit
 /* eslint-disable */
 
-import type { OperationId } from '@anagolay/types/interfaces/anagolay';
+import type { OperationId } from '@anagolay/types/interfaces/anagolaySupport';
 import type { OperationData, OperationVersionData } from '@anagolay/types/interfaces/operations';
 import type { WorkflowData, WorkflowVersionData } from '@anagolay/types/interfaces/workflows';
 import type { ApiTypes } from '@polkadot/api-base/types';

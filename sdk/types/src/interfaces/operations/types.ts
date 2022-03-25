@@ -10,7 +10,7 @@ import type {
   OperationId,
   VersionId,
   WasmArtifactSubType,
-} from '@anagolay/types/interfaces/anagolay';
+} from '@anagolay/types/interfaces/anagolaySupport';
 import type { BTreeMap, Bytes, Enum, Option, Struct, Vec, bool } from '@polkadot/types-codec';
 import type { AccountId, BlockNumber } from '@polkadot/types/interfaces/runtime';
 

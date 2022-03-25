@@ -12,7 +12,7 @@ export interface AnagolayVersionExtra extends Struct {
 export interface ArtifactId extends GenericId {}
 
 /** @name Characters */
-export interface Characters extends GenericId {}
+export interface Characters extends Bytes {}
 
 /** @name CreatorId */
 export interface CreatorId extends GenericId {}
@@ -57,4 +57,4 @@ export interface WasmArtifactSubType extends Enum {
 /** @name WorkflowId */
 export interface WorkflowId extends GenericId {}
 
-export type PHANTOM_ANAGOLAY = 'anagolay';
+export type PHANTOM_ANAGOLAYSUPPORT = 'anagolaySupport';

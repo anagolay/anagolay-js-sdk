@@ -15,7 +15,7 @@ import {
   AnOperationId,
   AnVersionId,
   AnWasmArtifactSubType,
-} from '../anagolay-support/interfaces';
+} from '../anagolaySupport/interfaces';
 
 export type AnTypeName = string;
 
@@ -53,23 +53,23 @@ export interface AnOperationWithStorage {
 
 // Operation Version
 
-export type AnOperationArtifactType = {
-  CRATE: null;
+export interface AnOperationArtifactType {
+  CRATE: undefined;
   WASM: AnWasmArtifactSubType;
   DOCS: AnDocsArtifactSubType;
-  GIT: null;
-};
+  GIT: undefined;
+}
 
-export type AnOperationArtifactStructure = {
+export interface AnOperationArtifactStructure {
   artifactType: AnOperationArtifactType;
   ipfsCid: AnGenericId;
-};
+}
 
-export type AnOperationVersionData = {
+export interface AnOperationVersionData {
   entityId: AnOperationId;
   parentId?: AnVersionId;
   artifacts: AnOperationArtifactStructure[];
-};
+}
 
 export interface AnOperationVersion {
   id: AnVersionId;

@@ -35,6 +35,6 @@ export enum AnDocsArtifactSubType {
   'RUSTDOC',
 }
 
-export type AnAnagolayVersionExtra = {
+export interface AnAnagolayVersionExtra {
   createdAt: number;
-};
+}

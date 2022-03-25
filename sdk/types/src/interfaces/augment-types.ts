@@ -13,7 +13,7 @@ import type {
   VersionId,
   WasmArtifactSubType,
   WorkflowId,
-} from '@anagolay/types/interfaces/anagolay';
+} from '@anagolay/types/interfaces/anagolaySupport';
 import type {
   Operation,
   OperationArtifactStructure,

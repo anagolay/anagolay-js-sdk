@@ -9,7 +9,7 @@ import {
   AnCreatorId,
   AnForWhat,
   AnGenericId,
-} from '../anagolay-support/interfaces';
+} from '../anagolaySupport/interfaces';
 
 export interface AnProofParams {
   k: string;

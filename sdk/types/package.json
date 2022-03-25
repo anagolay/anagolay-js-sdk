@@ -19,7 +19,7 @@
     "lint:fix": "eslint ./src --ext .js,.jsx,.ts,.tsx --fix",
     "gen:defs": "ts-node --skip-project node_modules/@polkadot/typegen/scripts/polkadot-types-from-defs.cjs --package @anagolay/types/interfaces  --input ./src/interfaces -- endpoint ./anagolay.json",
     "gen:meta": "ts-node --skip-project node_modules/@polkadot/typegen/scripts/polkadot-types-from-chain.cjs --package @anagolay/types/interfaces --endpoint ./anagolay.json --output ./src/interfaces",
-    "update:anagolay": "rm -f ./anagolay.json; curl -H \"Content-Type: application/json\" -d '{\"id\":\"1\", \"jsonrpc\":\"2.0\", \"method\": \"state_getMetadata\", \"params\":[]}' http://host.docker.internal:9933 > ./anagolay.json",
+    "update:anagolay": "rm -f ./anagolay.json; curl -H \"Content-Type: application/json\" -d '{\"id\":\"1\", \"jsonrpc\":\"2.0\", \"method\": \"state_getMetadata\", \"params\":[]}' http://localhost:9933 > ./anagolay.json",
     "gen:types": "ts-node ./src/generateTypesFile.ts; pnpm lint:fix"
   },
   "dependencies": {

@@ -1,5 +1,5 @@
 import ImageMetadataTags from './imageMetadata';
-import { AnGenericId } from './interfaces/anagolay/interfaces';
+import { AnGenericId } from './interfaces/anagolaySupport/interfaces';
 import { AnProofParams as OriginalSnProofParams } from './interfaces/poe/interfaces';
 import {
   AnAnagolayCopyrightClaim,
@@ -146,7 +146,7 @@ export interface AnInputParamsDefinition {
   decoded: outputDecoded;
 }
 
-export * from './interfaces/anagolay/interfaces';
+export * from './interfaces/anagolaySupport/interfaces';
 export * from './interfaces/operations/interfaces';
 export * from './interfaces/poe/interfaces';
 export * from './interfaces/statements/interfaces';
