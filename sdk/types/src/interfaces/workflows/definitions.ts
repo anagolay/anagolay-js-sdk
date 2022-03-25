@@ -17,7 +17,7 @@ export const WorkflowsCustomTypes: RegistryTypes = {
   },
   WorkflowExtra: {},
   Workflow: {
-    id: 'GenericId',
+    id: 'WorkflowId',
     data: 'WorkflowData',
     extra: 'Option<WorkflowExtra>',
   },

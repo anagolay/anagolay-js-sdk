@@ -33,11 +33,6 @@ export const OperationsCustomTypes: RegistryTypes = {
     accountId: 'AccountId',
     blockNumber: 'BlockNumber',
   },
-  OperationVersionRecord: {
-    record: 'OperationVersion',
-    accountId: 'AccountId',
-    blockNumber: 'BlockNumber',
-  },
   OperationArtifactType: {
     _enum: {
       CRATE: null,
@@ -59,6 +54,11 @@ export const OperationsCustomTypes: RegistryTypes = {
     id: 'VersionId',
     data: 'OperationVersionData',
     extra: 'Option<AnagolayVersionExtra>',
+  },
+  OperationVersionRecord: {
+    record: 'OperationVersion',
+    accountId: 'AccountId',
+    blockNumber: 'BlockNumber',
   },
 };
 

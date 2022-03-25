@@ -3,35 +3,86 @@
  * THE POLKADOT API TYPES ARE IN THE definitions.ts file
  */
 
-import { AnAccountId, AnBlockNumber, AnCreatorId, AnForWhat, AnGenericId } from '../anagolay/interfaces';
+import {
+  AnAccountId,
+  AnAnagolayVersionExtra,
+  AnBlockNumber,
+  AnCharacters,
+  AnCreatorId,
+  AnDocsArtifactSubType,
+  AnForWhat,
+  AnGenericId,
+  AnVersionId,
+  AnWasmArtifactSubType,
+  AnWorkflowId,
+} from '../anagolay-support/interfaces';
 
-export interface AnRule {
-  id: AnGenericId;
-  data: AnRuleData;
+// Workflow
+
+export interface AnOperationVersionReference {
+  operation_version_id: AnVersionId;
+  config: Map<AnCharacters, AnCharacters[]>;
 }
 
-export interface AnOperationReference {
-  id: AnGenericId;
-  children: AnOperationReference[];
+export interface AnWorkflowSegment {
+  input: number[];
+  sequence: AnOperationVersionReference[];
 }
 
-export interface AnRuleData {
-  version: number;
-  name: string;
-  desc: string;
+export type AnWorkflowData = {
+  name: AnCharacters;
   creator: AnCreatorId;
+  description: AnCharacters;
   groups: AnForWhat[];
-  parentId: AnGenericId;
-  ops: AnOperationReference[];
-}
+  segments: AnWorkflowSegment[];
+};
 
-export interface AnRuleWithStorage {
-  storageKey: string;
-  ruleInfo: AnRuleInfo;
-}
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type AnWorkflowExtra = Record<string, any>;
 
-export interface AnRuleInfo {
-  rule: AnRule;
+export type AnWorkflow = {
+  id: AnWorkflowId;
+  data: AnWorkflowData;
+  extra?: AnWorkflowExtra;
+};
+export interface AnWorkflowRecord {
+  record: AnWorkflow;
   accountId: AnAccountId;
   blockNumber: AnBlockNumber;
+}
+
+// Workflow Version
+
+export type AnWorkflowArtifactType = {
+  CRATE: null;
+  WASM: AnWasmArtifactSubType;
+  DOCS: AnDocsArtifactSubType;
+  GIT: null;
+};
+
+export type AnWorkflowArtifactStructure = {
+  artifactType: AnWorkflowArtifactType;
+  ipfsCid: AnGenericId;
+};
+
+export type AnWorkflowVersionData = {
+  entityId: AnWorkflowId;
+  parentId?: AnVersionId;
+  artifacts: AnWorkflowArtifactStructure[];
+};
+
+export interface AnWorkflowVersion {
+  id: AnVersionId;
+  data: AnWorkflowVersionData;
+  extra?: AnAnagolayVersionExtra;
+}
+
+export interface AnWorkflowVersionRecord {
+  record: AnWorkflowVersion;
+  accountId: AnAccountId;
+  blockNumber: AnBlockNumber;
+}
+
+export interface AnWorkflowVersionExtra {
+  createdAt: number;
 }

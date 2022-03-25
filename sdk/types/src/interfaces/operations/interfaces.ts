@@ -4,12 +4,32 @@
  */
 
 import { AnBoolean } from '../..';
-import { AnAccountId, AnBlockNumber, AnForWhat, AnGenericId } from '../anagolay/interfaces';
+import {
+  AnAccountId,
+  AnAnagolayVersionExtra,
+  AnBlockNumber,
+  AnCharacters,
+  AnDocsArtifactSubType,
+  AnForWhat,
+  AnGenericId,
+  AnOperationId,
+  AnVersionId,
+  AnWasmArtifactSubType,
+} from '../anagolay-support/interfaces';
 
 export type AnTypeName = string;
 
-/// Alias for string
-export type AnCharacters = string;
+export interface AnOperationData {
+  name: AnCharacters;
+  description: AnCharacters;
+  inputs: AnTypeName[];
+  config: Map<AnCharacters, AnCharacters[]>;
+  groups: AnForWhat[];
+  output: AnTypeName;
+  repository: AnCharacters;
+  license: AnCharacters;
+  nostd: AnBoolean;
+}
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type AnOperationExtra = Record<string, any>;
@@ -31,24 +51,30 @@ export interface AnOperationWithStorage {
   operationInfo: AnOperationRecord;
 }
 
-export interface AnOperationData {
-  name: AnCharacters;
-  description: AnCharacters;
-  inputs: AnTypeName[];
-  output: AnTypeName;
-  repository: AnCharacters;
-  license: AnCharacters;
-  groups: AnForWhat[];
-  config: Map<AnCharacters, AnCharacters[]>;
-  nostd: AnBoolean;
-}
-
 // Operation Version
 
+export type AnOperationArtifactType = {
+  CRATE: null;
+  WASM: AnWasmArtifactSubType;
+  DOCS: AnDocsArtifactSubType;
+  GIT: null;
+};
+
+export type AnOperationArtifactStructure = {
+  artifactType: AnOperationArtifactType;
+  ipfsCid: AnGenericId;
+};
+
+export type AnOperationVersionData = {
+  entityId: AnOperationId;
+  parentId?: AnVersionId;
+  artifacts: AnOperationArtifactStructure[];
+};
+
 export interface AnOperationVersion {
-  id: AnGenericId;
+  id: AnVersionId;
   data: AnOperationVersionData;
-  extra?: AnOperationVersionExtra;
+  extra?: AnAnagolayVersionExtra;
 }
 
 export interface AnOperationVersionRecord {
@@ -60,30 +86,3 @@ export interface AnOperationVersionRecord {
 export interface AnOperationVersionExtra {
   createdAt: number;
 }
-
-export interface AnOperationVersionPackage {
-  packageType: AnPackageType;
-  fileUrl: AnCharacters;
-  ipfsCid: AnGenericId;
-}
-
-export interface AnOperationVersionData {
-  operationId: AnGenericId;
-  parentId: AnGenericId;
-  documentationId: AnGenericId;
-  rehostedRepoId: AnGenericId;
-  packages: AnOperationVersionPackage[];
-}
-
-// the order is VERY important, must be the SAME as in the rust code. remember what SCALE abbreviates
-export enum AnPackageType {
-  'CRATE',
-  'CJS',
-  'WASM',
-  'ESM',
-  'WEB',
-}
-
-export type AnOperationId = AnGenericId;
-export type AnVersionId = AnGenericId;
-export type AnPackageId = AnGenericId;

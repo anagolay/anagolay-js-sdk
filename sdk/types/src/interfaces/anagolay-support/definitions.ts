@@ -1,7 +1,7 @@
 import { RegistryTypes } from '@polkadot/types/types';
 export const AnagolayCustomTypes: RegistryTypes = {
   GenericId: 'Vec<u8>',
-  Characters: 'GenericId',
+  Characters: 'Vec<u8>',
   CreatorId: 'GenericId',
   ArtifactId: 'GenericId',
   OperationId: 'GenericId',

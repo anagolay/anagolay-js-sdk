@@ -3,7 +3,13 @@
  * THE POLKADOT API TYPES ARE IN THE definitions.ts file
  */
 
-import { AnAccountId, AnBlockNumber, AnCreatorId, AnForWhat, AnGenericId } from '../anagolay/interfaces';
+import {
+  AnAccountId,
+  AnBlockNumber,
+  AnCreatorId,
+  AnForWhat,
+  AnGenericId,
+} from '../anagolay-support/interfaces';
 
 export interface AnProofParams {
   k: string;
