@@ -1,7 +1,7 @@
 # https://docs.gitlab.com/ee/ci/jobs/job_control.html
 image: node:16-bullseye
 stages:
-  - lint
+  - check
   - test
   - release
 
@@ -47,7 +47,7 @@ include:
     git --version
 
 is-it-pretty:
-  stage: lint
+  stage: check
   before_script:
     - *install-pnpm
   script:
