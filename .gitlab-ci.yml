@@ -75,26 +75,26 @@ test-and-build:
     - echo 'Building and testing all packages...'
     - node common/scripts/install-run-rush.js rebuild --verbose
 
-build-js-api-docs:
-  stage: release
-  before_script:
-    - *install-pnpm
-    - pnpm add -g @microsoft/api-documenter
-    - *install-ipfs-and-setup
-  script:
-    - set -e
-    - api-documenter markdown -i ./api-extractor-docs/json -o ./apps/anagolay.dev/docs/js-api
-    - ls -la ./apps/anagolay.dev/docs/js-api
+# build-js-api-docs:
+#   stage: release
+#   before_script:
+#     - *install-pnpm
+#     - pnpm add -g @microsoft/api-documenter
+#     - *install-ipfs-and-setup
+#   script:
+#     - set -e
+#     - api-documenter markdown -i ./api-extractor-docs/json -o ./apps/anagolay.dev/docs/js-api
+#     - ls -la ./apps/anagolay.dev/docs/js-api
 
-    # - echo "Install the docusaurus dependencies"
-    # - pnpm install
+#     # - echo "Install the docusaurus dependencies"
+#     # - pnpm install
 
-    # - echo "Build the docs website"
-    # - pnpm build
+#     # - echo "Build the docs website"
+#     # - pnpm build
 
-    # - echo "Uploading CLI to IPFS ..."
-    # - ipfs add --cid-version=1 --pin=false --recursive --quieter ./docs/published/build > ANAGOLAY_JS_API_DOCS
-    # - echo "The docs are published here https://ipfs.anagolay.network/ipfs/$(cat ANAGOLAY_JS_API_DOCS)
+#     # - echo "Uploading CLI to IPFS ..."
+#     # - ipfs add --cid-version=1 --pin=false --recursive --quieter ./docs/published/build > ANAGOLAY_JS_API_DOCS
+#     # - echo "The docs are published here https://ipfs.anagolay.network/ipfs/$(cat ANAGOLAY_JS_API_DOCS)
 
 upload-cli-to-ipfs:
   needs: ['test-and-build']
