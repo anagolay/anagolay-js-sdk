@@ -1,6 +1,7 @@
 # https://docs.gitlab.com/ee/ci/jobs/job_control.html
 image: node:16-bullseye
 stages:
+  - lint
   - test
   - release
 
@@ -45,9 +46,21 @@ include:
     pnpm --version
     git --version
 
+is-it-pretty:
+  stage: lint
+  before_script:
+    - *install-pnpm
+  script:
+    - set -e
+
+    - echo 'Installing rush...'
+    - node common/scripts/install-run-rush.js install
+
+    - echo 'Is our code pretty?'
+    - node common/scripts/install-run-rush.js prettier:check
+
 test-and-build:
   stage: test
-  coverage: /All\sfiles.*?\s+(\d+.\d+)/
   before_script:
     - *install-pnpm
   script:

@@ -6,7 +6,8 @@ sudo apt update && sudo apt-get install -y \
 	silversearcher-ag \
 	tmux \
 	neovim \
-	iputils-ping
+	iputils-ping \
+	direnv
 
 if ! command -v pnpm &>/dev/null; then
 	echo "pnpm could not be found, i will install it"
@@ -30,6 +31,8 @@ if [ ! -f "$HOME/.tmux.conf" ]; then
 
 	ln -fs /workspace/.devcontainer/.tmux.conf $HOME/.tmux.conf
 fi
+
+ln -fs /workspace/.devcontainer/.zshrc $HOME/.zshrc
 
 TEST_REPOS_PATH=$HOME/test-repos
 
