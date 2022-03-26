@@ -9,7 +9,6 @@ import {
   AnAnagolayVersionExtra,
   AnBlockNumber,
   AnCharacters,
-  AnDocsArtifactSubType,
   AnForWhat,
   AnGenericId,
   AnOperationId,
@@ -56,7 +55,7 @@ export interface AnOperationWithStorage {
 export interface AnOperationArtifactType {
   CRATE: undefined;
   WASM: AnWasmArtifactSubType;
-  DOCS: AnDocsArtifactSubType;
+  DOCS: undefined;
   GIT: undefined;
 }
 
@@ -65,6 +64,9 @@ export interface AnOperationArtifactStructure {
   ipfsCid: AnGenericId;
 }
 
+/**
+ * Version data. It contains all the needed parameters which define the entity Version and is hashed to produce the Version id
+ */
 export interface AnOperationVersionData {
   entityId: AnOperationId;
   parentId?: AnVersionId;

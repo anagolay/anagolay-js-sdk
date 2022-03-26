@@ -13,9 +13,9 @@ import {
   AnBoolean,
   AnCharacters,
   AnForWhat,
+  AnOperationArtifactStructure,
   AnOperationData,
   AnOperationVersionData,
-  AnPackageType,
   AnTypeName,
 } from '@anagolay/types';
 import { allCommitsPushed, createFileLogger, isFalse, isTrue, lastRevision, Logger } from '@anagolay/utils';
@@ -62,33 +62,7 @@ export interface OperationVersionSchema {
     performance: {
       execInSec: number;
     };
-    items: {
-      package_type: string;
-      file_name: string;
-      ipfs_cids: string;
-    }[];
-  };
-  docs: {
-    docs: {
-      cid: string;
-      path: string;
-      size: number;
-      url: string;
-    };
-    performance: {
-      execInSec: number;
-    };
-  };
-  rehosted: {
-    rehosted: {
-      cid: string;
-      path: string;
-      size: number;
-      url: string;
-    };
-    performance: {
-      execInSec: number;
-    };
+    items: AnOperationArtifactStructure[];
   };
   buildOutput: {
     performance: {
@@ -163,6 +137,7 @@ async function publishSubcmd(): Promise<void> {
     signale.error(error);
     process.exit(1);
   }
+
   const responsePublishService = await callPublishOperationService(repository);
 
   const chain = await connectToAnagolayChain();
@@ -217,7 +192,7 @@ async function submitTheExtrinsicCall(
   chainApi: ApiPromise,
   artifactsWithVersion: IDecodedArtifactsWithManifest
 ): Promise<ISignSubmitSuccessReturn> {
-  const { manifest, repository, artifacts, docs, rehosted } = artifactsWithVersion;
+  const { manifest, repository, artifacts: payloadArtifacts } = artifactsWithVersion;
 
   const operationData: AnOperationData = {
     name: manifest.name,
@@ -237,19 +212,9 @@ async function submitTheExtrinsicCall(
      * the reason is that the `operation_id` is calculated on the chain, and cannot be created at this stage.
      * WE had a choice to make, keep it like this, OR create new types that exclude this property. Obviously we chose former.
      */
-    operationId: '',
+    entityId: '',
     parentId: '',
-    documentationId: docs.docs.cid,
-    rehostedRepoId: rehosted.rehosted.cid,
-    packages: artifacts.items.map((a) => {
-      const t = a.package_type.toUpperCase() as unknown as number;
-      return {
-        fileUrl: a.ipfs_cids,
-        ipfsCid: a.ipfs_cids,
-        // need better way than this
-        packageType: AnPackageType[t] as unknown as number,
-      };
-    }),
+    artifacts: payloadArtifacts.items,
   };
 
   const { accountToUse } = await inquirer.prompt({

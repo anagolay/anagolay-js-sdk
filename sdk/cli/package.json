@@ -25,8 +25,8 @@
     "watch": "env-cmd -f ../../.env heft build --clean --watch",
     "lint:fix": "eslint ./src --ext .js,.jsx,.ts,.tsx",
     "start": "node --experimental-modules --experimental-specifier-resolution=node lib/index.js",
-    "link:bin": "sudo ln -sf /workspace/sdk/cli/lib/index.js /usr/local/bin/anagolay && sudo chmod +x /usr/local/bin/anagolay",
-    "link:bin:anagolay": "sudo ln -sf /workspace/sdk/cli/dist/anagolay.js /usr/local/bin/anagolay && sudo chmod +x /usr/local/bin/anagolay"
+    "link:bin:lib": "sudo ln -sf /workspace/sdk/cli/lib/index.js /usr/local/bin/anagolay && sudo chmod +x /usr/local/bin/anagolay",
+    "link:bin": "sudo ln -sf /workspace/sdk/cli/dist/anagolay.js /usr/local/bin/anagolay && sudo chmod +x /usr/local/bin/anagolay"
   },
   "devDependencies": {
     "tslib": "~2.3.1",

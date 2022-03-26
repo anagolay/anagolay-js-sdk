@@ -30,13 +30,13 @@ const COEFFICIENT_FOR_CONVERTING_TO_UNIT: number = 1000000000000;
 /**
  * Connect to the API -- aka Anagolay Network -
  * @remarks
- * Default value for the connection is 'ws://127.0.0.1:9944', it can be overwritten by setting the `ANAGOLAY_CHAIN_URL` environment variable
+ * Default value for the connection is 'ws://127.0.0.1:9944', it can be overwritten by setting the `ANAGOLAY_CHAIN_WS_URL` environment variable
  * @param log { Signale } - Optional logging to stdout
  * @returns
  */
 export async function connectToApi(log?: Signale): Promise<ApiPromise> {
-  const whereToConnect = !isNil(process.env.ANAGOLAY_CHAIN_URL)
-    ? process.env.ANAGOLAY_CHAIN_URL
+  const whereToConnect = !isNil(process.env.ANAGOLAY_CHAIN_WS_URL)
+    ? process.env.ANAGOLAY_CHAIN_WS_URL
     : 'ws://127.0.0.1:9944';
 
   const wsProvider = new WsProvider(whereToConnect);

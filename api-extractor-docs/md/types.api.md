@@ -7,37 +7,30 @@
 /// <reference types="node" />
 
 import type { AccountId } from '@polkadot/types/interfaces/runtime';
+import type { AnagolayVersionExtra as AnagolayVersionExtra_2 } from '@anagolay/types/interfaces/anagolaySupport';
 import type { BlockNumber } from '@polkadot/types/interfaces/runtime';
 import type { bool } from '@polkadot/types-codec';
 import type { BTreeMap } from '@polkadot/types-codec';
 import type { Bytes } from '@polkadot/types-codec';
-import type { Characters as Characters_2 } from '@anagolay/types/interfaces/anagolay';
+import type { Characters as Characters_2 } from '@anagolay/types/interfaces/anagolaySupport';
 import { Codec } from '@polkadot/types/types';
 import { CodecClass } from '@polkadot/types/types';
-import type { CreatorId as CreatorId_2 } from '@anagolay/types/interfaces/anagolay';
+import type { CreatorId as CreatorId_2 } from '@anagolay/types/interfaces/anagolaySupport';
+import type { DocsArtifactSubType as DocsArtifactSubType_2 } from '@anagolay/types/interfaces/anagolaySupport';
 import type { Enum } from '@polkadot/types-codec';
-import type { ForWhat as ForWhat_2 } from '@anagolay/types/interfaces/anagolay';
-import type { GenericId as GenericId_2 } from '@anagolay/types/interfaces/anagolay';
+import type { ForWhat as ForWhat_2 } from '@anagolay/types/interfaces/anagolaySupport';
+import type { GenericId as GenericId_2 } from '@anagolay/types/interfaces/anagolaySupport';
+import type { OperationId as OperationId_2 } from '@anagolay/types/interfaces/anagolaySupport';
 import type { Option } from '@polkadot/types-codec';
 import type { Struct } from '@polkadot/types-codec';
-import type { u32 } from '@polkadot/types-codec';
 import type { u64 } from '@polkadot/types-codec';
-import type { u8 } from '@polkadot/types-codec';
 import type { Vec } from '@polkadot/types-codec';
-
-// @public
-export type AnAccountId = string;
+import type { VersionId as VersionId_2 } from '@anagolay/types/interfaces/anagolaySupport';
+import type { WasmArtifactSubType as WasmArtifactSubType_2 } from '@anagolay/types/interfaces/anagolaySupport';
+import type { WorkflowId as WorkflowId_2 } from '@anagolay/types/interfaces/anagolaySupport';
 
 // @public (undocumented)
-export const anagolay: {
-    types: {
-        [x: string]: string | CodecClass<Codec> | Record<string, string> | {
-            _enum: string[] | Record<string, number> | Record<string, string | null>;
-        } | {
-            _set: Record<string, number>;
-        };
-    };
-};
+export type AnAccountId = string;
 
 // @public
 export interface AnagolayClaim extends Struct {
@@ -114,6 +107,23 @@ export interface AnagolayStatementRecord extends Struct {
 }
 
 // @public (undocumented)
+export const anagolaySupport: {
+    types: {
+        [x: string]: string | CodecClass<Codec> | Record<string, string> | {
+            _enum: string[] | Record<string, number> | Record<string, string | null>;
+        } | {
+            _set: Record<string, number>;
+        };
+    };
+};
+
+// @public
+export interface AnagolayVersionExtra extends Struct {
+    // (undocumented)
+    readonly createdAt: u64;
+}
+
+// @public (undocumented)
 export interface AnAnagolayClaim {
     // (undocumented)
     claimType: AnAnagolayClaimType;
@@ -186,7 +196,16 @@ export interface AnAnagolayStatement {
 }
 
 // @public (undocumented)
+export interface AnAnagolayVersionExtra {
+    // (undocumented)
+    createdAt: number;
+}
+
+// @public (undocumented)
 export type AnAny = any;
+
+// @public (undocumented)
+export type AnArtifactId = AnGenericId;
 
 // @public (undocumented)
 export type AnBlockNumber = number;
@@ -207,7 +226,13 @@ export type AnCharacters = string;
 export type AnCopyrightClaims = AnAnagolayCopyrightClaim[];
 
 // @public (undocumented)
-export type AnCreatorId = string;
+export type AnCreatorId = AnGenericId;
+
+// @public (undocumented)
+export enum AnDocsArtifactSubType {
+    // (undocumented)
+    'RUSTDOC' = 0
+}
 
 // @public (undocumented)
 export interface AnExpiration {
@@ -256,7 +281,7 @@ export enum AnForWhat {
     'USER' = 5
 }
 
-// @public (undocumented)
+// @public
 export type AnGenericId = string;
 
 // @public (undocumented)
@@ -310,6 +335,26 @@ export interface AnOperation {
 }
 
 // @public (undocumented)
+export interface AnOperationArtifactStructure {
+    // (undocumented)
+    artifactType: AnOperationArtifactType;
+    // (undocumented)
+    ipfsCid: AnGenericId;
+}
+
+// @public (undocumented)
+export interface AnOperationArtifactType {
+    // (undocumented)
+    CRATE: undefined;
+    // (undocumented)
+    DOCS: undefined;
+    // (undocumented)
+    GIT: undefined;
+    // (undocumented)
+    WASM: AnWasmArtifactSubType;
+}
+
+// @public (undocumented)
 export interface AnOperationData {
     // (undocumented)
     config: Map<AnCharacters, AnCharacters[]>;
@@ -348,51 +393,29 @@ export interface AnOperationRecord {
 }
 
 // @public (undocumented)
-export interface AnOperationReference {
-    // (undocumented)
-    children: AnOperationReference[];
-    // (undocumented)
-    id: AnGenericId;
-}
-
-// @public (undocumented)
 export interface AnOperationVersion {
     // (undocumented)
     data: AnOperationVersionData;
     // (undocumented)
-    extra?: AnOperationVersionExtra;
+    extra?: AnAnagolayVersionExtra;
     // (undocumented)
-    id: AnGenericId;
+    id: AnVersionId;
 }
 
-// @public (undocumented)
+// @public
 export interface AnOperationVersionData {
     // (undocumented)
-    documentationId: AnGenericId;
+    artifacts: AnOperationArtifactStructure[];
     // (undocumented)
-    operationId: AnGenericId;
+    entityId: AnOperationId;
     // (undocumented)
-    packages: AnOperationVersionPackage[];
-    // (undocumented)
-    parentId: AnGenericId;
-    // (undocumented)
-    rehostedRepoId: AnGenericId;
+    parentId?: AnVersionId;
 }
 
 // @public (undocumented)
 export interface AnOperationVersionExtra {
     // (undocumented)
     createdAt: number;
-}
-
-// @public (undocumented)
-export interface AnOperationVersionPackage {
-    // (undocumented)
-    fileUrl: AnCharacters;
-    // (undocumented)
-    ipfsCid: AnGenericId;
-    // (undocumented)
-    packageType: AnPackageType;
 }
 
 // @public (undocumented)
@@ -406,6 +429,14 @@ export interface AnOperationVersionRecord {
 }
 
 // @public (undocumented)
+export interface AnOperationVersionReference {
+    // (undocumented)
+    config: Map<AnCharacters, AnCharacters[]>;
+    // (undocumented)
+    operation_version_id: AnVersionId;
+}
+
+// @public (undocumented)
 export interface AnOperationWithStorage {
     // (undocumented)
     operationInfo: AnOperationRecord;
@@ -415,23 +446,6 @@ export interface AnOperationWithStorage {
 
 // @public (undocumented)
 export type AnOwnershipClaims = AnAnagolayOwnershipClaim[];
-
-// @public (undocumented)
-export type AnPackageId = AnGenericId;
-
-// @public (undocumented)
-export enum AnPackageType {
-    // (undocumented)
-    'CJS' = 1,
-    // (undocumented)
-    'CRATE' = 0,
-    // (undocumented)
-    'ESM' = 3,
-    // (undocumented)
-    'WASM' = 2,
-    // (undocumented)
-    'WEB' = 4
-}
 
 // @public (undocumented)
 export interface AnPhashInfo {
@@ -496,50 +510,6 @@ export interface AnProportion {
     value: string;
 }
 
-// @public (undocumented)
-export interface AnRule {
-    // (undocumented)
-    data: AnRuleData;
-    // (undocumented)
-    id: AnGenericId;
-}
-
-// @public (undocumented)
-export interface AnRuleData {
-    // (undocumented)
-    creator: AnCreatorId;
-    // (undocumented)
-    desc: string;
-    // (undocumented)
-    groups: AnForWhat[];
-    // (undocumented)
-    name: string;
-    // (undocumented)
-    ops: AnOperationReference[];
-    // (undocumented)
-    parentId: AnGenericId;
-    // (undocumented)
-    version: number;
-}
-
-// @public (undocumented)
-export interface AnRuleInfo {
-    // (undocumented)
-    accountId: AnAccountId;
-    // (undocumented)
-    blockNumber: AnBlockNumber;
-    // (undocumented)
-    rule: AnRule;
-}
-
-// @public (undocumented)
-export interface AnRuleWithStorage {
-    // (undocumented)
-    ruleInfo: AnRuleInfo;
-    // (undocumented)
-    storageKey: string;
-}
-
 // @public
 export type AnSigner = any;
 
@@ -600,48 +570,140 @@ export interface AnValidity {
 // @public (undocumented)
 export type AnVersionId = AnGenericId;
 
+// @public (undocumented)
+export enum AnWasmArtifactSubType {
+    // (undocumented)
+    'CJS' = 0,
+    // (undocumented)
+    'ESM' = 2,
+    // (undocumented)
+    'WASM' = 1,
+    // (undocumented)
+    'WEB' = 3
+}
+
+// @public (undocumented)
+export interface AnWorkflow {
+    // (undocumented)
+    data: AnWorkflowData;
+    // (undocumented)
+    extra?: AnWorkflowExtra;
+    // (undocumented)
+    id: AnWorkflowId;
+}
+
+// @public (undocumented)
+export interface AnWorkflowArtifactStructure {
+    // (undocumented)
+    artifactType: AnWorkflowArtifactType;
+    // (undocumented)
+    ipfsCid: AnGenericId;
+}
+
+// @public (undocumented)
+export interface AnWorkflowArtifactType {
+    // (undocumented)
+    CRATE: undefined;
+    // (undocumented)
+    DOCS: AnDocsArtifactSubType;
+    // (undocumented)
+    GIT: undefined;
+    // (undocumented)
+    WASM: AnWasmArtifactSubType;
+}
+
+// @public (undocumented)
+export interface AnWorkflowData {
+    // (undocumented)
+    creator: AnCreatorId;
+    // (undocumented)
+    description: AnCharacters;
+    // (undocumented)
+    groups: AnForWhat[];
+    // (undocumented)
+    name: AnCharacters;
+    // (undocumented)
+    segments: AnWorkflowSegment[];
+}
+
+// @public (undocumented)
+export type AnWorkflowExtra = Record<string, any>;
+
+// @public (undocumented)
+export type AnWorkflowId = AnGenericId;
+
+// @public (undocumented)
+export interface AnWorkflowRecord {
+    // (undocumented)
+    accountId: AnAccountId;
+    // (undocumented)
+    blockNumber: AnBlockNumber;
+    // (undocumented)
+    record: AnWorkflow;
+}
+
+// @public (undocumented)
+export interface AnWorkflowSegment {
+    // (undocumented)
+    input: number[];
+    // (undocumented)
+    sequence: AnOperationVersionReference[];
+}
+
+// @public (undocumented)
+export interface AnWorkflowVersion {
+    // (undocumented)
+    data: AnWorkflowVersionData;
+    // (undocumented)
+    extra?: AnAnagolayVersionExtra;
+    // (undocumented)
+    id: AnVersionId;
+}
+
+// @public (undocumented)
+export interface AnWorkflowVersionData {
+    // (undocumented)
+    artifacts: AnWorkflowArtifactStructure[];
+    // (undocumented)
+    entityId: AnWorkflowId;
+    // (undocumented)
+    parentId?: AnVersionId;
+}
+
+// @public (undocumented)
+export interface AnWorkflowVersionExtra {
+    // (undocumented)
+    createdAt: number;
+}
+
+// @public (undocumented)
+export interface AnWorkflowVersionRecord {
+    // (undocumented)
+    accountId: AnAccountId;
+    // (undocumented)
+    blockNumber: AnBlockNumber;
+    // (undocumented)
+    record: AnWorkflowVersion;
+}
+
+// @public
+export interface ArtifactId extends GenericId {
+}
+
 // @public
 export interface Characters extends Bytes {
 }
 
 // @public
-export interface CreatorId extends Bytes {
+export interface CreatorId extends GenericId {
 }
 
 // @public
-export interface DefaultsCid extends Struct {
+export interface DocsArtifactSubType extends Enum {
     // (undocumented)
-    readonly base: Bytes;
+    readonly isRustdoc: boolean;
     // (undocumented)
-    readonly codec: Bytes;
-    // (undocumented)
-    readonly version: u8;
-}
-
-// @public
-export interface DefaultsEncoding extends Struct {
-    // (undocumented)
-    readonly algo: Bytes;
-    // (undocumented)
-    readonly prefix: bool;
-}
-
-// @public
-export interface DefaultsHashing extends Struct {
-    // (undocumented)
-    readonly algo: Bytes;
-    // (undocumented)
-    readonly bits: u32;
-}
-
-// @public
-export interface DefaultValues extends Struct {
-    // (undocumented)
-    readonly cid: DefaultsCid;
-    // (undocumented)
-    readonly encoding: DefaultsEncoding;
-    // (undocumented)
-    readonly hashing: DefaultsHashing;
+    readonly type: 'Rustdoc';
 }
 
 // @public (undocumented)
@@ -736,6 +798,30 @@ export interface Operation extends Struct {
 }
 
 // @public
+export interface OperationArtifactStructure extends Struct {
+    // (undocumented)
+    readonly artifactType: OperationArtifactType;
+    // (undocumented)
+    readonly ipfsCid: GenericId_2;
+}
+
+// @public
+export interface OperationArtifactType extends Enum {
+    // (undocumented)
+    readonly asWasm: WasmArtifactSubType_2;
+    // (undocumented)
+    readonly isCrate: boolean;
+    // (undocumented)
+    readonly isDocs: boolean;
+    // (undocumented)
+    readonly isGit: boolean;
+    // (undocumented)
+    readonly isWasm: boolean;
+    // (undocumented)
+    readonly type: 'Crate' | 'Wasm' | 'Docs' | 'Git';
+}
+
+// @public
 export interface OperationData extends Struct {
     // (undocumented)
     readonly config: BTreeMap<Characters_2, Vec<Characters_2>>;
@@ -762,7 +848,7 @@ export interface OperationExtra extends Struct {
 }
 
 // @public
-export interface OperationId extends GenericId_2 {
+export interface OperationId extends GenericId {
 }
 
 // @public
@@ -773,14 +859,6 @@ export interface OperationRecord extends Struct {
     readonly blockNumber: BlockNumber;
     // (undocumented)
     readonly record: Operation;
-}
-
-// @public
-export interface OperationReference extends Struct {
-    // (undocumented)
-    readonly children: Vec<OperationReference>;
-    // (undocumented)
-    readonly id: GenericId_2;
 }
 
 // @public (undocumented)
@@ -799,39 +877,19 @@ export interface OperationVersion extends Struct {
     // (undocumented)
     readonly data: OperationVersionData;
     // (undocumented)
-    readonly extra: Option<OperationVersionExtra>;
+    readonly extra: Option<AnagolayVersionExtra_2>;
     // (undocumented)
-    readonly id: GenericId_2;
+    readonly id: VersionId_2;
 }
 
 // @public
 export interface OperationVersionData extends Struct {
     // (undocumented)
-    readonly documentationId: GenericId_2;
+    readonly artifacts: Vec<OperationArtifactStructure>;
     // (undocumented)
-    readonly operationId: GenericId_2;
+    readonly entityId: OperationId_2;
     // (undocumented)
-    readonly packages: Vec<OperationVersionPackage>;
-    // (undocumented)
-    readonly parentId: Option<GenericId_2>;
-    // (undocumented)
-    readonly rehostedRepoId: GenericId_2;
-}
-
-// @public
-export interface OperationVersionExtra extends Struct {
-    // (undocumented)
-    readonly createdAt: u64;
-}
-
-// @public
-export interface OperationVersionPackage extends Struct {
-    // (undocumented)
-    readonly fileUrl: Characters_2;
-    // (undocumented)
-    readonly ipfsCid: GenericId_2;
-    // (undocumented)
-    readonly packageType: PackageType;
+    readonly parentId: Option<VersionId_2>;
 }
 
 // @public
@@ -842,6 +900,14 @@ export interface OperationVersionRecord extends Struct {
     readonly blockNumber: BlockNumber;
     // (undocumented)
     readonly record: OperationVersion;
+}
+
+// @public
+export interface OperationVersionReference extends Struct {
+    // (undocumented)
+    readonly config: BTreeMap<Characters_2, Vec<Characters_2>>;
+    // (undocumented)
+    readonly operation_version_id: VersionId_2;
 }
 
 // @public (undocumented)
@@ -856,28 +922,8 @@ export type outputDecodedImplementation = AnBuffer | AnByteArray | AnFileBuffer 
 // @public (undocumented)
 export type outputImplementation = AnByteArray | AnBoolean | AnProofParams[] | AnString;
 
-// @public
-export interface PackageId extends GenericId_2 {
-}
-
-// @public
-export interface PackageType extends Enum {
-    // (undocumented)
-    readonly isCjs: boolean;
-    // (undocumented)
-    readonly isCrate: boolean;
-    // (undocumented)
-    readonly isEsm: boolean;
-    // (undocumented)
-    readonly isWasm: boolean;
-    // (undocumented)
-    readonly isWeb: boolean;
-    // (undocumented)
-    readonly type: 'Crate' | 'Cjs' | 'Wasm' | 'Esm' | 'Web';
-}
-
 // @public (undocumented)
-export type PHANTOM_ANAGOLAY = 'anagolay';
+export type PHANTOM_ANAGOLAYSUPPORT = 'anagolaySupport';
 
 // @public (undocumented)
 export type PHANTOM_OPERATIONS = 'operations';
@@ -886,10 +932,10 @@ export type PHANTOM_OPERATIONS = 'operations';
 export type PHANTOM_POE = 'poe';
 
 // @public (undocumented)
-export type PHANTOM_RULES = 'rules';
+export type PHANTOM_STATEMENTS = 'statements';
 
 // @public (undocumented)
-export type PHANTOM_STATEMENTS = 'statements';
+export type PHANTOM_WORKFLOWS = 'workflows';
 
 // @public
 export interface PhashInfo extends Struct {
@@ -966,59 +1012,6 @@ export interface Proportion extends Struct {
     readonly value: Bytes;
 }
 
-// @public
-export interface Rule extends Struct {
-    // (undocumented)
-    readonly data: RuleData;
-    // (undocumented)
-    readonly extra: Option<RuleExtra>;
-    // (undocumented)
-    readonly id: GenericId_2;
-}
-
-// @public
-export interface RuleData extends Struct {
-    // (undocumented)
-    readonly creator: CreatorId_2;
-    // (undocumented)
-    readonly desc: Bytes;
-    // (undocumented)
-    readonly groups: Vec<ForWhat_2>;
-    // (undocumented)
-    readonly name: Bytes;
-    // (undocumented)
-    readonly ops: Vec<OperationReference>;
-    // (undocumented)
-    readonly parentId: GenericId_2;
-    // (undocumented)
-    readonly version: u32;
-}
-
-// @public
-export interface RuleExtra extends Struct {
-}
-
-// @public
-export interface RuleRecord extends Struct {
-    // (undocumented)
-    readonly accountId: AccountId;
-    // (undocumented)
-    readonly blockNumber: BlockNumber;
-    // (undocumented)
-    readonly rule: Rule;
-}
-
-// @public (undocumented)
-export const rules: {
-    types: {
-        [x: string]: string | CodecClass<Codec> | Record<string, string> | {
-            _enum: string[] | Record<string, number> | Record<string, string | null>;
-        } | {
-            _set: Record<string, number>;
-        };
-    };
-};
-
 // @public (undocumented)
 export interface SaveStatementReturn {
     // (undocumented)
@@ -1066,7 +1059,138 @@ export interface Validity extends Struct {
 }
 
 // @public
-export interface VersionId extends GenericId_2 {
+export interface VersionId extends GenericId {
+}
+
+// @public
+export interface WasmArtifactSubType extends Enum {
+    // (undocumented)
+    readonly isCjs: boolean;
+    // (undocumented)
+    readonly isEsm: boolean;
+    // (undocumented)
+    readonly isWasm: boolean;
+    // (undocumented)
+    readonly isWeb: boolean;
+    // (undocumented)
+    readonly type: 'Cjs' | 'Wasm' | 'Esm' | 'Web';
+}
+
+// @public
+export interface Workflow extends Struct {
+    // (undocumented)
+    readonly data: WorkflowData;
+    // (undocumented)
+    readonly extra: Option<WorkflowExtra>;
+    // (undocumented)
+    readonly id: WorkflowId_2;
+}
+
+// @public
+export interface WorkflowArtifactStructure extends Struct {
+    // (undocumented)
+    readonly artifactType: WorkflowArtifactType;
+    // (undocumented)
+    readonly ipfsCid: GenericId_2;
+}
+
+// @public
+export interface WorkflowArtifactType extends Enum {
+    // (undocumented)
+    readonly asDocs: DocsArtifactSubType_2;
+    // (undocumented)
+    readonly asWasm: WasmArtifactSubType_2;
+    // (undocumented)
+    readonly isCrate: boolean;
+    // (undocumented)
+    readonly isDocs: boolean;
+    // (undocumented)
+    readonly isGit: boolean;
+    // (undocumented)
+    readonly isWasm: boolean;
+    // (undocumented)
+    readonly type: 'Crate' | 'Wasm' | 'Docs' | 'Git';
+}
+
+// @public
+export interface WorkflowData extends Struct {
+    // (undocumented)
+    readonly creator: CreatorId_2;
+    // (undocumented)
+    readonly description: Characters_2;
+    // (undocumented)
+    readonly groups: Vec<ForWhat_2>;
+    // (undocumented)
+    readonly name: Characters_2;
+    // (undocumented)
+    readonly segments: Vec<WorkflowSegment>;
+}
+
+// @public
+export interface WorkflowExtra extends Struct {
+}
+
+// @public
+export interface WorkflowId extends GenericId {
+}
+
+// @public
+export interface WorkflowRecord extends Struct {
+    // (undocumented)
+    readonly accountId: AccountId;
+    // (undocumented)
+    readonly blockNumber: BlockNumber;
+    // (undocumented)
+    readonly record: Workflow;
+}
+
+// @public (undocumented)
+export const workflows: {
+    types: {
+        [x: string]: string | CodecClass<Codec> | Record<string, string> | {
+            _enum: string[] | Record<string, number> | Record<string, string | null>;
+        } | {
+            _set: Record<string, number>;
+        };
+    };
+};
+
+// @public
+export interface WorkflowSegment extends Struct {
+    // (undocumented)
+    readonly input: Bytes;
+    // (undocumented)
+    readonly sequence: Vec<OperationVersionReference>;
+}
+
+// @public
+export interface WorkflowVersion extends Struct {
+    // (undocumented)
+    readonly data: WorkflowVersionData;
+    // (undocumented)
+    readonly extra: Option<AnagolayVersionExtra_2>;
+    // (undocumented)
+    readonly id: VersionId_2;
+}
+
+// @public
+export interface WorkflowVersionData extends Struct {
+    // (undocumented)
+    readonly artifacts: Vec<WorkflowArtifactStructure>;
+    // (undocumented)
+    readonly entityId: WorkflowId_2;
+    // (undocumented)
+    readonly parentId: Option<VersionId_2>;
+}
+
+// @public
+export interface WorkflowVersionRecord extends Struct {
+    // (undocumented)
+    readonly accountId: AccountId;
+    // (undocumented)
+    readonly blockNumber: BlockNumber;
+    // (undocumented)
+    readonly record: WorkflowVersion;
 }
 
 // (No @packageDocumentation comment for this package)

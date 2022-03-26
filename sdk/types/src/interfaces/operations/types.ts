@@ -4,7 +4,6 @@
 import type {
   AnagolayVersionExtra,
   Characters,
-  DocsArtifactSubType,
   ForWhat,
   GenericId,
   OperationId,
@@ -33,7 +32,6 @@ export interface OperationArtifactType extends Enum {
   readonly isWasm: boolean;
   readonly asWasm: WasmArtifactSubType;
   readonly isDocs: boolean;
-  readonly asDocs: DocsArtifactSubType;
   readonly isGit: boolean;
   readonly type: 'Crate' | 'Wasm' | 'Docs' | 'Git';
 }
