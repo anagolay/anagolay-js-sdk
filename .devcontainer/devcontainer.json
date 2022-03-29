@@ -27,9 +27,14 @@
     "yzhang.markdown-all-in-one",
     "eriklynd.json-tools",
     "oliversturm.fix-json",
-    "GitLab.gitlab-workflow"
+    "GitLab.gitlab-workflow",
+    "svelte.svelte-vscode",
+    "ardenivanov.svelte-intellisense",
+    "fivethree.vscode-svelte-snippets",
+    "bradlc.vscode-tailwindcss"
   ],
   "overrideCommand": false,
+  "forwardPorts": [7766],
   "features": {
     "docker-from-docker": {
       "version": "latest",

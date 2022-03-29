@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* body{
+  height: 100vh;
+  background: linear-gradient(45deg, var(--main), var(--secondary), var(--terciary) );
+} */

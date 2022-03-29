@@ -38,6 +38,7 @@
     "pnpm",
     "pnpx",
     "rehosted",
-    "subsampling"
+    "subsampling",
+    "tailwind"
   ]
 }

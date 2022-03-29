@@ -44,7 +44,11 @@
     },
     {
       "name": "@microsoft/api-extractor",
-      "allowedCategories": [ "libraries" ]
+      "allowedCategories": [ "libraries", "webapp" ]
+    },
+    {
+      "name": "@playwright/test",
+      "allowedCategories": [ "webapp" ]
     },
     {
       "name": "@polkadot/api",
@@ -88,19 +92,19 @@
     },
     {
       "name": "@rushstack/eslint-config",
-      "allowedCategories": [ "libraries" ]
+      "allowedCategories": [ "libraries", "webapp" ]
     },
     {
       "name": "@rushstack/heft",
-      "allowedCategories": [ "libraries" ]
+      "allowedCategories": [ "libraries", "webapp" ]
     },
     {
       "name": "@rushstack/heft-jest-plugin",
-      "allowedCategories": [ "libraries" ]
+      "allowedCategories": [ "libraries", "webapp" ]
     },
     {
       "name": "@rushstack/heft-node-rig",
-      "allowedCategories": [ "libraries" ]
+      "allowedCategories": [ "libraries", "webapp" ]
     },
     {
       "name": "@rushstack/heft-web-rig",
@@ -117,6 +121,30 @@
     {
       "name": "@sentry/tracing",
       "allowedCategories": [ "libraries" ]
+    },
+    {
+      "name": "@sveltejs/adapter-auto",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
+      "name": "@sveltejs/adapter-static",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
+      "name": "@sveltejs/kit",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
+      "name": "@typescript-eslint/eslint-plugin",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
+      "name": "@typescript-eslint/parser",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
+      "name": "autoprefixer",
+      "allowedCategories": [ "webapp" ]
     },
     {
       "name": "axios",
@@ -159,20 +187,32 @@
       "allowedCategories": [ "libraries" ]
     },
     {
+      "name": "daisyui",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
+      "name": "drawflow",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
       "name": "env-cmd",
       "allowedCategories": [ "libraries" ]
     },
     {
       "name": "eslint",
-      "allowedCategories": [ "libraries" ]
+      "allowedCategories": [ "libraries", "webapp" ]
     },
     {
       "name": "eslint-plugin-simple-import-sort",
-      "allowedCategories": [ "libraries" ]
+      "allowedCategories": [ "libraries", "webapp" ]
+    },
+    {
+      "name": "eslint-plugin-svelte3",
+      "allowedCategories": [ "webapp" ]
     },
     {
       "name": "eslint-plugin-unused-imports",
-      "allowedCategories": [ "libraries" ]
+      "allowedCategories": [ "libraries", "webapp" ]
     },
     {
       "name": "exifreader",
@@ -211,6 +251,18 @@
       "allowedCategories": [ "libraries" ]
     },
     {
+      "name": "postcss",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
+      "name": "prettier",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
+      "name": "prettier-plugin-svelte",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
       "name": "prism-react-renderer",
       "allowedCategories": [ "websites" ]
     },
@@ -235,6 +287,22 @@
       "allowedCategories": [ "libraries" ]
     },
     {
+      "name": "svelte",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
+      "name": "svelte-check",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
+      "name": "svelte-preprocess",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
+      "name": "tailwindcss",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
       "name": "ts-loader",
       "allowedCategories": [ "libraries" ]
     },
@@ -252,11 +320,11 @@
     },
     {
       "name": "tslib",
-      "allowedCategories": [ "libraries" ]
+      "allowedCategories": [ "libraries", "webapp" ]
     },
     {
       "name": "typescript",
-      "allowedCategories": [ "libraries" ]
+      "allowedCategories": [ "libraries", "webapp" ]
     },
     {
       "name": "webpack",
