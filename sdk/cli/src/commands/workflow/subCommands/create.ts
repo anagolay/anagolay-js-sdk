@@ -22,6 +22,7 @@ export default async function createSubCommand(): Promise<Command> {
  *
  * @privateRemarks [Gitlab issue](https://gitlab.com/anagolay/anagolay-js/-/issues/97)
  *
+ * @public
  */
 async function create(): Promise<void> {
   await askStarterQuestions();

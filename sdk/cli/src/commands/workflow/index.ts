@@ -1,6 +1,6 @@
 import { Command } from 'commander';
 
-import create from './sub-commands/create';
+import create from './subCommands/create';
 
 /**
  * Workflow main Command

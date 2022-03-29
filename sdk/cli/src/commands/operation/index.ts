@@ -192,7 +192,7 @@ async function submitTheExtrinsicCall(
   chainApi: ApiPromise,
   artifactsWithVersion: IDecodedArtifactsWithManifest
 ): Promise<ISignSubmitSuccessReturn> {
-  const { manifest, repository, artifacts: payloadArtifacts } = artifactsWithVersion;
+  const { manifest, repository, artifacts } = artifactsWithVersion;
 
   const operationData: AnOperationData = {
     name: manifest.name,
@@ -214,8 +214,9 @@ async function submitTheExtrinsicCall(
      */
     entityId: '',
     parentId: '',
-    artifacts: payloadArtifacts.items,
+    artifacts: artifacts.items,
   };
+  console.log(versionData, operationData);
 
   const { accountToUse } = await inquirer.prompt({
     name: 'accountToUse',
