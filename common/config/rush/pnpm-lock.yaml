@@ -9,18 +9,12 @@ importers:
     specifiers:
       '@microsoft/api-extractor': ~7.19.4
       '@playwright/test': ^1.20.0
-      '@rushstack/eslint-config': ~2.5.1
-      '@rushstack/heft': ~0.44.2
-      '@rushstack/heft-jest-plugin': ~0.2.2
-      '@rushstack/heft-node-rig': ~1.7.1
       '@sveltejs/adapter-auto': next
       '@sveltejs/adapter-static': next
       '@sveltejs/kit': next
       '@tailwindcss/forms': ~0.5.0
       '@tailwindcss/line-clamp': ~0.3.1
       '@tailwindcss/typography': ~0.5.2
-      '@types/drawflow': ~0.0.4
-      '@types/heft-jest': ~1.0.2
       '@types/node': 16.11.7
       '@typescript-eslint/eslint-plugin': ^5.10.1
       '@typescript-eslint/parser': ^5.10.1
@@ -47,18 +41,12 @@ importers:
     devDependencies:
       '@microsoft/api-extractor': 7.19.4
       '@playwright/test': 1.20.1
-      '@rushstack/eslint-config': 2.5.1_eslint@8.8.0+typescript@4.5.5
-      '@rushstack/heft': 0.44.2
-      '@rushstack/heft-jest-plugin': 0.2.3_@rushstack+heft@0.44.2
-      '@rushstack/heft-node-rig': 1.7.1_@rushstack+heft@0.44.2
       '@sveltejs/adapter-auto': 1.0.0-next.33
       '@sveltejs/adapter-static': 1.0.0-next.29
       '@sveltejs/kit': 1.0.0-next.303_svelte@3.46.4
       '@tailwindcss/forms': 0.5.0_tailwindcss@3.0.23
       '@tailwindcss/line-clamp': 0.3.1_tailwindcss@3.0.23
       '@tailwindcss/typography': 0.5.2_tailwindcss@3.0.23
-      '@types/drawflow': 0.0.4
-      '@types/heft-jest': 1.0.2
       '@types/node': 16.11.7
       '@typescript-eslint/eslint-plugin': 5.16.0_36abc69848fe2ad2254dba80e2e3f22c
       '@typescript-eslint/parser': 5.16.0_eslint@8.8.0+typescript@4.5.5
@@ -2492,10 +2480,6 @@ packages:
     resolution: {integrity: sha512-cdeYyv4KWoEgpBISTxWvqYsVy444DOqehiF3fM3ne10AmJ62RSyNkUnxMJXHQWRQQX2eR94m5y1IZyDwBjV9FQ==}
     dependencies:
       '@types/node': 16.11.7
-    dev: true
-
-  /@types/drawflow/0.0.4:
-    resolution: {integrity: sha512-LZ3qTfceI5Q9jveNA5VY5DyPuszLz4FTMsHNMMHFDPBUlmdlKGuMz9tVSuaP1AFUCCRJzq+sjUhozI51accUYg==}
     dev: true
 
   /@types/eslint-scope/3.7.3:

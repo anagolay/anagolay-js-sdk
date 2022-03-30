@@ -125,7 +125,15 @@
         </div>
       </div>
     </div>
-    <div id="drawflow" class="custom100vh flex-auto" on:drag={drag} on:drop={drop} on:dragover={allowDrop} />
+    <div>
+      <div
+        id="drawflow"
+        class="custom100vh flex-auto"
+        on:drag={drag}
+        on:drop={drop}
+        on:dragover={allowDrop}
+      />
+    </div>
   </div>
 </div>
 
