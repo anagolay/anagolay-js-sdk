@@ -65,7 +65,7 @@
       1,
       addedNodes.length * 40,
       addedNodes.length * 40,
-      name,
+      'bg-accent',
       { input, output, versions },
       name,
       false
@@ -87,42 +87,45 @@
   }
 </script>
 
-<div class="flex flex-row">
-  <div class="static">
-    <div class="relative h-full w-96 bg-orange-800">
-      <div class="absolute inset-y-0 left-0 ">
-        <div class="stats shadow w-fit mx-8 my-8">
-          <div class="stat place-items-center">
-            <div class="stat-title">Operations</div>
-            <div class="stat-value text-primary">{addedNodes.length || 0}</div>
-            <div class="stat-desc">Unique amount of operations in this workflow</div>
+<div data-theme="retro">
+  <!-- <div data-theme="forest"> -->
+  <div class="flex flex-row">
+    <div class="static">
+      <div class="relative h-full w-96 bg-secondary-content">
+        <div class="absolute inset-y-0 left-0 ">
+          <div class="stats shadow w-fit mx-8 my-8">
+            <div class="stat place-items-center">
+              <div class="stat-title">Operations</div>
+              <div class="stat-value text-primary">{addedNodes.length || 0}</div>
+              <div class="stat-desc">Unique amount of operations in this workflow</div>
+            </div>
           </div>
-        </div>
 
-        <div>
-          {#await opsFixtures}
-            <p>...waiting for fixtures</p>
-          {:then opsFixtures}
-            {#each opsFixtures as op, i}
-              <div class="card w-5/6 mx-8 my-8 bg-primary text-primary-content">
-                <div class="card-body">
-                  <h2 class="card-title">{op.data.name}</h2>
-                  <p>{op.data.description}</p>
-                  <p class="text-xs">{op.id}</p>
-                  <div class="card-actions justify-end">
-                    <button class="btn btn-sm" on:click={() => addNode(op)}>Add ></button>
+          <div>
+            {#await opsFixtures}
+              <p>...waiting for fixtures</p>
+            {:then opsFixtures}
+              {#each opsFixtures as op, i}
+                <div class="card w-5/6 mx-8 my-8 bg-primary text-primary-content">
+                  <div class="card-body">
+                    <h2 class="card-title">{op.data.name}</h2>
+                    <p>{op.data.description}</p>
+                    <p class="text-xs">{op.id}</p>
+                    <div class="card-actions justify-end">
+                      <button class="btn btn-sm" on:click={() => addNode(op)}>Add ></button>
+                    </div>
                   </div>
                 </div>
-              </div>
-            {/each}
-          {:catch error}
-            <p style="color: red">{error.message}</p>
-          {/await}
+              {/each}
+            {:catch error}
+              <p style="color: red">{error.message}</p>
+            {/await}
+          </div>
         </div>
       </div>
     </div>
+    <div id="drawflow" class="custom100vh flex-auto" on:drag={drag} on:drop={drop} on:dragover={allowDrop} />
   </div>
-  <div id="drawflow" class="custom100vh flex-auto" on:drag={drag} on:drop={drop} on:dragover={allowDrop} />
 </div>
 
 <style>

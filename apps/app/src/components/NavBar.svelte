@@ -3,7 +3,7 @@
 <!-- svelte-ignore a11y-missing-attribute -->
 <div class="navbar bg-base-100">
   <div class="flex-1">
-    <a class="btn btn-ghost normal-case text-xl">Workflow Builder</a>
+    <a class="btn btn-ghost normal-case text-xl" href="/">Anagolay App</a>
   </div>
   <div class="flex-none gap-2">
     <div class="form-control">
@@ -17,7 +17,7 @@
           />
         </div>
       </label>
-      <ul
+      <!-- <ul
         tabindex="0"
         class="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
       >
@@ -29,7 +29,7 @@
         </li>
         <li><a>Settings</a></li>
         <li><a>Logout</a></li>
-      </ul>
+      </ul> -->
     </div>
   </div>
 </div>

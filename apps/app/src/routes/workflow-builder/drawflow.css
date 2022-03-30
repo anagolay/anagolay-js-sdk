@@ -21,7 +21,7 @@
   display: flex;
   align-items: center;
   position: absolute;
-  background: rgb(136, 255, 0);
+  background: theme('colors.primary');
   width: 160px;
   min-height: 40px;
   border-radius: 4px;
@@ -32,7 +32,7 @@
 }
 
 .drawflow .drawflow-node.selected {
-  background: red;
+  background: theme('colors.accent');
 }
 
 .drawflow .drawflow-node:hover {
@@ -47,30 +47,35 @@
 .drawflow .drawflow-node .drawflow_content_node {
   width: 100%;
   display: block;
-  padding-left: 13px;
+  padding-left: 9px;
 }
 
-.drawflow .drawflow-node .input,
 .drawflow .drawflow-node .output {
   position: relative;
   width: 20px;
   height: 20px;
-  background: #fff;
+  background: theme('colors.orange.400');
+  border: 2px solid theme('colors.black');
   border-radius: 50%;
-  border: 2px solid #000;
   cursor: crosshair;
   z-index: 1;
   margin-bottom: 5px;
 }
 
 .drawflow .drawflow-node .input {
-  left: -27px;
+  left: -34px;
   top: 2px;
-  background: #ff0;
+  background-color: theme('colors.gray.500');
+  border: 2px solid theme('colors.black');
+
+  position: relative;
+  background: #fff;
+  cursor: crosshair;
+  z-index: 1;
 }
 
 .drawflow .drawflow-node .output {
-  right: -3px;
+  right: -5px;
   top: 2px;
 }
 
@@ -90,6 +95,7 @@
   stroke-width: 5px;
   stroke: #4682b4;
   pointer-events: all;
+  stroke-dasharray: 3%;
 }
 
 .drawflow .connection .main-path:hover {
@@ -125,16 +131,20 @@
   display: block;
   width: 30px;
   height: 30px;
-  background: #000;
+  background: theme('colors.error');
   color: #fff;
   z-index: 4;
   border: 2px solid #fff;
-  line-height: 30px;
+  line-height: 26px;
   font-weight: 700;
   text-align: center;
   border-radius: 50%;
   font-family: monospace;
   cursor: pointer;
+}
+
+.drawflow-delete:hover {
+  background: theme('colors.red.800');
 }
 
 .drawflow > .drawflow-delete {
