@@ -139,6 +139,10 @@
       "allowedCategories": [ "webapp" ]
     },
     {
+      "name": "@tailwindcss/line-clamp",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
       "name": "@tailwindcss/typography",
       "allowedCategories": [ "webapp" ]
     },
