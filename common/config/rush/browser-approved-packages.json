@@ -135,6 +135,14 @@
       "allowedCategories": [ "webapp" ]
     },
     {
+      "name": "@tailwindcss/forms",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
+      "name": "@tailwindcss/typography",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
       "name": "@typescript-eslint/eslint-plugin",
       "allowedCategories": [ "webapp" ]
     },
@@ -231,8 +239,16 @@
       "allowedCategories": [ "libraries" ]
     },
     {
+      "name": "multiformats",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
       "name": "multihashing-async",
       "allowedCategories": [ "libraries" ]
+    },
+    {
+      "name": "nanoid",
+      "allowedCategories": [ "webapp" ]
     },
     {
       "name": "nodemon",

@@ -1,9 +1,12 @@
 module.exports = {
   content: ['./src/**/*.{html,js,svelte,ts}'],
-  theme: {
-    extend: {},
-  },
-  plugins: [require('daisyui')],
+
+  plugins: [
+    require('@tailwindcss/typography'),
+    require('@tailwindcss/line-clamp'),
+    require('@tailwindcss/forms'),
+    require('daisyui'),
+  ],
   // daisyUI config (optional)
   daisyui: {
     styled: true,
@@ -14,5 +17,9 @@ module.exports = {
     rtl: false,
     prefix: '',
     darkTheme: 'dark',
+  },
+  darkMode: 'class',
+  theme: {
+    extend: {},
   },
 };
