@@ -288,7 +288,7 @@
     },
     {
       "name": "ramda",
-      "allowedCategories": [ "libraries" ]
+      "allowedCategories": [ "libraries", "webapp" ]
     },
     {
       "name": "react",
@@ -297,6 +297,10 @@
     {
       "name": "react-dom",
       "allowedCategories": [ "websites" ]
+    },
+    {
+      "name": "remeda",
+      "allowedCategories": [ "webapp" ]
     },
     {
       "name": "signale",

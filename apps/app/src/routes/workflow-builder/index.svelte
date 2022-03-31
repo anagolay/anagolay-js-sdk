@@ -1,53 +1,19 @@
-<script type="ts">
-  import Drawflow from 'drawflow';
-  import { onMount } from 'svelte';
+<script lang="ts">
+  import MaterialIcon from '$src/components/MaterialIcon.svelte';
   import { makeOps, type OperationsFixture } from '$src/fixtures/operations';
-
-  // only getting the fixtures
-  let opsFixtures: Promise<OperationsFixture[]> = makeOps();
-
-  /// Draflow editor
-  let editor: Drawflow;
+  import { removeItemFromArray } from '$src/utils/utils';
+  import { fade, fly } from 'svelte/transition';
+  import Drawflow from './drawflow.svelte';
 
   // workaround for the missing deduplication
   let addedNodes: string[] = [];
 
-  onMount(async () => {
-    const id = document.getElementById('drawflow');
-    editor = new Drawflow(id);
+  // workaround for the missing deduplication
+  let connectedNodes: number = 0;
 
-    editor.reroute = true;
-    editor.reroute_fix_curvature = true;
-    editor.force_first_input = false;
-
-    editor.start();
-
-    editor.addModule('workflow');
-    editor.changeModule('workflow');
-
-    editor.on('nodeMoved', function (id) {
-      console.log('Node moved ', id);
-    });
-    editor.on('connectionStart', function ({ output_id, output_class }) {
-      console.log('Node connectionStart ', output_id, output_class);
-    });
-    editor.on('connectionSelected', function ({ output_id, input_id, output_class, input_class }) {
-      console.log('Node connectionSelected ', { output_id, input_id, output_class, input_class });
-    });
-    editor.on('connectionCreated', function ({ output_id, input_id, output_class, input_class }) {
-      console.log('Node connectionCreated ', { output_id, input_id, output_class, input_class });
-      const inputNodeType = editor.getNodeFromId(input_id).data.input;
-      const outputNodeType = editor.getNodeFromId(output_id).data.output;
-
-      console.log(inputNodeType.includes(outputNodeType));
-
-      if (!inputNodeType.includes(outputNodeType)) {
-        editor.removeSingleConnection(output_id, input_id, output_class, input_class);
-        console.error('Got %s as output and %s as input', outputNodeType, inputNodeType);
-      }
-    });
-  });
-
+  // only getting the fixtures
+  let opsFixtures: Promise<OperationsFixture[]> = makeOps();
+  let nodeToAdd;
   // add the node to the drawer
   function addNode(data: OperationsFixture) {
     const {
@@ -56,89 +22,89 @@
       versions,
     } = data;
     if (addedNodes.includes(id)) {
-      throw new Error(`Node already added ${id}`);
+      addedNodes = removeItemFromArray(addedNodes, id);
+    } else {
+      nodeToAdd = {
+        id,
+        data: [
+          name,
+          input.length,
+          1,
+          (addedNodes.length + 1) * 80,
+          (addedNodes.length + 1) * 40,
+          'bg-accent',
+          { input, output, versions },
+          name,
+          false,
+        ],
+      };
+      addedNodes = [...addedNodes, id];
     }
-    editor.nodeId = id;
-    editor.addNode(
-      name,
-      input.length,
-      1,
-      addedNodes.length * 40,
-      addedNodes.length * 40,
-      'bg-accent',
-      { input, output, versions },
-      name,
-      false
-    );
-    addedNodes = [...addedNodes, id];
-  }
-
-  function allowDrop(ev) {
-    ev.preventDefault();
-    console.log('allowDrop invoked', ev);
-  }
-
-  function drag(ev) {
-    console.log('drag invoked', ev);
-  }
-
-  function drop(ev) {
-    console.log('drop invoked', ev);
+    console.log(addedNodes, nodeToAdd);
   }
 </script>
 
-<!-- <div data-theme="retro"> -->
-<div data-theme="synthwave">
-  <!-- <div> -->
-  <div class="flex flex-row">
-    <div class="static">
-      <div class="relative h-full w-96 bg-secondary-content">
-        <div class="absolute inset-y-0 left-0 ">
-          <div class="stats shadow w-fit mx-8 my-8">
-            <div class="stat place-items-center">
-              <div class="stat-title">Operations</div>
-              <div class="stat-value text-primary">{addedNodes.length || 0}</div>
-              <div class="stat-desc">Unique amount of operations in this workflow</div>
-            </div>
-          </div>
+<div class="flex flex-row min-h-screen bg-gray-100 text-gray-800">
+  <aside
+    class="sidebar w-64 md:shadow transform -translate-x-full md:translate-x-0 transition-transform duration-150 ease-in bg-indigo-500"
+  >
+    <div class="sidebar-content px-4 py-6">
+      <ul class="flex flex-col w-full">
+        {#await opsFixtures}
+          <li>...waiting for fixtures</li>
+        {:then opsFixtures}
+          {#each opsFixtures as op}
+            <li class="my-1">
+              <span class="flex flex-row items-center h-10 px-3 rounded-lg text-gray-700 bg-gray-100">
+                {#if addedNodes.includes(op.id)}
+                  <span in:fade out:fade class="flex items-center text-lg text-gray-400">
+                    <MaterialIcon classNames="w-8" iconName="checked" />
+                  </span>
+                {/if}
+                <button on:click={() => addNode(op)} class="flex flex-row items-center h-10 rounded-lg">
+                  <span>{op.data.name}</span>
+                </button>
+              </span>
+            </li>
+          {/each}
+        {:catch error}
+          <p style="color: red">{error.message}</p>
+        {/await}
+      </ul>
+    </div>
+    <div class="absolute bottom-0 my-10">
+      <a
+        class="text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-gray-100 transition-colors duration-200 flex items-center py-2 px-8"
+        href="#"
+      >
+        <svg
+          width="20"
+          fill="currentColor"
+          height="20"
+          class="h-5 w-5"
+          viewBox="0 0 1792 1792"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M1088 1256v240q0 16-12 28t-28 12h-240q-16 0-28-12t-12-28v-240q0-16 12-28t28-12h240q16 0 28 12t12 28zm316-600q0 54-15.5 101t-35 76.5-55 59.5-57.5 43.5-61 35.5q-41 23-68.5 65t-27.5 67q0 17-12 32.5t-28 15.5h-240q-15 0-25.5-18.5t-10.5-37.5v-45q0-83 65-156.5t143-108.5q59-27 84-56t25-76q0-42-46.5-74t-107.5-32q-65 0-108 29-35 25-107 115-13 16-31 16-12 0-25-8l-164-125q-13-10-15.5-25t5.5-28q160-266 464-266 80 0 161 31t146 83 106 127.5 41 158.5z"
+          />
+        </svg>
+        <span class="mx-4 font-medium"> Support </span>
+      </a>
+    </div>
+  </aside>
 
-          <div>
-            {#await opsFixtures}
-              <p>...waiting for fixtures</p>
-            {:then opsFixtures}
-              {#each opsFixtures as op, i}
-                <div class="card w-4/6 mx-8 my-8 bg-primary text-primary-content">
-                  <div class="card-body">
-                    <h2 class="card-title">{op.data.name}</h2>
-                    <p>{op.data.description}</p>
-                    <p class="text-xs">{op.id}</p>
-                    <div class="card-actions justify-end">
-                      <button class="btn btn-sm btn-wide" on:click={() => addNode(op)}>Add ></button>
-                    </div>
-                  </div>
-                </div>
-              {/each}
-            {:catch error}
-              <p style="color: red">{error.message}</p>
-            {/await}
-          </div>
-        </div>
+  <main class="main flex flex-col flex-grow -ml-64 md:ml-0 transition-all duration-150 ease-in">
+    <div class="main-content flex flex-col flex-grow p-4">
+      <!-- <h1 class="font-bold text-2xl text-gray-700">Dashboard</h1> -->
+      <div class="flex flex-col flex-grow border-4 border-gray-400 border-dashed bg-white rounded mt-4">
+        <Drawflow currentNodeToAdd={nodeToAdd} />
       </div>
     </div>
-    <div>
-      <div
-        id="drawflow"
-        class="custom100vh flex-auto"
-        on:drag={drag}
-        on:drop={drop}
-        on:dragover={allowDrop}
-      />
-    </div>
-  </div>
+  </main>
 </div>
-
-<style>
+<!-- <style>
   .custom100vh {
     height: 100vh;
   }
-</style>
+</style> -->

@@ -31,7 +31,8 @@
     "svelte.svelte-vscode",
     "ardenivanov.svelte-intellisense",
     "fivethree.vscode-svelte-snippets",
-    "bradlc.vscode-tailwindcss"
+    "bradlc.vscode-tailwindcss",
+    "formulahendry.auto-rename-tag"
   ],
   "overrideCommand": false,
   "forwardPorts": [7766],

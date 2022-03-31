@@ -16,6 +16,7 @@ importers:
       '@tailwindcss/line-clamp': ~0.3.1
       '@tailwindcss/typography': ~0.5.2
       '@types/node': 16.11.7
+      '@types/ramda': ~0.27.64
       '@typescript-eslint/eslint-plugin': ^5.10.1
       '@typescript-eslint/parser': ^5.10.1
       autoprefixer: ~10.4.4
@@ -30,6 +31,8 @@ importers:
       postcss: ~8.4.12
       prettier: ^2.5.1
       prettier-plugin-svelte: ^2.5.0
+      ramda: ~0.28.0
+      remeda: ~0.0.32
       svelte: ^3.44.0
       svelte-check: ^2.2.6
       svelte-preprocess: ^4.10.1
@@ -37,7 +40,10 @@ importers:
       tslib: ~2.3.1
       typescript: ~4.5.5
     dependencies:
+      '@types/ramda': 0.27.64
       drawflow: 0.0.55
+      ramda: 0.28.0
+      remeda: 0.0.32
     devDependencies:
       '@microsoft/api-extractor': 7.19.4
       '@playwright/test': 1.20.1
@@ -2625,7 +2631,6 @@ packages:
     resolution: {integrity: sha512-EDf++ss/JoMiDpvT1MuA8oi88OwpvmqVE+o8Ojm5v/5bdJEPZ6eIQd/XYAeQ0imlwG6Tf0Npfq4Z9w3hAKBk9Q==}
     dependencies:
       ts-toolbelt: 6.15.5
-    dev: true
 
   /@types/range-parser/1.2.4:
     resolution: {integrity: sha512-EEhsLsD6UsDM1yFhAvy0Cjr6VwmpMWqFBCb9w07wVugF7w9nfajxLuVmngTIpgS6svCnm6Vaw+MZhoDCKnOfsw==}
@@ -10121,6 +10126,10 @@ packages:
       rc: 1.2.8
     dev: true
 
+  /remeda/0.0.32:
+    resolution: {integrity: sha512-FEdl8ONpqY7AvvMHG5WYdomc0mGf2khHPUDu6QvNkOq4Wjkw5BvzWM4QyksAQ/US1sFIIRG8TVBn6iJx6HbRrA==}
+    dev: false
+
   /remove-trailing-separator/1.1.0:
     resolution: {integrity: sha1-wkvOKig62tW8P1jg1IJJuSN52O8=}
     dev: true
@@ -11567,7 +11576,6 @@ packages:
 
   /ts-toolbelt/6.15.5:
     resolution: {integrity: sha512-FZIXf1ksVyLcfr7M317jbB67XFJhOO1YqdTcuGaq9q5jLUoTikukZ+98TPjKiP2jC5CgmYdWWYs0s2nLSU0/1A==}
-    dev: true
 
   /tslib/1.14.1:
     resolution: {integrity: sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==}
