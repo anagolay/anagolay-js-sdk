@@ -3,42 +3,39 @@
   import './drawflow.css';
   import { onMount } from 'svelte';
   import { createEventDispatcher } from 'svelte';
-  import { isNil } from 'ramda';
+  import type { NodeToAdd } from './index.svelte';
+  const dispatch = createEventDispatcher<{ removeNode: { id: string } }>();
 
-  const dispatch = createEventDispatcher();
-
-  const triggerEvent = () => {
-    dispatch('hello', 'Rock');
-  };
-  /// Draflow editor
+  /// Drawflow editor
   let editor: Drawflow;
 
   let innerHeight: number;
 
-  export let currentNodeToAdd: any;
-
-  $: if (!isNil(currentNodeToAdd)) {
+  /**
+   * Wrap the Drawflow addNode method with setting the correct id
+   * @param currentNodeToAdd
+   */
+  export function addNode(currentNodeToAdd: NodeToAdd) {
     const { id, data: d } = currentNodeToAdd;
-    console.log('the currentNodeToAdd is ', currentNodeToAdd);
     editor.nodeId = id;
     editor.addNode(d[0], d[1], d[2], d[3], d[4], d[5], d[6], d[7], d[8]);
-    console.log(editor);
   }
+  /**
+   * REmove the node and propagate the changes
+   * @param id
+   */
+  export function removeNode(id: string) {
+    console.log('got the remove node ', id);
 
-  // // For now this is how Node adding works
-  // export let currentNodeToRemove: string;
-  // $: if (!isNil(currentNodeToRemove)) {
-  //   console.log('the currentNodeToRemove is ', currentNodeToRemove);
-  //   editor.removeNodeId(currentNodeToRemove);
-  //   console.log(editor);
-  // }
+    dispatch('removeNode', { id });
+  }
 
   onMount(async () => {
     const id = document.getElementById('drawflow');
     editor = new Drawflow(id);
     editor.reroute = true;
     editor.reroute_fix_curvature = true;
-    editor.force_first_input = false;
+    editor.force_first_input = true;
 
     editor.start();
 
@@ -53,10 +50,12 @@
 
     editor.on('nodeRemoved', function (id) {
       console.log('Node removed ', id);
+      // this is needed since thorig lib uses number, with time i will write this by myself
+      removeNode(id as unknown as string);
     });
 
     editor.on('nodeMoved', function (id) {
-      console.log('Node moved ', id);
+      // console.log('Node moved ', id);
     });
 
     editor.on('connectionStart', function ({ output_id, output_class }) {

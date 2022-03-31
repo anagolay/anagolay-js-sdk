@@ -6,9 +6,9 @@
     <a class="btn btn-ghost normal-case text-xl" href="/">Anagolay App</a>
   </div>
   <div class="flex-none gap-2">
-    <div class="form-control">
+    <!-- <div class="form-control">
       <input type="text" placeholder="Search" class="input input-bordered" />
-    </div>
+    </div> -->
     <div class="dropdown dropdown-end">
       <label tabindex="0" class="btn btn-ghost btn-circle avatar">
         <div class="w-10 rounded-full">

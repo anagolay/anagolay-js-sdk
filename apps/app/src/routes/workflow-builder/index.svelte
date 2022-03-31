@@ -1,3 +1,10 @@
+<script context="module" lang="ts">
+  export interface NodeToAdd {
+    id: string;
+    data: [string, number, number, number, number, string, any, string, string | boolean];
+  }
+</script>
+
 <script lang="ts">
   import MaterialIcon from '$src/components/MaterialIcon.svelte';
   import { makeOps, type OperationsFixture } from '$src/fixtures/operations';
@@ -13,7 +20,6 @@
 
   // only getting the fixtures
   let opsFixtures: Promise<OperationsFixture[]> = makeOps();
-  let nodeToAdd;
   // add the node to the drawer
   function addNode(data: OperationsFixture) {
     const {
@@ -21,10 +27,8 @@
       data: { name, input, output },
       versions,
     } = data;
-    if (addedNodes.includes(id)) {
-      addedNodes = removeItemFromArray(addedNodes, id);
-    } else {
-      nodeToAdd = {
+    if (!addedNodes.includes(id)) {
+      const nodeToAdd: NodeToAdd = {
         id,
         data: [
           name,
@@ -32,16 +36,38 @@
           1,
           (addedNodes.length + 1) * 80,
           (addedNodes.length + 1) * 40,
-          'bg-accent',
+          'classname-my-own',
           { input, output, versions },
-          name,
+          `<div class="container">
+            <span class="w-fit text-white">${name}</span>
+           </div>
+          `,
           false,
         ],
       };
+      bindedDf.addNode(nodeToAdd);
       addedNodes = [...addedNodes, id];
     }
-    console.log(addedNodes, nodeToAdd);
   }
+
+  /**
+   * Wrapper for remove node
+   */
+  function removeNode(event: CustomEvent<{ id: string }>) {
+    const { id } = event.detail;
+    console.log('removeNode', id);
+
+    addedNodes = removeItemFromArray(addedNodes, id);
+
+    // bindedDf.removeNode(id);
+  }
+
+  // Bind the drawFlow.svelte to this bariable so we can use it
+  let bindedDf: Drawflow;
+
+  let noticeText: string = `
+  <span>Right click selects node for deletion</span>
+  `;
 </script>
 
 <div class="flex flex-row min-h-screen bg-gray-100 text-gray-800">
@@ -56,12 +82,17 @@
           {#each opsFixtures as op}
             <li class="my-1">
               <span class="flex flex-row items-center h-10 px-3 rounded-lg text-gray-700 bg-gray-100">
-                {#if addedNodes.includes(op.id)}
-                  <span in:fade out:fade class="flex items-center text-lg text-gray-400">
-                    <MaterialIcon classNames="w-8" iconName="checked" />
+                <button
+                  disabled={addedNodes.includes(op.id)}
+                  on:click={() => addNode(op)}
+                  class="flex flex-row items-center h-10 rounded-lg {addedNodes.includes(op.id)
+                    ? 'disabled:opacity-75'
+                    : ''}"
+                >
+                  <span class="flex items-center text-lg text-green-400">
+                    <MaterialIcon classNames="w-8" iconName={addedNodes.includes(op.id) ? 'checked' : ''} />
                   </span>
-                {/if}
-                <button on:click={() => addNode(op)} class="flex flex-row items-center h-10 rounded-lg">
+
                   <span>{op.data.name}</span>
                 </button>
               </span>
@@ -73,9 +104,8 @@
       </ul>
     </div>
     <div class="absolute bottom-0 my-10">
-      <a
+      <span
         class="text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-gray-100 transition-colors duration-200 flex items-center py-2 px-8"
-        href="#"
       >
         <svg
           width="20"
@@ -90,19 +120,23 @@
           />
         </svg>
         <span class="mx-4 font-medium"> Support </span>
-      </a>
+      </span>
     </div>
   </aside>
 
   <main class="main flex flex-col flex-grow -ml-64 md:ml-0 transition-all duration-150 ease-in">
     <div class="main-content flex flex-col flex-grow p-4">
-      <!-- <h1 class="font-bold text-2xl text-gray-700">Dashboard</h1> -->
+      <article class="prose lg:prose-xl">
+        {@html noticeText}
+      </article>
+
       <div class="flex flex-col flex-grow border-4 border-gray-400 border-dashed bg-white rounded mt-4">
-        <Drawflow currentNodeToAdd={nodeToAdd} />
+        <Drawflow bind:this={bindedDf} on:removeNode={removeNode} />
       </div>
     </div>
   </main>
 </div>
+
 <!-- <style>
   .custom100vh {
     height: 100vh;
