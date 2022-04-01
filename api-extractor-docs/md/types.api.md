@@ -339,6 +339,8 @@ export interface AnOperationArtifactStructure {
     // (undocumented)
     artifactType: AnOperationArtifactType;
     // (undocumented)
+    fileExtension: AnCharacters;
+    // (undocumented)
     ipfsCid: AnGenericId;
 }
 
@@ -407,7 +409,7 @@ export interface AnOperationVersionData {
     // (undocumented)
     artifacts: AnOperationArtifactStructure[];
     // (undocumented)
-    entityId: AnOperationId;
+    entityId?: AnOperationId;
     // (undocumented)
     parentId?: AnVersionId;
 }
@@ -597,6 +599,8 @@ export interface AnWorkflowArtifactStructure {
     // (undocumented)
     artifactType: AnWorkflowArtifactType;
     // (undocumented)
+    fileExtension: AnCharacters;
+    // (undocumented)
     ipfsCid: AnGenericId;
 }
 
@@ -665,7 +669,7 @@ export interface AnWorkflowVersionData {
     // (undocumented)
     artifacts: AnWorkflowArtifactStructure[];
     // (undocumented)
-    entityId: AnWorkflowId;
+    entityId?: AnWorkflowId;
     // (undocumented)
     parentId?: AnVersionId;
 }
@@ -802,6 +806,8 @@ export interface OperationArtifactStructure extends Struct {
     // (undocumented)
     readonly artifactType: OperationArtifactType;
     // (undocumented)
+    readonly fileExtension: Characters_2;
+    // (undocumented)
     readonly ipfsCid: GenericId_2;
 }
 
@@ -887,7 +893,7 @@ export interface OperationVersionData extends Struct {
     // (undocumented)
     readonly artifacts: Vec<OperationArtifactStructure>;
     // (undocumented)
-    readonly entityId: OperationId_2;
+    readonly entityId: Option<OperationId_2>;
     // (undocumented)
     readonly parentId: Option<VersionId_2>;
 }
@@ -1091,6 +1097,8 @@ export interface WorkflowArtifactStructure extends Struct {
     // (undocumented)
     readonly artifactType: WorkflowArtifactType;
     // (undocumented)
+    readonly fileExtension: Characters_2;
+    // (undocumented)
     readonly ipfsCid: GenericId_2;
 }
 
@@ -1178,7 +1186,7 @@ export interface WorkflowVersionData extends Struct {
     // (undocumented)
     readonly artifacts: Vec<WorkflowArtifactStructure>;
     // (undocumented)
-    readonly entityId: WorkflowId_2;
+    readonly entityId: Option<WorkflowId_2>;
     // (undocumented)
     readonly parentId: Option<VersionId_2>;
 }
