@@ -41,10 +41,11 @@ export const WorkflowsCustomTypes: RegistryTypes = {
   },
   WorkflowArtifactStructure: {
     artifactType: 'WorkflowArtifactType',
+    fileExtension: 'Characters',
     ipfsCid: 'GenericId',
   },
   WorkflowVersionData: {
-    entityId: 'WorkflowId',
+    entityId: 'Option<WorkflowId>',
     parentId: 'Option<VersionId>',
     artifacts: 'Vec<WorkflowArtifactStructure>',
   },

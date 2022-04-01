@@ -23,6 +23,7 @@ export interface Operation extends Struct {
 /** @name OperationArtifactStructure */
 export interface OperationArtifactStructure extends Struct {
   readonly artifactType: OperationArtifactType;
+  readonly fileExtension: Characters;
   readonly ipfsCid: GenericId;
 }
 
@@ -68,7 +69,7 @@ export interface OperationVersion extends Struct {
 
 /** @name OperationVersionData */
 export interface OperationVersionData extends Struct {
-  readonly entityId: OperationId;
+  readonly entityId: Option<OperationId>;
   readonly parentId: Option<VersionId>;
   readonly artifacts: Vec<OperationArtifactStructure>;
 }

@@ -43,10 +43,11 @@ export const OperationsCustomTypes: RegistryTypes = {
   },
   OperationArtifactStructure: {
     artifactType: 'OperationArtifactType',
+    fileExtension: 'Characters',
     ipfsCid: 'GenericId',
   },
   OperationVersionData: {
-    entityId: 'OperationId',
+    entityId: 'Option<OperationId>',
     parentId: 'Option<VersionId>',
     artifacts: 'Vec<OperationArtifactStructure>',
   },

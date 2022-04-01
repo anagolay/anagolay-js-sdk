@@ -207,13 +207,8 @@ async function submitTheExtrinsicCall(
   };
 
   const versionData: AnOperationVersionData = {
-    /**
-     * although this is required by the struct, it is NOT taken in the consideration while saving
-     * the reason is that the `operation_id` is calculated on the chain, and cannot be created at this stage.
-     * WE had a choice to make, keep it like this, OR create new types that exclude this property. Obviously we chose former.
-     */
-    entityId: '',
-    parentId: '',
+    entityId: undefined,
+    parentId: undefined,
     artifacts: artifacts.items,
   };
   console.log(versionData, operationData);

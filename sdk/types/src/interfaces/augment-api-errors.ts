@@ -81,6 +81,10 @@ declare module '@polkadot/api-base/types/errors' {
     };
     operations: {
       /**
+       * A parameter of the request is invalid or does not respect a given constraint
+       **/
+      BadRequest: AugmentedError<ApiType>;
+      /**
        * Operation Manifest already exists.
        **/
       OperationAlreadyExists: AugmentedError<ApiType>;
@@ -138,6 +142,10 @@ declare module '@polkadot/api-base/types/errors' {
       [key: string]: AugmentedError<ApiType>;
     };
     workflows: {
+      /**
+       * A parameter of the request is invalid or does not respect a given constraint
+       **/
+      BadRequest: AugmentedError<ApiType>;
       /**
        * Workflow Manifest already exists.
        **/

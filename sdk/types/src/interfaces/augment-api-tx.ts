@@ -242,7 +242,7 @@ declare module '@polkadot/api-base/types/submittable' {
       /**
        * Create Operation manifest and the initial Version.
        *
-       * Once you have created the Manifest this extrinsic will always fail with 3 different
+       * Once you have created the Manifest this extrinsic will always fail with different
        * errors, each depend on the parts of the structure.
        * There is a check that a user cannot cheat and create new package if the package is
        * connected to other Operation or any other Version.
@@ -258,6 +258,7 @@ declare module '@polkadot/api-base/types/submittable' {
        * * `OperationAlreadyInitialized` - if the Operation already has an initial Version
        * * `OperationVersionPackageAlreadyExists` - one of the packages of the Version is already
        * registered to another Operation
+       * * `BadRequest` - if the request is invalid or does not respect a given constraint
        *
        * # Return
        * `DispatchResultWithPostInfo` containing Unit type
@@ -661,6 +662,7 @@ declare module '@polkadot/api-base/types/submittable' {
        * * `WorkflowAlreadyInitialized` - if the Workflow already has an initial Version
        * * `WorkflowVersionPackageAlreadyExists` - one of the packages of the Version is already
        * registered to another Workflow
+       * * `BadRequest` - if the request is invalid or does not respect a given constraint
        *
        * # Return
        * `DispatchResultWithPostInfo` containing Unit type

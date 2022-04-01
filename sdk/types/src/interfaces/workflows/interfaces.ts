@@ -62,11 +62,12 @@ export interface AnWorkflowArtifactType {
 
 export interface AnWorkflowArtifactStructure {
   artifactType: AnWorkflowArtifactType;
+  fileExtension: AnCharacters;
   ipfsCid: AnGenericId;
 }
 
 export interface AnWorkflowVersionData {
-  entityId: AnWorkflowId;
+  entityId?: AnWorkflowId;
   parentId?: AnVersionId;
   artifacts: AnWorkflowArtifactStructure[];
 }

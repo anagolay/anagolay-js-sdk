@@ -61,6 +61,7 @@ export interface AnOperationArtifactType {
 
 export interface AnOperationArtifactStructure {
   artifactType: AnOperationArtifactType;
+  fileExtension: AnCharacters;
   ipfsCid: AnGenericId;
 }
 
@@ -68,7 +69,7 @@ export interface AnOperationArtifactStructure {
  * Version data. It contains all the needed parameters which define the entity Version and is hashed to produce the Version id
  */
 export interface AnOperationVersionData {
-  entityId: AnOperationId;
+  entityId?: AnOperationId;
   parentId?: AnVersionId;
   artifacts: AnOperationArtifactStructure[];
 }

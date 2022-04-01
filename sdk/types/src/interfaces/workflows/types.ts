@@ -31,6 +31,7 @@ export interface Workflow extends Struct {
 /** @name WorkflowArtifactStructure */
 export interface WorkflowArtifactStructure extends Struct {
   readonly artifactType: WorkflowArtifactType;
+  readonly fileExtension: Characters;
   readonly ipfsCid: GenericId;
 }
 
@@ -79,7 +80,7 @@ export interface WorkflowVersion extends Struct {
 
 /** @name WorkflowVersionData */
 export interface WorkflowVersionData extends Struct {
-  readonly entityId: WorkflowId;
+  readonly entityId: Option<WorkflowId>;
   readonly parentId: Option<VersionId>;
   readonly artifacts: Vec<WorkflowArtifactStructure>;
 }

@@ -53,10 +53,11 @@
   },
   "OperationArtifactStructure": {
     "artifactType": "OperationArtifactType",
+    "fileExtension": "Characters",
     "ipfsCid": "GenericId"
   },
   "OperationVersionData": {
-    "entityId": "OperationId",
+    "entityId": "Option<OperationId>",
     "parentId": "Option<VersionId>",
     "artifacts": "Vec<OperationArtifactStructure>"
   },
@@ -137,10 +138,11 @@
   },
   "WorkflowArtifactStructure": {
     "artifactType": "WorkflowArtifactType",
+    "fileExtension": "Characters",
     "ipfsCid": "GenericId"
   },
   "WorkflowVersionData": {
-    "entityId": "WorkflowId",
+    "entityId": "Option<WorkflowId>",
     "parentId": "Option<VersionId>",
     "artifacts": "Vec<WorkflowArtifactStructure>"
   },
