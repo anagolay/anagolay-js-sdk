@@ -9,8 +9,12 @@
   import MaterialIcon from '$src/components/MaterialIcon.svelte';
   import { makeOps, type OperationsFixture } from '$src/fixtures/operations';
   import { removeItemFromArray } from '$src/utils/utils';
-  import { fade, fly } from 'svelte/transition';
+  import { onMount } from 'svelte';
   import Drawflow from './drawflow.svelte';
+  import { io, Socket } from 'socket.io-client';
+  import { page } from '$app/stores';
+
+  let namespace: string;
 
   // workaround for the missing deduplication
   let addedNodes: string[] = [];
@@ -61,6 +65,25 @@
 
     // bindedDf.removeNode(id);
   }
+
+  onMount(() => {
+    const whereToConnect = $page.url.searchParams.get('ws');
+    namespace = $page.url.searchParams.get('ns');
+    const socket: Socket = io(whereToConnect + '/' + namespace, {
+      path: '/ws',
+      reconnection: true,
+      transports: ['websocket'],
+      secure: false,
+    });
+    socket.on('connect', () => {
+      console.log('connected with id %s and namespace %s', socket.id, namespace);
+    });
+    socket.on('connect_error', () => {
+      console.error('socket error');
+
+      socket.connect();
+    });
+  });
 
   // Bind the drawFlow.svelte to this bariable so we can use it
   let bindedDf: Drawflow;
@@ -126,9 +149,10 @@
 
   <main class="main flex flex-col flex-grow -ml-64 md:ml-0 transition-all duration-150 ease-in">
     <div class="main-content flex flex-col flex-grow p-4">
-      <article class="prose lg:prose-xl">
-        {@html noticeText}
-      </article>
+      <div class="col-auto">
+        <button class="btn btn-primary btn-outline">Save The Workflow</button>
+        <button class="btn btn-warning">Cancel The Workflow</button>
+      </div>
 
       <div class="flex flex-col flex-grow border-4 border-gray-400 border-dashed bg-white rounded mt-4">
         <Drawflow bind:this={bindedDf} on:removeNode={removeNode} />

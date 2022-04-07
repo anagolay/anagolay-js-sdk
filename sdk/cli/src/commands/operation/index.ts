@@ -42,6 +42,7 @@ import {
   signAndSubmit,
   transferToAccount,
 } from '../../api';
+import { chooseAccount } from '../../commonQuestions/account';
 import { askStarterQuestions } from '../../commonQuestions/common';
 import { logsDir } from '../../utils';
 
@@ -213,23 +214,7 @@ async function submitTheExtrinsicCall(
   };
   console.log(versionData, operationData);
 
-  const { accountToUse } = await inquirer.prompt({
-    name: 'accountToUse',
-    message: 'How do you want to sign the TX',
-    type: 'list',
-    choices: [
-      {
-        key: 'alice',
-        value: 'alice',
-        name: 'With Alice',
-      },
-      {
-        key: 'personal',
-        value: 'personal',
-        name: 'With my personal account',
-      },
-    ],
-  });
+  const { accountToUse } = await chooseAccount();
 
   let accountFreeBalance = '0';
 

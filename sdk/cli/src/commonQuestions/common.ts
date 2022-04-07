@@ -1,5 +1,6 @@
 import inquirer from 'inquirer';
 
+import { createSettingsFile, readSettingsFile } from '../utils';
 /**
  * Interface for the Starter questions
  */
@@ -16,8 +17,14 @@ export interface IStartQuestions {
  * See {@link IStartQuestions} for the structure
  * @returns the answers to the questions.
  */
-export async function askStarterQuestions(disableDefaultBehavior: boolean = false): Promise<IStartQuestions> {
-  const startAnswers = await inquirer.prompt<IStartQuestions>([
+export async function askStarterQuestions(): Promise<void> {
+  const { disableStartupQuestions, fts } = await readSettingsFile();
+
+  if (disableStartupQuestions) {
+    return;
+  }
+
+  const startAnswers: IStartQuestions = await inquirer.prompt<IStartQuestions>([
     {
       type: 'confirm',
       name: 'proceedWithPublish',
@@ -38,13 +45,11 @@ export async function askStarterQuestions(disableDefaultBehavior: boolean = fals
     },
   ]);
 
-  // if the default behavior is disabled
-  if (!disableDefaultBehavior) {
-    const { proceedWithPublish } = startAnswers;
-    if (!proceedWithPublish) {
-      process.exit(0);
-    }
-  }
+  await createSettingsFile({
+    fts: fts || true,
+    enableTelemetry: startAnswers.enableTelemetry,
+    disableStartupQuestions: startAnswers.disableStartupQuestions,
+  });
 
-  return startAnswers;
+  return;
 }

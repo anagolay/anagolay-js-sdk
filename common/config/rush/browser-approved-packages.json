@@ -311,6 +311,10 @@
       "allowedCategories": [ "libraries" ]
     },
     {
+      "name": "socket.io-client",
+      "allowedCategories": [ "libraries", "webapp" ]
+    },
+    {
       "name": "svelte",
       "allowedCategories": [ "webapp" ]
     },

@@ -3,10 +3,10 @@
   "compilerOptions": {
     "types": ["heft-jest", "node", "webpack-env"],
     "resolveJsonModule": true,
-    "skipLibCheck": true,
-    "paths": {
-      "@polkadot/api/augment": ["./@anagolay/types/lib/interfaces/augment-api.ts"],
-      "@polkadot/types/augment": ["./@anagolay/types/lib/interfaces/augment-types.ts"]
-    }
+    "skipLibCheck": true
+    // "paths": {
+    //   "@polkadot/api/augment": ["./@anagolay/types/lib/interfaces/augment-api.ts"],
+    //   "@polkadot/types/augment": ["./@anagolay/types/lib/interfaces/augment-types.ts"]
+    // }
   }
 }

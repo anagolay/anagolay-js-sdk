@@ -1,13 +1,11 @@
-import clui from 'clui';
 import { Command } from 'commander';
-import inquirer from 'inquirer';
 
-// eslint-disable-next-line @rushstack/typedef-var
-const Spinner = clui.Spinner;
-
+import { chooseAccount, IAccountToUse } from '../../../commonQuestions/account';
 import { askStarterQuestions } from '../../../commonQuestions/common';
+import { connectToWSAndListen } from '../../../websocketService';
 
 export default async function createSubCommand(): Promise<Command> {
+  // eslint-disable-next-line @typescript-eslint/typedef
   const cmd = new Command('create');
   cmd
     .description(
@@ -26,27 +24,9 @@ export default async function createSubCommand(): Promise<Command> {
  */
 async function create(): Promise<void> {
   await askStarterQuestions();
+  const message = await connectToWSAndListen();
 
-  const spinSanityCheck = new Spinner('Performing sanity checks ...');
-  spinSanityCheck.start();
+  console.log(message);
 
-  const answers = await inquirer.prompt([
-    {
-      name: 'Which chain you want to connect to?',
-      type: 'list',
-      choices: [
-        {
-          key: 'anagolay-',
-          value: 'alice',
-          name: 'With Alice',
-        },
-        {
-          key: 'personal',
-          value: 'personal',
-          name: 'With my personal account',
-        },
-      ],
-    },
-  ]);
-  console.log(answers);
+  const accountType: IAccountToUse = await chooseAccount();
 }
