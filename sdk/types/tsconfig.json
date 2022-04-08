@@ -2,6 +2,10 @@
   "extends": "./node_modules/@rushstack/heft-node-rig/profiles/default/tsconfig-base.json",
   "compilerOptions": {
     "types": ["heft-jest", "node"],
+    "moduleResolution": "node",
+    "module": "es2020",
+    "lib": ["es2020", "DOM"],
+    "target": "es2020",
     "paths": {
       "@anagolay/types/*": ["./src/*"],
       "@polkadot/api/augment": ["./src/interfaces/augment-api.ts"],

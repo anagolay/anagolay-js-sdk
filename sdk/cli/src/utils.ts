@@ -56,7 +56,7 @@ export async function createSettingsFile(data: ISettings): Promise<void> {
  *
  */
 export async function updateSettingsFile(data: ISettings): Promise<void> {
-  const settings = await readSettingsFile();
+  const settings: ISettings = await readSettingsFile();
   const settingsFilePath: string = resolve(homedir(), '.cache/anagolay', 'settings.json');
   await writeFile(settingsFilePath, JSON.stringify({ ...settings, ...data }, null, 2));
 }
@@ -67,9 +67,16 @@ export async function updateSettingsFile(data: ISettings): Promise<void> {
  * @public
  */
 export async function readSettingsFile(): Promise<ISettings> {
-  const settingsFilePath: string = resolve(homedir(), '.cache/anagolay', 'settings.json');
-
-  return JSON.parse((await readFile(settingsFilePath)).toString());
+  try {
+    const settingsFilePath: string = resolve(homedir(), '.cache/anagolay', 'settings.json');
+    return JSON.parse((await readFile(settingsFilePath)).toString());
+  } catch (e) {
+    return {
+      fts: false,
+      enableTelemetry: true,
+      disableStartupQuestions: false,
+    };
+  }
 }
 
 /**

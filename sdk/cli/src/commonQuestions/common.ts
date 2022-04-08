@@ -12,8 +12,6 @@ export interface IStartQuestions {
 /**
  * Ask most common questions and collect answers
  *
- * @param disableDefaultBehavior - Setting this to `true` will disable the default reaction to specific answers. Like `process.exit(0)` when `proceedWithPublish` is answered with No
- *
  * See {@link IStartQuestions} for the structure
  * @returns the answers to the questions.
  */

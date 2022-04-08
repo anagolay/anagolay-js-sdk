@@ -20,7 +20,7 @@
     },
     {
       "name": "@anagolay/types",
-      "allowedCategories": [ "libraries" ]
+      "allowedCategories": [ "libraries", "webapp" ]
     },
     {
       "name": "@anagolay/util",

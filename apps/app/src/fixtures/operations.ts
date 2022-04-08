@@ -50,27 +50,6 @@ export async function makeOps(): Promise<OperationsFixture[]> {
       ],
     },
     {
-      id: await createCid('op_file_bad_one'),
-      data: {
-        name: 'op_file_bad_one',
-        description:
-          'Reads the file from given url and returns the buffer. RAW file buffer for other ops to use.',
-        input: ['String'],
-        config: {},
-        groups: ['SYS'],
-        output: 'Byts',
-        repository: 'https://gitlab.com/anagolay/op-file',
-        license: 'Apache 2.0',
-        nostd: true,
-      },
-      versions: [
-        await createCid(nanoid()),
-        await createCid(nanoid()),
-        await createCid(nanoid()),
-        await createCid(nanoid()),
-      ],
-    },
-    {
       id: await createCid('op_file'),
       data: {
         name: 'op_file',

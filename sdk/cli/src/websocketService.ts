@@ -1,5 +1,4 @@
 import clui from 'clui';
-import { randomUUID } from 'crypto';
 import { io, Socket } from 'socket.io-client';
 // eslint-disable-next-line @typescript-eslint/typedef
 const Spinner = clui.Spinner;
@@ -11,11 +10,13 @@ export async function connectToWSAndListen(): Promise<any> {
     const wsConnectionSpinner: clui.Spinner = new Spinner('Connecting WS service ...');
     wsConnectionSpinner.start();
 
-    const namespace: string = `workflow-${randomUUID()}`;
-    // const namespace: string = `workflow`;
+    // const namespace: string = `workflow-${randomUUID()}`;
+    const namespace: string = `workflow-85f2477c-c321-4625-b421-d9ad52d7eac5`;
     const socket: Socket = io(`${ANAGOLAY_WEBSOCKET_SERVICE_API_URL}/${namespace}`, {
       path: '/ws',
       reconnection: true,
+      transports: ['websocket'],
+      secure: false,
     });
 
     socket.on('connect', () => {
@@ -31,7 +32,6 @@ export async function connectToWSAndListen(): Promise<any> {
 
     socket.on('connect_error', (data) => {
       console.log('Error in connecting to the WS', data);
-      socket.io.opts.transports = ['polling', 'websocket'];
       wsConnectionSpinner.stop();
     });
 
@@ -45,6 +45,8 @@ export async function connectToWSAndListen(): Promise<any> {
      */
     socket.on('continueWithWorkflow', (message) => {
       wsConnectionSpinner.stop();
+      console.log(message);
+      socket.disconnect();
       resolve(message);
     });
 

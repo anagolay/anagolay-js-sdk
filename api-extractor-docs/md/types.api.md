@@ -21,7 +21,7 @@ import type { Enum } from '@polkadot/types-codec';
 import type { ForWhat as ForWhat_2 } from '@anagolay/types/interfaces/anagolaySupport';
 import type { GenericId as GenericId_2 } from '@anagolay/types/interfaces/anagolaySupport';
 import type { OperationId as OperationId_2 } from '@anagolay/types/interfaces/anagolaySupport';
-import type { Option } from '@polkadot/types-codec';
+import type { Option as Option_2 } from '@polkadot/types-codec';
 import type { Struct } from '@polkadot/types-codec';
 import type { u64 } from '@polkadot/types-codec';
 import type { Vec } from '@polkadot/types-codec';
@@ -91,7 +91,7 @@ export interface AnagolayStatement extends Struct {
     // (undocumented)
     readonly data: StatementData;
     // (undocumented)
-    readonly extra: Option<StatementExtra>;
+    readonly extra: Option_2<StatementExtra>;
     // (undocumented)
     readonly id: GenericId_2;
 }
@@ -109,7 +109,7 @@ export interface AnagolayStatementRecord extends Struct {
 // @public (undocumented)
 export const anagolaySupport: {
     types: {
-        [x: string]: string | CodecClass<Codec> | Record<string, string> | {
+        [x: string]: string | Record<string, string> | CodecClass<Codec> | {
             _enum: string[] | Record<string, number> | Record<string, string | null>;
         } | {
             _set: Record<string, number>;
@@ -796,7 +796,7 @@ export interface Operation extends Struct {
     // (undocumented)
     readonly data: OperationData;
     // (undocumented)
-    readonly extra: Option<OperationExtra>;
+    readonly extra: Option_2<OperationExtra>;
     // (undocumented)
     readonly id: GenericId_2;
 }
@@ -870,7 +870,7 @@ export interface OperationRecord extends Struct {
 // @public (undocumented)
 export const operations: {
     types: {
-        [x: string]: string | CodecClass<Codec> | Record<string, string> | {
+        [x: string]: string | Record<string, string> | CodecClass<Codec> | {
             _enum: string[] | Record<string, number> | Record<string, string | null>;
         } | {
             _set: Record<string, number>;
@@ -883,7 +883,7 @@ export interface OperationVersion extends Struct {
     // (undocumented)
     readonly data: OperationVersionData;
     // (undocumented)
-    readonly extra: Option<AnagolayVersionExtra_2>;
+    readonly extra: Option_2<AnagolayVersionExtra_2>;
     // (undocumented)
     readonly id: VersionId_2;
 }
@@ -893,9 +893,9 @@ export interface OperationVersionData extends Struct {
     // (undocumented)
     readonly artifacts: Vec<OperationArtifactStructure>;
     // (undocumented)
-    readonly entityId: Option<OperationId_2>;
+    readonly entityId: Option_2<OperationId_2>;
     // (undocumented)
-    readonly parentId: Option<VersionId_2>;
+    readonly parentId: Option_2<VersionId_2>;
 }
 
 // @public
@@ -954,7 +954,7 @@ export interface PhashInfo extends Struct {
 // @public (undocumented)
 export const poe: {
     types: {
-        [x: string]: string | CodecClass<Codec> | Record<string, string> | {
+        [x: string]: string | Record<string, string> | CodecClass<Codec> | {
             _enum: string[] | Record<string, number> | Record<string, string | null>;
         } | {
             _set: Record<string, number>;
@@ -967,7 +967,7 @@ export interface Proof extends Struct {
     // (undocumented)
     readonly data: ProofData;
     // (undocumented)
-    readonly extra: Option<ProofExtra>;
+    readonly extra: Option_2<ProofExtra>;
     // (undocumented)
     readonly id: GenericId_2;
 }
@@ -1041,7 +1041,7 @@ export interface StatementExtra extends Struct {
 // @public (undocumented)
 export const statements: {
     types: {
-        [x: string]: string | CodecClass<Codec> | Record<string, string> | {
+        [x: string]: string | Record<string, string> | CodecClass<Codec> | {
             _enum: string[] | Record<string, number> | Record<string, string | null>;
         } | {
             _set: Record<string, number>;
@@ -1087,7 +1087,7 @@ export interface Workflow extends Struct {
     // (undocumented)
     readonly data: WorkflowData;
     // (undocumented)
-    readonly extra: Option<WorkflowExtra>;
+    readonly extra: Option_2<WorkflowExtra>;
     // (undocumented)
     readonly id: WorkflowId_2;
 }
@@ -1155,7 +1155,7 @@ export interface WorkflowRecord extends Struct {
 // @public (undocumented)
 export const workflows: {
     types: {
-        [x: string]: string | CodecClass<Codec> | Record<string, string> | {
+        [x: string]: string | Record<string, string> | CodecClass<Codec> | {
             _enum: string[] | Record<string, number> | Record<string, string | null>;
         } | {
             _set: Record<string, number>;
@@ -1176,7 +1176,7 @@ export interface WorkflowVersion extends Struct {
     // (undocumented)
     readonly data: WorkflowVersionData;
     // (undocumented)
-    readonly extra: Option<AnagolayVersionExtra_2>;
+    readonly extra: Option_2<AnagolayVersionExtra_2>;
     // (undocumented)
     readonly id: VersionId_2;
 }
@@ -1186,9 +1186,9 @@ export interface WorkflowVersionData extends Struct {
     // (undocumented)
     readonly artifacts: Vec<WorkflowArtifactStructure>;
     // (undocumented)
-    readonly entityId: Option<WorkflowId_2>;
+    readonly entityId: Option_2<WorkflowId_2>;
     // (undocumented)
-    readonly parentId: Option<VersionId_2>;
+    readonly parentId: Option_2<VersionId_2>;
 }
 
 // @public

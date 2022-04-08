@@ -19,9 +19,6 @@ if ! command -v remote-signer &>/dev/null; then
 	sudo sh -c 'wget https://ipfs.anagolay.network/ipfs/QmVwR17T5oT4SsH1gb8T9L9gHe5CsJz2iwhbhWCwPPHgHR -O /usr/local/bin/remote-signer && chmod +x /usr/local/bin/remote-signer'
 fi
 
-# install the rush
-pnpm add -g @microsoft/rush
-
 if [ ! -d "$HOME/.tmux/plugins/tpm" ]; then
 	git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
 fi
@@ -40,6 +37,8 @@ if [ ! -d $TEST_REPOS_PATH/op-file ]; then
 	echo "Cloning the Op-File to the root for testing"
 	git clone git@gitlab.com:anagolay/operations/op-file.git $TEST_REPOS_PATH/op-file
 fi
+
+pnpm add -g json
 
 # # set the pnpm store path to the rush one so we can just pnpm stuff
 # pnpm config set store-dir /workspace/common/temp/pnpm-store

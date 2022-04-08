@@ -1070,7 +1070,16 @@
             },
             {
               "kind": "Content",
-              "text": "{\n    types: {\n        [x: string]: string | import(\"@polkadot/types/types\")."
+              "text": "{\n    types: {\n        [x: string]: string | "
+            },
+            {
+              "kind": "Reference",
+              "text": "Record",
+              "canonicalReference": "!Record:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<string, string> | import(\"@polkadot/types/types\")."
             },
             {
               "kind": "Reference",
@@ -1088,16 +1097,7 @@
             },
             {
               "kind": "Content",
-              "text": "> | "
-            },
-            {
-              "kind": "Reference",
-              "text": "Record",
-              "canonicalReference": "!Record:type"
-            },
-            {
-              "kind": "Content",
-              "text": "<string, string> | {\n            _enum: string[] | "
+              "text": "> | {\n            _enum: string[] | "
             },
             {
               "kind": "Reference",
@@ -8405,7 +8405,16 @@
             },
             {
               "kind": "Content",
-              "text": "{\n    types: {\n        [x: string]: string | import(\"@polkadot/types/types\")."
+              "text": "{\n    types: {\n        [x: string]: string | "
+            },
+            {
+              "kind": "Reference",
+              "text": "Record",
+              "canonicalReference": "!Record:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<string, string> | import(\"@polkadot/types/types\")."
             },
             {
               "kind": "Reference",
@@ -8423,16 +8432,7 @@
             },
             {
               "kind": "Content",
-              "text": "> | "
-            },
-            {
-              "kind": "Reference",
-              "text": "Record",
-              "canonicalReference": "!Record:type"
-            },
-            {
-              "kind": "Content",
-              "text": "<string, string> | {\n            _enum: string[] | "
+              "text": "> | {\n            _enum: string[] | "
             },
             {
               "kind": "Reference",
@@ -9408,7 +9408,16 @@
             },
             {
               "kind": "Content",
-              "text": "{\n    types: {\n        [x: string]: string | import(\"@polkadot/types/types\")."
+              "text": "{\n    types: {\n        [x: string]: string | "
+            },
+            {
+              "kind": "Reference",
+              "text": "Record",
+              "canonicalReference": "!Record:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<string, string> | import(\"@polkadot/types/types\")."
             },
             {
               "kind": "Reference",
@@ -9426,16 +9435,7 @@
             },
             {
               "kind": "Content",
-              "text": "> | "
-            },
-            {
-              "kind": "Reference",
-              "text": "Record",
-              "canonicalReference": "!Record:type"
-            },
-            {
-              "kind": "Content",
-              "text": "<string, string> | {\n            _enum: string[] | "
+              "text": "> | {\n            _enum: string[] | "
             },
             {
               "kind": "Reference",
@@ -10316,7 +10316,16 @@
             },
             {
               "kind": "Content",
-              "text": "{\n    types: {\n        [x: string]: string | import(\"@polkadot/types/types\")."
+              "text": "{\n    types: {\n        [x: string]: string | "
+            },
+            {
+              "kind": "Reference",
+              "text": "Record",
+              "canonicalReference": "!Record:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<string, string> | import(\"@polkadot/types/types\")."
             },
             {
               "kind": "Reference",
@@ -10334,16 +10343,7 @@
             },
             {
               "kind": "Content",
-              "text": "> | "
-            },
-            {
-              "kind": "Reference",
-              "text": "Record",
-              "canonicalReference": "!Record:type"
-            },
-            {
-              "kind": "Content",
-              "text": "<string, string> | {\n            _enum: string[] | "
+              "text": "> | {\n            _enum: string[] | "
             },
             {
               "kind": "Reference",
@@ -11537,7 +11537,16 @@
             },
             {
               "kind": "Content",
-              "text": "{\n    types: {\n        [x: string]: string | import(\"@polkadot/types/types\")."
+              "text": "{\n    types: {\n        [x: string]: string | "
+            },
+            {
+              "kind": "Reference",
+              "text": "Record",
+              "canonicalReference": "!Record:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<string, string> | import(\"@polkadot/types/types\")."
             },
             {
               "kind": "Reference",
@@ -11555,16 +11564,7 @@
             },
             {
               "kind": "Content",
-              "text": "> | "
-            },
-            {
-              "kind": "Reference",
-              "text": "Record",
-              "canonicalReference": "!Record:type"
-            },
-            {
-              "kind": "Content",
-              "text": "<string, string> | {\n            _enum: string[] | "
+              "text": "> | {\n            _enum: string[] | "
             },
             {
               "kind": "Reference",

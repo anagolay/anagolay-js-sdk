@@ -53,5 +53,5 @@
   },
   "remoteUser": "node",
   "postCreateCommand": "bash .devcontainer/install-deps.sh",
-  "postStartCommand": "rush update"
+  "postStartCommand": "pnpm add -g @microsoft/rush && rush update"
 }

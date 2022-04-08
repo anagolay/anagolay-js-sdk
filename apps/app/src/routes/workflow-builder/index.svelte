@@ -13,17 +13,43 @@
   import Drawflow from './drawflow.svelte';
   import { io, Socket } from 'socket.io-client';
   import { page } from '$app/stores';
+  import { AnForWhat, type AnWorkflowData } from '@anagolay/types';
+
+  const groupsAll = Object.entries(AnForWhat);
+  const Groups: { id: number; name: string }[] = groupsAll
+    .slice(groupsAll.length / 2, groupsAll.length)
+    .map((g) => {
+      return {
+        id: g[1] as number,
+        name: g[0],
+      };
+    });
+
+  let socket: Socket;
+
+  let saveDisabled: boolean = false;
+
+  function sendMessageToWs() {
+    console.log(workflowData);
+    socket.emit('continueWithWorkflow', workflowData);
+  }
 
   let namespace: string;
 
   // workaround for the missing deduplication
   let addedNodes: string[] = [];
 
-  // workaround for the missing deduplication
-  let connectedNodes: number = 0;
+  let workflowData: AnWorkflowData = {
+    name: '',
+    description: '',
+    creator: '',
+    groups: [],
+    segments: [],
+  };
 
   // only getting the fixtures
   let opsFixtures: Promise<OperationsFixture[]> = makeOps();
+
   // add the node to the drawer
   function addNode(data: OperationsFixture) {
     const {
@@ -59,29 +85,34 @@
    */
   function removeNode(event: CustomEvent<{ id: string }>) {
     const { id } = event.detail;
-    console.log('removeNode', id);
-
     addedNodes = removeItemFromArray(addedNodes, id);
-
-    // bindedDf.removeNode(id);
   }
 
-  onMount(() => {
+  onMount(async () => {
     const whereToConnect = $page.url.searchParams.get('ws');
     namespace = $page.url.searchParams.get('ns');
-    const socket: Socket = io(whereToConnect + '/' + namespace, {
-      path: '/ws',
+    workflowData.name = namespace;
+
+    const path = '/' + ($page.url.searchParams.get('path') || 'ws');
+
+    socket = io(whereToConnect + '/' + namespace, {
+      path,
       reconnection: true,
       transports: ['websocket'],
       secure: false,
     });
+
     socket.on('connect', () => {
       console.log('connected with id %s and namespace %s', socket.id, namespace);
     });
+
     socket.on('connect_error', () => {
       console.error('socket error');
-
       socket.connect();
+    });
+
+    socket.on('continueWithWorkflow', (message) => {
+      console.log(message);
     });
   });
 
@@ -91,13 +122,16 @@
   let noticeText: string = `
   <span>Right click selects node for deletion</span>
   `;
+
+  $: console.log(workflowData);
 </script>
 
-<div class="flex flex-row min-h-screen bg-gray-100 text-gray-800">
+<div class="flex flex-row min-h-screen">
   <aside
-    class="sidebar w-64 md:shadow transform -translate-x-full md:translate-x-0 transition-transform duration-150 ease-in bg-indigo-500"
+    class="sidebar w-64 md:shadow transform -translate-x-full md:translate-x-0 transition-transform duration-150 ease-in bg-base-content"
   >
     <div class="sidebar-content px-4 py-6">
+      <h2 class="text-white">Operations</h2>
       <ul class="flex flex-col w-full">
         {#await opsFixtures}
           <li>...waiting for fixtures</li>
@@ -126,43 +160,65 @@
         {/await}
       </ul>
     </div>
-    <div class="absolute bottom-0 my-10">
-      <span
-        class="text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-gray-100 transition-colors duration-200 flex items-center py-2 px-8"
-      >
-        <svg
-          width="20"
-          fill="currentColor"
-          height="20"
-          class="h-5 w-5"
-          viewBox="0 0 1792 1792"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M1088 1256v240q0 16-12 28t-28 12h-240q-16 0-28-12t-12-28v-240q0-16 12-28t28-12h240q16 0 28 12t12 28zm316-600q0 54-15.5 101t-35 76.5-55 59.5-57.5 43.5-61 35.5q-41 23-68.5 65t-27.5 67q0 17-12 32.5t-28 15.5h-240q-15 0-25.5-18.5t-10.5-37.5v-45q0-83 65-156.5t143-108.5q59-27 84-56t25-76q0-42-46.5-74t-107.5-32q-65 0-108 29-35 25-107 115-13 16-31 16-12 0-25-8l-164-125q-13-10-15.5-25t5.5-28q160-266 464-266 80 0 161 31t146 83 106 127.5 41 158.5z"
+    <div class="h-fit">
+      <div class="form-control px-4">
+        <div>
+          <label class="label" for="workflowName">
+            <span class="label-text text-white">Name</span>
+          </label>
+          <input
+            type="text"
+            name="workflowName"
+            bind:value={workflowData.name}
+            class="input bg-slate-200 input-bordered w-full max-w-xs text-slate-800 focus:text-slate-100 focus:bg-primary-focus"
           />
-        </svg>
-        <span class="mx-4 font-medium"> Support </span>
-      </span>
+        </div>
+        <div>
+          <label class="label" for="workflowDesc">
+            <span class="label-text text-white">Description</span>
+          </label>
+          <input
+            type="text"
+            name="workflowDesc"
+            bind:value={workflowData.description}
+            class="input bg-slate-200 input-bordered w-full max-w-xs text-slate-800 focus:text-slate-100  focus:bg-primary-focus"
+          />
+        </div>
+        <div>
+          <label class="label" for="groups">
+            <span class="label-text text-white">Groups</span>
+          </label>
+
+          <div class="bg-slate-200 rounded-lg px-2 py-2">
+            {#each Groups as group}
+              <div class="form-control py-0 px-0">
+                <label class="label cursor-pointer">
+                  <span class="label-text text-black">{group.name}</span>
+                  <input
+                    bind:group={workflowData.groups}
+                    type="checkbox"
+                    name="groups"
+                    class="checkbox outline checkbox-primary"
+                    value={group.id}
+                  />
+                </label>
+              </div>
+            {/each}
+          </div>
+        </div>
+      </div>
+      <div class="px-4 py-6 btn-group w-full bottom-0">
+        <button disabled={saveDisabled} on:click={sendMessageToWs} class="btn w-1/2 btn-primary">Save</button>
+        <button class="btn w-1/2 btn-error">Cancel</button>
+      </div>
     </div>
   </aside>
 
   <main class="main flex flex-col flex-grow -ml-64 md:ml-0 transition-all duration-150 ease-in">
-    <div class="main-content flex flex-col flex-grow p-4">
-      <div class="col-auto">
-        <button class="btn btn-primary btn-outline">Save The Workflow</button>
-        <button class="btn btn-warning">Cancel The Workflow</button>
-      </div>
-
-      <div class="flex flex-col flex-grow border-4 border-gray-400 border-dashed bg-white rounded mt-4">
+    <div class="main-content flex flex-col flex-grow px-4">
+      <div class="flex flex-col flex-grow border-4 border-gray-400 border-dashed bg-white rounded">
         <Drawflow bind:this={bindedDf} on:removeNode={removeNode} />
       </div>
     </div>
   </main>
 </div>
-
-<!-- <style>
-  .custom100vh {
-    height: 100vh;
-  }
-</style> -->

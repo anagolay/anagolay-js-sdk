@@ -92,10 +92,14 @@
 
 .drawflow .connection .main-path {
   fill: none;
-  stroke-width: 5px;
-  stroke: #4682b4;
-  pointer-events: all;
-  stroke-dasharray: 3%;
+  stroke-dasharray: 7;
+  animation: dashdraw 0.5s linear forwards infinite;
+}
+
+@keyframes dashdraw {
+  from {
+    stroke-dashoffset: 14;
+  }
 }
 
 .drawflow .connection .main-path:hover {

@@ -96,11 +96,4 @@
 
 <svelte:window bind:innerHeight />
 
-<div
-  id="drawflow"
-  style="height: {innerHeight}px;"
-  class="flex-auto"
-  on:drag={drag}
-  on:drop={drop}
-  on:dragover={allowDrop}
-/>
+<div id="drawflow" class="flex-auto" on:drag={drag} on:drop={drop} on:dragover={allowDrop} />
