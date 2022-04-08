@@ -119,9 +119,14 @@
   // Bind the drawFlow.svelte to this bariable so we can use it
   let bindedDf: Drawflow;
 
-  let noticeText: string = `
-  <span>Right click selects node for deletion</span>
-  `;
+  /**
+   * Opens the Operarion Info modal window
+   * @param id
+   */
+  function showOperationInfo(id: string) {
+    console.log('operationid is %s', id);
+    console.log('this shoul open the modal');
+  }
 
   $: console.log(workflowData);
 </script>
@@ -138,7 +143,9 @@
         {:then opsFixtures}
           {#each opsFixtures as op}
             <li class="my-1">
-              <span class="flex flex-row items-center h-10 px-3 rounded-lg text-gray-700 bg-gray-100">
+              <div
+                class="flex flex-column w-full justify-between items-center h-10 px-3 rounded-lg text-gray-700 bg-gray-100"
+              >
                 <button
                   disabled={addedNodes.includes(op.id)}
                   on:click={() => addNode(op)}
@@ -146,13 +153,19 @@
                     ? 'disabled:opacity-75'
                     : ''}"
                 >
-                  <span class="flex items-center text-lg text-green-400">
-                    <MaterialIcon classNames="w-8" iconName={addedNodes.includes(op.id) ? 'checked' : ''} />
-                  </span>
+                  <button
+                    disabled={!addedNodes.includes(op.id)}
+                    class="flex items-center text-lg text-green-400 disabled:text-slate-200"
+                  >
+                    <MaterialIcon classNames="w-8" iconName="checked" />
+                  </button>
 
                   <span>{op.data.name}</span>
                 </button>
-              </span>
+                <button on:click={() => showOperationInfo(op.id)} class="flex items-center text-lg ">
+                  <MaterialIcon classNames="w-8 " iconName="info" />
+                </button>
+              </div>
             </li>
           {/each}
         {:catch error}
