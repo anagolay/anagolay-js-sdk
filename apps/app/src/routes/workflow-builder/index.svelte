@@ -12,7 +12,6 @@
   import { onMount } from 'svelte';
   import Drawflow from './drawflow.svelte';
   import { io, Socket } from 'socket.io-client';
-  import { page } from '$app/stores';
   import { AnForWhat, type AnWorkflowData } from '@anagolay/types';
 
   const groupsAll = Object.entries(AnForWhat);
@@ -34,7 +33,12 @@
     socket.emit('continueWithWorkflow', workflowData);
   }
 
-  let namespace: string;
+  /**
+   * Svelte magic, this gets automagically populated when `index.ts` is finished and finds the values 😍
+   */
+  export let namespace: string;
+  export let ws: string;
+  export let path: string;
 
   // workaround for the missing deduplication
   let addedNodes: string[] = [];
@@ -69,7 +73,7 @@
           'classname-my-own',
           { input, output, versions },
           `<div class="container">
-            <span class="w-fit text-white">${name}</span>
+            <span class="w-fit">${name}</span>
            </div>
           `,
           false,
@@ -88,14 +92,13 @@
     addedNodes = removeItemFromArray(addedNodes, id);
   }
 
+  /**
+   * On the Component mount
+   */
   onMount(async () => {
-    const whereToConnect = $page.url.searchParams.get('ws');
-    namespace = $page.url.searchParams.get('ns');
     workflowData.name = namespace;
 
-    const path = '/' + ($page.url.searchParams.get('path') || 'ws');
-
-    socket = io(whereToConnect + '/' + namespace, {
+    socket = io(ws + '/' + namespace, {
       path,
       reconnection: true,
       transports: ['websocket'],
@@ -131,107 +134,111 @@
   $: console.log(workflowData);
 </script>
 
-<div class="flex flex-row min-h-screen">
-  <aside
-    class="sidebar w-64 md:shadow transform -translate-x-full md:translate-x-0 transition-transform duration-150 ease-in bg-base-content"
-  >
-    <div class="sidebar-content px-4 py-6">
-      <h2 class="text-white">Operations</h2>
-      <ul class="flex flex-col w-full">
-        {#await opsFixtures}
-          <li>...waiting for fixtures</li>
-        {:then opsFixtures}
-          {#each opsFixtures as op}
-            <li class="my-1">
-              <div
-                class="flex flex-column w-full justify-between items-center h-10 px-3 rounded-lg text-gray-700 bg-gray-100"
-              >
-                <button
-                  disabled={addedNodes.includes(op.id)}
-                  on:click={() => addNode(op)}
-                  class="flex flex-row items-center h-10 rounded-lg {addedNodes.includes(op.id)
-                    ? 'disabled:opacity-75'
-                    : ''}"
+<div>
+  <div class="flex flex-row min-h-screen">
+    <aside
+      class="sidebar w-64 md:shadow transform -translate-x-full md:translate-x-0 transition-transform duration-150 ease-in bg-base-content"
+    >
+      <div class="sidebar-content px-4 py-6">
+        <h2 class="text-base-300">Operations</h2>
+        <ul class="flex flex-col w-full">
+          {#await opsFixtures}
+            <li>...waiting for fixtures</li>
+          {:then opsFixtures}
+            {#each opsFixtures as op}
+              <li class="my-1">
+                <div
+                  class="flex flex-column w-full justify-between items-center h-10 px-1 rounded-lg text-gray-700 bg-base-content outline-dashed"
                 >
                   <button
-                    disabled={!addedNodes.includes(op.id)}
-                    class="flex items-center text-lg text-green-400 disabled:text-slate-200"
+                    disabled={addedNodes.includes(op.id)}
+                    on:click={() => addNode(op)}
+                    class="flex flex-row items-center justify-start h-10 rounded-lg w-full {addedNodes.includes(
+                      op.id
+                    )
+                      ? 'disabled:opacity-75'
+                      : ''}"
                   >
-                    <MaterialIcon classNames="w-8" iconName="checked" />
+                    <button
+                      disabled={!addedNodes.includes(op.id)}
+                      class="py-1 text-lg btn-sm disabled:text-slate-200"
+                    >
+                      <MaterialIcon classNames="w-4" iconName="checked" />
+                    </button>
+
+                    <span class="px-2">{op.data.name}</span>
                   </button>
-
-                  <span>{op.data.name}</span>
-                </button>
-                <button on:click={() => showOperationInfo(op.id)} class="flex items-center text-lg ">
-                  <MaterialIcon classNames="w-8 " iconName="info" />
-                </button>
-              </div>
-            </li>
-          {/each}
-        {:catch error}
-          <p style="color: red">{error.message}</p>
-        {/await}
-      </ul>
-    </div>
-    <div class="h-fit">
-      <div class="form-control px-4">
-        <div>
-          <label class="label" for="workflowName">
-            <span class="label-text text-white">Name</span>
-          </label>
-          <input
-            type="text"
-            name="workflowName"
-            bind:value={workflowData.name}
-            class="input bg-slate-200 input-bordered w-full max-w-xs text-slate-800 focus:text-slate-100 focus:bg-primary-focus"
-          />
-        </div>
-        <div>
-          <label class="label" for="workflowDesc">
-            <span class="label-text text-white">Description</span>
-          </label>
-          <input
-            type="text"
-            name="workflowDesc"
-            bind:value={workflowData.description}
-            class="input bg-slate-200 input-bordered w-full max-w-xs text-slate-800 focus:text-slate-100  focus:bg-primary-focus"
-          />
-        </div>
-        <div>
-          <label class="label" for="groups">
-            <span class="label-text text-white">Groups</span>
-          </label>
-
-          <div class="bg-slate-200 rounded-lg px-2 py-2">
-            {#each Groups as group}
-              <div class="form-control py-0 px-0">
-                <label class="label cursor-pointer">
-                  <span class="label-text text-black">{group.name}</span>
-                  <input
-                    bind:group={workflowData.groups}
-                    type="checkbox"
-                    name="groups"
-                    class="checkbox outline checkbox-primary"
-                    value={group.id}
-                  />
-                </label>
-              </div>
+                  <button on:click={() => showOperationInfo(op.id)} class="flex items-center text-lg ">
+                    <MaterialIcon classNames="w-8 " iconName="info" />
+                  </button>
+                </div>
+              </li>
             {/each}
+          {:catch error}
+            <p style="color: red">{error.message}</p>
+          {/await}
+        </ul>
+      </div>
+      <div class="h-fit">
+        <div class="form-control px-4">
+          <div>
+            <label class="label" for="workflowName">
+              <span class="label-text text-base-300">Name</span>
+            </label>
+            <input
+              type="text"
+              name="workflowName"
+              bind:value={workflowData.name}
+              class="input bg-slate-200 input-bordered w-full max-w-xs text-slate-800 focus:text-slate-100 focus:bg-primary-focus"
+            />
+          </div>
+          <div>
+            <label class="label" for="workflowDesc">
+              <span class="label-text text-base-300">Description</span>
+            </label>
+            <input
+              type="text"
+              name="workflowDesc"
+              bind:value={workflowData.description}
+              class="input bg-slate-200 input-bordered w-full max-w-xs text-slate-800 focus:text-slate-100  focus:bg-primary-focus"
+            />
+          </div>
+          <div>
+            <label class="label" for="groups">
+              <span class="label-text text-base-300">Groups</span>
+            </label>
+
+            <div class="bg-slate-200 rounded-lg px-2 py-2">
+              {#each Groups as group}
+                <div class="form-control py-0 px-0">
+                  <label class="label cursor-pointer">
+                    <span class="label-text text-black">{group.name}</span>
+                    <input
+                      bind:group={workflowData.groups}
+                      type="checkbox"
+                      name="groups"
+                      class="checkbox outline checkbox-primary"
+                      value={group.id}
+                    />
+                  </label>
+                </div>
+              {/each}
+            </div>
           </div>
         </div>
+        <div class="px-4 py-6 btn-group w-full bottom-0">
+          <button disabled={saveDisabled} on:click={sendMessageToWs} class="btn w-1/2 btn-primary"
+            >Save</button
+          >
+          <button class="btn w-1/2 btn-error">Cancel</button>
+        </div>
       </div>
-      <div class="px-4 py-6 btn-group w-full bottom-0">
-        <button disabled={saveDisabled} on:click={sendMessageToWs} class="btn w-1/2 btn-primary">Save</button>
-        <button class="btn w-1/2 btn-error">Cancel</button>
-      </div>
-    </div>
-  </aside>
+    </aside>
 
-  <main class="main flex flex-col flex-grow -ml-64 md:ml-0 transition-all duration-150 ease-in">
-    <div class="main-content flex flex-col flex-grow px-4">
-      <div class="flex flex-col flex-grow border-4 border-gray-400 border-dashed bg-white rounded">
+    <main class="bg-base-300 flex flex-col flex-grow -ml-64 md:ml-0 transition-all duration-150 ease-in">
+      <div class=" flex flex-col flex-grow">
         <Drawflow bind:this={bindedDf} on:removeNode={removeNode} />
       </div>
-    </div>
-  </main>
+    </main>
+  </div>
 </div>

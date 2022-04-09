@@ -1,6 +1,3 @@
-<!-- svelte-ignore a11y-label-has-associated-control -->
-<!-- svelte-ignore a11y-missing-attribute -->
-<!-- svelte-ignore a11y-missing-attribute -->
 <div class="navbar bg-base-100">
   <div class="flex-1">
     <a class="btn btn-ghost normal-case text-xl" href="/">Anagolay App</a>
@@ -10,9 +7,10 @@
       <input type="text" placeholder="Search" class="input input-bordered" />
     </div> -->
     <div class="dropdown dropdown-end">
-      <label tabindex="0" class="btn btn-ghost btn-circle avatar">
+      <label tabindex="0" class="btn btn-ghost btn-circle avatar" for="">
         <div class="w-10 rounded-full">
           <img
+            alt=""
             src="https://ipfs.anagolay.network/ipfs/QmTbeJniR8i4GwfrpXSi5QbVibSzsK8biJ3KeF765PWDN8?filename=anagolay-round_bb_gl144.png"
           />
         </div>

@@ -32,7 +32,8 @@
     "ardenivanov.svelte-intellisense",
     "fivethree.vscode-svelte-snippets",
     "bradlc.vscode-tailwindcss",
-    "formulahendry.auto-rename-tag"
+    "formulahendry.auto-rename-tag",
+    "christian-kohler.npm-intellisense"
   ],
   "overrideCommand": false,
   "forwardPorts": [7766],

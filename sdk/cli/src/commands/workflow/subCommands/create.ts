@@ -1,8 +1,13 @@
+import { AnWorkflowData } from '@anagolay/types';
 import { Command } from 'commander';
 
-import { chooseAccount, IAccountToUse } from '../../../commonQuestions/account';
 import { askStarterQuestions } from '../../../commonQuestions/common';
-import { connectToWSAndListen } from '../../../websocketService';
+import { connectToWSAndListenFowWorkflow } from '../../../websocketService';
+
+const { ANAGOLAY_WORKFLOW_BUILDER_UI, ANAGOLAY_CHAIN_WS_URL } = process.env;
+
+if (!ANAGOLAY_WORKFLOW_BUILDER_UI) throw new Error('ANAGOLAY_WORKFLOW_BUILDER_UI is not set');
+if (!ANAGOLAY_CHAIN_WS_URL) throw new Error('ANAGOLAY_CHAIN_WS_URL is not set');
 
 export default async function createSubCommand(): Promise<Command> {
   // eslint-disable-next-line @typescript-eslint/typedef
@@ -24,9 +29,21 @@ export default async function createSubCommand(): Promise<Command> {
  */
 async function create(): Promise<void> {
   await askStarterQuestions();
-  const message = await connectToWSAndListen();
 
-  console.log(message);
+  // const namespace: string = `workflow-${randomUUID()}`;
+  const namespace: string = `workflow-85f2477c-c321-4625-b421-d9ad52d7eac5`;
+  const wsURL: string = encodeURIComponent(
+    (ANAGOLAY_CHAIN_WS_URL as string)?.includes('docker')
+      ? 'http://localhost:2113'
+      : (ANAGOLAY_CHAIN_WS_URL as string)
+  );
 
-  const accountType: IAccountToUse = await chooseAccount();
+  const link: string = `${ANAGOLAY_WORKFLOW_BUILDER_UI}?ws=${wsURL}&ns=${namespace}&path=ws`;
+  console.log(`Follow this link to start building the Workflow: \n${link}`);
+
+  const message: AnWorkflowData = await connectToWSAndListenFowWorkflow(namespace);
+
+  // console.log(message);
+
+  // const accountType: IAccountToUse = await chooseAccount();
 }

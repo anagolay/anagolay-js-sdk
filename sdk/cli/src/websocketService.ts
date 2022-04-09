@@ -1,23 +1,46 @@
+import { AnWorkflowData } from '@anagolay/types';
 import clui from 'clui';
-import { io, Socket } from 'socket.io-client';
+import { io, Socket, SocketOptions } from 'socket.io-client';
 // eslint-disable-next-line @typescript-eslint/typedef
 const Spinner = clui.Spinner;
 
 const { ANAGOLAY_WEBSOCKET_SERVICE_API_URL } = process.env;
 
-export async function connectToWSAndListen(): Promise<any> {
+/**
+ * Connect to the Socket.io instance
+ * @param url  - Full URL with or without the namespace
+ * @param options - Normal Socket options
+ * @returns Connected socket
+
+ */
+export function connectToWs(url: string, options?: SocketOptions): Socket {
+  const socket: Socket = io(url, {
+    path: '/ws',
+    reconnection: true,
+    transports: ['websocket'],
+    secure: false,
+    ...options,
+  });
+  return socket;
+}
+
+/**
+ * Connect to the Socket and listen for the events for Workflow namespaces.
+ * @param namespace - workflow namespace in a format `workflow-uuidV4`
+ * @param options - optional socket options
+ *
+ *
+ * @returns Resolves the message with the signature {@link AnWorkflowData} interface
+ */
+export async function connectToWSAndListenFowWorkflow(
+  namespace: string,
+  options?: SocketOptions
+): Promise<AnWorkflowData> {
   return new Promise((resolve, reject) => {
     const wsConnectionSpinner: clui.Spinner = new Spinner('Connecting WS service ...');
     wsConnectionSpinner.start();
 
-    // const namespace: string = `workflow-${randomUUID()}`;
-    const namespace: string = `workflow-85f2477c-c321-4625-b421-d9ad52d7eac5`;
-    const socket: Socket = io(`${ANAGOLAY_WEBSOCKET_SERVICE_API_URL}/${namespace}`, {
-      path: '/ws',
-      reconnection: true,
-      transports: ['websocket'],
-      secure: false,
-    });
+    const socket: Socket = connectToWs(`${ANAGOLAY_WEBSOCKET_SERVICE_API_URL}/${namespace}`, options);
 
     socket.on('connect', () => {
       wsConnectionSpinner.message('Waiting for the data ...');
@@ -43,7 +66,7 @@ export async function connectToWSAndListen(): Promise<any> {
     /**
      * This is the main event for the continuing the workflow creation
      */
-    socket.on('continueWithWorkflow', (message) => {
+    socket.on('continueWithWorkflow', (message: AnWorkflowData) => {
       wsConnectionSpinner.stop();
       console.log(message);
       socket.disconnect();

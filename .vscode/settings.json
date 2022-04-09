@@ -26,6 +26,7 @@
   "javascript.validate.enable": false,
   "files.associations": {
     "*.json": "jsonc",
+    "package.json": "json",
     "*.cjs": "javascript"
   },
   "npm.packageManager": "pnpm",
