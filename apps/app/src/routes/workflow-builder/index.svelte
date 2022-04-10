@@ -17,6 +17,9 @@
 
   import Spinner from '$src/components/Spinner.svelte';
 
+  /**
+   * This is how we buidl the actual VALUES! i had to change the output of the types to be ES2020
+   */
   const groupsAll = Object.entries(AnForWhat);
   const Groups: { id: number; name: string }[] = groupsAll
     .slice(groupsAll.length / 2, groupsAll.length)
@@ -29,7 +32,7 @@
 
   let socket: Socket;
 
-  let saveDisabled: boolean = false;
+  let saveDisabled: boolean = true;
 
   function sendMessageToWs() {
     console.log(workflowData);
@@ -234,8 +237,10 @@
           </div>
         </div>
         <div class="px-4 py-6 btn-group w-full bottom-0">
-          <button disabled={saveDisabled} on:click={sendMessageToWs} class="btn w-1/2 btn-primary"
-            >Save</button
+          <button
+            disabled={saveDisabled}
+            on:click={sendMessageToWs}
+            class="btn w-1/2 btn-primary  disabled:text-slate-500">Save</button
           >
           <button class="btn w-1/2 btn-error">Cancel</button>
         </div>
