@@ -323,6 +323,10 @@
       "allowedCategories": [ "webapp" ]
     },
     {
+      "name": "svelte-material-icons",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
       "name": "svelte-preprocess",
       "allowedCategories": [ "webapp" ]
     },
