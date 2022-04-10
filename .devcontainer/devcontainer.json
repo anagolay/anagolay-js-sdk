@@ -33,7 +33,8 @@
     "fivethree.vscode-svelte-snippets",
     "bradlc.vscode-tailwindcss",
     "formulahendry.auto-rename-tag",
-    "christian-kohler.npm-intellisense"
+    "christian-kohler.npm-intellisense",
+    "donjayamanne.githistory"
   ],
   "overrideCommand": false,
   "forwardPorts": [7766],

@@ -21,7 +21,7 @@
   display: flex;
   align-items: center;
   position: absolute;
-  background: theme('colors.primary');
+  /* background: theme('colors.primary'); */
   width: 200px;
   min-height: 40px;
   border-radius: 4px;
@@ -63,14 +63,17 @@
 }
 
 .drawflow .drawflow-node .input {
+  /* https://developer.mozilla.org/en-US/docs/Web/CSS/revert */
+  all: revert;
   left: -34px;
   top: 2px;
   background-color: theme('colors.gray.500');
   border: 2px solid theme('colors.black');
-
   position: relative;
-  background: #fff;
   cursor: crosshair;
+  border-radius: 1.4rem;
+  height: 1.2rem;
+  width: 2rem;
   z-index: 1;
 }
 
