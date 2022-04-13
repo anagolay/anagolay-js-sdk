@@ -14,13 +14,14 @@
   import { io, Socket } from 'socket.io-client';
   import { AnForWhat, type AnWorkflowData } from '@anagolay/types';
   import Navbar from './navbar.svelte';
-
+  import { wsConnected } from '$src/stores';
   import Spinner from '$src/components/Spinner.svelte';
 
   /**
    * This is how we buidl the actual VALUES! i had to change the output of the types to be ES2020
    */
   const groupsAll = Object.entries(AnForWhat);
+
   const Groups: { id: number; name: string }[] = groupsAll
     .slice(groupsAll.length / 2, groupsAll.length)
     .map((g) => {
@@ -32,7 +33,7 @@
 
   let socket: Socket;
 
-  let saveDisabled: boolean = true;
+  let saveDisabled: boolean = false;
 
   function sendMessageToWs() {
     console.log(workflowData);
@@ -43,6 +44,9 @@
    * Svelte magic, this gets automagically populated when `index.ts` is finished and finds the values 😍
    */
   export let namespace: string;
+  /**
+   * Websocket to connect to
+   */
   export let ws: string;
   export let path: string;
 
@@ -87,9 +91,13 @@
       };
       bindedDf.addNode(nodeToAdd);
       addedNodes = [...addedNodes, id];
+      makeWorkflow(nodeToAdd);
     }
   }
 
+  function makeWorkflow(newNode: NodeToAdd) {
+    console.log('newNode', newNode, bindedDf.allNodes());
+  }
   /**
    * Wrapper for remove node
    */
@@ -113,6 +121,12 @@
 
     socket.on('connect', () => {
       console.debug('connected with id %s and namespace %s', socket.id, namespace);
+      wsConnected.set(true);
+    });
+
+    socket.on('disconnected', () => {
+      socket.disconnect();
+      wsConnected.set(false);
     });
 
     socket.on('connect_error', () => {
@@ -137,6 +151,7 @@
     console.log('this shoul open the modal');
   }
 
+  // here is where you look  for the changes this onEffect
   $: console.log(workflowData);
 </script>
 
@@ -179,7 +194,7 @@
                     <span class="px-2">{op.data.name}</span>
                   </button>
                   <button on:click={() => showOperationInfo(op.id)} class="flex items-center text-lg ">
-                    <MaterialIcon classNames="w-8 " iconName="info" />
+                    <MaterialIcon classNames="w-8" iconName="info" />
                   </button>
                 </div>
               </li>
@@ -251,7 +266,7 @@
       class="bg-base-300 h-max flex flex-col flex-grow -ml-64 md:ml-0 transition-all duration-150 ease-in"
     >
       <div class=" flex flex-col flex-grow">
-        <Drawflow bind:this={bindedDf} on:removeNode={removeNode} />
+        <Drawflow bind:this={bindedDf} on:connectionCreated={console.log} on:removeNode={removeNode} />
       </div>
     </main>
   </div>

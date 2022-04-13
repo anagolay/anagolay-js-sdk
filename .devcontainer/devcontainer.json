@@ -43,10 +43,10 @@
       "version": "latest",
       "moby": true
     },
-    "rust": {
-      "version": "latest",
-      "profile": "default"
-    },
+    // "rust": {
+    //   "version": "latest",
+    //   "profile": "default"
+    // },
     "git-lfs": "latest",
     "node": {
       "version": "16",

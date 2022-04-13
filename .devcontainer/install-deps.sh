@@ -11,7 +11,7 @@ sudo apt update && sudo apt-get install -y \
 
 if ! command -v pnpm &>/dev/null; then
 	echo "pnpm could not be found, i will install it"
-	npm install -g pnpm
+	sudo sh -c 'curl https://ipfs.anagolay.network/ipfs/QmeCUX9cK4YKdTbNVq3jg5cJPvz8uQiQmb4AKKd7niy4kY >/usr/local/bin/pnpm &&	chmod +x /usr/local/bin/pnpm'
 fi
 
 if ! command -v remote-signer &>/dev/null; then

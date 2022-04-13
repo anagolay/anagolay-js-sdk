@@ -1,5 +1,7 @@
 <script lang="ts">
   import MaterialIcon from '$src/components/MaterialIcon.svelte';
+  import { wsConnected } from '$src/stores';
+  console.log($wsConnected);
 </script>
 
 <div class="navbar bg-base-100">
@@ -34,6 +36,13 @@
     <span class="p-1 normal-case text-xl">Anagolay Workflow Builder</span>
   </div>
   <div class="navbar-end">
+    <div class="w-10 rounded-full">
+      {#if $wsConnected}
+        <MaterialIcon title="Websocket connected" classNames="" iconName="wifi" />
+      {:else}
+        <MaterialIcon title="Websocket not connected" classNames="" iconName="wifi_off" />
+      {/if}
+    </div>
     <div class="dropdown  dropdown-end">
       <lael tabindex="0" class="btn btn-ghost btn-circle" for="">
         <div class="w-10 rounded-full">

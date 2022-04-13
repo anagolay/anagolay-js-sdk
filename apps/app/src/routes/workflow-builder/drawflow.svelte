@@ -6,7 +6,9 @@
   import type { NodeToAdd } from './index.svelte';
   const dispatch = createEventDispatcher<{ removeNode: { id: string } }>();
 
-  /// Drawflow editor
+  /**
+   * Drawflow editor
+   */
   let editor: Drawflow;
 
   let innerHeight: number;
@@ -21,13 +23,24 @@
     editor.addNode(d[0], d[1], d[2], d[3], d[4], d[5], d[6], d[7], d[8]);
   }
   /**
-   * REmove the node and propagate the changes
+   * Remove the node and propagate the changes
    * @param id
    */
   export function removeNode(id: string) {
     console.log('got the remove node ', id);
 
     dispatch('removeNode', { id });
+  }
+
+  export function connectionCreated(params: any) {
+    console.log('params in connectionCreated', params);
+  }
+
+  /**
+   * Exposed and wrapped all nodes
+   */
+  export function allNodes() {
+    return editor.drawflow;
   }
 
   onMount(async () => {
@@ -69,6 +82,7 @@
     // here we check can we create the connection. Due to the way library is made, this is the ONLY way
     editor.on('connectionCreated', function ({ output_id, input_id, output_class, input_class }) {
       console.log('Node connectionCreated ', { output_id, input_id, output_class, input_class });
+
       const inputNodeType = editor.getNodeFromId(input_id).data.input;
       const outputNodeType = editor.getNodeFromId(output_id).data.output;
 
@@ -76,6 +90,8 @@
         editor.removeSingleConnection(output_id, input_id, output_class, input_class);
         console.error('Got %s as output and %s as input', outputNodeType, inputNodeType);
       }
+
+      // here is where i call computeWorkflow
       // connectedNodes += 1;
     });
   });
