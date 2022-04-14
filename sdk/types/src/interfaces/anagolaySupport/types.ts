@@ -14,9 +14,6 @@ export interface ArtifactId extends GenericId {}
 /** @name Characters */
 export interface Characters extends Bytes {}
 
-/** @name CreatorId */
-export interface CreatorId extends GenericId {}
-
 /** @name DocsArtifactSubType */
 export interface DocsArtifactSubType extends Enum {
   readonly isRustdoc: boolean;

@@ -1,7 +1,7 @@
 import { RegistryTypes } from '@polkadot/types/types';
 export const WorkflowsCustomTypes: RegistryTypes = {
   OperationVersionReference: {
-    operation_version_id: 'VersionId',
+    version_id: 'VersionId',
     config: 'BTreeMap<Characters, Vec<Characters>>',
   },
   WorkflowSegment: {
@@ -10,10 +10,11 @@ export const WorkflowsCustomTypes: RegistryTypes = {
   },
   WorkflowData: {
     name: 'Characters',
-    creator: 'CreatorId',
+    creators: 'Vec<Characters>',
     description: 'Characters',
     groups: 'Vec<ForWhat>',
     segments: 'Vec<WorkflowSegment>',
+    version: 'Characters',
   },
   WorkflowExtra: {},
   Workflow: {

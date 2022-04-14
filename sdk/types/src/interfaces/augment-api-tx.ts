@@ -671,7 +671,7 @@ declare module '@polkadot/api-base/types/submittable' {
         (
           workflowData:
             | WorkflowData
-            | { name?: any; creator?: any; description?: any; groups?: any; segments?: any }
+            | { name?: any; creators?: any; description?: any; groups?: any; segments?: any; version?: any }
             | string
             | Uint8Array,
           versionData:

@@ -11,7 +11,7 @@ Full list of `Anagolay*` Generic Types to -> Javascript native types can be foun
 To generate new types and api augmentations you must have Anagolay Network chain running. Check how to do that HERE.
 
 ```sh
-yarn gen:types
+pnpm generate
 ```
 
 This will connect to the chain and generate:

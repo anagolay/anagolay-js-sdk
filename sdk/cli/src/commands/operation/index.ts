@@ -212,7 +212,7 @@ async function submitTheExtrinsicCall(
     parentId: undefined,
     artifacts: artifacts.items,
   };
-  console.log(versionData, operationData);
+  console.log('%o %o', operationData, versionData);
 
   const { accountToUse } = await chooseAccount();
 
@@ -305,7 +305,7 @@ async function callPublishOperationService(repository: string): Promise<any> {
         },
       };
 
-      const publishServiceAddToQUrl: string = `${baseUrl}/v1/q`;
+      const publishServiceAddToQUrl: string = `${baseUrl}/v1/q?context=operation`;
 
       const { data, status } = await axios.post(publishServiceAddToQUrl, payloadData, {
         headers: {
