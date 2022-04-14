@@ -3,14 +3,20 @@
   import './drawflow.css';
   import { onMount } from 'svelte';
   import { createEventDispatcher } from 'svelte';
-  import type { NodeToAdd } from './index.svelte';
-  const dispatch = createEventDispatcher<{ removeNode: { id: string } }>();
+  import type { NodeToAdd } from './interfaces';
+
+  import { workflowNodes } from './stores';
+
+  const dispatch = createEventDispatcher();
 
   /**
    * Drawflow editor
    */
   let editor: Drawflow;
 
+  /**
+   * For setting the workflow canvas hight
+   */
   let innerHeight: number;
 
   /**
@@ -32,15 +38,19 @@
     dispatch('removeNode', { id });
   }
 
-  export function connectionCreated(params: any) {
-    console.log('params in connectionCreated', params);
+  export function createWorkflow() {
+    dispatch('createWorkflow');
   }
 
   /**
    * Exposed and wrapped all nodes
    */
   export function allNodes() {
-    return editor.drawflow;
+    return editor.drawflow.drawflow.workflow;
+  }
+
+  export function getNodeFromId(id: string) {
+    return editor.getNodeFromId(id);
   }
 
   onMount(async () => {
@@ -58,41 +68,51 @@
 
     // setting up the callbacks for the events
     editor.on('nodeCreated', function (id) {
-      console.log('Node created ', id);
+      console.debug('Node created ', id);
     });
 
     editor.on('nodeRemoved', function (id) {
-      console.log('Node removed ', id);
+      console.debug('Node removed ', id);
       // this is needed since thorig lib uses number, with time i will write this by myself
       removeNode(id as unknown as string);
     });
 
     editor.on('nodeMoved', function (id) {
-      // console.log('Node moved ', id);
+      // console.debug('Node moved ', id);
     });
 
     editor.on('connectionStart', function ({ output_id, output_class }) {
-      console.log('Node connectionStart ', output_id, output_class);
+      console.debug('Node connectionStart ', output_id, output_class);
     });
 
     editor.on('connectionSelected', function ({ output_id, input_id, output_class, input_class }) {
-      console.log('Node connectionSelected ', { output_id, input_id, output_class, input_class });
+      console.debug('Node connectionSelected ', { output_id, input_id, output_class, input_class });
     });
 
     // here we check can we create the connection. Due to the way library is made, this is the ONLY way
     editor.on('connectionCreated', function ({ output_id, input_id, output_class, input_class }) {
-      console.log('Node connectionCreated ', { output_id, input_id, output_class, input_class });
+      console.debug('Node connectionCreated ', { output_id, input_id, output_class, input_class });
 
-      const inputNodeType = editor.getNodeFromId(input_id).data.input;
-      const outputNodeType = editor.getNodeFromId(output_id).data.output;
+      const currentNode = editor.getNodeFromId(input_id);
+      const incommingNode = editor.getNodeFromId(output_id);
 
-      if (!inputNodeType.includes(outputNodeType)) {
+      const currentNodeType = currentNode.data.input;
+      const incommingNodeType = incommingNode.data.output;
+
+      // console.log('input node', currentNode);
+      // console.log('output node', incommingNode);
+
+      if (!currentNodeType.includes(incommingNodeType)) {
         editor.removeSingleConnection(output_id, input_id, output_class, input_class);
-        console.error('Got %s as output and %s as input', outputNodeType, inputNodeType);
+        console.error('Got %s as output and %s as input', incommingNodeType, currentNodeType);
       }
 
-      // here is where i call computeWorkflow
-      // connectedNodes += 1;
+      // Update the store
+      workflowNodes.addConnection({
+        fromNode: currentNode,
+        toNode: incommingNode,
+      });
+      createWorkflow();
     });
   });
 

@@ -1,7 +1,6 @@
 <script lang="ts">
   import MaterialIcon from '$src/components/MaterialIcon.svelte';
   import { wsConnected } from '$src/stores';
-  console.log($wsConnected);
 </script>
 
 <div class="navbar bg-base-100">

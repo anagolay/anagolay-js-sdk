@@ -1,8 +1,5 @@
-<script context="module" lang="ts">
-  export interface NodeToAdd {
-    id: string;
-    data: [string, number, number, number, number, string, any, string, string | boolean];
-  }
+<script context="module">
+  export const prerender = false;
 </script>
 
 <script lang="ts">
@@ -16,7 +13,10 @@
   import Navbar from './navbar.svelte';
   import { wsConnected } from '$src/stores';
   import Spinner from '$src/components/Spinner.svelte';
-
+  import type { DrawflowConnectionDetail, DrawflowNode, NodeToAdd, Segment, SegmentData } from './interfaces';
+  import { allNodes, workflowNodes } from './stores';
+  import { isNil, last, reject } from 'remeda';
+  import Code from '$src/components/Code.svelte';
   /**
    * This is how we buidl the actual VALUES! i had to change the output of the types to be ES2020
    */
@@ -51,8 +51,12 @@
   export let path: string;
 
   // workaround for the missing deduplication
+  // reason why we have this is becuase it doesn't matter now do we have duplicates or not, it's all about making things work. drawflow is not that good library, must make mine
   let addedNodes: string[] = [];
 
+  /**
+   * Get this from the @anagolay/types
+   */
   let workflowData: AnWorkflowData = {
     name: '',
     description: '',
@@ -67,21 +71,25 @@
   // add the node to the drawer
   function addNode(data: OperationsFixture) {
     const {
-      id,
-      data: { name, input, output },
+      id: operationId,
+      data: { name, input, output, groups },
       versions,
     } = data;
+
+    // we are adding the versionID  to the workflow, not operationID
+    const id = last(versions);
+
     if (!addedNodes.includes(id)) {
       const nodeToAdd: NodeToAdd = {
         id,
         data: [
           name,
           input.length,
-          1,
+          1, // always only one output
           (addedNodes.length + 1) * 80,
           (addedNodes.length + 1) * 40,
           'bg-base-content',
-          { input, output, versions },
+          { input, output, groups },
           `<div class="container">
             <span class="w-fit text-base-100">${name}</span>
            </div>
@@ -91,13 +99,130 @@
       };
       bindedDf.addNode(nodeToAdd);
       addedNodes = [...addedNodes, id];
-      makeWorkflow(nodeToAdd);
+      allNodes.update((n) => [...n, nodeToAdd]);
+
+      workflowNodes.add(nodeToAdd);
+      // workflowNodes.update((n) => {
+      //   const r = new Object();
+      //   r[nodeToAdd.id] = {
+      //     connections: {
+      //       from: [],
+      //       to: [],
+      //     },
+      //   };
+      //   console.log('update n ', n, nodeToAdd, r);
+      //   return Object.assign(n, r);
+      // });
+      createWorkflow();
     }
   }
-
-  function makeWorkflow(newNode: NodeToAdd) {
-    console.log('newNode', newNode, bindedDf.allNodes());
+  function createNewSegment(
+    currentNode: DrawflowNode,
+    outgoers: DrawflowConnectionDetail[],
+    currentSegment: SegmentData[],
+    segments: Segment[]
+  ) {
+    if (currentSegment.length > 0) {
+      segments.push({
+        input: [],
+        sequence: [...currentSegment].reverse(),
+      });
+      currentSegment.splice(0, currentSegment.length);
+    }
+    return segments;
   }
+
+  function traverseGraph(currentNode: DrawflowNode, currentSegment, segments, traversed: string[] = []) {
+    const allNodesDrawflow: Record<string, DrawflowNode> = bindedDf.allNodes().data;
+
+    // get all incomming connections
+    // outgoers
+    const incomingConnections = Object.keys(currentNode.inputs)
+      .map((k) => {
+        const input = currentNode.inputs[k];
+        return input.connections;
+      })
+      .flat();
+
+    //incmmers
+    const outgoingConnections = currentNode.outputs['output_1'].connections;
+
+    const isTraversed = traversed.includes(currentNode.id);
+
+    if (!isTraversed) {
+      traversed.push(currentNode.id);
+      if (outgoingConnections.length > 1) {
+        createNewSegment(currentNode, incomingConnections, currentSegment, segments);
+      }
+      currentSegment.push({
+        node: currentNode,
+        representation: [currentNode.name, {}],
+      });
+
+      if (
+        incomingConnections.length === 0 ||
+        incomingConnections.length > 1 ||
+        currentNode.data.groups.includes('USER')
+      ) {
+        createNewSegment(currentNode, incomingConnections, currentSegment, segments);
+        incomingConnections.map((inputConnection) => {
+          const r = bindedDf.getNodeFromId(inputConnection.node);
+          traverseGraph(r, currentSegment, segments);
+        });
+      } else if (incomingConnections.length === 1) {
+        const r = bindedDf.getNodeFromId(incomingConnections[0].node);
+
+        traverseGraph(r, currentSegment, segments, traversed);
+      }
+    }
+    console.log({ segments, incomingConnections, outgoingConnections });
+  }
+
+  /**
+   * Make the workflow object
+   */
+  function createWorkflow() {
+    let segments: Segment[] = [];
+    let currentSegment: SegmentData[] = [];
+
+    const allNodesDrawflow: Record<string, DrawflowNode> = bindedDf.allNodes().data;
+
+    const roots = reject(
+      Object.keys(allNodesDrawflow).map((key) => {
+        const df_Node = allNodesDrawflow[key];
+        if (df_Node.outputs['output_1'].connections.length === 0) {
+          return df_Node;
+        }
+      }),
+      isNil
+    );
+
+    console.log('roots', roots);
+    roots.map((r) => {
+      traverseGraph(r, currentSegment, segments);
+      if (currentSegment.length > 0) {
+        const incomingConnections = Object.keys(r.inputs)
+          .map((k) => {
+            const input = r.inputs[k];
+            return input.connections;
+          })
+          .flat()
+          .reverse();
+        createNewSegment(r, incomingConnections, currentSegment, segments);
+      }
+    });
+    segments = segments.reverse();
+
+    const nodeIdsBySegment = segments.map((segment) => segment.sequence.flatMap((data) => data.node.id));
+
+    segments.forEach((segment) => {
+      const firstOpData = segment.sequence[0];
+      segment.input = Array(Math.max(1, Object.keys(firstOpData.node.inputs).length)).fill(-1);
+    });
+
+    console.log({ segments });
+  }
+
   /**
    * Wrapper for remove node
    */
@@ -151,8 +276,12 @@
     console.log('this shoul open the modal');
   }
 
-  // here is where you look  for the changes this onEffect
-  $: console.log(workflowData);
+  // // here is where you look  for the changes this onEffect
+  // $: {
+  //   console.log($allNodes);
+
+  //   console.log(workflowData);
+  // }
 </script>
 
 <div>
@@ -176,16 +305,16 @@
                   class="flex flex-column w-full justify-between items-center h-10 px-1 rounded-lg text-gray-700 bg-base-content outline-dashed"
                 >
                   <button
-                    disabled={addedNodes.includes(op.id)}
+                    disabled={addedNodes.includes(last(op.versions))}
                     on:click={() => addNode(op)}
                     class="flex flex-row items-center justify-start h-10 rounded-lg w-full {addedNodes.includes(
-                      op.id
+                      last(op.versions)
                     )
                       ? 'disabled:opacity-75'
                       : ''}"
                   >
                     <button
-                      disabled={!addedNodes.includes(op.id)}
+                      disabled={!addedNodes.includes(last(op.versions))}
                       class="py-1 text-lg btn-sm disabled:text-slate-200"
                     >
                       <MaterialIcon classNames="w-4" iconName="checked" />
@@ -266,8 +395,9 @@
       class="bg-base-300 h-max flex flex-col flex-grow -ml-64 md:ml-0 transition-all duration-150 ease-in"
     >
       <div class=" flex flex-col flex-grow">
-        <Drawflow bind:this={bindedDf} on:connectionCreated={console.log} on:removeNode={removeNode} />
+        <Drawflow bind:this={bindedDf} on:createWorkflow={createWorkflow} on:removeNode={removeNode} />
       </div>
+      <Code code={$workflowNodes} />
     </main>
   </div>
 </div>
