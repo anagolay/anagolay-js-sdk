@@ -72,7 +72,7 @@
   function addNode(data: OperationsFixture) {
     const {
       id: operationId,
-      data: { name, input, output, groups },
+      data: { name, input, output, groups, config },
       versions,
     } = data;
 
@@ -84,12 +84,12 @@
         id,
         data: [
           name,
-          input.length,
+          input.length + 1,
           1, // always only one output
           (addedNodes.length + 1) * 80,
           (addedNodes.length + 1) * 40,
           'bg-base-content',
-          { input, output, groups },
+          { input, output, groups, config },
           `<div class="container">
             <span class="w-fit text-base-100">${name}</span>
            </div>
@@ -217,10 +217,23 @@
 
     segments.forEach((segment) => {
       const firstOpData = segment.sequence[0];
-      segment.input = Array(Math.max(1, Object.keys(firstOpData.node.inputs).length)).fill(-1);
+      // in drawflow the inputs are Record<string,any>, need the length, so only way is to get the keys then length of them
+      const inputKeys = Object.keys(firstOpData.node.inputs);
+      segment.input = Array(Math.max(1, inputKeys.length)).fill(-1);
     });
 
-    console.log({ segments });
+    const s = segments.map((segment) => {
+      return {
+        input: segment.input,
+        sequence: segment.sequence.map((d: SegmentData) => ({
+          version_id: d.node.id,
+          config: {},
+        })),
+      };
+    });
+    console.log({ segments, s });
+
+    return s;
   }
 
   /**
