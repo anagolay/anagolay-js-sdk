@@ -1,6 +1,6 @@
 <script lang="ts">
   import Code from '$src/components/Code.svelte';
-  import { workflow } from './stores';
+  import { workflowManifest } from './stores';
   import MaterialIcon from '$src/components/MaterialIcon.svelte';
   import { wsConnected } from '$src/stores';
 </script>
@@ -41,14 +41,12 @@
       <!-- The button to open modal -->
       <label for="manifest-modal" class="btn modal-button">Show Manifest</label>
 
-      <!-- Put this part before </body> tag -->
       <input type="checkbox" id="manifest-modal" class="modal-toggle" />
-      <div class="modal w-full">
-        <div class="modal-box">
-          <Code code={$workflow} />
-          <div class="modal-action">
-            <label for="manifest-modal" class="btn">Close</label>
-          </div>
+      <div class="modal cursor-pointer">
+        <div class="modal-box w-11/12 max-w-5xl">
+          <label for="manifest-modal" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+
+          <Code code={$workflowManifest} />
         </div>
       </div>
     </div>

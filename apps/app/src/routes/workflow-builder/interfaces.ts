@@ -24,6 +24,7 @@ export interface Connection {
 }
 export interface WorkflowNodeConnection {
   id: string;
+  config: Record<string, any>;
   connections: {
     out: Connection[];
     in: Connection[];
@@ -61,3 +62,8 @@ export declare type SegmentData = {
   node: DrawflowNode;
   representation: [string, any];
 };
+
+export interface Sequence {
+  version_id: string;
+  config: Record<string, any>;
+}

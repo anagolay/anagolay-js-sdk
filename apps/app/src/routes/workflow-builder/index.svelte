@@ -13,9 +13,10 @@
   import { wsConnected } from '$src/stores';
   import Spinner from '$src/components/Spinner.svelte';
   import type { DrawflowNode, NodeToAdd, Segment, SegmentData } from './interfaces';
-  import { addedNodes, allNodes, workflow } from './stores';
-  import { isNil, last, reject } from 'remeda';
+  import { addedNodes, workflowNodes, workflow, workflowManifest } from './stores';
+  import { compact, isNil, last, reject } from 'remeda';
   import OperationNode from './OperationNode.svelte';
+
   /**
    * This is how we buidl the actual VALUES! i had to change the output of the types to be ES2020
    */
@@ -32,11 +33,11 @@
 
   let socket: Socket;
 
-  let saveDisabled: boolean = false;
+  let saveDisabled: boolean = true;
 
   function sendMessageToWs() {
-    console.log(workflowData);
-    socket.emit('continueWithWorkflow', workflowData);
+    console.log($workflowManifest);
+    socket.emit('continueWithWorkflow', workflowManifest);
   }
 
   /**
@@ -48,17 +49,6 @@
    */
   export let ws: string;
   export let path: string;
-
-  /**
-   * Get this from the @anagolay/types
-   */
-  let workflowData: AnWorkflowData = {
-    name: '',
-    description: '',
-    creator: '',
-    groups: [],
-    segments: [],
-  };
 
   // only getting the fixtures
   let opsFixtures: Promise<OperationsFixture[]> = makeOps();
@@ -94,7 +84,7 @@
       };
       bindedDf.addNode(nodeToAdd);
       addedNodes.update((currentState) => [...currentState, id]);
-      allNodes.update((currentState) => [...currentState, nodeToAdd]);
+      workflowNodes.update((currentState) => [...currentState, nodeToAdd]);
 
       workflow.addNode(nodeToAdd);
 
@@ -180,18 +170,16 @@
 
     const allNodesDrawflow: Record<string, DrawflowNode> = bindedDf.allNodes().data;
 
-    const roots = reject(
+    const roots = compact(
       Object.keys(allNodesDrawflow).map((key) => {
         const df_Node = allNodesDrawflow[key];
         // While using drawflow we can always know the name of the output. Also we cannot have more than one output, so it will always be `output_1`
         if (df_Node.outputs['output_1'].connections.length === 0) {
           return df_Node;
         }
-      }),
-      isNil
+      })
     );
 
-    console.log('roots', roots);
     roots.map((r) => {
       traverseGraph(r, currentSegment, segments);
       if (currentSegment.length > 0) {
@@ -242,7 +230,7 @@
    * On the Component mount
    */
   onMount(async () => {
-    workflowData.name = namespace;
+    $workflowManifest.name = namespace;
 
     socket = io(ws + '/' + namespace, {
       path,
@@ -282,13 +270,6 @@
     console.log('operationid is %s', id);
     console.log('this should open the modal');
   }
-
-  // // here is where you look  for the changes this onEffect
-  // $: {
-  //   console.log($allNodes);
-
-  //   console.log(workflowData);
-  // }
 </script>
 
 <div>
@@ -324,7 +305,7 @@
             <input
               type="text"
               name="workflowName"
-              bind:value={workflowData.name}
+              bind:value={$workflowManifest.name}
               class="input bg-slate-200 input-bordered w-full max-w-xs text-slate-800 focus:text-slate-100 focus:bg-primary-focus"
             />
           </div>
@@ -335,7 +316,7 @@
             <input
               type="text"
               name="workflowDesc"
-              bind:value={workflowData.description}
+              bind:value={$workflowManifest.description}
               class="input bg-slate-200 input-bordered w-full max-w-xs text-slate-800 focus:text-slate-100  focus:bg-primary-focus"
             />
           </div>
@@ -350,7 +331,7 @@
                   <label class="label cursor-pointer">
                     <span class="label-text text-black">{group.name}</span>
                     <input
-                      bind:group={workflowData.groups}
+                      bind:group={$workflowManifest.groups}
                       type="checkbox"
                       name="groups"
                       class="checkbox outline checkbox-primary"
