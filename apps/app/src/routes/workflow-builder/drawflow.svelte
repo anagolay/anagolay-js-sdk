@@ -5,7 +5,7 @@
   import { createEventDispatcher } from 'svelte';
   import type { NodeToAdd } from './interfaces';
 
-  import { workflowNodes } from './stores';
+  import { workflow } from './stores';
 
   const dispatch = createEventDispatcher();
 
@@ -108,7 +108,7 @@
       }
 
       // Update the store
-      workflowNodes.addConnection({
+      workflow.addConnection({
         fromNode: currentNode,
         toNode: incommingNode,
       });

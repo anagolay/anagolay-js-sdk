@@ -1,9 +1,11 @@
 import { writable, type Updater, type Writable } from 'svelte/store';
 import type { NodeToAdd, WorkflowNodeConnection } from './interfaces';
 
+export const addedNodes: Writable<string[]> = writable([]);
+
 export const allNodes: Writable<NodeToAdd[]> = writable([]);
 
-function workflowNodesFn() {
+function workflowFn() {
   const { update, subscribe, set } = writable<WorkflowNodeConnection[]>([]);
 
   return {
@@ -14,7 +16,7 @@ function workflowNodesFn() {
      * @param n - Node to add to the store
      * @returns
      */
-    add: (n: NodeToAdd) => {
+    addNode: (n: NodeToAdd) => {
       const r = {
         id: n.id,
         connections: {
@@ -27,9 +29,12 @@ function workflowNodesFn() {
     addConnection: ({ fromNode, toNode }) => {
       // console.log(fromNode, toNode);
     },
+    setConfig: (data: { nodeId: string; configKey: string; configValue: string }) => {
+      console.log(data);
+    },
     reset: () => set([]),
   };
 }
 
-export const workflowNodes = workflowNodesFn();
+export const workflow = workflowFn();
 // export const workflowNodes = writable<WorkflowNodesConnection>({});

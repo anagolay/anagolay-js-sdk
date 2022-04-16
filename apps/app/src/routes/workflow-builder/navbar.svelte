@@ -1,4 +1,6 @@
 <script lang="ts">
+  import Code from '$src/components/Code.svelte';
+  import { workflow } from './stores';
   import MaterialIcon from '$src/components/MaterialIcon.svelte';
   import { wsConnected } from '$src/stores';
 </script>
@@ -35,11 +37,26 @@
     <span class="p-1 normal-case text-xl">Anagolay Workflow Builder</span>
   </div>
   <div class="navbar-end">
-    <div class="w-10 rounded-full">
+    <div class="modalWindow mx-1">
+      <!-- The button to open modal -->
+      <label for="manifest-modal" class="btn modal-button">Show Manifest</label>
+
+      <!-- Put this part before </body> tag -->
+      <input type="checkbox" id="manifest-modal" class="modal-toggle" />
+      <div class="modal w-full">
+        <div class="modal-box">
+          <Code code={$workflow} />
+          <div class="modal-action">
+            <label for="manifest-modal" class="btn">Close</label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="w-10 rounded-full mx-1">
       {#if $wsConnected}
-        <MaterialIcon title="Websocket connected" classNames="" iconName="wifi" />
+        <MaterialIcon title="Websocket connected" classNames="cursor-help" iconName="wifi" />
       {:else}
-        <MaterialIcon title="Websocket not connected" classNames="" iconName="wifi_off" />
+        <MaterialIcon title="Websocket not connected" classNames="cursor-help" iconName="wifi_off" />
       {/if}
     </div>
     <div class="dropdown  dropdown-end">

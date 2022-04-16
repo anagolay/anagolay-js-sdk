@@ -4,6 +4,6 @@
   export let space: number = 2;
 </script>
 
-<div class="lg:container mx-auto bg-info-content">
-  <pre>{JSON.stringify(code, replacer, space)}</pre>
+<div class="lg:container mx-auto ">
+  <pre class="">{JSON.stringify(code, replacer, space)}</pre>
 </div>

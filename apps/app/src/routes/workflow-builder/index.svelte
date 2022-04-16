@@ -3,7 +3,6 @@
 </script>
 
 <script lang="ts">
-  import MaterialIcon from '$src/components/MaterialIcon.svelte';
   import { makeOps, type OperationsFixture } from '$src/fixtures/operations';
   import { removeItemFromArray } from '$src/utils/utils';
   import { onMount } from 'svelte';
@@ -13,10 +12,10 @@
   import Navbar from './navbar.svelte';
   import { wsConnected } from '$src/stores';
   import Spinner from '$src/components/Spinner.svelte';
-  import type { DrawflowConnectionDetail, DrawflowNode, NodeToAdd, Segment, SegmentData } from './interfaces';
-  import { allNodes, workflowNodes } from './stores';
+  import type { DrawflowNode, NodeToAdd, Segment, SegmentData } from './interfaces';
+  import { addedNodes, allNodes, workflow } from './stores';
   import { isNil, last, reject } from 'remeda';
-  import Code from '$src/components/Code.svelte';
+  import OperationNode from './OperationNode.svelte';
   /**
    * This is how we buidl the actual VALUES! i had to change the output of the types to be ES2020
    */
@@ -50,10 +49,6 @@
   export let ws: string;
   export let path: string;
 
-  // workaround for the missing deduplication
-  // reason why we have this is becuase it doesn't matter now do we have duplicates or not, it's all about making things work. drawflow is not that good library, must make mine
-  let addedNodes: string[] = [];
-
   /**
    * Get this from the @anagolay/types
    */
@@ -79,15 +74,15 @@
     // we are adding the versionID  to the workflow, not operationID
     const id = last(versions);
 
-    if (!addedNodes.includes(id)) {
+    if (!$addedNodes.includes(id)) {
       const nodeToAdd: NodeToAdd = {
         id,
         data: [
           name,
-          input.length + 1,
+          input.length,
           1, // always only one output
-          (addedNodes.length + 1) * 80,
-          (addedNodes.length + 1) * 40,
+          ($addedNodes.length + 1) * 80,
+          ($addedNodes.length + 1) * 40,
           'bg-base-content',
           { input, output, groups, config },
           `<div class="container">
@@ -98,35 +93,33 @@
         ],
       };
       bindedDf.addNode(nodeToAdd);
-      addedNodes = [...addedNodes, id];
-      allNodes.update((n) => [...n, nodeToAdd]);
+      addedNodes.update((currentState) => [...currentState, id]);
+      allNodes.update((currentState) => [...currentState, nodeToAdd]);
 
-      workflowNodes.add(nodeToAdd);
-      // workflowNodes.update((n) => {
-      //   const r = new Object();
-      //   r[nodeToAdd.id] = {
-      //     connections: {
-      //       from: [],
-      //       to: [],
-      //     },
-      //   };
-      //   console.log('update n ', n, nodeToAdd, r);
-      //   return Object.assign(n, r);
-      // });
+      workflow.addNode(nodeToAdd);
+
       createWorkflow();
     }
   }
-  function createNewSegment(
-    currentNode: DrawflowNode,
-    outgoers: DrawflowConnectionDetail[],
-    currentSegment: SegmentData[],
-    segments: Segment[]
-  ) {
+  /**
+   * Create a new segment.
+   *
+   * @privateRemark - This must be done in better way.
+   *
+   * @param currentNode
+   * @param outgoers
+   * @param currentSegment
+   * @param incomingSegments
+   */
+  function createNewSegment(currentSegment: SegmentData[], incomingSegments: Segment[]) {
+    const segments = incomingSegments;
+
     if (currentSegment.length > 0) {
       segments.push({
         input: [],
         sequence: [...currentSegment].reverse(),
       });
+      // clear out currentSegment, there must be better solution
       currentSegment.splice(0, currentSegment.length);
     }
     return segments;
@@ -144,7 +137,7 @@
       })
       .flat();
 
-    //incmmers
+    // While using drawflow we can always know the name of the output. Also we cannot have more than one output, so it will always be `output_1`
     const outgoingConnections = currentNode.outputs['output_1'].connections;
 
     const isTraversed = traversed.includes(currentNode.id);
@@ -152,7 +145,7 @@
     if (!isTraversed) {
       traversed.push(currentNode.id);
       if (outgoingConnections.length > 1) {
-        createNewSegment(currentNode, incomingConnections, currentSegment, segments);
+        createNewSegment(currentSegment, segments);
       }
       currentSegment.push({
         node: currentNode,
@@ -164,15 +157,15 @@
         incomingConnections.length > 1 ||
         currentNode.data.groups.includes('USER')
       ) {
-        createNewSegment(currentNode, incomingConnections, currentSegment, segments);
+        createNewSegment(currentSegment, segments);
         incomingConnections.map((inputConnection) => {
           const r = bindedDf.getNodeFromId(inputConnection.node);
           traverseGraph(r, currentSegment, segments);
         });
       } else if (incomingConnections.length === 1) {
-        const r = bindedDf.getNodeFromId(incomingConnections[0].node);
+        const currentNode = bindedDf.getNodeFromId(incomingConnections[0].node);
 
-        traverseGraph(r, currentSegment, segments, traversed);
+        traverseGraph(currentNode, currentSegment, segments, traversed);
       }
     }
     console.log({ segments, incomingConnections, outgoingConnections });
@@ -190,6 +183,7 @@
     const roots = reject(
       Object.keys(allNodesDrawflow).map((key) => {
         const df_Node = allNodesDrawflow[key];
+        // While using drawflow we can always know the name of the output. Also we cannot have more than one output, so it will always be `output_1`
         if (df_Node.outputs['output_1'].connections.length === 0) {
           return df_Node;
         }
@@ -208,7 +202,7 @@
           })
           .flat()
           .reverse();
-        createNewSegment(r, incomingConnections, currentSegment, segments);
+        createNewSegment(currentSegment, segments);
       }
     });
     segments = segments.reverse();
@@ -241,7 +235,7 @@
    */
   function removeNode(event: CustomEvent<{ id: string }>) {
     const { id } = event.detail;
-    addedNodes = removeItemFromArray(addedNodes, id);
+    addedNodes.set(removeItemFromArray($addedNodes, id));
   }
 
   /**
@@ -286,7 +280,7 @@
    */
   function showOperationInfo(id: string) {
     console.log('operationid is %s', id);
-    console.log('this shoul open the modal');
+    console.log('this should open the modal');
   }
 
   // // here is where you look  for the changes this onEffect
@@ -299,13 +293,12 @@
 
 <div>
   <Navbar />
-  <div class="flex flex-row min-h-screen">
+  <div class=" flex flex-row min-h-screen">
     <aside
-      class="sidebar w-64 md:shadow transform -translate-x-full md:translate-x-0 transition-transform duration-150 ease-in bg-base-content"
+      class=" w-64 md:shadow transform -translate-x-full md:translate-x-0 transition-transform duration-150 ease-in bg-base-content"
     >
-      <div class="px-4 py-6">
-        <h2 class="text-base-300">Operations</h2>
-
+      <div class="container px-4 my-2">
+        <h2 class="text-base-300">Operations:</h2>
         <ul class="flex flex-col w-full">
           {#await opsFixtures}
             <li>
@@ -313,32 +306,8 @@
             </li>
           {:then opsFixtures}
             {#each opsFixtures as op}
-              <li class="my-1">
-                <div
-                  class="flex flex-column w-full justify-between items-center h-10 px-1 rounded-lg text-gray-700 bg-base-content outline-dashed"
-                >
-                  <button
-                    disabled={addedNodes.includes(last(op.versions))}
-                    on:click={() => addNode(op)}
-                    class="flex flex-row items-center justify-start h-10 rounded-lg w-full {addedNodes.includes(
-                      last(op.versions)
-                    )
-                      ? 'disabled:opacity-75'
-                      : ''}"
-                  >
-                    <button
-                      disabled={!addedNodes.includes(last(op.versions))}
-                      class="py-1 text-lg btn-sm disabled:text-slate-200"
-                    >
-                      <MaterialIcon classNames="w-4" iconName="checked" />
-                    </button>
-
-                    <span class="px-2">{op.data.name}</span>
-                  </button>
-                  <button on:click={() => showOperationInfo(op.id)} class="flex items-center text-lg ">
-                    <MaterialIcon classNames="w-8" iconName="info" />
-                  </button>
-                </div>
+              <li>
+                <OperationNode {op} {addNode} {showOperationInfo} />
               </li>
             {/each}
           {:catch error}
@@ -410,7 +379,6 @@
       <div class=" flex flex-col flex-grow">
         <Drawflow bind:this={bindedDf} on:createWorkflow={createWorkflow} on:removeNode={removeNode} />
       </div>
-      <Code code={$workflowNodes} />
     </main>
   </div>
 </div>
