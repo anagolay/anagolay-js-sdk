@@ -12,9 +12,9 @@
   import Navbar from './navbar.svelte';
   import { wsConnected } from '$src/stores';
   import Spinner from '$src/components/Spinner.svelte';
-  import type { DrawflowNode, NodeToAdd, Segment, SegmentData } from './interfaces';
-  import { addedNodes, workflowNodes, workflow, workflowManifest } from './stores';
-  import { compact, isNil, last, reject } from 'remeda';
+  import type { NodeToAdd, Segment, SegmentData } from './interfaces';
+  import { addedNodesIds, workflowGraph, workflowManifest } from './stores';
+  import { last } from 'remeda';
   import OperationNode from './OperationNode.svelte';
 
   /**
@@ -55,175 +55,7 @@
 
   // add the node to the drawer
   function addNode(data: OperationsFixture) {
-    const {
-      id: operationId,
-      data: { name, input, output, groups, config },
-      versions,
-    } = data;
-
-    // we are adding the versionID  to the workflow, not operationID
-    const id = last(versions);
-
-    if (!$addedNodes.includes(id)) {
-      const nodeToAdd: NodeToAdd = {
-        id,
-        data: [
-          name,
-          input.length,
-          1, // always only one output
-          ($addedNodes.length + 1) * 80,
-          ($addedNodes.length + 1) * 40,
-          'bg-base-content',
-          { input, output, groups, config },
-          `<div class="container">
-            <span class="w-fit text-base-100">${name}</span>
-           </div>
-          `,
-          false,
-        ],
-      };
-      bindedDf.addNode(nodeToAdd);
-      addedNodes.update((currentState) => [...currentState, id]);
-      workflowNodes.update((currentState) => [...currentState, nodeToAdd]);
-
-      workflow.addNode(nodeToAdd);
-
-      createWorkflow();
-    }
-  }
-  /**
-   * Create a new segment.
-   *
-   * @privateRemark - This must be done in better way.
-   *
-   * @param currentNode
-   * @param outgoers
-   * @param currentSegment
-   * @param incomingSegments
-   */
-  function createNewSegment(currentSegment: SegmentData[], incomingSegments: Segment[]) {
-    const segments = incomingSegments;
-
-    if (currentSegment.length > 0) {
-      segments.push({
-        input: [],
-        sequence: [...currentSegment].reverse(),
-      });
-      // clear out currentSegment, there must be better solution
-      currentSegment.splice(0, currentSegment.length);
-    }
-    return segments;
-  }
-
-  function traverseGraph(currentNode: DrawflowNode, currentSegment, segments, traversed: string[] = []) {
-    const allNodesDrawflow: Record<string, DrawflowNode> = bindedDf.allNodes().data;
-
-    // get all incomming connections
-    // outgoers
-    const incomingConnections = Object.keys(currentNode.inputs)
-      .map((k) => {
-        const input = currentNode.inputs[k];
-        return input.connections;
-      })
-      .flat();
-
-    // While using drawflow we can always know the name of the output. Also we cannot have more than one output, so it will always be `output_1`
-    const outgoingConnections = currentNode.outputs['output_1'].connections;
-
-    const isTraversed = traversed.includes(currentNode.id);
-
-    if (!isTraversed) {
-      traversed.push(currentNode.id);
-      if (outgoingConnections.length > 1) {
-        createNewSegment(currentSegment, segments);
-      }
-      currentSegment.push({
-        node: currentNode,
-        representation: [currentNode.name, {}],
-      });
-
-      if (
-        incomingConnections.length === 0 ||
-        incomingConnections.length > 1 ||
-        currentNode.data.groups.includes('USER')
-      ) {
-        createNewSegment(currentSegment, segments);
-        incomingConnections.map((inputConnection) => {
-          const r = bindedDf.getNodeFromId(inputConnection.node);
-          traverseGraph(r, currentSegment, segments);
-        });
-      } else if (incomingConnections.length === 1) {
-        const currentNode = bindedDf.getNodeFromId(incomingConnections[0].node);
-
-        traverseGraph(currentNode, currentSegment, segments, traversed);
-      }
-    }
-    console.log({ segments, incomingConnections, outgoingConnections });
-  }
-
-  /**
-   * Make the workflow object
-   */
-  function createWorkflow() {
-    let segments: Segment[] = [];
-    let currentSegment: SegmentData[] = [];
-
-    const allNodesDrawflow: Record<string, DrawflowNode> = bindedDf.allNodes().data;
-
-    const roots = compact(
-      Object.keys(allNodesDrawflow).map((key) => {
-        const df_Node = allNodesDrawflow[key];
-        // While using drawflow we can always know the name of the output. Also we cannot have more than one output, so it will always be `output_1`
-        if (df_Node.outputs['output_1'].connections.length === 0) {
-          return df_Node;
-        }
-      })
-    );
-
-    roots.map((r) => {
-      traverseGraph(r, currentSegment, segments);
-      if (currentSegment.length > 0) {
-        const incomingConnections = Object.keys(r.inputs)
-          .map((k) => {
-            const input = r.inputs[k];
-            return input.connections;
-          })
-          .flat()
-          .reverse();
-        createNewSegment(currentSegment, segments);
-      }
-    });
-    segments = segments.reverse();
-
-    const nodeIdsBySegment = segments.map((segment) => segment.sequence.flatMap((data) => data.node.id));
-
-    segments.forEach((segment) => {
-      const firstOpData = segment.sequence[0];
-      // in drawflow the inputs are Record<string,any>, need the length, so only way is to get the keys then length of them
-      const inputKeys = Object.keys(firstOpData.node.inputs);
-      segment.input = Array(Math.max(1, inputKeys.length)).fill(-1);
-    });
-
-    const s = segments.map((segment) => {
-      return {
-        input: segment.input,
-        sequence: segment.sequence.map((d: SegmentData) => ({
-          version_id: d.node.id,
-          config: {},
-        })),
-      };
-    });
-    console.log({ segments, s });
-
-    return s;
-  }
-
-  /**
-   * Wrapper for remove node
-   */
-  function removeNode(event: CustomEvent<{ id: string }>) {
-    const { id } = event.detail;
-    addedNodes.set(removeItemFromArray($addedNodes, id));
+    bindedDf.addNode(data);
   }
 
   /**
@@ -267,13 +99,25 @@
    * @param id
    */
   function showOperationInfo(id: string) {
-    console.log('operationid is %s', id);
+    console.log('operation version ID is %s', id);
     console.log('this should open the modal');
   }
+
+  $: console.log('addedNodesIds', $addedNodesIds);
+  $: console.log('workflowGraph', $workflowGraph);
+  $: console.log('workflowManifest', $workflowManifest);
 </script>
 
 <div>
   <Navbar />
+  <button
+    class="btn btn-warning"
+    on:click={() => {
+      addedNodesIds.set([]);
+      workflowGraph.reset();
+      bindedDf.reset();
+    }}>RESET STORES</button
+  >
   <div class=" flex flex-row min-h-screen">
     <aside
       class=" w-64 md:shadow transform -translate-x-full md:translate-x-0 transition-transform duration-150 ease-in bg-base-content"
@@ -358,7 +202,7 @@
       class="bg-base-300 h-max flex flex-col flex-grow -ml-64 md:ml-0 transition-all duration-150 ease-in"
     >
       <div class=" flex flex-col flex-grow">
-        <Drawflow bind:this={bindedDf} on:createWorkflow={createWorkflow} on:removeNode={removeNode} />
+        <Drawflow bind:this={bindedDf} />
       </div>
     </main>
   </div>

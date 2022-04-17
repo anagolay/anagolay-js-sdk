@@ -1,5 +1,8 @@
 /**
  * Remove the idem from the array using the `Array.filter` function.
+ *
+ * @remarks Pure function
+ *
  * @param array
  * @param itemToRemove
  * @returns New array without the item

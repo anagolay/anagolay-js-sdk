@@ -1,3 +1,5 @@
+import type { AnOperationData } from '@anagolay/types';
+
 /**
  * Drawflow node
  *
@@ -20,15 +22,25 @@ export interface NodeToAdd {
 
 export interface Connection {
   nodeId: string;
-  name: string;
+  nameOrIndex?: string;
 }
 export interface WorkflowNodeConnection {
+  /**
+   * Latest Version id
+   */
   id: string;
   config: Record<string, any>;
-  connections: {
-    out: Connection[];
-    in: Connection[];
+  /**
+   * An edge is a connection between two nodes. All edges are directed
+   */
+  edges: {
+    out: string[];
+    in: string[];
   };
+  /**
+   * Operation Data type
+   */
+  data: AnOperationData;
 }
 
 export interface DrawflowNode {
@@ -53,15 +65,15 @@ export interface DrawflowConnectionDetail {
   node: string;
 }
 
-export declare type Segment = {
+export interface Segment {
   input: number[];
   sequence: SegmentData[];
-};
+}
 
-export declare type SegmentData = {
-  node: DrawflowNode;
+export interface SegmentData {
+  node: WorkflowNodeConnection;
   representation: [string, any];
-};
+}
 
 export interface Sequence {
   version_id: string;

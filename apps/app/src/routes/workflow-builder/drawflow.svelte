@@ -2,12 +2,11 @@
   import Drawflow from 'drawflow';
   import './drawflow.css';
   import { onMount } from 'svelte';
-  import { createEventDispatcher } from 'svelte';
-  import type { NodeToAdd } from './interfaces';
 
-  import { workflow } from './stores';
-
-  const dispatch = createEventDispatcher();
+  import { workflowGraph, addedNodesIds, workflowManifest } from './stores';
+  import { last } from 'remeda';
+  import type { OperationsFixture } from '$src/fixtures/operations';
+  import { AnForWhat } from '@anagolay/types';
 
   /**
    * Drawflow editor
@@ -15,31 +14,41 @@
   let editor: Drawflow;
 
   /**
-   * For setting the workflow canvas hight
+   * For setting the Drawflow canvas hight
    */
   let innerHeight: number;
 
   /**
    * Wrap the Drawflow addNode method with setting the correct id
-   * @param currentNodeToAdd
+   * @param node
    */
-  export function addNode(currentNodeToAdd: NodeToAdd) {
-    const { id, data: d } = currentNodeToAdd;
+  export function addNode(node: OperationsFixture) {
+    const {
+      data: { name, inputs, output, groups, config },
+      versions,
+    } = node;
+
+    const id = last(versions);
+
+    const d: [string, number, number, number, number, string, any, string, string | boolean] = [
+      name,
+      inputs.length || 1,
+      1, // always only one output
+      ($addedNodesIds.length + 1) * 80,
+      ($addedNodesIds.length + 1) * 40,
+      'bg-base-content',
+      {}, //{ inputs, output, groups, config },
+      `<div class="container">
+        <span class="w-fit text-base-100">${name}</span>
+      </div>`,
+      false,
+    ];
+
     editor.nodeId = id;
     editor.addNode(d[0], d[1], d[2], d[3], d[4], d[5], d[6], d[7], d[8]);
-  }
-  /**
-   * Remove the node and propagate the changes
-   * @param id
-   */
-  export function removeNode(id: string) {
-    console.log('got the remove node ', id);
 
-    dispatch('removeNode', { id });
-  }
-
-  export function createWorkflow() {
-    dispatch('createWorkflow');
+    workflowGraph.addNode(node);
+    workflowManifest.generate();
   }
 
   /**
@@ -51,6 +60,12 @@
 
   export function getNodeFromId(id: string) {
     return editor.getNodeFromId(id);
+  }
+
+  export function reset() {
+    editor.removeModule('workflow');
+    editor.addModule('workflow');
+    editor.changeModule('workflow');
   }
 
   onMount(async () => {
@@ -71,10 +86,10 @@
       console.debug('Node created ', id);
     });
 
-    editor.on('nodeRemoved', function (id) {
+    editor.on('nodeRemoved', (id) => {
       console.debug('Node removed ', id);
-      // this is needed since thorig lib uses number, with time i will write this by myself
-      removeNode(id as unknown as string);
+      workflowGraph.removeNode(id as unknown as string);
+      workflowManifest.generate();
     });
 
     editor.on('nodeMoved', function (id) {
@@ -93,26 +108,41 @@
     editor.on('connectionCreated', function ({ output_id, input_id, output_class, input_class }) {
       console.debug('Node connectionCreated ', { output_id, input_id, output_class, input_class });
 
-      const currentNode = editor.getNodeFromId(input_id);
-      const incommingNode = editor.getNodeFromId(output_id);
+      const currentNode = workflowGraph.getNodeById(input_id);
+      const incommingNode = workflowGraph.getNodeById(output_id);
 
-      const currentNodeType = currentNode.data.input;
+      const {
+        id,
+        data: { inputs, groups },
+      } = currentNode;
+
+      // this is left like this intentionally, much nicer to read this than if i would destruct it all
+      const currentNodeType = inputs;
       const incommingNodeType = incommingNode.data.output;
 
-      // console.log('input node', currentNode);
-      // console.log('output node', incommingNode);
-
-      if (!currentNodeType.includes(incommingNodeType)) {
-        editor.removeSingleConnection(output_id, input_id, output_class, input_class);
-        console.error('Got %s as output and %s as input', incommingNodeType, currentNodeType);
+      if (!groups.includes(AnForWhat.FLOWCONTROL)) {
+        if (!currentNodeType.includes(incommingNodeType)) {
+          editor.removeSingleConnection(output_id, input_id, output_class, input_class);
+          console.error('Got %s as output and %s as input', incommingNodeType, currentNodeType);
+        }
+      } else {
+        // if we have the input of [] this means the node accepts N amount of inputs of the same type
+        if (inputs.length === 0) {
+          editor.addNodeInput(id);
+        } else if (inputs.length > 1) {
+          console.log('have flowcontrol op, check that all the inputs have the same type');
+        } else {
+          console.log('FC operation else condition', currentNode);
+        }
       }
 
       // Update the store
-      workflow.addConnection({
-        fromNode: currentNode,
-        toNode: incommingNode,
+      workflowGraph.addEdge({
+        fromNode: incommingNode,
+        toNode: currentNode,
       });
-      createWorkflow();
+
+      workflowManifest.generate();
     });
   });
 
