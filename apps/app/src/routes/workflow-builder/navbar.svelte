@@ -42,13 +42,13 @@
       <label for="manifest-modal" class="btn modal-button">Show Manifest</label>
 
       <input type="checkbox" id="manifest-modal" class="modal-toggle" />
-      <div class="modal cursor-pointer">
+      <label for="manifest-modal" class="modal cursor-pointer">
         <div class="modal-box w-11/12 max-w-5xl">
           <label for="manifest-modal" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
 
           <Code code={$workflowManifest} />
         </div>
-      </div>
+      </label>
     </div>
     <div class="w-10 rounded-full mx-1">
       {#if $wsConnected}

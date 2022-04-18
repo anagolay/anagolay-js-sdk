@@ -57,7 +57,7 @@
     <div class="my-1">
       <!-- https://svelte.dev/repl/d9da6330755049dab0aa2a0dcfa2d549?version=3.23.2 -->
       {#each [...op.data.config] as [key, value]}
-        <ul class="menu bg-base-100 ">
+        <ul class="menu bg-base-100">
           <span class="text-sm p-1">{key.toUpperCase()}</span>
 
           {#each op.data.config.get(key) as item}

@@ -4,7 +4,6 @@
 
 <script lang="ts">
   import { makeOps, type OperationsFixture } from '$src/fixtures/operations';
-  import { removeItemFromArray } from '$src/utils/utils';
   import { onMount } from 'svelte';
   import Drawflow from './drawflow.svelte';
   import { io, Socket } from 'socket.io-client';
@@ -12,13 +11,13 @@
   import Navbar from './navbar.svelte';
   import { wsConnected } from '$src/stores';
   import Spinner from '$src/components/Spinner.svelte';
-  import type { NodeToAdd, Segment, SegmentData } from './interfaces';
   import { addedNodesIds, workflowGraph, workflowManifest } from './stores';
   import { last } from 'remeda';
   import OperationNode from './OperationNode.svelte';
+  import FrostBox from '$src/components/FrostBox.svelte';
 
   /**
-   * This is how we buidl the actual VALUES! i had to change the output of the types to be ES2020
+   * This is how we build the actual VALUES! i had to change the output of the types to be ES2020
    */
   const groupsAll = Object.entries(AnForWhat);
 
@@ -36,8 +35,8 @@
   let saveDisabled: boolean = true;
 
   function sendMessageToWs() {
-    console.log($workflowManifest);
-    socket.emit('continueWithWorkflow', workflowManifest);
+    socket.emit('continueWithWorkflow', $workflowManifest);
+    socket.disconnect();
   }
 
   /**
@@ -76,18 +75,13 @@
       wsConnected.set(true);
     });
 
-    socket.on('disconnected', () => {
-      socket.disconnect();
+    socket.on('disconnect', () => {
       wsConnected.set(false);
     });
 
     socket.on('connect_error', () => {
       console.error('socket error');
       socket.connect();
-    });
-
-    socket.on('continueWithWorkflow', (message) => {
-      console.log(message);
     });
   });
 
@@ -103,12 +97,19 @@
     console.log('this should open the modal');
   }
 
-  $: console.log('addedNodesIds', $addedNodesIds);
-  $: console.log('workflowGraph', $workflowGraph);
-  $: console.log('workflowManifest', $workflowManifest);
+  // make check when wen can enable save button
+  $: {
+    const { segments, groups, name, description } = $workflowManifest;
+    if (groups.length > 0 && name.length > 7 && description.length > 7 && segments.length > 0) {
+      const firstSegment = segments[0];
+      if (firstSegment.input.includes(-1) && firstSegment.sequence.length > 0) {
+        saveDisabled = false;
+      }
+    }
+  }
 </script>
 
-<div>
+<div class="container mx-auto">
   <Navbar />
   <button
     class="btn btn-warning"
@@ -118,9 +119,9 @@
       bindedDf.reset();
     }}>RESET STORES</button
   >
-  <div class=" flex flex-row min-h-screen">
+  <div class="flex flex-row min-h-screen">
     <aside
-      class=" w-64 md:shadow transform -translate-x-full md:translate-x-0 transition-transform duration-150 ease-in bg-base-content"
+      class="w-64 lg:shadow transform -translate-x-full md:translate-x-0 transition-transform duration-150 ease-in bg-base-content"
     >
       <div class="container px-4 my-2">
         <h2 class="text-base-300">Operations:</h2>
@@ -199,9 +200,9 @@
     </aside>
 
     <main
-      class="bg-base-300 h-max flex flex-col flex-grow -ml-64 md:ml-0 transition-all duration-150 ease-in"
+      class="bg-base-content flex flex-col flex-grow -ml-64 md:ml-0 transition-all duration-150 ease-in h-screen"
     >
-      <div class=" flex flex-col flex-grow">
+      <div class="flex flex-col flex-grow">
         <Drawflow bind:this={bindedDf} />
       </div>
     </main>

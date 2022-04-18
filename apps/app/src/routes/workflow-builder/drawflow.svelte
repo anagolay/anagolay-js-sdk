@@ -36,10 +36,10 @@
       1, // always only one output
       ($addedNodesIds.length + 1) * 80,
       ($addedNodesIds.length + 1) * 40,
-      'bg-base-content',
+      'bg-base-300',
       {}, //{ inputs, output, groups, config },
-      `<div class="container">
-        <span class="w-fit text-base-100">${name}</span>
+      `<div class="">
+        <span class="w-fit text-lg">${name}</span>
       </div>`,
       false,
     ];

@@ -34,7 +34,13 @@ export interface WorkflowNodeConnection {
    * An edge is a connection between two nodes. All edges are directed
    */
   edges: {
+    /**
+     * All the nodes FROM this node.
+     */
     out: string[];
+    /**
+     * All the nodes TO this node.
+     */
     in: string[];
   };
   /**

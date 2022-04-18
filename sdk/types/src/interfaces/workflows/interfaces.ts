@@ -20,7 +20,7 @@ import {
 // Workflow
 
 export interface AnOperationVersionReference {
-  operation_version_id: AnVersionId;
+  version_id: AnVersionId;
   config: Map<AnCharacters, AnCharacters[]>;
 }
 

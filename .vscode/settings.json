@@ -11,6 +11,9 @@
   "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
+  "[svelte]": {
+    "editor.defaultFormatter": "svelte.svelte-vscode"
+  },
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
@@ -40,6 +43,7 @@
     "pnpm",
     "pnpx",
     "rehosted",
+    "remeda",
     "subsampling",
     "tailwind"
   ]

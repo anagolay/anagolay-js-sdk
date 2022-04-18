@@ -1,10 +1,13 @@
-import { clone, compact, filter, forEach, isNil, last, map } from 'remeda';
-import { writable, type Subscriber, type Writable, get } from 'svelte/store';
-import type { NodeToAdd, Segment, SegmentData, WorkflowNodeConnection } from './interfaces';
-import { AnForWhat, type AnWorkflowData, type AnWorkflowSegment } from '@anagolay/types';
+import { type AnWorkflowData, type AnWorkflowSegment, AnForWhat } from '@anagolay/types';
+import * as R from 'ramda';
+import { clone, filter, forEach, isNil, last } from 'remeda';
+import { type Writable, get, writable } from 'svelte/store';
+
 import type { OperationsFixture } from '$src/fixtures/operations';
 import { removeItemFromArray } from '$src/utils/utils';
-import * as R from 'ramda';
+
+import type { Segment, SegmentData, WorkflowNodeConnection } from './interfaces';
+
 /**
  * Keep the `NodeId[]` as a quick cache access
  */
@@ -68,12 +71,10 @@ function workflowGraphFn() {
      */
     addEdge: (edge: { fromNode: WorkflowNodeConnection; toNode: WorkflowNodeConnection }) => {
       const { fromNode, toNode } = edge;
-      console.log('Make connection from %s output to %s input ', fromNode.data.name, toNode.data.name);
 
       update((currentState) => {
         fromNode.edges.out.push(toNode.id);
         toNode.edges.in.push(fromNode.id);
-        console.log('currentState', currentState);
         return currentState;
       });
     },
@@ -113,6 +114,8 @@ export const workflowGraph = workflowGraphFn();
  */
 function workflowManifestFn(initialData: AnWorkflowData) {
   const { update, subscribe, set } = writable<AnWorkflowData>();
+
+  // this is called only once when the store is created
   set(initialData);
 
   /**
@@ -132,23 +135,31 @@ function workflowManifestFn(initialData: AnWorkflowData) {
         sequence: [...currentSegment].reverse(),
       });
 
-      // clear out currentSegment, there must be better solution
-      currentSegment.splice(0, currentSegment.length);
+      // clear out currentSegment, assinging the [] doesn't work.
+      currentSegment.length = 0;
     }
     return segments;
   }
 
+  /**
+   * Simple and dirty recursive function which traversed the manifest graph.
+   *
+   * @TODO
+   *
+   * @remarks we need to improve this for sure.
+   *
+   * @param currentNode
+   * @param currentSegment
+   * @param segments
+   * @param traversed
+   */
   function traverseGraph(
     currentNode: WorkflowNodeConnection,
     currentSegment: SegmentData[],
     segments: Segment[],
     traversed: string[] = []
   ) {
-    // get all incoming connections
-    // outgoers
     const incomingConnections = currentNode.edges.in;
-
-    // While using drawflow we can always know the name of the output. Also we cannot have more than one output, so it will always be `output_1`
     const outgoingConnections = currentNode.edges.out;
 
     const isTraversed = traversed.includes(currentNode.id);
@@ -189,33 +200,47 @@ function workflowManifestFn(initialData: AnWorkflowData) {
      */
     generate: () => {
       const workflowGraphStore = get(workflowGraph);
-      console.log('workflowGraphStore', workflowGraphStore);
 
+      // helper array which contains the names and ids
       let segments: Segment[] = [];
-      let currentSegment: SegmentData[] = [];
 
+      // current processing segment
+      const currentSegment: SegmentData[] = [];
+
+      /**
+       * `root`s have dual definition:
+       *
+       * 1. any node without edges is a ``root``
+       * 2. the most dependent node is a ``root``
+       *
+       * This doesn't mean that the root is the root of the execution, it means that this is workflow root, or a center
+       */
       const roots = filter(workflowGraphStore, (f) => f.edges.out.length === 0);
       forEach(roots, (node) => {
         traverseGraph(node, currentSegment, segments);
         if (currentSegment.length > 0) {
-          const incomingConnections = node.edges.in.reverse();
           createNewSegment(currentSegment, segments);
         }
       });
+
+      // need to reverse because the processing will always put the last segments in the first place.
       segments = segments.reverse();
+
+      // loop through the segments to update correct inputs with correct segment Indexes
       segments.forEach((segment) => {
         const firstOpData = segment.sequence[0];
-        // in drawflow the inputs are Record<string,any>, need the length, so only way is to get the keys then length of them
-        segment.input = Array(Math.max(1, firstOpData.node.edges.in.length)).fill(-1);
 
+        // fill the array with the -1 for length of the input edges. -1 means that this is the user input segment.
+        segment.input = Array(firstOpData.node.edges.in.length || 1).fill(-1);
+
+        // cache the node ids per segment for faster querying later
         const nodeIdsBySegment = segments.map((segment) => segment.sequence.flatMap((data) => data.node.id));
 
-        console.log('nodeIdsBySegment', nodeIdsBySegment);
-
         forEach(firstOpData.node.edges.in, (f) => {
-          let segmentIndex = nodeIdsBySegment.findIndex((ids) => ids.find((id) => id === f));
-          console.log('segmentIndex', segmentIndex);
+          // find the segment index that matches the incoming edge node from the cache array
+          const segmentIndex = nodeIdsBySegment.findIndex((ids) => ids.find((id) => id === f));
           if (segmentIndex >= 0) {
+            // now find the input inde
             const inputIndex = segments.findIndex((seg) => seg.sequence.find((seg1) => seg1.node.id === f));
 
             segment.input[inputIndex] = segmentIndex;
@@ -227,11 +252,11 @@ function workflowManifestFn(initialData: AnWorkflowData) {
           input: segment.input,
           sequence: segment.sequence.map((d: SegmentData) => ({
             version_id: d.node.id,
-            config: d.node.config,
+            // convert the Object to Map
+            config: new Map(Object.entries(d.node.config)),
           })),
         };
       });
-      console.log({ segments, s });
       update((currentState) => {
         return { ...currentState, segments: s };
       });
