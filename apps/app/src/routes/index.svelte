@@ -2,7 +2,9 @@
   import FrostBox from '$src/components/FrostBox.svelte';
 </script>
 
-<div class="container mx-auto px-4 flex flex-col h-screen p-4 bg-gradient-to-b from-blue-500 to-green-500">
+<div
+  class="container mx-auto px-20 pt-20 flex flex-col  h-screen p-4 bg-gradient-to-b from-blue-500 to-green-500"
+>
   <div class="flex flex-row flex-wrap justify-between h-72">
     <FrostBox class="m-2 basis-72">
       <a

@@ -111,14 +111,14 @@
 
 <div class="container mx-auto">
   <Navbar />
-  <button
+  <!-- <button
     class="btn btn-warning"
     on:click={() => {
       addedNodesIds.set([]);
       workflowGraph.reset();
       bindedDf.reset();
     }}>RESET STORES</button
-  >
+  > -->
   <div class="flex flex-row min-h-screen">
     <aside
       class="w-64 lg:shadow transform -translate-x-full md:translate-x-0 transition-transform duration-150 ease-in bg-base-content"
@@ -200,11 +200,9 @@
     </aside>
 
     <main
-      class="bg-base-content flex flex-col flex-grow -ml-64 md:ml-0 transition-all duration-150 ease-in h-screen"
+      class="bg-base-content flex flex-col flex-grow -ml-64 md:ml-0 transition-all duration-150 ease-in h-auto"
     >
-      <div class="flex flex-col flex-grow">
-        <Drawflow bind:this={bindedDf} />
-      </div>
+      <Drawflow bind:this={bindedDf} />
     </main>
   </div>
 </div>
