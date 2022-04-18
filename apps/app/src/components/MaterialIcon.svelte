@@ -2,7 +2,9 @@
   /**
    * any class name
    */
-  export let classNames: string = '';
+  let classNames: string = '';
+
+  export { classNames as class };
   /**
    * @remark
    * This is the ligature of the material icon that you load via link tag
@@ -15,4 +17,4 @@
   export let title: string = '';
 </script>
 
-<span {title} class={`material-icons ${classNames}`}>{iconName}</span>
+<span {title} class="material-icons {classNames}">{iconName}</span>

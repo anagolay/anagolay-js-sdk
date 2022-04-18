@@ -1,4 +1,4 @@
-import type { AnOperationData } from '@anagolay/types';
+import type { AnCharacters, AnOperationData } from '@anagolay/types';
 
 /**
  * Drawflow node
@@ -29,7 +29,7 @@ export interface WorkflowNodeConnection {
    * Latest Version id
    */
   id: string;
-  config: Record<string, any>;
+  config: Map<AnCharacters, AnCharacters[]>;
   /**
    * An edge is a connection between two nodes. All edges are directed
    */

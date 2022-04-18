@@ -3,6 +3,8 @@
 </script>
 
 <script lang="ts">
+  import { fade } from 'svelte/transition';
+
   import { makeOps, type OperationsFixture } from '$src/fixtures/operations';
   import { onMount } from 'svelte';
   import Drawflow from './drawflow.svelte';
@@ -10,11 +12,12 @@
   import { AnForWhat, type AnWorkflowData } from '@anagolay/types';
   import Navbar from './navbar.svelte';
   import { wsConnected } from '$src/stores';
-  import Spinner from '$src/components/Spinner.svelte';
   import { addedNodesIds, workflowGraph, workflowManifest } from './stores';
-  import { last } from 'remeda';
   import OperationNode from './OperationNode.svelte';
-  import FrostBox from '$src/components/FrostBox.svelte';
+  import SkeletonLoader from '$src/components/SkeletonLoader.svelte';
+  import { alerts } from '$src/components/notifications/store';
+
+  let lockThePage: boolean = false;
 
   /**
    * This is how we build the actual VALUES! i had to change the output of the types to be ES2020
@@ -35,7 +38,16 @@
   let saveDisabled: boolean = true;
 
   function sendMessageToWs() {
+    saveDisabled = true;
+    alerts.add('Workflow data sent to WS, please check the CLI.', 'success', false);
     socket.emit('continueWithWorkflow', $workflowManifest);
+    socket.disconnect();
+    lockThePage = true;
+  }
+
+  function cancelTheCreation() {
+    alerts.add('Workflow canceled', 'warning');
+    socket.emit('cancelWorkflowBuilding', {});
     socket.disconnect();
   }
 
@@ -109,26 +121,23 @@
   }
 </script>
 
-<div class="container mx-auto">
+{#if lockThePage}
+  <div class="dim-screen" transition:fade />
+{/if}
+
+<div>
   <Navbar />
-  <!-- <button
-    class="btn btn-warning"
-    on:click={() => {
-      addedNodesIds.set([]);
-      workflowGraph.reset();
-      bindedDf.reset();
-    }}>RESET STORES</button
-  > -->
-  <div class="flex flex-row min-h-screen">
+
+  <div class="flex flex-row min-h-screen ">
     <aside
       class="w-64 lg:shadow transform -translate-x-full md:translate-x-0 transition-transform duration-150 ease-in bg-base-content"
     >
-      <div class="container px-4 my-2">
+      <div class="px-4 my-2 min-h-12">
         <h2 class="text-base-300">Operations:</h2>
         <ul class="flex flex-col w-full">
           {#await opsFixtures}
-            <li>
-              <Spinner outerBorder="border-primary" />
+            <li class="">
+              <SkeletonLoader />
             </li>
           {:then opsFixtures}
             {#each opsFixtures as op}
@@ -194,15 +203,30 @@
             on:click={sendMessageToWs}
             class="btn w-1/2 btn-primary  disabled:text-slate-500">Save</button
           >
-          <button class="btn w-1/2 btn-error">Cancel</button>
+          <button on:click={cancelTheCreation} class="btn w-1/2 btn-error">Cancel</button>
         </div>
       </div>
     </aside>
 
     <main
-      class="bg-base-content flex flex-col flex-grow -ml-64 md:ml-0 transition-all duration-150 ease-in h-auto"
+      class="flex flex-col flex-grow -ml-64 md:ml-0 transition-all duration-150 ease-in h-auto  bg-gradient-to-b from-blue-500 to-green-500"
     >
       <Drawflow bind:this={bindedDf} />
     </main>
   </div>
 </div>
+
+<style>
+  .dim-screen {
+    position: fixed;
+    padding: 0;
+    margin: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.5);
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+  }
+</style>

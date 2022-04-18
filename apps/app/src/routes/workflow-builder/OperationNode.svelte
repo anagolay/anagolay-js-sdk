@@ -33,11 +33,13 @@
 
     workflowManifest.generate();
   }
-  $: console.log();
+
+  let roundedClassName: string = 'rounded-md';
+  $: op.data.config.size === 0 || (roundedClassName = 'rounded-t-md');
 </script>
 
 <div class="flex flex-col w-full rounded-md bg-base-content my-1">
-  <div class="flex flex-row bg-base-200 rounded-t-md p-2">
+  <div class="flex flex-row bg-base-200 p-2 {roundedClassName}">
     <button
       disabled={$addedNodesIds.includes(last(op.versions))}
       on:click={() => addNode(op)}
@@ -50,15 +52,15 @@
       <span class="px-2">{op.data.name}</span>
     </button>
     <button on:click={() => showOperationInfo(op.id)} class="flex items-center text-lg">
-      <MaterialIcon classNames="text-slate-500" iconName="info" />
+      <MaterialIcon class="text-slate-500" iconName="info" />
     </button>
   </div>
   {#if op.data.config.size !== 0}
-    <div class="my-1">
+    <div class="bg-base-content">
       <!-- https://svelte.dev/repl/d9da6330755049dab0aa2a0dcfa2d549?version=3.23.2 -->
       {#each [...op.data.config] as [key, value]}
-        <ul class="menu bg-base-100">
-          <span class="text-sm p-1">{key.toUpperCase()}</span>
+        <ul class="menu bg-base-100 rounded-b-md">
+          <span class="text-sm m-3">{key.toUpperCase()}</span>
 
           {#each op.data.config.get(key) as item}
             <li>

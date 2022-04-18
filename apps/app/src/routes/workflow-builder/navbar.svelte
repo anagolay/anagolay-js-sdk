@@ -52,9 +52,9 @@
     </div>
     <div class="w-10 rounded-full mx-1">
       {#if $wsConnected}
-        <MaterialIcon title="Websocket connected" classNames="cursor-help" iconName="wifi" />
+        <MaterialIcon title="Websocket connected" class="cursor-help" iconName="wifi" />
       {:else}
-        <MaterialIcon title="Websocket not connected" classNames="cursor-help" iconName="wifi_off" />
+        <MaterialIcon title="Websocket not connected" class="cursor-help" iconName="wifi_off" />
       {/if}
     </div>
     <div class="dropdown  dropdown-end">

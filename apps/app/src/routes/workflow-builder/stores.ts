@@ -17,8 +17,8 @@ function workflowGraphFn() {
   const { update, subscribe, set } = writable<WorkflowNodeConnection[]>([]);
 
   return {
-    subscribe: subscribe,
-    set: set,
+    subscribe,
+    set,
     /**
      * Get the node by the ID,
      * @remarks Remember, the nodeID is the `last(versions)`
@@ -42,7 +42,7 @@ function workflowGraphFn() {
           out: [],
           in: [],
         },
-        config: {},
+        config: new Map(),
       };
       update((currentState) => {
         const nodeIsAlreadyAdded = currentState.find((v) => v.id === node.id);
@@ -89,8 +89,11 @@ function workflowGraphFn() {
       update((currentState) => {
         const nodeIdx = currentState.findIndex((f) => f.id === nodeId);
         const node = currentState.find((f) => f.id === nodeId);
+        const currentConfig = node.config;
+        // update the config
+        currentConfig[configKey] = configValue;
 
-        node.config[configKey] = configValue;
+        node.config = new Map(Object.entries(currentConfig));
 
         // deep clone the current state
         const newState = clone(currentState);
@@ -130,7 +133,7 @@ function workflowManifestFn(initialData: AnWorkflowData) {
     const segments = incomingSegments;
 
     if (currentSegment.length > 0) {
-      const pushedIndex = segments.push({
+      segments.push({
         input: [],
         sequence: [...currentSegment].reverse(),
       });
@@ -248,15 +251,16 @@ function workflowManifestFn(initialData: AnWorkflowData) {
         });
       });
       const s: AnWorkflowSegment[] = segments.map((segment) => {
+        console.log(segment);
         return {
           input: segment.input,
           sequence: segment.sequence.map((d: SegmentData) => ({
             version_id: d.node.id,
-            // convert the Object to Map
-            config: new Map(Object.entries(d.node.config)),
+            config: d.node.config,
           })),
         };
       });
+
       update((currentState) => {
         return { ...currentState, segments: s };
       });

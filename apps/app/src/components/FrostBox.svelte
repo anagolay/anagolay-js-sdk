@@ -4,7 +4,7 @@
 </script>
 
 <div
-  class={`${classNames} rounded-lg backdrop-blur-xl bg-white/25 shadow-lg border border-solid border-white/30 flex flex-1 justify-center align-middle items-center hover:bg-sky-700 transition duration-150 ease-in-out`}
+  class="rounded-md backdrop-blur-xl bg-white/25 shadow-lg border border-solid border-white/30 flex flex-1 justify-center align-middle items-center hover:bg-sky-700 transition duration-150 ease-in-out {classNames}"
 >
   <slot />
 </div>
