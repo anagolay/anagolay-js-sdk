@@ -12,10 +12,10 @@
   import { AnForWhat, type AnWorkflowData } from '@anagolay/types';
   import Navbar from './navbar.svelte';
   import { wsConnected } from '$src/stores';
-  import { addedNodesIds, workflowGraph, workflowManifest } from './stores';
+  import { workflowManifest } from './stores';
   import OperationNode from './OperationNode.svelte';
   import SkeletonLoader from '$src/components/SkeletonLoader.svelte';
-  import { alerts } from '$src/components/notifications/store';
+  import { alerts } from '$src/components/notifications/stores';
 
   let lockThePage: boolean = false;
 

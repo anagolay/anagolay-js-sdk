@@ -127,9 +127,9 @@
         }
       } else {
         // if we have the input of [] this means the node accepts N amount of inputs of the same type
-        if (inputs.length === 0) {
+        if (currentNodeType.length === 0) {
           editor.addNodeInput(id);
-        } else if (inputs.length > 1) {
+        } else if (currentNodeType.length > 1) {
           console.log('have flowcontrol op, check that all the inputs have the same type');
         } else {
           console.log('FC operation else condition', currentNode);
@@ -158,6 +158,9 @@
   function drop(ev) {
     console.log('drop invoked', ev);
   }
+
+  // https://svelte.dev/docs#component-format-script-3-$-marks-a-statement-as-reactive
+  $: console.log($workflowGraph);
 </script>
 
 <svelte:window bind:innerHeight />

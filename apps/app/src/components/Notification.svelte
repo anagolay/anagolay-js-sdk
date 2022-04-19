@@ -1,6 +1,6 @@
 <script lang="ts">
   import MaterialIcon from './MaterialIcon.svelte';
-  import type { Alert } from './notifications/store';
+  import type { Alert } from './notifications/stores';
   import { fade } from 'svelte/transition';
 
   let classNames: string = '';

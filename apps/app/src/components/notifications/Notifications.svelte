@@ -1,7 +1,7 @@
 <script>
   import Notification from '../Notification.svelte';
 
-  import { alerts } from './store';
+  import { alerts } from './stores';
 </script>
 
 <div class="stack" style="display: block;">

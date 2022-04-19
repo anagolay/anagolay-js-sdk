@@ -1,6 +1,6 @@
 import { type AnWorkflowData, type AnWorkflowSegment, AnForWhat } from '@anagolay/types';
 import * as R from 'ramda';
-import { clone, filter, forEach, isNil, last } from 'remeda';
+import { clone, filter, forEach, isNil, last, map } from 'remeda';
 import { type Writable, get, writable } from 'svelte/store';
 
 import type { OperationsFixture } from '$src/fixtures/operations';
@@ -19,6 +19,7 @@ function workflowGraphFn() {
   return {
     subscribe,
     set,
+
     /**
      * Get the node by the ID,
      * @remarks Remember, the nodeID is the `last(versions)`
@@ -73,6 +74,7 @@ function workflowGraphFn() {
       const { fromNode, toNode } = edge;
 
       update((currentState) => {
+        // all the nodes are refs, so the currentState is not modified directly
         fromNode.edges.out.push(toNode.id);
         toNode.edges.in.push(fromNode.id);
         return currentState;
@@ -115,11 +117,17 @@ export const workflowGraph = workflowGraphFn();
  * @param initialData - Initial data
  * @returns
  */
-function workflowManifestFn(initialData: AnWorkflowData) {
+function workflowManifestFn() {
   const { update, subscribe, set } = writable<AnWorkflowData>();
 
   // this is called only once when the store is created
-  set(initialData);
+  set({
+    name: '',
+    description: '',
+    creator: '',
+    groups: [],
+    segments: [],
+  });
 
   /**
    * Create a new segment.
@@ -202,6 +210,7 @@ function workflowManifestFn(initialData: AnWorkflowData) {
      * Generate the manifest based on the `workflowGraph` store
      */
     generate: () => {
+      // get the WorkflowGraph store values
       const workflowGraphStore = get(workflowGraph);
 
       // helper array which contains the names and ids
@@ -230,20 +239,20 @@ function workflowManifestFn(initialData: AnWorkflowData) {
       segments = segments.reverse();
 
       // loop through the segments to update correct inputs with correct segment Indexes
-      segments.forEach((segment) => {
+      forEach(segments, (segment) => {
         const firstOpData = segment.sequence[0];
 
         // fill the array with the -1 for length of the input edges. -1 means that this is the user input segment.
         segment.input = Array(firstOpData.node.edges.in.length || 1).fill(-1);
 
         // cache the node ids per segment for faster querying later
-        const nodeIdsBySegment = segments.map((segment) => segment.sequence.flatMap((data) => data.node.id));
+        const nodeIdsBySegment = map(segments, (segment) => segment.sequence.flatMap((data) => data.node.id));
 
         forEach(firstOpData.node.edges.in, (f) => {
           // find the segment index that matches the incoming edge node from the cache array
           const segmentIndex = nodeIdsBySegment.findIndex((ids) => ids.find((id) => id === f));
           if (segmentIndex >= 0) {
-            // now find the input inde
+            // now find the input node
             const inputIndex = segments.findIndex((seg) => seg.sequence.find((seg1) => seg1.node.id === f));
 
             segment.input[inputIndex] = segmentIndex;
@@ -265,16 +274,19 @@ function workflowManifestFn(initialData: AnWorkflowData) {
         return { ...currentState, segments: s };
       });
     },
+    reset: () => {
+      return set({
+        name: '',
+        description: '',
+        creator: '',
+        groups: [],
+        segments: [],
+      });
+    },
   };
 }
 
 /**
  * Workflow Manifest store. The `generate` must be called, it is not automatically triggered
  */
-export const workflowManifest = workflowManifestFn({
-  name: '',
-  description: '',
-  creator: '',
-  groups: [],
-  segments: [],
-});
+export const workflowManifest = workflowManifestFn();
