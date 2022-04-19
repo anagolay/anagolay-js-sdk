@@ -5862,12 +5862,12 @@
           "members": [
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/types!AnWorkflowData#creator:member",
+              "canonicalReference": "@anagolay/types!AnWorkflowData#creators:member",
               "docComment": "",
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "creator: "
+                  "text": "creators: "
                 },
                 {
                   "kind": "Reference",
@@ -5876,15 +5876,19 @@
                 },
                 {
                   "kind": "Content",
+                  "text": "[]"
+                },
+                {
+                  "kind": "Content",
                   "text": ";"
                 }
               ],
               "isOptional": false,
               "releaseTag": "Public",
-              "name": "creator",
+              "name": "creators",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
-                "endIndex": 2
+                "endIndex": 3
               }
             },
             {
@@ -6174,12 +6178,12 @@
           "members": [
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/types!AnWorkflowSegment#input:member",
+              "canonicalReference": "@anagolay/types!AnWorkflowSegment#inputs:member",
               "docComment": "",
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "input: "
+                  "text": "inputs: "
                 },
                 {
                   "kind": "Content",
@@ -6192,7 +6196,7 @@
               ],
               "isOptional": false,
               "releaseTag": "Public",
-              "name": "input",
+              "name": "inputs",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
@@ -11208,8 +11212,8 @@
                 },
                 {
                   "kind": "Reference",
-                  "text": "Characters",
-                  "canonicalReference": "@anagolay/types!Characters:interface"
+                  "text": "CreatorId",
+                  "canonicalReference": "@anagolay/types!CreatorId:interface"
                 },
                 {
                   "kind": "Content",
@@ -11665,12 +11669,12 @@
           "members": [
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/types!WorkflowSegment#input:member",
+              "canonicalReference": "@anagolay/types!WorkflowSegment#inputs:member",
               "docComment": "",
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "readonly input: "
+                  "text": "readonly inputs: "
                 },
                 {
                   "kind": "Reference",
@@ -11684,7 +11688,7 @@
               ],
               "isOptional": false,
               "releaseTag": "Public",
-              "name": "input",
+              "name": "inputs",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2

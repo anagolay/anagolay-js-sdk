@@ -25,13 +25,13 @@ export interface AnOperationVersionReference {
 }
 
 export interface AnWorkflowSegment {
-  input: number[];
+  inputs: number[];
   sequence: AnOperationVersionReference[];
 }
 
 export interface AnWorkflowData {
   name: AnCharacters;
-  creator: AnCreatorId;
+  creators: AnCreatorId[];
   description: AnCharacters;
   groups: AnForWhat[];
   segments: AnWorkflowSegment[];

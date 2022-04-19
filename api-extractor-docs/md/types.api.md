@@ -619,7 +619,7 @@ export interface AnWorkflowArtifactType {
 // @public (undocumented)
 export interface AnWorkflowData {
     // (undocumented)
-    creator: AnCreatorId;
+    creators: AnCreatorId[];
     // (undocumented)
     description: AnCharacters;
     // (undocumented)
@@ -649,7 +649,7 @@ export interface AnWorkflowRecord {
 // @public (undocumented)
 export interface AnWorkflowSegment {
     // (undocumented)
-    input: number[];
+    inputs: number[];
     // (undocumented)
     sequence: AnOperationVersionReference[];
 }
@@ -1123,7 +1123,7 @@ export interface WorkflowArtifactType extends Enum {
 // @public
 export interface WorkflowData extends Struct {
     // (undocumented)
-    readonly creators: Vec<Characters_2>;
+    readonly creators: Vec<CreatorId_2>;
     // (undocumented)
     readonly description: Characters_2;
     // (undocumented)
@@ -1168,7 +1168,7 @@ export const workflows: {
 // @public
 export interface WorkflowSegment extends Struct {
     // (undocumented)
-    readonly input: Bytes;
+    readonly inputs: Bytes;
     // (undocumented)
     readonly sequence: Vec<OperationVersionReference>;
 }

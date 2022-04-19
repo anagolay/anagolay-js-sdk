@@ -142,7 +142,7 @@ function workflowManifestFn() {
 
     if (currentSegment.length > 0) {
       segments.push({
-        input: [],
+        inputs: [],
         sequence: [...currentSegment].reverse(),
       });
 
@@ -243,7 +243,7 @@ function workflowManifestFn() {
         const firstOpData = segment.sequence[0];
 
         // fill the array with the -1 for length of the input edges. -1 means that this is the user input segment.
-        segment.input = Array(firstOpData.node.edges.in.length || 1).fill(-1);
+        segment.inputs = Array(firstOpData.node.edges.in.length || 1).fill(-1);
 
         // cache the node ids per segment for faster querying later
         const nodeIdsBySegment = map(segments, (segment) => segment.sequence.flatMap((data) => data.node.id));
@@ -255,14 +255,14 @@ function workflowManifestFn() {
             // now find the input node
             const inputIndex = segments.findIndex((seg) => seg.sequence.find((seg1) => seg1.node.id === f));
 
-            segment.input[inputIndex] = segmentIndex;
+            segment.inputs[inputIndex] = segmentIndex;
           }
         });
       });
       const s: AnWorkflowSegment[] = segments.map((segment) => {
         console.log(segment);
         return {
-          input: segment.input,
+          inputs: segment.inputs,
           sequence: segment.sequence.map((d: SegmentData) => ({
             version_id: d.node.id,
             config: d.node.config,

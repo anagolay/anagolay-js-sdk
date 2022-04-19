@@ -72,7 +72,7 @@ export interface DrawflowConnectionDetail {
 }
 
 export interface Segment {
-  input: number[];
+  inputs: number[];
   sequence: SegmentData[];
 }
 

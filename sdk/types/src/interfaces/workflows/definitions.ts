@@ -5,12 +5,12 @@ export const WorkflowsCustomTypes: RegistryTypes = {
     config: 'BTreeMap<Characters, Vec<Characters>>',
   },
   WorkflowSegment: {
-    input: 'Vec<u8>',
+    inputs: 'Vec<u8>',
     sequence: 'Vec<OperationVersionReference>',
   },
   WorkflowData: {
     name: 'Characters',
-    creators: 'Vec<Characters>',
+    creators: 'Vec<CreatorId>',
     description: 'Characters',
     groups: 'Vec<ForWhat>',
     segments: 'Vec<WorkflowSegment>',

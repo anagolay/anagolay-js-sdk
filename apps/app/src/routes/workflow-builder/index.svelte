@@ -114,7 +114,7 @@
     const { segments, groups, name, description } = $workflowManifest;
     if (groups.length > 0 && name.length > 7 && description.length > 7 && segments.length > 0) {
       const firstSegment = segments[0];
-      if (firstSegment.input.includes(-1) && firstSegment.sequence.length > 0) {
+      if (firstSegment.inputs.includes(-1) && firstSegment.sequence.length > 0) {
         saveDisabled = false;
       }
     }

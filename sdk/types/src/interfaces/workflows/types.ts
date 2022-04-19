@@ -4,6 +4,7 @@
 import type {
   AnagolayVersionExtra,
   Characters,
+  CreatorId,
   DocsArtifactSubType,
   ForWhat,
   GenericId,
@@ -48,7 +49,7 @@ export interface WorkflowArtifactType extends Enum {
 /** @name WorkflowData */
 export interface WorkflowData extends Struct {
   readonly name: Characters;
-  readonly creators: Vec<Characters>;
+  readonly creators: Vec<CreatorId>;
   readonly description: Characters;
   readonly groups: Vec<ForWhat>;
   readonly segments: Vec<WorkflowSegment>;
@@ -67,7 +68,7 @@ export interface WorkflowRecord extends Struct {
 
 /** @name WorkflowSegment */
 export interface WorkflowSegment extends Struct {
-  readonly input: Bytes;
+  readonly inputs: Bytes;
   readonly sequence: Vec<OperationVersionReference>;
 }
 
