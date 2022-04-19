@@ -4,7 +4,7 @@
  */
 export type AnGenericId = string;
 export type AnCharacters = string;
-export type AnCreatorId = AnGenericId;
+export type AnCreatorId = AnCharacters;
 export type AnArtifactId = AnGenericId;
 export type AnOperationId = AnGenericId;
 export type AnWorkflowId = AnGenericId;

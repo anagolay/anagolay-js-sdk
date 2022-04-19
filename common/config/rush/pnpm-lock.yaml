@@ -24,6 +24,7 @@ importers:
       daisyui: ~2.13.4
       drawflow: ~0.0.55
       eslint: 8.8.0
+      eslint-config-prettier: ~8.5.0
       eslint-plugin-simple-import-sort: ~7.0.0
       eslint-plugin-svelte3: ^3.2.1
       eslint-plugin-unused-imports: ~2.0.0
@@ -54,7 +55,7 @@ importers:
       '@playwright/test': 1.20.1
       '@sveltejs/adapter-auto': 1.0.0-next.34
       '@sveltejs/adapter-static': 1.0.0-next.29
-      '@sveltejs/kit': 1.0.0-next.310_svelte@3.46.4
+      '@sveltejs/kit': 1.0.0-next.315_svelte@3.46.4
       '@tailwindcss/forms': 0.5.0_tailwindcss@3.0.23
       '@tailwindcss/line-clamp': 0.3.1_tailwindcss@3.0.23
       '@tailwindcss/typography': 0.5.2_tailwindcss@3.0.23
@@ -65,6 +66,7 @@ importers:
       autoprefixer: 10.4.4_postcss@8.4.12
       daisyui: 2.13.4_081650f2f4dba35b17265937ab2a2ec0
       eslint: 8.8.0
+      eslint-config-prettier: 8.5.0_eslint@8.8.0
       eslint-plugin-simple-import-sort: 7.0.0_eslint@8.8.0
       eslint-plugin-svelte3: 3.4.1_eslint@8.8.0+svelte@3.46.4
       eslint-plugin-unused-imports: 2.0.0_d4a619025bfc8d8d3ee944ec00cfd830
@@ -161,6 +163,7 @@ importers:
 
   ../../sdk/types:
     specifiers:
+      '@digitak/esrun': ~3.1.2
       '@microsoft/api-extractor': ~7.19.4
       '@polkadot/api': 7.8.1
       '@polkadot/api-base': ~7.8.1
@@ -194,6 +197,7 @@ importers:
       '@polkadot/types': 7.8.1
       '@polkadot/types-codec': 7.8.1
     devDependencies:
+      '@digitak/esrun': 3.1.2
       '@microsoft/api-extractor': 7.19.4
       '@rushstack/eslint-config': 2.5.1_eslint@8.8.0+typescript@4.5.5
       '@rushstack/heft': 0.44.9
@@ -952,6 +956,16 @@ packages:
     engines: {node: '>=12'}
     dependencies:
       '@cspotcode/source-map-consumer': 0.8.0
+    dev: true
+
+  /@digitak/esrun/3.1.2:
+    resolution: {integrity: sha512-15zbkLp7Ex8uPEO92GZKygdXkRBovLEN7l2rSmbNT7mRY89MXYjwUqiKe+SWWOw1B1vTuMiabPWouGLWA8q5qg==}
+    engines: {node: '>=14.0'}
+    hasBin: true
+    dependencies:
+      anymatch: 3.1.2
+      chokidar: 3.5.3
+      esbuild: 0.12.29
     dev: true
 
   /@eslint/eslintrc/1.1.0:
@@ -2355,8 +2369,8 @@ packages:
       esbuild: 0.14.28
     dev: true
 
-  /@sveltejs/kit/1.0.0-next.310_svelte@3.46.4:
-    resolution: {integrity: sha512-pTyMyaoyHS+V5cQZIQMfQXmLkhw1VaRwT9avOSgwDc0QBpnNw2LdzwoPYsUr96ca5B6cfT3SMUNolxErTNHmPQ==}
+  /@sveltejs/kit/1.0.0-next.315_svelte@3.46.4:
+    resolution: {integrity: sha512-f6ufqd9z6uicOOr1eSIclm4TonwoRtw0kuIYrDatYSZtu/081kZ5r0Vj6sXDI6tFI1kctoRzPtFECXf5zkZvlw==}
     engines: {node: '>=14.13'}
     hasBin: true
     peerDependencies:
@@ -5564,6 +5578,12 @@ packages:
     dev: true
     optional: true
 
+  /esbuild/0.12.29:
+    resolution: {integrity: sha512-w/XuoBCSwepyiZtIRsKsetiLDUVGPVw1E/R3VTFSecIy8UR7Cq3SOtwKHJMFoVqqVG36aGkzh4e8BvpO1Fdc7g==}
+    hasBin: true
+    requiresBuild: true
+    dev: true
+
   /esbuild/0.14.28:
     resolution: {integrity: sha512-YLNprkCcMVKQ5sekmCKEQ3Obu/L7s6+iij38xNKyBeSmSsTWur4Ky/9zB3XIGT8SCJITG/bZwAR2l7YOAXch4Q==}
     engines: {node: '>=12'}
@@ -5630,6 +5650,15 @@ packages:
       optionator: 0.8.3
     optionalDependencies:
       source-map: 0.6.1
+    dev: true
+
+  /eslint-config-prettier/8.5.0_eslint@8.8.0:
+    resolution: {integrity: sha512-obmWKLUNCnhtQRKc+tmnYuQl0pFU1ibYJQ5BGhTVB08bHe9wC8qUeG7c08dj9XX+AuPj1YSGSQIHl1pnDHZR0Q==}
+    hasBin: true
+    peerDependencies:
+      eslint: '>=7.0.0'
+    dependencies:
+      eslint: 8.8.0
     dev: true
 
   /eslint-plugin-promise/6.0.0_eslint@8.8.0:

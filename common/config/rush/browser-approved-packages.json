@@ -215,6 +215,10 @@
       "allowedCategories": [ "libraries", "webapp" ]
     },
     {
+      "name": "eslint-config-prettier",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
       "name": "eslint-plugin-simple-import-sort",
       "allowedCategories": [ "libraries", "webapp" ]
     },

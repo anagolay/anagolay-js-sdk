@@ -226,7 +226,7 @@ export type AnCharacters = string;
 export type AnCopyrightClaims = AnAnagolayCopyrightClaim[];
 
 // @public (undocumented)
-export type AnCreatorId = AnGenericId;
+export type AnCreatorId = AnCharacters;
 
 // @public (undocumented)
 export enum AnDocsArtifactSubType {
@@ -435,7 +435,7 @@ export interface AnOperationVersionReference {
     // (undocumented)
     config: Map<AnCharacters, AnCharacters[]>;
     // (undocumented)
-    operation_version_id: AnVersionId;
+    version_id: AnVersionId;
 }
 
 // @public (undocumented)
@@ -699,7 +699,7 @@ export interface Characters extends Bytes {
 }
 
 // @public
-export interface CreatorId extends GenericId {
+export interface CreatorId extends Characters {
 }
 
 // @public
@@ -913,7 +913,7 @@ export interface OperationVersionReference extends Struct {
     // (undocumented)
     readonly config: BTreeMap<Characters_2, Vec<Characters_2>>;
     // (undocumented)
-    readonly operation_version_id: VersionId_2;
+    readonly version_id: VersionId_2;
 }
 
 // @public (undocumented)
@@ -1123,7 +1123,7 @@ export interface WorkflowArtifactType extends Enum {
 // @public
 export interface WorkflowData extends Struct {
     // (undocumented)
-    readonly creator: CreatorId_2;
+    readonly creators: Vec<Characters_2>;
     // (undocumented)
     readonly description: Characters_2;
     // (undocumented)
@@ -1132,6 +1132,8 @@ export interface WorkflowData extends Struct {
     readonly name: Characters_2;
     // (undocumented)
     readonly segments: Vec<WorkflowSegment>;
+    // (undocumented)
+    readonly version: Characters_2;
 }
 
 // @public

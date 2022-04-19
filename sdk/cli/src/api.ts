@@ -146,7 +146,7 @@ export interface ISignSubmitSuccessReturn {
 
 /**
  * Take the seed and type then create the KeyringPair and return it
- * @param params
+ * @param params - Input params
  * @returns
  */
 export function createKeyringPairFromSeed(params: { seed: string; type: KeypairType }): KeyringPair {

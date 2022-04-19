@@ -5,6 +5,7 @@ import type {
   AnagolayVersionExtra,
   ArtifactId,
   Characters,
+  CreatorId,
   DocsArtifactSubType,
   ForWhat,
   GenericId,
@@ -1392,6 +1393,7 @@ declare module '@polkadot/types/types/registry' {
     CoreOccupied: CoreOccupied;
     CrateVersion: CrateVersion;
     CreatedBlock: CreatedBlock;
+    CreatorId: CreatorId;
     Data: Data;
     DeferredOffenceOf: DeferredOffenceOf;
     DefunctVoter: DefunctVoter;
