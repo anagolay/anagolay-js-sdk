@@ -1,3 +1,7 @@
+<script context="module">
+  export const prerender = false;
+</script>
+
 <script lang="ts">
   import MaterialIcon from '$src/components/MaterialIcon.svelte';
   import type { OperationsFixture } from '$src/fixtures/operations';
