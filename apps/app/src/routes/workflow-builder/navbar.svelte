@@ -28,7 +28,7 @@
         class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
       >
         <li>
-          <a href="/">/ <MaterialIcon classNames="" iconName="home" /></a>
+          <a href="/">/ <MaterialIcon iconName="home" /></a>
         </li>
       </ul>
     </div>

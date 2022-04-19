@@ -163,7 +163,6 @@ importers:
 
   ../../sdk/types:
     specifiers:
-      '@digitak/esrun': ~3.1.2
       '@microsoft/api-extractor': ~7.19.4
       '@polkadot/api': 7.8.1
       '@polkadot/api-base': ~7.8.1
@@ -197,7 +196,6 @@ importers:
       '@polkadot/types': 7.8.1
       '@polkadot/types-codec': 7.8.1
     devDependencies:
-      '@digitak/esrun': 3.1.2
       '@microsoft/api-extractor': 7.19.4
       '@rushstack/eslint-config': 2.5.1_eslint@8.8.0+typescript@4.5.5
       '@rushstack/heft': 0.44.9
@@ -956,16 +954,6 @@ packages:
     engines: {node: '>=12'}
     dependencies:
       '@cspotcode/source-map-consumer': 0.8.0
-    dev: true
-
-  /@digitak/esrun/3.1.2:
-    resolution: {integrity: sha512-15zbkLp7Ex8uPEO92GZKygdXkRBovLEN7l2rSmbNT7mRY89MXYjwUqiKe+SWWOw1B1vTuMiabPWouGLWA8q5qg==}
-    engines: {node: '>=14.0'}
-    hasBin: true
-    dependencies:
-      anymatch: 3.1.2
-      chokidar: 3.5.3
-      esbuild: 0.12.29
     dev: true
 
   /@eslint/eslintrc/1.1.0:
@@ -5577,12 +5565,6 @@ packages:
     requiresBuild: true
     dev: true
     optional: true
-
-  /esbuild/0.12.29:
-    resolution: {integrity: sha512-w/XuoBCSwepyiZtIRsKsetiLDUVGPVw1E/R3VTFSecIy8UR7Cq3SOtwKHJMFoVqqVG36aGkzh4e8BvpO1Fdc7g==}
-    hasBin: true
-    requiresBuild: true
-    dev: true
 
   /esbuild/0.14.28:
     resolution: {integrity: sha512-YLNprkCcMVKQ5sekmCKEQ3Obu/L7s6+iij38xNKyBeSmSsTWur4Ky/9zB3XIGT8SCJITG/bZwAR2l7YOAXch4Q==}
