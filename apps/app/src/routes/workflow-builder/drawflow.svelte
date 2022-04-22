@@ -100,6 +100,23 @@
       console.debug('Node connectionStart ', output_id, output_class);
     });
 
+    editor.on('connectionRemoved', function ({ output_id, input_id, output_class, input_class }) {
+      console.debug('Node connectionRemoved ', { output_id, input_id, output_class, input_class });
+
+      const currentNode = workflowGraph.getNodeById(input_id);
+
+      const {
+        id,
+        data: { inputs },
+      } = currentNode;
+
+      // if we have the input of [] this means the node accepts N amount of inputs of the same type
+      // In this case remove the surplus input when its connection is removed
+      if (inputs.length == 0) {
+        editor.removeNodeInput(id, input_class);
+      }
+    });
+
     editor.on('connectionSelected', function ({ output_id, input_id, output_class, input_class }) {
       console.debug('Node connectionSelected ', { output_id, input_id, output_class, input_class });
     });
@@ -110,6 +127,21 @@
 
       const currentNode = workflowGraph.getNodeById(input_id);
       const incommingNode = workflowGraph.getNodeById(output_id);
+
+      // traverse from output to output starting from the new connection to see if it would create a loop
+      const traversed = [];
+      let traverseNode = incommingNode;
+      let traverseTo = input_id;
+      do {
+        traversed.push(traverseNode.id);
+        traverseNode = workflowGraph.getNodeById(traverseTo);
+        if (traversed.includes(traverseNode.id)) {
+          editor.removeSingleConnection(output_id, input_id, output_class, input_class);
+          console.error('This connection would create a loop');
+          return;
+        }
+        traverseTo = traverseNode.edges.out[0];
+      } while (traverseTo);
 
       const {
         id,
@@ -124,11 +156,24 @@
         if (!currentNodeType.includes(incommingNodeType)) {
           editor.removeSingleConnection(output_id, input_id, output_class, input_class);
           console.error('Got %s as output and %s as input', incommingNodeType, currentNodeType);
+          return;
         }
       } else {
         // if we have the input of [] this means the node accepts N amount of inputs of the same type
         if (currentNodeType.length === 0) {
-          editor.addNodeInput(id);
+          // make sure the input is not already occupied
+          let inputIndex = parseInt(input_class.split('_')[1], 10) - 1;
+          if (!currentNode.edges.in[inputIndex]) {
+            editor.addNodeInput(id);
+          } else {
+            editor.removeSingleConnection(output_id, input_id, output_class, input_class);
+            console.error(
+              'Input %s is already occupied by connection from %s',
+              input_class,
+              currentNode.edges.in[inputIndex]
+            );
+            return;
+          }
         } else if (currentNodeType.length > 1) {
           console.log('have flowcontrol op, check that all the inputs have the same type');
         } else {
