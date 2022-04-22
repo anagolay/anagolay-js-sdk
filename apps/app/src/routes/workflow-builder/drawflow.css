@@ -131,7 +131,7 @@
 .drawflow .main-path {
   fill: none;
   stroke-width: 5px;
-  stroke: #4682b4;
+  stroke: theme('colors.white');
 }
 
 .drawflow-delete {

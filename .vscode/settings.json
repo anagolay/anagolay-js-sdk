@@ -46,5 +46,25 @@
     "remeda",
     "subsampling",
     "tailwind"
-  ]
+  ],
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/bower_components": true,
+    "**/*.code-search": true,
+    "/tmp": true,
+    "temp": true
+  },
+  "eslint.alwaysShowStatus": true,
+  "eslint.lintTask.enable": true,
+  "eslint.probe": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "html",
+    "vue",
+    "markdown",
+    "svelte"
+  ],
+  "eslint.useESLintClass": true
 }

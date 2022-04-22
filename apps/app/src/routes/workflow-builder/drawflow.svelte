@@ -7,6 +7,7 @@
   import { last } from 'remeda';
   import type { OperationsFixture } from '$src/fixtures/operations';
   import { AnForWhat } from '@anagolay/types';
+  import { alerts } from '$src/components/notifications/stores';
 
   /**
    * Drawflow editor
@@ -24,11 +25,11 @@
    */
   export function addNode(node: OperationsFixture) {
     const {
-      data: { name, inputs, output, groups, config },
+      data: { name, inputs },
       versions,
     } = node;
 
-    const id = last(versions);
+    const id: string = last(versions);
 
     const d: [string, number, number, number, number, string, any, string, string | boolean] = [
       name,
@@ -38,7 +39,7 @@
       ($addedNodesIds.length + 1) * 40,
       'bg-base-300',
       {}, //{ inputs, output, groups, config },
-      `<div class="">
+      `<div>
         <span class="w-fit text-lg">${name}</span>
       </div>`,
       false,
@@ -138,6 +139,7 @@
         if (traversed.includes(traverseNode.id)) {
           editor.removeSingleConnection(output_id, input_id, output_class, input_class);
           console.error('This connection would create a loop');
+          alerts.add('This connection would create a loop', 'error');
           return;
         }
         traverseTo = traverseNode.edges.out[0];
@@ -156,6 +158,7 @@
         if (!currentNodeType.includes(incommingNodeType)) {
           editor.removeSingleConnection(output_id, input_id, output_class, input_class);
           console.error('Got %s as output and %s as input', incommingNodeType, currentNodeType);
+          alerts.add(`Got ${incommingNodeType} as output and ${currentNodeType} as input`, 'error');
           return;
         }
       } else {
@@ -172,12 +175,16 @@
               input_class,
               currentNode.edges.in[inputIndex]
             );
+            alerts.add(
+              `Input ${input_class} is already occupied by connection from ${currentNode.edges.in[inputIndex]}`,
+              'error'
+            );
             return;
           }
         } else if (currentNodeType.length > 1) {
-          console.log('have flowcontrol op, check that all the inputs have the same type');
+          console.debug('have flowcontrol op, check that all the inputs have the same type');
         } else {
-          console.log('FC operation else condition', currentNode);
+          console.debug('FC operation else condition', currentNode);
         }
       }
 
@@ -203,9 +210,6 @@
   function drop(ev) {
     console.log('drop invoked', ev);
   }
-
-  // https://svelte.dev/docs#component-format-script-3-$-marks-a-statement-as-reactive
-  $: console.log($workflowGraph);
 </script>
 
 <svelte:window bind:innerHeight />

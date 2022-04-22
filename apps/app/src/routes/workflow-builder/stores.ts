@@ -277,7 +277,6 @@ function workflowManifestFn() {
         });
       });
       const s: AnWorkflowSegment[] = segments.map((segment) => {
-        console.log(segment);
         return {
           inputs: segment.inputs,
           sequence: segment.sequence.map((d: SegmentData) => ({
