@@ -62,6 +62,23 @@ function workflowGraphFn() {
       addedNodesIds.set(removeItemFromArray(cachedStore, nodeId));
 
       update((currentState) => {
+        // remove the node from the edges of connecting nodes
+        const node = currentState.find((f) => f.id === nodeId);
+        node.edges.in.forEach((edgeNodeId) => {
+          const edgeNode = currentState.find((f) => f.id === edgeNodeId);
+          const edgeOutNodeIdx = edgeNode.edges.out.findIndex((id) => id === nodeId);
+          if (edgeOutNodeIdx >= 0) {
+            edgeNode.edges.out = R.remove(edgeOutNodeIdx, 1, edgeNode.edges.out);
+          }
+        });
+        node.edges.out.forEach((edgeNodeId) => {
+          const edgeNode = currentState.find((f) => f.id === edgeNodeId);
+          const edgeOutNodeIdx = edgeNode.edges.in.findIndex((id) => id === nodeId);
+          if (edgeOutNodeIdx >= 0) {
+            edgeNode.edges.in = R.remove(edgeOutNodeIdx, 1, edgeNode.edges.in);
+          }
+        });
+        // remove the node
         const nodeIdx = currentState.findIndex((f) => f.id === nodeId);
         return R.remove(nodeIdx, 1, currentState);
       });
@@ -124,7 +141,7 @@ function workflowManifestFn() {
   set({
     name: '',
     description: '',
-    creator: '',
+    creators: [],
     groups: [],
     segments: [],
   });
@@ -278,7 +295,7 @@ function workflowManifestFn() {
       return set({
         name: '',
         description: '',
-        creator: '',
+        creators: [],
         groups: [],
         segments: [],
       });

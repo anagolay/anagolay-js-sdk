@@ -13,7 +13,7 @@
  * // [1,2,4]
  * ```
  */
-export function removeItemFromArray(array: any[], itemToRemove: any) {
+export function removeItemFromArray(array: any[], itemToRemove: any): any[] {
   const newArray = array.filter((element) => {
     return element !== itemToRemove;
   });
