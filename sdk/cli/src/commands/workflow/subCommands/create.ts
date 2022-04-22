@@ -33,7 +33,7 @@ async function create(): Promise<void> {
   // const namespace: string = `workflow-${randomUUID()}`;
   const namespace: string = `workflow-85f2477c-c321-4625-b421-d9ad52d7eac5`;
   const wsURL: string = encodeURIComponent(
-    (ANAGOLAY_CHAIN_WS_URL as string)?.includes('docker')
+    (ANAGOLAY_CHAIN_WS_URL as string)?.includes('docker') // in vscode container we use docker-internal.local
       ? 'http://localhost:2113'
       : (ANAGOLAY_CHAIN_WS_URL as string)
   );
@@ -43,7 +43,7 @@ async function create(): Promise<void> {
 
   const message: AnWorkflowData = await connectToWSAndListenFowWorkflow(namespace);
 
-  // console.log(message);
+  console.log(message);
 
   // const accountType: IAccountToUse = await chooseAccount();
 }

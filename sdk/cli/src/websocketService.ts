@@ -2,6 +2,7 @@ import { AnWorkflowData } from '@anagolay/types';
 import clui from 'clui';
 import { io, Socket, SocketOptions } from 'socket.io-client';
 // eslint-disable-next-line @typescript-eslint/typedef
+// eslint-disable-next-line @rushstack/typedef-var
 const Spinner = clui.Spinner;
 
 const { ANAGOLAY_WEBSOCKET_SERVICE_API_URL } = process.env;

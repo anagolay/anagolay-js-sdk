@@ -31,7 +31,7 @@ const COEFFICIENT_FOR_CONVERTING_TO_UNIT: number = 1000000000000;
  * Connect to the API -- aka Anagolay Network -
  * @remarks
  * Default value for the connection is 'ws://127.0.0.1:9944', it can be overwritten by setting the `ANAGOLAY_CHAIN_WS_URL` environment variable
- * @param log { Signale } - Optional logging to stdout
+ * @param log - Optional logging to stdout
  * @returns
  */
 export async function connectToApi(log?: Signale): Promise<ApiPromise> {
@@ -86,10 +86,10 @@ function validateSeed(suri: string): void {
 }
 /**
  * Transfer the Tokens from one account to another.
- * @param api
- * @param toAccount
- * @param fromAccount
- * @param amountInUnits
+ * @param api -
+ * @param toAccount -
+ * @param fromAccount -
+ * @param amountInUnits -
  * @returns
  */
 export async function transferToAccount(
@@ -160,9 +160,8 @@ export function createKeyringPairFromSeed(params: { seed: string; type: KeypairT
 
 /**
  * Sign and send the extrinsic
- * @param params
+ * @param params -
  * @remarks Error response is 
- * 
  * ```ts
  * export interface ISignSubmitErrorReturn {
  *   message: string;
@@ -249,7 +248,7 @@ export async function signAndSubmit(params: ISignAndSubmitParams): Promise<ISign
  * Is a dispatch error or not
  *
  * @remarks Shamelessly taken from the https://github.com/polkadot-js/apps/blob/master/packages/react-params/src/Param/DispatchError.tsx#L25 because i couldn't find in their docs HOW to deal with the errors. now i know and it is weird
- * @param value
+ * @param value -
  * @returns
  */
 function isDispatchError(value?: unknown): value is DispatchError {

@@ -186,7 +186,7 @@ interface IDecodedArtifactsWithManifest extends OperationVersionSchema {
 
 /**
  * Prepare and Create extrinsics, call the api and return the data
- * @param artifactsWithVersion
+ * @param artifactsWithVersion -
  * @public
  */
 async function submitTheExtrinsicCall(
