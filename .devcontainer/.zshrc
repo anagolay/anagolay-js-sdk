@@ -99,6 +99,9 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+export HISTIGNORE='doppler*'
+
 DISABLE_AUTO_UPDATE=true
 DISABLE_UPDATE_PROMPT=true
 eval "$(direnv hook zsh)"

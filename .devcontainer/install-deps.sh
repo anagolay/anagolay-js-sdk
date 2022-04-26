@@ -2,12 +2,20 @@
 set -x
 set -e
 
+curl -sLf --retry 3 --tlsv1.2 --proto "=https" 'https://packages.doppler.com/public/cli/gpg.DE2A7741A397C129.key' | sudo apt-key add -
+echo "deb https://packages.doppler.com/public/cli/deb/debian any-version main" | sudo tee /etc/apt/sources.list.d/doppler-cli.list
+
 sudo apt update && sudo apt-get install -y \
 	silversearcher-ag \
 	tmux \
 	neovim \
 	iputils-ping \
-	direnv
+	direnv \
+	apt-transport-https \
+	ca-certificates \
+	curl \
+	gnupg \
+	doppler
 
 if ! command -v pnpm &>/dev/null; then
 	echo "pnpm could not be found, i will install it"

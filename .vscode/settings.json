@@ -66,5 +66,8 @@
     "markdown",
     "svelte"
   ],
-  "eslint.useESLintClass": true
+  "eslint.useESLintClass": true,
+  "workbench.colorCustomizations": {
+    "titleBar.activeBackground": "#3659c2"
+  }
 }
