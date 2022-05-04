@@ -95,6 +95,6 @@ export function parseURL(sourceURL: string): string;
 export { polkadot_util }
 
 // @public
-export function urlForRemote(remote?: string): Promise<string>;
+export function urlForRemote(remote?: string, parse?: boolean): Promise<string>;
 
 ```

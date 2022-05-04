@@ -9,7 +9,6 @@ import {
   AnBlockNumber,
   AnCharacters,
   AnCreatorId,
-  AnDocsArtifactSubType,
   AnForWhat,
   AnGenericId,
   AnVersionId,
@@ -20,8 +19,8 @@ import {
 // Workflow
 
 export interface AnOperationVersionReference {
-  version_id: AnVersionId;
-  config: Map<AnCharacters, AnCharacters[]>;
+  versionId: AnVersionId;
+  config: Map<AnCharacters, AnCharacters>;
 }
 
 export interface AnWorkflowSegment {
@@ -35,6 +34,7 @@ export interface AnWorkflowData {
   description: AnCharacters;
   groups: AnForWhat[];
   segments: AnWorkflowSegment[];
+  version: AnCharacters;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -54,10 +54,9 @@ export interface AnWorkflowRecord {
 // Workflow Version
 
 export interface AnWorkflowArtifactType {
-  CRATE: undefined;
-  WASM: AnWasmArtifactSubType;
-  DOCS: AnDocsArtifactSubType;
-  GIT: undefined;
+  Docs: undefined;
+  Git: undefined;
+  Wasm: AnWasmArtifactSubType;
 }
 
 export interface AnWorkflowArtifactStructure {

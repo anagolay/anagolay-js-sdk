@@ -1,4 +1,4 @@
-import type { AnCharacters, AnOperationData } from '@anagolay/types';
+import type { AnCharacters, AnOperation, AnOperationData, AnOperationVersion } from '@anagolay/types';
 
 /**
  * Drawflow node
@@ -29,7 +29,7 @@ export interface WorkflowNodeConnection {
    * Latest Version id
    */
   id: string;
-  config: Map<AnCharacters, AnCharacters[]>;
+  config: Map<AnCharacters, AnCharacters>;
   /**
    * An edge is a connection between two nodes. All edges are directed
    */
@@ -47,6 +47,14 @@ export interface WorkflowNodeConnection {
    * Operation Data type
    */
   data: AnOperationData;
+  /**
+   * Operation manifest
+   */
+  operation: AnOperation;
+  /**
+   * Operation version manifest
+   */
+  version: AnOperationVersion;
 }
 
 export interface DrawflowNode {
@@ -82,6 +90,6 @@ export interface SegmentData {
 }
 
 export interface Sequence {
-  version_id: string;
+  versionId: string;
   config: Record<string, any>;
 }

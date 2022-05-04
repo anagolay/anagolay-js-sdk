@@ -32,6 +32,7 @@ import type {
   ContractInstantiateResult,
   InstantiateRequest,
 } from '@polkadot/types/interfaces/contracts';
+import type { BlockStats } from '@polkadot/types/interfaces/dev';
 import type { CreatedBlock } from '@polkadot/types/interfaces/engine';
 import type {
   EthAccount,
@@ -72,7 +73,12 @@ import type {
   SignedBlock,
   StorageData,
 } from '@polkadot/types/interfaces/runtime';
-import type { ReadProof, RuntimeVersion, TraceBlockResponse } from '@polkadot/types/interfaces/state';
+import type {
+  MigrationStatusResult,
+  ReadProof,
+  RuntimeVersion,
+  TraceBlockResponse,
+} from '@polkadot/types/interfaces/state';
 import type {
   ApplyExtrinsicResult,
   ChainProperties,
@@ -321,6 +327,12 @@ declare module '@polkadot/rpc-core/types/jsonrpc' {
           at?: BlockHash | string | Uint8Array
         ) => Observable<CodeUploadResult>
       >;
+    };
+    dev: {
+      /**
+       * Reexecute the specified `block_hash` and gather statistics while doing so
+       **/
+      getBlockStats: AugmentedRpc<(at: Hash | string | Uint8Array) => Observable<Option<BlockStats>>>;
     };
     engine: {
       /**
@@ -615,14 +627,10 @@ declare module '@polkadot/rpc-core/types/jsonrpc' {
     };
     grandpa: {
       /**
-       * Prove finality for the range (begin; end] hash.
+       * Prove finality for the given block number, returning the Justification for the last block in the set.
        **/
       proveFinality: AugmentedRpc<
-        (
-          begin: BlockHash | string | Uint8Array,
-          end: BlockHash | string | Uint8Array,
-          authoritiesSetId?: u64 | AnyNumber | Uint8Array
-        ) => Observable<Option<EncodedFinalityProofs>>
+        (blockNumber: BlockNumber | AnyNumber | Uint8Array) => Observable<Option<EncodedFinalityProofs>>
       >;
       /**
        * Returns the state of the current best round state as well as the ongoing background rounds
@@ -883,6 +891,12 @@ declare module '@polkadot/rpc-core/types/jsonrpc' {
           storageKeys: Option<Text> | null | object | string | Uint8Array,
           methods: Option<Text> | null | object | string | Uint8Array
         ) => Observable<TraceBlockResponse>
+      >;
+      /**
+       * Check current migration state
+       **/
+      trieMigrationStatus: AugmentedRpc<
+        (at?: BlockHash | string | Uint8Array) => Observable<MigrationStatusResult>
       >;
     };
     syncstate: {

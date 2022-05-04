@@ -2185,42 +2185,6 @@
           }
         },
         {
-          "kind": "Enum",
-          "canonicalReference": "@anagolay/types!AnDocsArtifactSubType:enum",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export declare enum AnDocsArtifactSubType "
-            }
-          ],
-          "releaseTag": "Public",
-          "name": "AnDocsArtifactSubType",
-          "members": [
-            {
-              "kind": "EnumMember",
-              "canonicalReference": "@anagolay/types!AnDocsArtifactSubType.RUSTDOC:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "'RUSTDOC' = "
-                },
-                {
-                  "kind": "Content",
-                  "text": "0"
-                }
-              ],
-              "releaseTag": "Public",
-              "name": "RUSTDOC",
-              "initializerTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            }
-          ]
-        },
-        {
           "kind": "Interface",
           "canonicalReference": "@anagolay/types!AnExpiration:interface",
           "docComment": "",
@@ -3237,12 +3201,12 @@
           "members": [
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/types!AnOperationArtifactType#CRATE:member",
+              "canonicalReference": "@anagolay/types!AnOperationArtifactType#Docs:member",
               "docComment": "",
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "CRATE: "
+                  "text": "Docs: "
                 },
                 {
                   "kind": "Content",
@@ -3255,7 +3219,7 @@
               ],
               "isOptional": false,
               "releaseTag": "Public",
-              "name": "CRATE",
+              "name": "Docs",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
@@ -3263,12 +3227,12 @@
             },
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/types!AnOperationArtifactType#DOCS:member",
+              "canonicalReference": "@anagolay/types!AnOperationArtifactType#Git:member",
               "docComment": "",
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "DOCS: "
+                  "text": "Git: "
                 },
                 {
                   "kind": "Content",
@@ -3281,7 +3245,7 @@
               ],
               "isOptional": false,
               "releaseTag": "Public",
-              "name": "DOCS",
+              "name": "Git",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
@@ -3289,38 +3253,12 @@
             },
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/types!AnOperationArtifactType#GIT:member",
+              "canonicalReference": "@anagolay/types!AnOperationArtifactType#Wasm:member",
               "docComment": "",
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "GIT: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "undefined"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "GIT",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/types!AnOperationArtifactType#WASM:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "WASM: "
+                  "text": "Wasm: "
                 },
                 {
                   "kind": "Reference",
@@ -3334,7 +3272,7 @@
               ],
               "isOptional": false,
               "releaseTag": "Public",
-              "name": "WASM",
+              "name": "Wasm",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
@@ -4169,7 +4107,7 @@
                 },
                 {
                   "kind": "Content",
-                  "text": "[]>"
+                  "text": ">"
                 },
                 {
                   "kind": "Content",
@@ -4186,12 +4124,12 @@
             },
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/types!AnOperationVersionReference#version_id:member",
+              "canonicalReference": "@anagolay/types!AnOperationVersionReference#versionId:member",
               "docComment": "",
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "version_id: "
+                  "text": "versionId: "
                 },
                 {
                   "kind": "Reference",
@@ -4205,7 +4143,7 @@
               ],
               "isOptional": false,
               "releaseTag": "Public",
-              "name": "version_id",
+              "name": "versionId",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
@@ -5447,12 +5385,12 @@
           "members": [
             {
               "kind": "EnumMember",
-              "canonicalReference": "@anagolay/types!AnWasmArtifactSubType.CJS:member",
+              "canonicalReference": "@anagolay/types!AnWasmArtifactSubType.Cjs:member",
               "docComment": "",
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "'CJS' = "
+                  "text": "'Cjs' = "
                 },
                 {
                   "kind": "Content",
@@ -5460,7 +5398,7 @@
                 }
               ],
               "releaseTag": "Public",
-              "name": "CJS",
+              "name": "Cjs",
               "initializerTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
@@ -5468,33 +5406,12 @@
             },
             {
               "kind": "EnumMember",
-              "canonicalReference": "@anagolay/types!AnWasmArtifactSubType.ESM:member",
+              "canonicalReference": "@anagolay/types!AnWasmArtifactSubType.Esm:member",
               "docComment": "",
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "'ESM' = "
-                },
-                {
-                  "kind": "Content",
-                  "text": "2"
-                }
-              ],
-              "releaseTag": "Public",
-              "name": "ESM",
-              "initializerTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "EnumMember",
-              "canonicalReference": "@anagolay/types!AnWasmArtifactSubType.WASM:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "'WASM' = "
+                  "text": "'Esm' = "
                 },
                 {
                   "kind": "Content",
@@ -5502,7 +5419,7 @@
                 }
               ],
               "releaseTag": "Public",
-              "name": "WASM",
+              "name": "Esm",
               "initializerTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
@@ -5510,12 +5427,33 @@
             },
             {
               "kind": "EnumMember",
-              "canonicalReference": "@anagolay/types!AnWasmArtifactSubType.WEB:member",
+              "canonicalReference": "@anagolay/types!AnWasmArtifactSubType.Wasm:member",
               "docComment": "",
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "'WEB' = "
+                  "text": "'Wasm' = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "2"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "Wasm",
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@anagolay/types!AnWasmArtifactSubType.Web:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "'Web' = "
                 },
                 {
                   "kind": "Content",
@@ -5523,7 +5461,7 @@
                 }
               ],
               "releaseTag": "Public",
-              "name": "WEB",
+              "name": "Web",
               "initializerTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
@@ -5740,12 +5678,12 @@
           "members": [
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/types!AnWorkflowArtifactType#CRATE:member",
+              "canonicalReference": "@anagolay/types!AnWorkflowArtifactType#Docs:member",
               "docComment": "",
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "CRATE: "
+                  "text": "Docs: "
                 },
                 {
                   "kind": "Content",
@@ -5758,7 +5696,7 @@
               ],
               "isOptional": false,
               "releaseTag": "Public",
-              "name": "CRATE",
+              "name": "Docs",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
@@ -5766,39 +5704,12 @@
             },
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/types!AnWorkflowArtifactType#DOCS:member",
+              "canonicalReference": "@anagolay/types!AnWorkflowArtifactType#Git:member",
               "docComment": "",
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "DOCS: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "AnDocsArtifactSubType",
-                  "canonicalReference": "@anagolay/types!AnDocsArtifactSubType:enum"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "DOCS",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/types!AnWorkflowArtifactType#GIT:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "GIT: "
+                  "text": "Git: "
                 },
                 {
                   "kind": "Content",
@@ -5811,7 +5722,7 @@
               ],
               "isOptional": false,
               "releaseTag": "Public",
-              "name": "GIT",
+              "name": "Git",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
@@ -5819,12 +5730,12 @@
             },
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/types!AnWorkflowArtifactType#WASM:member",
+              "canonicalReference": "@anagolay/types!AnWorkflowArtifactType#Wasm:member",
               "docComment": "",
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "WASM: "
+                  "text": "Wasm: "
                 },
                 {
                   "kind": "Reference",
@@ -5838,7 +5749,7 @@
               ],
               "isOptional": false,
               "releaseTag": "Public",
-              "name": "WASM",
+              "name": "Wasm",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
@@ -6005,6 +5916,33 @@
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 3
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@anagolay/types!AnWorkflowData#version:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "version: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "AnCharacters",
+                  "canonicalReference": "@anagolay/types!AnCharacters:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "version",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
               }
             }
           ],
@@ -6653,88 +6591,6 @@
           "releaseTag": "Public",
           "name": "CreatorId",
           "members": [],
-          "extendsTokenRanges": [
-            {
-              "startIndex": 1,
-              "endIndex": 3
-            }
-          ]
-        },
-        {
-          "kind": "Interface",
-          "canonicalReference": "@anagolay/types!DocsArtifactSubType:interface",
-          "docComment": "/**\n * @name DocsArtifactSubType\n */\n",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export interface DocsArtifactSubType extends "
-            },
-            {
-              "kind": "Reference",
-              "text": "Enum",
-              "canonicalReference": "@polkadot/types-codec!Enum:class"
-            },
-            {
-              "kind": "Content",
-              "text": " "
-            }
-          ],
-          "releaseTag": "Public",
-          "name": "DocsArtifactSubType",
-          "members": [
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/types!DocsArtifactSubType#isRustdoc:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "readonly isRustdoc: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "boolean"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "isRustdoc",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/types!DocsArtifactSubType#type:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "readonly type: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "'Rustdoc'"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "type",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            }
-          ],
           "extendsTokenRanges": [
             {
               "startIndex": 1,
@@ -7763,32 +7619,6 @@
             },
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/types!OperationArtifactType#isCrate:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "readonly isCrate: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "boolean"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "isCrate",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
               "canonicalReference": "@anagolay/types!OperationArtifactType#isDocs:member",
               "docComment": "",
               "excerptTokens": [
@@ -7876,7 +7706,7 @@
                 },
                 {
                   "kind": "Content",
-                  "text": "'Crate' | 'Wasm' | 'Docs' | 'Git'"
+                  "text": "'Docs' | 'Git' | 'Wasm'"
                 },
                 {
                   "kind": "Content",
@@ -8909,21 +8739,12 @@
                 },
                 {
                   "kind": "Reference",
-                  "text": "Vec",
-                  "canonicalReference": "@polkadot/types-codec!Vec:class"
-                },
-                {
-                  "kind": "Content",
-                  "text": "<"
-                },
-                {
-                  "kind": "Reference",
                   "text": "Characters",
                   "canonicalReference": "@anagolay/types!Characters:interface"
                 },
                 {
                   "kind": "Content",
-                  "text": ">>"
+                  "text": ">"
                 },
                 {
                   "kind": "Content",
@@ -8935,17 +8756,17 @@
               "name": "config",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
-                "endIndex": 9
+                "endIndex": 7
               }
             },
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/types!OperationVersionReference#version_id:member",
+              "canonicalReference": "@anagolay/types!OperationVersionReference#versionId:member",
               "docComment": "",
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "readonly version_id: "
+                  "text": "readonly versionId: "
                 },
                 {
                   "kind": "Reference",
@@ -8959,7 +8780,7 @@
               ],
               "isOptional": false,
               "releaseTag": "Public",
-              "name": "version_id",
+              "name": "versionId",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
@@ -10698,7 +10519,7 @@
                 },
                 {
                   "kind": "Content",
-                  "text": "'Cjs' | 'Wasm' | 'Esm' | 'Web'"
+                  "text": "'Cjs' | 'Esm' | 'Wasm' | 'Web'"
                 },
                 {
                   "kind": "Content",
@@ -10980,33 +10801,6 @@
           "members": [
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/types!WorkflowArtifactType#asDocs:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "readonly asDocs: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "DocsArtifactSubType",
-                  "canonicalReference": "@anagolay/types!DocsArtifactSubType:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "asDocs",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
               "canonicalReference": "@anagolay/types!WorkflowArtifactType#asWasm:member",
               "docComment": "",
               "excerptTokens": [
@@ -11027,32 +10821,6 @@
               "isOptional": false,
               "releaseTag": "Public",
               "name": "asWasm",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/types!WorkflowArtifactType#isCrate:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "readonly isCrate: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "boolean"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "isCrate",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
@@ -11147,7 +10915,7 @@
                 },
                 {
                   "kind": "Content",
-                  "text": "'Crate' | 'Wasm' | 'Docs' | 'Git'"
+                  "text": "'Docs' | 'Git' | 'Wasm'"
                 },
                 {
                   "kind": "Content",

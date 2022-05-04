@@ -29,12 +29,11 @@ export interface OperationArtifactStructure extends Struct {
 
 /** @name OperationArtifactType */
 export interface OperationArtifactType extends Enum {
-  readonly isCrate: boolean;
-  readonly isWasm: boolean;
-  readonly asWasm: WasmArtifactSubType;
   readonly isDocs: boolean;
   readonly isGit: boolean;
-  readonly type: 'Crate' | 'Wasm' | 'Docs' | 'Git';
+  readonly isWasm: boolean;
+  readonly asWasm: WasmArtifactSubType;
+  readonly type: 'Docs' | 'Git' | 'Wasm';
 }
 
 /** @name OperationData */

@@ -4,22 +4,22 @@
  * For Full license read LICENSE file
  */
 
-// THIS UST BE INCLUDED IF WE WANT AUGMENTED TYPES
+// https://polkadot.js.org/docs/api/FAQ/#since-upgrading-to-the-7x-series-typescript-augmentation-is-missing
+import '@polkadot/api-augment';
+// THIS MUST BE INCLUDED IF WE WANT AUGMENTED TYPES
 import '@anagolay/types/lib/interfaces/augment-api';
 import '@anagolay/types/lib/interfaces/augment-types';
 
-import { AnOperationData, AnOperationVersionData } from '@anagolay/types';
 import customTypes from '@anagolay/types/lib/customTypes.json';
-import { hexToString } from '@anagolay/utils';
-import { ApiPromise, WsProvider } from '@polkadot/api';
+import { ApiPromise, SubmittableResult, WsProvider } from '@polkadot/api';
 import { Keyring } from '@polkadot/keyring';
 import { KeyringPair } from '@polkadot/keyring/types';
-import { DispatchError } from '@polkadot/types/interfaces';
+import { DispatchError, EventRecord } from '@polkadot/types/interfaces';
 import { assert, isHex } from '@polkadot/util';
 import { keyExtractSuri, mnemonicValidate } from '@polkadot/util-crypto';
 import { KeypairType } from '@polkadot/util-crypto/types';
 import { Spinner } from 'clui';
-import { equals, isNil, trim } from 'ramda';
+import { isNil, trim } from 'ramda';
 import signale, { Signale } from 'signale';
 
 const SEED_LENGTHS: number[] = [12, 15, 18, 21, 24];
@@ -127,11 +127,8 @@ export async function transferToAccount(
   });
 }
 
-export interface ISignAndSubmitParams {
-  api: ApiPromise;
-  account: KeyringPair;
-  operationData: AnOperationData;
-  versionData: AnOperationVersionData;
+export interface ISubmittable {
+  signAndSend: (account: KeyringPair, callback: (result: SubmittableResult) => void) => Promise<() => void>;
 }
 
 export interface ISignSubmitErrorReturn {
@@ -141,7 +138,7 @@ export interface ISignSubmitErrorReturn {
 
 export interface ISignSubmitSuccessReturn {
   blockHash: string;
-  operationId: string;
+  entityId: string;
 }
 
 /**
@@ -160,7 +157,8 @@ export function createKeyringPairFromSeed(params: { seed: string; type: KeypairT
 
 /**
  * Sign and send the extrinsic
- * @param params -
+ * @param account - Keyring pair used to sign
+ * @param submittable - Extrinsic to sign and submit
  * @remarks Error response is 
  * ```ts
  * export interface ISignSubmitErrorReturn {
@@ -169,34 +167,28 @@ export function createKeyringPairFromSeed(params: { seed: string; type: KeypairT
  * }
 ```
  * 
- * @returns If success resolve will return `ISignSubmitSuccessReturn`, if there is an error reject will return `ISignSubmitErrorReturn`
+ * @returns If success resolve will return the block hash, if there is an error reject will return `ISignSubmitErrorReturn`
  */
-export async function signAndSubmit(params: ISignAndSubmitParams): Promise<ISignSubmitSuccessReturn> {
+export async function signAndSubmit(
+  account: KeyringPair,
+  submittable: ISubmittable,
+  spinner: Spinner,
+  eventsHandler?: (events: EventRecord[]) => void
+): Promise<string> {
+  spinner.message('Signing and submitting the TX ...');
+
+  spinner.start();
   // eslint-disable-next-line no-async-promise-executor
   return new Promise(async (resolve, reject) => {
-    // hold this until the end, clui doesn't like the signale
-    let operationId: string;
+    const unSub = await submittable.signAndSend(account, (result) => {
+      if (eventsHandler) {
+        eventsHandler(result.events);
+      }
 
-    const spinner = new Spinner('');
-    spinner.message('Signing and submitting the TX ...');
-
-    spinner.start();
-
-    const { versionData, operationData, api, account } = params;
-
-    const submittable = api.tx.operations.create(operationData, versionData);
-
-    const unSub = await submittable.signAndSend(account, {}, (result) => {
       // destruct the result
       const { events, status } = result;
-
       events.forEach((record) => {
         const { event } = record;
-
-        if (equals(event.method, 'OperationCreated')) {
-          operationId = hexToString(event.data[1].toString());
-          spinner.message(`Operation created ID: ${operationId}`);
-        }
 
         // if the event has more stuff, like the error
         event.data.map((value) => {
@@ -231,14 +223,14 @@ export async function signAndSubmit(params: ISignAndSubmitParams): Promise<ISign
 
       if (status.isInBlock) {
         spinner.message(``);
-        spinner.message(`TX is in the block ...`);
+        spinner.message(`TX is in the block ...           `);
       } else if (status.isFinalized) {
         const blockHash = status.asFinalized.toHex();
 
         spinner.message(`TX is finalized.`);
         spinner.stop();
         unSub();
-        resolve({ blockHash, operationId });
+        resolve(blockHash);
       }
     });
   });

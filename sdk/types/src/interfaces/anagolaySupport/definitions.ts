@@ -11,10 +11,7 @@ export const AnagolayCustomTypes: RegistryTypes = {
     _enum: ['GENERIC', 'PHOTO', 'CAMERA', 'LENS', 'SMARTPHONE', 'USER', 'SYS', 'FLOWCONTROL'],
   },
   WasmArtifactSubType: {
-    _enum: ['CJS', 'WASM', 'ESM', 'WEB'],
-  },
-  DocsArtifactSubType: {
-    _enum: ['RUSTDOC'],
+    _enum: ['Cjs', 'Esm', 'Wasm', 'Web'],
   },
   AnagolayVersionExtra: {
     createdAt: 'u64',

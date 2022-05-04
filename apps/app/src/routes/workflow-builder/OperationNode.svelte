@@ -3,20 +3,22 @@
 </script>
 
 <script lang="ts">
+  import type { OperationWithVersions } from '$src/api';
+
   import MaterialIcon from '$src/components/MaterialIcon.svelte';
-  import type { OperationsFixture } from '$src/fixtures/operations';
+  import type { AnOperation, AnOperationVersion } from '@anagolay/types';
+  import { isEmpty } from 'ramda';
   import { last } from 'remeda';
-  import { is_empty } from 'svelte/internal';
-  import { addedNodesIds, workflowGraph, workflowManifest } from './stores';
+  import { addedNodesIds, workflowGraph, workflow } from './stores';
   /**
-   * Operation from the chain
+   * Operation and versions from the chain
    */
-  export let op: OperationsFixture;
+  export let opv: OperationWithVersions;
 
   /**
    * Add Node to the Drawflow
    */
-  export let addNode: (op: OperationsFixture) => void;
+  export let addNode: (op: AnOperation, versions: AnOperationVersion[]) => void;
 
   /**
    * Show Oepration info Prop
@@ -30,48 +32,47 @@
    */
   function selectConfig(key: string, value: string) {
     workflowGraph.setConfigToNode({
-      nodeId: last(op.versions),
+      nodeId: last(opv.versions).id,
       configKey: key,
       configValue: value,
     });
 
-    workflowManifest.generate();
+    workflow.generate();
   }
 
   let roundedClassName: string = 'rounded-md';
-  $: op.data.config.size === 0 || (roundedClassName = 'rounded-t-md');
+  $: isEmpty(opv.op.data.config) || (roundedClassName = 'rounded-t-md');
 </script>
 
 <div class="flex flex-col w-full rounded-md bg-base-content my-1">
   <div class="flex flex-row bg-base-200 p-2 {roundedClassName}">
     <button
-      disabled={$addedNodesIds.includes(last(op.versions))}
-      on:click={() => addNode(op)}
+      disabled={$addedNodesIds.includes(last(opv.versions).id)}
+      on:click={() => addNode(opv.op, opv.versions)}
       class=" flex flex-row items-center justify-start h-10 rounded-md w-full {$addedNodesIds.includes(
-        last(op.versions)
+        last(opv.versions).id
       )
         ? 'text-success'
         : 'text-primary-content'}"
     >
-      <span class="px-2">{op.data.name}</span>
+      <span class="px-2">{opv.op.data.name}</span>
     </button>
-    <button on:click={() => showOperationInfo(op.id)} class="flex items-center text-lg">
+    <button on:click={() => showOperationInfo(opv.op.id)} class="flex items-center text-lg">
       <MaterialIcon class="text-slate-500" iconName="info" />
     </button>
   </div>
-  {#if op.data.config.size !== 0}
+  {#if !isEmpty(opv.op.data.config)}
     <div class="bg-base-content">
       <!-- https://svelte.dev/repl/d9da6330755049dab0aa2a0dcfa2d549?version=3.23.2 -->
-      {#each [...op.data.config] as [key, value]}
+      {#each Object.entries(opv.op.data.config) as [key, values]}
         <ul class="menu bg-base-100 rounded-b-md">
           <span class="text-sm m-3">{key.toUpperCase()}</span>
-
-          {#each op.data.config.get(key) as item}
+          {#each values as item}
             <li>
               <label class="label cursor-pointer">
                 <span class="text-sm">{item}</span>
                 <input
-                  disabled={!$addedNodesIds.includes(last(op.versions))}
+                  disabled={!$addedNodesIds.includes(last(opv.versions).id)}
                   on:click={() => selectConfig(key, item)}
                   type="radio"
                   name={key}

@@ -1,13 +1,38 @@
-import { AnWorkflowData } from '@anagolay/types';
+import { AnWorkflowArtifactStructure, AnWorkflowData, AnWorkflowVersionData } from '@anagolay/types';
+import { createFileLogger, Logger } from '@anagolay/utils';
+import { ApiPromise } from '@polkadot/api';
+import { KeyringPair } from '@polkadot/keyring/types';
+import { EventRecord } from '@polkadot/types/interfaces';
+import { hexToString } from '@polkadot/util';
+import { cryptoWaitReady } from '@polkadot/util-crypto';
+import clui from 'clui';
 import { Command } from 'commander';
+import { equals } from 'ramda';
+import signale from 'signale';
 
+import { ISignSubmitErrorReturn, ISignSubmitSuccessReturn, signAndSubmit } from '../../../api';
+import { chooseAccount } from '../../../commonQuestions/account';
 import { askStarterQuestions } from '../../../commonQuestions/common';
-import { connectToWSAndListenFowWorkflow } from '../../../websocketService';
+import { callPublishService, ISuccessfulResponse } from '../../../publish';
+import { connectToAnagolayChain, ensureBalance, logsDir } from '../../../utils';
+import { connectToWSAndListenFowWorkflow, IWorkflowBuild } from '../../../websocketService';
 
-const { ANAGOLAY_WORKFLOW_BUILDER_UI, ANAGOLAY_CHAIN_WS_URL } = process.env;
+const { ANAGOLAY_WORKFLOW_BUILDER_UI, ANAGOLAY_CHAIN_WS_URL, ANAGOLAY_WEBSOCKET_SERVICE_API_URL } =
+  process.env;
 
 if (!ANAGOLAY_WORKFLOW_BUILDER_UI) throw new Error('ANAGOLAY_WORKFLOW_BUILDER_UI is not set');
+if (!ANAGOLAY_WEBSOCKET_SERVICE_API_URL) throw new Error('ANAGOLAY_WEBSOCKET_SERVICE_API_URL is not set');
 if (!ANAGOLAY_CHAIN_WS_URL) throw new Error('ANAGOLAY_CHAIN_WS_URL is not set');
+
+const log: Logger = createFileLogger(`${logsDir()}/workflow.log`, { name: 'workflow' });
+
+/**
+ * Publish workflow successful response
+ */
+export type IWorkflowVersionSchema = ISuccessfulResponse<AnWorkflowArtifactStructure>;
+
+// eslint-disable-next-line @rushstack/typedef-var
+const Spinner = clui.Spinner;
 
 export default async function createSubCommand(): Promise<Command> {
   // eslint-disable-next-line @typescript-eslint/typedef
@@ -33,17 +58,83 @@ async function create(): Promise<void> {
   // const namespace: string = `workflow-${randomUUID()}`;
   const namespace: string = `workflow-85f2477c-c321-4625-b421-d9ad52d7eac5`;
   const wsURL: string = encodeURIComponent(
-    (ANAGOLAY_CHAIN_WS_URL as string)?.includes('docker') // in vscode container we use docker-internal.local
-      ? 'http://localhost:2113'
+    (ANAGOLAY_WEBSOCKET_SERVICE_API_URL as string)?.includes('host.docker.internal') // in vscode container we use host.docker.internal
+      ? (ANAGOLAY_WEBSOCKET_SERVICE_API_URL as string).replace('host.docker.internal', '0.0.0.0')
+      : (ANAGOLAY_WEBSOCKET_SERVICE_API_URL as string)
+  );
+  const chainURL: string = encodeURIComponent(
+    (ANAGOLAY_CHAIN_WS_URL as string)?.includes('host.docker.internal') // in vscode container we use host.docker.internal
+      ? (ANAGOLAY_CHAIN_WS_URL as string).replace('host.docker.internal', '0.0.0.0')
       : (ANAGOLAY_CHAIN_WS_URL as string)
   );
 
-  const link: string = `${ANAGOLAY_WORKFLOW_BUILDER_UI}?ws=${wsURL}&ns=${namespace}&path=ws`;
+  const link: string = `${ANAGOLAY_WORKFLOW_BUILDER_UI}?ws=${wsURL}&anagolay_chain_ws=${chainURL}&ns=${namespace}&path=ws`;
   console.log(`Follow this link to start building the Workflow: \n${link}`);
 
-  const message: AnWorkflowData = await connectToWSAndListenFowWorkflow(namespace);
+  const workflowBuild: IWorkflowBuild = await connectToWSAndListenFowWorkflow(namespace);
 
-  console.log(message);
+  const payloadData = {
+    context: 'workflow',
+    payload: workflowBuild,
+  };
 
-  // const accountType: IAccountToUse = await chooseAccount();
+  const publishResponse = await callPublishService<AnWorkflowArtifactStructure, IWorkflowVersionSchema>(
+    log,
+    payloadData
+  );
+  const versionData: AnWorkflowVersionData = {
+    entityId: undefined,
+    parentId: undefined,
+    artifacts: publishResponse.artifacts.items,
+  };
+
+  const chain: ApiPromise = await connectToAnagolayChain();
+
+  const extrinsics = await submitTheExtrinsicCall(chain, workflowBuild.manifestData, versionData);
+
+  console.log('> Workflow TX is at blockHash', extrinsics.blockHash);
+  console.log('> Workflow ID is', extrinsics.entityId);
+  signale.success('Publishing is DONE 🎉🎉!');
+  process.exit();
+}
+
+async function submitTheExtrinsicCall(
+  chainApi: ApiPromise,
+  workflowData: AnWorkflowData,
+  workflowVersionData: AnWorkflowVersionData
+): Promise<ISignSubmitSuccessReturn> {
+  // Wait WASM interface initialization
+  await cryptoWaitReady();
+
+  // Get holder for the actual account having enough balance
+  const { accountToUse } = await chooseAccount();
+  const account: KeyringPair = await ensureBalance(chainApi, accountToUse);
+  workflowData.creators.push(account.address);
+
+  console.log('%o %o', workflowData, workflowVersionData);
+
+  // hold this until the end, clui doesn't like the signale
+  let entityId: string = '';
+
+  const spinner = new Spinner('');
+  const submittable = chainApi.tx.workflows.create(workflowData, workflowVersionData);
+  const eventsHandler = (events: EventRecord[]): void => {
+    events.forEach((record) => {
+      const { event } = record;
+      if (equals(event.method, 'WorkflowCreated')) {
+        entityId = hexToString(event.data[1].toString());
+        spinner.message(`Workflow created ID: ${entityId}`);
+        log.info(`Workflow created ID: ${entityId}`);
+      }
+    });
+  };
+
+  try {
+    const blockHash = await signAndSubmit(account, submittable, spinner, eventsHandler);
+    return { blockHash, entityId };
+  } catch (error) {
+    const { message, errorType } = error as ISignSubmitErrorReturn;
+    signale.error(`${message} :: ${errorType}`);
+    process.exit(1);
+  }
 }

@@ -17,12 +17,6 @@ export interface Characters extends Bytes {}
 /** @name CreatorId */
 export interface CreatorId extends Characters {}
 
-/** @name DocsArtifactSubType */
-export interface DocsArtifactSubType extends Enum {
-  readonly isRustdoc: boolean;
-  readonly type: 'Rustdoc';
-}
-
 /** @name ForWhat */
 export interface ForWhat extends Enum {
   readonly isGeneric: boolean;
@@ -48,10 +42,10 @@ export interface VersionId extends GenericId {}
 /** @name WasmArtifactSubType */
 export interface WasmArtifactSubType extends Enum {
   readonly isCjs: boolean;
-  readonly isWasm: boolean;
   readonly isEsm: boolean;
+  readonly isWasm: boolean;
   readonly isWeb: boolean;
-  readonly type: 'Cjs' | 'Wasm' | 'Esm' | 'Web';
+  readonly type: 'Cjs' | 'Esm' | 'Wasm' | 'Web';
 }
 
 /** @name WorkflowId */

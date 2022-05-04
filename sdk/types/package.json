@@ -24,13 +24,13 @@
     "package": "bash ../../common/scripts/package.sh"
   },
   "dependencies": {
-    "@polkadot/api": "7.8.1",
+    "@polkadot/api": "7.15.1",
     "@polkadot/metadata": "4.17.1",
-    "@polkadot/rpc-core": "7.8.1",
-    "@polkadot/types": "~7.8.1",
-    "@polkadot/api-base": "~7.8.1",
-    "@polkadot/typegen": "7.8.1",
-    "@polkadot/types-codec": "~7.8.1"
+    "@polkadot/rpc-core": "7.15.1",
+    "@polkadot/types": "7.15.1",
+    "@polkadot/api-base": "7.15.1",
+    "@polkadot/typegen": "7.15.1",
+    "@polkadot/types-codec": "7.15.1"
   },
   "devDependencies": {
     "exifreader": "^3.12.6",
@@ -39,10 +39,10 @@
     "@rushstack/heft-node-rig": "~1.7.1",
     "@microsoft/api-extractor": "~7.19.4",
     "@rushstack/eslint-config": "~2.5.1",
-    "@rushstack/heft": "~0.44.7",
-    "@rushstack/heft-jest-plugin": "~0.2.2",
+    "@rushstack/heft": "0.44.7",
+    "@rushstack/heft-jest-plugin": "0.2.2",
     "@rushstack/heft-web-rig": "~0.7.2",
-    "@types/heft-jest": "~1.0.2",
+    "@types/heft-jest": "1.0.2",
     "@types/node": "16.11.7",
     "eslint": "8.8.0",
     "eslint-plugin-simple-import-sort": "~7.0.0",

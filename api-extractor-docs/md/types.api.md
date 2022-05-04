@@ -16,7 +16,6 @@ import type { Characters as Characters_2 } from '@anagolay/types/interfaces/anag
 import { Codec } from '@polkadot/types/types';
 import { CodecClass } from '@polkadot/types/types';
 import type { CreatorId as CreatorId_2 } from '@anagolay/types/interfaces/anagolaySupport';
-import type { DocsArtifactSubType as DocsArtifactSubType_2 } from '@anagolay/types/interfaces/anagolaySupport';
 import type { Enum } from '@polkadot/types-codec';
 import type { ForWhat as ForWhat_2 } from '@anagolay/types/interfaces/anagolaySupport';
 import type { GenericId as GenericId_2 } from '@anagolay/types/interfaces/anagolaySupport';
@@ -229,12 +228,6 @@ export type AnCopyrightClaims = AnAnagolayCopyrightClaim[];
 export type AnCreatorId = AnCharacters;
 
 // @public (undocumented)
-export enum AnDocsArtifactSubType {
-    // (undocumented)
-    'RUSTDOC' = 0
-}
-
-// @public (undocumented)
 export interface AnExpiration {
     // (undocumented)
     expirationType: AnExpirationType;
@@ -347,13 +340,11 @@ export interface AnOperationArtifactStructure {
 // @public (undocumented)
 export interface AnOperationArtifactType {
     // (undocumented)
-    CRATE: undefined;
+    Docs: undefined;
     // (undocumented)
-    DOCS: undefined;
+    Git: undefined;
     // (undocumented)
-    GIT: undefined;
-    // (undocumented)
-    WASM: AnWasmArtifactSubType;
+    Wasm: AnWasmArtifactSubType;
 }
 
 // @public (undocumented)
@@ -433,9 +424,9 @@ export interface AnOperationVersionRecord {
 // @public (undocumented)
 export interface AnOperationVersionReference {
     // (undocumented)
-    config: Map<AnCharacters, AnCharacters[]>;
+    config: Map<AnCharacters, AnCharacters>;
     // (undocumented)
-    version_id: AnVersionId;
+    versionId: AnVersionId;
 }
 
 // @public (undocumented)
@@ -575,13 +566,13 @@ export type AnVersionId = AnGenericId;
 // @public (undocumented)
 export enum AnWasmArtifactSubType {
     // (undocumented)
-    'CJS' = 0,
+    'Cjs' = 0,
     // (undocumented)
-    'ESM' = 2,
+    'Esm' = 1,
     // (undocumented)
-    'WASM' = 1,
+    'Wasm' = 2,
     // (undocumented)
-    'WEB' = 3
+    'Web' = 3
 }
 
 // @public (undocumented)
@@ -607,13 +598,11 @@ export interface AnWorkflowArtifactStructure {
 // @public (undocumented)
 export interface AnWorkflowArtifactType {
     // (undocumented)
-    CRATE: undefined;
+    Docs: undefined;
     // (undocumented)
-    DOCS: AnDocsArtifactSubType;
+    Git: undefined;
     // (undocumented)
-    GIT: undefined;
-    // (undocumented)
-    WASM: AnWasmArtifactSubType;
+    Wasm: AnWasmArtifactSubType;
 }
 
 // @public (undocumented)
@@ -628,6 +617,8 @@ export interface AnWorkflowData {
     name: AnCharacters;
     // (undocumented)
     segments: AnWorkflowSegment[];
+    // (undocumented)
+    version: AnCharacters;
 }
 
 // @public (undocumented)
@@ -700,14 +691,6 @@ export interface Characters extends Bytes {
 
 // @public
 export interface CreatorId extends Characters {
-}
-
-// @public
-export interface DocsArtifactSubType extends Enum {
-    // (undocumented)
-    readonly isRustdoc: boolean;
-    // (undocumented)
-    readonly type: 'Rustdoc';
 }
 
 // @public (undocumented)
@@ -816,15 +799,13 @@ export interface OperationArtifactType extends Enum {
     // (undocumented)
     readonly asWasm: WasmArtifactSubType_2;
     // (undocumented)
-    readonly isCrate: boolean;
-    // (undocumented)
     readonly isDocs: boolean;
     // (undocumented)
     readonly isGit: boolean;
     // (undocumented)
     readonly isWasm: boolean;
     // (undocumented)
-    readonly type: 'Crate' | 'Wasm' | 'Docs' | 'Git';
+    readonly type: 'Docs' | 'Git' | 'Wasm';
 }
 
 // @public
@@ -911,9 +892,9 @@ export interface OperationVersionRecord extends Struct {
 // @public
 export interface OperationVersionReference extends Struct {
     // (undocumented)
-    readonly config: BTreeMap<Characters_2, Vec<Characters_2>>;
+    readonly config: BTreeMap<Characters_2, Characters_2>;
     // (undocumented)
-    readonly version_id: VersionId_2;
+    readonly versionId: VersionId_2;
 }
 
 // @public (undocumented)
@@ -1079,7 +1060,7 @@ export interface WasmArtifactSubType extends Enum {
     // (undocumented)
     readonly isWeb: boolean;
     // (undocumented)
-    readonly type: 'Cjs' | 'Wasm' | 'Esm' | 'Web';
+    readonly type: 'Cjs' | 'Esm' | 'Wasm' | 'Web';
 }
 
 // @public
@@ -1105,11 +1086,7 @@ export interface WorkflowArtifactStructure extends Struct {
 // @public
 export interface WorkflowArtifactType extends Enum {
     // (undocumented)
-    readonly asDocs: DocsArtifactSubType_2;
-    // (undocumented)
     readonly asWasm: WasmArtifactSubType_2;
-    // (undocumented)
-    readonly isCrate: boolean;
     // (undocumented)
     readonly isDocs: boolean;
     // (undocumented)
@@ -1117,7 +1094,7 @@ export interface WorkflowArtifactType extends Enum {
     // (undocumented)
     readonly isWasm: boolean;
     // (undocumented)
-    readonly type: 'Crate' | 'Wasm' | 'Docs' | 'Git';
+    readonly type: 'Docs' | 'Git' | 'Wasm';
 }
 
 // @public

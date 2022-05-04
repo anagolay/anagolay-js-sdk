@@ -53,10 +53,9 @@ export interface AnOperationWithStorage {
 // Operation Version
 
 export interface AnOperationArtifactType {
-  CRATE: undefined;
-  WASM: AnWasmArtifactSubType;
-  DOCS: undefined;
-  GIT: undefined;
+  Docs: undefined;
+  Git: undefined;
+  Wasm: AnWasmArtifactSubType;
 }
 
 export interface AnOperationArtifactStructure {

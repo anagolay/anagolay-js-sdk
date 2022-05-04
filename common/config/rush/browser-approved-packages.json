@@ -52,7 +52,11 @@
     },
     {
       "name": "@polkadot/api",
-      "allowedCategories": [ "libraries" ]
+      "allowedCategories": [ "libraries", "webapp" ]
+    },
+    {
+      "name": "@polkadot/api-augment",
+      "allowedCategories": [ "libraries", "webapp" ]
     },
     {
       "name": "@polkadot/api-base",
@@ -76,15 +80,15 @@
     },
     {
       "name": "@polkadot/types",
-      "allowedCategories": [ "libraries" ]
+      "allowedCategories": [ "libraries", "webapp" ]
     },
     {
       "name": "@polkadot/types-codec",
-      "allowedCategories": [ "libraries" ]
+      "allowedCategories": [ "libraries", "webapp" ]
     },
     {
       "name": "@polkadot/util",
-      "allowedCategories": [ "libraries" ]
+      "allowedCategories": [ "libraries", "webapp" ]
     },
     {
       "name": "@polkadot/util-crypto",

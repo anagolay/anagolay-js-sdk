@@ -1,4 +1,3 @@
-import { AnWorkflowData } from '@anagolay/types';
 import clui from 'clui';
 import { io, Socket, SocketOptions } from 'socket.io-client';
 // eslint-disable-next-line @typescript-eslint/typedef
@@ -6,6 +5,14 @@ import { io, Socket, SocketOptions } from 'socket.io-client';
 const Spinner = clui.Spinner;
 
 const { ANAGOLAY_WEBSOCKET_SERVICE_API_URL } = process.env;
+
+import { AnOperation, AnOperationVersion, AnWorkflowData } from '@anagolay/types';
+
+export interface IWorkflowBuild {
+  manifestData: AnWorkflowData;
+  operations: AnOperation[];
+  operationVersions: AnOperationVersion[];
+}
 
 /**
  * Connect to the Socket.io instance
@@ -31,12 +38,12 @@ export function connectToWs(url: string, options?: SocketOptions): Socket {
  * @param options - optional socket options
  *
  *
- * @returns Resolves the message with the signature {@link AnWorkflowData} interface
+ * @returns Resolves the message with the signature {@link WorkflowData} interface
  */
 export async function connectToWSAndListenFowWorkflow(
   namespace: string,
   options?: SocketOptions
-): Promise<AnWorkflowData> {
+): Promise<IWorkflowBuild> {
   return new Promise((resolve, reject) => {
     const wsConnectionSpinner: clui.Spinner = new Spinner('Connecting WS service ...');
     wsConnectionSpinner.start();
@@ -67,11 +74,11 @@ export async function connectToWSAndListenFowWorkflow(
     /**
      * This is the main event for the continuing the workflow creation
      */
-    socket.on('continueWithWorkflow', (message: AnWorkflowData) => {
+    socket.on('continueWithWorkflow', (message) => {
       wsConnectionSpinner.stop();
-      console.log(message);
       socket.disconnect();
-      resolve(message);
+      const workflowBuild: IWorkflowBuild = JSON.parse(message);
+      resolve(workflowBuild);
     });
 
     /**
