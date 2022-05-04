@@ -2,15 +2,13 @@
 [![coverage report](https://gitlab.com/anagolay/anagolay-js/badges/main/coverage.svg?job=test-and-build)](https://gitlab.com/anagolay/anagolay-js/-/commits/main)
 
 
-
-
-
 ## Dev friendly blockchain SDK for Anagolay Network. 👩‍💻🚀👨‍💻
 
 This is the monorepo for ALL Anagolay packages. This includes following list:
 
 1. Anagolay Network CLI located under `<root>/sdk/cli`
 2. Anagolay Network Types located under `<root>/sdk/types`
+3. All utils are located under `<root>/sdk/utils`
 
 ## Development
 
