@@ -49,9 +49,6 @@ export function customReplacer<V>(key: string, value: V): ISerializedMap<V> | V 
 }
 
 export function customReviver<T extends ISerializedMap<T>>(key: string, value: T): T | Map<any, any> {
-  console.log('key', key);
-  console.log('value', value);
-
   if (typeof value === 'object' && value !== null) {
     if (value.type === 'Map' || value.type === 'map') {
       return new Map(Object.entries(value.data));
