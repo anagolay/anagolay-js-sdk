@@ -5,7 +5,6 @@ import type {
   AnagolayVersionExtra,
   Characters,
   CreatorId,
-  DocsArtifactSubType,
   ForWhat,
   GenericId,
   VersionId,
@@ -17,8 +16,8 @@ import type { AccountId, BlockNumber } from '@polkadot/types/interfaces/runtime'
 
 /** @name OperationVersionReference */
 export interface OperationVersionReference extends Struct {
-  readonly version_id: VersionId;
-  readonly config: BTreeMap<Characters, Vec<Characters>>;
+  readonly versionId: VersionId;
+  readonly config: BTreeMap<Characters, Characters>;
 }
 
 /** @name Workflow */
@@ -37,13 +36,11 @@ export interface WorkflowArtifactStructure extends Struct {
 
 /** @name WorkflowArtifactType */
 export interface WorkflowArtifactType extends Enum {
-  readonly isCrate: boolean;
+  readonly isDocs: boolean;
+  readonly isGit: boolean;
   readonly isWasm: boolean;
   readonly asWasm: WasmArtifactSubType;
-  readonly isDocs: boolean;
-  readonly asDocs: DocsArtifactSubType;
-  readonly isGit: boolean;
-  readonly type: 'Crate' | 'Wasm' | 'Docs' | 'Git';
+  readonly type: 'Docs' | 'Git' | 'Wasm';
 }
 
 /** @name WorkflowData */

@@ -1139,7 +1139,7 @@
         {
           "kind": "Function",
           "canonicalReference": "@anagolay/utils!urlForRemote:function(1)",
-          "docComment": "/**\n * Return the URL for the git remote.\n *\n * @remarks\n *\n * This function is using the `git remote get-url --all` then invokes the {@link parseURL}\n *\n * @param remote - An origin as defined in the .git/config\n *\n * @defaultValue\n *\n * for `remote` param is `origin`\n *\n * @public\n */\n",
+          "docComment": "/**\n * Return the URL for the git remote.\n *\n * @remarks\n *\n * This function is using the `git remote get-url --all` then invokes the {@link parseURL} if parse parameter is true\n *\n * @param remote - An origin as defined in the .git/config\n *\n * @param parse - Flag that dictates whether to parse the url or not\n *\n * @defaultValue\n *\n * for `remote` param is `origin`\n *\n * @public\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
@@ -1148,6 +1148,14 @@
             {
               "kind": "Content",
               "text": "string"
+            },
+            {
+              "kind": "Content",
+              "text": ", parse?: "
+            },
+            {
+              "kind": "Content",
+              "text": "boolean"
             },
             {
               "kind": "Content",
@@ -1168,8 +1176,8 @@
             }
           ],
           "returnTypeTokenRange": {
-            "startIndex": 3,
-            "endIndex": 5
+            "startIndex": 5,
+            "endIndex": 7
           },
           "releaseTag": "Public",
           "overloadIndex": 1,
@@ -1179,6 +1187,13 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
+              }
+            },
+            {
+              "parameterName": "parse",
+              "parameterTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
               }
             }
           ],

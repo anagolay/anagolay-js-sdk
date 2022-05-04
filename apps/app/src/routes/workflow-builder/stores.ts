@@ -1,9 +1,14 @@
-import { type AnWorkflowData, type AnWorkflowSegment, AnForWhat } from '@anagolay/types';
+import {
+  type AnOperation,
+  type AnOperationVersion,
+  type AnWorkflowData,
+  type AnWorkflowSegment,
+  AnForWhat,
+} from '@anagolay/types';
 import * as R from 'ramda';
-import { clone, filter, forEach, isNil, last, map } from 'remeda';
+import { clone, filter, forEach, isNil, map } from 'remeda';
 import { type Writable, get, writable } from 'svelte/store';
 
-import type { OperationsFixture } from '$src/fixtures/operations';
 import { removeItemFromArray } from '$src/utils/utils';
 
 import type { Segment, SegmentData, WorkflowNodeConnection } from './interfaces';
@@ -32,18 +37,21 @@ function workflowGraphFn() {
     },
     /**
      * Add the node
-     * @param n - Node to add to the store
+     * @param o - Operation manifest
+     * @param v - Operation version manifest
      * @returns Nothing
      */
-    addNode: (n: OperationsFixture) => {
+    addNode: (o: AnOperation, v: AnOperationVersion) => {
       const node: WorkflowNodeConnection = {
-        id: last(n.versions),
-        data: n.data,
+        id: v.id,
+        data: o.data,
         edges: {
           out: [],
           in: [],
         },
         config: new Map(),
+        operation: o,
+        version: v,
       };
       update((currentState) => {
         const nodeIsAlreadyAdded = currentState.find((v) => v.id === node.id);
@@ -134,16 +142,25 @@ export const workflowGraph = workflowGraphFn();
  * @param initialData - Initial data
  * @returns
  */
-function workflowManifestFn() {
-  const { update, subscribe, set } = writable<AnWorkflowData>();
+function workflowFn() {
+  const { update, subscribe, set } = writable<{
+    manifestData: AnWorkflowData;
+    operations: AnOperation[];
+    operationVersions: AnOperationVersion[];
+  }>();
 
   // this is called only once when the store is created
   set({
-    name: '',
-    description: '',
-    creators: [],
-    groups: [],
-    segments: [],
+    manifestData: {
+      name: '',
+      description: '',
+      creators: [],
+      groups: [],
+      segments: [],
+      version: '',
+    },
+    operations: [],
+    operationVersions: [],
   });
 
   /**
@@ -280,23 +297,37 @@ function workflowManifestFn() {
         return {
           inputs: segment.inputs,
           sequence: segment.sequence.map((d: SegmentData) => ({
-            version_id: d.node.id,
+            versionId: d.node.id,
             config: d.node.config,
           })),
         };
       });
+      const ops: AnOperation[] = map(workflowGraphStore, (f) => f.operation);
+      const opVers: AnOperationVersion[] = map(workflowGraphStore, (f) => f.version);
 
       update((currentState) => {
-        return { ...currentState, segments: s };
+        return {
+          manifestData: {
+            ...currentState.manifestData,
+            segments: s,
+          },
+          operations: ops,
+          operationVersions: opVers,
+        };
       });
     },
     reset: () => {
       return set({
-        name: '',
-        description: '',
-        creators: [],
-        groups: [],
-        segments: [],
+        manifestData: {
+          name: '',
+          description: '',
+          creators: [],
+          groups: [],
+          segments: [],
+          version: '',
+        },
+        operations: [],
+        operationVersions: [],
       });
     },
   };
@@ -305,4 +336,4 @@ function workflowManifestFn() {
 /**
  * Workflow Manifest store. The `generate` must be called, it is not automatically triggered
  */
-export const workflowManifest = workflowManifestFn();
+export const workflow = workflowFn();

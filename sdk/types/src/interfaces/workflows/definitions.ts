@@ -1,8 +1,8 @@
 import { RegistryTypes } from '@polkadot/types/types';
 export const WorkflowsCustomTypes: RegistryTypes = {
   OperationVersionReference: {
-    version_id: 'VersionId',
-    config: 'BTreeMap<Characters, Vec<Characters>>',
+    versionId: 'VersionId',
+    config: 'BTreeMap<Characters, Characters>',
   },
   WorkflowSegment: {
     inputs: 'Vec<u8>',
@@ -34,10 +34,9 @@ export const WorkflowsCustomTypes: RegistryTypes = {
   },
   WorkflowArtifactType: {
     _enum: {
-      CRATE: null,
-      WASM: 'WasmArtifactSubType',
-      DOCS: 'DocsArtifactSubType',
-      GIT: null,
+      Docs: null,
+      Git: null,
+      Wasm: 'WasmArtifactSubType',
     },
   },
   WorkflowArtifactStructure: {

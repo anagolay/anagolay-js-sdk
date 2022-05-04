@@ -13,10 +13,12 @@
     "watch": "nodemon --watch ./src --ext ts --exec heft build"
   },
   "dependencies": {
-    "@polkadot/util": "8.4.1",
+    "@polkadot/util": "8.7.1",
     "pino": "~7.6.5",
     "ramda": "~0.28.0",
-    "@polkadot/api": "7.8.1"
+    "@polkadot/api": "7.15.1",
+    "@polkadot/types": "7.15.1",
+    "@polkadot/types-codec": "7.15.1"
   },
   "devDependencies": {
     "tslib": "~2.3.1",
@@ -24,9 +26,9 @@
     "@rushstack/heft-node-rig": "~1.7.1",
     "@microsoft/api-extractor": "~7.19.4",
     "@rushstack/eslint-config": "~2.5.1",
-    "@rushstack/heft": "~0.44.7",
-    "@rushstack/heft-jest-plugin": "~0.2.2",
-    "@types/heft-jest": "~1.0.2",
+    "@rushstack/heft": "0.44.7",
+    "@rushstack/heft-jest-plugin": "0.2.2",
+    "@types/heft-jest": "1.0.2",
     "@types/node": "16.11.7",
     "@types/ramda": "~0.27.64",
     "eslint": "8.8.0",

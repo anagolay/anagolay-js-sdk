@@ -35,10 +35,9 @@ export const OperationsCustomTypes: RegistryTypes = {
   },
   OperationArtifactType: {
     _enum: {
-      CRATE: null,
-      WASM: 'WasmArtifactSubType',
-      DOCS: null,
-      GIT: null,
+      Docs: null,
+      Git: null,
+      Wasm: 'WasmArtifactSubType',
     },
   },
   OperationArtifactStructure: {

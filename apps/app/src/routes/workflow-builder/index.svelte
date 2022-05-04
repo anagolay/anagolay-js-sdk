@@ -2,20 +2,24 @@
   export const prerender = false;
 </script>
 
-<script lang="ts">
+<script script lang="ts">
   import { fade } from 'svelte/transition';
 
-  import { makeOps, type OperationsFixture } from '$src/fixtures/operations';
   import { onMount } from 'svelte';
   import Drawflow from './drawflow.svelte';
   import { io, Socket } from 'socket.io-client';
-  import { AnForWhat, type AnWorkflowData } from '@anagolay/types';
+  import { AnForWhat, type AnOperation, type AnOperationVersion } from '@anagolay/types';
   import Navbar from './navbar.svelte';
   import { wsConnected } from '$src/stores';
-  import { workflowManifest } from './stores';
+  import { workflow } from './stores';
   import OperationNode from './OperationNode.svelte';
   import SkeletonLoader from '$src/components/SkeletonLoader.svelte';
   import { alerts } from '$src/components/notifications/stores';
+  import { connectToApi, makeOps, type OperationWithVersions } from '$src/api';
+  import { ApiPromise } from '@polkadot/api';
+  import { OperationData, OperationVersionData } from '@anagolay/types/lib/interfaces/operations/types';
+  import { WorkflowData } from '@anagolay/types/lib/interfaces/types';
+  import { kMaxLength } from 'buffer';
 
   let lockThePage: boolean = false;
 
@@ -37,10 +41,20 @@
 
   let saveDisabled: boolean = true;
 
+  let chain: ApiPromise;
+
   function sendMessageToWs() {
     saveDisabled = true;
     alerts.add('Workflow data sent to WS, please check the CLI.', 'success', false);
-    socket.emit('continueWithWorkflow', $workflowManifest);
+    const workflowBuild = JSON.stringify($workflow, function (_, value) {
+      if (value instanceof Map) {
+        // Maps are not serializable, convert to object
+        return Object.fromEntries(value);
+      } else {
+        return value;
+      }
+    });
+    socket.emit('continueWithWorkflow', workflowBuild);
     socket.disconnect();
     lockThePage = true;
   }
@@ -60,20 +74,25 @@
    */
   export let ws: string;
   export let path: string;
+  export let anagolay_chain_ws: string;
 
-  // only getting the fixtures
-  let opsFixtures: Promise<OperationsFixture[]> = makeOps();
+  // Operations with their respective versions from the chain
+  let opvs: Promise<OperationWithVersions[]> = new Promise<OperationWithVersions[]>((res, rej) => {});
 
   // add the node to the drawer
-  function addNode(data: OperationsFixture) {
-    bindedDf.addNode(data);
+  function addNode(op: AnOperation, versions: AnOperationVersion[]) {
+    bindedDf.addNode(op, versions);
   }
 
   /**
    * On the Component mount
    */
   onMount(async () => {
-    $workflowManifest.name = namespace;
+    chain = await connectToApi(anagolay_chain_ws);
+
+    opvs = makeOps(chain);
+
+    $workflow.manifestData.name = namespace;
 
     socket = io(ws + '/' + namespace, {
       path,
@@ -111,8 +130,15 @@
 
   // make check when wen can enable save button
   $: {
-    const { segments, groups, name, description } = $workflowManifest;
-    if (groups.length > 0 && name.length > 7 && description.length > 7 && segments.length > 0) {
+    const { segments, groups, name, description, version } = $workflow.manifestData;
+    saveDisabled = true;
+    if (
+      groups.length > 0 &&
+      name.length > 7 &&
+      description.length > 7 &&
+      segments.length > 0 &&
+      version.split('.').length == 3
+    ) {
       const firstSegment = segments[0];
       if (firstSegment.inputs.includes(-1) && firstSegment.sequence.length > 0) {
         saveDisabled = false;
@@ -135,18 +161,18 @@
       <div class="px-4 my-2 min-h-12">
         <h2 class="text-base-300">Operations:</h2>
         <ul class="flex flex-col w-full">
-          {#await opsFixtures}
+          {#await opvs}
             <li class="">
               <SkeletonLoader />
             </li>
-          {:then opsFixtures}
-            {#each opsFixtures as op}
+          {:then opvs}
+            {#each opvs as opv}
               <li>
-                <OperationNode {op} {addNode} {showOperationInfo} />
+                <OperationNode {opv} {addNode} {showOperationInfo} />
               </li>
             {/each}
           {:catch error}
-            <p style="color: red">{error.message}</p>
+            <p style="color: red">${error.message}</p>
           {/await}
         </ul>
       </div>
@@ -159,7 +185,7 @@
             <input
               type="text"
               name="workflowName"
-              bind:value={$workflowManifest.name}
+              bind:value={$workflow.manifestData.name}
               class="input bg-slate-200 input-bordered w-full max-w-xs text-slate-800 focus:text-slate-100 focus:bg-primary-focus"
             />
           </div>
@@ -170,8 +196,19 @@
             <input
               type="text"
               name="workflowDesc"
-              bind:value={$workflowManifest.description}
+              bind:value={$workflow.manifestData.description}
               class="input bg-slate-200 input-bordered w-full max-w-xs text-slate-800 focus:text-slate-100  focus:bg-primary-focus"
+            />
+          </div>
+          <div>
+            <label class="label" for="workflowVersion">
+              <span class="label-text text-base-300">Version</span>
+            </label>
+            <input
+              type="text"
+              name="workflowVersion"
+              bind:value={$workflow.manifestData.version}
+              class="input bg-slate-200 input-bordered w-full max-w-xs text-slate-800 focus:text-slate-100 focus:bg-primary-focus"
             />
           </div>
           <div>
@@ -185,11 +222,11 @@
                   <label class="label cursor-pointer">
                     <span class="label-text text-black">{group.name}</span>
                     <input
-                      bind:group={$workflowManifest.groups}
+                      bind:group={$workflow.manifestData.groups}
                       type="checkbox"
                       name="groups"
                       class="checkbox outline checkbox-primary"
-                      value={group.id}
+                      value={group.name}
                     />
                   </label>
                 </div>

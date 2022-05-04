@@ -1,6 +1,6 @@
 <script lang="ts">
   import Code from '$src/components/Code.svelte';
-  import { workflowManifest } from './stores';
+  import { workflow } from './stores';
   import MaterialIcon from '$src/components/MaterialIcon.svelte';
   import { wsConnected } from '$src/stores';
 </script>
@@ -46,7 +46,7 @@
         <div class="modal-box w-11/12 max-w-5xl">
           <label for="manifest-modal" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
 
-          <Code code={$workflowManifest} />
+          <Code code={$workflow.manifestData} />
         </div>
       </label>
     </div>

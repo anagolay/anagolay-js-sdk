@@ -176,14 +176,18 @@ export async function allCommitsPushed(cwd: string): Promise<boolean> {
 
 /**
  * Return the URL for the git remote.
- * @remarks This function is using the `git remote get-url --all` then invokes the {@link parseURL}
+ * @remarks This function is using the `git remote get-url --all` then invokes the {@link parseURL} if parse parameter is true
  * @param remote - An origin as defined in the .git/config
+ * @param parse - Flag that dictates whether to parse the url or not
  * @defaultValue for `remote` param is `origin`
 
  * @public
  */
-export async function urlForRemote(remote: string = 'origin'): Promise<string> {
+export async function urlForRemote(remote: string = 'origin', parse: boolean = true): Promise<string> {
   const { stdout: repo } = await exec(`git remote get-url --all ${remote}`, { cwd: process.cwd() });
+  if (!parse) {
+    return repo.trim();
+  }
   const httpRepo = parseURL(repo.trim());
   return httpRepo.trim();
 }

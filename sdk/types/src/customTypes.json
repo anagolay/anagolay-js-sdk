@@ -12,10 +12,7 @@
     "_enum": ["GENERIC", "PHOTO", "CAMERA", "LENS", "SMARTPHONE", "USER", "SYS", "FLOWCONTROL"]
   },
   "WasmArtifactSubType": {
-    "_enum": ["CJS", "WASM", "ESM", "WEB"]
-  },
-  "DocsArtifactSubType": {
-    "_enum": ["RUSTDOC"]
+    "_enum": ["Cjs", "Esm", "Wasm", "Web"]
   },
   "AnagolayVersionExtra": {
     "createdAt": "u64"
@@ -45,10 +42,9 @@
   },
   "OperationArtifactType": {
     "_enum": {
-      "CRATE": null,
-      "WASM": "WasmArtifactSubType",
-      "DOCS": null,
-      "GIT": null
+      "Docs": null,
+      "Git": null,
+      "Wasm": "WasmArtifactSubType"
     }
   },
   "OperationArtifactStructure": {
@@ -98,8 +94,8 @@
     "proofId": "GenericId"
   },
   "OperationVersionReference": {
-    "version_id": "VersionId",
-    "config": "BTreeMap<Characters, Vec<Characters>>"
+    "versionId": "VersionId",
+    "config": "BTreeMap<Characters, Characters>"
   },
   "WorkflowSegment": {
     "inputs": "Vec<u8>",
@@ -131,10 +127,9 @@
   },
   "WorkflowArtifactType": {
     "_enum": {
-      "CRATE": null,
-      "WASM": "WasmArtifactSubType",
-      "DOCS": "DocsArtifactSubType",
-      "GIT": null
+      "Docs": null,
+      "Git": null,
+      "Wasm": "WasmArtifactSubType"
     }
   },
   "WorkflowArtifactStructure": {

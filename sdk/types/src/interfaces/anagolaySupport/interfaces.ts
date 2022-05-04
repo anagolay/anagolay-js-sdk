@@ -25,14 +25,10 @@ export enum AnForWhat {
 }
 
 export enum AnWasmArtifactSubType {
-  'CJS',
-  'WASM',
-  'ESM',
-  'WEB',
-}
-
-export enum AnDocsArtifactSubType {
-  'RUSTDOC',
+  'Cjs',
+  'Esm',
+  'Wasm',
+  'Web',
 }
 
 export interface AnAnagolayVersionExtra {

@@ -3,10 +3,9 @@
   import './drawflow.css';
   import { onMount } from 'svelte';
 
-  import { workflowGraph, addedNodesIds, workflowManifest } from './stores';
+  import { workflowGraph, addedNodesIds, workflow } from './stores';
   import { last } from 'remeda';
-  import type { OperationsFixture } from '$src/fixtures/operations';
-  import { AnForWhat } from '@anagolay/types';
+  import { AnForWhat, type AnOperation, type AnOperationVersion } from '@anagolay/types';
   import { alerts } from '$src/components/notifications/stores';
 
   /**
@@ -23,13 +22,13 @@
    * Wrap the Drawflow addNode method with setting the correct id
    * @param node
    */
-  export function addNode(node: OperationsFixture) {
+  export function addNode(node: AnOperation, versions: AnOperationVersion[]) {
     const {
       data: { name, inputs },
-      versions,
     } = node;
 
-    const id: string = last(versions);
+    const version = last(versions);
+    const id: string = version.id;
 
     const d: [string, number, number, number, number, string, any, string, string | boolean] = [
       name,
@@ -48,8 +47,8 @@
     editor.nodeId = id;
     editor.addNode(d[0], d[1], d[2], d[3], d[4], d[5], d[6], d[7], d[8]);
 
-    workflowGraph.addNode(node);
-    workflowManifest.generate();
+    workflowGraph.addNode(node, version);
+    workflow.generate();
   }
 
   /**
@@ -90,7 +89,7 @@
     editor.on('nodeRemoved', (id) => {
       console.debug('Node removed ', id);
       workflowGraph.removeNode(id as unknown as string);
-      workflowManifest.generate();
+      workflow.generate();
     });
 
     editor.on('nodeMoved', function (id) {
@@ -194,7 +193,7 @@
         toNode: currentNode,
       });
 
-      workflowManifest.generate();
+      workflow.generate();
     });
   });
 
