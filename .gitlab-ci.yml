@@ -30,12 +30,10 @@ include:
 
 # include this where you need it. like in before_script
 .install-ipfs-and-setup: &install-ipfs-and-setup
-  - echo "Downloading the go-ipfs binary v0.12.0 from our IPFS node"
+  - echo "Downloading anagolay ipfs CLI which works with the ipfsAuthProxy."
   - |
-    curl https://ipfs.anagolay.network/ipfs/bafybeih63m5xkkskklntu3ufd6kyjgkvqot4bcre3evquindven7i6yxse > /usr/local/bin/ipfs
-    chmod +x /usr/local/bin/ipfs
-    mkdir $IPFS_PATH
-    echo "/ip4/${ANAGOLAY_MAIN_IPFS_IP}/tcp/${ANAGOLAY_MAIN_IPFS_PORT}" > $IPFS_PATH/api
+    curl https://ipfs.anagolay.network/ipfs/bafybeiebighwouxt3vkttuhfcwb3dgr7vzxpujlqfzvngt7omnrizjajfy > /usr/local/bin/ipfsCli
+    chmod +x /usr/local/bin/ipfsCli
 
 # https://docs.gitlab.com/ee/ci/yaml/yaml_optimization.html#yaml-anchors-for-scripts
 .install-pnpm: &install-pnpm
@@ -45,6 +43,7 @@ include:
     node --version
     pnpm --version
     git --version
+    ipfsCli --version
 
 is-it-pretty:
   stage: check
@@ -111,7 +110,7 @@ upload-cli-to-ipfs:
     - node common/scripts/install-run-rush.js rebuild --from @anagolay/cli
 
     - echo "Uploading CLI to IPFS ..."
-    - ipfs add --cid-version=1 --pin=true --recursive --quieter sdk/cli/dist/anagolay.js > ANAGOLAY_CLI_CID
+    - ipfsCli upload --pin --onlyCid sdk/cli/dist/anagolay.js > ANAGOLAY_CLI_CID
     - echo "The CLI is published with the CID:" && cat ANAGOLAY_CLI_CID
   rules:
     - if: $CI_COMMIT_MESSAGE =~ /^.*\[build all\].*$/s
@@ -125,8 +124,10 @@ upload-custom-types-to-ipfs:
     - set -e
 
     - echo "Uploading Custom types to IPFS ..."
-    - ipfs add --cid-version=1 --pin=true --recursive --quieter sdk/types/src/customTypes.json > ANAGOLAY_CUSTOM_TYPES_CID
+    - ipfsCli upload --pin --onlyCid sdk/types/src/customTypes.json > ANAGOLAY_CUSTOM_TYPES_CID
     - echo "The Custom Types are published with the CID:" && cat ANAGOLAY_CUSTOM_TYPES_CID
+    - echo "https://ipfs.anagolay.network/ipfs/$(cat ANAGOLAY_CUSTOM_TYPES_CID)"
+
   rules:
     - if: $CI_COMMIT_MESSAGE =~ /^.*\[build all\].*$/s
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
