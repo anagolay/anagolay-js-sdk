@@ -43,7 +43,6 @@ include:
     node --version
     pnpm --version
     git --version
-    ipfsCli --version
 
 is-it-pretty:
   stage: check
