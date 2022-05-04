@@ -1,9 +1,9 @@
 'use strict';
 
 const webpack = require('webpack');
-const path = require('path');
 
 const nodeExternals = require('webpack-node-externals');
+const { resolve } = require('path');
 
 const isProduction = process.env.NODE_ENV == 'production';
 
@@ -34,7 +34,7 @@ const config = {
   output: {
     // library: 'signer',
     // libraryTarget: 'umd',
-    path: path.resolve(__dirname, './dist'),
+    path: resolve(__dirname, './dist'),
     // filename: '[name].js',
     clean: true,
   },
@@ -62,6 +62,9 @@ const config = {
   },
   resolve: {
     extensions: ['.ts', '.js'],
+    alias: {
+      $src: resolve(__dirname, 'src'),
+    },
   },
   module: {
     rules: [
