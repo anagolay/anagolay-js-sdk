@@ -120,6 +120,7 @@ function workflowGraphFn() {
         // update the config
         currentConfig[configKey] = configValue;
 
+        // Map to Map transformation as atomic update
         node.config = new Map(Object.entries(currentConfig));
 
         // deep clone the current state

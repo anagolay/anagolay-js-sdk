@@ -17,9 +17,7 @@
   import { alerts } from '$src/components/notifications/stores';
   import { connectToApi, makeOps, type OperationWithVersions } from '$src/api';
   import { ApiPromise } from '@polkadot/api';
-  import { OperationData, OperationVersionData } from '@anagolay/types/lib/interfaces/operations/types';
-  import { WorkflowData } from '@anagolay/types/lib/interfaces/types';
-  import { kMaxLength } from 'buffer';
+  import { serializeThenParse } from '@anagolay/utils/lib/json';
 
   let lockThePage: boolean = false;
 
@@ -29,6 +27,7 @@
   const groupsAll = Object.entries(AnForWhat);
 
   const Groups: { id: number; name: string }[] = groupsAll
+    // check the console.log(groupsAll) for the reason why slice and divide by 2
     .slice(groupsAll.length / 2, groupsAll.length)
     .map((g) => {
       return {
@@ -46,17 +45,14 @@
   function sendMessageToWs() {
     saveDisabled = true;
     alerts.add('Workflow data sent to WS, please check the CLI.', 'success', false);
-    const workflowBuild = JSON.stringify($workflow, function (_, value) {
-      if (value instanceof Map) {
-        // Maps are not serializable, convert to object
-        return Object.fromEntries(value);
-      } else {
-        return value;
-      }
-    });
+
+    // The serialization of the Map is not natively  supported. When we serialize we use the replacer and wnen parse we use the reviver
+
+    const workflowBuild = serializeThenParse($workflow);
+
     socket.emit('continueWithWorkflow', workflowBuild);
     socket.disconnect();
-    lockThePage = true;
+    lockThePage = false;
   }
 
   function cancelTheCreation() {
@@ -236,7 +232,7 @@
         </div>
         <div class="px-4 py-6 btn-group w-full bottom-0">
           <button
-            disabled={saveDisabled}
+            disabled={false}
             on:click={sendMessageToWs}
             class="btn w-1/2 btn-primary  disabled:text-slate-500">Save</button
           >

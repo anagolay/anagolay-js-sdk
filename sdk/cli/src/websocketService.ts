@@ -1,7 +1,6 @@
+/* eslint-disable @rushstack/typedef-var */
 import clui from 'clui';
 import { io, Socket, SocketOptions } from 'socket.io-client';
-// eslint-disable-next-line @typescript-eslint/typedef
-// eslint-disable-next-line @rushstack/typedef-var
 const Spinner = clui.Spinner;
 
 const { ANAGOLAY_WEBSOCKET_SERVICE_API_URL } = process.env;
@@ -74,11 +73,11 @@ export async function connectToWSAndListenFowWorkflow(
     /**
      * This is the main event for the continuing the workflow creation
      */
-    socket.on('continueWithWorkflow', (message) => {
+    socket.on('continueWithWorkflow', (message: IWorkflowBuild) => {
       wsConnectionSpinner.stop();
       socket.disconnect();
-      const workflowBuild: IWorkflowBuild = JSON.parse(message);
-      resolve(workflowBuild);
+
+      resolve(message);
     });
 
     /**

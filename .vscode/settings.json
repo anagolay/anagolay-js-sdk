@@ -39,6 +39,7 @@
     "clui",
     "destructure",
     "grayscale",
+    "Jsonify",
     "multihashes",
     "pnpm",
     "pnpx",

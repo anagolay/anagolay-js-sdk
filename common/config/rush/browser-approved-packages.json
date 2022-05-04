@@ -28,7 +28,7 @@
     },
     {
       "name": "@anagolay/utils",
-      "allowedCategories": [ "libraries" ]
+      "allowedCategories": [ "libraries", "webapp" ]
     },
     {
       "name": "@docusaurus/core",

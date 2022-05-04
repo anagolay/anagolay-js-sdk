@@ -1,6 +1,6 @@
 import inquirer from 'inquirer';
 
-import { createSettingsFile, readSettingsFile } from '../utils';
+import { createSettingsFile, readSettingsFile } from '$src/utils';
 /**
  * Interface for the Starter questions
  */

@@ -17,11 +17,11 @@ import { stat } from 'node:fs/promises';
 import { equals } from 'ramda';
 import signale from 'signale';
 
-import { ISignSubmitErrorReturn, ISignSubmitSuccessReturn, signAndSubmit } from '../../api';
-import { chooseAccount } from '../../commonQuestions/account';
-import { askStarterQuestions } from '../../commonQuestions/common';
-import { callPublishService, ISuccessfulResponse } from '../../publish';
-import { connectToAnagolayChain, ensureBalance, logsDir } from '../../utils';
+import { ISignSubmitErrorReturn, ISignSubmitSuccessReturn, signAndSubmit } from '$src/api';
+import { chooseAccount } from '$src/commonQuestions/account';
+import { askStarterQuestions } from '$src/commonQuestions/common';
+import { callPublishService, ISuccessfulResponse } from '$src/publish';
+import { connectToAnagolayChain, ensureBalance, logsDir } from '$src/utils';
 
 // eslint-disable-next-line @rushstack/typedef-var
 const Spinner = clui.Spinner;

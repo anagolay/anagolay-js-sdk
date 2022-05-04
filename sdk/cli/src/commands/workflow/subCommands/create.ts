@@ -10,12 +10,12 @@ import { Command } from 'commander';
 import { equals } from 'ramda';
 import signale from 'signale';
 
-import { ISignSubmitErrorReturn, ISignSubmitSuccessReturn, signAndSubmit } from '../../../api';
-import { chooseAccount } from '../../../commonQuestions/account';
-import { askStarterQuestions } from '../../../commonQuestions/common';
-import { callPublishService, ISuccessfulResponse } from '../../../publish';
-import { connectToAnagolayChain, ensureBalance, logsDir } from '../../../utils';
-import { connectToWSAndListenFowWorkflow, IWorkflowBuild } from '../../../websocketService';
+import { ISignSubmitErrorReturn, ISignSubmitSuccessReturn, signAndSubmit } from '$src/api';
+import { chooseAccount } from '$src/commonQuestions/account';
+import { askStarterQuestions } from '$src/commonQuestions/common';
+import { callPublishService, ISuccessfulResponse } from '$src/publish';
+import { connectToAnagolayChain, ensureBalance, logsDir } from '$src/utils';
+import { connectToWSAndListenFowWorkflow, IWorkflowBuild } from '$src/websocketService';
 
 const { ANAGOLAY_WORKFLOW_BUILDER_UI, ANAGOLAY_CHAIN_WS_URL, ANAGOLAY_WEBSOCKET_SERVICE_API_URL } =
   process.env;
@@ -59,16 +59,17 @@ async function create(): Promise<void> {
   const namespace: string = `workflow-85f2477c-c321-4625-b421-d9ad52d7eac5`;
   const wsURL: string = encodeURIComponent(
     (ANAGOLAY_WEBSOCKET_SERVICE_API_URL as string)?.includes('host.docker.internal') // in vscode container we use host.docker.internal
-      ? (ANAGOLAY_WEBSOCKET_SERVICE_API_URL as string).replace('host.docker.internal', '0.0.0.0')
+      ? (ANAGOLAY_WEBSOCKET_SERVICE_API_URL as string).replace('host.docker.internal', '127.0.0.1')
       : (ANAGOLAY_WEBSOCKET_SERVICE_API_URL as string)
   );
   const chainURL: string = encodeURIComponent(
     (ANAGOLAY_CHAIN_WS_URL as string)?.includes('host.docker.internal') // in vscode container we use host.docker.internal
-      ? (ANAGOLAY_CHAIN_WS_URL as string).replace('host.docker.internal', '0.0.0.0')
+      ? (ANAGOLAY_CHAIN_WS_URL as string).replace('host.docker.internal', '127.0.0.1')
       : (ANAGOLAY_CHAIN_WS_URL as string)
   );
 
   const link: string = `${ANAGOLAY_WORKFLOW_BUILDER_UI}?ws=${wsURL}&anagolay_chain_ws=${chainURL}&ns=${namespace}&path=ws`;
+
   console.log(`Follow this link to start building the Workflow: \n${link}`);
 
   const workflowBuild: IWorkflowBuild = await connectToWSAndListenFowWorkflow(namespace);
