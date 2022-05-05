@@ -28,12 +28,6 @@ export function createFileLogger(fileLocation: string, options?: LoggerOptions):
 export function createLogger(options?: LoggerOptions | DestinationStream): Logger;
 
 // @public
-function customReplacer<V>(key: string, value: V): ISerializedMap<V> | V;
-
-// @public (undocumented)
-function customReviver<T extends ISerializedMap<T>>(key: string, value: T): T | Map<any, any>;
-
-// @public
 export const defaultExecOptions: IExecOptions;
 
 // @public
@@ -80,37 +74,11 @@ export function isDirty(path: string): Promise<{
     changes: string;
 }>;
 
-// @public (undocumented)
-interface ISerializedMap<T> {
-    // (undocumented)
-    data: T;
-    // (undocumented)
-    type: 'Map';
-}
-
 // @public
 export function isFalse(value: string | number): boolean;
 
 // @public
 export function isTrue(value: string | number): boolean;
-
-declare namespace json {
-    export {
-        customReplacer,
-        customReviver,
-        parse,
-        serialize,
-        serializeThenParse,
-        Jsonify,
-        ISerializedMap
-    }
-}
-export { json }
-
-// @public (undocumented)
-type Jsonify<T> = T extends Date ? string : T extends object ? {
-    [k in keyof T]: Jsonify<T[k]>;
-} : T;
 
 // @public
 export function lastRevision(repoPath: string): Promise<string>;
@@ -122,9 +90,10 @@ export type Logger = Logger_2;
 export function normalizeUrlPathname(pathName: string): string;
 
 // Warning: (ae-forgotten-export) The symbol "ReplacerOrReviverAsFunction" needs to be exported by the entry point index.d.ts
+// Warning: (ae-forgotten-export) The symbol "Jsonify" needs to be exported by the entry point index.d.ts
 //
 // @public
-function parse<T>(data: string, reviver?: ReplacerOrReviverAsFunction<T>): Jsonify<T>;
+export function parse<T>(data: string, reviver?: ReplacerOrReviverAsFunction<T>): Jsonify<T>;
 
 // @public
 export function parseURL(sourceURL: string): string;
@@ -134,10 +103,10 @@ export { polkadot_util }
 // Warning: (ae-forgotten-export) The symbol "ReplacerAsArray" needs to be exported by the entry point index.d.ts
 //
 // @public
-function serialize<T>(data: T, space?: number, replacer?: ReplacerOrReviverAsFunction<T> | ReplacerAsArray | undefined): string;
+export function serialize<T>(data: T, space?: number, replacer?: ReplacerOrReviverAsFunction<T> | ReplacerAsArray | undefined): string;
 
 // @public
-function serializeThenParse<T>(data: T): Jsonify<T>;
+export function serializeThenParse<T>(data: T): Jsonify<T>;
 
 // @public
 export function urlForRemote(remote?: string, parse?: boolean): Promise<string>;

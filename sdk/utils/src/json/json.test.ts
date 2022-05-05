@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { parse, serialize, serializeThenParse } from '.';
+import { parse, serialize, serializeThenParse } from './json';
 
 interface IFistObject {
   s: string;

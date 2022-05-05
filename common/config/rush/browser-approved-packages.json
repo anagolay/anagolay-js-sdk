@@ -279,6 +279,10 @@
       "allowedCategories": [ "libraries" ]
     },
     {
+      "name": "pkg",
+      "allowedCategories": [ "libraries" ]
+    },
+    {
       "name": "postcss",
       "allowedCategories": [ "webapp" ]
     },

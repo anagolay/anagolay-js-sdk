@@ -29,14 +29,12 @@
 
 import * as polkadot_util from '@polkadot/util';
 
-import * as json from './json';
-
 /**
  * Re-export Polkadot utils
  * @public
  */
-export { json };
 export { polkadot_util };
+
 export { isFalse, isTrue } from './booleans';
 export { defaultExecOptions, exec, IExecOptions } from './exec';
 export {
@@ -52,4 +50,5 @@ export {
   urlForRemote,
 } from './git';
 export { hexToString } from './hex/hex';
+export { parse, serialize, serializeThenParse } from './json/json';
 export { createFileLogger, createLogger, Logger } from './logger';
