@@ -17,7 +17,7 @@
   import { alerts } from '$src/components/notifications/stores';
   import { connectToApi, makeOps, type OperationWithVersions } from '$src/api';
   import { ApiPromise } from '@polkadot/api';
-  import { serializeThenParse } from '@anagolay/utils/lib/json';
+  import { serializeThenParse } from '$src/json';
 
   let lockThePage: boolean = false;
 
@@ -52,7 +52,7 @@
 
     socket.emit('continueWithWorkflow', workflowBuild);
     socket.disconnect();
-    lockThePage = false;
+    lockThePage = true;
   }
 
   function cancelTheCreation() {
@@ -232,7 +232,7 @@
         </div>
         <div class="px-4 py-6 btn-group w-full bottom-0">
           <button
-            disabled={false}
+            disabled={saveDisabled}
             on:click={sendMessageToWs}
             class="btn w-1/2 btn-primary  disabled:text-slate-500">Save</button
           >
