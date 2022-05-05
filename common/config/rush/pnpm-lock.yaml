@@ -8,7 +8,6 @@ importers:
   ../../apps/app:
     specifiers:
       '@anagolay/types': workspace:*
-      '@anagolay/utils': workspace:*
       '@microsoft/api-extractor': ~7.19.4
       '@playwright/test': ^1.20.0
       '@polkadot/api': 7.15.1
@@ -46,12 +45,12 @@ importers:
       svelte-check: ^2.2.6
       svelte-material-icons: ~2.0.2
       svelte-preprocess: ^4.10.1
+      sveltejs-adapter-ipfs: ~0.3.0
       tailwindcss: ~3.0.23
       tslib: ~2.3.1
       typescript: ~4.5.5
     dependencies:
       '@anagolay/types': link:../../sdk/types
-      '@anagolay/utils': link:../../sdk/utils
       '@polkadot/api': 7.15.1
       '@polkadot/api-augment': 7.15.1
       '@polkadot/types': 7.15.1
@@ -90,6 +89,7 @@ importers:
       svelte: 3.46.4
       svelte-check: 2.4.6_postcss@8.4.12+svelte@3.46.4
       svelte-preprocess: 4.10.4_8e1ce1e9899cbca95f3f212355dfcaf0
+      sveltejs-adapter-ipfs: 0.3.0
       tailwindcss: 3.0.23_autoprefixer@10.4.4
       tslib: 2.3.1
       typescript: 4.5.5
@@ -6515,6 +6515,18 @@ packages:
       debug:
         optional: true
 
+  /follow-redirects/1.14.8_debug@4.3.3:
+    resolution: {integrity: sha512-1x0S9UVJHsQprFcEC/qnNzBLcIxsjAV905f/UkQxbclCsoTWlacCNOpQa/anodLl2uaEKFhfWOvM2Qg77+15zA==}
+    engines: {node: '>=4.0'}
+    peerDependencies:
+      debug: '*'
+    peerDependenciesMeta:
+      debug:
+        optional: true
+    dependencies:
+      debug: 4.3.3_supports-color@6.1.0
+    dev: true
+
   /for-in/1.0.2:
     resolution: {integrity: sha1-gQaNKVqBQuwKxybG4iAMMPttXoA=}
     engines: {node: '>=0.10.0'}
@@ -6571,6 +6583,15 @@ packages:
 
   /fs-constants/1.0.0:
     resolution: {integrity: sha512-y6OAwoSIf7FyjMIv94u+b5rdheZEjzR63GTyZJm5qh4Bi+2YgwLCcI/fPFZkL5PSixOt6ZNKm+w+Hfp/Bciwow==}
+    dev: true
+
+  /fs-extra/10.1.0:
+    resolution: {integrity: sha512-oRXApq54ETRj4eMiFzGnHWGy+zo5raudjuxN0b8H7s/RU2oW0Wvsx9O0ACRN/kRq9E8Vu/ReskGB5o3ji+FzHQ==}
+    engines: {node: '>=12'}
+    dependencies:
+      graceful-fs: 4.2.9
+      jsonfile: 6.1.0
+      universalify: 2.0.0
     dev: true
 
   /fs-extra/7.0.1:
@@ -7162,7 +7183,7 @@ packages:
     engines: {node: '>=8.0.0'}
     dependencies:
       eventemitter3: 4.0.7
-      follow-redirects: 1.14.8
+      follow-redirects: 1.14.8_debug@4.3.3
       requires-port: 1.0.0
     transitivePeerDependencies:
       - debug
@@ -11028,6 +11049,11 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
+  /slash/4.0.0:
+    resolution: {integrity: sha512-3dOsAHXXUkQTpOYcoAxLIorMTp4gIQr5IW3iVb7A7lFIp0VHhnynm9izx6TssdrIcVIESAlVjtnO2K8bg+Coew==}
+    engines: {node: '>=12'}
+    dev: true
+
   /smart-buffer/4.2.0:
     resolution: {integrity: sha512-94hK0Hh8rPqQl2xXc3HsaBoOXKV20MToPkcXvwbISWLEs+64sBq5kFgn2kJDHb1Pry9yrP0dxrCI9RRci7RXKg==}
     engines: {node: '>= 6.0.0', npm: '>= 3.0.0'}
@@ -11673,6 +11699,14 @@ packages:
   /svelte/3.46.4:
     resolution: {integrity: sha512-qKJzw6DpA33CIa+C/rGp4AUdSfii0DOTCzj/2YpSKKayw5WGSS624Et9L1nU1k2OVRS9vaENQXp2CVZNU+xvIg==}
     engines: {node: '>= 8'}
+    dev: true
+
+  /sveltejs-adapter-ipfs/0.3.0:
+    resolution: {integrity: sha512-C6ZwJTHI5mSG4dyMRgog3/pUGV8a9XNcDKGLCMywoSO/auG+skfgDL14IaS5PxW+sS6dNs5iQQOepi13tyeZVA==}
+    dependencies:
+      fs-extra: 10.1.0
+      slash: 4.0.0
+      tiny-glob: 0.2.9
     dev: true
 
   /symbol-tree/3.2.4:

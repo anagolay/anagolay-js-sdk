@@ -35,12 +35,9 @@ export type IWorkflowVersionSchema = ISuccessfulResponse<AnWorkflowArtifactStruc
 const Spinner = clui.Spinner;
 
 export default async function createSubCommand(): Promise<Command> {
-  // eslint-disable-next-line @typescript-eslint/typedef
   const cmd = new Command('create');
   cmd
-    .description(
-      'Create the Workflow. This command will create a link for you to open where you can create Workflow using web UI.'
-    )
+    .description('Create the Workflow in web UI. Logs are available here ~/.logs/anagolay/workflow.log')
     .action(create);
   return cmd;
 }
@@ -83,6 +80,9 @@ async function create(): Promise<void> {
     log,
     payloadData
   );
+
+  console.log(publishResponse, publishResponse.artifacts);
+
   const versionData: AnWorkflowVersionData = {
     entityId: undefined,
     parentId: undefined,
@@ -112,28 +112,35 @@ async function submitTheExtrinsicCall(
   const account: KeyringPair = await ensureBalance(chainApi, accountToUse);
   workflowData.creators.push(account.address);
 
+  log.info('Submitting the extrinsic call');
+
   console.log('%o %o', workflowData, workflowVersionData);
 
-  // hold this until the end, clui doesn't like the signale
   let entityId: string = '';
 
-  const spinner = new Spinner('');
+  const spinner = new Spinner('Creating submittable extrinsic ...');
+  spinner.start();
+
   const submittable = chainApi.tx.workflows.create(workflowData, workflowVersionData);
+
   const eventsHandler = (events: EventRecord[]): void => {
     events.forEach((record) => {
       const { event } = record;
       if (equals(event.method, 'WorkflowCreated')) {
         entityId = hexToString(event.data[1].toString());
         spinner.message(`Workflow created ID: ${entityId}`);
-        log.info(`Workflow created ID: ${entityId}`);
+        log.info(`Workflow created with ID: ${entityId}`);
+        spinner.stop();
       }
     });
   };
 
   try {
     const blockHash = await signAndSubmit(account, submittable, spinner, eventsHandler);
+    spinner.stop();
     return { blockHash, entityId };
   } catch (error) {
+    spinner.stop();
     const { message, errorType } = error as ISignSubmitErrorReturn;
     signale.error(`${message} :: ${errorType}`);
     process.exit(1);

@@ -106,7 +106,7 @@ export { polkadot_util }
 export function serialize<T>(data: T, space?: number, replacer?: ReplacerOrReviverAsFunction<T> | ReplacerAsArray | undefined): string;
 
 // @public
-export function serializeThenParse<T>(data: T): Jsonify<T>;
+export function serializeThenParse<T>(data: T, toOriginal?: boolean): Jsonify<T>;
 
 // @public
 export function urlForRemote(remote?: string, parse?: boolean): Promise<string>;

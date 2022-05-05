@@ -1320,7 +1320,7 @@
         {
           "kind": "Function",
           "canonicalReference": "@anagolay/utils!serializeThenParse:function(1)",
-          "docComment": "/**\n * This does `parse(serialize(x))` with inferring the type.\n *\n * @remarks\n *\n * - The biggest use of this is to get the types autocompleted. - The performance is NOT tested, it might be really slow\n *\n * @param data - Any defined `T` or nothing, then the T will be inferred\n *\n * @returns Parsed serialized data with type infering\n */\n",
+          "docComment": "/**\n * This does `JSON.parse(serialize(x))` with inferring the type. It doesn't use the custom reviver function. It just parses the serialized string.\n *\n * @remarks\n *\n * - The biggest use of this is to get the types autocompleted. - The performance is NOT tested, it might be really slow\n *\n * @param data - Any defined `T` or nothing, then the T will be inferred\n *\n * @param toOriginal - Use reviver function to return the JSON to it's original state\n *\n * @returns Parsed serialized data with type infering\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
@@ -1329,6 +1329,14 @@
             {
               "kind": "Content",
               "text": "T"
+            },
+            {
+              "kind": "Content",
+              "text": ", toOriginal?: "
+            },
+            {
+              "kind": "Content",
+              "text": "boolean"
             },
             {
               "kind": "Content",
@@ -1349,8 +1357,8 @@
             }
           ],
           "returnTypeTokenRange": {
-            "startIndex": 3,
-            "endIndex": 5
+            "startIndex": 5,
+            "endIndex": 7
           },
           "releaseTag": "Public",
           "overloadIndex": 1,
@@ -1360,6 +1368,13 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
+              }
+            },
+            {
+              "parameterName": "toOriginal",
+              "parameterTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
               }
             }
           ],

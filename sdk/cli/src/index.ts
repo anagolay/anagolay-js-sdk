@@ -18,7 +18,11 @@ async function main(): Promise<void> {
   // const program = commander.createCommand();
   const cmd = new Command();
 
-  cmd.version('0.7.0').description('Welcome to Anagolay CLI');
+  cmd.version('0.7.0').description(`Welcome to Anagolay CLI.
+
+Logs dir                ~/.logs/anagolay
+Settings and cache dir  ~/.cache/anagolay
+`);
 
   /// HERE we start with adding the 1st level commands
   cmd.addCommand(await makeOperationCommand());

@@ -53,7 +53,9 @@
     "**/bower_components": true,
     "**/*.code-search": true,
     "/tmp": true,
-    "temp": true
+    "temp": true,
+    "apps/app/.svelte-kit": true,
+    "apps/app/build": true
   },
   "eslint.alwaysShowStatus": true,
   "eslint.lintTask.enable": true,

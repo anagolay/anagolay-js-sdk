@@ -6,6 +6,7 @@ const Spinner = clui.Spinner;
 const { ANAGOLAY_WEBSOCKET_SERVICE_API_URL } = process.env;
 
 import { AnOperation, AnOperationVersion, AnWorkflowData } from '@anagolay/types';
+import { serializeThenParse } from '@anagolay/utils';
 
 export interface IWorkflowBuild {
   manifestData: AnWorkflowData;
@@ -77,7 +78,10 @@ export async function connectToWSAndListenFowWorkflow(
       wsConnectionSpinner.stop();
       socket.disconnect();
 
-      resolve(message);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const m: IWorkflowBuild = serializeThenParse<any>(message, true);
+
+      resolve(m);
     });
 
     /**

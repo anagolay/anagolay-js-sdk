@@ -212,7 +212,7 @@ export async function signAndSubmit(
               });
               unSub();
             } else {
-              throw new Error(`Well, this is weird. The event value is not module nor token. 😟 `);
+              throw new Error(`Well, this is weird. The event value is not module nor token. 😟`);
             }
           } else {
             // console.log('looped data', value.toJSON());

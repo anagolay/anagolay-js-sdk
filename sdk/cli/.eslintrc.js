@@ -7,7 +7,7 @@ module.exports = {
     // '@rushstack/eslint-config/mixins/friendly-locals',
     '@rushstack/eslint-config/mixins/tsdoc',
   ],
-  parserOptions: { tsconfigRootDir: __dirname },
+  parserOptions: { tsconfigRootDir: __dirname, ecmaVersion: 'latest' },
   plugins: ['simple-import-sort', 'unused-imports'],
   rules: {
     '@typescript-eslint/no-floating-promises': 0,

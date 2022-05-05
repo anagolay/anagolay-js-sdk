@@ -106,15 +106,21 @@ export function serialize<T>(
 }
 
 /**
- * This does `parse(serialize(x))` with inferring the type.
+ * This does `JSON.parse(serialize(x))` with inferring the type. It doesn't use the custom reviver function. It just parses the serialized string.
  *
  * @remarks
+ *
  * - The biggest use of this is to get the types autocompleted.
  * - The performance is NOT tested, it might be really slow
  *
  * @param data - Any defined `T` or nothing, then the T will be inferred
+ * @param toOriginal - Use reviver function to return the JSON to it's original state
  * @returns Parsed serialized data with type infering
  */
-export function serializeThenParse<T>(data: T): Jsonify<T> {
-  return parse(serialize(data));
+export function serializeThenParse<T>(data: T, toOriginal: boolean = false): Jsonify<T> {
+  if (toOriginal) {
+    return parse(serialize(data));
+  } else {
+    return JSON.parse(serialize(data));
+  }
 }

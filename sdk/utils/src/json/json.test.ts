@@ -18,10 +18,23 @@ const firstObject = {
   config: new Map().set('d', 12),
 };
 
+const firstObjectParsed = {
+  s: 's',
+  n: 7,
+  b: true,
+  ar: [],
+  config: {
+    type: 'Map',
+    data: {
+      d: 12,
+    },
+  },
+};
+
 describe('JSON test suite', () => {
-  it('should test the roundTrip', () => {
+  it('should test the serializeThenParse', () => {
     const parsed = serializeThenParse(firstObject);
-    expect(parsed).toEqual(parsed);
+    expect(parsed).toEqual(firstObjectParsed);
   });
   it('should test the parsing', () => {
     const parsed = parse<IFistObject>(firstObjAsString);
