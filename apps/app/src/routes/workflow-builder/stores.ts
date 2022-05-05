@@ -158,7 +158,7 @@ function workflowFn() {
       creators: [],
       groups: [],
       segments: [],
-      version: '',
+      version: '0.7.0',
     },
     operations: [],
     operationVersions: [],
@@ -314,6 +314,23 @@ function workflowFn() {
           },
           operations: ops,
           operationVersions: opVers,
+          // toString(key) {
+          //   console.log('key', key);
+
+          //   console.log('manifestData in toJSON', this.manifestData);
+          //   return this;
+          // },
+          // // // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify#tojson_behavior
+          // toJSON(key) {
+          //   const { segments } = this.manifestData;
+
+          //   console.log(segments);
+
+          //   R.map((seq) => {
+          //     console.log('seq', seq);
+          //   }, segments);
+          //   return this;
+          // },
         };
       });
     },

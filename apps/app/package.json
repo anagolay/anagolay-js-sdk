@@ -47,7 +47,8 @@
     "@tailwindcss/line-clamp": "~0.3.1",
     "@types/ramda": "~0.27.64",
     "@anagolay/types": "workspace:*",
-    "eslint-config-prettier": "~8.5.0"
+    "eslint-config-prettier": "~8.5.0",
+    "sveltejs-adapter-ipfs": "~0.3.0"
   },
   "dependencies": {
     "drawflow": "~0.0.55",
@@ -59,7 +60,6 @@
     "@polkadot/types": "7.15.1",
     "@polkadot/api-augment": "7.15.1",
     "@polkadot/util": "8.7.1",
-    "@anagolay/utils": "workspace:*",
     "@anagolay/types": "workspace:*",
     "@polkadot/types-codec": "7.15.1"
   }

@@ -17,7 +17,7 @@
   import { alerts } from '$src/components/notifications/stores';
   import { connectToApi, makeOps, type OperationWithVersions } from '$src/api';
   import { ApiPromise } from '@polkadot/api';
-  import { serializeThenParse } from '$src/json';
+  import { serializeThenParse } from '$src/utils/json';
 
   let lockThePage: boolean = false;
 
@@ -51,8 +51,8 @@
     const workflowBuild = serializeThenParse($workflow);
 
     socket.emit('continueWithWorkflow', workflowBuild);
-    socket.disconnect();
-    lockThePage = true;
+    // socket.disconnect();
+    // lockThePage = true;
   }
 
   function cancelTheCreation() {
@@ -128,13 +128,7 @@
   $: {
     const { segments, groups, name, description, version } = $workflow.manifestData;
     saveDisabled = true;
-    if (
-      groups.length > 0 &&
-      name.length > 7 &&
-      description.length > 7 &&
-      segments.length > 0 &&
-      version.split('.').length == 3
-    ) {
+    if (groups.length > 0 && name.length > 7 && description.length > 7 && segments.length > 0) {
       const firstSegment = segments[0];
       if (firstSegment.inputs.includes(-1) && firstSegment.sequence.length > 0) {
         saveDisabled = false;
@@ -196,17 +190,7 @@
               class="input bg-slate-200 input-bordered w-full max-w-xs text-slate-800 focus:text-slate-100  focus:bg-primary-focus"
             />
           </div>
-          <div>
-            <label class="label" for="workflowVersion">
-              <span class="label-text text-base-300">Version</span>
-            </label>
-            <input
-              type="text"
-              name="workflowVersion"
-              bind:value={$workflow.manifestData.version}
-              class="input bg-slate-200 input-bordered w-full max-w-xs text-slate-800 focus:text-slate-100 focus:bg-primary-focus"
-            />
-          </div>
+
           <div>
             <label class="label" for="groups">
               <span class="label-text text-base-300">Groups</span>

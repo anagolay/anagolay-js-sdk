@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { serialize } from '$src/json';
+  import { serialize } from '$src/utils/json';
 
   let classNames: string = '';
   export { classNames as class };

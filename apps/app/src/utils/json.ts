@@ -1,15 +1,28 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/naming-convention */
-import { isNil } from 'ramda';
+import { hexToString } from '@polkadot/util';
+import { isNil, startsWith } from 'ramda';
 
-export type Jsonify<T> = T extends Date
+export declare type Jsonify<T> = T extends Date
   ? string
   : T extends object
   ? {
       [k in keyof T]: Jsonify<T[k]>;
     }
+  : T extends Record<any, AnyJson>
+  ? any
   : T;
 
+export declare type AnyJson =
+  | string
+  | number
+  | boolean
+  | null
+  | undefined
+  | AnyJson[]
+  | {
+      [index: string]: AnyJson;
+    };
 /**
  * Taken from the native types
  */
@@ -50,7 +63,11 @@ export function customReplacer<V>(key: string, value: V): ISerializedMap<V> | V 
 
 export function customReviver<T extends ISerializedMap<T>>(key: string, value: T): T | Map<any, any> {
   if (typeof value === 'object' && value !== null) {
-    if (value.type === 'Map' || value.type === 'map') {
+    // console.log('key', startsWith('0x', key), key);
+    if (startsWith('0x', key)) {
+      this[hexToString(key)] = value;
+      return undefined;
+    } else if (value.type === 'Map' || value.type === 'map') {
       return new Map(Object.entries(value.data));
     }
   }
@@ -66,7 +83,7 @@ export function customReviver<T extends ISerializedMap<T>>(key: string, value: T
  * @param reviver - A function that knows how to handle custom de-serialization. Opposite of {@link  customReplacer}
  * @returns
  */
-export function parse<T>(data: string, reviver?: ReplacerOrReviverAsFunction<T>): Jsonify<T> {
+export function parse<T>(data: string, reviver?: ReplacerOrReviverAsFunction<T>): T {
   let reviverParam = reviver;
 
   if (isNil(reviverParam)) {
@@ -106,15 +123,21 @@ export function serialize<T>(
 }
 
 /**
- * This does `parse(serialize(x))` with inferring the type.
+ * This does `JSON.parse(serialize(x))` with inferring the type. It doesn't use the custom reviver function. It just parses the serialized string.
  *
  * @remarks
+ *
  * - The biggest use of this is to get the types autocompleted.
  * - The performance is NOT tested, it might be really slow
  *
  * @param data - Any defined `T` or nothing, then the T will be inferred
+ * @param toOriginal - Use reviver function to return the JSON to it's original state
  * @returns Parsed serialized data with type infering
  */
-export function serializeThenParse<T>(data: T): Jsonify<T> {
-  return parse(serialize(data));
+export function serializeThenParse<T>(data: T, toOriginal = false): T {
+  if (toOriginal) {
+    return parse<T>(serialize<T>(data));
+  } else {
+    return JSON.parse(serialize<T>(data));
+  }
 }
