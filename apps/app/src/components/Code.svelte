@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { serialize } from '@anagolay/utils/lib/json';
+  import { serialize } from '$src/json';
 
   let classNames: string = '';
   export { classNames as class };
@@ -10,5 +10,5 @@
 </script>
 
 <div class="lg:container mx-auto ">
-  <pre class={classNames}>{serialize(code, 2)}</pre>
+  <pre class={classNames}>{serialize(code, space)}</pre>
 </div>
