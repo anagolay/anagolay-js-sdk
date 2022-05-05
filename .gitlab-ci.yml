@@ -111,6 +111,8 @@ upload-cli-to-ipfs:
     - echo "Uploading CLI to IPFS ..."
     - ipfsCli upload --pin --onlyCid sdk/cli/dist/anagolay.js > ANAGOLAY_CLI_CID
     - echo "The CLI is published with the CID:" && cat ANAGOLAY_CLI_CID
+    - echo "https://ipfs.anagolay.network/ipfs/$(cat ANAGOLAY_CLI_CID)"
+
   rules:
     - if: $CI_COMMIT_MESSAGE =~ /^.*\[build all\].*$/s
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
