@@ -5917,33 +5917,6 @@
                 "startIndex": 1,
                 "endIndex": 3
               }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/types!AnWorkflowData#version:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "version: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "AnCharacters",
-                  "canonicalReference": "@anagolay/types!AnCharacters:type"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "version",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
             }
           ],
           "extendsTokenRanges": []
@@ -11132,33 +11105,6 @@
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 5
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/types!WorkflowData#version:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "readonly version: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Characters",
-                  "canonicalReference": "@anagolay/types!Characters:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "version",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
               }
             }
           ],

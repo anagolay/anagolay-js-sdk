@@ -158,7 +158,7 @@ function workflowFn() {
       creators: [],
       groups: [],
       segments: [],
-      version: '0.7.0',
+      version: '0.0.1',
     },
     operations: [],
     operationVersions: [],

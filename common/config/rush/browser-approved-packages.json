@@ -343,6 +343,10 @@
       "allowedCategories": [ "webapp" ]
     },
     {
+      "name": "sveltejs-adapter-ipfs",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
       "name": "tailwindcss",
       "allowedCategories": [ "webapp" ]
     },

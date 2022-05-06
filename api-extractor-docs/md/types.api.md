@@ -617,8 +617,6 @@ export interface AnWorkflowData {
     name: AnCharacters;
     // (undocumented)
     segments: AnWorkflowSegment[];
-    // (undocumented)
-    version: AnCharacters;
 }
 
 // @public (undocumented)
@@ -1109,8 +1107,6 @@ export interface WorkflowData extends Struct {
     readonly name: Characters_2;
     // (undocumented)
     readonly segments: Vec<WorkflowSegment>;
-    // (undocumented)
-    readonly version: Characters_2;
 }
 
 // @public
