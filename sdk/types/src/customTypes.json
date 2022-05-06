@@ -106,8 +106,7 @@
     "creators": "Vec<CreatorId>",
     "description": "Characters",
     "groups": "Vec<ForWhat>",
-    "segments": "Vec<WorkflowSegment>",
-    "version": "Characters"
+    "segments": "Vec<WorkflowSegment>"
   },
   "WorkflowExtra": {},
   "Workflow": {

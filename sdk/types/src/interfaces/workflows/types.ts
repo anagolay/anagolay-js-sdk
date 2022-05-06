@@ -50,7 +50,6 @@ export interface WorkflowData extends Struct {
   readonly description: Characters;
   readonly groups: Vec<ForWhat>;
   readonly segments: Vec<WorkflowSegment>;
-  readonly version: Characters;
 }
 
 /** @name WorkflowExtra */

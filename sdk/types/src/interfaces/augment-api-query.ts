@@ -117,7 +117,7 @@ declare module '@polkadot/api-base/types/storage' {
       /**
        * Retrieve the Operation Manifest with the AccountId ( which is the owner ) and OperationId.
        **/
-      operationsByOperationIdAndAccountId: AugmentedQuery<
+      operationByOperationIdAndAccountId: AugmentedQuery<
         ApiType,
         (
           arg1: OperationId | string | Uint8Array,
@@ -131,23 +131,23 @@ declare module '@polkadot/api-base/types/storage' {
        **/
       total: AugmentedQuery<ApiType, () => Observable<u64>, []> & QueryableStorageEntry<ApiType, []>;
       /**
-       * Retrieve all Versions for a single Operation Manifest.
-       **/
-      versionsByOperationId: AugmentedQuery<
-        ApiType,
-        (arg: OperationId | string | Uint8Array) => Observable<Vec<VersionId>>,
-        [OperationId]
-      > &
-        QueryableStorageEntry<ApiType, [OperationId]>;
-      /**
        * Retrieve the Version.
        **/
-      versionsByVersionId: AugmentedQuery<
+      versionByVersionId: AugmentedQuery<
         ApiType,
         (arg: VersionId | string | Uint8Array) => Observable<OperationVersionRecord>,
         [VersionId]
       > &
         QueryableStorageEntry<ApiType, [VersionId]>;
+      /**
+       * Retrieve all Versions for a single Operation Manifest.
+       **/
+      versionIdsByOperationId: AugmentedQuery<
+        ApiType,
+        (arg: OperationId | string | Uint8Array) => Observable<Vec<VersionId>>,
+        [OperationId]
+      > &
+        QueryableStorageEntry<ApiType, [OperationId]>;
       /**
        * Generic query
        **/
@@ -313,11 +313,11 @@ declare module '@polkadot/api-base/types/storage' {
       /**
        * Amount of saved workflows
        **/
-      total: AugmentedQuery<ApiType, () => Observable<u32>, []> & QueryableStorageEntry<ApiType, []>;
+      total: AugmentedQuery<ApiType, () => Observable<u64>, []> & QueryableStorageEntry<ApiType, []>;
       /**
        * Retrieve the Version.
        **/
-      versionsByVersionId: AugmentedQuery<
+      versionByVersionId: AugmentedQuery<
         ApiType,
         (arg: VersionId | string | Uint8Array) => Observable<WorkflowVersionRecord>,
         [VersionId]
@@ -326,16 +326,16 @@ declare module '@polkadot/api-base/types/storage' {
       /**
        * Retrieve all Versions for a single Workflow Manifest.
        **/
-      versionsByWorkflowId: AugmentedQuery<
+      versionIdsByWorkflowId: AugmentedQuery<
         ApiType,
         (arg: WorkflowId | string | Uint8Array) => Observable<Vec<VersionId>>,
         [WorkflowId]
       > &
         QueryableStorageEntry<ApiType, [WorkflowId]>;
       /**
-       * Retrieve the Workflow Manifest with the AccountId ( which is the owner ) and WorkflowId.
+       * Retrieve the Workflow Manifest with the WorkflowId and AccountId ( which is the owner )
        **/
-      workflowsByWorkflowIdAndAccountId: AugmentedQuery<
+      workflowByWorkflowIdAndAccountId: AugmentedQuery<
         ApiType,
         (
           arg1: WorkflowId | string | Uint8Array,

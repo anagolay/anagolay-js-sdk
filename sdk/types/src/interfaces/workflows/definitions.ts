@@ -14,7 +14,6 @@ export const WorkflowsCustomTypes: RegistryTypes = {
     description: 'Characters',
     groups: 'Vec<ForWhat>',
     segments: 'Vec<WorkflowSegment>',
-    version: 'Characters',
   },
   WorkflowExtra: {},
   Workflow: {

@@ -34,7 +34,6 @@ export interface AnWorkflowData {
   description: AnCharacters;
   groups: AnForWhat[];
   segments: AnWorkflowSegment[];
-  version: AnCharacters;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
