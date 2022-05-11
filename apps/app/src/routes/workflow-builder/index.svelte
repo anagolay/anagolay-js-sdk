@@ -136,8 +136,9 @@
     const { segments, groups, name, description } = $workflow.manifestData;
     saveDisabled = true;
     if (groups.length > 0 && name.length > 7 && description.length > 7 && segments.length > 0) {
+      const heads = segments.filter((s) => s.inputs.every((i) => i == -1));
       const firstSegment = segments[0];
-      if (firstSegment.inputs.includes(-1) && firstSegment.sequence.length > 0) {
+      if (heads.length == 1 && firstSegment.inputs.includes(-1) && firstSegment.sequence.length > 0) {
         saveDisabled = false;
       }
     }
