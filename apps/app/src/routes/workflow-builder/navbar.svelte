@@ -46,7 +46,19 @@
         <div class="modal-box w-11/12 max-w-5xl">
           <label for="manifest-modal" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
 
-          <Code code={$workflow.manifestData} />
+          <Code
+            code={JSON.parse(
+              JSON.stringify($workflow.manifestData, (key, value) => {
+                // @TODO here, again we need to serialize the object to JSON without alteration of the model
+                // serializeAndParse() cannot work here
+                if (value instanceof Map) {
+                  return Object.fromEntries(value);
+                } else {
+                  return value;
+                }
+              })
+            )}
+          />
         </div>
       </label>
     </div>
