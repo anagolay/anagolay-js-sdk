@@ -76,9 +76,26 @@ async function create(): Promise<void> {
 
   const workflowBuild: IWorkflowBuild = await connectToWSAndListenFowWorkflow(namespace);
 
+  // @TODO: the publish service accept a workflow manifest were maps are plain objects (as in JSON),
+  // since it insert this JSON in the artifact's manifest.
+  // We could use serializeAndParse() here to convert IWorkflowBuild to our transport level
+  // representation were maps are objects augmented with metadata to make the call to publisher service,
+  // but it would be pointless because on the other side we would still need, after the parse(), to write the
+  // code to transform maps to plain object in order to insert the information into the artifact's manifest.
+  // So I simply send JSON now.
+  const payload = JSON.parse(
+    JSON.stringify(workflowBuild, (key, value) => {
+      if (value instanceof Map) {
+        return Object.fromEntries(value);
+      } else {
+        return value;
+      }
+    })
+  );
+
   const payloadData = {
     context: 'workflow',
-    payload: workflowBuild,
+    payload,
   };
 
   const publishResponse = await callPublishService<AnWorkflowArtifactStructure, IWorkflowVersionSchema>(
