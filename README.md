@@ -9,6 +9,7 @@ This is the monorepo for ALL Anagolay packages. This includes following list:
 1. Anagolay Network CLI located under `<root>/sdk/cli`
 2. Anagolay Network Types located under `<root>/sdk/types`
 3. All utils are located under `<root>/sdk/utils`
+4. Anagolay Workflow Builder is located in `<root>/apps/app`
 
 ## Development
 

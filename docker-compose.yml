@@ -1,9 +1,10 @@
 version: '3.5'
 services:
   code:
-    image: mcr.microsoft.com/vscode/devcontainers/typescript-node:16-bullseye
+    image: mcr.microsoft.com/vscode/devcontainers/typescript-node:17-bullseye
     user: $UID
     volumes:
+      - pnpm_store:/workspace/common/temp/pnpm_tore:cached
       - ./:/workspace:cached
       - user_home:$HOME:cached
       # Uncomment the next line to use Docker from inside the container. See https://aka.ms/vscode-remote/samples/docker-from-docker-compose for details.
@@ -15,3 +16,4 @@ services:
       - 'host.docker.internal:host-gateway'
 volumes:
   user_home:
+  pnpm_store:

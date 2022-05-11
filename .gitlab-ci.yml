@@ -12,9 +12,6 @@ cache:
     - ANAGOLAY_CLI_CID
     - ANAGOLAY_CUSTOM_TYPES_CID
 
-variables:
-  IPFS_PATH: .ipfs
-
 workflow:
   rules:
     - if: $CI_COMMIT_MESSAGE =~ /-draft$/
