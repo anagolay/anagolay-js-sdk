@@ -29,7 +29,7 @@ include:
   - template: Security/Secret-Detection.gitlab-ci.yml
 
 # include this where you need it. like in before_script
-.install-ipfs-and-setup: &install-ipfs-and-setup
+.install-ipfs-cli-and-setup: &install-ipfs-cli-and-setup
   - echo "Downloading anagolay ipfs CLI which works with the ipfsAuthProxy."
   - |
     curl https://ipfs.anagolay.network/ipfs/bafybeiebighwouxt3vkttuhfcwb3dgr7vzxpujlqfzvngt7omnrizjajfy > /usr/local/bin/ipfsCli
@@ -78,7 +78,7 @@ test-and-build:
 #   before_script:
 #     - *install-pnpm
 #     - pnpm add -g @microsoft/api-documenter
-#     - *install-ipfs-and-setup
+#     - *install-ipfs-cli-and-setup
 #   script:
 #     - set -e
 #     - api-documenter markdown -i ./api-extractor-docs/json -o ./apps/anagolay.dev/docs/js-api
@@ -98,7 +98,7 @@ upload-cli-to-ipfs:
   needs: ['test-and-build']
   stage: release
   before_script:
-    - *install-ipfs-and-setup
+    - *install-ipfs-cli-and-setup
   script:
     - set -e
 
@@ -120,7 +120,7 @@ upload-cli-to-ipfs:
 upload-custom-types-to-ipfs:
   stage: release
   before_script:
-    - *install-ipfs-and-setup
+    - *install-ipfs-cli-and-setup
   script:
     - set -e
 
