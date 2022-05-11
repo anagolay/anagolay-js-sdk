@@ -42,8 +42,14 @@
 
   let chain: ApiPromise;
 
+  /**
+   * Send the Manifest to WS.
+   *
+   * @remarks
+   * The commented code lines are left like this intentionally.
+   */
   function sendMessageToWs() {
-    saveDisabled = true;
+    // saveDisabled = true;
     alerts.add('Workflow data sent to WS, please check the CLI.', 'success', false);
 
     // The serialization of the Map is not natively  supported. When we serialize we use the replacer and wnen parse we use the reviver
@@ -51,6 +57,7 @@
     const workflowBuild = serializeThenParse($workflow);
 
     socket.emit('continueWithWorkflow', workflowBuild);
+
     // socket.disconnect();
     // lockThePage = true;
   }
@@ -126,7 +133,7 @@
 
   // make check when wen can enable save button
   $: {
-    const { segments, groups, name, description, version } = $workflow.manifestData;
+    const { segments, groups, name, description } = $workflow.manifestData;
     saveDisabled = true;
     if (groups.length > 0 && name.length > 7 && description.length > 7 && segments.length > 0) {
       const firstSegment = segments[0];

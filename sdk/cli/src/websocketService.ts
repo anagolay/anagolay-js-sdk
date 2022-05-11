@@ -64,6 +64,12 @@ export async function connectToWSAndListenFowWorkflow(
     socket.on('connect_error', (data) => {
       console.log('Error in connecting to the WS', data);
       wsConnectionSpinner.stop();
+      socket.disconnect();
+    });
+    socket.on('error', (data) => {
+      console.log('got ERROR', data);
+      wsConnectionSpinner.stop();
+      socket.disconnect();
     });
 
     socket.on('disconnect', (d) => {
@@ -78,6 +84,7 @@ export async function connectToWSAndListenFowWorkflow(
       wsConnectionSpinner.stop();
       socket.disconnect();
 
+      // this is really needed to do here since we are serializing the Map into the object with the `type='Map'` and now we need the actual Map
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const m: IWorkflowBuild = serializeThenParse<any>(message, true);
 

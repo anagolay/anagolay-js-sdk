@@ -45,6 +45,7 @@ export async function callPublishService<T, U extends ISuccessfulResponse<T>>(
   spinPublishOperation.message('Collecting information.');
   spinPublishOperation.start();
   const { apiKey, baseUrl } = await getPublishApiInfo(log);
+
   // eslint-disable-next-line no-async-promise-executor
   return new Promise(async (resolve, reject) => {
     try {
@@ -65,24 +66,42 @@ export async function callPublishService<T, U extends ISuccessfulResponse<T>>(
       if (status === 201) {
         spinPublishOperation.message('Checking if the remote job is done. This can take a while.');
         const jobPollingInterval = setInterval(async () => {
-          const response = await axios.get<IPollingResponse<T>>([baseUrl, data.job.api].join(''), {
-            headers: {
-              'x-api-key': apiKey,
-              'User-Agent': `Anagolay CLI v${7}`,
-              'Content-Type': 'application/json',
-            },
-            httpAgent,
-          });
+          try {
+            const response = await axios.get<IPollingResponse<T>>([baseUrl, data.job.api].join(''), {
+              headers: {
+                'x-api-key': apiKey,
+                'User-Agent': `Anagolay CLI v${7}`,
+                'Content-Type': 'application/json',
+              },
+              httpAgent,
+            });
 
-          const {
-            data: { done: jobDone, version: responseData },
-          } = response;
+            const {
+              data: { done: jobDone, version: responseData },
+            } = response;
 
-          if (jobDone) {
-            clearInterval(jobPollingInterval);
+            if (jobDone) {
+              clearInterval(jobPollingInterval);
+              spinPublishOperation.stop();
+
+              resolve(responseData as U);
+            }
+          } catch (error) {
             spinPublishOperation.stop();
 
-            resolve(responseData as U);
+            if (axios.isAxiosError(error)) {
+              // log.error(error.response?.data);
+              // signale.error(error.response?.data);
+              // reject(error.response?.data);
+              console.error(error.message);
+              process.exit(1);
+            } else {
+              console.error('Not axios error', (error as Error).message);
+              // log.error(error);
+              // signale.error(error);
+              reject((error as Error).message);
+              process.exit(1);
+            }
           }
         }, 2000);
       }
@@ -97,6 +116,7 @@ export async function callPublishService<T, U extends ISuccessfulResponse<T>>(
       }
     } catch (error) {
       spinPublishOperation.stop();
+
       if (axios.isAxiosError(error)) {
         // log.error(error.response?.data);
         // signale.error(error.response?.data);

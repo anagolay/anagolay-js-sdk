@@ -7,6 +7,7 @@ import { hexToString } from '@polkadot/util';
 import { cryptoWaitReady } from '@polkadot/util-crypto';
 import clui from 'clui';
 import { Command } from 'commander';
+import { URL } from 'node:url';
 import { equals } from 'ramda';
 import signale from 'signale';
 
@@ -54,20 +55,24 @@ async function create(): Promise<void> {
 
   // const namespace: string = `workflow-${randomUUID()}`;
   const namespace: string = `workflow-85f2477c-c321-4625-b421-d9ad52d7eac5`;
-  const wsURL: string = encodeURIComponent(
-    (ANAGOLAY_WEBSOCKET_SERVICE_API_URL as string)?.includes('host.docker.internal') // in vscode container we use host.docker.internal
-      ? (ANAGOLAY_WEBSOCKET_SERVICE_API_URL as string).replace('host.docker.internal', '127.0.0.1')
-      : (ANAGOLAY_WEBSOCKET_SERVICE_API_URL as string)
-  );
-  const chainURL: string = encodeURIComponent(
-    (ANAGOLAY_CHAIN_WS_URL as string)?.includes('host.docker.internal') // in vscode container we use host.docker.internal
-      ? (ANAGOLAY_CHAIN_WS_URL as string).replace('host.docker.internal', '127.0.0.1')
-      : (ANAGOLAY_CHAIN_WS_URL as string)
-  );
+  // in vscode container we use host.docker.internal
+  const wsURL: string = (ANAGOLAY_WEBSOCKET_SERVICE_API_URL as string)?.includes('host.docker.internal')
+    ? (ANAGOLAY_WEBSOCKET_SERVICE_API_URL as string).replace('host.docker.internal', '127.0.0.1')
+    : (ANAGOLAY_WEBSOCKET_SERVICE_API_URL as string);
 
-  const link: string = `${ANAGOLAY_WORKFLOW_BUILDER_UI}?ws=${wsURL}&anagolay_chain_ws=${chainURL}&ns=${namespace}&path=ws`;
+  // in vscode container we use host.docker.internal
+  const chainURL: string = (ANAGOLAY_CHAIN_WS_URL as string)?.includes('host.docker.internal')
+    ? (ANAGOLAY_CHAIN_WS_URL as string).replace('host.docker.internal', '127.0.0.1')
+    : (ANAGOLAY_CHAIN_WS_URL as string);
 
-  console.log(`Follow this link to start building the Workflow: \n${link}`);
+  // better link building
+  const link = new URL(ANAGOLAY_WORKFLOW_BUILDER_UI as string);
+  link.searchParams.append('ws', wsURL);
+  link.searchParams.append('anagolay_chain_ws', chainURL);
+  link.searchParams.append('ns', namespace);
+  link.searchParams.append('path', 'ws');
+
+  console.log(`Open this link to start building the Workflow (Ctrl+click): \n${link}`);
 
   const workflowBuild: IWorkflowBuild = await connectToWSAndListenFowWorkflow(namespace);
 
@@ -80,8 +85,6 @@ async function create(): Promise<void> {
     log,
     payloadData
   );
-
-  console.log(publishResponse, publishResponse.artifacts);
 
   const versionData: AnWorkflowVersionData = {
     entityId: undefined,
@@ -114,7 +117,7 @@ async function submitTheExtrinsicCall(
 
   log.info('Submitting the extrinsic call');
 
-  console.log('%o %o', workflowData, workflowVersionData);
+  // console.log('%o %o', workflowData, workflowVersionData);
 
   let entityId: string = '';
 
