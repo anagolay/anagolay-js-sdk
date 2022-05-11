@@ -89,7 +89,7 @@ async function publishSubcmd(): Promise<void> {
 
   let repository: string;
   try {
-    repository = await urlForRemote('origin', false);
+    repository = await urlForRemote('origin');
   } catch (error) {
     signale.error(error);
     process.exit(1);
