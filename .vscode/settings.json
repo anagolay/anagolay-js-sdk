@@ -72,5 +72,6 @@
   "eslint.useESLintClass": true,
   "workbench.colorCustomizations": {
     "titleBar.activeBackground": "#3659c2"
-  }
+  },
+  "terminal.integrated.scrollback": 10000
 }
