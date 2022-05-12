@@ -109,6 +109,6 @@ export function serialize<T>(data: T, space?: number, replacer?: ReplacerOrReviv
 export function serializeThenParse<T>(data: T, toOriginal?: boolean): Jsonify<T>;
 
 // @public
-export function urlForRemote(remote?: string, parse?: boolean): Promise<string>;
+export function urlForRemote(remote?: string): Promise<string>;
 
 ```
