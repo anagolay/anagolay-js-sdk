@@ -95,7 +95,7 @@
 
     opvs = makeOps(chain);
 
-    $workflow.manifestData.name = namespace;
+    $workflow.manifestData.name = namespace.replaceAll('-', '_');
 
     socket = io(ws + '/' + namespace, {
       path,

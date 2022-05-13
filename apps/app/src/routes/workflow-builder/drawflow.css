@@ -164,3 +164,9 @@
   right: -15px;
   top: -15px;
 }
+
+.outline-dashed {
+  outline-style: dashed;
+  outline-width: 1px;
+  outline-color: hsl(var(--pc) / var(--tw-text-opacity));
+}
