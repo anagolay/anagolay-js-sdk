@@ -3,3 +3,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.outline-dashed {
+  outline-style: dashed;
+  outline-width: 1px;
+}

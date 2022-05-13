@@ -7,6 +7,7 @@ import { hexToString } from '@polkadot/util';
 import { cryptoWaitReady } from '@polkadot/util-crypto';
 import clui from 'clui';
 import { Command } from 'commander';
+import { randomUUID } from 'crypto';
 import { URL } from 'node:url';
 import { equals } from 'ramda';
 import signale from 'signale';
@@ -53,8 +54,7 @@ export default async function createSubCommand(): Promise<Command> {
 async function create(): Promise<void> {
   await askStarterQuestions();
 
-  // const namespace: string = `workflow-${randomUUID()}`;
-  const namespace: string = `workflow-85f2477c-c321-4625-b421-d9ad52d7eac5`;
+  const namespace: string = `workflow_${randomUUID()}`;
   // in vscode container we use host.docker.internal
   const wsURL: string = (ANAGOLAY_WEBSOCKET_SERVICE_API_URL as string)?.includes('host.docker.internal')
     ? (ANAGOLAY_WEBSOCKET_SERVICE_API_URL as string).replace('host.docker.internal', '127.0.0.1')

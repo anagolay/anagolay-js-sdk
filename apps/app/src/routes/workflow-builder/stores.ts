@@ -341,7 +341,6 @@ function workflowFn() {
           creators: [],
           groups: [],
           segments: [],
-          version: '',
         },
         operations: [],
         operationVersions: [],

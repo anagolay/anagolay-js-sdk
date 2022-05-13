@@ -1,4 +1,5 @@
 const defaultTheme = require('tailwindcss/defaultTheme');
+const { '[data-theme=dark]': darkTheme } = require('daisyui/src/colors/themes');
 
 module.exports = {
   content: ['./src/**/*.{html,js,svelte,ts}'],
@@ -19,21 +20,11 @@ module.exports = {
     rtl: false,
     prefix: '',
     darkTheme: 'dark',
-    // themes: [
-    //   {
-    //     anagolay: {
-    //       primary: '#054F77',
-    //       secondary: '#093954',
-    //       accent: '#8CFF00',
-    //       neutral: '#052233',
-    //       'base-100': '#2D3B43',
-    //       info: '#3ABFF8',
-    //       success: '#36D399',
-    //       warning: '#FBBD23',
-    //       error: '#F87272',
-    //     },
-    //   },
-    // ],
+    themes: [
+      {
+        dark: darkTheme,
+      },
+    ],
   },
 
   theme: {
