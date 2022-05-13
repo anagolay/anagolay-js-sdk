@@ -137,7 +137,7 @@ async function submitTheExtrinsicCall(
   operationData: AnOperationData,
   versionData: AnOperationVersionData
 ): Promise<ISignSubmitSuccessReturn> {
-  console.log('%o %o', operationData, versionData);
+  // console.log('%o %o', operationData, versionData);
 
   // Wait WASM interface initialization
   await cryptoWaitReady();

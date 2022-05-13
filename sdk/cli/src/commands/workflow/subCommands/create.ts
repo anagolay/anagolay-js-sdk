@@ -54,7 +54,9 @@ export default async function createSubCommand(): Promise<Command> {
 async function create(): Promise<void> {
   await askStarterQuestions();
 
-  const namespace: string = `workflow-${randomUUID()}`;
+  // DO NOT CHANGE the structure, this always must be in this format.
+  const namespace: string = `workflow_${randomUUID()}`;
+
   // in vscode container we use host.docker.internal
   const wsURL: string = (ANAGOLAY_WEBSOCKET_SERVICE_API_URL as string)?.includes('host.docker.internal')
     ? (ANAGOLAY_WEBSOCKET_SERVICE_API_URL as string).replace('host.docker.internal', '127.0.0.1')

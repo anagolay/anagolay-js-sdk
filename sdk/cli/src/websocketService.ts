@@ -66,15 +66,16 @@ export async function connectToWSAndListenFowWorkflow(
       wsConnectionSpinner.stop();
       socket.disconnect();
     });
+
     socket.on('error', (data) => {
       console.log('got ERROR', data);
       wsConnectionSpinner.stop();
       socket.disconnect();
     });
 
-    socket.on('disconnect', (d) => {
+    socket.on('disconnect', () => {
       wsConnectionSpinner.stop();
-      console.log(`Disconnected from WebSockets`, d);
+      console.log(`Disconnected from WebSockets`);
     });
 
     /**

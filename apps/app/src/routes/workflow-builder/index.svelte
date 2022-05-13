@@ -49,7 +49,7 @@
    * The commented code lines are left like this intentionally.
    */
   function sendMessageToWs() {
-    // saveDisabled = true;
+    saveDisabled = true;
     alerts.add('Workflow data sent to WS, please check the CLI.', 'success', false);
 
     // The serialization of the Map is not natively  supported. When we serialize we use the replacer and wnen parse we use the reviver
@@ -58,8 +58,8 @@
 
     socket.emit('continueWithWorkflow', workflowBuild);
 
-    // socket.disconnect();
-    // lockThePage = true;
+    socket.disconnect();
+    lockThePage = true;
   }
 
   function cancelTheCreation() {

@@ -41,7 +41,8 @@
     "bradlc.vscode-tailwindcss",
     "formulahendry.auto-rename-tag",
     "christian-kohler.npm-intellisense",
-    "donjayamanne.githistory"
+    "donjayamanne.githistory",
+    "eamodio.gitlens"
   ],
   "overrideCommand": false,
   "forwardPorts": [7766],
