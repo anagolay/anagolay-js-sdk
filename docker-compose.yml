@@ -10,7 +10,7 @@ services:
       # Uncomment the next line to use Docker from inside the container. See https://aka.ms/vscode-remote/samples/docker-from-docker-compose for details.
       - /var/run/docker.sock:/var/run/docker.sock
     command: sleep infinity
-    env_file: ./.env
+    # env_file: ./.env
     restart: unless-stopped
     extra_hosts:
       - 'host.docker.internal:host-gateway'
