@@ -9,7 +9,8 @@ cache:
   key: $CI_COMMIT_REF_SLUG
   paths:
     - common/temp/
-    - ANAGOLAY_CLI_CID
+    - ANAGOLAY_CLI_JS_CID
+    - ANAGOLAY_CLI_BIN_CID
     - ANAGOLAY_CUSTOM_TYPES_CID
 
 workflow:
@@ -106,9 +107,13 @@ upload-cli-to-ipfs:
     - node common/scripts/install-run-rush.js rebuild --from @anagolay/cli
 
     - echo "Uploading CLI to IPFS ..."
-    - ipfsCli upload --pin --onlyCid sdk/cli/dist/anagolay.js > ANAGOLAY_CLI_CID
-    - echo "The CLI is published with the CID:" && cat ANAGOLAY_CLI_CID
-    - echo "https://ipfs.anagolay.network/ipfs/$(cat ANAGOLAY_CLI_CID)"
+    - ipfsCli upload --pin --onlyCid sdk/cli/dist/anagolay.js > ANAGOLAY_CLI_JS_CID
+    - echo "The JS CLI version CID:" && cat ANAGOLAY_CLI_JS_CID
+    - echo "https://$(cat ANAGOLAY_CLI_JS_CID).ipfs.anagolay.network?filename=anagolay"
+
+    - ipfsCli upload --pin --onlyCid sdk/cli/binaries/anagolay > ANAGOLAY_CLI_BIN_CID
+    - echo "The BINARY CLI version CID:" && cat ANAGOLAY_CLI_BIN_CID
+    - echo "https://$(cat ANAGOLAY_CLI_BIN_CID).ipfs.anagolay.network?filename=anagolay"
 
   rules:
     - if: $CI_COMMIT_MESSAGE =~ /^.*\[build all\].*$/s
