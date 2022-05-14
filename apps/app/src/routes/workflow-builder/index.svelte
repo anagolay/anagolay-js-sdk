@@ -1,5 +1,5 @@
 <script context="module">
-  export const prerender = false;
+  export const prerender = true;
 </script>
 
 <script script lang="ts">
@@ -15,7 +15,7 @@
   import OperationNode from './OperationNode.svelte';
   import SkeletonLoader from '$src/components/SkeletonLoader.svelte';
   import { alerts } from '$src/components/notifications/stores';
-  import { connectToApi, makeOps, type OperationWithVersions } from '$src/api';
+  import { connectToApi, retrieveOperations, type OperationWithVersions } from '$src/api';
   import { ApiPromise } from '@polkadot/api';
   import { serializeThenParse } from '$src/utils/json';
 
@@ -93,8 +93,7 @@
   onMount(async () => {
     chain = await connectToApi(anagolay_chain_ws);
 
-    opvs = makeOps(chain);
-
+    // sluggify
     $workflow.manifestData.name = namespace.replaceAll('-', '_');
 
     socket = io(ws + '/' + namespace, {
@@ -103,6 +102,8 @@
       transports: ['websocket'],
       secure: false,
     });
+
+    opvs = retrieveOperations(chain);
 
     socket.on('connect', () => {
       console.debug('connected with id %s and namespace %s', socket.id, namespace);
@@ -144,6 +145,10 @@
     }
   }
 </script>
+
+<svelte:head>
+  <title>Workflow builder</title>
+</svelte:head>
 
 {#if lockThePage}
   <div class="dim-screen" transition:fade />

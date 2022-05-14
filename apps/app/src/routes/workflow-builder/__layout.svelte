@@ -4,7 +4,7 @@
   import './drawflow.css';
 </script>
 
-<div class="">
+<div>
   <slot />
   <Notifications />
 </div>

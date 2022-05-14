@@ -8,13 +8,10 @@ const config = {
   // Consult https://github.com/sveltejs/svelte-preprocess
   // for more information about preprocessors
   preprocess: preprocess(),
-  // methodOverride: {
-  //   allowed: ['PATCH', 'DELETE'],
-  // },
   kit: {
     // adapter: adapter(),
     adapter: adapter_ipfs({}),
-
+    trailingSlash: 'always',
     prerender: {
       default: true,
     },

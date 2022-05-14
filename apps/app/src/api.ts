@@ -44,10 +44,11 @@ function convertModel<T>(polkadotModel: Struct | Raw): T {
  * @param chain - Connected chain instance
  * @returns
  */
-export async function makeOps(chain: ApiPromise): Promise<OperationWithVersions[]> {
+export async function retrieveOperations(chain: ApiPromise): Promise<OperationWithVersions[]> {
   // retrieve the operations from the chain
   const operations =
     await chain.query.operations.operationByOperationIdAndAccountId.entries<OperationRecord>();
+  console.log(operations);
 
   return await Promise.all(
     operations.map(async ([, opRecord]: [unknown, OperationRecord]) => {

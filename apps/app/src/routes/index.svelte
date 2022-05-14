@@ -2,6 +2,9 @@
   import FrostBox from '$src/components/FrostBox.svelte';
 </script>
 
+<svelte:head>
+  <title>Anagolay Network app</title>
+</svelte:head>
 <div
   class="bg-cover bg-no-repeat  bg-[url('https://images.unsplash.com/photo-1531366936337-7c912a4589a7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2670&q=80')] container mx-auto px-20 pt-20 flex flex-col h-screen p-4"
 >
@@ -35,6 +38,6 @@
     </FrostBox>
   </div>
   <div class="flex justify-center align-middle items-center h-full">
-    <img class="w-72 h-72" src="anagolay-white-with-text.png" alt="Anagolay Logo" />
+    <img class="w-72 h-72" src="/anagolay-white-with-text.png" alt="Anagolay Logo" />
   </div>
 </div>
