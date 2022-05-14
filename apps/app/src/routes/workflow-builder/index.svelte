@@ -18,6 +18,7 @@
   import { connectToApi, retrieveOperations, type OperationWithVersions } from '$src/api';
   import { ApiPromise } from '@polkadot/api';
   import { serializeThenParse } from '$src/utils/json';
+  import { isEmpty } from 'ramda';
 
   let lockThePage: boolean = false;
 
@@ -165,10 +166,13 @@
         <h2 class="text-base-300">Operations:</h2>
         <ul class="flex flex-col w-full">
           {#await opvs}
-            <li class="">
+            <li>
               <SkeletonLoader />
             </li>
           {:then opvs}
+            {#if isEmpty(opvs)}
+              <span class="label-text text-base-300">Nothing found. Please publish few Operations.</span>
+            {/if}
             {#each opvs as opv}
               <li>
                 <OperationNode {opv} {addNode} {showOperationInfo} />
