@@ -78,6 +78,16 @@ async function create(): Promise<void> {
 
   const workflowBuild: IWorkflowBuild = await connectToWSAndListenFowWorkflow(namespace);
 
+  const chain: ApiPromise = await connectToAnagolayChain();
+
+  // Wait WASM interface initialization
+  await cryptoWaitReady();
+
+  // Get holder for the actual account having enough balance
+  const { accountToUse } = await chooseAccount();
+  const account: KeyringPair = await ensureBalance(chain, accountToUse);
+  workflowBuild.manifestData.creators.push(account.address);
+
   // @TODO: the publish service accept a workflow manifest were maps are plain objects (as in JSON),
   // since it insert this JSON in the artifact's manifest.
   // We could use serializeAndParse() here to convert IWorkflowBuild to our transport level
@@ -111,9 +121,7 @@ async function create(): Promise<void> {
     artifacts: publishResponse.artifacts.items,
   };
 
-  const chain: ApiPromise = await connectToAnagolayChain();
-
-  const extrinsics = await submitTheExtrinsicCall(chain, workflowBuild.manifestData, versionData);
+  const extrinsics = await submitTheExtrinsicCall(chain, account, workflowBuild.manifestData, versionData);
 
   console.log('> Workflow TX is at blockHash', extrinsics.blockHash);
   console.log('> Workflow ID is', extrinsics.entityId);
@@ -123,17 +131,10 @@ async function create(): Promise<void> {
 
 async function submitTheExtrinsicCall(
   chainApi: ApiPromise,
+  account: KeyringPair,
   workflowData: AnWorkflowData,
   workflowVersionData: AnWorkflowVersionData
 ): Promise<ISignSubmitSuccessReturn> {
-  // Wait WASM interface initialization
-  await cryptoWaitReady();
-
-  // Get holder for the actual account having enough balance
-  const { accountToUse } = await chooseAccount();
-  const account: KeyringPair = await ensureBalance(chainApi, accountToUse);
-  workflowData.creators.push(account.address);
-
   log.info('Submitting the extrinsic call');
 
   // console.log('%o %o', workflowData, workflowVersionData);
