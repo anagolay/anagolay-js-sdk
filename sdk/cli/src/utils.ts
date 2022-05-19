@@ -38,12 +38,12 @@ export function logsDir(): string {
  * Settings interface
  * @remarks This should maybe be typed differently. Probably use Pick or Partial
  */
-interface ISettings {
+export interface ISettings {
   /**
    * FirstTimeSetup
    */
   fts: boolean;
-  enableTelemetry: boolean;
+  // enableTelemetry: boolean;
   disableStartupQuestions: boolean;
 }
 
@@ -83,7 +83,7 @@ export async function readSettingsFile(): Promise<ISettings> {
   } catch (e) {
     return {
       fts: false,
-      enableTelemetry: true,
+      // enableTelemetry: true,
       disableStartupQuestions: false,
     };
   }
@@ -92,10 +92,10 @@ export async function readSettingsFile(): Promise<ISettings> {
 /**
  * @returns Return the `enableTelemetry` setting
  */
-export async function isTelemetryEnabled(): Promise<boolean> {
-  const { enableTelemetry } = await readSettingsFile();
-  return enableTelemetry;
-}
+// export async function isTelemetryEnabled(): Promise<boolean> {
+//   const { enableTelemetry } = await readSettingsFile();
+//   return enableTelemetry;
+// }
 
 /**
  * Connect to the anagolay chain

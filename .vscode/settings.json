@@ -23,7 +23,11 @@
   "[markdown]": {
     "editor.wordWrap": "wordWrapColumn",
     "editor.wordWrapColumn": 110,
-    "editor.quickSuggestions": true,
+    "editor.quickSuggestions": {
+      "comments": "on",
+      "strings": "on",
+      "other": "on"
+    },
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "javascript.validate.enable": false,

@@ -53,6 +53,7 @@ export default async function createSubCommand(): Promise<Command> {
  */
 async function create(): Promise<void> {
   await askStarterQuestions();
+  console.time('workflow_create');
 
   // DO NOT CHANGE the structure, this always must be in this format.
   const namespace: string = `workflow_${randomUUID()}`;
@@ -126,6 +127,8 @@ async function create(): Promise<void> {
   console.log('> Workflow TX is at blockHash', extrinsics.blockHash);
   console.log('> Workflow ID is', extrinsics.entityId);
   signale.success('Publishing is DONE 🎉🎉!');
+  console.timeEnd('workflow_create');
+
   process.exit();
 }
 

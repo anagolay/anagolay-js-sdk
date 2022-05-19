@@ -73,7 +73,7 @@ export default async function makeCommand(): Promise<Command> {
  */
 async function publishSubcmd(): Promise<void> {
   await askStarterQuestions();
-
+  console.time('operation_publish');
   const spinSanityCheck = new Spinner('Performing sanity checks ...');
   spinSanityCheck.start();
 
@@ -124,13 +124,15 @@ async function publishSubcmd(): Promise<void> {
   console.log('> Operation TX is at blockHash', extrinsics.blockHash);
   console.log('> Operation ID is', extrinsics.entityId);
   signale.success('Publishing is DONE 🎉🎉!');
+  console.timeEnd('operation_publish');
   process.exit();
 }
-
 /**
  * Prepare and Create extrinsics, call the api and return the data
- * @param artifactsWithVersion -
- * @public
+ * @param chainApi  -
+ * @param operationData -
+ * @param versionData -
+ * @returns
  */
 async function submitTheExtrinsicCall(
   chainApi: ApiPromise,

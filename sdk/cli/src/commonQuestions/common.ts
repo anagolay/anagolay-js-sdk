@@ -1,13 +1,11 @@
 import inquirer from 'inquirer';
 
-import { createSettingsFile, readSettingsFile } from '$src/utils';
+import { createSettingsFile, ISettings, readSettingsFile } from '$src/utils';
 /**
  * Interface for the Starter questions
  */
-export interface IStartQuestions {
+export interface IStartQuestions extends ISettings {
   proceedWithPublish: boolean;
-  enableTelemetry: boolean;
-  disableStartupQuestions: boolean;
 }
 /**
  * Ask most common questions and collect answers
@@ -29,12 +27,12 @@ export async function askStarterQuestions(): Promise<void> {
       message: 'Do you want to proceed?',
       default: true,
     },
-    {
-      type: 'confirm',
-      name: 'enableTelemetry',
-      message: 'Do you want to enable telemetry?',
-      default: true,
-    },
+    // {
+    //   type: 'confirm',
+    //   name: 'enableTelemetry',
+    //   message: 'Do you want to enable telemetry?',
+    //   default: true,
+    // },
     {
       type: 'confirm',
       name: 'disableStartupQuestions',
@@ -45,8 +43,8 @@ export async function askStarterQuestions(): Promise<void> {
 
   await createSettingsFile({
     fts: fts || true,
-    enableTelemetry: startAnswers.enableTelemetry,
     disableStartupQuestions: startAnswers.disableStartupQuestions,
+    // enableTelemetry: startAnswers.enableTelemetry,
   });
 
   return;
