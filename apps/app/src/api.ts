@@ -48,7 +48,6 @@ export async function retrieveOperations(chain: ApiPromise): Promise<OperationWi
   // retrieve the operations from the chain
   const operations =
     await chain.query.operations.operationByOperationIdAndAccountId.entries<OperationRecord>();
-  console.log(operations);
 
   return await Promise.all(
     operations.map(async ([, opRecord]: [unknown, OperationRecord]) => {

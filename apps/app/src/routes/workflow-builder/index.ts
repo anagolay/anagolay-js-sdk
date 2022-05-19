@@ -24,6 +24,8 @@ export const get: RequestHandler = async (event): Promise<RequestHandlerOutput> 
 
   const body = { ws, anagolay_chain_ws, namespace, path: '/' + path };
 
+  console.log('Connection params', body);
+
   return {
     status: 200,
     body,
