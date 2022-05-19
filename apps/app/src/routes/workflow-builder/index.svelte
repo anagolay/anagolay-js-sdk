@@ -4,6 +4,8 @@
 
 <script script lang="ts">
   import { fade } from 'svelte/transition';
+  import { page } from '$app/stores';
+  import { remove, split } from 'ramda';
 
   import { onMount } from 'svelte';
   import Drawflow from './drawflow.svelte';
@@ -19,8 +21,7 @@
   import { ApiPromise } from '@polkadot/api';
   import { serializeThenParse } from '$src/utils/json';
   import { isEmpty } from 'ramda';
-
-  let lockThePage: boolean = false;
+  import { getHashValue } from '$src/utils/url';
 
   /**
    * This is how we build the actual VALUES! i had to change the output of the types to be ES2020
@@ -60,7 +61,6 @@
     socket.emit('continueWithWorkflow', workflowBuild);
 
     socket.disconnect();
-    lockThePage = true;
   }
 
   function cancelTheCreation() {
@@ -70,15 +70,25 @@
   }
 
   /**
-   * Svelte magic, this gets automagically populated when `index.ts` is finished and finds the values 😍
+   * Namespace to connect to. This is the shared namespace between this app and CLI
    */
-  export let namespace: string;
+  let namespace: string = getHashValue($page.url.hash, 'ns');
+
   /**
-   * Websocket to connect to
+   * Websocket server address without the client path.
    */
-  export let ws: string;
-  export let path: string;
-  export let anagolay_chain_ws: string;
+  let ws: string = 'ws://127.0.0.1:2113';
+
+  /**
+   * This is the path where to get the socket.io client library
+   * https://socket.io/docs/v4/client-options/#path
+   */
+  let path: string = '/ws';
+
+  /**
+   * What is the Anagolay Chain ws url. Used for getting the operations
+   */
+  let anagolay_chain_ws: string = 'ws://127.0.0.1:9944';
 
   // Operations with their respective versions from the chain
   let opvs: Promise<OperationWithVersions[]> = new Promise<OperationWithVersions[]>((res, rej) => {});
@@ -89,13 +99,23 @@
   }
 
   /**
+   * Override if needed
+   */
+  $: namespace = getHashValue($page.url.hash, 'ns');
+  $: ws = getHashValue($page.url.hash, 'ws');
+  $: path = '/' + getHashValue($page.url.hash, 'path');
+  $: anagolay_chain_ws = getHashValue($page.url.hash, 'anagolay_chain_ws');
+
+  $: console.log({ namespace, anagolay_chain_ws, ws, path });
+
+  /**
    * On the Component mount
    */
   onMount(async () => {
     chain = await connectToApi(anagolay_chain_ws);
 
     // sluggify
-    $workflow.manifestData.name = namespace.replaceAll('-', '_');
+    $workflow.manifestData.name = namespace;
 
     socket = io(ws + '/' + namespace, {
       path,
@@ -107,7 +127,7 @@
     opvs = retrieveOperations(chain);
 
     socket.on('connect', () => {
-      console.debug('connected with id %s and namespace %s', socket.id, namespace);
+      console.debug('WS:: connected with id %s and namespace %s', socket.id, namespace);
       wsConnected.set(true);
     });
 
@@ -150,10 +170,6 @@
 <svelte:head>
   <title>Workflow builder</title>
 </svelte:head>
-
-{#if lockThePage}
-  <div class="dim-screen" transition:fade />
-{/if}
 
 <div>
   <Navbar />

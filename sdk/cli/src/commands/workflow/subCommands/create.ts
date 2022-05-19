@@ -75,7 +75,9 @@ async function create(): Promise<void> {
   link.searchParams.append('ns', namespace);
   link.searchParams.append('path', 'ws');
 
-  console.log(`Open this link to start building the Workflow (Ctrl+click): \n${link}`);
+  console.log(
+    `Open this link to start building the Workflow (Ctrl+click): \n ${ANAGOLAY_WORKFLOW_BUILDER_UI}#${link.searchParams.toString()}`
+  );
 
   const workflowBuild: IWorkflowBuild = await connectToWSAndListenFowWorkflow(namespace);
 

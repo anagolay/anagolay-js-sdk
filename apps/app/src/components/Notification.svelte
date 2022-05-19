@@ -16,7 +16,6 @@
 </script>
 
 {#if infoLevel === ''}
-  style="z-index: 999999"
   <div class="alert shadow-lg fixed w-fit bottom-7 right-7 {classNames}" transition:fade>
     <div>
       <p>{data.text}</p>
@@ -26,7 +25,6 @@
     </button>
   </div>
 {:else if infoLevel === 'info'}
-  style="z-index: 999999"
   <div class="alert alert-info shadow-lg fixed w-fit bottom-7 right-7 {classNames}" transition:fade>
     <div>
       <p>{data.text}</p>
@@ -36,7 +34,6 @@
     </button>
   </div>
 {:else if infoLevel === 'warning'}
-  style="z-index: 999999"
   <div class="alert alert-warning shadow-lg fixed w-fit bottom-7 right-7 {classNames}" transition:fade>
     <div>
       <p>{data.text}</p>
@@ -47,7 +44,6 @@
   </div>
 {:else if infoLevel === 'success'}
   <div
-    style="z-index: 999999"
     class="alert {alertCss} alert-success shadow-lg fixed w-fit bottom-7 right-7 {classNames}"
     transition:fade
   >
@@ -60,7 +56,6 @@
   </div>
 {:else if infoLevel === 'error'}
   <div
-    style="z-index: 999999"
     class="alert {alertCss} alert-error shadow-lg fixed w-fit bottom-7 right-7 {classNames}"
     transition:fade
   >

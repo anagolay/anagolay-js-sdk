@@ -19,6 +19,12 @@ function alertsFn() {
     subscribe,
     set,
     update,
+    /**
+     * Add the alert
+     * @param text - message
+     * @param infoLevel - success, warn, or error
+     * @param autoclose - default true after 2000 ms will close the alert
+     */
     add: (text: string, infoLevel: InfoLevel = '', autoclose = true) => {
       const id = nanoid();
       const a: Alert = {
