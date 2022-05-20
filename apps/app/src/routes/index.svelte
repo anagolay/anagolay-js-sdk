@@ -6,7 +6,7 @@
   <title>Anagolay Network app</title>
 </svelte:head>
 <div
-  class="bg-cover bg-no-repeat  bg-[url('https://images.unsplash.com/photo-1531366936337-7c912a4589a7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2670&q=80')] container mx-auto px-20 pt-20 flex flex-col h-screen p-4"
+  class="bg-cover bg-no-repeat  bg-[url('https://images.unsplash.com/photo-1531366936337-7c912a4589a7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2670&q=80')]  px-20 pt-20 flex flex-col h-screen p-4"
 >
   <div class="flex flex-row flex-wrap justify-between h-5/6">
     <FrostBox class="m-2 basis-72">

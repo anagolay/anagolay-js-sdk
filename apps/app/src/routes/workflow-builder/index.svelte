@@ -3,9 +3,7 @@
 </script>
 
 <script script lang="ts">
-  import { fade } from 'svelte/transition';
   import { page } from '$app/stores';
-  import { remove, split } from 'ramda';
 
   import { onMount } from 'svelte';
   import Drawflow from './drawflow.svelte';
@@ -77,18 +75,18 @@
   /**
    * Websocket server address without the client path.
    */
-  let ws: string = 'ws://127.0.0.1:2113';
+  let ws: string = getHashValue($page.url.hash, 'ws', 'ws://127.0.0.1:2113');
 
   /**
    * This is the path where to get the socket.io client library
    * https://socket.io/docs/v4/client-options/#path
    */
-  let path: string = '/ws';
+  let path: string = '/' + getHashValue($page.url.hash, 'path', 'ws');
 
   /**
    * What is the Anagolay Chain ws url. Used for getting the operations
    */
-  let anagolay_chain_ws: string = 'ws://127.0.0.1:9944';
+  let anagolay_chain_ws: string = getHashValue($page.url.hash, 'anagolay_chain_ws', 'ws://127.0.0.1:9944');
 
   // Operations with their respective versions from the chain
   let opvs: Promise<OperationWithVersions[]> = new Promise<OperationWithVersions[]>((res, rej) => {});
@@ -97,14 +95,6 @@
   function addNode(op: AnOperation, versions: AnOperationVersion[]) {
     bindedDf.addNode(op, versions);
   }
-
-  /**
-   * Override if needed
-   */
-  $: namespace = getHashValue($page.url.hash, 'ns');
-  $: ws = getHashValue($page.url.hash, 'ws');
-  $: path = '/' + getHashValue($page.url.hash, 'path');
-  $: anagolay_chain_ws = getHashValue($page.url.hash, 'anagolay_chain_ws');
 
   $: console.log({ namespace, anagolay_chain_ws, ws, path });
 
@@ -265,7 +255,7 @@
     </main>
   </div>
 </div>
-
+<!-- 
 <style>
   .dim-screen {
     position: fixed;
@@ -279,4 +269,4 @@
     z-index: 1000;
     backdrop-filter: blur(5px);
   }
-</style>
+</style> -->

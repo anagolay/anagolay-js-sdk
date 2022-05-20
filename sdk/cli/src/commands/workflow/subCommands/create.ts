@@ -22,10 +22,6 @@ import { connectToWSAndListenFowWorkflow, IWorkflowBuild } from '$src/websocketS
 const { ANAGOLAY_WORKFLOW_BUILDER_UI, ANAGOLAY_CHAIN_WS_URL, ANAGOLAY_WEBSOCKET_SERVICE_API_URL } =
   process.env;
 
-if (!ANAGOLAY_WORKFLOW_BUILDER_UI) throw new Error('ANAGOLAY_WORKFLOW_BUILDER_UI is not set');
-if (!ANAGOLAY_WEBSOCKET_SERVICE_API_URL) throw new Error('ANAGOLAY_WEBSOCKET_SERVICE_API_URL is not set');
-if (!ANAGOLAY_CHAIN_WS_URL) throw new Error('ANAGOLAY_CHAIN_WS_URL is not set');
-
 const log: Logger = createFileLogger(`${logsDir()}/workflow.log`, { name: 'workflow' });
 
 /**
@@ -52,6 +48,10 @@ export default async function createSubCommand(): Promise<Command> {
  * @public
  */
 async function create(): Promise<void> {
+  if (!ANAGOLAY_WORKFLOW_BUILDER_UI) throw new Error('ANAGOLAY_WORKFLOW_BUILDER_UI is not set');
+  if (!ANAGOLAY_WEBSOCKET_SERVICE_API_URL) throw new Error('ANAGOLAY_WEBSOCKET_SERVICE_API_URL is not set');
+  if (!ANAGOLAY_CHAIN_WS_URL) throw new Error('ANAGOLAY_CHAIN_WS_URL is not set');
+
   await askStarterQuestions();
   console.time('workflow_create');
 
