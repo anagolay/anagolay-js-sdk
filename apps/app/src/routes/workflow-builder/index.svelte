@@ -20,6 +20,13 @@
   import { serializeThenParse } from '$src/utils/json';
   import { isEmpty } from 'ramda';
   import { getHashValue } from '$src/utils/url';
+  import slug from 'slug';
+
+  /**
+   * A value which we will sluggify and then add to the store value `$workflow.manifestData.name`.
+   * This acts as a package name, so choose wisely
+   */
+  let workflowName: string = '';
 
   /**
    * This is how we build the actual VALUES! i had to change the output of the types to be ES2020
@@ -96,7 +103,7 @@
     bindedDf.addNode(op, versions);
   }
 
-  $: console.log({ namespace, anagolay_chain_ws, ws, path });
+  $: console.debug({ namespace, anagolay_chain_ws, ws, path });
 
   /**
    * On the Component mount
@@ -104,8 +111,8 @@
   onMount(async () => {
     chain = await connectToApi(anagolay_chain_ws);
 
-    // sluggify
-    $workflow.manifestData.name = namespace;
+    // initial name is the namespace to connect to
+    workflowName = namespace;
 
     socket = io(ws + '/' + namespace, {
       path,
@@ -155,6 +162,11 @@
       }
     }
   }
+
+  /**
+   * Listen for the changes and then slug the name
+   */
+  $: $workflow.manifestData.name = slug(workflowName, '_');
 </script>
 
 <svelte:head>
@@ -198,7 +210,7 @@
             <input
               type="text"
               name="workflowName"
-              bind:value={$workflow.manifestData.name}
+              bind:value={workflowName}
               class="input bg-slate-200 input-bordered w-full max-w-xs text-slate-800 focus:text-slate-100 focus:bg-primary-focus"
             />
           </div>

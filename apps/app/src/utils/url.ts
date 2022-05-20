@@ -9,7 +9,8 @@ import { alerts } from '$src/components/notifications/stores';
  * @returns decoded value via `decodeURIComponent` or default value
  */
 export function getHashValue(fullHash: string, hashName: string, defaultValue = ''): string {
-  console.log('getHashValue', { hashName, fullHash });
+  console.debug('getHashValue', { hashName, fullHash });
+
   if (isEmpty(fullHash)) return '';
 
   // remove the `#` from the string

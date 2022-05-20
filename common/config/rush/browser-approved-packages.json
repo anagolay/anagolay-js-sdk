@@ -320,7 +320,7 @@
     },
     {
       "name": "slug",
-      "allowedCategories": [ "libraries" ]
+      "allowedCategories": [ "libraries", "webapp" ]
     },
     {
       "name": "socket.io-client",

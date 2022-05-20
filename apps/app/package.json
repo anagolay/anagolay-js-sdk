@@ -47,7 +47,9 @@
     "@types/ramda": "~0.27.64",
     "@anagolay/types": "workspace:*",
     "eslint-config-prettier": "~8.5.0",
-    "sveltejs-adapter-ipfs": "0.3.0"
+    "sveltejs-adapter-ipfs": "0.3.0",
+    "slug": "~5.3.0",
+    "@types/slug": "~5.0.3"
   },
   "dependencies": {
     "drawflow": "~0.0.55",
