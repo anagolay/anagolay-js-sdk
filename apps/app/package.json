@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "svelte-kit -p 7766 dev",
-    "build": "exit 0",
+    "build": "pnpm build:svelte",
     "build:svelte": "svelte-kit build",
     "package": "svelte-kit package",
     "preview": "svelte-kit preview",
