@@ -26,6 +26,11 @@ const config = {
           target: 'es2020',
         },
       },
+      build: {
+        // warn on chunks above 1MB
+        chunkSizeWarningLimit: 1024,
+        rollupOptions: {},
+      },
     },
   },
 };
