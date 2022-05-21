@@ -21,7 +21,7 @@ import { ISignSubmitErrorReturn, ISignSubmitSuccessReturn, signAndSubmit } from 
 import { chooseAccount } from '$src/commonQuestions/account';
 import { askStarterQuestions } from '$src/commonQuestions/common';
 import { callPublishService, ISuccessfulResponse } from '$src/publish';
-import { connectToAnagolayChain, ensureBalance, logsDir } from '$src/utils';
+import { connectToAnagolayChain, ensureBalance, logsDir, showArtifactTable } from '$src/utils';
 
 // eslint-disable-next-line @rushstack/typedef-var
 const Spinner = clui.Spinner;
@@ -73,7 +73,7 @@ export default async function makeCommand(): Promise<Command> {
  */
 async function publishSubcmd(): Promise<void> {
   await askStarterQuestions();
-  console.time('operation_publish');
+  console.time('Total execution elapsed time');
   const spinSanityCheck = new Spinner('Performing sanity checks ...');
   spinSanityCheck.start();
 
@@ -121,10 +121,13 @@ async function publishSubcmd(): Promise<void> {
 
   const extrinsics = await submitTheExtrinsicCall(chain, operationData, versionData);
 
-  console.log('> Operation TX is at blockHash', extrinsics.blockHash);
-  console.log('> Operation ID is', extrinsics.entityId);
-  signale.success('Publishing is DONE 🎉🎉!');
-  console.timeEnd('operation_publish');
+  console.log('> TX is at blockHash', extrinsics.blockHash);
+  console.log('> Manifest ID is', extrinsics.entityId);
+
+  showArtifactTable(versionData.artifacts);
+
+  console.timeEnd('Total execution elapsed time');
+  signale.success('DONE 🎉🎉!');
   process.exit();
 }
 /**

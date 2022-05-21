@@ -4,6 +4,7 @@
  * For Full license read LICENSE file
  */
 
+import { AnOperationArtifactStructure } from '@anagolay/types';
 import { ApiPromise } from '@polkadot/api';
 import { KeyringPair } from '@polkadot/keyring/types';
 import { AccountInfo } from '@polkadot/types/interfaces';
@@ -174,4 +175,23 @@ export async function ensureBalance(chainApi: ApiPromise, accountToUse: string):
     }
     return createKeyringPairFromSeed({ seed, type: accountType });
   }
+}
+
+/**
+ * Show redacted artifact information with `console.table`.
+ *
+ * @remarks
+ * The table wil show only the `cid` and the `artifactType` from {@link AnOperationArtifactStructure}
+ *
+ * @param artifacts - Artifacts
+ */
+export function showArtifactTable(artifacts: AnOperationArtifactStructure[]): void {
+  /**
+   * It's easier to show the cids to the user for now then ask them to go to search the chain
+   */
+  const compactArtifactList = artifacts.map((a) => {
+    return { type: a.artifactType, cid: a.ipfsCid };
+  });
+  console.log('Artifacts and their types.');
+  console.table(compactArtifactList);
 }

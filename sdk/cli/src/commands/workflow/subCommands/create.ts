@@ -16,7 +16,7 @@ import { ISignSubmitErrorReturn, ISignSubmitSuccessReturn, signAndSubmit } from 
 import { chooseAccount } from '$src/commonQuestions/account';
 import { askStarterQuestions } from '$src/commonQuestions/common';
 import { callPublishService, ISuccessfulResponse } from '$src/publish';
-import { connectToAnagolayChain, ensureBalance, logsDir } from '$src/utils';
+import { connectToAnagolayChain, ensureBalance, logsDir, showArtifactTable } from '$src/utils';
 import { connectToWSAndListenFowWorkflow, IWorkflowBuild } from '$src/websocketService';
 
 const { ANAGOLAY_WORKFLOW_BUILDER_UI, ANAGOLAY_CHAIN_WS_URL, ANAGOLAY_WEBSOCKET_SERVICE_API_URL } =
@@ -53,7 +53,7 @@ async function create(): Promise<void> {
   if (!ANAGOLAY_CHAIN_WS_URL) throw new Error('ANAGOLAY_CHAIN_WS_URL is not set');
 
   await askStarterQuestions();
-  console.time('workflow_create');
+  console.time('Total execution elapsed time');
 
   // DO NOT CHANGE the structure, this always must be in this format.
   const namespace: string = `workflow_${randomUUID()}`;
@@ -126,11 +126,13 @@ async function create(): Promise<void> {
 
   const extrinsics = await submitTheExtrinsicCall(chain, account, workflowBuild.manifestData, versionData);
 
-  console.log('> Workflow TX is at blockHash', extrinsics.blockHash);
-  console.log('> Workflow ID is', extrinsics.entityId);
-  signale.success('Publishing is DONE 🎉🎉!');
-  console.timeEnd('workflow_create');
+  console.log('> TX is at blockHash', extrinsics.blockHash);
+  console.log('> Manifest ID is', extrinsics.entityId);
 
+  showArtifactTable(versionData.artifacts);
+
+  console.timeEnd('Total execution elapsed time');
+  signale.success('DONE 🎉🎉!');
   process.exit();
 }
 
