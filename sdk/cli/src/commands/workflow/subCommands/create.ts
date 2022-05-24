@@ -127,6 +127,7 @@ async function create(): Promise<void> {
   const extrinsics = await submitTheExtrinsicCall(chain, account, workflowBuild.manifestData, versionData);
 
   console.log('> TX is at blockHash', extrinsics.blockHash);
+  console.log('> Workflow name:', workflowBuild.manifestData.name);
   console.log('> Manifest ID is', extrinsics.entityId);
 
   showArtifactTable(versionData.artifacts);
@@ -158,9 +159,8 @@ async function submitTheExtrinsicCall(
       const { event } = record;
       if (equals(event.method, 'WorkflowCreated')) {
         entityId = hexToString(event.data[1].toString());
-        spinner.message(`Workflow created ID: ${entityId}`);
-        log.info(`Workflow created with ID: ${entityId}`);
         spinner.stop();
+        log.info(`Workflow created with ID: ${entityId}`);
       }
     });
   };
