@@ -1,9 +1,7 @@
-image:
-  file: ./devops/.gitpod.Dockerfile
 tasks:
   - name: install the remote-signer
     before: |
-      sudo sh -c 'curl https://ipfs.anagolay.network/ipfs/QmVwR17T5oT4SsH1gb8T9L9gHe5CsJz2iwhbhWCwPPHgHR > /usr/local/bin/remote-signer && chmod +x /usr/local/bin/remote-signer' \
+      sudo sh -c 'curl https://ipfs.anagolay.network/ipfs/bafybeiarhwobvpvz76iy6clqaf3ub7yc4rvvkydmimh652r2svdaznubrq > /usr/local/bin/remote-signer && chmod +x /usr/local/bin/remote-signer' \
       && git config --global gpg.program "remote-signer" \
       && git config --global commit.gpgsign true
 
@@ -17,13 +15,10 @@ vscode:
     - dbaeumer.vscode-eslint
     - mongodb.mongodb-vscode
     - foxundermoon.shell-format
-    - be5invis.toml
     - streetsidesoftware.code-spell-checker
     - mhutchie.git-graph
     - PKief.material-icon-theme
     - ms-azuretools.vscode-docker
     - eg2.vscode-npm-script
     - pflannery.vscode-versionlens
-    - eriklynd.json-tool
-    - oliversturm.fix-json
     - formulahendry.auto-rename-tag

@@ -24,7 +24,7 @@ fi
 
 if ! command -v remote-signer &>/dev/null; then
 	echo "remote-signer could not be found, i will install it"
-	sudo sh -c 'wget https://ipfs.anagolay.network/ipfs/QmVwR17T5oT4SsH1gb8T9L9gHe5CsJz2iwhbhWCwPPHgHR -O /usr/local/bin/remote-signer && chmod +x /usr/local/bin/remote-signer'
+	sudo sh -c 'wget https://ipfs.anagolay.network/ipfs/bafybeiarhwobvpvz76iy6clqaf3ub7yc4rvvkydmimh652r2svdaznubrq -O /usr/local/bin/remote-signer && chmod +x /usr/local/bin/remote-signer'
 fi
 
 if [ ! -d "$HOME/.tmux/plugins/tpm" ]; then
