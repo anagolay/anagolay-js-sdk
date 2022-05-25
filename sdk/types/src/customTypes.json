@@ -2,43 +2,22 @@
   "Address": "AccountId",
   "LookupSource": "AccountId",
   "GenericId": "Vec<u8>",
-  "CreatorId": "Vec<u8>",
   "Characters": "Vec<u8>",
-  "DefaultsHashing": {
-    "algo": "Vec<u8>",
-    "bits": "u32"
-  },
-  "DefaultsEncoding": {
-    "algo": "Vec<u8>",
-    "prefix": "bool"
-  },
-  "DefaultsCid": {
-    "version": "u8",
-    "base": "Vec<u8>",
-    "codec": "Vec<u8>"
-  },
-  "DefaultValues": {
-    "hashing": "DefaultsHashing",
-    "encoding": "DefaultsEncoding",
-    "cid": "DefaultsCid"
-  },
+  "CreatorId": "Characters",
+  "ArtifactId": "GenericId",
+  "OperationId": "GenericId",
+  "WorkflowId": "GenericId",
+  "VersionId": "GenericId",
   "ForWhat": {
     "_enum": ["GENERIC", "PHOTO", "CAMERA", "LENS", "SMARTPHONE", "USER", "SYS", "FLOWCONTROL"]
   },
-  "OperationId": "GenericId",
-  "VersionId": "GenericId",
-  "PackageId": "GenericId",
+  "WasmArtifactSubType": {
+    "_enum": ["Cjs", "Esm", "Wasm", "Web"]
+  },
+  "AnagolayVersionExtra": {
+    "createdAt": "u64"
+  },
   "TypeName": "Vec<u8>",
-  "OperationRecord": {
-    "record": "Operation",
-    "accountId": "AccountId",
-    "blockNumber": "BlockNumber"
-  },
-  "Operation": {
-    "id": "GenericId",
-    "data": "OperationData",
-    "extra": "Option<OperationExtra>"
-  },
   "OperationData": {
     "name": "Characters",
     "description": "Characters",
@@ -51,33 +30,42 @@
     "nostd": "bool"
   },
   "OperationExtra": {},
+  "Operation": {
+    "id": "GenericId",
+    "data": "OperationData",
+    "extra": "Option<OperationExtra>"
+  },
+  "OperationRecord": {
+    "record": "Operation",
+    "accountId": "AccountId",
+    "blockNumber": "BlockNumber"
+  },
+  "OperationArtifactType": {
+    "_enum": {
+      "Docs": null,
+      "Git": null,
+      "Wasm": "WasmArtifactSubType"
+    }
+  },
+  "OperationArtifactStructure": {
+    "artifactType": "OperationArtifactType",
+    "fileExtension": "Characters",
+    "ipfsCid": "GenericId"
+  },
+  "OperationVersionData": {
+    "entityId": "Option<OperationId>",
+    "parentId": "Option<VersionId>",
+    "artifacts": "Vec<OperationArtifactStructure>"
+  },
+  "OperationVersion": {
+    "id": "VersionId",
+    "data": "OperationVersionData",
+    "extra": "Option<AnagolayVersionExtra>"
+  },
   "OperationVersionRecord": {
     "record": "OperationVersion",
     "accountId": "AccountId",
     "blockNumber": "BlockNumber"
-  },
-  "OperationVersion": {
-    "id": "GenericId",
-    "data": "OperationVersionData",
-    "extra": "Option<OperationVersionExtra>"
-  },
-  "PackageType": {
-    "_enum": ["CRATE", "CJS", "WASM", "ESM", "WEB"]
-  },
-  "OperationVersionPackage": {
-    "packageType": "PackageType",
-    "fileUrl": "Characters",
-    "ipfsCid": "GenericId"
-  },
-  "OperationVersionData": {
-    "operationId": "GenericId",
-    "parentId": "Option<GenericId>",
-    "documentationId": "GenericId",
-    "rehostedRepoId": "GenericId",
-    "packages": "Vec<OperationVersionPackage>"
-  },
-  "OperationVersionExtra": {
-    "createdAt": "u64"
   },
   "ProofParams": {
     "k": "Vec<u8>",
@@ -105,30 +93,59 @@
     "pHash": "Vec<u8>",
     "proofId": "GenericId"
   },
-  "Rule": {
-    "id": "GenericId",
-    "data": "RuleData",
-    "extra": "Option<RuleExtra>"
+  "OperationVersionReference": {
+    "versionId": "VersionId",
+    "config": "BTreeMap<Characters, Characters>"
   },
-  "RuleRecord": {
-    "rule": "Rule",
+  "WorkflowSegment": {
+    "inputs": "Vec<u8>",
+    "sequence": "Vec<OperationVersionReference>"
+  },
+  "WorkflowData": {
+    "name": "Characters",
+    "creators": "Vec<CreatorId>",
+    "description": "Characters",
+    "groups": "Vec<ForWhat>",
+    "segments": "Vec<WorkflowSegment>"
+  },
+  "WorkflowExtra": {},
+  "Workflow": {
+    "id": "WorkflowId",
+    "data": "WorkflowData",
+    "extra": "Option<WorkflowExtra>"
+  },
+  "WorkflowRecord": {
+    "record": "Workflow",
     "accountId": "AccountId",
     "blockNumber": "BlockNumber"
   },
-  "OperationReference": {
-    "id": "GenericId",
-    "children": "Vec<OperationReference>"
+  "WorkflowVersionRecord": {
+    "record": "WorkflowVersion",
+    "accountId": "AccountId",
+    "blockNumber": "BlockNumber"
   },
-  "RuleData": {
-    "version": "u32",
-    "name": "Vec<u8>",
-    "desc": "Vec<u8>",
-    "creator": "CreatorId",
-    "groups": "Vec<ForWhat>",
-    "parentId": "GenericId",
-    "ops": "Vec<OperationReference>"
+  "WorkflowArtifactType": {
+    "_enum": {
+      "Docs": null,
+      "Git": null,
+      "Wasm": "WasmArtifactSubType"
+    }
   },
-  "RuleExtra": {},
+  "WorkflowArtifactStructure": {
+    "artifactType": "WorkflowArtifactType",
+    "fileExtension": "Characters",
+    "ipfsCid": "GenericId"
+  },
+  "WorkflowVersionData": {
+    "entityId": "Option<WorkflowId>",
+    "parentId": "Option<VersionId>",
+    "artifacts": "Vec<WorkflowArtifactStructure>"
+  },
+  "WorkflowVersion": {
+    "id": "VersionId",
+    "data": "WorkflowVersionData",
+    "extra": "Option<AnagolayVersionExtra>"
+  },
   "Proportion": {
     "sign": "Vec<u8>",
     "name": "Vec<u8>",

@@ -11,6 +11,9 @@
   "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
+  "[svelte]": {
+    "editor.defaultFormatter": "svelte.svelte-vscode"
+  },
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
@@ -20,24 +23,59 @@
   "[markdown]": {
     "editor.wordWrap": "wordWrapColumn",
     "editor.wordWrapColumn": 110,
-    "editor.quickSuggestions": true,
+    "editor.quickSuggestions": {
+      "comments": "on",
+      "strings": "on",
+      "other": "on"
+    },
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "javascript.validate.enable": false,
   "files.associations": {
     "*.json": "jsonc",
+    "package.json": "json",
     "*.cjs": "javascript"
   },
   "npm.packageManager": "pnpm",
   "cSpell.words": [
     "anagolay",
     "bafy",
+    "clui",
     "destructure",
     "grayscale",
+    "Jsonify",
     "multihashes",
     "pnpm",
     "pnpx",
     "rehosted",
-    "subsampling"
-  ]
+    "remeda",
+    "subsampling",
+    "tailwind"
+  ],
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/bower_components": true,
+    "**/*.code-search": true,
+    "/tmp": true,
+    "temp": true,
+    "apps/app/.svelte-kit": true,
+    "apps/app/build": true
+  },
+  "eslint.alwaysShowStatus": true,
+  "eslint.lintTask.enable": true,
+  "eslint.probe": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "html",
+    "vue",
+    "markdown",
+    "svelte"
+  ],
+  "eslint.useESLintClass": true,
+  "workbench.colorCustomizations": {
+    "titleBar.activeBackground": "#3659c2"
+  },
+  "terminal.integrated.scrollback": 10000
 }

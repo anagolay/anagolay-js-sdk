@@ -3,6 +3,9 @@
   "heftPlugins": [
     {
       "plugin": "@rushstack/heft-webpack5-plugin"
+    },
+    {
+      "plugin": "@rushstack/heft-jest-plugin"
     }
   ]
 }

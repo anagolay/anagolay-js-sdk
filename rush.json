@@ -57,7 +57,7 @@
      * The default value is false to avoid legacy compatibility issues.
      * It is strongly recommended to set strictPeerDependencies=true.
      */
-    "strictPeerDependencies": true,
+    // "strictPeerDependencies": true,
     /**
      * Configures the strategy used to select versions during installation.
      *
@@ -199,9 +199,9 @@
     //    */
     "reviewCategories": [
       // Some example categories:
-      "production", // projects that ship to production
-      "tools", // non-shipping projects that are part of the developer toolchain
-      "libraries" // experiments that should mostly be ignored by the review process
+      "webapp", // all our Web applications
+      "libraries", // our libraries that other stuff depend on
+      "websites" // our list of websites for anagolay
     ],
     //
     //   /**
@@ -271,7 +271,7 @@
      * your PR branch, and in this situation "rush change" will also automatically invoke "git fetch"
      * to retrieve the latest activity for the remote master branch.
      */
-    "url": "https://gitlab.com/anagolay/network-js-sdk",
+    "url": "https://gitlab.com/anagolay/anagolay-js",
     /**
      * The default branch name. This tells "rush change" which remote branch to compare against.
      * The default value is "master"
@@ -457,6 +457,18 @@
       "projectFolder": "sdk/types",
       "reviewCategory": "libraries",
       "shouldPublish": false
+    },
+    {
+      "packageName": "@anagolay/app",
+      "projectFolder": "apps/app",
+      "reviewCategory": "webapp",
+      "shouldPublish": false
     }
+    // {
+    //   "packageName": "anagolay.dev",
+    //   "projectFolder": "apps/anagolay.dev",
+    //   "reviewCategory": "websites",
+    //   "shouldPublish": false
+    // }
   ]
 }

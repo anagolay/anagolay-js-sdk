@@ -10,10 +10,10 @@ async function main(): Promise<void> {
   const t = {
     Address: 'AccountId',
     LookupSource: 'AccountId',
-    ...CustomTypes.anagolay.types,
+    ...CustomTypes.anagolaySupport.types,
     ...CustomTypes.operations.types,
     ...CustomTypes.poe.types,
-    ...CustomTypes.rules.types,
+    ...CustomTypes.workflows.types,
     ...CustomTypes.statements.types,
   };
 

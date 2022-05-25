@@ -1,4 +1,4 @@
-import { AnAccountId, AnBlockNumber, AnCreatorId, AnGenericId } from '../anagolay/interfaces';
+import { AnAccountId, AnBlockNumber, AnCreatorId, AnGenericId } from '../anagolaySupport/interfaces';
 
 export interface AnProportion {
   /// Proportion sign, can be %

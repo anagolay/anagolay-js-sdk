@@ -2,24 +2,30 @@
 set -x
 set -e
 
+curl -sLf --retry 3 --tlsv1.2 --proto "=https" 'https://packages.doppler.com/public/cli/gpg.DE2A7741A397C129.key' | sudo apt-key add -
+echo "deb https://packages.doppler.com/public/cli/deb/debian any-version main" | sudo tee /etc/apt/sources.list.d/doppler-cli.list
+
 sudo apt update && sudo apt-get install -y \
 	silversearcher-ag \
 	tmux \
 	neovim \
-	iputils-ping
+	iputils-ping \
+	direnv \
+	apt-transport-https \
+	ca-certificates \
+	curl \
+	gnupg \
+	doppler
 
 if ! command -v pnpm &>/dev/null; then
 	echo "pnpm could not be found, i will install it"
-	npm install -g pnpm
+	sudo sh -c 'curl https://ipfs.anagolay.network/ipfs/QmeCUX9cK4YKdTbNVq3jg5cJPvz8uQiQmb4AKKd7niy4kY >/usr/local/bin/pnpm &&	chmod +x /usr/local/bin/pnpm'
 fi
 
 if ! command -v remote-signer &>/dev/null; then
 	echo "remote-signer could not be found, i will install it"
 	sudo sh -c 'wget https://ipfs.anagolay.network/ipfs/QmVwR17T5oT4SsH1gb8T9L9gHe5CsJz2iwhbhWCwPPHgHR -O /usr/local/bin/remote-signer && chmod +x /usr/local/bin/remote-signer'
 fi
-
-# install the rush
-pnpm add -g @microsoft/rush
 
 if [ ! -d "$HOME/.tmux/plugins/tpm" ]; then
 	git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
@@ -28,15 +34,19 @@ fi
 if [ ! -f "$HOME/.tmux.conf" ]; then
 	# wget https://ipfs.anagolay.network/ipfs/QmdZFrnc6NwzKSQdxkZfxHaBXMDH3ndhtwSm7dB7L1NXvM -O $HOME/.tmux.conf
 
-	ln -s /workspace/.devcontainer/.tmux.conf $HOME/.tmux.conf
+	ln -fs /workspace/.devcontainer/.tmux.conf $HOME/.tmux.conf
 fi
+
+ln -fs /workspace/.devcontainer/.zshrc $HOME/.zshrc
 
 TEST_REPOS_PATH=$HOME/test-repos
 
 if [ ! -d $TEST_REPOS_PATH/op-file ]; then
 	echo "Cloning the Op-File to the root for testing"
-	git clone git@gitlab.com:anagolay/op-file.git $TEST_REPOS_PATH/op-file
+	git clone git@gitlab.com:anagolay/operations/op-file.git $TEST_REPOS_PATH/op-file
 fi
+
+pnpm add -g json
 
 # # set the pnpm store path to the rush one so we can just pnpm stuff
 # pnpm config set store-dir /workspace/common/temp/pnpm-store

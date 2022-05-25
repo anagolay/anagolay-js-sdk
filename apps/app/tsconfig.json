@@ -1,0 +1,17 @@
+{
+  "extends": "./.svelte-kit/tsconfig.json",
+  "compilerOptions": {
+    "resolveJsonModule": true,
+    "preserveValueImports": false,
+    "esModuleInterop": true,
+    "importsNotUsedAsValues": "preserve",
+    "types": ["node"],
+    "typeRoots": ["src/@types", "node_modules/@types"],
+    "paths": {
+      "$src": ["src/"],
+      "$src/*": ["src/*"],
+      "$lib": ["src/lib"],
+      "$lib/*": ["src/lib/*"]
+    }
+  }
+}

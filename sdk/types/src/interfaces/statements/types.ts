@@ -1,7 +1,7 @@
 // Auto-generated via `yarn polkadot-types-from-defs`, do not edit
 /* eslint-disable */
 
-import type { CreatorId, GenericId } from '@anagolay/types/interfaces/anagolay';
+import type { CreatorId, GenericId } from '@anagolay/types/interfaces/anagolaySupport';
 import type { Bytes, Enum, Option, Struct } from '@polkadot/types-codec';
 import type { AccountId, BlockNumber } from '@polkadot/types/interfaces/runtime';
 

@@ -1,20 +1,7 @@
 import { RegistryTypes } from '@polkadot/types/types';
 
 export const OperationsCustomTypes: RegistryTypes = {
-  OperationId: 'GenericId',
-  VersionId: 'GenericId',
-  PackageId: 'GenericId',
   TypeName: 'Vec<u8>',
-  OperationRecord: {
-    record: 'Operation',
-    accountId: 'AccountId',
-    blockNumber: 'BlockNumber',
-  },
-  Operation: {
-    id: 'GenericId',
-    data: 'OperationData',
-    extra: 'Option<OperationExtra>',
-  },
   OperationData: {
     /// max 128(0.12kb) characters, slugify to use _
     name: 'Characters',
@@ -36,33 +23,42 @@ export const OperationsCustomTypes: RegistryTypes = {
     nostd: 'bool',
   },
   OperationExtra: {},
+  Operation: {
+    id: 'GenericId',
+    data: 'OperationData',
+    extra: 'Option<OperationExtra>',
+  },
+  OperationRecord: {
+    record: 'Operation',
+    accountId: 'AccountId',
+    blockNumber: 'BlockNumber',
+  },
+  OperationArtifactType: {
+    _enum: {
+      Docs: null,
+      Git: null,
+      Wasm: 'WasmArtifactSubType',
+    },
+  },
+  OperationArtifactStructure: {
+    artifactType: 'OperationArtifactType',
+    fileExtension: 'Characters',
+    ipfsCid: 'GenericId',
+  },
+  OperationVersionData: {
+    entityId: 'Option<OperationId>',
+    parentId: 'Option<VersionId>',
+    artifacts: 'Vec<OperationArtifactStructure>',
+  },
+  OperationVersion: {
+    id: 'VersionId',
+    data: 'OperationVersionData',
+    extra: 'Option<AnagolayVersionExtra>',
+  },
   OperationVersionRecord: {
     record: 'OperationVersion',
     accountId: 'AccountId',
     blockNumber: 'BlockNumber',
-  },
-  OperationVersion: {
-    id: 'GenericId',
-    data: 'OperationVersionData',
-    extra: 'Option<OperationVersionExtra>',
-  },
-  PackageType: {
-    _enum: ['CRATE', 'CJS', 'WASM', 'ESM', 'WEB'],
-  },
-  OperationVersionPackage: {
-    packageType: 'PackageType',
-    fileUrl: 'Characters',
-    ipfsCid: 'GenericId',
-  },
-  OperationVersionData: {
-    operationId: 'GenericId',
-    parentId: 'Option<GenericId>',
-    documentationId: 'GenericId',
-    rehostedRepoId: 'GenericId',
-    packages: 'Vec<OperationVersionPackage>',
-  },
-  OperationVersionExtra: {
-    createdAt: 'u64',
   },
 };
 

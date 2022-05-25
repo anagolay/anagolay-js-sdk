@@ -1,11 +1,23 @@
 {
+  "ts-node": {
+    // these options are overrides used only by ts-node
+    // same as our --compilerOptions flag and our TS_NODE_COMPILER_OPTIONS environment variable
+    "compilerOptions": {
+      "module": "commonjs"
+    }
+  },
   "extends": "./node_modules/@rushstack/heft-node-rig/profiles/default/tsconfig-base.json",
   "compilerOptions": {
     "types": ["heft-jest", "node"],
+    "moduleResolution": "node",
+    "module": "ES2020",
+    "lib": ["ES2020", "DOM"],
+    "target": "es2020",
     "paths": {
       "@anagolay/types/*": ["./src/*"],
       "@polkadot/api/augment": ["./src/interfaces/augment-api.ts"],
       "@polkadot/types/augment": ["./src/interfaces/augment-types.ts"]
     }
-  }
+  },
+  "exclude": ["**.*.js"]
 }

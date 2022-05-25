@@ -20,7 +20,7 @@
     },
     {
       "name": "@anagolay/types",
-      "allowedCategories": [ "libraries" ]
+      "allowedCategories": [ "libraries", "webapp" ]
     },
     {
       "name": "@anagolay/util",
@@ -28,15 +28,35 @@
     },
     {
       "name": "@anagolay/utils",
-      "allowedCategories": [ "libraries" ]
+      "allowedCategories": [ "libraries", "webapp" ]
+    },
+    {
+      "name": "@docusaurus/core",
+      "allowedCategories": [ "websites" ]
+    },
+    {
+      "name": "@docusaurus/preset-classic",
+      "allowedCategories": [ "websites" ]
+    },
+    {
+      "name": "@mdx-js/react",
+      "allowedCategories": [ "websites" ]
     },
     {
       "name": "@microsoft/api-extractor",
-      "allowedCategories": [ "libraries" ]
+      "allowedCategories": [ "libraries", "webapp" ]
+    },
+    {
+      "name": "@playwright/test",
+      "allowedCategories": [ "webapp" ]
     },
     {
       "name": "@polkadot/api",
-      "allowedCategories": [ "libraries" ]
+      "allowedCategories": [ "libraries", "webapp" ]
+    },
+    {
+      "name": "@polkadot/api-augment",
+      "allowedCategories": [ "libraries", "webapp" ]
     },
     {
       "name": "@polkadot/api-base",
@@ -60,15 +80,15 @@
     },
     {
       "name": "@polkadot/types",
-      "allowedCategories": [ "libraries" ]
+      "allowedCategories": [ "libraries", "webapp" ]
     },
     {
       "name": "@polkadot/types-codec",
-      "allowedCategories": [ "libraries" ]
+      "allowedCategories": [ "libraries", "webapp" ]
     },
     {
       "name": "@polkadot/util",
-      "allowedCategories": [ "libraries" ]
+      "allowedCategories": [ "libraries", "webapp" ]
     },
     {
       "name": "@polkadot/util-crypto",
@@ -76,19 +96,19 @@
     },
     {
       "name": "@rushstack/eslint-config",
-      "allowedCategories": [ "libraries" ]
+      "allowedCategories": [ "libraries", "webapp" ]
     },
     {
       "name": "@rushstack/heft",
-      "allowedCategories": [ "libraries" ]
+      "allowedCategories": [ "libraries", "webapp" ]
     },
     {
       "name": "@rushstack/heft-jest-plugin",
-      "allowedCategories": [ "libraries" ]
+      "allowedCategories": [ "libraries", "webapp" ]
     },
     {
       "name": "@rushstack/heft-node-rig",
-      "allowedCategories": [ "libraries" ]
+      "allowedCategories": [ "libraries", "webapp" ]
     },
     {
       "name": "@rushstack/heft-web-rig",
@@ -97,6 +117,50 @@
     {
       "name": "@rushstack/heft-webpack5-plugin",
       "allowedCategories": [ "libraries" ]
+    },
+    {
+      "name": "@sentry/node",
+      "allowedCategories": [ "libraries" ]
+    },
+    {
+      "name": "@sentry/tracing",
+      "allowedCategories": [ "libraries" ]
+    },
+    {
+      "name": "@sveltejs/adapter-auto",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
+      "name": "@sveltejs/adapter-static",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
+      "name": "@sveltejs/kit",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
+      "name": "@tailwindcss/forms",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
+      "name": "@tailwindcss/line-clamp",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
+      "name": "@tailwindcss/typography",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
+      "name": "@typescript-eslint/eslint-plugin",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
+      "name": "@typescript-eslint/parser",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
+      "name": "autoprefixer",
+      "allowedCategories": [ "webapp" ]
     },
     {
       "name": "axios",
@@ -123,6 +187,14 @@
       "allowedCategories": [ "libraries" ]
     },
     {
+      "name": "cli-spinner",
+      "allowedCategories": [ "libraries" ]
+    },
+    {
+      "name": "clsx",
+      "allowedCategories": [ "websites" ]
+    },
+    {
       "name": "clui",
       "allowedCategories": [ "libraries" ]
     },
@@ -131,20 +203,36 @@
       "allowedCategories": [ "libraries" ]
     },
     {
+      "name": "daisyui",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
+      "name": "drawflow",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
       "name": "env-cmd",
       "allowedCategories": [ "libraries" ]
     },
     {
       "name": "eslint",
-      "allowedCategories": [ "libraries" ]
+      "allowedCategories": [ "libraries", "webapp" ]
+    },
+    {
+      "name": "eslint-config-prettier",
+      "allowedCategories": [ "webapp" ]
     },
     {
       "name": "eslint-plugin-simple-import-sort",
-      "allowedCategories": [ "libraries" ]
+      "allowedCategories": [ "libraries", "webapp" ]
+    },
+    {
+      "name": "eslint-plugin-svelte3",
+      "allowedCategories": [ "webapp" ]
     },
     {
       "name": "eslint-plugin-unused-imports",
-      "allowedCategories": [ "libraries" ]
+      "allowedCategories": [ "libraries", "webapp" ]
     },
     {
       "name": "exifreader",
@@ -163,8 +251,16 @@
       "allowedCategories": [ "libraries" ]
     },
     {
+      "name": "multiformats",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
       "name": "multihashing-async",
       "allowedCategories": [ "libraries" ]
+    },
+    {
+      "name": "nanoid",
+      "allowedCategories": [ "webapp" ]
     },
     {
       "name": "nodemon",
@@ -183,12 +279,40 @@
       "allowedCategories": [ "libraries" ]
     },
     {
-      "name": "pino-pretty",
+      "name": "pkg",
       "allowedCategories": [ "libraries" ]
     },
     {
+      "name": "postcss",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
+      "name": "prettier",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
+      "name": "prettier-plugin-svelte",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
+      "name": "prism-react-renderer",
+      "allowedCategories": [ "websites" ]
+    },
+    {
       "name": "ramda",
-      "allowedCategories": [ "libraries" ]
+      "allowedCategories": [ "libraries", "webapp" ]
+    },
+    {
+      "name": "react",
+      "allowedCategories": [ "websites" ]
+    },
+    {
+      "name": "react-dom",
+      "allowedCategories": [ "websites" ]
+    },
+    {
+      "name": "remeda",
+      "allowedCategories": [ "webapp" ]
     },
     {
       "name": "signale",
@@ -196,7 +320,35 @@
     },
     {
       "name": "slug",
-      "allowedCategories": [ "libraries" ]
+      "allowedCategories": [ "libraries", "webapp" ]
+    },
+    {
+      "name": "socket.io-client",
+      "allowedCategories": [ "libraries", "webapp" ]
+    },
+    {
+      "name": "svelte",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
+      "name": "svelte-check",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
+      "name": "svelte-material-icons",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
+      "name": "svelte-preprocess",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
+      "name": "sveltejs-adapter-ipfs",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
+      "name": "tailwindcss",
+      "allowedCategories": [ "webapp" ]
     },
     {
       "name": "ts-loader",
@@ -216,11 +368,11 @@
     },
     {
       "name": "tslib",
-      "allowedCategories": [ "libraries" ]
+      "allowedCategories": [ "libraries", "webapp" ]
     },
     {
       "name": "typescript",
-      "allowedCategories": [ "libraries" ]
+      "allowedCategories": [ "libraries", "webapp" ]
     },
     {
       "name": "webpack",

@@ -26,3 +26,4 @@ vscode:
     - pflannery.vscode-versionlens
     - eriklynd.json-tool
     - oliversturm.fix-json
+    - formulahendry.auto-rename-tag

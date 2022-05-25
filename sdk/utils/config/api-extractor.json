@@ -113,9 +113,9 @@
      * SUPPORTED TOKENS: <packageName>, <unscopedPackageName>
      * DEFAULT VALUE: "<unscopedPackageName>.api.md"
      */
-    // "reportFileName": "../../../docs/md/<unscopedPackageName>.api.md",
+    // "reportFileName": "../../../api-extractor-docs/md/<unscopedPackageName>.api.md",
     "enabled": true,
-    "reportFolder": "../../../docs/md/",
+    "reportFolder": "../../../api-extractor-docs/md/",
     "reportTempFolder": "<projectFolder>/temp/"
     /**
      * Specifies the folder where the API report file is written.  The file name portion is determined by
@@ -163,7 +163,7 @@
      * SUPPORTED TOKENS: <projectFolder>, <packageName>, <unscopedPackageName>
      * DEFAULT VALUE: "<projectFolder>/temp/<unscopedPackageName>.api.json"
      */
-    "apiJsonFilePath": "../../../docs/json/<unscopedPackageName>.api.json"
+    "apiJsonFilePath": "../../../api-extractor-docs/json/<unscopedPackageName>.api.json"
   },
   /**
    * Configures how the .d.ts rollup file will be generated.
@@ -283,7 +283,7 @@
          *
          * DEFAULT VALUE: "warning"
          */
-        "logLevel": "none"
+        "logLevel": "warning"
         /**
          * When addToApiReportFile is true:  If API Extractor is configured to write an API report file (.api.md),
          * then the message will be written inside that file; otherwise, the message is instead logged according to

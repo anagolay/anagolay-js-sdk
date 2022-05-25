@@ -1,6 +1,7 @@
 # https://docs.gitlab.com/ee/ci/jobs/job_control.html
 image: node:16-bullseye
 stages:
+  - check
   - test
   - release
 
@@ -8,7 +9,8 @@ cache:
   key: $CI_COMMIT_REF_SLUG
   paths:
     - common/temp/
-    - ANAGOLAY_CLI_CID
+    - ANAGOLAY_CLI_JS_CID
+    - ANAGOLAY_CLI_BIN_CID
     - ANAGOLAY_CUSTOM_TYPES_CID
 
 workflow:
@@ -24,29 +26,39 @@ include:
   - template: Security/SAST.gitlab-ci.yml
   - template: Security/Secret-Detection.gitlab-ci.yml
 
-.install-ipfs-and-setup: &install-ipfs-and-setup
-  variables:
-    IPFS_PATH: .ipfs
-  before_script:
-    - echo "Downloading the go-ipfs binary v0.12.0 from our IPFS node"
-    - |
-      curl https://ipfs.anagolay.network/ipfs/bafybeih63m5xkkskklntu3ufd6kyjgkvqot4bcre3evquindven7i6yxse > /usr/local/bin/ipfs
-      chmod +x /usr/local/bin/ipfs
-      mkdir $IPFS_PATH
-      echo "/ip4/${ANAGOLAY_MAIN_IPFS_IP}/tcp/${ANAGOLAY_MAIN_IPFS_PORT}" > $IPFS_PATH/api
+# include this where you need it. like in before_script
+.install-ipfs-cli-and-setup: &install-ipfs-cli-and-setup
+  - echo "Downloading anagolay ipfs CLI which works with the ipfsAuthProxy."
+  - |
+    curl https://ipfs.anagolay.network/ipfs/bafybeiebighwouxt3vkttuhfcwb3dgr7vzxpujlqfzvngt7omnrizjajfy > /usr/local/bin/ipfsCli
+    chmod +x /usr/local/bin/ipfsCli
 
+# https://docs.gitlab.com/ee/ci/yaml/yaml_optimization.html#yaml-anchors-for-scripts
 .install-pnpm: &install-pnpm
+  - |
+    curl https://ipfs.anagolay.network/ipfs/QmeCUX9cK4YKdTbNVq3jg5cJPvz8uQiQmb4AKKd7niy4kY > /usr/local/bin/pnpm
+    chmod +x /usr/local/bin/pnpm
+    node --version
+    pnpm --version
+    git --version
+
+is-it-pretty:
+  stage: check
   before_script:
-    - |
-      curl https://ipfs.anagolay.network/ipfs/QmeCUX9cK4YKdTbNVq3jg5cJPvz8uQiQmb4AKKd7niy4kY > /usr/local/bin/pnpm
-      chmod +x /usr/local/bin/pnpm
-      node --version
-      pnpm --version
-      git --version
+    - *install-pnpm
+  script:
+    - set -e
+
+    - echo 'Installing rush...'
+    - node common/scripts/install-run-rush.js install
+
+    - echo 'Is our code pretty?'
+    - node common/scripts/install-run-rush.js prettier:check
 
 test-and-build:
   stage: test
-  <<: *install-pnpm
+  before_script:
+    - *install-pnpm
   script:
     - set -e
 
@@ -59,9 +71,32 @@ test-and-build:
     - echo 'Building and testing all packages...'
     - node common/scripts/install-run-rush.js rebuild --verbose
 
+# build-js-api-docs:
+#   stage: release
+#   before_script:
+#     - *install-pnpm
+#     - pnpm add -g @microsoft/api-documenter
+#     - *install-ipfs-cli-and-setup
+#   script:
+#     - set -e
+#     - api-documenter markdown -i ./api-extractor-docs/json -o ./apps/anagolay.dev/docs/js-api
+#     - ls -la ./apps/anagolay.dev/docs/js-api
+
+#     # - echo "Install the docusaurus dependencies"
+#     # - pnpm install
+
+#     # - echo "Build the docs website"
+#     # - pnpm build
+
+#     # - echo "Uploading CLI to IPFS ..."
+#     # - ipfs add --cid-version=1 --pin=false --recursive --quieter ./docs/published/build > ANAGOLAY_JS_API_DOCS
+#     # - echo "The docs are published here https://ipfs.anagolay.network/ipfs/$(cat ANAGOLAY_JS_API_DOCS)
+
 upload-cli-to-ipfs:
+  needs: ['test-and-build']
   stage: release
-  <<: *install-ipfs-and-setup
+  before_script:
+    - *install-ipfs-cli-and-setup
   script:
     - set -e
 
@@ -72,42 +107,30 @@ upload-cli-to-ipfs:
     - node common/scripts/install-run-rush.js rebuild --from @anagolay/cli
 
     - echo "Uploading CLI to IPFS ..."
-    - ipfs add --cid-version=1 --pin=true --recursive --quieter sdk/cli/dist/anagolay.js > ANAGOLAY_CLI_CID
-    - echo "The CLI is published with the CID:" && cat ANAGOLAY_CLI_CID
+    - ipfsCli upload --pin --onlyCid sdk/cli/dist/anagolay.js > ANAGOLAY_CLI_JS_CID
+    - echo "The JS CLI version CID:" && cat ANAGOLAY_CLI_JS_CID
+    - echo "https://$(cat ANAGOLAY_CLI_JS_CID).ipfs.anagolay.network?filename=anagolay"
+
+    - ipfsCli upload --pin --onlyCid sdk/cli/binaries/anagolay > ANAGOLAY_CLI_BIN_CID
+    - echo "The BINARY CLI version CID:" && cat ANAGOLAY_CLI_BIN_CID
+    - echo "https://$(cat ANAGOLAY_CLI_BIN_CID).ipfs.anagolay.network?filename=anagolay"
+
   rules:
-    - if: $CI_COMMIT_MESSAGE =~ /^.*\[build_all\].*$/s
+    - if: $CI_COMMIT_MESSAGE =~ /^.*\[build all\].*$/s
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+
 upload-custom-types-to-ipfs:
   stage: release
-  <<: *install-ipfs-and-setup
+  before_script:
+    - *install-ipfs-cli-and-setup
   script:
     - set -e
 
     - echo "Uploading Custom types to IPFS ..."
-    - ipfs add --cid-version=1 --pin=true --recursive --quieter sdk/types/src/customTypes.json > ANAGOLAY_CUSTOM_TYPES_CID
+    - ipfsCli upload --pin --onlyCid sdk/types/src/customTypes.json > ANAGOLAY_CUSTOM_TYPES_CID
     - echo "The Custom Types are published with the CID:" && cat ANAGOLAY_CUSTOM_TYPES_CID
-  rules:
-    - if: $CI_COMMIT_MESSAGE =~ /^.*\[build_all\].*$/s
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
-  # artifacts:
-  #   paths:
-  #     - ANAGOLAY_CUSTOM_TYPES_CID
-## there is no point in releasing it like this. the release process should use the rehost or republish service then make a tag
+    - echo "https://ipfs.anagolay.network/ipfs/$(cat ANAGOLAY_CUSTOM_TYPES_CID)"
 
-# release-sdk:
-#   stage: release
-#   image: registry.gitlab.com/gitlab-org/release-cli:latest
-#   needs:
-#     - job: upload-cli-to-ipfs
-#   script:
-#     - echo 'Releasing the sdk'
-#     - cat ANAGOLAY_CLI_CID
-#   release:
-#     name: 'Release $CI_COMMIT_SHA'
-#     description: 'Created using the release-cli $EXTRA_DESCRIPTION' # $EXTRA_DESCRIPTION and the $TAG
-#     tag_name: '$CI_COMMIT_SHA' # variables must be defined elsewhere
-#     ref: '$CI_COMMIT_SHA' # in the pipeline. For example, in the
-#     assets:
-#       links:
-#         - name: 'anagolay'
-#           url: 'https://ipfs.anagolay.network/ipfs/$ANAGOLAY_CLI_CID'
+  rules:
+    - if: $CI_COMMIT_MESSAGE =~ /^.*\[build all\].*$/s
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH

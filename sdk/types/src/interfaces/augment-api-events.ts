@@ -1,12 +1,12 @@
 // Auto-generated via `yarn polkadot-types-from-chain`, do not edit
 /* eslint-disable */
 
-import type { GenericId } from '@anagolay/types/interfaces/anagolay';
+import type { Characters, OperationId, WorkflowId } from '@anagolay/types/interfaces/anagolaySupport';
 import type { ApiTypes } from '@polkadot/api-base/types';
 import type { u32 } from '@polkadot/types-codec';
 import type { BalanceStatus } from '@polkadot/types/interfaces/balances';
 import type { AuthorityList } from '@polkadot/types/interfaces/grandpa';
-import type { AccountId, Balance, Hash } from '@polkadot/types/interfaces/runtime';
+import type { AccountId, Balance } from '@polkadot/types/interfaces/runtime';
 import type { DispatchError, DispatchInfo, DispatchResult } from '@polkadot/types/interfaces/system';
 
 declare module '@polkadot/api-base/types/events' {
@@ -72,51 +72,13 @@ declare module '@polkadot/api-base/types/events' {
     };
     operations: {
       /**
-       * Operation created. \[ AccountId, OperationId \]
+       * Bad request error occurs and this event propagates a detailed description
        **/
-      OperationCreated: AugmentedEvent<ApiType, [AccountId, GenericId]>;
+      BadRequestError: AugmentedEvent<ApiType, [AccountId, Characters]>;
       /**
-       * Generic event
+       * Operation Manifest created together with Version and Packages.
        **/
-      [key: string]: AugmentedEvent<ApiType>;
-    };
-    poe: {
-      /**
-       * Phash is created. \{owner, pHash}\
-       **/
-      PhashCreated: AugmentedEvent<ApiType, [AccountId, Hash]>;
-      /**
-       * Proof is created and claimed . \{owner, cid}\
-       **/
-      ProofCreated: AugmentedEvent<ApiType, [AccountId, GenericId]>;
-      /**
-       * Generic event
-       **/
-      [key: string]: AugmentedEvent<ApiType>;
-    };
-    rules: {
-      /**
-       * Rule is created
-       **/
-      RuleCreated: AugmentedEvent<ApiType, [AccountId, GenericId]>;
-      /**
-       * Generic event
-       **/
-      [key: string]: AugmentedEvent<ApiType>;
-    };
-    statements: {
-      /**
-       * Copyright is created. [who, CID]
-       **/
-      CopyrightCreated: AugmentedEvent<ApiType, [AccountId, GenericId]>;
-      /**
-       * Ownership is created. [who, CID]
-       **/
-      OwnershipCreated: AugmentedEvent<ApiType, [AccountId, GenericId]>;
-      /**
-       * Statement revoked. [who, CID]
-       **/
-      StatementRevoked: AugmentedEvent<ApiType, [AccountId, GenericId]>;
+      OperationCreated: AugmentedEvent<ApiType, [AccountId, OperationId]>;
       /**
        * Generic event
        **/
@@ -176,6 +138,20 @@ declare module '@polkadot/api-base/types/events' {
        * well as the error. \[index, error\]
        **/
       BatchInterrupted: AugmentedEvent<ApiType, [u32, DispatchError]>;
+      /**
+       * Generic event
+       **/
+      [key: string]: AugmentedEvent<ApiType>;
+    };
+    workflows: {
+      /**
+       * Bad request error occurs and this event propagates a detailed description
+       **/
+      BadRequestError: AugmentedEvent<ApiType, [AccountId, Characters]>;
+      /**
+       * Workflow Manifest created together with Version and Packages.
+       **/
+      WorkflowCreated: AugmentedEvent<ApiType, [AccountId, WorkflowId]>;
       /**
        * Generic event
        **/
