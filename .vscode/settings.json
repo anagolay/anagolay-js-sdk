@@ -5,14 +5,13 @@
   "eslint.format.enable": true,
   "editor.wordWrap": "bounded",
   "editor.wordWrapColumn": 110,
-  "editor.rulers": [110],
+  "editor.rulers": [
+    110
+  ],
   "editor.formatOnSave": true,
   "editor.formatOnPaste": false,
   "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[svelte]": {
-    "editor.defaultFormatter": "svelte.svelte-vscode"
   },
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
