@@ -1,4 +1,28 @@
-import { AnAccountId, AnBlockNumber, AnCreatorId, AnGenericId } from '../anagolaySupport/interfaces';
+import { Characters } from '../anagolaySupport';
+import {
+  AnAccountId,
+  AnBlockNumber,
+  AnCreatorId,
+  AnProofId,
+  AnSignatureId,
+  AnStatementId,
+  AnWorkflowId,
+} from '../anagolaySupport/interfaces';
+
+export interface AnSignature {
+  /// signing key in urn/did format 'urn:pgp:9cdf8dd38531511968c8d8cb524036585b62f15b'
+  sigKey: Characters;
+  /// Signature sign(prepared_statement, pvtKey(sigKey)) and encoded using multibase
+  // https://gitlab.com/anagolay/sensio-faas/-/blob/master/sp-api/src/plugins/copyright/helpers.ts#L76
+  sig: string;
+  /// Content identifier of the sig field -- CID(sig)
+  cid: AnSignatureId;
+}
+
+export interface AnSignatures {
+  holder: AnSignature;
+  issuer: AnSignature;
+}
 
 export interface AnProportion {
   /// Proportion sign, can be %
@@ -30,28 +54,28 @@ export interface AnExpiration {
   value: string;
 }
 
-export enum AnAnagolayClaimType {
+export enum AnClaimType {
   COPYRIGHT,
   OWNERSHIP,
 }
 
-export interface AnAnagolayClaim {
+export interface AnClaim {
   /// Prev Sensio Statement id in case this statement is revoked or changed
-  prevId: AnGenericId;
+  prevId?: AnStatementId;
   /// PoE id of the record in question.
-  poeId: AnGenericId;
+  poeId: AnProofId;
   /// Implemented rule
-  ruleId: AnGenericId;
+  workflowId: AnWorkflowId;
   /// In which proportion the statement is held
   proportion: AnProportion;
   /// ATM this is the same as poeId @TODO this should be unique representation of the subject that is NOT poe
-  subjectId: AnGenericId;
+  subjectId: ProofId;
   /// ATM this is the did representation of the substrate based account in format 'did:substrate:5EJA1oSrTx7xYMBerrUHLNktA3P89YHJBeTrevotTQab6gEY/sensio-network', @NOTE this is part of the SENSIO ID which will come later this year
   holder: AnCreatorId;
   /// ATM this is the did representation of the substrate based account in format 'did:substrate:Hcd78R7frJfUZHsqgpPEBLeiCZxV29uyyyURaPxB71ojNjy/sensio-network', @NOTE this is part of the SENSIO ID which will come later this year
-  issuer: string;
+  issuer: AnCreatorId;
   /// Generic type, ATM is Copyright or Ownership
-  claimType: AnAnagolayClaimType;
+  claimType: AnClaimType;
   /// How long this statement is valid
   valid: AnValidity;
   /// Setting when the statement should end
@@ -60,46 +84,21 @@ export interface AnAnagolayClaim {
   onExpiration: string;
 }
 
-export interface AnAnagolayOwnershipClaim extends AnAnagolayClaim {
-  claimType: AnAnagolayClaimType.OWNERSHIP;
-}
-
-export interface AnAnagolayCopyrightClaim extends AnAnagolayClaim {
-  claimType: AnAnagolayClaimType.COPYRIGHT;
-}
-
-export interface AnAnagolaySignature {
-  /// signing key in urn/did format 'urn:pgp:9cdf8dd38531511968c8d8cb524036585b62f15b'
-  sigKey: string;
-  /// Signature sign(prepared_statement, pvtKey(sigKey)) and encoded using multibase
-  // https://gitlab.com/anagolay/sensio-faas/-/blob/master/sp-api/src/plugins/copyright/helpers.ts#L76
-  sig: string;
-  /// Content identifier of the sig field -- CID(sig)
-  cid: AnGenericId;
-}
-
-export interface AnAnagolaySignatures {
-  holder: AnAnagolaySignature;
-  issuer: AnAnagolaySignature;
-}
-
 export interface AnStatementData {
-  signatures: AnAnagolaySignatures;
-  claim: AnAnagolayClaim;
+  signatures: AnSignatures;
+  claim: AnClaim;
 }
 
-export interface AnAnagolayStatement {
-  id: AnGenericId;
+export interface AnStatementExtra {}
+
+export interface AnStatement {
+  id: AnStatementId;
   data: AnStatementData;
+  extra?: AnStatementExtra;
 }
 
-export interface AnStatementInfo {
-  statement: AnAnagolayStatement;
+export interface AnStatementRecord {
+  statement: AnStatement;
   accountId: AnAccountId;
   blockNumber: AnBlockNumber;
-}
-
-export interface AnStatementWithStorage {
-  storageKey: string;
-  statementInfo: AnStatementInfo;
 }

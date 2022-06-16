@@ -1,30 +1,30 @@
 import { RegistryTypes } from '@polkadot/types/types';
 export const PoECustomTypes: RegistryTypes = {
   ProofParams: {
-    k: 'Vec<u8>',
+    k: 'Characters',
     v: 'Vec<u8>',
   },
-  ProofRecord: {
-    record: 'Proof',
-    accountId: 'AccountId',
-    blockNumber: 'BlockNumber',
-  },
-  Proof: {
-    id: 'GenericId',
-    data: 'ProofData',
-    extra: 'Option<ProofExtra>',
+  PhashInfo: {
+    pHash: 'Vec<u8>',
+    proofId: 'ProofId',
   },
   ProofData: {
-    ruleId: 'GenericId',
-    prevId: 'GenericId',
+    workflowId: 'WorkflowId',
+    prevId: 'WorkflowId',
     creator: 'CreatorId',
     groups: 'Vec<ForWhat>',
     params: 'Vec<ProofParams>',
   },
   ProofExtra: {},
-  PhashInfo: {
-    pHash: 'Vec<u8>',
-    proofId: 'GenericId',
+  Proof: {
+    id: 'GenericId',
+    data: 'ProofData',
+    extra: 'Option<ProofExtra>',
+  },
+  ProofRecord: {
+    record: 'Proof',
+    accountId: 'AccountId',
+    blockNumber: 'BlockNumber',
   },
 };
 

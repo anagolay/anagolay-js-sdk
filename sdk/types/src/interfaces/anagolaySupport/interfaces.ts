@@ -8,6 +8,9 @@ export type AnCreatorId = AnCharacters;
 export type AnArtifactId = AnGenericId;
 export type AnOperationId = AnGenericId;
 export type AnWorkflowId = AnGenericId;
+export type AnStatementId = AnGenericId;
+export type AnProofId = AnGenericId;
+export type AnSignatureId = AnGenericId;
 export type AnVersionId = AnGenericId;
 
 export type AnAccountId = string;

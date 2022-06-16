@@ -7,12 +7,29 @@
   "ArtifactId": "GenericId",
   "OperationId": "GenericId",
   "WorkflowId": "GenericId",
+  "StatementId": "GenericId",
+  "ProofId": "GenericId",
+  "SignatureId": "GenericId",
   "VersionId": "GenericId",
   "ForWhat": {
-    "_enum": ["GENERIC", "PHOTO", "CAMERA", "LENS", "SMARTPHONE", "USER", "SYS", "FLOWCONTROL"]
+    "_enum": [
+      "GENERIC",
+      "PHOTO",
+      "CAMERA",
+      "LENS",
+      "SMARTPHONE",
+      "USER",
+      "SYS",
+      "FLOWCONTROL"
+    ]
   },
   "WasmArtifactSubType": {
-    "_enum": ["Cjs", "Esm", "Wasm", "Web"]
+    "_enum": [
+      "Cjs",
+      "Esm",
+      "Wasm",
+      "Web"
+    ]
   },
   "AnagolayVersionExtra": {
     "createdAt": "u64"
@@ -68,30 +85,30 @@
     "blockNumber": "BlockNumber"
   },
   "ProofParams": {
-    "k": "Vec<u8>",
+    "k": "Characters",
     "v": "Vec<u8>"
   },
-  "ProofRecord": {
-    "record": "Proof",
-    "accountId": "AccountId",
-    "blockNumber": "BlockNumber"
-  },
-  "Proof": {
-    "id": "GenericId",
-    "data": "ProofData",
-    "extra": "Option<ProofExtra>"
+  "PhashInfo": {
+    "pHash": "Vec<u8>",
+    "proofId": "ProofId"
   },
   "ProofData": {
-    "ruleId": "GenericId",
-    "prevId": "GenericId",
+    "workflowId": "WorkflowId",
+    "prevId": "WorkflowId",
     "creator": "CreatorId",
     "groups": "Vec<ForWhat>",
     "params": "Vec<ProofParams>"
   },
   "ProofExtra": {},
-  "PhashInfo": {
-    "pHash": "Vec<u8>",
-    "proofId": "GenericId"
+  "Proof": {
+    "id": "GenericId",
+    "data": "ProofData",
+    "extra": "Option<ProofExtra>"
+  },
+  "ProofRecord": {
+    "record": "Proof",
+    "accountId": "AccountId",
+    "blockNumber": "BlockNumber"
   },
   "OperationVersionReference": {
     "versionId": "VersionId",
@@ -146,6 +163,15 @@
     "data": "WorkflowVersionData",
     "extra": "Option<AnagolayVersionExtra>"
   },
+  "Signature": {
+    "sigKey": "Characters",
+    "sig": "Vec<u8>",
+    "cid": "SignatureId"
+  },
+  "Signatures": {
+    "holder": "Signature",
+    "issuer": "Signature"
+  },
   "Proportion": {
     "sign": "Vec<u8>",
     "name": "Vec<u8>",
@@ -156,50 +182,51 @@
     "until": "Vec<u8>"
   },
   "ExpirationType": {
-    "_enum": ["FOREVER", "YEARS", "MONTHS", "DAYS", "MINUTES", "SECONDS"]
+    "_enum": [
+      "FOREVER",
+      "YEARS",
+      "MONTHS",
+      "DAYS",
+      "MINUTES",
+      "SECONDS"
+    ]
   },
   "Expiration": {
     "expirationType": "ExpirationType",
     "value": "Vec<u8>"
   },
-  "AnagolayClaimType": {
-    "_enum": ["COPYRIGHT", "OWNERSHIP"]
+  "ClaimType": {
+    "_enum": [
+      "COPYRIGHT",
+      "OWNERSHIP"
+    ]
   },
-  "AnagolayClaim": {
-    "prevId": "GenericId",
-    "poeId": "GenericId",
-    "ruleId": "GenericId",
+  "Claim": {
+    "prevId": "Option<StatementId>",
+    "poeId": "ProofId",
+    "workflowId": "WorkflowId",
     "proportion": "Proportion",
-    "subjectId": "GenericId",
+    "subjectId": "ProofId",
     "holder": "CreatorId",
-    "issuer": "Vec<u8>",
-    "claimType": "AnagolayClaimType",
+    "issuer": "CreatorId",
+    "claimType": "ClaimType",
     "valid": "Validity",
     "expiration": "Expiration",
     "onExpiration": "Vec<u8>"
   },
-  "AnagolaySignature": {
-    "sigKey": "Vec<u8>",
-    "sig": "Vec<u8>",
-    "cid": "GenericId"
-  },
-  "AnagolaySignatures": {
-    "holder": "AnagolaySignature",
-    "issuer": "AnagolaySignature"
-  },
-  "AnagolayStatementRecord": {
-    "record": "AnagolayStatement",
-    "accountId": "AccountId",
-    "blockNumber": "BlockNumber"
-  },
   "StatementData": {
-    "signatures": "AnagolaySignatures",
-    "claim": "AnagolayClaim"
+    "signatures": "Signatures",
+    "claim": "Claim"
   },
   "StatementExtra": {},
-  "AnagolayStatement": {
+  "Statement": {
     "id": "GenericId",
     "data": "StatementData",
     "extra": "Option<StatementExtra>"
+  },
+  "StatementRecord": {
+    "record": "Statement",
+    "accountId": "AccountId",
+    "blockNumber": "BlockNumber"
   }
 }

@@ -1,12 +1,12 @@
 // Auto-generated via `yarn polkadot-types-from-chain`, do not edit
 /* eslint-disable */
 
-import type { Characters, OperationId, WorkflowId } from '@anagolay/types/interfaces/anagolaySupport';
+import type { Characters, OperationId, ProofId, StatementId, WorkflowId } from '@anagolay/types/interfaces/anagolaySupport';
 import type { ApiTypes } from '@polkadot/api-base/types';
 import type { u32 } from '@polkadot/types-codec';
 import type { BalanceStatus } from '@polkadot/types/interfaces/balances';
 import type { AuthorityList } from '@polkadot/types/interfaces/grandpa';
-import type { AccountId, Balance } from '@polkadot/types/interfaces/runtime';
+import type { AccountId, Balance, Hash } from '@polkadot/types/interfaces/runtime';
 import type { DispatchError, DispatchInfo, DispatchResult } from '@polkadot/types/interfaces/system';
 
 declare module '@polkadot/api-base/types/events' {
@@ -79,6 +79,46 @@ declare module '@polkadot/api-base/types/events' {
        * Operation Manifest created together with Version and Packages.
        **/
       OperationCreated: AugmentedEvent<ApiType, [AccountId, OperationId]>;
+      /**
+       * Generic event
+       **/
+      [key: string]: AugmentedEvent<ApiType>;
+    };
+    poe: {
+      /**
+       * Bad request error occurs and this event propagates a detailed description
+       **/
+      BadRequestError: AugmentedEvent<ApiType, [AccountId, Characters]>;
+      /**
+       * Phash is created
+       **/
+      PhashCreated: AugmentedEvent<ApiType, [AccountId, Hash]>;
+      /**
+       * Proof is created and claimed
+       **/
+      ProofCreated: AugmentedEvent<ApiType, [AccountId, ProofId]>;
+      /**
+       * Generic event
+       **/
+      [key: string]: AugmentedEvent<ApiType>;
+    };
+    statements: {
+      /**
+       * Bad request error occurs and this event propagates a detailed description
+       **/
+      BadRequestError: AugmentedEvent<ApiType, [AccountId, Characters]>;
+      /**
+       * Copyright is created
+       **/
+      CopyrightCreated: AugmentedEvent<ApiType, [AccountId, StatementId]>;
+      /**
+       * Ownership is created
+       **/
+      OwnershipCreated: AugmentedEvent<ApiType, [AccountId, StatementId]>;
+      /**
+       * Statement revoked
+       **/
+      StatementRevoked: AugmentedEvent<ApiType, [AccountId, StatementId]>;
       /**
        * Generic event
        **/

@@ -101,6 +101,62 @@ declare module '@polkadot/api-base/types/errors' {
        **/
       [key: string]: AugmentedError<ApiType>;
     };
+    poe: {
+      /**
+       * A parameter of the request is invalid or does not respect a given constraint
+       **/
+      BadRequest: AugmentedError<ApiType>;
+      /**
+       * The proof does not exist, so it cannot be revoked
+       **/
+      NoSuchProof: AugmentedError<ApiType>;
+      /**
+       * PHash and ProofId combination already exist
+       **/
+      PHashAndProofIdComboAlreadyExist: AugmentedError<ApiType>;
+      /**
+       * This proof has already been claimed
+       **/
+      ProofAlreadyClaimed: AugmentedError<ApiType>;
+      /**
+       * The Workflow groups don't match the Proof groups
+       **/
+      ProofWorkflowTypeMismatch: AugmentedError<ApiType>;
+      /**
+       * Generic error
+       **/
+      [key: string]: AugmentedError<ApiType>;
+    };
+    statements: {
+      /**
+       * A parameter of the request is invalid or does not respect a given constraint
+       **/
+      BadRequest: AugmentedError<ApiType>;
+      /**
+       * Create child statement is not yet supported
+       **/
+      CreatingChildStatementNotSupported: AugmentedError<ApiType>;
+      /**
+       * Statement doesn't exist.
+       **/
+      NoSuchStatement: AugmentedError<ApiType>;
+      /**
+       * Proof already has this statement
+       **/
+      ProofHasStatement: AugmentedError<ApiType>;
+      /**
+       * Statement has child statement and it cannot be revoked
+       **/
+      StatementHasChildStatement: AugmentedError<ApiType>;
+      /**
+       * Wrong claim type
+       **/
+      WrongClaimType: AugmentedError<ApiType>;
+      /**
+       * Generic error
+       **/
+      [key: string]: AugmentedError<ApiType>;
+    };
     sudo: {
       /**
        * Sender must be the Sudo account
@@ -114,7 +170,7 @@ declare module '@polkadot/api-base/types/errors' {
     system: {
       /**
        * Failed to extract the runtime version from the new runtime.
-       *
+       * 
        * Either calling `Core_version` or decoding `RuntimeVersion` failed.
        **/
       FailedToExtractRuntimeVersion: AugmentedError<ApiType>;
