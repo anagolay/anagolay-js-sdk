@@ -36,6 +36,15 @@ export interface GenericId extends Bytes {}
 /** @name OperationId */
 export interface OperationId extends GenericId {}
 
+/** @name ProofId */
+export interface ProofId extends GenericId {}
+
+/** @name SignatureId */
+export interface SignatureId extends GenericId {}
+
+/** @name StatementId */
+export interface StatementId extends GenericId {}
+
 /** @name VersionId */
 export interface VersionId extends GenericId {}
 

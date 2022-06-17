@@ -1,11 +1,7 @@
 import ImageMetadataTags from './imageMetadata';
 import { AnGenericId } from './interfaces/anagolaySupport/interfaces';
 import { AnProofParams as OriginalSnProofParams } from './interfaces/poe/interfaces';
-import {
-  AnAnagolayCopyrightClaim,
-  AnAnagolayOwnershipClaim,
-  AnAnagolayStatement,
-} from './interfaces/statements/interfaces';
+import { AnClaim, AnStatement as OriginalAnStatement } from './interfaces/statements/interfaces';
 
 export interface SaveStatementReturn {
   statement_id: AnGenericId;
@@ -39,10 +35,10 @@ export type outputDecoded =
   | 'AnOwnershipClaims'
   | 'AnCopyrightClaims'
   | 'AnGenericIds'
-  | 'AnAnagolayClaim[]'
-  | 'AnAnagolaySignatures[]'
+  | 'AnClaim[]'
+  | 'AnSignatures[]'
   | 'AnSigner'
-  | '[AnAnagolayClaim[],AnAnagolaySignatures[]]'
+  | '[AnClaim[],AnSignatures[]]'
   | 'StringOrBuffer'
   | 'SaveStatementReturn[]';
 
@@ -103,10 +99,9 @@ export type AnGenericIds = AnGenericId[];
 export type AnBuffer = Buffer;
 export type AnByteArray = Uint8Array;
 export type AnFileBuffer = Buffer;
-export type AnStatement = AnAnagolayStatement;
-export type AnStatements = AnAnagolayStatement[];
-export type AnCopyrightClaims = AnAnagolayCopyrightClaim[];
-export type AnOwnershipClaims = AnAnagolayOwnershipClaim[];
+export type AnStatement = OriginalAnStatement;
+export type AnStatements = AnStatement[];
+export type AnClaims = AnClaim[];
 export type AnProofParams = OriginalSnProofParams;
 export type AnBoolean = boolean;
 export type AnString = string;

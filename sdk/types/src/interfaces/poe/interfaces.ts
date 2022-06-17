@@ -6,41 +6,42 @@
 import {
   AnAccountId,
   AnBlockNumber,
+  AnCharacters,
   AnCreatorId,
   AnForWhat,
   AnGenericId,
+  AnProofId,
+  AnWorkflowId,
 } from '../anagolaySupport/interfaces';
 
 export interface AnProofParams {
-  k: string;
+  k: AnCharacters;
   v: string;
 }
 
-export interface AnProofInfo {
-  proof: AnProof;
-  accountId: AnAccountId;
-  blockNumber: AnBlockNumber;
-}
-
-export interface AnProof {
-  id: AnGenericId;
-  data: AnProofData;
+export interface AnPhashInfo {
+  pHash: string;
+  proofId: AnProofId;
 }
 
 export interface AnProofData {
-  ruleId: AnGenericId;
-  prevId: AnGenericId;
+  workflowId: AnWorkflowId;
+  prevId: AnWorkflowId;
   creator: AnCreatorId;
   groups: AnForWhat[];
   params: AnProofParams[];
 }
 
-export interface AnPhashInfo {
-  pHash: string;
-  proofId: AnGenericId;
+export interface AnProofExtra {}
+
+export interface AnProof {
+  id: AnGenericId;
+  data: AnProofData;
+  extra?: AnProofExtra;
 }
 
-export interface AnProofWithStorage {
-  storageKey: string;
-  proofInfo: AnProofInfo;
+export interface AnProofRecord {
+  proof: AnProof;
+  accountId: AnAccountId;
+  blockNumber: AnBlockNumber;
 }

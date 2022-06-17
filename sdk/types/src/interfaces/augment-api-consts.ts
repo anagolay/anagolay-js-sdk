@@ -4,13 +4,7 @@
 import type { ApiTypes } from '@polkadot/api-base/types';
 import type { Vec, u8 } from '@polkadot/types-codec';
 import type { Codec } from '@polkadot/types-codec/types';
-import type {
-  Balance,
-  BalanceOf,
-  BlockNumber,
-  Moment,
-  RuntimeDbWeight,
-} from '@polkadot/types/interfaces/runtime';
+import type { Balance, BalanceOf, BlockNumber, Moment, RuntimeDbWeight } from '@polkadot/types/interfaces/runtime';
 import type { RuntimeVersion } from '@polkadot/types/interfaces/state';
 import type { WeightToFeeCoefficient } from '@polkadot/types/interfaces/support';
 import type { BlockLength, BlockWeights } from '@polkadot/types/interfaces/system';
@@ -46,7 +40,7 @@ declare module '@polkadot/api-base/types/consts' {
       dbWeight: RuntimeDbWeight & AugmentedConst<ApiType>;
       /**
        * The designated SS85 prefix of this chain.
-       *
+       * 
        * This replaces the "ss58Format" property declared in the chain spec. Reason is
        * that the runtime should know about the prefix in order to make use of it as
        * an identifier of the chain.

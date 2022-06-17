@@ -6,6 +6,9 @@ export const AnagolayCustomTypes: RegistryTypes = {
   ArtifactId: 'GenericId',
   OperationId: 'GenericId',
   WorkflowId: 'GenericId',
+  StatementId: 'GenericId',
+  ProofId: 'GenericId',
+  SignatureId: 'GenericId',
   VersionId: 'GenericId',
   ForWhat: {
     _enum: ['GENERIC', 'PHOTO', 'CAMERA', 'LENS', 'SMARTPHONE', 'USER', 'SYS', 'FLOWCONTROL'],
