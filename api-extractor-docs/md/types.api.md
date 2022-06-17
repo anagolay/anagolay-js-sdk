@@ -21,6 +21,9 @@ import type { ForWhat as ForWhat_2 } from '@anagolay/types/interfaces/anagolaySu
 import type { GenericId as GenericId_2 } from '@anagolay/types/interfaces/anagolaySupport';
 import type { OperationId as OperationId_2 } from '@anagolay/types/interfaces/anagolaySupport';
 import type { Option as Option_2 } from '@polkadot/types-codec';
+import type { ProofId as ProofId_2 } from '@anagolay/types/interfaces/anagolaySupport';
+import type { SignatureId as SignatureId_2 } from '@anagolay/types/interfaces/anagolaySupport';
+import type { StatementId as StatementId_2 } from '@anagolay/types/interfaces/anagolaySupport';
 import type { Struct } from '@polkadot/types-codec';
 import type { u64 } from '@polkadot/types-codec';
 import type { Vec } from '@polkadot/types-codec';
@@ -30,80 +33,6 @@ import type { WorkflowId as WorkflowId_2 } from '@anagolay/types/interfaces/anag
 
 // @public (undocumented)
 export type AnAccountId = string;
-
-// @public
-export interface AnagolayClaim extends Struct {
-    // (undocumented)
-    readonly claimType: AnagolayClaimType;
-    // (undocumented)
-    readonly expiration: Expiration;
-    // (undocumented)
-    readonly holder: CreatorId_2;
-    // (undocumented)
-    readonly issuer: Bytes;
-    // (undocumented)
-    readonly onExpiration: Bytes;
-    // (undocumented)
-    readonly poeId: GenericId_2;
-    // (undocumented)
-    readonly prevId: GenericId_2;
-    // (undocumented)
-    readonly proportion: Proportion;
-    // (undocumented)
-    readonly ruleId: GenericId_2;
-    // (undocumented)
-    readonly subjectId: GenericId_2;
-    // (undocumented)
-    readonly valid: Validity;
-}
-
-// @public
-export interface AnagolayClaimType extends Enum {
-    // (undocumented)
-    readonly isCopyright: boolean;
-    // (undocumented)
-    readonly isOwnership: boolean;
-    // (undocumented)
-    readonly type: 'Copyright' | 'Ownership';
-}
-
-// @public
-export interface AnagolaySignature extends Struct {
-    // (undocumented)
-    readonly cid: GenericId_2;
-    // (undocumented)
-    readonly sig: Bytes;
-    // (undocumented)
-    readonly sigKey: Bytes;
-}
-
-// @public
-export interface AnagolaySignatures extends Struct {
-    // (undocumented)
-    readonly holder: AnagolaySignature;
-    // (undocumented)
-    readonly issuer: AnagolaySignature;
-}
-
-// @public
-export interface AnagolayStatement extends Struct {
-    // (undocumented)
-    readonly data: StatementData;
-    // (undocumented)
-    readonly extra: Option_2<StatementExtra>;
-    // (undocumented)
-    readonly id: GenericId_2;
-}
-
-// @public
-export interface AnagolayStatementRecord extends Struct {
-    // (undocumented)
-    readonly accountId: AccountId;
-    // (undocumented)
-    readonly blockNumber: BlockNumber;
-    // (undocumented)
-    readonly record: AnagolayStatement;
-}
 
 // @public (undocumented)
 export const anagolaySupport: {
@@ -120,78 +49,6 @@ export const anagolaySupport: {
 export interface AnagolayVersionExtra extends Struct {
     // (undocumented)
     readonly createdAt: u64;
-}
-
-// @public (undocumented)
-export interface AnAnagolayClaim {
-    // (undocumented)
-    claimType: AnAnagolayClaimType;
-    // (undocumented)
-    expiration: AnExpiration;
-    // (undocumented)
-    holder: AnCreatorId;
-    // (undocumented)
-    issuer: string;
-    // (undocumented)
-    onExpiration: string;
-    // (undocumented)
-    poeId: AnGenericId;
-    // (undocumented)
-    prevId: AnGenericId;
-    // (undocumented)
-    proportion: AnProportion;
-    // (undocumented)
-    ruleId: AnGenericId;
-    // (undocumented)
-    subjectId: AnGenericId;
-    // (undocumented)
-    valid: AnValidity;
-}
-
-// @public (undocumented)
-export enum AnAnagolayClaimType {
-    // (undocumented)
-    COPYRIGHT = 0,
-    // (undocumented)
-    OWNERSHIP = 1
-}
-
-// @public (undocumented)
-export interface AnAnagolayCopyrightClaim extends AnAnagolayClaim {
-    // (undocumented)
-    claimType: AnAnagolayClaimType.COPYRIGHT;
-}
-
-// @public (undocumented)
-export interface AnAnagolayOwnershipClaim extends AnAnagolayClaim {
-    // (undocumented)
-    claimType: AnAnagolayClaimType.OWNERSHIP;
-}
-
-// @public (undocumented)
-export interface AnAnagolaySignature {
-    // (undocumented)
-    cid: AnGenericId;
-    // (undocumented)
-    sig: string;
-    // (undocumented)
-    sigKey: string;
-}
-
-// @public (undocumented)
-export interface AnAnagolaySignatures {
-    // (undocumented)
-    holder: AnAnagolaySignature;
-    // (undocumented)
-    issuer: AnAnagolaySignature;
-}
-
-// @public (undocumented)
-export interface AnAnagolayStatement {
-    // (undocumented)
-    data: AnStatementData;
-    // (undocumented)
-    id: AnGenericId;
 }
 
 // @public (undocumented)
@@ -222,7 +79,41 @@ export type AnByteArray = Uint8Array;
 export type AnCharacters = string;
 
 // @public (undocumented)
-export type AnCopyrightClaims = AnAnagolayCopyrightClaim[];
+export interface AnClaim {
+    // (undocumented)
+    claimType: AnClaimType;
+    // (undocumented)
+    expiration: AnExpiration;
+    // (undocumented)
+    holder: AnCreatorId;
+    // (undocumented)
+    issuer: AnCreatorId;
+    // (undocumented)
+    onExpiration: string;
+    // (undocumented)
+    poeId: AnProofId;
+    // (undocumented)
+    prevId?: AnStatementId;
+    // (undocumented)
+    proportion: AnProportion;
+    // (undocumented)
+    subjectId: AnProofId;
+    // (undocumented)
+    valid: AnValidity;
+    // (undocumented)
+    workflowId: AnWorkflowId;
+}
+
+// @public (undocumented)
+export type AnClaims = AnClaim[];
+
+// @public (undocumented)
+export enum AnClaimType {
+    // (undocumented)
+    COPYRIGHT = 0,
+    // (undocumented)
+    OWNERSHIP = 1
+}
 
 // @public (undocumented)
 export type AnCreatorId = AnCharacters;
@@ -438,20 +329,19 @@ export interface AnOperationWithStorage {
 }
 
 // @public (undocumented)
-export type AnOwnershipClaims = AnAnagolayOwnershipClaim[];
-
-// @public (undocumented)
 export interface AnPhashInfo {
     // (undocumented)
     pHash: string;
     // (undocumented)
-    proofId: AnGenericId;
+    proofId: AnProofId;
 }
 
 // @public (undocumented)
 export interface AnProof {
     // (undocumented)
     data: AnProofData;
+    // (undocumented)
+    extra?: AnProofExtra;
     // (undocumented)
     id: AnGenericId;
 }
@@ -467,30 +357,29 @@ export interface AnProofData {
     // (undocumented)
     params: AnProofParams_2[];
     // (undocumented)
-    prevId: AnGenericId;
+    prevId: AnWorkflowId;
     // (undocumented)
-    ruleId: AnGenericId;
+    workflowId: AnWorkflowId;
 }
 
 // @public (undocumented)
-export interface AnProofInfo {
+export interface AnProofExtra {
+}
+
+// @public (undocumented)
+export type AnProofId = AnGenericId;
+
+// @public (undocumented)
+export type AnProofParams = AnProofParams_2;
+
+// @public (undocumented)
+export interface AnProofRecord {
     // (undocumented)
     accountId: AnAccountId;
     // (undocumented)
     blockNumber: AnBlockNumber;
     // (undocumented)
     proof: AnProof;
-}
-
-// @public (undocumented)
-export type AnProofParams = AnProofParams_2;
-
-// @public (undocumented)
-export interface AnProofWithStorage {
-    // (undocumented)
-    proofInfo: AnProofInfo;
-    // (undocumented)
-    storageKey: string;
 }
 
 // @public (undocumented)
@@ -501,6 +390,27 @@ export interface AnProportion {
     sign: string;
     // (undocumented)
     value: string;
+}
+
+// @public (undocumented)
+export interface AnSignature {
+    // (undocumented)
+    cid: AnSignatureId;
+    // (undocumented)
+    sig: string;
+    // (undocumented)
+    sigKey: Characters;
+}
+
+// @public (undocumented)
+export type AnSignatureId = AnGenericId;
+
+// @public (undocumented)
+export interface AnSignatures {
+    // (undocumented)
+    holder: AnSignature;
+    // (undocumented)
+    issuer: AnSignature;
 }
 
 // @public
@@ -514,37 +424,38 @@ export interface AnSplitParams {
     opName: AnString;
 }
 
+// Warning: (ae-forgotten-export) The symbol "AnStatement" needs to be exported by the entry point index.d.ts
+//
 // @public (undocumented)
-export type AnStatement = AnAnagolayStatement;
+export type AnStatement = AnStatement_2;
 
 // @public (undocumented)
 export interface AnStatementData {
     // (undocumented)
-    claim: AnAnagolayClaim;
+    claim: AnClaim;
     // (undocumented)
-    signatures: AnAnagolaySignatures;
+    signatures: AnSignatures;
 }
 
 // @public (undocumented)
-export interface AnStatementInfo {
+export interface AnStatementExtra {
+}
+
+// @public (undocumented)
+export type AnStatementId = AnGenericId;
+
+// @public (undocumented)
+export interface AnStatementRecord {
     // (undocumented)
     accountId: AnAccountId;
     // (undocumented)
     blockNumber: AnBlockNumber;
     // (undocumented)
-    statement: AnAnagolayStatement;
+    statement: AnStatement_2;
 }
 
 // @public (undocumented)
-export type AnStatements = AnAnagolayStatement[];
-
-// @public (undocumented)
-export interface AnStatementWithStorage {
-    // (undocumented)
-    statementInfo: AnStatementInfo;
-    // (undocumented)
-    storageKey: string;
-}
+export type AnStatements = AnStatement[];
 
 // @public (undocumented)
 export type AnString = string;
@@ -685,6 +596,42 @@ export interface ArtifactId extends GenericId {
 
 // @public
 export interface Characters extends Bytes {
+}
+
+// @public
+export interface Claim extends Struct {
+    // (undocumented)
+    readonly claimType: ClaimType;
+    // (undocumented)
+    readonly expiration: Expiration;
+    // (undocumented)
+    readonly holder: CreatorId_2;
+    // (undocumented)
+    readonly issuer: CreatorId_2;
+    // (undocumented)
+    readonly onExpiration: Bytes;
+    // (undocumented)
+    readonly poeId: ProofId_2;
+    // (undocumented)
+    readonly prevId: Option_2<StatementId_2>;
+    // (undocumented)
+    readonly proportion: Proportion;
+    // (undocumented)
+    readonly subjectId: ProofId_2;
+    // (undocumented)
+    readonly valid: Validity;
+    // (undocumented)
+    readonly workflowId: WorkflowId_2;
+}
+
+// @public
+export interface ClaimType extends Enum {
+    // (undocumented)
+    readonly isCopyright: boolean;
+    // (undocumented)
+    readonly isOwnership: boolean;
+    // (undocumented)
+    readonly type: 'Copyright' | 'Ownership';
 }
 
 // @public
@@ -899,7 +846,7 @@ export interface OperationVersionReference extends Struct {
 export type output = 'AnByteArray' | 'AnProofParams[]' | 'AnBoolean' | 'AnString' | 'AnAny' | 'StringOrBuffer';
 
 // @public (undocumented)
-export type outputDecoded = 'AnBuffer' | 'AnByteArray' | 'AnFileBuffer' | 'AnStatement' | 'AnStatements' | 'AnProofParams' | 'AnProofParams[]' | 'AnString' | 'AnAny' | 'AnImageMetadata' | 'AnSplitParams' | 'AnGenericId' | 'AnBoolean' | 'AnNull' | 'AnImageData' | 'AnOwnershipClaims' | 'AnCopyrightClaims' | 'AnGenericIds' | 'AnAnagolayClaim[]' | 'AnAnagolaySignatures[]' | 'AnSigner' | '[AnAnagolayClaim[],AnAnagolaySignatures[]]' | 'StringOrBuffer' | 'SaveStatementReturn[]';
+export type outputDecoded = 'AnBuffer' | 'AnByteArray' | 'AnFileBuffer' | 'AnStatement' | 'AnStatements' | 'AnProofParams' | 'AnProofParams[]' | 'AnString' | 'AnAny' | 'AnImageMetadata' | 'AnSplitParams' | 'AnGenericId' | 'AnBoolean' | 'AnNull' | 'AnImageData' | 'AnOwnershipClaims' | 'AnCopyrightClaims' | 'AnGenericIds' | 'AnClaim[]' | 'AnSignatures[]' | 'AnSigner' | '[AnClaim[],AnSignatures[]]' | 'StringOrBuffer' | 'SaveStatementReturn[]';
 
 // @public (undocumented)
 export type outputDecodedImplementation = AnBuffer | AnByteArray | AnFileBuffer | AnStatement | AnStatements | AnProofParams | AnBoolean | AnString | AnAny | AnImageMetadata | AnImageData;
@@ -927,7 +874,7 @@ export interface PhashInfo extends Struct {
     // (undocumented)
     readonly pHash: Bytes;
     // (undocumented)
-    readonly proofId: GenericId_2;
+    readonly proofId: ProofId_2;
 }
 
 // @public (undocumented)
@@ -960,9 +907,9 @@ export interface ProofData extends Struct {
     // (undocumented)
     readonly params: Vec<ProofParams>;
     // (undocumented)
-    readonly prevId: GenericId_2;
+    readonly prevId: WorkflowId_2;
     // (undocumented)
-    readonly ruleId: GenericId_2;
+    readonly workflowId: WorkflowId_2;
 }
 
 // @public
@@ -970,9 +917,13 @@ export interface ProofExtra extends Struct {
 }
 
 // @public
+export interface ProofId extends GenericId {
+}
+
+// @public
 export interface ProofParams extends Struct {
     // (undocumented)
-    readonly k: Bytes;
+    readonly k: Characters_2;
     // (undocumented)
     readonly v: Bytes;
 }
@@ -1006,15 +957,61 @@ export interface SaveStatementReturn {
 }
 
 // @public
+export interface Signature extends Struct {
+    // (undocumented)
+    readonly cid: SignatureId_2;
+    // (undocumented)
+    readonly sig: Bytes;
+    // (undocumented)
+    readonly sigKey: Characters_2;
+}
+
+// @public
+export interface SignatureId extends GenericId {
+}
+
+// @public
+export interface Signatures extends Struct {
+    // (undocumented)
+    readonly holder: Signature;
+    // (undocumented)
+    readonly issuer: Signature;
+}
+
+// @public
+export interface Statement extends Struct {
+    // (undocumented)
+    readonly data: StatementData;
+    // (undocumented)
+    readonly extra: Option_2<StatementExtra>;
+    // (undocumented)
+    readonly id: GenericId_2;
+}
+
+// @public
 export interface StatementData extends Struct {
     // (undocumented)
-    readonly claim: AnagolayClaim;
+    readonly claim: Claim;
     // (undocumented)
-    readonly signatures: AnagolaySignatures;
+    readonly signatures: Signatures;
 }
 
 // @public
 export interface StatementExtra extends Struct {
+}
+
+// @public
+export interface StatementId extends GenericId {
+}
+
+// @public
+export interface StatementRecord extends Struct {
+    // (undocumented)
+    readonly accountId: AccountId;
+    // (undocumented)
+    readonly blockNumber: BlockNumber;
+    // (undocumented)
+    readonly record: Statement;
 }
 
 // @public (undocumented)

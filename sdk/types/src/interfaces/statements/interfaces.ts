@@ -69,7 +69,7 @@ export interface AnClaim {
   /// In which proportion the statement is held
   proportion: AnProportion;
   /// ATM this is the same as poeId @TODO this should be unique representation of the subject that is NOT poe
-  subjectId: ProofId;
+  subjectId: AnProofId;
   /// ATM this is the did representation of the substrate based account in format 'did:substrate:5EJA1oSrTx7xYMBerrUHLNktA3P89YHJBeTrevotTQab6gEY/sensio-network', @NOTE this is part of the SENSIO ID which will come later this year
   holder: AnCreatorId;
   /// ATM this is the did representation of the substrate based account in format 'did:substrate:Hcd78R7frJfUZHsqgpPEBLeiCZxV29uyyyURaPxB71ojNjy/sensio-network', @NOTE this is part of the SENSIO ID which will come later this year

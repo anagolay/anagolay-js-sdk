@@ -195,871 +195,6 @@
           }
         },
         {
-          "kind": "Interface",
-          "canonicalReference": "@anagolay/types!AnagolayClaim:interface",
-          "docComment": "/**\n * @name AnagolayClaim\n */\n",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export interface AnagolayClaim extends "
-            },
-            {
-              "kind": "Reference",
-              "text": "Struct",
-              "canonicalReference": "@polkadot/types-codec!Struct:class"
-            },
-            {
-              "kind": "Content",
-              "text": " "
-            }
-          ],
-          "releaseTag": "Public",
-          "name": "AnagolayClaim",
-          "members": [
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/types!AnagolayClaim#claimType:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "readonly claimType: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "AnagolayClaimType",
-                  "canonicalReference": "@anagolay/types!AnagolayClaimType:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "claimType",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/types!AnagolayClaim#expiration:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "readonly expiration: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Expiration",
-                  "canonicalReference": "@anagolay/types!Expiration:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "expiration",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/types!AnagolayClaim#holder:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "readonly holder: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "CreatorId",
-                  "canonicalReference": "@anagolay/types!CreatorId:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "holder",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/types!AnagolayClaim#issuer:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "readonly issuer: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Bytes",
-                  "canonicalReference": "@polkadot/types-codec!Bytes:class"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "issuer",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/types!AnagolayClaim#onExpiration:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "readonly onExpiration: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Bytes",
-                  "canonicalReference": "@polkadot/types-codec!Bytes:class"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "onExpiration",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/types!AnagolayClaim#poeId:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "readonly poeId: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "GenericId",
-                  "canonicalReference": "@anagolay/types!GenericId:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "poeId",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/types!AnagolayClaim#prevId:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "readonly prevId: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "GenericId",
-                  "canonicalReference": "@anagolay/types!GenericId:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "prevId",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/types!AnagolayClaim#proportion:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "readonly proportion: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Proportion",
-                  "canonicalReference": "@anagolay/types!Proportion:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "proportion",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/types!AnagolayClaim#ruleId:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "readonly ruleId: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "GenericId",
-                  "canonicalReference": "@anagolay/types!GenericId:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "ruleId",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/types!AnagolayClaim#subjectId:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "readonly subjectId: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "GenericId",
-                  "canonicalReference": "@anagolay/types!GenericId:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "subjectId",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/types!AnagolayClaim#valid:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "readonly valid: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Validity",
-                  "canonicalReference": "@anagolay/types!Validity:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "valid",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            }
-          ],
-          "extendsTokenRanges": [
-            {
-              "startIndex": 1,
-              "endIndex": 3
-            }
-          ]
-        },
-        {
-          "kind": "Interface",
-          "canonicalReference": "@anagolay/types!AnagolayClaimType:interface",
-          "docComment": "/**\n * @name AnagolayClaimType\n */\n",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export interface AnagolayClaimType extends "
-            },
-            {
-              "kind": "Reference",
-              "text": "Enum",
-              "canonicalReference": "@polkadot/types-codec!Enum:class"
-            },
-            {
-              "kind": "Content",
-              "text": " "
-            }
-          ],
-          "releaseTag": "Public",
-          "name": "AnagolayClaimType",
-          "members": [
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/types!AnagolayClaimType#isCopyright:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "readonly isCopyright: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "boolean"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "isCopyright",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/types!AnagolayClaimType#isOwnership:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "readonly isOwnership: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "boolean"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "isOwnership",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/types!AnagolayClaimType#type:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "readonly type: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "'Copyright' | 'Ownership'"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "type",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            }
-          ],
-          "extendsTokenRanges": [
-            {
-              "startIndex": 1,
-              "endIndex": 3
-            }
-          ]
-        },
-        {
-          "kind": "Interface",
-          "canonicalReference": "@anagolay/types!AnagolaySignature:interface",
-          "docComment": "/**\n * @name AnagolaySignature\n */\n",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export interface AnagolaySignature extends "
-            },
-            {
-              "kind": "Reference",
-              "text": "Struct",
-              "canonicalReference": "@polkadot/types-codec!Struct:class"
-            },
-            {
-              "kind": "Content",
-              "text": " "
-            }
-          ],
-          "releaseTag": "Public",
-          "name": "AnagolaySignature",
-          "members": [
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/types!AnagolaySignature#cid:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "readonly cid: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "GenericId",
-                  "canonicalReference": "@anagolay/types!GenericId:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "cid",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/types!AnagolaySignature#sig:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "readonly sig: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Bytes",
-                  "canonicalReference": "@polkadot/types-codec!Bytes:class"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "sig",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/types!AnagolaySignature#sigKey:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "readonly sigKey: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Bytes",
-                  "canonicalReference": "@polkadot/types-codec!Bytes:class"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "sigKey",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            }
-          ],
-          "extendsTokenRanges": [
-            {
-              "startIndex": 1,
-              "endIndex": 3
-            }
-          ]
-        },
-        {
-          "kind": "Interface",
-          "canonicalReference": "@anagolay/types!AnagolaySignatures:interface",
-          "docComment": "/**\n * @name AnagolaySignatures\n */\n",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export interface AnagolaySignatures extends "
-            },
-            {
-              "kind": "Reference",
-              "text": "Struct",
-              "canonicalReference": "@polkadot/types-codec!Struct:class"
-            },
-            {
-              "kind": "Content",
-              "text": " "
-            }
-          ],
-          "releaseTag": "Public",
-          "name": "AnagolaySignatures",
-          "members": [
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/types!AnagolaySignatures#holder:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "readonly holder: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "AnagolaySignature",
-                  "canonicalReference": "@anagolay/types!AnagolaySignature:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "holder",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/types!AnagolaySignatures#issuer:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "readonly issuer: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "AnagolaySignature",
-                  "canonicalReference": "@anagolay/types!AnagolaySignature:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "issuer",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            }
-          ],
-          "extendsTokenRanges": [
-            {
-              "startIndex": 1,
-              "endIndex": 3
-            }
-          ]
-        },
-        {
-          "kind": "Interface",
-          "canonicalReference": "@anagolay/types!AnagolayStatement:interface",
-          "docComment": "/**\n * @name AnagolayStatement\n */\n",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export interface AnagolayStatement extends "
-            },
-            {
-              "kind": "Reference",
-              "text": "Struct",
-              "canonicalReference": "@polkadot/types-codec!Struct:class"
-            },
-            {
-              "kind": "Content",
-              "text": " "
-            }
-          ],
-          "releaseTag": "Public",
-          "name": "AnagolayStatement",
-          "members": [
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/types!AnagolayStatement#data:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "readonly data: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "StatementData",
-                  "canonicalReference": "@anagolay/types!StatementData:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "data",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/types!AnagolayStatement#extra:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "readonly extra: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Option",
-                  "canonicalReference": "@polkadot/types-codec!Option:class"
-                },
-                {
-                  "kind": "Content",
-                  "text": "<"
-                },
-                {
-                  "kind": "Reference",
-                  "text": "StatementExtra",
-                  "canonicalReference": "@anagolay/types!StatementExtra:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": ">"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "extra",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 5
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/types!AnagolayStatement#id:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "readonly id: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "GenericId",
-                  "canonicalReference": "@anagolay/types!GenericId:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "id",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            }
-          ],
-          "extendsTokenRanges": [
-            {
-              "startIndex": 1,
-              "endIndex": 3
-            }
-          ]
-        },
-        {
-          "kind": "Interface",
-          "canonicalReference": "@anagolay/types!AnagolayStatementRecord:interface",
-          "docComment": "/**\n * @name AnagolayStatementRecord\n */\n",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export interface AnagolayStatementRecord extends "
-            },
-            {
-              "kind": "Reference",
-              "text": "Struct",
-              "canonicalReference": "@polkadot/types-codec!Struct:class"
-            },
-            {
-              "kind": "Content",
-              "text": " "
-            }
-          ],
-          "releaseTag": "Public",
-          "name": "AnagolayStatementRecord",
-          "members": [
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/types!AnagolayStatementRecord#accountId:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "readonly accountId: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "AccountId",
-                  "canonicalReference": "@polkadot/types!AccountId:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "accountId",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/types!AnagolayStatementRecord#blockNumber:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "readonly blockNumber: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "BlockNumber",
-                  "canonicalReference": "@polkadot/types!BlockNumber:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "blockNumber",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/types!AnagolayStatementRecord#record:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "readonly record: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "AnagolayStatement",
-                  "canonicalReference": "@anagolay/types!AnagolayStatement:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "record",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            }
-          ],
-          "extendsTokenRanges": [
-            {
-              "startIndex": 1,
-              "endIndex": 3
-            }
-          ]
-        },
-        {
           "kind": "Variable",
           "canonicalReference": "@anagolay/types!anagolaySupport:var",
           "docComment": "",
@@ -1190,723 +325,6 @@
               "endIndex": 3
             }
           ]
-        },
-        {
-          "kind": "Interface",
-          "canonicalReference": "@anagolay/types!AnAnagolayClaim:interface",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export interface AnAnagolayClaim "
-            }
-          ],
-          "releaseTag": "Public",
-          "name": "AnAnagolayClaim",
-          "members": [
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/types!AnAnagolayClaim#claimType:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "claimType: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "AnAnagolayClaimType",
-                  "canonicalReference": "@anagolay/types!AnAnagolayClaimType:enum"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "claimType",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/types!AnAnagolayClaim#expiration:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "expiration: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "AnExpiration",
-                  "canonicalReference": "@anagolay/types!AnExpiration:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "expiration",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/types!AnAnagolayClaim#holder:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "holder: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "AnCreatorId",
-                  "canonicalReference": "@anagolay/types!AnCreatorId:type"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "holder",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/types!AnAnagolayClaim#issuer:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "issuer: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "string"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "issuer",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/types!AnAnagolayClaim#onExpiration:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "onExpiration: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "string"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "onExpiration",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/types!AnAnagolayClaim#poeId:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "poeId: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "AnGenericId",
-                  "canonicalReference": "@anagolay/types!AnGenericId:type"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "poeId",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/types!AnAnagolayClaim#prevId:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "prevId: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "AnGenericId",
-                  "canonicalReference": "@anagolay/types!AnGenericId:type"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "prevId",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/types!AnAnagolayClaim#proportion:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "proportion: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "AnProportion",
-                  "canonicalReference": "@anagolay/types!AnProportion:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "proportion",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/types!AnAnagolayClaim#ruleId:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "ruleId: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "AnGenericId",
-                  "canonicalReference": "@anagolay/types!AnGenericId:type"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "ruleId",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/types!AnAnagolayClaim#subjectId:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "subjectId: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "AnGenericId",
-                  "canonicalReference": "@anagolay/types!AnGenericId:type"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "subjectId",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/types!AnAnagolayClaim#valid:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "valid: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "AnValidity",
-                  "canonicalReference": "@anagolay/types!AnValidity:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "valid",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            }
-          ],
-          "extendsTokenRanges": []
-        },
-        {
-          "kind": "Enum",
-          "canonicalReference": "@anagolay/types!AnAnagolayClaimType:enum",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export declare enum AnAnagolayClaimType "
-            }
-          ],
-          "releaseTag": "Public",
-          "name": "AnAnagolayClaimType",
-          "members": [
-            {
-              "kind": "EnumMember",
-              "canonicalReference": "@anagolay/types!AnAnagolayClaimType.COPYRIGHT:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "COPYRIGHT = "
-                },
-                {
-                  "kind": "Content",
-                  "text": "0"
-                }
-              ],
-              "releaseTag": "Public",
-              "name": "COPYRIGHT",
-              "initializerTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "EnumMember",
-              "canonicalReference": "@anagolay/types!AnAnagolayClaimType.OWNERSHIP:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "OWNERSHIP = "
-                },
-                {
-                  "kind": "Content",
-                  "text": "1"
-                }
-              ],
-              "releaseTag": "Public",
-              "name": "OWNERSHIP",
-              "initializerTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            }
-          ]
-        },
-        {
-          "kind": "Interface",
-          "canonicalReference": "@anagolay/types!AnAnagolayCopyrightClaim:interface",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export interface AnAnagolayCopyrightClaim extends "
-            },
-            {
-              "kind": "Reference",
-              "text": "AnAnagolayClaim",
-              "canonicalReference": "@anagolay/types!AnAnagolayClaim:interface"
-            },
-            {
-              "kind": "Content",
-              "text": " "
-            }
-          ],
-          "releaseTag": "Public",
-          "name": "AnAnagolayCopyrightClaim",
-          "members": [
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/types!AnAnagolayCopyrightClaim#claimType:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "claimType: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "AnAnagolayClaimType.COPYRIGHT",
-                  "canonicalReference": "@anagolay/types!AnAnagolayClaimType.COPYRIGHT:member"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "claimType",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            }
-          ],
-          "extendsTokenRanges": [
-            {
-              "startIndex": 1,
-              "endIndex": 3
-            }
-          ]
-        },
-        {
-          "kind": "Interface",
-          "canonicalReference": "@anagolay/types!AnAnagolayOwnershipClaim:interface",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export interface AnAnagolayOwnershipClaim extends "
-            },
-            {
-              "kind": "Reference",
-              "text": "AnAnagolayClaim",
-              "canonicalReference": "@anagolay/types!AnAnagolayClaim:interface"
-            },
-            {
-              "kind": "Content",
-              "text": " "
-            }
-          ],
-          "releaseTag": "Public",
-          "name": "AnAnagolayOwnershipClaim",
-          "members": [
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/types!AnAnagolayOwnershipClaim#claimType:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "claimType: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "AnAnagolayClaimType.OWNERSHIP",
-                  "canonicalReference": "@anagolay/types!AnAnagolayClaimType.OWNERSHIP:member"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "claimType",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            }
-          ],
-          "extendsTokenRanges": [
-            {
-              "startIndex": 1,
-              "endIndex": 3
-            }
-          ]
-        },
-        {
-          "kind": "Interface",
-          "canonicalReference": "@anagolay/types!AnAnagolaySignature:interface",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export interface AnAnagolaySignature "
-            }
-          ],
-          "releaseTag": "Public",
-          "name": "AnAnagolaySignature",
-          "members": [
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/types!AnAnagolaySignature#cid:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "cid: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "AnGenericId",
-                  "canonicalReference": "@anagolay/types!AnGenericId:type"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "cid",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/types!AnAnagolaySignature#sig:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "sig: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "string"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "sig",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/types!AnAnagolaySignature#sigKey:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "sigKey: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "string"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "sigKey",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            }
-          ],
-          "extendsTokenRanges": []
-        },
-        {
-          "kind": "Interface",
-          "canonicalReference": "@anagolay/types!AnAnagolaySignatures:interface",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export interface AnAnagolaySignatures "
-            }
-          ],
-          "releaseTag": "Public",
-          "name": "AnAnagolaySignatures",
-          "members": [
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/types!AnAnagolaySignatures#holder:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "holder: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "AnAnagolaySignature",
-                  "canonicalReference": "@anagolay/types!AnAnagolaySignature:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "holder",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/types!AnAnagolaySignatures#issuer:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "issuer: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "AnAnagolaySignature",
-                  "canonicalReference": "@anagolay/types!AnAnagolaySignature:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "issuer",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            }
-          ],
-          "extendsTokenRanges": []
-        },
-        {
-          "kind": "Interface",
-          "canonicalReference": "@anagolay/types!AnAnagolayStatement:interface",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export interface AnAnagolayStatement "
-            }
-          ],
-          "releaseTag": "Public",
-          "name": "AnAnagolayStatement",
-          "members": [
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/types!AnAnagolayStatement#data:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "data: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "AnStatementData",
-                  "canonicalReference": "@anagolay/types!AnStatementData:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "data",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/types!AnAnagolayStatement#id:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "id: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "AnGenericId",
-                  "canonicalReference": "@anagolay/types!AnGenericId:type"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "id",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            }
-          ],
-          "extendsTokenRanges": []
         },
         {
           "kind": "Interface",
@@ -2129,18 +547,330 @@
           }
         },
         {
-          "kind": "TypeAlias",
-          "canonicalReference": "@anagolay/types!AnCopyrightClaims:type",
+          "kind": "Interface",
+          "canonicalReference": "@anagolay/types!AnClaim:interface",
           "docComment": "",
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export declare type AnCopyrightClaims = "
+              "text": "export interface AnClaim "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "AnClaim",
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@anagolay/types!AnClaim#claimType:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "claimType: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "AnClaimType",
+                  "canonicalReference": "@anagolay/types!AnClaimType:enum"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "claimType",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@anagolay/types!AnClaim#expiration:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "expiration: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "AnExpiration",
+                  "canonicalReference": "@anagolay/types!AnExpiration:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "expiration",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@anagolay/types!AnClaim#holder:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "holder: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "AnCreatorId",
+                  "canonicalReference": "@anagolay/types!AnCreatorId:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "holder",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@anagolay/types!AnClaim#issuer:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "issuer: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "AnCreatorId",
+                  "canonicalReference": "@anagolay/types!AnCreatorId:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "issuer",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@anagolay/types!AnClaim#onExpiration:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "onExpiration: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "onExpiration",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@anagolay/types!AnClaim#poeId:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "poeId: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "AnProofId",
+                  "canonicalReference": "@anagolay/types!AnProofId:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "poeId",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@anagolay/types!AnClaim#prevId:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "prevId?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "AnStatementId",
+                  "canonicalReference": "@anagolay/types!AnStatementId:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "prevId",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@anagolay/types!AnClaim#proportion:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "proportion: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "AnProportion",
+                  "canonicalReference": "@anagolay/types!AnProportion:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "proportion",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@anagolay/types!AnClaim#subjectId:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "subjectId: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "AnProofId",
+                  "canonicalReference": "@anagolay/types!AnProofId:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "subjectId",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@anagolay/types!AnClaim#valid:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "valid: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "AnValidity",
+                  "canonicalReference": "@anagolay/types!AnValidity:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "valid",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@anagolay/types!AnClaim#workflowId:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "workflowId: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "AnWorkflowId",
+                  "canonicalReference": "@anagolay/types!AnWorkflowId:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "workflowId",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "extendsTokenRanges": []
+        },
+        {
+          "kind": "TypeAlias",
+          "canonicalReference": "@anagolay/types!AnClaims:type",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare type AnClaims = "
             },
             {
               "kind": "Reference",
-              "text": "AnAnagolayCopyrightClaim",
-              "canonicalReference": "@anagolay/types!AnAnagolayCopyrightClaim:interface"
+              "text": "AnClaim",
+              "canonicalReference": "@anagolay/types!AnClaim:interface"
             },
             {
               "kind": "Content",
@@ -2152,11 +882,68 @@
             }
           ],
           "releaseTag": "Public",
-          "name": "AnCopyrightClaims",
+          "name": "AnClaims",
           "typeTokenRange": {
             "startIndex": 1,
             "endIndex": 3
           }
+        },
+        {
+          "kind": "Enum",
+          "canonicalReference": "@anagolay/types!AnClaimType:enum",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare enum AnClaimType "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "AnClaimType",
+          "members": [
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@anagolay/types!AnClaimType.COPYRIGHT:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "COPYRIGHT = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "0"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "COPYRIGHT",
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@anagolay/types!AnClaimType.OWNERSHIP:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "OWNERSHIP = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "1"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "OWNERSHIP",
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ]
         },
         {
           "kind": "TypeAlias",
@@ -4222,36 +3009,6 @@
           "extendsTokenRanges": []
         },
         {
-          "kind": "TypeAlias",
-          "canonicalReference": "@anagolay/types!AnOwnershipClaims:type",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export declare type AnOwnershipClaims = "
-            },
-            {
-              "kind": "Reference",
-              "text": "AnAnagolayOwnershipClaim",
-              "canonicalReference": "@anagolay/types!AnAnagolayOwnershipClaim:interface"
-            },
-            {
-              "kind": "Content",
-              "text": "[]"
-            },
-            {
-              "kind": "Content",
-              "text": ";"
-            }
-          ],
-          "releaseTag": "Public",
-          "name": "AnOwnershipClaims",
-          "typeTokenRange": {
-            "startIndex": 1,
-            "endIndex": 3
-          }
-        },
-        {
           "kind": "Interface",
           "canonicalReference": "@anagolay/types!AnPhashInfo:interface",
           "docComment": "",
@@ -4301,8 +3058,8 @@
                 },
                 {
                   "kind": "Reference",
-                  "text": "AnGenericId",
-                  "canonicalReference": "@anagolay/types!AnGenericId:type"
+                  "text": "AnProofId",
+                  "canonicalReference": "@anagolay/types!AnProofId:type"
                 },
                 {
                   "kind": "Content",
@@ -4355,6 +3112,33 @@
               "isOptional": false,
               "releaseTag": "Public",
               "name": "data",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@anagolay/types!AnProof#extra:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "extra?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "AnProofExtra",
+                  "canonicalReference": "@anagolay/types!AnProofExtra:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "extra",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
@@ -4503,8 +3287,8 @@
                 },
                 {
                   "kind": "Reference",
-                  "text": "AnGenericId",
-                  "canonicalReference": "@anagolay/types!AnGenericId:type"
+                  "text": "AnWorkflowId",
+                  "canonicalReference": "@anagolay/types!AnWorkflowId:type"
                 },
                 {
                   "kind": "Content",
@@ -4521,17 +3305,17 @@
             },
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/types!AnProofData#ruleId:member",
+              "canonicalReference": "@anagolay/types!AnProofData#workflowId:member",
               "docComment": "",
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "ruleId: "
+                  "text": "workflowId: "
                 },
                 {
                   "kind": "Reference",
-                  "text": "AnGenericId",
-                  "canonicalReference": "@anagolay/types!AnGenericId:type"
+                  "text": "AnWorkflowId",
+                  "canonicalReference": "@anagolay/types!AnWorkflowId:type"
                 },
                 {
                   "kind": "Content",
@@ -4540,7 +3324,7 @@
               ],
               "isOptional": false,
               "releaseTag": "Public",
-              "name": "ruleId",
+              "name": "workflowId",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
@@ -4551,100 +3335,44 @@
         },
         {
           "kind": "Interface",
-          "canonicalReference": "@anagolay/types!AnProofInfo:interface",
+          "canonicalReference": "@anagolay/types!AnProofExtra:interface",
           "docComment": "",
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export interface AnProofInfo "
+              "text": "export interface AnProofExtra "
             }
           ],
           "releaseTag": "Public",
-          "name": "AnProofInfo",
-          "members": [
+          "name": "AnProofExtra",
+          "members": [],
+          "extendsTokenRanges": []
+        },
+        {
+          "kind": "TypeAlias",
+          "canonicalReference": "@anagolay/types!AnProofId:type",
+          "docComment": "",
+          "excerptTokens": [
             {
-              "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/types!AnProofInfo#accountId:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "accountId: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "AnAccountId",
-                  "canonicalReference": "@anagolay/types!AnAccountId:type"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "accountId",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
+              "kind": "Content",
+              "text": "export declare type AnProofId = "
             },
             {
-              "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/types!AnProofInfo#blockNumber:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "blockNumber: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "AnBlockNumber",
-                  "canonicalReference": "@anagolay/types!AnBlockNumber:type"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "blockNumber",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
+              "kind": "Reference",
+              "text": "AnGenericId",
+              "canonicalReference": "@anagolay/types!AnGenericId:type"
             },
             {
-              "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/types!AnProofInfo#proof:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "proof: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "AnProof",
-                  "canonicalReference": "@anagolay/types!AnProof:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "proof",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
+              "kind": "Content",
+              "text": ";"
             }
           ],
-          "extendsTokenRanges": []
+          "releaseTag": "Public",
+          "name": "AnProofId",
+          "typeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 2
+          }
         },
         {
           "kind": "TypeAlias",
@@ -4674,30 +3402,30 @@
         },
         {
           "kind": "Interface",
-          "canonicalReference": "@anagolay/types!AnProofWithStorage:interface",
+          "canonicalReference": "@anagolay/types!AnProofRecord:interface",
           "docComment": "",
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export interface AnProofWithStorage "
+              "text": "export interface AnProofRecord "
             }
           ],
           "releaseTag": "Public",
-          "name": "AnProofWithStorage",
+          "name": "AnProofRecord",
           "members": [
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/types!AnProofWithStorage#proofInfo:member",
+              "canonicalReference": "@anagolay/types!AnProofRecord#accountId:member",
               "docComment": "",
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "proofInfo: "
+                  "text": "accountId: "
                 },
                 {
                   "kind": "Reference",
-                  "text": "AnProofInfo",
-                  "canonicalReference": "@anagolay/types!AnProofInfo:interface"
+                  "text": "AnAccountId",
+                  "canonicalReference": "@anagolay/types!AnAccountId:type"
                 },
                 {
                   "kind": "Content",
@@ -4706,7 +3434,7 @@
               ],
               "isOptional": false,
               "releaseTag": "Public",
-              "name": "proofInfo",
+              "name": "accountId",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
@@ -4714,16 +3442,17 @@
             },
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/types!AnProofWithStorage#storageKey:member",
+              "canonicalReference": "@anagolay/types!AnProofRecord#blockNumber:member",
               "docComment": "",
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "storageKey: "
+                  "text": "blockNumber: "
                 },
                 {
-                  "kind": "Content",
-                  "text": "string"
+                  "kind": "Reference",
+                  "text": "AnBlockNumber",
+                  "canonicalReference": "@anagolay/types!AnBlockNumber:type"
                 },
                 {
                   "kind": "Content",
@@ -4732,7 +3461,34 @@
               ],
               "isOptional": false,
               "releaseTag": "Public",
-              "name": "storageKey",
+              "name": "blockNumber",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@anagolay/types!AnProofRecord#proof:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "proof: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "AnProof",
+                  "canonicalReference": "@anagolay/types!AnProof:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "proof",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
@@ -4827,6 +3583,198 @@
               "isOptional": false,
               "releaseTag": "Public",
               "name": "value",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "extendsTokenRanges": []
+        },
+        {
+          "kind": "Interface",
+          "canonicalReference": "@anagolay/types!AnSignature:interface",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface AnSignature "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "AnSignature",
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@anagolay/types!AnSignature#cid:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "cid: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "AnSignatureId",
+                  "canonicalReference": "@anagolay/types!AnSignatureId:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "cid",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@anagolay/types!AnSignature#sig:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "sig: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "sig",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@anagolay/types!AnSignature#sigKey:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "sigKey: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Characters",
+                  "canonicalReference": "@anagolay/types!Characters:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "sigKey",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "extendsTokenRanges": []
+        },
+        {
+          "kind": "TypeAlias",
+          "canonicalReference": "@anagolay/types!AnSignatureId:type",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare type AnSignatureId = "
+            },
+            {
+              "kind": "Reference",
+              "text": "AnGenericId",
+              "canonicalReference": "@anagolay/types!AnGenericId:type"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "AnSignatureId",
+          "typeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 2
+          }
+        },
+        {
+          "kind": "Interface",
+          "canonicalReference": "@anagolay/types!AnSignatures:interface",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface AnSignatures "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "AnSignatures",
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@anagolay/types!AnSignatures#holder:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "holder: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "AnSignature",
+                  "canonicalReference": "@anagolay/types!AnSignature:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "holder",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@anagolay/types!AnSignatures#issuer:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "issuer: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "AnSignature",
+                  "canonicalReference": "@anagolay/types!AnSignature:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "issuer",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
@@ -4945,8 +3893,8 @@
             },
             {
               "kind": "Reference",
-              "text": "AnAnagolayStatement",
-              "canonicalReference": "@anagolay/types!AnAnagolayStatement:interface"
+              "text": "OriginalAnStatement",
+              "canonicalReference": "@anagolay/types!AnStatement:interface"
             },
             {
               "kind": "Content",
@@ -4984,8 +3932,8 @@
                 },
                 {
                   "kind": "Reference",
-                  "text": "AnAnagolayClaim",
-                  "canonicalReference": "@anagolay/types!AnAnagolayClaim:interface"
+                  "text": "AnClaim",
+                  "canonicalReference": "@anagolay/types!AnClaim:interface"
                 },
                 {
                   "kind": "Content",
@@ -5011,8 +3959,8 @@
                 },
                 {
                   "kind": "Reference",
-                  "text": "AnAnagolaySignatures",
-                  "canonicalReference": "@anagolay/types!AnAnagolaySignatures:interface"
+                  "text": "AnSignatures",
+                  "canonicalReference": "@anagolay/types!AnSignatures:interface"
                 },
                 {
                   "kind": "Content",
@@ -5032,20 +3980,61 @@
         },
         {
           "kind": "Interface",
-          "canonicalReference": "@anagolay/types!AnStatementInfo:interface",
+          "canonicalReference": "@anagolay/types!AnStatementExtra:interface",
           "docComment": "",
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export interface AnStatementInfo "
+              "text": "export interface AnStatementExtra "
             }
           ],
           "releaseTag": "Public",
-          "name": "AnStatementInfo",
+          "name": "AnStatementExtra",
+          "members": [],
+          "extendsTokenRanges": []
+        },
+        {
+          "kind": "TypeAlias",
+          "canonicalReference": "@anagolay/types!AnStatementId:type",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare type AnStatementId = "
+            },
+            {
+              "kind": "Reference",
+              "text": "AnGenericId",
+              "canonicalReference": "@anagolay/types!AnGenericId:type"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "AnStatementId",
+          "typeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 2
+          }
+        },
+        {
+          "kind": "Interface",
+          "canonicalReference": "@anagolay/types!AnStatementRecord:interface",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface AnStatementRecord "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "AnStatementRecord",
           "members": [
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/types!AnStatementInfo#accountId:member",
+              "canonicalReference": "@anagolay/types!AnStatementRecord#accountId:member",
               "docComment": "",
               "excerptTokens": [
                 {
@@ -5072,7 +4061,7 @@
             },
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/types!AnStatementInfo#blockNumber:member",
+              "canonicalReference": "@anagolay/types!AnStatementRecord#blockNumber:member",
               "docComment": "",
               "excerptTokens": [
                 {
@@ -5099,7 +4088,7 @@
             },
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/types!AnStatementInfo#statement:member",
+              "canonicalReference": "@anagolay/types!AnStatementRecord#statement:member",
               "docComment": "",
               "excerptTokens": [
                 {
@@ -5108,8 +4097,8 @@
                 },
                 {
                   "kind": "Reference",
-                  "text": "AnAnagolayStatement",
-                  "canonicalReference": "@anagolay/types!AnAnagolayStatement:interface"
+                  "text": "AnStatement",
+                  "canonicalReference": "@anagolay/types!AnStatement:interface"
                 },
                 {
                   "kind": "Content",
@@ -5138,8 +4127,8 @@
             },
             {
               "kind": "Reference",
-              "text": "AnAnagolayStatement",
-              "canonicalReference": "@anagolay/types!AnAnagolayStatement:interface"
+              "text": "AnStatement",
+              "canonicalReference": "@anagolay/types!AnStatement:type"
             },
             {
               "kind": "Content",
@@ -5156,75 +4145,6 @@
             "startIndex": 1,
             "endIndex": 3
           }
-        },
-        {
-          "kind": "Interface",
-          "canonicalReference": "@anagolay/types!AnStatementWithStorage:interface",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export interface AnStatementWithStorage "
-            }
-          ],
-          "releaseTag": "Public",
-          "name": "AnStatementWithStorage",
-          "members": [
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/types!AnStatementWithStorage#statementInfo:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "statementInfo: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "AnStatementInfo",
-                  "canonicalReference": "@anagolay/types!AnStatementInfo:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "statementInfo",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/types!AnStatementWithStorage#storageKey:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "storageKey: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "string"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "storageKey",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            }
-          ],
-          "extendsTokenRanges": []
         },
         {
           "kind": "TypeAlias",
@@ -6535,6 +5455,454 @@
           "releaseTag": "Public",
           "name": "Characters",
           "members": [],
+          "extendsTokenRanges": [
+            {
+              "startIndex": 1,
+              "endIndex": 3
+            }
+          ]
+        },
+        {
+          "kind": "Interface",
+          "canonicalReference": "@anagolay/types!Claim:interface",
+          "docComment": "/**\n * @name Claim\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface Claim extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "Struct",
+              "canonicalReference": "@polkadot/types-codec!Struct:class"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "Claim",
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@anagolay/types!Claim#claimType:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "readonly claimType: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ClaimType",
+                  "canonicalReference": "@anagolay/types!ClaimType:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "claimType",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@anagolay/types!Claim#expiration:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "readonly expiration: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Expiration",
+                  "canonicalReference": "@anagolay/types!Expiration:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "expiration",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@anagolay/types!Claim#holder:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "readonly holder: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "CreatorId",
+                  "canonicalReference": "@anagolay/types!CreatorId:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "holder",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@anagolay/types!Claim#issuer:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "readonly issuer: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "CreatorId",
+                  "canonicalReference": "@anagolay/types!CreatorId:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "issuer",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@anagolay/types!Claim#onExpiration:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "readonly onExpiration: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Bytes",
+                  "canonicalReference": "@polkadot/types-codec!Bytes:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "onExpiration",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@anagolay/types!Claim#poeId:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "readonly poeId: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ProofId",
+                  "canonicalReference": "@anagolay/types!ProofId:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "poeId",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@anagolay/types!Claim#prevId:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "readonly prevId: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Option",
+                  "canonicalReference": "@polkadot/types-codec!Option:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "StatementId",
+                  "canonicalReference": "@anagolay/types!StatementId:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "prevId",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 5
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@anagolay/types!Claim#proportion:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "readonly proportion: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Proportion",
+                  "canonicalReference": "@anagolay/types!Proportion:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "proportion",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@anagolay/types!Claim#subjectId:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "readonly subjectId: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ProofId",
+                  "canonicalReference": "@anagolay/types!ProofId:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "subjectId",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@anagolay/types!Claim#valid:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "readonly valid: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Validity",
+                  "canonicalReference": "@anagolay/types!Validity:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "valid",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@anagolay/types!Claim#workflowId:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "readonly workflowId: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "WorkflowId",
+                  "canonicalReference": "@anagolay/types!WorkflowId:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "workflowId",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "extendsTokenRanges": [
+            {
+              "startIndex": 1,
+              "endIndex": 3
+            }
+          ]
+        },
+        {
+          "kind": "Interface",
+          "canonicalReference": "@anagolay/types!ClaimType:interface",
+          "docComment": "/**\n * @name ClaimType\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface ClaimType extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "Enum",
+              "canonicalReference": "@polkadot/types-codec!Enum:class"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "ClaimType",
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@anagolay/types!ClaimType#isCopyright:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "readonly isCopyright: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "isCopyright",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@anagolay/types!ClaimType#isOwnership:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "readonly isOwnership: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "isOwnership",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@anagolay/types!ClaimType#type:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "readonly type: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "'Copyright' | 'Ownership'"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "type",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
           "extendsTokenRanges": [
             {
               "startIndex": 1,
@@ -8803,7 +8171,7 @@
             },
             {
               "kind": "Content",
-              "text": "'AnBuffer' | 'AnByteArray' | 'AnFileBuffer' | 'AnStatement' | 'AnStatements' | 'AnProofParams' | 'AnProofParams[]' | 'AnString' | 'AnAny' | 'AnImageMetadata' | 'AnSplitParams' | 'AnGenericId' | 'AnBoolean' | 'AnNull' | 'AnImageData' | 'AnOwnershipClaims' | 'AnCopyrightClaims' | 'AnGenericIds' | 'AnAnagolayClaim[]' | 'AnAnagolaySignatures[]' | 'AnSigner' | '[AnAnagolayClaim[],AnAnagolaySignatures[]]' | 'StringOrBuffer' | 'SaveStatementReturn[]'"
+              "text": "'AnBuffer' | 'AnByteArray' | 'AnFileBuffer' | 'AnStatement' | 'AnStatements' | 'AnProofParams' | 'AnProofParams[]' | 'AnString' | 'AnAny' | 'AnImageMetadata' | 'AnSplitParams' | 'AnGenericId' | 'AnBoolean' | 'AnNull' | 'AnImageData' | 'AnOwnershipClaims' | 'AnCopyrightClaims' | 'AnGenericIds' | 'AnClaim[]' | 'AnSignatures[]' | 'AnSigner' | '[AnClaim[],AnSignatures[]]' | 'StringOrBuffer' | 'SaveStatementReturn[]'"
             },
             {
               "kind": "Content",
@@ -9171,8 +8539,8 @@
                 },
                 {
                   "kind": "Reference",
-                  "text": "GenericId",
-                  "canonicalReference": "@anagolay/types!GenericId:interface"
+                  "text": "ProofId",
+                  "canonicalReference": "@anagolay/types!ProofId:interface"
                 },
                 {
                   "kind": "Content",
@@ -9534,8 +8902,8 @@
                 },
                 {
                   "kind": "Reference",
-                  "text": "GenericId",
-                  "canonicalReference": "@anagolay/types!GenericId:interface"
+                  "text": "WorkflowId",
+                  "canonicalReference": "@anagolay/types!WorkflowId:interface"
                 },
                 {
                   "kind": "Content",
@@ -9552,17 +8920,17 @@
             },
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/types!ProofData#ruleId:member",
+              "canonicalReference": "@anagolay/types!ProofData#workflowId:member",
               "docComment": "",
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "readonly ruleId: "
+                  "text": "readonly workflowId: "
                 },
                 {
                   "kind": "Reference",
-                  "text": "GenericId",
-                  "canonicalReference": "@anagolay/types!GenericId:interface"
+                  "text": "WorkflowId",
+                  "canonicalReference": "@anagolay/types!WorkflowId:interface"
                 },
                 {
                   "kind": "Content",
@@ -9571,7 +8939,7 @@
               ],
               "isOptional": false,
               "releaseTag": "Public",
-              "name": "ruleId",
+              "name": "workflowId",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
@@ -9616,6 +8984,35 @@
         },
         {
           "kind": "Interface",
+          "canonicalReference": "@anagolay/types!ProofId:interface",
+          "docComment": "/**\n * @name ProofId\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface ProofId extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "GenericId",
+              "canonicalReference": "@anagolay/types!GenericId:interface"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "ProofId",
+          "members": [],
+          "extendsTokenRanges": [
+            {
+              "startIndex": 1,
+              "endIndex": 3
+            }
+          ]
+        },
+        {
+          "kind": "Interface",
           "canonicalReference": "@anagolay/types!ProofParams:interface",
           "docComment": "/**\n * @name ProofParams\n */\n",
           "excerptTokens": [
@@ -9647,8 +9044,8 @@
                 },
                 {
                   "kind": "Reference",
-                  "text": "Bytes",
-                  "canonicalReference": "@polkadot/types-codec!Bytes:class"
+                  "text": "Characters",
+                  "canonicalReference": "@anagolay/types!Characters:interface"
                 },
                 {
                   "kind": "Content",
@@ -9992,6 +9389,354 @@
         },
         {
           "kind": "Interface",
+          "canonicalReference": "@anagolay/types!Signature:interface",
+          "docComment": "/**\n * @name Signature\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface Signature extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "Struct",
+              "canonicalReference": "@polkadot/types-codec!Struct:class"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "Signature",
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@anagolay/types!Signature#cid:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "readonly cid: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "SignatureId",
+                  "canonicalReference": "@anagolay/types!SignatureId:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "cid",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@anagolay/types!Signature#sig:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "readonly sig: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Bytes",
+                  "canonicalReference": "@polkadot/types-codec!Bytes:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "sig",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@anagolay/types!Signature#sigKey:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "readonly sigKey: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Characters",
+                  "canonicalReference": "@anagolay/types!Characters:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "sigKey",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "extendsTokenRanges": [
+            {
+              "startIndex": 1,
+              "endIndex": 3
+            }
+          ]
+        },
+        {
+          "kind": "Interface",
+          "canonicalReference": "@anagolay/types!SignatureId:interface",
+          "docComment": "/**\n * @name SignatureId\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface SignatureId extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "GenericId",
+              "canonicalReference": "@anagolay/types!GenericId:interface"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "SignatureId",
+          "members": [],
+          "extendsTokenRanges": [
+            {
+              "startIndex": 1,
+              "endIndex": 3
+            }
+          ]
+        },
+        {
+          "kind": "Interface",
+          "canonicalReference": "@anagolay/types!Signatures:interface",
+          "docComment": "/**\n * @name Signatures\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface Signatures extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "Struct",
+              "canonicalReference": "@polkadot/types-codec!Struct:class"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "Signatures",
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@anagolay/types!Signatures#holder:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "readonly holder: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Signature",
+                  "canonicalReference": "@anagolay/types!Signature:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "holder",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@anagolay/types!Signatures#issuer:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "readonly issuer: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Signature",
+                  "canonicalReference": "@anagolay/types!Signature:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "issuer",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "extendsTokenRanges": [
+            {
+              "startIndex": 1,
+              "endIndex": 3
+            }
+          ]
+        },
+        {
+          "kind": "Interface",
+          "canonicalReference": "@anagolay/types!Statement:interface",
+          "docComment": "/**\n * @name Statement\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface Statement extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "Struct",
+              "canonicalReference": "@polkadot/types-codec!Struct:class"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "Statement",
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@anagolay/types!Statement#data:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "readonly data: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "StatementData",
+                  "canonicalReference": "@anagolay/types!StatementData:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "data",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@anagolay/types!Statement#extra:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "readonly extra: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Option",
+                  "canonicalReference": "@polkadot/types-codec!Option:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "StatementExtra",
+                  "canonicalReference": "@anagolay/types!StatementExtra:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "extra",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 5
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@anagolay/types!Statement#id:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "readonly id: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "GenericId",
+                  "canonicalReference": "@anagolay/types!GenericId:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "id",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "extendsTokenRanges": [
+            {
+              "startIndex": 1,
+              "endIndex": 3
+            }
+          ]
+        },
+        {
+          "kind": "Interface",
           "canonicalReference": "@anagolay/types!StatementData:interface",
           "docComment": "/**\n * @name StatementData\n */\n",
           "excerptTokens": [
@@ -10023,8 +9768,8 @@
                 },
                 {
                   "kind": "Reference",
-                  "text": "AnagolayClaim",
-                  "canonicalReference": "@anagolay/types!AnagolayClaim:interface"
+                  "text": "Claim",
+                  "canonicalReference": "@anagolay/types!Claim:interface"
                 },
                 {
                   "kind": "Content",
@@ -10050,8 +9795,8 @@
                 },
                 {
                   "kind": "Reference",
-                  "text": "AnagolaySignatures",
-                  "canonicalReference": "@anagolay/types!AnagolaySignatures:interface"
+                  "text": "Signatures",
+                  "canonicalReference": "@anagolay/types!Signatures:interface"
                 },
                 {
                   "kind": "Content",
@@ -10096,6 +9841,146 @@
           "releaseTag": "Public",
           "name": "StatementExtra",
           "members": [],
+          "extendsTokenRanges": [
+            {
+              "startIndex": 1,
+              "endIndex": 3
+            }
+          ]
+        },
+        {
+          "kind": "Interface",
+          "canonicalReference": "@anagolay/types!StatementId:interface",
+          "docComment": "/**\n * @name StatementId\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface StatementId extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "GenericId",
+              "canonicalReference": "@anagolay/types!GenericId:interface"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "StatementId",
+          "members": [],
+          "extendsTokenRanges": [
+            {
+              "startIndex": 1,
+              "endIndex": 3
+            }
+          ]
+        },
+        {
+          "kind": "Interface",
+          "canonicalReference": "@anagolay/types!StatementRecord:interface",
+          "docComment": "/**\n * @name StatementRecord\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface StatementRecord extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "Struct",
+              "canonicalReference": "@polkadot/types-codec!Struct:class"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "StatementRecord",
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@anagolay/types!StatementRecord#accountId:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "readonly accountId: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "AccountId",
+                  "canonicalReference": "@polkadot/types!AccountId:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "accountId",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@anagolay/types!StatementRecord#blockNumber:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "readonly blockNumber: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "BlockNumber",
+                  "canonicalReference": "@polkadot/types!BlockNumber:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "blockNumber",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@anagolay/types!StatementRecord#record:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "readonly record: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Statement",
+                  "canonicalReference": "@anagolay/types!Statement:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "record",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
           "extendsTokenRanges": [
             {
               "startIndex": 1,
