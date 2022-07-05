@@ -1,9 +1,7 @@
+image: docker.io/woss/gitpod-workspace:gitpod_workspace-full_2022-05-08-14-31-53
 tasks:
-  - name: install the remote-signer
-    before: |
-      sudo sh -c 'curl https://ipfs.anagolay.network/ipfs/bafybeicurfm4pbyyf6iqlj26bvmwr6cperfuimgo734ls7fj2umgmmbawq > /usr/local/bin/remote-signer && chmod +x /usr/local/bin/remote-signer' \
-      && git config --global gpg.program "remote-signer" \
-      && git config --global commit.gpgsign true
+  - name: prep-env
+    init: pnpm env use --global lts && node $GITPOD_REPO_ROOT/common/scripts/install-run-rush.js update && exit
 
 vscode:
   extensions:
