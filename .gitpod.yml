@@ -1,7 +1,7 @@
 image: docker.io/woss/gitpod-workspace:gitpod_workspace-full_2022-05-08-14-31-53
 tasks:
   - name: prep-env
-    init: pnpm env use --global 18.4.0 && node $GITPOD_REPO_ROOT/common/scripts/install-run-rush.js update && exit
+    init: pnpm env use --global lts && node $GITPOD_REPO_ROOT/common/scripts/install-run-rush.js update && exit
 
 vscode:
   extensions:
