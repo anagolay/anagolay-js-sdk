@@ -34,7 +34,7 @@ cache:
 .install-ipfs-cli-and-setup: &install-ipfs-cli-and-setup
   - echo "Downloading anagolay ipfs CLI which works with the ipfsAuthProxy."
   - |
-    curl https://ipfs.anagolay.network/ipfs/"$ANAGOLAY_IPFS_CLI_CID" > /usr/local/bin/ipfsCli
+    curl https://ipfs.anagolay.network/ipfs/bafybeig634knkl57gqgkmh3fti6zxisfcd47swetf5lastcx2waboa4a4a > /usr/local/bin/ipfsCli
     chmod +x /usr/local/bin/ipfsCli
 
 # https://docs.gitlab.com/ee/ci/yaml/yaml_optimization.html#yaml-anchors-for-scripts
