@@ -1,5 +1,5 @@
 # https://docs.gitlab.com/ee/ci/jobs/job_control.html
-image: node:16-bullseye
+image: node:18-bullseye
 stages:
   - check
   - test
@@ -17,18 +17,18 @@ cache:
     - ANAGOLAY_CLI_BIN_CID
     - ANAGOLAY_CUSTOM_TYPES_CID
 
-workflow:
-  rules:
-    - if: $CI_COMMIT_MESSAGE =~ /-draft$/
-      when: never
-    - if: $CI_MERGE_REQUEST_IID
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+# workflow:
+#   rules:
+#     - if: $CI_COMMIT_MESSAGE =~ /-draft$/
+#       when: never
+#     - if: $CI_MERGE_REQUEST_IID
+#     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
 
-include:
-  - template: Security/Dependency-Scanning.gitlab-ci.yml
-  - template: Security/License-Scanning.gitlab-ci.yml
-  - template: Security/SAST.gitlab-ci.yml
-  - template: Security/Secret-Detection.gitlab-ci.yml
+# include:
+#   - template: Security/Dependency-Scanning.gitlab-ci.yml
+#   - template: Security/License-Scanning.gitlab-ci.yml
+#   - template: Security/SAST.gitlab-ci.yml
+#   - template: Security/Secret-Detection.gitlab-ci.yml
 
 # include this where you need it. like in before_script
 .install-ipfs-cli-and-setup: &install-ipfs-cli-and-setup
@@ -40,8 +40,8 @@ include:
 # https://docs.gitlab.com/ee/ci/yaml/yaml_optimization.html#yaml-anchors-for-scripts
 .install-pnpm: &install-pnpm
   - |
-    curl https://ipfs.anagolay.network/ipfs/"$PNPM_IPFS_CID" > /usr/local/bin/pnpm
-    chmod +x /usr/local/bin/pnpm
+    curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm@7
+    pnpm config set store-dir common/temp/pnpm-store
     node --version
     pnpm --version
     git --version
