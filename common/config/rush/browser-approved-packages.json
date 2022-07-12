@@ -39,6 +39,10 @@
       "allowedCategories": [ "websites" ]
     },
     {
+      "name": "@fontsource/fira-mono",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
       "name": "@mdx-js/react",
       "allowedCategories": [ "websites" ]
     },
@@ -373,6 +377,10 @@
     {
       "name": "typescript",
       "allowedCategories": [ "libraries", "webapp" ]
+    },
+    {
+      "name": "vite",
+      "allowedCategories": [ "webapp" ]
     },
     {
       "name": "webpack",

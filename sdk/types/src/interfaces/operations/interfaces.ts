@@ -3,7 +3,6 @@
  * THE POLKADOT API TYPES ARE IN THE definitions.ts file
  */
 
-import { AnBoolean } from '../..';
 import {
   AnAccountId,
   AnAnagolayVersionExtra,
@@ -27,7 +26,7 @@ export interface AnOperationData {
   output: AnTypeName;
   repository: AnCharacters;
   license: AnCharacters;
-  nostd: AnBoolean;
+  features: AnCharacters[];
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

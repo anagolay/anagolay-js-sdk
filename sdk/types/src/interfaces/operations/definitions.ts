@@ -19,8 +19,13 @@ export const OperationsCustomTypes: RegistryTypes = {
     repository: 'Characters',
     /// Short name of the license, like "Apache-2.0"
     license: 'Characters',
-    /// Indicator of the capability of the Operation to work in no-std environment
-    nostd: 'bool',
+    /// Indicator of the features of the binary. Typically the following
+    /// - `config_<key>` with _key_ coming from the config map allows conditional compilation of the
+    ///   feature `config_<key>_<value>` where _value_ is the configuration selected at the moment the
+    ///   operation is instantiated
+    /// - `std` declares support for nostd as default and possibility to work with std. If this
+    ///   feature is missing, the operation is intended to be working **only** in std
+    features: 'Vec<Characters>',
   },
   OperationExtra: {},
   Operation: {
