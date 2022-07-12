@@ -3,9 +3,13 @@ tasks:
   - name: prep-env
     init: pnpm env use --global lts && node $GITPOD_REPO_ROOT/common/scripts/install-run-rush.js update && exit
 
+ports:
+  - port: 7766
+    visibility: public
+    onOpen: open-preview
+
 vscode:
   extensions:
-    - PKief.material-icon-theme
     - esbenp.prettier-vscode
     - donjayamanne.githistory
     - eamodio.gitlens

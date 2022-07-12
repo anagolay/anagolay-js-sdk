@@ -9,7 +9,6 @@
 import type { AccountId } from '@polkadot/types/interfaces/runtime';
 import type { AnagolayVersionExtra as AnagolayVersionExtra_2 } from '@anagolay/types/interfaces/anagolaySupport';
 import type { BlockNumber } from '@polkadot/types/interfaces/runtime';
-import type { bool } from '@polkadot/types-codec';
 import type { BTreeMap } from '@polkadot/types-codec';
 import type { Bytes } from '@polkadot/types-codec';
 import type { Characters as Characters_2 } from '@anagolay/types/interfaces/anagolaySupport';
@@ -245,6 +244,8 @@ export interface AnOperationData {
     // (undocumented)
     description: AnCharacters;
     // (undocumented)
+    features: AnCharacters[];
+    // (undocumented)
     groups: AnForWhat[];
     // (undocumented)
     inputs: AnTypeName[];
@@ -252,8 +253,6 @@ export interface AnOperationData {
     license: AnCharacters;
     // (undocumented)
     name: AnCharacters;
-    // (undocumented)
-    nostd: AnBoolean;
     // (undocumented)
     output: AnTypeName;
     // (undocumented)
@@ -760,6 +759,8 @@ export interface OperationData extends Struct {
     // (undocumented)
     readonly description: Characters_2;
     // (undocumented)
+    readonly features: Vec<Characters_2>;
+    // (undocumented)
     readonly groups: Vec<ForWhat_2>;
     // (undocumented)
     readonly inputs: Vec<TypeName>;
@@ -767,8 +768,6 @@ export interface OperationData extends Struct {
     readonly license: Characters_2;
     // (undocumented)
     readonly name: Characters_2;
-    // (undocumented)
-    readonly nostd: bool;
     // (undocumented)
     readonly output: TypeName;
     // (undocumented)

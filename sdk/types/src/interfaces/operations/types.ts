@@ -1,8 +1,16 @@
 // Auto-generated via `yarn polkadot-types-from-defs`, do not edit
 /* eslint-disable */
 
-import type { AnagolayVersionExtra, Characters, ForWhat, GenericId, OperationId, VersionId, WasmArtifactSubType } from '@anagolay/types/interfaces/anagolaySupport';
-import type { BTreeMap, Bytes, Enum, Option, Struct, Vec, bool } from '@polkadot/types-codec';
+import type {
+  AnagolayVersionExtra,
+  Characters,
+  ForWhat,
+  GenericId,
+  OperationId,
+  VersionId,
+  WasmArtifactSubType,
+} from '@anagolay/types/interfaces/anagolaySupport';
+import type { BTreeMap, Bytes, Enum, Option, Struct, Vec } from '@polkadot/types-codec';
 import type { AccountId, BlockNumber } from '@polkadot/types/interfaces/runtime';
 
 /** @name Operation */
@@ -38,7 +46,7 @@ export interface OperationData extends Struct {
   readonly output: TypeName;
   readonly repository: Characters;
   readonly license: Characters;
-  readonly nostd: bool;
+  readonly features: Vec<Characters>;
 }
 
 /** @name OperationExtra */

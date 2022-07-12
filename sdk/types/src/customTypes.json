@@ -12,24 +12,10 @@
   "SignatureId": "GenericId",
   "VersionId": "GenericId",
   "ForWhat": {
-    "_enum": [
-      "GENERIC",
-      "PHOTO",
-      "CAMERA",
-      "LENS",
-      "SMARTPHONE",
-      "USER",
-      "SYS",
-      "FLOWCONTROL"
-    ]
+    "_enum": ["GENERIC", "PHOTO", "CAMERA", "LENS", "SMARTPHONE", "USER", "SYS", "FLOWCONTROL"]
   },
   "WasmArtifactSubType": {
-    "_enum": [
-      "Cjs",
-      "Esm",
-      "Wasm",
-      "Web"
-    ]
+    "_enum": ["Cjs", "Esm", "Wasm", "Web"]
   },
   "AnagolayVersionExtra": {
     "createdAt": "u64"
@@ -44,7 +30,7 @@
     "output": "TypeName",
     "repository": "Characters",
     "license": "Characters",
-    "nostd": "bool"
+    "features": "Vec<Characters>"
   },
   "OperationExtra": {},
   "Operation": {
@@ -182,24 +168,14 @@
     "until": "Vec<u8>"
   },
   "ExpirationType": {
-    "_enum": [
-      "FOREVER",
-      "YEARS",
-      "MONTHS",
-      "DAYS",
-      "MINUTES",
-      "SECONDS"
-    ]
+    "_enum": ["FOREVER", "YEARS", "MONTHS", "DAYS", "MINUTES", "SECONDS"]
   },
   "Expiration": {
     "expirationType": "ExpirationType",
     "value": "Vec<u8>"
   },
   "ClaimType": {
-    "_enum": [
-      "COPYRIGHT",
-      "OWNERSHIP"
-    ]
+    "_enum": ["COPYRIGHT", "OWNERSHIP"]
   },
   "Claim": {
     "prevId": "Option<StatementId>",

@@ -2159,6 +2159,37 @@
             },
             {
               "kind": "PropertySignature",
+              "canonicalReference": "@anagolay/types!AnOperationData#features:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "features: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "AnCharacters",
+                  "canonicalReference": "@anagolay/types!AnCharacters:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "features",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              }
+            },
+            {
+              "kind": "PropertySignature",
               "canonicalReference": "@anagolay/types!AnOperationData#groups:member",
               "docComment": "",
               "excerptTokens": [
@@ -2268,33 +2299,6 @@
               "isOptional": false,
               "releaseTag": "Public",
               "name": "name",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/types!AnOperationData#nostd:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "nostd: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "AnBoolean",
-                  "canonicalReference": "@anagolay/types!AnBoolean:type"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "nostd",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
@@ -7179,6 +7183,46 @@
             },
             {
               "kind": "PropertySignature",
+              "canonicalReference": "@anagolay/types!OperationData#features:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "readonly features: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Vec",
+                  "canonicalReference": "@polkadot/types-codec!Vec:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Characters",
+                  "canonicalReference": "@anagolay/types!Characters:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "features",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 5
+              }
+            },
+            {
+              "kind": "PropertySignature",
               "canonicalReference": "@anagolay/types!OperationData#groups:member",
               "docComment": "",
               "excerptTokens": [
@@ -7306,33 +7350,6 @@
               "isOptional": false,
               "releaseTag": "Public",
               "name": "name",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/types!OperationData#nostd:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "readonly nostd: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "bool",
-                  "canonicalReference": "@polkadot/types-codec!bool:class"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "nostd",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
