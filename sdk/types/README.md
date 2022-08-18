@@ -1,4 +1,7 @@
-# All Anagolay Network custom types and interfaces
+
+# Anagolay Network custom types and interfaces
+
+![Anagolay SDK banner](https://macula.kelp.digital/ipfs/bafybeih6hpvgetxd5uer6jv3ys3xtoyfrlk2x7okqmm6d4ci7dthigyvzm)
 
 This module cantinas ALL custom types for interaction with the Anagolay Network and the Anagolay Network API.
 

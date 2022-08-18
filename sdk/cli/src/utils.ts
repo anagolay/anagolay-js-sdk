@@ -9,16 +9,14 @@ import { ApiPromise } from '@polkadot/api';
 import { KeyringPair } from '@polkadot/keyring/types';
 import { AccountInfo } from '@polkadot/types/interfaces';
 import { KeypairType } from '@polkadot/util-crypto/types';
-import { Spinner } from 'clui';
 import inquirer from 'inquirer';
 import { mkdirSync } from 'node:fs';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { homedir } from 'node:os';
 import { resolve } from 'node:path';
 import { equals, isEmpty } from 'ramda';
-import signale from 'signale';
 
-import { connectToApi, createKeyringPairFromSeed, getAlice, transferToAccount } from './api';
+import { createKeyringPairFromSeed, getAlice, transferToAccount } from './api';
 
 /**
  * Make the logs directory into the `os.homedir()/.logs/anagolay`
@@ -97,25 +95,6 @@ export async function readSettingsFile(): Promise<ISettings> {
 //   const { enableTelemetry } = await readSettingsFile();
 //   return enableTelemetry;
 // }
-
-/**
- * Connect to the anagolay chain
- */
-export async function connectToAnagolayChain(): Promise<ApiPromise> {
-  const spinner = new Spinner('');
-  spinner.message('Connecting to the Anagolay chain ...');
-  spinner.start();
-
-  const api = await connectToApi();
-  // Retrieve the chain & node information information via rpc calls
-  const [nodeName, nodeVersion] = await Promise.all([api.rpc.system.name(), api.rpc.system.version()]);
-
-  spinner.message('Connected!');
-  spinner.stop();
-  signale.info(`Connected to ${nodeName} v${nodeVersion}`);
-
-  return api;
-}
 
 /**
  * Ensure that the selected account has enough balance.

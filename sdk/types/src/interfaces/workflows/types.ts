@@ -1,8 +1,17 @@
 // Auto-generated via `yarn polkadot-types-from-defs`, do not edit
 /* eslint-disable */
 
-import type { AnagolayVersionExtra, Characters, CreatorId, ForWhat, GenericId, VersionId, WasmArtifactSubType, WorkflowId } from '@anagolay/types/interfaces/anagolaySupport';
-import type { BTreeMap, Bytes, Enum, Option, Struct, Vec } from '@polkadot/types-codec';
+import type {
+  AnagolayVersionExtra,
+  Characters,
+  CreatorId,
+  ForWhat,
+  GenericId,
+  VersionId,
+  WasmArtifactSubType,
+  WorkflowId,
+} from '@anagolay/types/interfaces/anagolaySupport';
+import type { BTreeMap, Enum, Option, Struct, Vec, i8 } from '@polkadot/types-codec';
 import type { AccountId, BlockNumber } from '@polkadot/types/interfaces/runtime';
 
 /** @name OperationVersionReference */
@@ -55,7 +64,7 @@ export interface WorkflowRecord extends Struct {
 
 /** @name WorkflowSegment */
 export interface WorkflowSegment extends Struct {
-  readonly inputs: Bytes;
+  readonly inputs: Vec<i8>;
   readonly sequence: Vec<OperationVersionReference>;
 }
 

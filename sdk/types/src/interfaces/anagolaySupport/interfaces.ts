@@ -13,6 +13,8 @@ export type AnProofId = AnGenericId;
 export type AnSignatureId = AnGenericId;
 export type AnVersionId = AnGenericId;
 
+export type AnTypeName = AnCharacters;
+
 export type AnAccountId = string;
 export type AnBlockNumber = number;
 

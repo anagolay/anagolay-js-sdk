@@ -1,8 +1,9 @@
 # https://docs.gitlab.com/ee/ci/jobs/job_control.html
-image: node:16-bullseye
+image: node:18.4.0-bullseye
 stages:
   - check
   - test
+  - build
   - release
 
 variables:
@@ -76,6 +77,45 @@ test-code:
     - echo 'Building and testing all packages...'
     - node common/scripts/install-run-rush.js rebuild --verbose
 
+test-code-node16-lts:
+  image: node:16-bullseye
+  needs: ['is-it-pretty']
+  allow_failure: true
+  stage: test
+  before_script:
+    - *install-pnpm
+  script:
+    - set -e
+
+    - echo 'Installing rush...'
+    - node common/scripts/install-run-rush.js install
+
+    # - echo 'Checking for missing change logs...'
+    # - node common/scripts/install-run-rush.js change -v
+
+    - echo 'Building and testing all packages...'
+    - node common/scripts/install-run-rush.js rebuild --verbose
+
+# We want to build this separately because the sveltekit breaks all the time
+build-app:
+  needs: ['test-code']
+  allow_failure: true
+  stage: build
+  before_script:
+    - *install-pnpm
+  script:
+    - set -e
+
+    - echo 'Installing rush...'
+    - node common/scripts/install-run-rush.js install
+
+    - echo 'Building and testing all packages...'
+    - node common/scripts/install-run-rush.js build --from @anagolay/api
+
+    - echo 'Building Anagolay app ...'
+    - cd ./apps/app
+    - pnpm build:svelte
+
 # build-js-api-docs:
 #   stage: release
 #   before_script:
@@ -96,6 +136,31 @@ test-code:
 #     # - echo "Uploading CLI to IPFS ..."
 #     # - ipfs add --cid-version=1 --pin=false --recursive --quieter ./docs/published/build > ANAGOLAY_JS_API_DOCS
 #     # - echo "The docs are published here https://ipfs.anagolay.network/ipfs/$(cat ANAGOLAY_JS_API_DOCS)
+
+# build-anagolay-cli-binaries:
+#   needs: ['test-code']
+#   allow_failure: true
+#   stage: build
+#   before_script:
+#     - *install-pnpm
+#     - mkdir -p ./binaries
+#   script:
+#     - set -e
+
+#     - echo 'Installing rush...'
+#     - node common/scripts/install-run-rush.js install
+
+#     - echo 'Building Anagolay CLI binaries ...'
+#     - cd ./sdk/cli
+#     - node ./buildBinaries.js
+#   artifacts: ## paths are wrong
+#     name: 'anagolay'
+#     when: on_success
+#     paths:
+#       - binaries/anagolay-node16-linux-x64
+#       - binaries/anagolay-node18-linux-x64
+#     untracked: false
+#     expire_in: '30 days'
 
 upload-cli-to-ipfs:
   needs: ['test-code']
@@ -120,22 +185,6 @@ upload-cli-to-ipfs:
     - ipfsCli add --pin --onlyCid sdk/cli/binaries/anagolay > ANAGOLAY_CLI_BIN_CID
     - echo "The BINARY CLI version CID:" && cat ANAGOLAY_CLI_BIN_CID
     - echo "https://$(cat ANAGOLAY_CLI_BIN_CID).ipfs.anagolay.network?filename=anagolay"
-
-  rules:
-    - if: $CI_COMMIT_MESSAGE =~ /^.*\[build all\].*$/s
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
-
-upload-custom-types-to-ipfs:
-  stage: release
-  before_script:
-    - *install-ipfs-cli-and-setup
-  script:
-    - set -e
-
-    - echo "Uploading Custom types to IPFS ..."
-    - ipfsCli add --pin --onlyCid sdk/types/src/customTypes.json > ANAGOLAY_CUSTOM_TYPES_CID
-    - echo "The Custom Types are published with the CID:" && cat ANAGOLAY_CUSTOM_TYPES_CID
-    - echo "https://ipfs.anagolay.network/ipfs/$(cat ANAGOLAY_CUSTOM_TYPES_CID)"
 
   rules:
     - if: $CI_COMMIT_MESSAGE =~ /^.*\[build all\].*$/s

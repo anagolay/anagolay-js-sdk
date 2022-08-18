@@ -417,29 +417,12 @@
     //   // "versionPolicyName": ""
     // },
     //
-    // {
-    //   "packageName": "my-controls",
-    //   "projectFolder": "libraries/my-controls",
-    //   "reviewCategory": "production"
-    // },
-    // {
-    //   "packageName": "@anagolay/util",
-    //   "projectFolder": "sdk/util",
-    //   "reviewCategory": "libraries",
-    //   "shouldPublish": true
-    // },
-    // {
-    //   "packageName": "@anagolay/core",
-    //   "projectFolder": "sdk/core",
-    //   "reviewCategory": "libraries",
-    //   "shouldPublish": true
-    // },
-    // {
-    //   "packageName": "@anagolay/api",
-    //   "projectFolder": "sdk/api",
-    //   "reviewCategory": "libraries",
-    //   "shouldPublish": true
-    // },
+    {
+      "packageName": "@anagolay/api",
+      "projectFolder": "sdk/api",
+      "reviewCategory": "libraries",
+      "shouldPublish": true
+    },
     {
       "packageName": "@anagolay/cli",
       "projectFolder": "sdk/cli",
@@ -462,6 +445,12 @@
       "packageName": "@anagolay/app",
       "projectFolder": "apps/app",
       "reviewCategory": "webapp",
+      "shouldPublish": false
+    },
+    {
+      "packageName": "@anagolay/migrate",
+      "projectFolder": "examples/migrate",
+      "reviewCategory": "libraries",
       "shouldPublish": false
     }
     // {

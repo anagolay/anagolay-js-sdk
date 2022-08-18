@@ -5,13 +5,12 @@
   "eslint.format.enable": true,
   "editor.wordWrap": "bounded",
   "editor.wordWrapColumn": 110,
-  "editor.rulers": [
-    110
-  ],
+  "editor.rulers": [110],
   "editor.formatOnSave": true,
   "editor.formatOnPaste": false,
   "[json]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.wordWrap": "off"
   },
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -32,6 +31,7 @@
   "javascript.validate.enable": false,
   "files.associations": {
     "*.json": "jsonc",
+    "**/config/*.json": "jsonc",
     "package.json": "json",
     "*.cjs": "javascript"
   },

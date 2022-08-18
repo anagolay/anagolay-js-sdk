@@ -7,6 +7,8 @@ import clui from 'clui';
 import { isEmpty, isNil } from 'ramda';
 import signale from 'signale';
 
+import { publishServiceURL } from './config';
+
 // eslint-disable-next-line @rushstack/typedef-var
 const Spinner = clui.Spinner;
 
@@ -145,7 +147,6 @@ async function getPublishApiInfo(log: Logger): Promise<{ apiKey: string; baseUrl
     MOCK_API,
     POSTMAN_MOCK_API_KEY,
     ANAGOLAY_PUBLISH_SERVICE_API_KEY,
-    ANAGOLAY_PUBLISH_SERVICE_API_URL,
     POSTMAN_MOCK_API_URL,
     ENABLE_API_KEY_SUPPORT,
   } = process.env;
@@ -168,20 +169,20 @@ async function getPublishApiInfo(log: Logger): Promise<{ apiKey: string; baseUrl
   } else {
     if (!isNil(ENABLE_API_KEY_SUPPORT) && isFalse(ENABLE_API_KEY_SUPPORT)) {
       if (
-        !isNil(ANAGOLAY_PUBLISH_SERVICE_API_URL) &&
-        !isEmpty(ANAGOLAY_PUBLISH_SERVICE_API_URL) &&
+        !isNil(publishServiceURL) &&
+        !isEmpty(publishServiceURL) &&
         !isNil(ANAGOLAY_PUBLISH_SERVICE_API_KEY) &&
         !isEmpty(ANAGOLAY_PUBLISH_SERVICE_API_KEY)
       ) {
         log.info('Found api key in the env variable, using that.');
         apiKey = ANAGOLAY_PUBLISH_SERVICE_API_KEY;
-        baseUrl = ANAGOLAY_PUBLISH_SERVICE_API_URL;
+        baseUrl = publishServiceURL;
       } else {
         throw new Error('Cannot find the api key and url in the env');
       }
     } else {
-      if (!isNil(ANAGOLAY_PUBLISH_SERVICE_API_URL) && !isEmpty(ANAGOLAY_PUBLISH_SERVICE_API_URL)) {
-        baseUrl = ANAGOLAY_PUBLISH_SERVICE_API_URL;
+      if (!isNil(publishServiceURL) && !isEmpty(publishServiceURL)) {
+        baseUrl = publishServiceURL;
       }
     }
   }

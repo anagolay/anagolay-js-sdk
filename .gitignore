@@ -65,12 +65,13 @@ common/autoinstallers/*/.npmrc
 **/.rush/temp/
 
 lib
+lib_cjs
 dist
 temp
+core*
 
 # Heft
 */*/.heft/build-cache/**
 */*/.heft/temp/**
 .pnpm-store
-anagolay.json
 binaries

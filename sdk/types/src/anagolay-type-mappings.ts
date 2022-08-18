@@ -1,7 +1,7 @@
 import ImageMetadataTags from './imageMetadata';
 import { AnGenericId } from './interfaces/anagolaySupport/interfaces';
-import { AnProofParams as OriginalSnProofParams } from './interfaces/poe/interfaces';
-import { AnClaim, AnStatement as OriginalAnStatement } from './interfaces/statements/interfaces';
+import { AnClaim, AnStatement } from './interfaces/statements/interfaces';
+import { AnProofParams } from './types';
 
 export interface SaveStatementReturn {
   statement_id: AnGenericId;
@@ -99,10 +99,8 @@ export type AnGenericIds = AnGenericId[];
 export type AnBuffer = Buffer;
 export type AnByteArray = Uint8Array;
 export type AnFileBuffer = Buffer;
-export type AnStatement = OriginalAnStatement;
 export type AnStatements = AnStatement[];
 export type AnClaims = AnClaim[];
-export type AnProofParams = OriginalSnProofParams;
 export type AnBoolean = boolean;
 export type AnString = string;
 
@@ -141,8 +139,8 @@ export interface AnInputParamsDefinition {
   decoded: outputDecoded;
 }
 
-export * from './interfaces/anagolaySupport/interfaces';
-export * from './interfaces/operations/interfaces';
-export * from './interfaces/poe/interfaces';
-export * from './interfaces/statements/interfaces';
-export * from './interfaces/workflows/interfaces';
+// export * from './interfaces/anagolaySupport/interfaces';
+// export * from './interfaces/operations/interfaces';
+// export * from './interfaces/poe/interfaces';
+// export * from './interfaces/statements/interfaces';
+// export * from './interfaces/workflows/interfaces';

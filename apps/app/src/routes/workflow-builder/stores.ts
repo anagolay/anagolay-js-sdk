@@ -222,6 +222,7 @@ function workflowFn() {
       if (
         incomingConnections.length === 0 ||
         incomingConnections.length > 1 ||
+        // AnForWhat.USER
         currentNode.data.groups.includes(AnForWhat.USER)
       ) {
         createNewSegment(currentSegment, segments);

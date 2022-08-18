@@ -1,0 +1,52 @@
+{
+  "name": "@anagolay/api",
+  "version": "0.7.0",
+  "author": "did:substrate:GHm6gp6khjcxQvnbnSsHdYejsFK1nNVxcGyGAsbDfsymtLr",
+  "license": "GPL3",
+  "licenseFile": "./LICENSE",
+  "description": "Anagolay JS/TS API",
+  "module": "./lib/index.js",
+  "main": "./lib_cjs/index.js",
+  "types": "./lib/api.d.ts",
+  "scripts": {
+    "test:watch": "heft test --watch",
+    "build": "heft test --clean && echo '{\"type\":\"commonjs\"}' > ./lib_cjs/package.json && echo '{\"type\":\"module\"}' > ./lib/package.json",
+    "watch": "nodemon --watch ./src --ext ts --exec heft build"
+  },
+  "dependencies": {
+    "@anagolay/types": "workspace:*",
+    "@anagolay/utils": "workspace:*",
+    "@polkadot/util": "10.1.1",
+    "@polkadot/api": "9.2.2",
+    "ramda": "0.28.0"
+  },
+  "devDependencies": {
+    "tslib": "2.4.0",
+    "typescript": "4.7.4",
+    "@rushstack/heft-node-rig": "1.10.2",
+    "@microsoft/api-extractor": "7.29.2",
+    "@rushstack/eslint-config": "3.0.0",
+    "@rushstack/heft": "0.47.2",
+    "@rushstack/heft-jest-plugin": "0.3.25",
+    "@types/heft-jest": "1.0.3",
+    "@types/node": "18.7.6",
+    "@types/ramda": "0.27.64",
+    "eslint": "8.22.0",
+    "eslint-plugin-simple-import-sort": "7.0.0",
+    "eslint-plugin-unused-imports": "2.0.0",
+    "env-cmd": "10.1.0",
+    "nodemon": "2.0.15"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.com/anagolay/anagolay-js.git",
+    "directory": "sdk/api"
+  },
+  "bugs": {
+    "url": "https://gitlab.com/anagolay/anagolay-js/issues"
+  },
+  "homepage": "https://gitlab.com/anagolay/anagolay-js/-/tree/main/sdk/api#readme",
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}

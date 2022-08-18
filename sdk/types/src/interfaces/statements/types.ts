@@ -1,7 +1,15 @@
 // Auto-generated via `yarn polkadot-types-from-defs`, do not edit
 /* eslint-disable */
 
-import type { Characters, CreatorId, GenericId, ProofId, SignatureId, StatementId, WorkflowId } from '@anagolay/types/interfaces/anagolaySupport';
+import type {
+  Characters,
+  CreatorId,
+  GenericId,
+  ProofId,
+  SignatureId,
+  StatementId,
+  WorkflowId,
+} from '@anagolay/types/interfaces/anagolaySupport';
 import type { Bytes, Enum, Option, Struct } from '@polkadot/types-codec';
 import type { AccountId, BlockNumber } from '@polkadot/types/interfaces/runtime';
 
@@ -17,7 +25,7 @@ export interface Claim extends Struct {
   readonly claimType: ClaimType;
   readonly valid: Validity;
   readonly expiration: Expiration;
-  readonly onExpiration: Bytes;
+  readonly onExpiration: Characters;
 }
 
 /** @name ClaimType */
@@ -30,7 +38,7 @@ export interface ClaimType extends Enum {
 /** @name Expiration */
 export interface Expiration extends Struct {
   readonly expirationType: ExpirationType;
-  readonly value: Bytes;
+  readonly value: Characters;
 }
 
 /** @name ExpirationType */
@@ -46,9 +54,9 @@ export interface ExpirationType extends Enum {
 
 /** @name Proportion */
 export interface Proportion extends Struct {
-  readonly sign: Bytes;
-  readonly name: Bytes;
-  readonly value: Bytes;
+  readonly sign: Characters;
+  readonly name: Characters;
+  readonly value: Characters;
 }
 
 /** @name Signature */
@@ -89,8 +97,8 @@ export interface StatementRecord extends Struct {
 
 /** @name Validity */
 export interface Validity extends Struct {
-  readonly from: Bytes;
-  readonly until: Bytes;
+  readonly from: Characters;
+  readonly until: Characters;
 }
 
 export type PHANTOM_STATEMENTS = 'statements';

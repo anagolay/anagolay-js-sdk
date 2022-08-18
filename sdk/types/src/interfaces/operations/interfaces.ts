@@ -11,11 +11,10 @@ import {
   AnForWhat,
   AnGenericId,
   AnOperationId,
+  AnTypeName,
   AnVersionId,
   AnWasmArtifactSubType,
 } from '../anagolaySupport/interfaces';
-
-export type AnTypeName = string;
 
 export interface AnOperationData {
   name: AnCharacters;
