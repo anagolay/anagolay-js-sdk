@@ -1,15 +1,16 @@
 [![pipeline status](https://gitlab.com/anagolay/anagolay-js/badges/main/pipeline.svg)](https://gitlab.com/anagolay/anagolay-js/-/commits/main)
 [![coverage report](https://gitlab.com/anagolay/anagolay-js/badges/main/coverage.svg?job=test-and-build)](https://gitlab.com/anagolay/anagolay-js/-/commits/main)
 
+![Anagolay SDK banner](https://macula.kelp.digital/ipfs/bafybeih6hpvgetxd5uer6jv3ys3xtoyfrlk2x7okqmm6d4ci7dthigyvzm)
 
-## Dev friendly blockchain SDK for Anagolay Network. 👩‍💻🚀👨‍💻
+## Anagolay Network JS/TS SDK for lazy devs 👩‍💻🚀👨‍💻
 
 This is the monorepo for ALL Anagolay packages. This includes following list:
 
 1. Anagolay Network CLI located under `<root>/sdk/cli`
 2. Anagolay Network Types located under `<root>/sdk/types`
 3. All utils are located under `<root>/sdk/utils`
-4. Anagolay Workflow Builder is located in `<root>/apps/app`
+4. Anagolay Application is located in `<root>/apps/app`
 
 ## Development
 

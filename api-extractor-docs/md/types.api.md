@@ -7,28 +7,17 @@
 /// <reference types="node" />
 
 import type { AccountId } from '@polkadot/types/interfaces/runtime';
-import type { AnagolayVersionExtra as AnagolayVersionExtra_2 } from '@anagolay/types/interfaces/anagolaySupport';
 import type { BlockNumber } from '@polkadot/types/interfaces/runtime';
 import type { BTreeMap } from '@polkadot/types-codec';
 import type { Bytes } from '@polkadot/types-codec';
-import type { Characters as Characters_2 } from '@anagolay/types/interfaces/anagolaySupport';
 import { Codec } from '@polkadot/types/types';
 import { CodecClass } from '@polkadot/types/types';
-import type { CreatorId as CreatorId_2 } from '@anagolay/types/interfaces/anagolaySupport';
 import type { Enum } from '@polkadot/types-codec';
-import type { ForWhat as ForWhat_2 } from '@anagolay/types/interfaces/anagolaySupport';
-import type { GenericId as GenericId_2 } from '@anagolay/types/interfaces/anagolaySupport';
-import type { OperationId as OperationId_2 } from '@anagolay/types/interfaces/anagolaySupport';
+import type { i8 } from '@polkadot/types-codec';
 import type { Option as Option_2 } from '@polkadot/types-codec';
-import type { ProofId as ProofId_2 } from '@anagolay/types/interfaces/anagolaySupport';
-import type { SignatureId as SignatureId_2 } from '@anagolay/types/interfaces/anagolaySupport';
-import type { StatementId as StatementId_2 } from '@anagolay/types/interfaces/anagolaySupport';
 import type { Struct } from '@polkadot/types-codec';
 import type { u64 } from '@polkadot/types-codec';
 import type { Vec } from '@polkadot/types-codec';
-import type { VersionId as VersionId_2 } from '@anagolay/types/interfaces/anagolaySupport';
-import type { WasmArtifactSubType as WasmArtifactSubType_2 } from '@anagolay/types/interfaces/anagolaySupport';
-import type { WorkflowId as WorkflowId_2 } from '@anagolay/types/interfaces/anagolaySupport';
 
 // @public (undocumented)
 export type AnAccountId = string;
@@ -88,7 +77,7 @@ export interface AnClaim {
     // (undocumented)
     issuer: AnCreatorId;
     // (undocumented)
-    onExpiration: string;
+    onExpiration: AnCharacters;
     // (undocumented)
     poeId: AnProofId;
     // (undocumented)
@@ -122,7 +111,7 @@ export interface AnExpiration {
     // (undocumented)
     expirationType: AnExpirationType;
     // (undocumented)
-    value: string;
+    value: AnCharacters;
 }
 
 // @public (undocumented)
@@ -384,11 +373,11 @@ export interface AnProofRecord {
 // @public (undocumented)
 export interface AnProportion {
     // (undocumented)
-    name: string;
+    name: AnCharacters;
     // (undocumented)
-    sign: string;
+    sign: AnCharacters;
     // (undocumented)
-    value: string;
+    value: AnCharacters;
 }
 
 // @public (undocumented)
@@ -398,7 +387,7 @@ export interface AnSignature {
     // (undocumented)
     sig: string;
     // (undocumented)
-    sigKey: Characters;
+    sigKey: AnCharacters;
 }
 
 // @public (undocumented)
@@ -460,14 +449,14 @@ export type AnStatements = AnStatement[];
 export type AnString = string;
 
 // @public (undocumented)
-export type AnTypeName = string;
+export type AnTypeName = AnCharacters;
 
 // @public (undocumented)
 export interface AnValidity {
     // (undocumented)
-    from: string;
+    from: AnCharacters;
     // (undocumented)
-    until: string;
+    until: AnCharacters;
 }
 
 // @public (undocumented)
@@ -604,23 +593,23 @@ export interface Claim extends Struct {
     // (undocumented)
     readonly expiration: Expiration;
     // (undocumented)
-    readonly holder: CreatorId_2;
+    readonly holder: CreatorId;
     // (undocumented)
-    readonly issuer: CreatorId_2;
+    readonly issuer: CreatorId;
     // (undocumented)
-    readonly onExpiration: Bytes;
+    readonly onExpiration: Characters;
     // (undocumented)
-    readonly poeId: ProofId_2;
+    readonly poeId: ProofId;
     // (undocumented)
-    readonly prevId: Option_2<StatementId_2>;
+    readonly prevId: Option_2<StatementId>;
     // (undocumented)
     readonly proportion: Proportion;
     // (undocumented)
-    readonly subjectId: ProofId_2;
+    readonly subjectId: ProofId;
     // (undocumented)
     readonly valid: Validity;
     // (undocumented)
-    readonly workflowId: WorkflowId_2;
+    readonly workflowId: WorkflowId;
 }
 
 // @public
@@ -671,7 +660,7 @@ export interface Expiration extends Struct {
     // (undocumented)
     readonly expirationType: ExpirationType;
     // (undocumented)
-    readonly value: Bytes;
+    readonly value: Characters;
 }
 
 // @public
@@ -725,7 +714,7 @@ export interface Operation extends Struct {
     // (undocumented)
     readonly extra: Option_2<OperationExtra>;
     // (undocumented)
-    readonly id: GenericId_2;
+    readonly id: GenericId;
 }
 
 // @public
@@ -733,15 +722,15 @@ export interface OperationArtifactStructure extends Struct {
     // (undocumented)
     readonly artifactType: OperationArtifactType;
     // (undocumented)
-    readonly fileExtension: Characters_2;
+    readonly fileExtension: Characters;
     // (undocumented)
-    readonly ipfsCid: GenericId_2;
+    readonly ipfsCid: GenericId;
 }
 
 // @public
 export interface OperationArtifactType extends Enum {
     // (undocumented)
-    readonly asWasm: WasmArtifactSubType_2;
+    readonly asWasm: WasmArtifactSubType;
     // (undocumented)
     readonly isDocs: boolean;
     // (undocumented)
@@ -755,23 +744,23 @@ export interface OperationArtifactType extends Enum {
 // @public
 export interface OperationData extends Struct {
     // (undocumented)
-    readonly config: BTreeMap<Characters_2, Vec<Characters_2>>;
+    readonly config: BTreeMap<Characters, Vec<Characters>>;
     // (undocumented)
-    readonly description: Characters_2;
+    readonly description: Characters;
     // (undocumented)
-    readonly features: Vec<Characters_2>;
+    readonly features: Vec<Characters>;
     // (undocumented)
-    readonly groups: Vec<ForWhat_2>;
+    readonly groups: Vec<ForWhat>;
     // (undocumented)
     readonly inputs: Vec<TypeName>;
     // (undocumented)
-    readonly license: Characters_2;
+    readonly license: Characters;
     // (undocumented)
-    readonly name: Characters_2;
+    readonly name: Characters;
     // (undocumented)
     readonly output: TypeName;
     // (undocumented)
-    readonly repository: Characters_2;
+    readonly repository: Characters;
 }
 
 // @public
@@ -808,9 +797,9 @@ export interface OperationVersion extends Struct {
     // (undocumented)
     readonly data: OperationVersionData;
     // (undocumented)
-    readonly extra: Option_2<AnagolayVersionExtra_2>;
+    readonly extra: Option_2<AnagolayVersionExtra>;
     // (undocumented)
-    readonly id: VersionId_2;
+    readonly id: VersionId;
 }
 
 // @public
@@ -818,9 +807,9 @@ export interface OperationVersionData extends Struct {
     // (undocumented)
     readonly artifacts: Vec<OperationArtifactStructure>;
     // (undocumented)
-    readonly entityId: Option_2<OperationId_2>;
+    readonly entityId: Option_2<OperationId>;
     // (undocumented)
-    readonly parentId: Option_2<VersionId_2>;
+    readonly parentId: Option_2<VersionId>;
 }
 
 // @public
@@ -836,9 +825,9 @@ export interface OperationVersionRecord extends Struct {
 // @public
 export interface OperationVersionReference extends Struct {
     // (undocumented)
-    readonly config: BTreeMap<Characters_2, Characters_2>;
+    readonly config: BTreeMap<Characters, Characters>;
     // (undocumented)
-    readonly versionId: VersionId_2;
+    readonly versionId: VersionId;
 }
 
 // @public (undocumented)
@@ -873,7 +862,7 @@ export interface PhashInfo extends Struct {
     // (undocumented)
     readonly pHash: Bytes;
     // (undocumented)
-    readonly proofId: ProofId_2;
+    readonly proofId: ProofId;
 }
 
 // @public (undocumented)
@@ -894,21 +883,21 @@ export interface Proof extends Struct {
     // (undocumented)
     readonly extra: Option_2<ProofExtra>;
     // (undocumented)
-    readonly id: GenericId_2;
+    readonly id: GenericId;
 }
 
 // @public
 export interface ProofData extends Struct {
     // (undocumented)
-    readonly creator: CreatorId_2;
+    readonly creator: CreatorId;
     // (undocumented)
-    readonly groups: Vec<ForWhat_2>;
+    readonly groups: Vec<ForWhat>;
     // (undocumented)
     readonly params: Vec<ProofParams>;
     // (undocumented)
-    readonly prevId: WorkflowId_2;
+    readonly prevId: WorkflowId;
     // (undocumented)
-    readonly workflowId: WorkflowId_2;
+    readonly workflowId: WorkflowId;
 }
 
 // @public
@@ -922,7 +911,7 @@ export interface ProofId extends GenericId {
 // @public
 export interface ProofParams extends Struct {
     // (undocumented)
-    readonly k: Characters_2;
+    readonly k: Characters;
     // (undocumented)
     readonly v: Bytes;
 }
@@ -940,11 +929,11 @@ export interface ProofRecord extends Struct {
 // @public
 export interface Proportion extends Struct {
     // (undocumented)
-    readonly name: Bytes;
+    readonly name: Characters;
     // (undocumented)
-    readonly sign: Bytes;
+    readonly sign: Characters;
     // (undocumented)
-    readonly value: Bytes;
+    readonly value: Characters;
 }
 
 // @public (undocumented)
@@ -958,11 +947,11 @@ export interface SaveStatementReturn {
 // @public
 export interface Signature extends Struct {
     // (undocumented)
-    readonly cid: SignatureId_2;
+    readonly cid: SignatureId;
     // (undocumented)
     readonly sig: Bytes;
     // (undocumented)
-    readonly sigKey: Characters_2;
+    readonly sigKey: Characters;
 }
 
 // @public
@@ -984,7 +973,7 @@ export interface Statement extends Struct {
     // (undocumented)
     readonly extra: Option_2<StatementExtra>;
     // (undocumented)
-    readonly id: GenericId_2;
+    readonly id: GenericId;
 }
 
 // @public
@@ -1028,15 +1017,15 @@ export const statements: {
 export type StringOrBuffer = AnString | AnBuffer;
 
 // @public
-export interface TypeName extends Bytes {
+export interface TypeName extends Characters {
 }
 
 // @public
 export interface Validity extends Struct {
     // (undocumented)
-    readonly from: Bytes;
+    readonly from: Characters;
     // (undocumented)
-    readonly until: Bytes;
+    readonly until: Characters;
 }
 
 // @public
@@ -1064,7 +1053,7 @@ export interface Workflow extends Struct {
     // (undocumented)
     readonly extra: Option_2<WorkflowExtra>;
     // (undocumented)
-    readonly id: WorkflowId_2;
+    readonly id: WorkflowId;
 }
 
 // @public
@@ -1072,15 +1061,15 @@ export interface WorkflowArtifactStructure extends Struct {
     // (undocumented)
     readonly artifactType: WorkflowArtifactType;
     // (undocumented)
-    readonly fileExtension: Characters_2;
+    readonly fileExtension: Characters;
     // (undocumented)
-    readonly ipfsCid: GenericId_2;
+    readonly ipfsCid: GenericId;
 }
 
 // @public
 export interface WorkflowArtifactType extends Enum {
     // (undocumented)
-    readonly asWasm: WasmArtifactSubType_2;
+    readonly asWasm: WasmArtifactSubType;
     // (undocumented)
     readonly isDocs: boolean;
     // (undocumented)
@@ -1094,13 +1083,13 @@ export interface WorkflowArtifactType extends Enum {
 // @public
 export interface WorkflowData extends Struct {
     // (undocumented)
-    readonly creators: Vec<CreatorId_2>;
+    readonly creators: Vec<CreatorId>;
     // (undocumented)
-    readonly description: Characters_2;
+    readonly description: Characters;
     // (undocumented)
-    readonly groups: Vec<ForWhat_2>;
+    readonly groups: Vec<ForWhat>;
     // (undocumented)
-    readonly name: Characters_2;
+    readonly name: Characters;
     // (undocumented)
     readonly segments: Vec<WorkflowSegment>;
 }
@@ -1137,7 +1126,7 @@ export const workflows: {
 // @public
 export interface WorkflowSegment extends Struct {
     // (undocumented)
-    readonly inputs: Bytes;
+    readonly inputs: Vec<i8>;
     // (undocumented)
     readonly sequence: Vec<OperationVersionReference>;
 }
@@ -1147,9 +1136,9 @@ export interface WorkflowVersion extends Struct {
     // (undocumented)
     readonly data: WorkflowVersionData;
     // (undocumented)
-    readonly extra: Option_2<AnagolayVersionExtra_2>;
+    readonly extra: Option_2<AnagolayVersionExtra>;
     // (undocumented)
-    readonly id: VersionId_2;
+    readonly id: VersionId;
 }
 
 // @public
@@ -1157,9 +1146,9 @@ export interface WorkflowVersionData extends Struct {
     // (undocumented)
     readonly artifacts: Vec<WorkflowArtifactStructure>;
     // (undocumented)
-    readonly entityId: Option_2<WorkflowId_2>;
+    readonly entityId: Option_2<WorkflowId>;
     // (undocumented)
-    readonly parentId: Option_2<VersionId_2>;
+    readonly parentId: Option_2<VersionId>;
 }
 
 // @public

@@ -4,6 +4,7 @@
  * For Full license read LICENSE file
  */
 
+import { connectToWs as connectToChainViaWs } from '@anagolay/api';
 import { AnOperationArtifactStructure, AnOperationData, AnOperationVersionData } from '@anagolay/types';
 import { allCommitsPushed, createFileLogger, lastRevision, Logger, urlForRemote } from '@anagolay/utils';
 import { ApiPromise } from '@polkadot/api';
@@ -21,7 +22,7 @@ import { ISignSubmitErrorReturn, ISignSubmitSuccessReturn, signAndSubmit } from 
 import { chooseAccount } from '$src/commonQuestions/account';
 import { askStarterQuestions } from '$src/commonQuestions/common';
 import { callPublishService, ISuccessfulResponse } from '$src/publish';
-import { connectToAnagolayChain, ensureBalance, logsDir, showArtifactTable } from '$src/utils';
+import { ensureBalance, logsDir, showArtifactTable } from '$src/utils';
 
 // eslint-disable-next-line @rushstack/typedef-var
 const Spinner = clui.Spinner;
@@ -117,7 +118,7 @@ async function publishSubcmd(): Promise<void> {
     artifacts: publishResponse.artifacts.items,
   };
 
-  const chain = await connectToAnagolayChain();
+  const chain = await connectToChainViaWs();
 
   const extrinsics = await submitTheExtrinsicCall(chain, operationData, versionData);
 

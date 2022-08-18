@@ -5,7 +5,7 @@
 
   import { workflowGraph, addedNodesIds, workflow } from './stores';
   import { last } from 'remeda';
-  import { AnForWhat, type AnOperation, type AnOperationVersion } from '@anagolay/types';
+  import { AnForWhat, AnOperation, AnOperationVersion } from '@anagolay/types';
   import { alerts } from '$src/components/notifications/stores';
 
   /**
@@ -152,7 +152,7 @@
       // this is left like this intentionally, much nicer to read this than if i would destruct it all
       const currentNodeType = inputs;
       const incommingNodeType = incommingNode.data.output;
-
+      // AnForWhat.FLOWCONTROL
       if (!groups.includes(AnForWhat.FLOWCONTROL)) {
         if (!currentNodeType.includes(incommingNodeType)) {
           editor.removeSingleConnection(output_id, input_id, output_class, input_class);

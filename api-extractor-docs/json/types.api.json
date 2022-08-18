@@ -1,8 +1,8 @@
 {
   "metadata": {
     "toolPackage": "@microsoft/api-extractor",
-    "toolVersion": "7.19.4",
-    "schemaVersion": 1004,
+    "toolVersion": "7.28.6",
+    "schemaVersion": 1009,
     "oldestForwardsCompatibleVersion": 1001,
     "tsdocConfig": {
       "$schema": "https://developer.microsoft.com/json-schemas/tsdoc/v0/tsdoc.schema.json",
@@ -156,18 +156,21 @@
         "@betaDocumentation": true,
         "@internalRemarks": true,
         "@preapproved": true
-      }
+      },
+      "reportUnsupportedHtmlElements": false
     }
   },
   "kind": "Package",
   "canonicalReference": "@anagolay/types!",
   "docComment": "",
   "name": "@anagolay/types",
+  "preserveMemberOrder": false,
   "members": [
     {
       "kind": "EntryPoint",
       "canonicalReference": "@anagolay/types!",
       "name": "",
+      "preserveMemberOrder": false,
       "members": [
         {
           "kind": "TypeAlias",
@@ -262,6 +265,7 @@
               "text": "<string, number>;\n        };\n    };\n}"
             }
           ],
+          "isReadonly": true,
           "releaseTag": "Public",
           "name": "anagolaySupport",
           "variableTypeTokenRange": {
@@ -290,6 +294,7 @@
           ],
           "releaseTag": "Public",
           "name": "AnagolayVersionExtra",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -310,6 +315,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "createdAt",
@@ -322,7 +328,7 @@
           "extendsTokenRanges": [
             {
               "startIndex": 1,
-              "endIndex": 3
+              "endIndex": 2
             }
           ]
         },
@@ -338,6 +344,7 @@
           ],
           "releaseTag": "Public",
           "name": "AnAnagolayVersionExtra",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -357,6 +364,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "createdAt",
@@ -558,6 +566,7 @@
           ],
           "releaseTag": "Public",
           "name": "AnClaim",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -578,6 +587,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "claimType",
@@ -605,6 +615,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "expiration",
@@ -632,6 +643,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "holder",
@@ -659,6 +671,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "issuer",
@@ -677,14 +690,16 @@
                   "text": "onExpiration: "
                 },
                 {
-                  "kind": "Content",
-                  "text": "string"
+                  "kind": "Reference",
+                  "text": "AnCharacters",
+                  "canonicalReference": "@anagolay/types!AnCharacters:type"
                 },
                 {
                   "kind": "Content",
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "onExpiration",
@@ -712,6 +727,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "poeId",
@@ -739,6 +755,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "prevId",
@@ -766,6 +783,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "proportion",
@@ -793,6 +811,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "subjectId",
@@ -820,6 +839,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "valid",
@@ -847,6 +867,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "workflowId",
@@ -900,6 +921,7 @@
           ],
           "releaseTag": "Public",
           "name": "AnClaimType",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "EnumMember",
@@ -915,12 +937,12 @@
                   "text": "0"
                 }
               ],
-              "releaseTag": "Public",
-              "name": "COPYRIGHT",
               "initializerTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
-              }
+              },
+              "releaseTag": "Public",
+              "name": "COPYRIGHT"
             },
             {
               "kind": "EnumMember",
@@ -936,12 +958,12 @@
                   "text": "1"
                 }
               ],
-              "releaseTag": "Public",
-              "name": "OWNERSHIP",
               "initializerTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
-              }
+              },
+              "releaseTag": "Public",
+              "name": "OWNERSHIP"
             }
           ]
         },
@@ -983,6 +1005,7 @@
           ],
           "releaseTag": "Public",
           "name": "AnExpiration",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -1003,6 +1026,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "expirationType",
@@ -1021,14 +1045,16 @@
                   "text": "value: "
                 },
                 {
-                  "kind": "Content",
-                  "text": "string"
+                  "kind": "Reference",
+                  "text": "AnCharacters",
+                  "canonicalReference": "@anagolay/types!AnCharacters:type"
                 },
                 {
                   "kind": "Content",
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "value",
@@ -1052,6 +1078,7 @@
           ],
           "releaseTag": "Public",
           "name": "AnExpirationType",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "EnumMember",
@@ -1067,12 +1094,12 @@
                   "text": "3"
                 }
               ],
-              "releaseTag": "Public",
-              "name": "DAYS",
               "initializerTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
-              }
+              },
+              "releaseTag": "Public",
+              "name": "DAYS"
             },
             {
               "kind": "EnumMember",
@@ -1088,12 +1115,12 @@
                   "text": "0"
                 }
               ],
-              "releaseTag": "Public",
-              "name": "FOREVER",
               "initializerTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
-              }
+              },
+              "releaseTag": "Public",
+              "name": "FOREVER"
             },
             {
               "kind": "EnumMember",
@@ -1109,12 +1136,12 @@
                   "text": "4"
                 }
               ],
-              "releaseTag": "Public",
-              "name": "MINUTES",
               "initializerTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
-              }
+              },
+              "releaseTag": "Public",
+              "name": "MINUTES"
             },
             {
               "kind": "EnumMember",
@@ -1130,12 +1157,12 @@
                   "text": "2"
                 }
               ],
-              "releaseTag": "Public",
-              "name": "MONTHS",
               "initializerTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
-              }
+              },
+              "releaseTag": "Public",
+              "name": "MONTHS"
             },
             {
               "kind": "EnumMember",
@@ -1151,12 +1178,12 @@
                   "text": "5"
                 }
               ],
-              "releaseTag": "Public",
-              "name": "SECONDS",
               "initializerTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
-              }
+              },
+              "releaseTag": "Public",
+              "name": "SECONDS"
             },
             {
               "kind": "EnumMember",
@@ -1172,12 +1199,12 @@
                   "text": "1"
                 }
               ],
-              "releaseTag": "Public",
-              "name": "YEARS",
               "initializerTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
-              }
+              },
+              "releaseTag": "Public",
+              "name": "YEARS"
             }
           ]
         },
@@ -1219,6 +1246,7 @@
           ],
           "releaseTag": "Public",
           "name": "AnForWhat",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "EnumMember",
@@ -1234,12 +1262,12 @@
                   "text": "2"
                 }
               ],
-              "releaseTag": "Public",
-              "name": "CAMERA",
               "initializerTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
-              }
+              },
+              "releaseTag": "Public",
+              "name": "CAMERA"
             },
             {
               "kind": "EnumMember",
@@ -1255,12 +1283,12 @@
                   "text": "7"
                 }
               ],
-              "releaseTag": "Public",
-              "name": "FLOWCONTROL",
               "initializerTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
-              }
+              },
+              "releaseTag": "Public",
+              "name": "FLOWCONTROL"
             },
             {
               "kind": "EnumMember",
@@ -1276,12 +1304,12 @@
                   "text": "0"
                 }
               ],
-              "releaseTag": "Public",
-              "name": "GENERIC",
               "initializerTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
-              }
+              },
+              "releaseTag": "Public",
+              "name": "GENERIC"
             },
             {
               "kind": "EnumMember",
@@ -1297,12 +1325,12 @@
                   "text": "3"
                 }
               ],
-              "releaseTag": "Public",
-              "name": "LENS",
               "initializerTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
-              }
+              },
+              "releaseTag": "Public",
+              "name": "LENS"
             },
             {
               "kind": "EnumMember",
@@ -1318,12 +1346,12 @@
                   "text": "1"
                 }
               ],
-              "releaseTag": "Public",
-              "name": "PHOTO",
               "initializerTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
-              }
+              },
+              "releaseTag": "Public",
+              "name": "PHOTO"
             },
             {
               "kind": "EnumMember",
@@ -1339,12 +1367,12 @@
                   "text": "4"
                 }
               ],
-              "releaseTag": "Public",
-              "name": "SMARTPHONE",
               "initializerTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
-              }
+              },
+              "releaseTag": "Public",
+              "name": "SMARTPHONE"
             },
             {
               "kind": "EnumMember",
@@ -1360,12 +1388,12 @@
                   "text": "6"
                 }
               ],
-              "releaseTag": "Public",
-              "name": "SYS",
               "initializerTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
-              }
+              },
+              "releaseTag": "Public",
+              "name": "SYS"
             },
             {
               "kind": "EnumMember",
@@ -1381,12 +1409,12 @@
                   "text": "5"
                 }
               ],
-              "releaseTag": "Public",
-              "name": "USER",
               "initializerTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
-              }
+              },
+              "releaseTag": "Public",
+              "name": "USER"
             }
           ]
         },
@@ -1457,6 +1485,7 @@
           ],
           "releaseTag": "Public",
           "name": "AnImageData",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -1490,6 +1519,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "data",
@@ -1516,6 +1546,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "height",
@@ -1542,6 +1573,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "width",
@@ -1574,6 +1606,7 @@
           ],
           "releaseTag": "Public",
           "name": "AnImageMetadata",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -1594,6 +1627,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "file",
@@ -1606,7 +1640,7 @@
           "extendsTokenRanges": [
             {
               "startIndex": 1,
-              "endIndex": 3
+              "endIndex": 2
             }
           ]
         },
@@ -1622,6 +1656,7 @@
           ],
           "releaseTag": "Public",
           "name": "AnInputParamsDefinition",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -1642,6 +1677,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "data",
@@ -1669,6 +1705,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "decoded",
@@ -1692,6 +1729,7 @@
           ],
           "releaseTag": "Public",
           "name": "AnInputParamsImplementation",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -1712,6 +1750,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "data",
@@ -1743,6 +1782,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "decode",
@@ -1791,6 +1831,7 @@
           ],
           "releaseTag": "Public",
           "name": "AnOperation",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -1811,6 +1852,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "data",
@@ -1838,6 +1880,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "extra",
@@ -1865,6 +1908,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "id",
@@ -1888,6 +1932,7 @@
           ],
           "releaseTag": "Public",
           "name": "AnOperationArtifactStructure",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -1908,6 +1953,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "artifactType",
@@ -1935,6 +1981,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "fileExtension",
@@ -1962,6 +2009,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "ipfsCid",
@@ -1985,6 +2033,7 @@
           ],
           "releaseTag": "Public",
           "name": "AnOperationArtifactType",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -2004,6 +2053,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "Docs",
@@ -2030,6 +2080,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "Git",
@@ -2057,6 +2108,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "Wasm",
@@ -2080,6 +2132,7 @@
           ],
           "releaseTag": "Public",
           "name": "AnOperationData",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -2122,6 +2175,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "config",
@@ -2149,6 +2203,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "description",
@@ -2180,6 +2235,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "features",
@@ -2211,6 +2267,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "groups",
@@ -2242,6 +2299,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "inputs",
@@ -2269,6 +2327,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "license",
@@ -2296,6 +2355,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "name",
@@ -2323,6 +2383,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "output",
@@ -2350,6 +2411,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "repository",
@@ -2429,6 +2491,7 @@
           ],
           "releaseTag": "Public",
           "name": "AnOperationRecord",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -2449,6 +2512,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "accountId",
@@ -2476,6 +2540,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "blockNumber",
@@ -2503,6 +2568,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "record",
@@ -2526,6 +2592,7 @@
           ],
           "releaseTag": "Public",
           "name": "AnOperationVersion",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -2546,6 +2613,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "data",
@@ -2573,6 +2641,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "extra",
@@ -2600,6 +2669,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "id",
@@ -2623,6 +2693,7 @@
           ],
           "releaseTag": "Public",
           "name": "AnOperationVersionData",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -2647,6 +2718,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "artifacts",
@@ -2674,6 +2746,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "entityId",
@@ -2701,6 +2774,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "parentId",
@@ -2724,6 +2798,7 @@
           ],
           "releaseTag": "Public",
           "name": "AnOperationVersionExtra",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -2743,6 +2818,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "createdAt",
@@ -2766,6 +2842,7 @@
           ],
           "releaseTag": "Public",
           "name": "AnOperationVersionRecord",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -2786,6 +2863,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "accountId",
@@ -2813,6 +2891,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "blockNumber",
@@ -2840,6 +2919,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "record",
@@ -2863,6 +2943,7 @@
           ],
           "releaseTag": "Public",
           "name": "AnOperationVersionReference",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -2905,6 +2986,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "config",
@@ -2932,6 +3014,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "versionId",
@@ -2955,6 +3038,7 @@
           ],
           "releaseTag": "Public",
           "name": "AnOperationWithStorage",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -2975,6 +3059,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "operationInfo",
@@ -3001,6 +3086,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "storageKey",
@@ -3024,6 +3110,7 @@
           ],
           "releaseTag": "Public",
           "name": "AnPhashInfo",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -3043,6 +3130,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "pHash",
@@ -3070,6 +3158,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "proofId",
@@ -3093,6 +3182,7 @@
           ],
           "releaseTag": "Public",
           "name": "AnProof",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -3113,6 +3203,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "data",
@@ -3140,6 +3231,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "extra",
@@ -3167,6 +3259,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "id",
@@ -3190,6 +3283,7 @@
           ],
           "releaseTag": "Public",
           "name": "AnProofData",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -3210,6 +3304,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "creator",
@@ -3241,6 +3336,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "groups",
@@ -3272,6 +3368,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "params",
@@ -3299,6 +3396,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "prevId",
@@ -3326,6 +3424,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "workflowId",
@@ -3349,6 +3448,7 @@
           ],
           "releaseTag": "Public",
           "name": "AnProofExtra",
+          "preserveMemberOrder": false,
           "members": [],
           "extendsTokenRanges": []
         },
@@ -3416,6 +3516,7 @@
           ],
           "releaseTag": "Public",
           "name": "AnProofRecord",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -3436,6 +3537,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "accountId",
@@ -3463,6 +3565,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "blockNumber",
@@ -3490,6 +3593,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "proof",
@@ -3513,6 +3617,7 @@
           ],
           "releaseTag": "Public",
           "name": "AnProportion",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -3524,14 +3629,16 @@
                   "text": "name: "
                 },
                 {
-                  "kind": "Content",
-                  "text": "string"
+                  "kind": "Reference",
+                  "text": "AnCharacters",
+                  "canonicalReference": "@anagolay/types!AnCharacters:type"
                 },
                 {
                   "kind": "Content",
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "name",
@@ -3550,14 +3657,16 @@
                   "text": "sign: "
                 },
                 {
-                  "kind": "Content",
-                  "text": "string"
+                  "kind": "Reference",
+                  "text": "AnCharacters",
+                  "canonicalReference": "@anagolay/types!AnCharacters:type"
                 },
                 {
                   "kind": "Content",
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "sign",
@@ -3576,14 +3685,16 @@
                   "text": "value: "
                 },
                 {
-                  "kind": "Content",
-                  "text": "string"
+                  "kind": "Reference",
+                  "text": "AnCharacters",
+                  "canonicalReference": "@anagolay/types!AnCharacters:type"
                 },
                 {
                   "kind": "Content",
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "value",
@@ -3607,6 +3718,7 @@
           ],
           "releaseTag": "Public",
           "name": "AnSignature",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -3627,6 +3739,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "cid",
@@ -3653,6 +3766,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "sig",
@@ -3672,14 +3786,15 @@
                 },
                 {
                   "kind": "Reference",
-                  "text": "Characters",
-                  "canonicalReference": "@anagolay/types!Characters:interface"
+                  "text": "AnCharacters",
+                  "canonicalReference": "@anagolay/types!AnCharacters:type"
                 },
                 {
                   "kind": "Content",
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "sigKey",
@@ -3729,6 +3844,7 @@
           ],
           "releaseTag": "Public",
           "name": "AnSignatures",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -3749,6 +3865,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "holder",
@@ -3776,6 +3893,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "issuer",
@@ -3824,6 +3942,7 @@
           ],
           "releaseTag": "Public",
           "name": "AnSplitParams",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -3848,6 +3967,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "data",
@@ -3875,6 +3995,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "opName",
@@ -3924,6 +4045,7 @@
           ],
           "releaseTag": "Public",
           "name": "AnStatementData",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -3944,6 +4066,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "claim",
@@ -3971,6 +4094,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "signatures",
@@ -3994,6 +4118,7 @@
           ],
           "releaseTag": "Public",
           "name": "AnStatementExtra",
+          "preserveMemberOrder": false,
           "members": [],
           "extendsTokenRanges": []
         },
@@ -4035,6 +4160,7 @@
           ],
           "releaseTag": "Public",
           "name": "AnStatementRecord",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -4055,6 +4181,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "accountId",
@@ -4082,6 +4209,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "blockNumber",
@@ -4109,6 +4237,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "statement",
@@ -4185,8 +4314,9 @@
               "text": "export declare type AnTypeName = "
             },
             {
-              "kind": "Content",
-              "text": "string"
+              "kind": "Reference",
+              "text": "AnCharacters",
+              "canonicalReference": "@anagolay/types!AnCharacters:type"
             },
             {
               "kind": "Content",
@@ -4212,6 +4342,7 @@
           ],
           "releaseTag": "Public",
           "name": "AnValidity",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -4223,14 +4354,16 @@
                   "text": "from: "
                 },
                 {
-                  "kind": "Content",
-                  "text": "string"
+                  "kind": "Reference",
+                  "text": "AnCharacters",
+                  "canonicalReference": "@anagolay/types!AnCharacters:type"
                 },
                 {
                   "kind": "Content",
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "from",
@@ -4249,14 +4382,16 @@
                   "text": "until: "
                 },
                 {
-                  "kind": "Content",
-                  "text": "string"
+                  "kind": "Reference",
+                  "text": "AnCharacters",
+                  "canonicalReference": "@anagolay/types!AnCharacters:type"
                 },
                 {
                   "kind": "Content",
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "until",
@@ -4306,6 +4441,7 @@
           ],
           "releaseTag": "Public",
           "name": "AnWasmArtifactSubType",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "EnumMember",
@@ -4321,12 +4457,12 @@
                   "text": "0"
                 }
               ],
-              "releaseTag": "Public",
-              "name": "Cjs",
               "initializerTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
-              }
+              },
+              "releaseTag": "Public",
+              "name": "Cjs"
             },
             {
               "kind": "EnumMember",
@@ -4342,12 +4478,12 @@
                   "text": "1"
                 }
               ],
-              "releaseTag": "Public",
-              "name": "Esm",
               "initializerTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
-              }
+              },
+              "releaseTag": "Public",
+              "name": "Esm"
             },
             {
               "kind": "EnumMember",
@@ -4363,12 +4499,12 @@
                   "text": "2"
                 }
               ],
-              "releaseTag": "Public",
-              "name": "Wasm",
               "initializerTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
-              }
+              },
+              "releaseTag": "Public",
+              "name": "Wasm"
             },
             {
               "kind": "EnumMember",
@@ -4384,12 +4520,12 @@
                   "text": "3"
                 }
               ],
-              "releaseTag": "Public",
-              "name": "Web",
               "initializerTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
-              }
+              },
+              "releaseTag": "Public",
+              "name": "Web"
             }
           ]
         },
@@ -4405,6 +4541,7 @@
           ],
           "releaseTag": "Public",
           "name": "AnWorkflow",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -4425,6 +4562,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "data",
@@ -4452,6 +4590,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "extra",
@@ -4479,6 +4618,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "id",
@@ -4502,6 +4642,7 @@
           ],
           "releaseTag": "Public",
           "name": "AnWorkflowArtifactStructure",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -4522,6 +4663,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "artifactType",
@@ -4549,6 +4691,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "fileExtension",
@@ -4576,6 +4719,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "ipfsCid",
@@ -4599,6 +4743,7 @@
           ],
           "releaseTag": "Public",
           "name": "AnWorkflowArtifactType",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -4618,6 +4763,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "Docs",
@@ -4644,6 +4790,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "Git",
@@ -4671,6 +4818,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "Wasm",
@@ -4694,6 +4842,7 @@
           ],
           "releaseTag": "Public",
           "name": "AnWorkflowData",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -4718,6 +4867,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "creators",
@@ -4745,6 +4895,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "description",
@@ -4776,6 +4927,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "groups",
@@ -4803,6 +4955,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "name",
@@ -4834,6 +4987,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "segments",
@@ -4913,6 +5067,7 @@
           ],
           "releaseTag": "Public",
           "name": "AnWorkflowRecord",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -4933,6 +5088,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "accountId",
@@ -4960,6 +5116,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "blockNumber",
@@ -4987,6 +5144,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "record",
@@ -5010,6 +5168,7 @@
           ],
           "releaseTag": "Public",
           "name": "AnWorkflowSegment",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -5029,6 +5188,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "inputs",
@@ -5060,6 +5220,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "sequence",
@@ -5083,6 +5244,7 @@
           ],
           "releaseTag": "Public",
           "name": "AnWorkflowVersion",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -5103,6 +5265,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "data",
@@ -5130,6 +5293,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "extra",
@@ -5157,6 +5321,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "id",
@@ -5180,6 +5345,7 @@
           ],
           "releaseTag": "Public",
           "name": "AnWorkflowVersionData",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -5204,6 +5370,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "artifacts",
@@ -5231,6 +5398,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "entityId",
@@ -5258,6 +5426,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "parentId",
@@ -5281,6 +5450,7 @@
           ],
           "releaseTag": "Public",
           "name": "AnWorkflowVersionExtra",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -5300,6 +5470,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "createdAt",
@@ -5323,6 +5494,7 @@
           ],
           "releaseTag": "Public",
           "name": "AnWorkflowVersionRecord",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -5343,6 +5515,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "accountId",
@@ -5370,6 +5543,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "blockNumber",
@@ -5397,6 +5571,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "record",
@@ -5429,11 +5604,12 @@
           ],
           "releaseTag": "Public",
           "name": "ArtifactId",
+          "preserveMemberOrder": false,
           "members": [],
           "extendsTokenRanges": [
             {
               "startIndex": 1,
-              "endIndex": 3
+              "endIndex": 2
             }
           ]
         },
@@ -5458,11 +5634,12 @@
           ],
           "releaseTag": "Public",
           "name": "Characters",
+          "preserveMemberOrder": false,
           "members": [],
           "extendsTokenRanges": [
             {
               "startIndex": 1,
-              "endIndex": 3
+              "endIndex": 2
             }
           ]
         },
@@ -5487,6 +5664,7 @@
           ],
           "releaseTag": "Public",
           "name": "Claim",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -5507,6 +5685,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "claimType",
@@ -5534,6 +5713,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "expiration",
@@ -5561,6 +5741,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "holder",
@@ -5588,6 +5769,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "issuer",
@@ -5607,14 +5789,15 @@
                 },
                 {
                   "kind": "Reference",
-                  "text": "Bytes",
-                  "canonicalReference": "@polkadot/types-codec!Bytes:class"
+                  "text": "Characters",
+                  "canonicalReference": "@anagolay/types!Characters:interface"
                 },
                 {
                   "kind": "Content",
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "onExpiration",
@@ -5642,6 +5825,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "poeId",
@@ -5682,6 +5866,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "prevId",
@@ -5709,6 +5894,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "proportion",
@@ -5736,6 +5922,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "subjectId",
@@ -5763,6 +5950,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "valid",
@@ -5790,6 +5978,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "workflowId",
@@ -5802,7 +5991,7 @@
           "extendsTokenRanges": [
             {
               "startIndex": 1,
-              "endIndex": 3
+              "endIndex": 2
             }
           ]
         },
@@ -5827,6 +6016,7 @@
           ],
           "releaseTag": "Public",
           "name": "ClaimType",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -5846,6 +6036,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "isCopyright",
@@ -5872,6 +6063,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "isOwnership",
@@ -5898,6 +6090,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "type",
@@ -5910,7 +6103,7 @@
           "extendsTokenRanges": [
             {
               "startIndex": 1,
-              "endIndex": 3
+              "endIndex": 2
             }
           ]
         },
@@ -5935,11 +6128,12 @@
           ],
           "releaseTag": "Public",
           "name": "CreatorId",
+          "preserveMemberOrder": false,
           "members": [],
           "extendsTokenRanges": [
             {
               "startIndex": 1,
-              "endIndex": 3
+              "endIndex": 2
             }
           ]
         },
@@ -5955,6 +6149,7 @@
           ],
           "releaseTag": "Public",
           "name": "ExifFile",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -5974,6 +6169,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "\"Bits Per Sample\"",
@@ -6000,6 +6196,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "\"Color Components\"",
@@ -6026,6 +6223,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "\"Image Height\"",
@@ -6052,6 +6250,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "\"Image Width\"",
@@ -6078,6 +6277,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "Subsampling",
@@ -6110,6 +6310,7 @@
           ],
           "releaseTag": "Public",
           "name": "Expiration",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -6130,6 +6331,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "expirationType",
@@ -6149,14 +6351,15 @@
                 },
                 {
                   "kind": "Reference",
-                  "text": "Bytes",
-                  "canonicalReference": "@polkadot/types-codec!Bytes:class"
+                  "text": "Characters",
+                  "canonicalReference": "@anagolay/types!Characters:interface"
                 },
                 {
                   "kind": "Content",
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "value",
@@ -6169,7 +6372,7 @@
           "extendsTokenRanges": [
             {
               "startIndex": 1,
-              "endIndex": 3
+              "endIndex": 2
             }
           ]
         },
@@ -6194,6 +6397,7 @@
           ],
           "releaseTag": "Public",
           "name": "ExpirationType",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -6213,6 +6417,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "isDays",
@@ -6239,6 +6444,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "isForever",
@@ -6265,6 +6471,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "isMinutes",
@@ -6291,6 +6498,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "isMonths",
@@ -6317,6 +6525,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "isSeconds",
@@ -6343,6 +6552,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "isYears",
@@ -6369,6 +6579,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "type",
@@ -6381,7 +6592,7 @@
           "extendsTokenRanges": [
             {
               "startIndex": 1,
-              "endIndex": 3
+              "endIndex": 2
             }
           ]
         },
@@ -6406,6 +6617,7 @@
           ],
           "releaseTag": "Public",
           "name": "ForWhat",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -6425,6 +6637,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "isCamera",
@@ -6451,6 +6664,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "isFlowcontrol",
@@ -6477,6 +6691,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "isGeneric",
@@ -6503,6 +6718,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "isLens",
@@ -6529,6 +6745,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "isPhoto",
@@ -6555,6 +6772,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "isSmartphone",
@@ -6581,6 +6799,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "isSys",
@@ -6607,6 +6826,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "isUser",
@@ -6633,6 +6853,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "type",
@@ -6645,7 +6866,7 @@
           "extendsTokenRanges": [
             {
               "startIndex": 1,
-              "endIndex": 3
+              "endIndex": 2
             }
           ]
         },
@@ -6670,11 +6891,12 @@
           ],
           "releaseTag": "Public",
           "name": "GenericId",
+          "preserveMemberOrder": false,
           "members": [],
           "extendsTokenRanges": [
             {
               "startIndex": 1,
-              "endIndex": 3
+              "endIndex": 2
             }
           ]
         },
@@ -6699,6 +6921,7 @@
           ],
           "releaseTag": "Public",
           "name": "Operation",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -6719,6 +6942,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "data",
@@ -6759,6 +6983,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "extra",
@@ -6786,6 +7011,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "id",
@@ -6798,7 +7024,7 @@
           "extendsTokenRanges": [
             {
               "startIndex": 1,
-              "endIndex": 3
+              "endIndex": 2
             }
           ]
         },
@@ -6823,6 +7049,7 @@
           ],
           "releaseTag": "Public",
           "name": "OperationArtifactStructure",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -6843,6 +7070,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "artifactType",
@@ -6870,6 +7098,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "fileExtension",
@@ -6897,6 +7126,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "ipfsCid",
@@ -6909,7 +7139,7 @@
           "extendsTokenRanges": [
             {
               "startIndex": 1,
-              "endIndex": 3
+              "endIndex": 2
             }
           ]
         },
@@ -6934,6 +7164,7 @@
           ],
           "releaseTag": "Public",
           "name": "OperationArtifactType",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -6954,6 +7185,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "asWasm",
@@ -6980,6 +7212,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "isDocs",
@@ -7006,6 +7239,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "isGit",
@@ -7032,6 +7266,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "isWasm",
@@ -7058,6 +7293,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "type",
@@ -7070,7 +7306,7 @@
           "extendsTokenRanges": [
             {
               "startIndex": 1,
-              "endIndex": 3
+              "endIndex": 2
             }
           ]
         },
@@ -7095,6 +7331,7 @@
           ],
           "releaseTag": "Public",
           "name": "OperationData",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -7146,6 +7383,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "config",
@@ -7173,6 +7411,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "description",
@@ -7213,6 +7452,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "features",
@@ -7253,6 +7493,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "groups",
@@ -7293,6 +7534,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "inputs",
@@ -7320,6 +7562,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "license",
@@ -7347,6 +7590,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "name",
@@ -7374,6 +7618,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "output",
@@ -7401,6 +7646,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "repository",
@@ -7413,7 +7659,7 @@
           "extendsTokenRanges": [
             {
               "startIndex": 1,
-              "endIndex": 3
+              "endIndex": 2
             }
           ]
         },
@@ -7438,11 +7684,12 @@
           ],
           "releaseTag": "Public",
           "name": "OperationExtra",
+          "preserveMemberOrder": false,
           "members": [],
           "extendsTokenRanges": [
             {
               "startIndex": 1,
-              "endIndex": 3
+              "endIndex": 2
             }
           ]
         },
@@ -7467,11 +7714,12 @@
           ],
           "releaseTag": "Public",
           "name": "OperationId",
+          "preserveMemberOrder": false,
           "members": [],
           "extendsTokenRanges": [
             {
               "startIndex": 1,
-              "endIndex": 3
+              "endIndex": 2
             }
           ]
         },
@@ -7496,6 +7744,7 @@
           ],
           "releaseTag": "Public",
           "name": "OperationRecord",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -7516,6 +7765,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "accountId",
@@ -7543,6 +7793,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "blockNumber",
@@ -7570,6 +7821,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "record",
@@ -7582,7 +7834,7 @@
           "extendsTokenRanges": [
             {
               "startIndex": 1,
-              "endIndex": 3
+              "endIndex": 2
             }
           ]
         },
@@ -7654,6 +7906,7 @@
               "text": "<string, number>;\n        };\n    };\n}"
             }
           ],
+          "isReadonly": true,
           "releaseTag": "Public",
           "name": "operations",
           "variableTypeTokenRange": {
@@ -7682,6 +7935,7 @@
           ],
           "releaseTag": "Public",
           "name": "OperationVersion",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -7702,6 +7956,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "data",
@@ -7742,6 +7997,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "extra",
@@ -7769,6 +8025,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "id",
@@ -7781,7 +8038,7 @@
           "extendsTokenRanges": [
             {
               "startIndex": 1,
-              "endIndex": 3
+              "endIndex": 2
             }
           ]
         },
@@ -7806,6 +8063,7 @@
           ],
           "releaseTag": "Public",
           "name": "OperationVersionData",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -7839,6 +8097,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "artifacts",
@@ -7879,6 +8138,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "entityId",
@@ -7919,6 +8179,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "parentId",
@@ -7931,7 +8192,7 @@
           "extendsTokenRanges": [
             {
               "startIndex": 1,
-              "endIndex": 3
+              "endIndex": 2
             }
           ]
         },
@@ -7956,6 +8217,7 @@
           ],
           "releaseTag": "Public",
           "name": "OperationVersionRecord",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -7976,6 +8238,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "accountId",
@@ -8003,6 +8266,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "blockNumber",
@@ -8030,6 +8294,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "record",
@@ -8042,7 +8307,7 @@
           "extendsTokenRanges": [
             {
               "startIndex": 1,
-              "endIndex": 3
+              "endIndex": 2
             }
           ]
         },
@@ -8067,6 +8332,7 @@
           ],
           "releaseTag": "Public",
           "name": "OperationVersionReference",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -8109,6 +8375,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "config",
@@ -8136,6 +8403,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "versionId",
@@ -8148,7 +8416,7 @@
           "extendsTokenRanges": [
             {
               "startIndex": 1,
-              "endIndex": 3
+              "endIndex": 2
             }
           ]
         },
@@ -8517,6 +8785,7 @@
           ],
           "releaseTag": "Public",
           "name": "PhashInfo",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -8537,6 +8806,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "pHash",
@@ -8564,6 +8834,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "proofId",
@@ -8576,7 +8847,7 @@
           "extendsTokenRanges": [
             {
               "startIndex": 1,
-              "endIndex": 3
+              "endIndex": 2
             }
           ]
         },
@@ -8648,6 +8919,7 @@
               "text": "<string, number>;\n        };\n    };\n}"
             }
           ],
+          "isReadonly": true,
           "releaseTag": "Public",
           "name": "poe",
           "variableTypeTokenRange": {
@@ -8676,6 +8948,7 @@
           ],
           "releaseTag": "Public",
           "name": "Proof",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -8696,6 +8969,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "data",
@@ -8736,6 +9010,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "extra",
@@ -8763,6 +9038,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "id",
@@ -8775,7 +9051,7 @@
           "extendsTokenRanges": [
             {
               "startIndex": 1,
-              "endIndex": 3
+              "endIndex": 2
             }
           ]
         },
@@ -8800,6 +9076,7 @@
           ],
           "releaseTag": "Public",
           "name": "ProofData",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -8820,6 +9097,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "creator",
@@ -8860,6 +9138,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "groups",
@@ -8900,6 +9179,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "params",
@@ -8927,6 +9207,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "prevId",
@@ -8954,6 +9235,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "workflowId",
@@ -8966,7 +9248,7 @@
           "extendsTokenRanges": [
             {
               "startIndex": 1,
-              "endIndex": 3
+              "endIndex": 2
             }
           ]
         },
@@ -8991,11 +9273,12 @@
           ],
           "releaseTag": "Public",
           "name": "ProofExtra",
+          "preserveMemberOrder": false,
           "members": [],
           "extendsTokenRanges": [
             {
               "startIndex": 1,
-              "endIndex": 3
+              "endIndex": 2
             }
           ]
         },
@@ -9020,11 +9303,12 @@
           ],
           "releaseTag": "Public",
           "name": "ProofId",
+          "preserveMemberOrder": false,
           "members": [],
           "extendsTokenRanges": [
             {
               "startIndex": 1,
-              "endIndex": 3
+              "endIndex": 2
             }
           ]
         },
@@ -9049,6 +9333,7 @@
           ],
           "releaseTag": "Public",
           "name": "ProofParams",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -9069,6 +9354,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "k",
@@ -9096,6 +9382,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "v",
@@ -9108,7 +9395,7 @@
           "extendsTokenRanges": [
             {
               "startIndex": 1,
-              "endIndex": 3
+              "endIndex": 2
             }
           ]
         },
@@ -9133,6 +9420,7 @@
           ],
           "releaseTag": "Public",
           "name": "ProofRecord",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -9153,6 +9441,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "accountId",
@@ -9180,6 +9469,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "blockNumber",
@@ -9207,6 +9497,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "record",
@@ -9219,7 +9510,7 @@
           "extendsTokenRanges": [
             {
               "startIndex": 1,
-              "endIndex": 3
+              "endIndex": 2
             }
           ]
         },
@@ -9244,6 +9535,7 @@
           ],
           "releaseTag": "Public",
           "name": "Proportion",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -9256,14 +9548,15 @@
                 },
                 {
                   "kind": "Reference",
-                  "text": "Bytes",
-                  "canonicalReference": "@polkadot/types-codec!Bytes:class"
+                  "text": "Characters",
+                  "canonicalReference": "@anagolay/types!Characters:interface"
                 },
                 {
                   "kind": "Content",
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "name",
@@ -9283,14 +9576,15 @@
                 },
                 {
                   "kind": "Reference",
-                  "text": "Bytes",
-                  "canonicalReference": "@polkadot/types-codec!Bytes:class"
+                  "text": "Characters",
+                  "canonicalReference": "@anagolay/types!Characters:interface"
                 },
                 {
                   "kind": "Content",
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "sign",
@@ -9310,14 +9604,15 @@
                 },
                 {
                   "kind": "Reference",
-                  "text": "Bytes",
-                  "canonicalReference": "@polkadot/types-codec!Bytes:class"
+                  "text": "Characters",
+                  "canonicalReference": "@anagolay/types!Characters:interface"
                 },
                 {
                   "kind": "Content",
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "value",
@@ -9330,7 +9625,7 @@
           "extendsTokenRanges": [
             {
               "startIndex": 1,
-              "endIndex": 3
+              "endIndex": 2
             }
           ]
         },
@@ -9346,6 +9641,7 @@
           ],
           "releaseTag": "Public",
           "name": "SaveStatementReturn",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -9366,6 +9662,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "poe_id",
@@ -9393,6 +9690,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "statement_id",
@@ -9425,6 +9723,7 @@
           ],
           "releaseTag": "Public",
           "name": "Signature",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -9445,6 +9744,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "cid",
@@ -9472,6 +9772,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "sig",
@@ -9499,6 +9800,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "sigKey",
@@ -9511,7 +9813,7 @@
           "extendsTokenRanges": [
             {
               "startIndex": 1,
-              "endIndex": 3
+              "endIndex": 2
             }
           ]
         },
@@ -9536,11 +9838,12 @@
           ],
           "releaseTag": "Public",
           "name": "SignatureId",
+          "preserveMemberOrder": false,
           "members": [],
           "extendsTokenRanges": [
             {
               "startIndex": 1,
-              "endIndex": 3
+              "endIndex": 2
             }
           ]
         },
@@ -9565,6 +9868,7 @@
           ],
           "releaseTag": "Public",
           "name": "Signatures",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -9585,6 +9889,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "holder",
@@ -9612,6 +9917,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "issuer",
@@ -9624,7 +9930,7 @@
           "extendsTokenRanges": [
             {
               "startIndex": 1,
-              "endIndex": 3
+              "endIndex": 2
             }
           ]
         },
@@ -9649,6 +9955,7 @@
           ],
           "releaseTag": "Public",
           "name": "Statement",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -9669,6 +9976,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "data",
@@ -9709,6 +10017,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "extra",
@@ -9736,6 +10045,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "id",
@@ -9748,7 +10058,7 @@
           "extendsTokenRanges": [
             {
               "startIndex": 1,
-              "endIndex": 3
+              "endIndex": 2
             }
           ]
         },
@@ -9773,6 +10083,7 @@
           ],
           "releaseTag": "Public",
           "name": "StatementData",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -9793,6 +10104,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "claim",
@@ -9820,6 +10132,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "signatures",
@@ -9832,7 +10145,7 @@
           "extendsTokenRanges": [
             {
               "startIndex": 1,
-              "endIndex": 3
+              "endIndex": 2
             }
           ]
         },
@@ -9857,11 +10170,12 @@
           ],
           "releaseTag": "Public",
           "name": "StatementExtra",
+          "preserveMemberOrder": false,
           "members": [],
           "extendsTokenRanges": [
             {
               "startIndex": 1,
-              "endIndex": 3
+              "endIndex": 2
             }
           ]
         },
@@ -9886,11 +10200,12 @@
           ],
           "releaseTag": "Public",
           "name": "StatementId",
+          "preserveMemberOrder": false,
           "members": [],
           "extendsTokenRanges": [
             {
               "startIndex": 1,
-              "endIndex": 3
+              "endIndex": 2
             }
           ]
         },
@@ -9915,6 +10230,7 @@
           ],
           "releaseTag": "Public",
           "name": "StatementRecord",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -9935,6 +10251,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "accountId",
@@ -9962,6 +10279,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "blockNumber",
@@ -9989,6 +10307,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "record",
@@ -10001,7 +10320,7 @@
           "extendsTokenRanges": [
             {
               "startIndex": 1,
-              "endIndex": 3
+              "endIndex": 2
             }
           ]
         },
@@ -10073,6 +10392,7 @@
               "text": "<string, number>;\n        };\n    };\n}"
             }
           ],
+          "isReadonly": true,
           "releaseTag": "Public",
           "name": "statements",
           "variableTypeTokenRange": {
@@ -10126,8 +10446,8 @@
             },
             {
               "kind": "Reference",
-              "text": "Bytes",
-              "canonicalReference": "@polkadot/types-codec!Bytes:class"
+              "text": "Characters",
+              "canonicalReference": "@anagolay/types!Characters:interface"
             },
             {
               "kind": "Content",
@@ -10136,11 +10456,12 @@
           ],
           "releaseTag": "Public",
           "name": "TypeName",
+          "preserveMemberOrder": false,
           "members": [],
           "extendsTokenRanges": [
             {
               "startIndex": 1,
-              "endIndex": 3
+              "endIndex": 2
             }
           ]
         },
@@ -10165,6 +10486,7 @@
           ],
           "releaseTag": "Public",
           "name": "Validity",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -10177,14 +10499,15 @@
                 },
                 {
                   "kind": "Reference",
-                  "text": "Bytes",
-                  "canonicalReference": "@polkadot/types-codec!Bytes:class"
+                  "text": "Characters",
+                  "canonicalReference": "@anagolay/types!Characters:interface"
                 },
                 {
                   "kind": "Content",
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "from",
@@ -10204,14 +10527,15 @@
                 },
                 {
                   "kind": "Reference",
-                  "text": "Bytes",
-                  "canonicalReference": "@polkadot/types-codec!Bytes:class"
+                  "text": "Characters",
+                  "canonicalReference": "@anagolay/types!Characters:interface"
                 },
                 {
                   "kind": "Content",
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "until",
@@ -10224,7 +10548,7 @@
           "extendsTokenRanges": [
             {
               "startIndex": 1,
-              "endIndex": 3
+              "endIndex": 2
             }
           ]
         },
@@ -10249,11 +10573,12 @@
           ],
           "releaseTag": "Public",
           "name": "VersionId",
+          "preserveMemberOrder": false,
           "members": [],
           "extendsTokenRanges": [
             {
               "startIndex": 1,
-              "endIndex": 3
+              "endIndex": 2
             }
           ]
         },
@@ -10278,6 +10603,7 @@
           ],
           "releaseTag": "Public",
           "name": "WasmArtifactSubType",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -10297,6 +10623,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "isCjs",
@@ -10323,6 +10650,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "isEsm",
@@ -10349,6 +10677,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "isWasm",
@@ -10375,6 +10704,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "isWeb",
@@ -10401,6 +10731,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "type",
@@ -10413,7 +10744,7 @@
           "extendsTokenRanges": [
             {
               "startIndex": 1,
-              "endIndex": 3
+              "endIndex": 2
             }
           ]
         },
@@ -10438,6 +10769,7 @@
           ],
           "releaseTag": "Public",
           "name": "Workflow",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -10458,6 +10790,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "data",
@@ -10498,6 +10831,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "extra",
@@ -10525,6 +10859,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "id",
@@ -10537,7 +10872,7 @@
           "extendsTokenRanges": [
             {
               "startIndex": 1,
-              "endIndex": 3
+              "endIndex": 2
             }
           ]
         },
@@ -10562,6 +10897,7 @@
           ],
           "releaseTag": "Public",
           "name": "WorkflowArtifactStructure",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -10582,6 +10918,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "artifactType",
@@ -10609,6 +10946,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "fileExtension",
@@ -10636,6 +10974,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "ipfsCid",
@@ -10648,7 +10987,7 @@
           "extendsTokenRanges": [
             {
               "startIndex": 1,
-              "endIndex": 3
+              "endIndex": 2
             }
           ]
         },
@@ -10673,6 +11012,7 @@
           ],
           "releaseTag": "Public",
           "name": "WorkflowArtifactType",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -10693,6 +11033,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "asWasm",
@@ -10719,6 +11060,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "isDocs",
@@ -10745,6 +11087,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "isGit",
@@ -10771,6 +11114,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "isWasm",
@@ -10797,6 +11141,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "type",
@@ -10809,7 +11154,7 @@
           "extendsTokenRanges": [
             {
               "startIndex": 1,
-              "endIndex": 3
+              "endIndex": 2
             }
           ]
         },
@@ -10834,6 +11179,7 @@
           ],
           "releaseTag": "Public",
           "name": "WorkflowData",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -10867,6 +11213,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "creators",
@@ -10894,6 +11241,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "description",
@@ -10934,6 +11282,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "groups",
@@ -10961,6 +11310,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "name",
@@ -11001,6 +11351,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "segments",
@@ -11013,7 +11364,7 @@
           "extendsTokenRanges": [
             {
               "startIndex": 1,
-              "endIndex": 3
+              "endIndex": 2
             }
           ]
         },
@@ -11038,11 +11389,12 @@
           ],
           "releaseTag": "Public",
           "name": "WorkflowExtra",
+          "preserveMemberOrder": false,
           "members": [],
           "extendsTokenRanges": [
             {
               "startIndex": 1,
-              "endIndex": 3
+              "endIndex": 2
             }
           ]
         },
@@ -11067,11 +11419,12 @@
           ],
           "releaseTag": "Public",
           "name": "WorkflowId",
+          "preserveMemberOrder": false,
           "members": [],
           "extendsTokenRanges": [
             {
               "startIndex": 1,
-              "endIndex": 3
+              "endIndex": 2
             }
           ]
         },
@@ -11096,6 +11449,7 @@
           ],
           "releaseTag": "Public",
           "name": "WorkflowRecord",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -11116,6 +11470,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "accountId",
@@ -11143,6 +11498,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "blockNumber",
@@ -11170,6 +11526,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "record",
@@ -11182,7 +11539,7 @@
           "extendsTokenRanges": [
             {
               "startIndex": 1,
-              "endIndex": 3
+              "endIndex": 2
             }
           ]
         },
@@ -11254,6 +11611,7 @@
               "text": "<string, number>;\n        };\n    };\n}"
             }
           ],
+          "isReadonly": true,
           "releaseTag": "Public",
           "name": "workflows",
           "variableTypeTokenRange": {
@@ -11282,6 +11640,7 @@
           ],
           "releaseTag": "Public",
           "name": "WorkflowSegment",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -11294,20 +11653,34 @@
                 },
                 {
                   "kind": "Reference",
-                  "text": "Bytes",
-                  "canonicalReference": "@polkadot/types-codec!Bytes:class"
+                  "text": "Vec",
+                  "canonicalReference": "@polkadot/types-codec!Vec:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "i8",
+                  "canonicalReference": "@polkadot/types-codec!i8:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">"
                 },
                 {
                   "kind": "Content",
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "inputs",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
-                "endIndex": 2
+                "endIndex": 5
               }
             },
             {
@@ -11342,6 +11715,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "sequence",
@@ -11354,7 +11728,7 @@
           "extendsTokenRanges": [
             {
               "startIndex": 1,
-              "endIndex": 3
+              "endIndex": 2
             }
           ]
         },
@@ -11379,6 +11753,7 @@
           ],
           "releaseTag": "Public",
           "name": "WorkflowVersion",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -11399,6 +11774,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "data",
@@ -11439,6 +11815,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "extra",
@@ -11466,6 +11843,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "id",
@@ -11478,7 +11856,7 @@
           "extendsTokenRanges": [
             {
               "startIndex": 1,
-              "endIndex": 3
+              "endIndex": 2
             }
           ]
         },
@@ -11503,6 +11881,7 @@
           ],
           "releaseTag": "Public",
           "name": "WorkflowVersionData",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -11536,6 +11915,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "artifacts",
@@ -11576,6 +11956,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "entityId",
@@ -11616,6 +11997,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "parentId",
@@ -11628,7 +12010,7 @@
           "extendsTokenRanges": [
             {
               "startIndex": 1,
-              "endIndex": 3
+              "endIndex": 2
             }
           ]
         },
@@ -11653,6 +12035,7 @@
           ],
           "releaseTag": "Public",
           "name": "WorkflowVersionRecord",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -11673,6 +12056,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "accountId",
@@ -11700,6 +12084,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "blockNumber",
@@ -11727,6 +12112,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "record",
@@ -11739,7 +12125,7 @@
           "extendsTokenRanges": [
             {
               "startIndex": 1,
-              "endIndex": 3
+              "endIndex": 2
             }
           ]
         }

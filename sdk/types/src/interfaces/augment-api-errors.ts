@@ -1,10 +1,26 @@
 // Auto-generated via `yarn polkadot-types-from-chain`, do not edit
 /* eslint-disable */
 
-import type { ApiTypes } from '@polkadot/api-base/types';
+// import type lookup before we augment - in some environments
+// this is required to allow for ambient/previous definitions
+import '@polkadot/api-base/types/errors';
+
+import type { ApiTypes, AugmentedError } from '@polkadot/api-base/types';
+
+export type __AugmentedError<ApiType extends ApiTypes> = AugmentedError<ApiType>;
 
 declare module '@polkadot/api-base/types/errors' {
-  export interface AugmentedErrors<ApiType extends ApiTypes> {
+  interface AugmentedErrors<ApiType extends ApiTypes> {
+    anagolay: {
+      /**
+       * Insertion of Artifact failed since MaxArtifacts limit is reached
+       **/
+      MaxArtifactsLimitReached: AugmentedError<ApiType>;
+      /**
+       * Generic error
+       **/
+      [key: string]: AugmentedError<ApiType>;
+    };
     balances: {
       /**
        * Beneficiary account must pre-exist
@@ -31,9 +47,9 @@ declare module '@polkadot/api-base/types/errors' {
        **/
       LiquidityRestrictions: AugmentedError<ApiType>;
       /**
-       * Got an overflow after adding
+       * Number of named reserves exceed MaxReserves
        **/
-      Overflow: AugmentedError<ApiType>;
+      TooManyReserves: AugmentedError<ApiType>;
       /**
        * Vesting balance too high to send value
        **/
@@ -85,6 +101,14 @@ declare module '@polkadot/api-base/types/errors' {
        **/
       BadRequest: AugmentedError<ApiType>;
       /**
+       * Insertion of Artifact failed since MaxArtifacts limit is reached
+       **/
+      MaxArtifactsLimitReached: AugmentedError<ApiType>;
+      /**
+       * Insertion of Version failed since MaxVersionsPerOperation limit is reached
+       **/
+      MaxVersionsPerOperationLimitReached: AugmentedError<ApiType>;
+      /**
        * Operation Manifest already exists.
        **/
       OperationAlreadyExists: AugmentedError<ApiType>;
@@ -107,15 +131,19 @@ declare module '@polkadot/api-base/types/errors' {
        **/
       BadRequest: AugmentedError<ApiType>;
       /**
-       * The proof does not exist, so it cannot be revoked
+       * The Proof does not exist, so it cannot be revoked
        **/
       NoSuchProof: AugmentedError<ApiType>;
+      /**
+       * The Workflow associated to the proof does not exist
+       **/
+      NoSuchWorkflow: AugmentedError<ApiType>;
       /**
        * PHash and ProofId combination already exist
        **/
       PHashAndProofIdComboAlreadyExist: AugmentedError<ApiType>;
       /**
-       * This proof has already been claimed
+       * This Proof has already been claimed
        **/
       ProofAlreadyClaimed: AugmentedError<ApiType>;
       /**
@@ -136,6 +164,10 @@ declare module '@polkadot/api-base/types/errors' {
        * Create child statement is not yet supported
        **/
       CreatingChildStatementNotSupported: AugmentedError<ApiType>;
+      /**
+       * Insertion of Statement failed since MaxStatementsPerProof limit is reached
+       **/
+      MaxStatementsPerProofLimitReached: AugmentedError<ApiType>;
       /**
        * Statement doesn't exist.
        **/
@@ -169,8 +201,12 @@ declare module '@polkadot/api-base/types/errors' {
     };
     system: {
       /**
+       * The origin filter prevent the call to be dispatched.
+       **/
+      CallFiltered: AugmentedError<ApiType>;
+      /**
        * Failed to extract the runtime version from the new runtime.
-       * 
+       *
        * Either calling `Core_version` or decoding `RuntimeVersion` failed.
        **/
       FailedToExtractRuntimeVersion: AugmentedError<ApiType>;
@@ -197,11 +233,56 @@ declare module '@polkadot/api-base/types/errors' {
        **/
       [key: string]: AugmentedError<ApiType>;
     };
+    utility: {
+      /**
+       * Too many calls batched.
+       **/
+      TooManyCalls: AugmentedError<ApiType>;
+      /**
+       * Generic error
+       **/
+      [key: string]: AugmentedError<ApiType>;
+    };
+    vesting: {
+      /**
+       * Amount being transferred is too low to create a vesting schedule.
+       **/
+      AmountLow: AugmentedError<ApiType>;
+      /**
+       * The account already has `MaxVestingSchedules` count of schedules and thus
+       * cannot add another one. Consider merging existing schedules in order to add another.
+       **/
+      AtMaxVestingSchedules: AugmentedError<ApiType>;
+      /**
+       * Failed to create a new schedule because some parameter was invalid.
+       **/
+      InvalidScheduleParams: AugmentedError<ApiType>;
+      /**
+       * The account given is not vesting.
+       **/
+      NotVesting: AugmentedError<ApiType>;
+      /**
+       * An index was out of bounds of the vesting schedules.
+       **/
+      ScheduleIndexOutOfBounds: AugmentedError<ApiType>;
+      /**
+       * Generic error
+       **/
+      [key: string]: AugmentedError<ApiType>;
+    };
     workflows: {
       /**
        * A parameter of the request is invalid or does not respect a given constraint
        **/
       BadRequest: AugmentedError<ApiType>;
+      /**
+       * Insertion of Artifact failed since MaxArtifacts limit is reached
+       **/
+      MaxArtifactsLimitReached: AugmentedError<ApiType>;
+      /**
+       * Insertion of Version failed since MaxVersionsPerWorkflow limit is reached
+       **/
+      MaxVersionsPerWorkflowLimitReached: AugmentedError<ApiType>;
       /**
        * Workflow Manifest already exists.
        **/

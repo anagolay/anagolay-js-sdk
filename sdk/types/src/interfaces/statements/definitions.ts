@@ -1,11 +1,12 @@
-import { RegistryTypes } from '@polkadot/types/types';
-export const StatementsCustomTypes: RegistryTypes = {
+import { Definitions, DefinitionsTypes } from '@polkadot/types/types';
+
+export const StatementsCustomTypes: DefinitionsTypes = {
   Signature: {
     /// signing key in urn/did format 'urn:pgp:9cdf8dd38531511968c8d8cb524036585b62f15b'
     sigKey: 'Characters',
     /// Signature sign(prepared_statement, pvtKey(sigKey)) and encoded using multibase
     // https://gitlab.com/anagolay/sensio-faas/-/blob/master/sp-api/src/plugins/copyright/helpers.ts#L76
-    sig: 'Vec<u8>',
+    sig: 'BoundedVec<u8, Get<u32>>',
     /// Content identifier of the sig field -- CID(sig)
     cid: 'SignatureId',
   },
@@ -15,15 +16,15 @@ export const StatementsCustomTypes: RegistryTypes = {
   },
   Proportion: {
     /// Proportion sign, can be %
-    sign: 'Vec<u8>',
-    name: 'Vec<u8>',
-    value: 'Vec<u8>',
+    sign: 'Characters',
+    name: 'Characters',
+    value: 'Characters',
   },
   Validity: {
     /// When the validity starts, this should be DATE_TIME
-    from: 'Vec<u8>',
+    from: 'Characters',
     /// When validity ends, this is calculate Validity.from + Expiration.value
-    until: 'Vec<u8>',
+    until: 'Characters',
   },
   ExpirationType: {
     _enum: ['FOREVER', 'YEARS', 'MONTHS', 'DAYS', 'MINUTES', 'SECONDS'],
@@ -32,7 +33,7 @@ export const StatementsCustomTypes: RegistryTypes = {
     /// Proportion sign, can be %
     expirationType: 'ExpirationType',
     /// How long is the expiration, if  ExpirationType::FOREVER then this is empty
-    value: 'Vec<u8>',
+    value: 'Characters',
   },
   ClaimType: {
     _enum: ['COPYRIGHT', 'OWNERSHIP'],
@@ -59,7 +60,7 @@ export const StatementsCustomTypes: RegistryTypes = {
     /// Setting when the statement should end
     expiration: 'Expiration',
     /// What happens after the expiration? this is default rule or smart contract that automatically does stuff, like move it to the public domain, transfer to relatives etc... need better definition
-    onExpiration: 'Vec<u8>',
+    onExpiration: 'Characters',
   },
   StatementData: {
     signatures: 'Signatures',
@@ -79,7 +80,5 @@ export const StatementsCustomTypes: RegistryTypes = {
 };
 
 export default {
-  types: {
-    ...StatementsCustomTypes,
-  },
-};
+  types: StatementsCustomTypes,
+} as Definitions;

@@ -4,6 +4,10 @@
   "packages": [
     {
       "name": "@anagolay/api",
+      "allowedCategories": [ "libraries", "webapp" ]
+    },
+    {
+      "name": "@anagolay/app",
       "allowedCategories": [ "libraries" ]
     },
     {
@@ -388,6 +392,10 @@
     },
     {
       "name": "webpack-node-externals",
+      "allowedCategories": [ "libraries" ]
+    },
+    {
+      "name": "yargs",
       "allowedCategories": [ "libraries" ]
     }
   ]

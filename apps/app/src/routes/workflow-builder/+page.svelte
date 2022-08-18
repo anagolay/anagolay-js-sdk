@@ -82,7 +82,7 @@
   /**
    * Websocket server address without the client path.
    */
-  let ws: string = getHashValue($page.url.hash, 'ws', 'ws://127.0.0.1:2113');
+  let ws: string = getHashValue($page.url.hash, 'ws', 'wss://ws.anagolay.io');
 
   /**
    * This is the path where to get the socket.io client library
@@ -93,7 +93,11 @@
   /**
    * What is the Anagolay Chain ws url. Used for getting the operations
    */
-  let anagolay_chain_ws: string = getHashValue($page.url.hash, 'anagolay_chain_ws', 'ws://127.0.0.1:9944');
+  let anagolay_chain_ws: string = getHashValue(
+    $page.url.hash,
+    'anagolay_chain_ws',
+    'wss://idiyanale-1.bootnode.dev.anagolay.io'
+  );
 
   // Operations with their respective versions from the chain
   let opvs: Promise<OperationWithVersions[]> = new Promise<OperationWithVersions[]>((res, rej) => {});

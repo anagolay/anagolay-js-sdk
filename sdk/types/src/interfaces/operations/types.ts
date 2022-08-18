@@ -7,10 +7,11 @@ import type {
   ForWhat,
   GenericId,
   OperationId,
+  TypeName,
   VersionId,
   WasmArtifactSubType,
 } from '@anagolay/types/interfaces/anagolaySupport';
-import type { BTreeMap, Bytes, Enum, Option, Struct, Vec } from '@polkadot/types-codec';
+import type { BTreeMap, Enum, Option, Struct, Vec } from '@polkadot/types-codec';
 import type { AccountId, BlockNumber } from '@polkadot/types/interfaces/runtime';
 
 /** @name Operation */
@@ -79,8 +80,5 @@ export interface OperationVersionRecord extends Struct {
   readonly accountId: AccountId;
   readonly blockNumber: BlockNumber;
 }
-
-/** @name TypeName */
-export interface TypeName extends Bytes {}
 
 export type PHANTOM_OPERATIONS = 'operations';

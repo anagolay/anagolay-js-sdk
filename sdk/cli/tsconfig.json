@@ -2,14 +2,17 @@
   "extends": "./node_modules/@rushstack/heft-node-rig/profiles/default/tsconfig-base.json",
   "compilerOptions": {
     "types": ["heft-jest", "node", "webpack-env"],
-    "resolveJsonModule": true,
-    "skipLibCheck": true,
     "baseUrl": ".",
     "paths": {
       "$src": ["src"],
       "$src/*": ["src/*"]
       //   "@polkadot/api/augment": ["./@anagolay/types/lib/interfaces/augment-api.ts"],
       //   "@polkadot/types/augment": ["./@anagolay/types/lib/interfaces/augment-types.ts"]
-    }
+    },
+    "moduleResolution": "node",
+    "skipLibCheck": true,
+    "noUnusedLocals": false,
+    "composite": true,
+    "module": "ES2020"
   }
 }

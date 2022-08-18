@@ -12,9 +12,8 @@ import {
   OperationVersionRecord,
   VersionId,
 } from '@anagolay/types';
-import customTypes from '@anagolay/types/lib/customTypes.json';
 import { ApiPromise, WsProvider } from '@polkadot/api';
-import { Struct } from '@polkadot/types';
+import { Option, Struct } from '@polkadot/types';
 import { Raw } from '@polkadot/types-codec';
 import { isNil, map } from 'ramda';
 
@@ -46,21 +45,23 @@ function convertModel<T>(polkadotModel: Struct | Raw): T {
  */
 export async function retrieveOperations(chain: ApiPromise): Promise<OperationWithVersions[]> {
   // retrieve the operations from the chain
-  const operations =
-    await chain.query.operations.operationByOperationIdAndAccountId.entries<OperationRecord>();
+  const operations = await chain.query.operations.operationByOperationIdAndAccountId.entries<
+    Option<OperationRecord>
+  >();
 
   return await Promise.all(
-    operations.map(async ([, opRecord]: [unknown, OperationRecord]) => {
-      const op: AnOperation = convertModel(opRecord.record);
+    operations.map(async ([, opRecord]: [unknown, Option<OperationRecord>]) => {
+      const op: AnOperation = convertModel(opRecord.unwrap().record);
 
       const operationFromChain = await chain.query.operations.versionIdsByOperationId<VersionId[]>(op.id);
       const versionIds: AnVersionId[] = map(convertModel)(operationFromChain);
 
       const versions: AnOperationVersion[] = await Promise.all(
         versionIds.map(async (versionId: AnVersionId) => {
-          const opVerRecord: OperationVersionRecord =
-            await chain.query.operations.versionByVersionId<OperationVersionRecord>(versionId);
-          return convertModel(opVerRecord.record);
+          const opVerRecord = await chain.query.operations.versionByVersionId<Option<OperationVersionRecord>>(
+            versionId
+          );
+          return convertModel(opVerRecord.unwrap().record);
         })
       );
       return {
@@ -86,7 +87,6 @@ export async function connectToApi(apiUrl?: string): Promise<ApiPromise> {
 
   const api = await ApiPromise.create({
     provider: wsProvider,
-    types: customTypes,
   });
 
   return api;

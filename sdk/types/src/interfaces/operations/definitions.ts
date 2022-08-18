@@ -1,18 +1,17 @@
-import { RegistryTypes } from '@polkadot/types/types';
+import { Definitions, DefinitionsTypes } from '@polkadot/types/types';
 
-export const OperationsCustomTypes: RegistryTypes = {
-  TypeName: 'Vec<u8>',
+export const OperationsCustomTypes: DefinitionsTypes = {
   OperationData: {
     /// max 128(0.12kb) characters, slugify to use _
     name: 'Characters',
     /// max 512(0.5kb) or 1024(1kb) chars, can be markdown but not html
     description: 'Characters',
     /// What operation accepts in the implementation. these are the params of the function with the types
-    inputs: 'Vec<TypeName>',
+    inputs: 'BoundedVec<TypeName, Get<u32>>',
     /// A map where keys are names of configuration parameters and values are collections of strings representing allowed values
-    config: 'BTreeMap<Characters, Vec<Characters>>',
+    config: 'BoundedBTreeMap<Characters, BoundedVec<Characters, Get<u32>>, Get<u32>>',
     /// A switch used to generate the Workflow segments
-    groups: 'Vec<ForWhat>',
+    groups: 'BoundedVec<ForWhat, Get<u32>>',
     /// Data type name defining the operation output
     output: 'TypeName',
     /// The fully qualified URL for the repository, this can be any public repo URL
@@ -25,7 +24,7 @@ export const OperationsCustomTypes: RegistryTypes = {
     ///   operation is instantiated
     /// - `std` declares support for nostd as default and possibility to work with std. If this
     ///   feature is missing, the operation is intended to be working **only** in std
-    features: 'Vec<Characters>',
+    features: 'BoundedVec<Characters, Get<u32>>',
   },
   OperationExtra: {},
   Operation: {
@@ -53,7 +52,7 @@ export const OperationsCustomTypes: RegistryTypes = {
   OperationVersionData: {
     entityId: 'Option<OperationId>',
     parentId: 'Option<VersionId>',
-    artifacts: 'Vec<OperationArtifactStructure>',
+    artifacts: 'BoundedVec<OperationArtifactStructure, Get<u32>>',
   },
   OperationVersion: {
     id: 'VersionId',
@@ -69,7 +68,5 @@ export const OperationsCustomTypes: RegistryTypes = {
 
 // For the Network
 export default {
-  types: {
-    ...OperationsCustomTypes,
-  },
-};
+  types: OperationsCustomTypes,
+} as Definitions;

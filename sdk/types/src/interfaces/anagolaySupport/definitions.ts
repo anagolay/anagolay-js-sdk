@@ -1,7 +1,8 @@
-import { RegistryTypes } from '@polkadot/types/types';
-export const AnagolayCustomTypes: RegistryTypes = {
-  GenericId: 'Vec<u8>',
-  Characters: 'Vec<u8>',
+import { Definitions, DefinitionsTypes } from '@polkadot/types/types';
+
+export const AnagolayCustomTypes: DefinitionsTypes = {
+  GenericId: 'BoundedVec<u8, Get<u32>>',
+  Characters: 'BoundedVec<u8, Get<u32>>',
   CreatorId: 'Characters',
   ArtifactId: 'GenericId',
   OperationId: 'GenericId',
@@ -10,6 +11,7 @@ export const AnagolayCustomTypes: RegistryTypes = {
   ProofId: 'GenericId',
   SignatureId: 'GenericId',
   VersionId: 'GenericId',
+  TypeName: 'Characters',
   ForWhat: {
     _enum: ['GENERIC', 'PHOTO', 'CAMERA', 'LENS', 'SMARTPHONE', 'USER', 'SYS', 'FLOWCONTROL'],
   },
@@ -22,7 +24,5 @@ export const AnagolayCustomTypes: RegistryTypes = {
 };
 
 export default {
-  types: {
-    ...AnagolayCustomTypes,
-  },
-};
+  types: AnagolayCustomTypes,
+} as Definitions;

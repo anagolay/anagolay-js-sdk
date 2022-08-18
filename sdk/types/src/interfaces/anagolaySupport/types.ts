@@ -45,6 +45,9 @@ export interface SignatureId extends GenericId {}
 /** @name StatementId */
 export interface StatementId extends GenericId {}
 
+/** @name TypeName */
+export interface TypeName extends Characters {}
+
 /** @name VersionId */
 export interface VersionId extends GenericId {}
 

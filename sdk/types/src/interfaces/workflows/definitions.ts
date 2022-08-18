@@ -1,19 +1,20 @@
-import { RegistryTypes } from '@polkadot/types/types';
-export const WorkflowsCustomTypes: RegistryTypes = {
+import { Definitions, DefinitionsTypes } from '@polkadot/types/types';
+
+export const WorkflowsCustomTypes: DefinitionsTypes = {
   OperationVersionReference: {
     versionId: 'VersionId',
-    config: 'BTreeMap<Characters, Characters>',
+    config: 'BoundedBTreeMap<Characters, Characters, Get<u32>>',
   },
   WorkflowSegment: {
-    inputs: 'Vec<u8>',
-    sequence: 'Vec<OperationVersionReference>',
+    inputs: 'BoundedVec<i8, Get<u32>>',
+    sequence: 'BoundedVec<OperationVersionReference, Get<u32>>',
   },
   WorkflowData: {
     name: 'Characters',
-    creators: 'Vec<CreatorId>',
+    creators: 'BoundedVec<CreatorId, Get<u32>>',
     description: 'Characters',
-    groups: 'Vec<ForWhat>',
-    segments: 'Vec<WorkflowSegment>',
+    groups: 'BoundedVec<ForWhat, Get<u32>>',
+    segments: 'BoundedVec<WorkflowSegment, Get<u32>>',
   },
   WorkflowExtra: {},
   Workflow: {
@@ -46,7 +47,7 @@ export const WorkflowsCustomTypes: RegistryTypes = {
   WorkflowVersionData: {
     entityId: 'Option<WorkflowId>',
     parentId: 'Option<VersionId>',
-    artifacts: 'Vec<WorkflowArtifactStructure>',
+    artifacts: 'BoundedVec<WorkflowArtifactStructure, Get<u32>>',
   },
   WorkflowVersion: {
     id: 'VersionId',
@@ -56,7 +57,5 @@ export const WorkflowsCustomTypes: RegistryTypes = {
 };
 
 export default {
-  types: {
-    ...WorkflowsCustomTypes,
-  },
-};
+  types: WorkflowsCustomTypes,
+} as Definitions;

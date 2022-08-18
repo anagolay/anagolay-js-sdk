@@ -1,7 +1,7 @@
-import { Characters } from '../anagolaySupport';
 import {
   AnAccountId,
   AnBlockNumber,
+  AnCharacters,
   AnCreatorId,
   AnProofId,
   AnSignatureId,
@@ -11,7 +11,7 @@ import {
 
 export interface AnSignature {
   /// signing key in urn/did format 'urn:pgp:9cdf8dd38531511968c8d8cb524036585b62f15b'
-  sigKey: Characters;
+  sigKey: AnCharacters;
   /// Signature sign(prepared_statement, pvtKey(sigKey)) and encoded using multibase
   // https://gitlab.com/anagolay/sensio-faas/-/blob/master/sp-api/src/plugins/copyright/helpers.ts#L76
   sig: string;
@@ -26,16 +26,16 @@ export interface AnSignatures {
 
 export interface AnProportion {
   /// Proportion sign, can be %
-  sign: string;
-  name: string;
-  value: string;
+  sign: AnCharacters;
+  name: AnCharacters;
+  value: AnCharacters;
 }
 
 export interface AnValidity {
   /// When the validity starts, this should be DATE_TIME
-  from: string;
+  from: AnCharacters;
   /// When validity ends, this is calculate Validity.from + Expiration.value
-  until: string;
+  until: AnCharacters;
 }
 
 export enum AnExpirationType {
@@ -51,7 +51,7 @@ export interface AnExpiration {
   /// Proportion sign, can be %
   expirationType: AnExpirationType;
   /// How long is the expiration, if  ExpirationType::FOREVER then this is empty
-  value: string;
+  value: AnCharacters;
 }
 
 export enum AnClaimType {
@@ -81,7 +81,7 @@ export interface AnClaim {
   /// Setting when the statement should end
   expiration: AnExpiration;
   /// What happens after the expiration? this is default rule or smart contract that automatically does stuff, like move it to the public domain, transfer to relatives etc... need better definition
-  onExpiration: string;
+  onExpiration: AnCharacters;
 }
 
 export interface AnStatementData {

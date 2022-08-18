@@ -1,3 +1,4 @@
+import { connectToWs, defaultChainToConnect } from '@anagolay/api';
 import { AnWorkflowArtifactStructure, AnWorkflowData, AnWorkflowVersionData } from '@anagolay/types';
 import { createFileLogger, Logger } from '@anagolay/utils';
 import { ApiPromise } from '@polkadot/api';
@@ -15,12 +16,10 @@ import signale from 'signale';
 import { ISignSubmitErrorReturn, ISignSubmitSuccessReturn, signAndSubmit } from '$src/api';
 import { chooseAccount } from '$src/commonQuestions/account';
 import { askStarterQuestions } from '$src/commonQuestions/common';
+import { websocketURL, workflowBuilderURL } from '$src/config';
 import { callPublishService, ISuccessfulResponse } from '$src/publish';
-import { connectToAnagolayChain, ensureBalance, logsDir, showArtifactTable } from '$src/utils';
-import { connectToWSAndListenFowWorkflow, IWorkflowBuild } from '$src/websocketService';
-
-const { ANAGOLAY_WORKFLOW_BUILDER_UI, ANAGOLAY_CHAIN_WS_URL, ANAGOLAY_WEBSOCKET_SERVICE_API_URL } =
-  process.env;
+import { ensureBalance, logsDir, showArtifactTable } from '$src/utils';
+import { connectToWebsocketRelayAndListenFowWorkflow, IWorkflowBuild } from '$src/websocketService';
 
 const log: Logger = createFileLogger(`${logsDir()}/workflow.log`, { name: 'workflow' });
 
@@ -48,40 +47,26 @@ export default async function createSubCommand(): Promise<Command> {
  * @public
  */
 async function create(): Promise<void> {
-  if (!ANAGOLAY_WORKFLOW_BUILDER_UI) throw new Error('ANAGOLAY_WORKFLOW_BUILDER_UI is not set');
-  if (!ANAGOLAY_WEBSOCKET_SERVICE_API_URL) throw new Error('ANAGOLAY_WEBSOCKET_SERVICE_API_URL is not set');
-  if (!ANAGOLAY_CHAIN_WS_URL) throw new Error('ANAGOLAY_CHAIN_WS_URL is not set');
-
   await askStarterQuestions();
   console.time('Total execution elapsed time');
 
   // DO NOT CHANGE the structure, this always must be in this format.
   const namespace: string = `workflow_${randomUUID()}`;
 
-  // in vscode container we use host.docker.internal
-  const wsURL: string = (ANAGOLAY_WEBSOCKET_SERVICE_API_URL as string)?.includes('host.docker.internal')
-    ? (ANAGOLAY_WEBSOCKET_SERVICE_API_URL as string).replace('host.docker.internal', '127.0.0.1')
-    : (ANAGOLAY_WEBSOCKET_SERVICE_API_URL as string);
-
-  // in vscode container we use host.docker.internal
-  const chainURL: string = (ANAGOLAY_CHAIN_WS_URL as string)?.includes('host.docker.internal')
-    ? (ANAGOLAY_CHAIN_WS_URL as string).replace('host.docker.internal', '127.0.0.1')
-    : (ANAGOLAY_CHAIN_WS_URL as string);
-
   // better link building
-  const link = new URL(ANAGOLAY_WORKFLOW_BUILDER_UI as string);
-  link.searchParams.append('ws', wsURL);
-  link.searchParams.append('anagolay_chain_ws', chainURL);
+  const link = new URL(workflowBuilderURL as string);
+  link.searchParams.append('ws', websocketURL);
+  link.searchParams.append('anagolay_chain_ws', defaultChainToConnect);
   link.searchParams.append('ns', namespace);
   link.searchParams.append('path', 'ws');
 
   console.log(
-    `Open this link to start building the Workflow (Ctrl+click): \n ${ANAGOLAY_WORKFLOW_BUILDER_UI}#${link.searchParams.toString()}`
+    `Open this link to start building the Workflow (Ctrl+click): \n ${workflowBuilderURL}#${link.searchParams.toString()}`
   );
 
-  const workflowBuild: IWorkflowBuild = await connectToWSAndListenFowWorkflow(namespace);
+  const workflowBuild: IWorkflowBuild = await connectToWebsocketRelayAndListenFowWorkflow(namespace);
 
-  const chain: ApiPromise = await connectToAnagolayChain();
+  const chain: ApiPromise = await connectToWs();
 
   // Wait WASM interface initialization
   await cryptoWaitReady();

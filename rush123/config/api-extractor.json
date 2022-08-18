@@ -283,7 +283,7 @@
          *
          * DEFAULT VALUE: "warning"
          */
-        "logLevel": "none"
+        "logLevel": "warning"
         /**
          * When addToApiReportFile is true:  If API Extractor is configured to write an API report file (.api.md),
          * then the message will be written inside that file; otherwise, the message is instead logged according to

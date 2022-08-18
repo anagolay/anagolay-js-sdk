@@ -4,14 +4,10 @@
  * For Full license read LICENSE file
  */
 
-// https://polkadot.js.org/docs/api/FAQ/#since-upgrading-to-the-7x-series-typescript-augmentation-is-missing
-import '@polkadot/api-augment';
 // THIS MUST BE INCLUDED IF WE WANT AUGMENTED TYPES
-import '@anagolay/types/lib/interfaces/augment-api';
-import '@anagolay/types/lib/interfaces/augment-types';
+import '@anagolay/types/augment-api';
 
-import customTypes from '@anagolay/types/lib/customTypes.json';
-import { ApiPromise, SubmittableResult, WsProvider } from '@polkadot/api';
+import { ApiPromise, SubmittableResult } from '@polkadot/api';
 import { Keyring } from '@polkadot/keyring';
 import { KeyringPair } from '@polkadot/keyring/types';
 import { DispatchError, EventRecord } from '@polkadot/types/interfaces';
@@ -19,39 +15,14 @@ import { assert, isHex } from '@polkadot/util';
 import { keyExtractSuri, mnemonicValidate } from '@polkadot/util-crypto';
 import { KeypairType } from '@polkadot/util-crypto/types';
 import { Spinner } from 'clui';
-import { isNil, trim } from 'ramda';
-import signale, { Signale } from 'signale';
+import { trim } from 'ramda';
+import signale from 'signale';
 
 const SEED_LENGTHS: number[] = [12, 15, 18, 21, 24];
 
 // if you want DEV UNITS you multiply them with this to get the REAL value for transfers
 const COEFFICIENT_FOR_CONVERTING_TO_UNIT: number = 1000000000000;
 
-/**
- * Connect to the API -- aka Anagolay Network -
- * @remarks
- * Default value for the connection is 'ws://127.0.0.1:9944', it can be overwritten by setting the `ANAGOLAY_CHAIN_WS_URL` environment variable
- * @param log - Optional logging to stdout
- * @returns
- */
-export async function connectToApi(log?: Signale): Promise<ApiPromise> {
-  const whereToConnect = !isNil(process.env.ANAGOLAY_CHAIN_WS_URL)
-    ? process.env.ANAGOLAY_CHAIN_WS_URL
-    : 'ws://127.0.0.1:9944';
-
-  const wsProvider = new WsProvider(whereToConnect);
-
-  const api = await ApiPromise.create({
-    provider: wsProvider,
-    types: customTypes,
-  });
-
-  api.on('disconnected', () => log?.info('api disconnected'));
-  api.on('connected', () => log?.info('api connected'));
-  api.on('error', (error) => log?.info(`api error ${error}`));
-
-  return api;
-}
 /**
  * Get the Alice account
  */

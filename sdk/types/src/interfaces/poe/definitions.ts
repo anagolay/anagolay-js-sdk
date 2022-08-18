@@ -1,19 +1,19 @@
-import { RegistryTypes } from '@polkadot/types/types';
-export const PoECustomTypes: RegistryTypes = {
+import { Definitions, DefinitionsTypes } from '@polkadot/types/types';
+export const PoECustomTypes: DefinitionsTypes = {
   ProofParams: {
     k: 'Characters',
-    v: 'Vec<u8>',
+    v: 'BoundedVec<u8, Get<u32>>',
   },
   PhashInfo: {
-    pHash: 'Vec<u8>',
+    pHash: 'BoundedVec<u8, Get<u32>>',
     proofId: 'ProofId',
   },
   ProofData: {
     workflowId: 'WorkflowId',
     prevId: 'WorkflowId',
     creator: 'CreatorId',
-    groups: 'Vec<ForWhat>',
-    params: 'Vec<ProofParams>',
+    groups: 'BoundedVec<ForWhat, Get<u32>>',
+    params: 'BoundedVec<ProofParams, Get<u32>>',
   },
   ProofExtra: {},
   Proof: {
@@ -29,7 +29,5 @@ export const PoECustomTypes: RegistryTypes = {
 };
 
 export default {
-  types: {
-    ...PoECustomTypes,
-  },
-};
+  types: PoECustomTypes,
+} as Definitions;

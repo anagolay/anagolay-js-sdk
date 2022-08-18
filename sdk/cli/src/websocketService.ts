@@ -3,10 +3,10 @@ import clui from 'clui';
 import { io, Socket, SocketOptions } from 'socket.io-client';
 const Spinner = clui.Spinner;
 
-const { ANAGOLAY_WEBSOCKET_SERVICE_API_URL } = process.env;
-
 import { AnOperation, AnOperationVersion, AnWorkflowData } from '@anagolay/types';
 import { serializeThenParse } from '@anagolay/utils';
+
+import { websocketURL } from './config';
 
 export interface IWorkflowBuild {
   manifestData: AnWorkflowData;
@@ -21,12 +21,12 @@ export interface IWorkflowBuild {
  * @returns Connected socket
 
  */
-export function connectToWs(url: string, options?: SocketOptions): Socket {
+export function connectToWebsocketRelay(url: string, options?: SocketOptions): Socket {
   const socket: Socket = io(url, {
     path: '/ws',
     reconnection: true,
     transports: ['websocket'],
-    secure: false,
+    secure: true,
     ...options,
   });
   return socket;
@@ -40,7 +40,7 @@ export function connectToWs(url: string, options?: SocketOptions): Socket {
  *
  * @returns Resolves the message with the signature {@link WorkflowData} interface
  */
-export async function connectToWSAndListenFowWorkflow(
+export async function connectToWebsocketRelayAndListenFowWorkflow(
   namespace: string,
   options?: SocketOptions
 ): Promise<IWorkflowBuild> {
@@ -48,7 +48,7 @@ export async function connectToWSAndListenFowWorkflow(
     const wsConnectionSpinner: clui.Spinner = new Spinner('Connecting WS service ...');
     wsConnectionSpinner.start();
 
-    const socket: Socket = connectToWs(`${ANAGOLAY_WEBSOCKET_SERVICE_API_URL}/${namespace}`, options);
+    const socket: Socket = connectToWebsocketRelay(`${websocketURL}/${namespace}`, options);
 
     socket.on('connect', () => {
       wsConnectionSpinner.message('Waiting for the data ...');

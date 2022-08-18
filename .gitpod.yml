@@ -1,7 +1,10 @@
 image: docker.io/woss/gitpod-workspace:gitpod_workspace-full_2022-05-08-14-31-53
 tasks:
   - name: prep-env
-    init: pnpm env use --global lts && node $GITPOD_REPO_ROOT/common/scripts/install-run-rush.js update && exit
+    init: |
+      pnpm env use --global lts
+      node $GITPOD_REPO_ROOT/common/scripts/install-run-rush.js update
+      exit
 
 ports:
   - port: 7766
@@ -15,7 +18,6 @@ vscode:
     - eamodio.gitlens
     - yzhang.markdown-all-in-one
     - dbaeumer.vscode-eslint
-    - mongodb.mongodb-vscode
     - foxundermoon.shell-format
     - streetsidesoftware.code-spell-checker
     - mhutchie.git-graph
