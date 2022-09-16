@@ -175,7 +175,7 @@
         {
           "kind": "Function",
           "canonicalReference": "@anagolay/api!connectToWs:function(1)",
-          "docComment": "/**\n * Create a Websocket connection\n *\n * @param connectTo - A host to connect to, default is `wss://rpc.idiyanale.anagolay.io`\n *\n * Example:\n * ```ts\n * import {connectToWs} from '@anagolay/api'\n * const connection = await connectToWs()\n * ```\n *\n */\n",
+          "docComment": "/**\n * Create a Websocket connection\n *\n * @param connectTo - A host to connect to, default is `wss://idiyanale.rpc.anagolay.io`\n *\n * Example: ```ts import {connectToWs} from '@anagolay/api' const api = await connectToWs() // Retrieve the chain & node information information via rpc calls const [chain, nodeName, nodeVersion] = await Promise.all([ api.rpc.system.chain(), api.rpc.system.name(), api.rpc.system.version(), ]);\n *\n * console.log(`You are connected to chain ${chain} using ${nodeName} v${nodeVersion}`); ```\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
@@ -251,6 +251,808 @@
             "startIndex": 1,
             "endIndex": 2
           }
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "@anagolay/api!getCachedApi:function(1)",
+          "docComment": "/**\n * If there is a cached instance it will be returned otherwise error is thrown\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function getCachedApi(): "
+            },
+            {
+              "kind": "Reference",
+              "text": "ApiPromise",
+              "canonicalReference": "@polkadot/api!ApiPromise:class"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 2
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [],
+          "name": "getCachedApi"
+        },
+        {
+          "kind": "Interface",
+          "canonicalReference": "@anagolay/api!IEventMessage:interface",
+          "docComment": "/**\n * Generic event message\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface IEventMessage "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "IEventMessage",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@anagolay/api!IEventMessage#error:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "error?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "{\n        message: string;\n        extra?: any;\n    }"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "error",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@anagolay/api!IEventMessage#finalized:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "finalized?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "finalized",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@anagolay/api!IEventMessage#message:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "message?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "message",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "extendsTokenRanges": []
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "@anagolay/api!networkCallback:function(1)",
+          "docComment": "/**\n * Generic callback for all `tx.signAndSend` methods Usage:\n * ```ts\n *   import createEventEmitter from '@anagolay/api/events'\n *   const broadcast = createEventEmitter()\n *   const receivedInstance = await api.tx.utility\n *     .batch(txs)\n *     .signAndSend(signer, {}, params =>\n *       networkCallback(params, broadcast, EVENT_NAME_BATCH)\n *     )\n *\n *     // usage\n *      receivedInstance.on(EVENT_NAME_BATCH, p => console.log(p))\n * ```\n *\n * @param params - [ISubmittableResult] callback params from the call\n *\n * @param broadcast - EventEmitter instance\n *\n * @param eventName - the event name for each pallet. available in `./config.ts`\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function networkCallback(params: "
+            },
+            {
+              "kind": "Reference",
+              "text": "ISubmittableResult",
+              "canonicalReference": "@polkadot/types!ISubmittableResult:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ", broadcast: "
+            },
+            {
+              "kind": "Reference",
+              "text": "ICustomEventEmitter",
+              "canonicalReference": "@anagolay/api!ICustomEventEmitter:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ", eventName: "
+            },
+            {
+              "kind": "Content",
+              "text": "string"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Reference",
+              "text": "Promise",
+              "canonicalReference": "!Promise:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "<void>"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 7,
+            "endIndex": 9
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "params",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isOptional": false
+            },
+            {
+              "parameterName": "broadcast",
+              "parameterTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "isOptional": false
+            },
+            {
+              "parameterName": "eventName",
+              "parameterTypeTokenRange": {
+                "startIndex": 5,
+                "endIndex": 6
+              },
+              "isOptional": false
+            }
+          ],
+          "name": "networkCallback"
+        },
+        {
+          "kind": "Namespace",
+          "canonicalReference": "@anagolay/api!pallets:namespace",
+          "docComment": "",
+          "excerptTokens": [],
+          "releaseTag": "None",
+          "name": "pallets",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "Namespace",
+              "canonicalReference": "@anagolay/api!pallets.poe:namespace",
+              "docComment": "",
+              "excerptTokens": [],
+              "releaseTag": "None",
+              "name": "poe",
+              "preserveMemberOrder": false,
+              "members": [
+                {
+                  "kind": "Namespace",
+                  "canonicalReference": "@anagolay/api!pallets.poe.config:namespace",
+                  "docComment": "",
+                  "excerptTokens": [],
+                  "releaseTag": "None",
+                  "name": "config",
+                  "preserveMemberOrder": false,
+                  "members": [
+                    {
+                      "kind": "Variable",
+                      "canonicalReference": "@anagolay/api!pallets.poe.config.EVENT_NAME_BATCH:var",
+                      "docComment": "",
+                      "excerptTokens": [
+                        {
+                          "kind": "Content",
+                          "text": "EVENT_NAME_BATCH: "
+                        },
+                        {
+                          "kind": "Content",
+                          "text": "string"
+                        }
+                      ],
+                      "isReadonly": true,
+                      "releaseTag": "Public",
+                      "name": "EVENT_NAME_BATCH",
+                      "variableTypeTokenRange": {
+                        "startIndex": 1,
+                        "endIndex": 2
+                      }
+                    },
+                    {
+                      "kind": "Variable",
+                      "canonicalReference": "@anagolay/api!pallets.poe.config.EVENT_NAME_ERROR:var",
+                      "docComment": "",
+                      "excerptTokens": [
+                        {
+                          "kind": "Content",
+                          "text": "EVENT_NAME_ERROR: "
+                        },
+                        {
+                          "kind": "Content",
+                          "text": "string"
+                        }
+                      ],
+                      "isReadonly": true,
+                      "releaseTag": "Public",
+                      "name": "EVENT_NAME_ERROR",
+                      "variableTypeTokenRange": {
+                        "startIndex": 1,
+                        "endIndex": 2
+                      }
+                    },
+                    {
+                      "kind": "Variable",
+                      "canonicalReference": "@anagolay/api!pallets.poe.config.EVENT_NAME_SINGLE:var",
+                      "docComment": "",
+                      "excerptTokens": [
+                        {
+                          "kind": "Content",
+                          "text": "EVENT_NAME_SINGLE: "
+                        },
+                        {
+                          "kind": "Content",
+                          "text": "string"
+                        }
+                      ],
+                      "isReadonly": true,
+                      "releaseTag": "Public",
+                      "name": "EVENT_NAME_SINGLE",
+                      "variableTypeTokenRange": {
+                        "startIndex": 1,
+                        "endIndex": 2
+                      }
+                    }
+                  ]
+                },
+                {
+                  "kind": "Function",
+                  "canonicalReference": "@anagolay/api!pallets.poe.createSubmittableExtrinsic:function(1)",
+                  "docComment": "/**\n * Helper function for creating the Submittable result. This can be easily used in the `ramda.map` function with the list of SnProof. Returns the Submittable statement object\n * ```ts\n * import { map } from 'ramda'\n * const txs = map(createSubmittableExtrinsic, d)\n * ```\n *\n * @param d - Typescript native Proof\n */\n",
+                  "excerptTokens": [
+                    {
+                      "kind": "Content",
+                      "text": "export declare function createSubmittableExtrinsic(d: "
+                    },
+                    {
+                      "kind": "Reference",
+                      "text": "AnProofData",
+                      "canonicalReference": "@anagolay/types!AnProofData:interface"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "): "
+                    },
+                    {
+                      "kind": "Reference",
+                      "text": "SubmittableExtrinsic",
+                      "canonicalReference": "@polkadot/api-base!SubmittableExtrinsic:interface"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "<'promise'>"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ";"
+                    }
+                  ],
+                  "returnTypeTokenRange": {
+                    "startIndex": 3,
+                    "endIndex": 5
+                  },
+                  "releaseTag": "Public",
+                  "overloadIndex": 1,
+                  "parameters": [
+                    {
+                      "parameterName": "d",
+                      "parameterTypeTokenRange": {
+                        "startIndex": 1,
+                        "endIndex": 2
+                      },
+                      "isOptional": false
+                    }
+                  ],
+                  "name": "createSubmittableExtrinsic"
+                },
+                {
+                  "kind": "Variable",
+                  "canonicalReference": "@anagolay/api!pallets.poe.palletName:var",
+                  "docComment": "",
+                  "excerptTokens": [
+                    {
+                      "kind": "Content",
+                      "text": "palletName: "
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "string"
+                    }
+                  ],
+                  "isReadonly": true,
+                  "releaseTag": "Public",
+                  "name": "palletName",
+                  "variableTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                },
+                {
+                  "kind": "Function",
+                  "canonicalReference": "@anagolay/api!pallets.poe.save:function(1)",
+                  "docComment": "/**\n * Save a single poe to the chain. You need to provide the data, the ID is calculated before saving.\n *\n * @NOTE calculating the ID inside allows us to decouple the ID generation from the rest of the code and potentially the calculation of the ID on the chain\n *\n * @param d - Proof data that we want to save to the chain.\n *\n * @param signer - Account that will be owner of the transaction and ones who pays the fees\n *\n * @param options - Signer options\n *\n * @returns the custom event emitter\n *\n * Example:\n * ```ts\n * import { pallets } from '@anagolay/api';\n * const broadcast = await pallets.poe.save(data, signer)\n *\n * broadcast.on(pallets.poe.config.EVENT_NAME_SINGLE, (p) => {\n *   console.log('[poe:save]', p.message)\n *   if (p.finalized) {\n *     process.exit(0)\n *   }\n * })\n * ```\n *\n */\n",
+                  "excerptTokens": [
+                    {
+                      "kind": "Content",
+                      "text": "export declare function save(d: "
+                    },
+                    {
+                      "kind": "Reference",
+                      "text": "AnProofData",
+                      "canonicalReference": "@anagolay/types!AnProofData:interface"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ", signer: "
+                    },
+                    {
+                      "kind": "Reference",
+                      "text": "AddressOrPair",
+                      "canonicalReference": "@polkadot/api-base!AddressOrPair:type"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ", options?: "
+                    },
+                    {
+                      "kind": "Reference",
+                      "text": "Partial",
+                      "canonicalReference": "!Partial:type"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "<"
+                    },
+                    {
+                      "kind": "Reference",
+                      "text": "SignerOptions",
+                      "canonicalReference": "@polkadot/api!SignerOptions:interface"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ">"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "): "
+                    },
+                    {
+                      "kind": "Reference",
+                      "text": "Promise",
+                      "canonicalReference": "!Promise:interface"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "<"
+                    },
+                    {
+                      "kind": "Reference",
+                      "text": "ICustomEventEmitter",
+                      "canonicalReference": "@anagolay/api!ICustomEventEmitter:interface"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ">"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ";"
+                    }
+                  ],
+                  "returnTypeTokenRange": {
+                    "startIndex": 10,
+                    "endIndex": 14
+                  },
+                  "releaseTag": "Public",
+                  "overloadIndex": 1,
+                  "parameters": [
+                    {
+                      "parameterName": "d",
+                      "parameterTypeTokenRange": {
+                        "startIndex": 1,
+                        "endIndex": 2
+                      },
+                      "isOptional": false
+                    },
+                    {
+                      "parameterName": "signer",
+                      "parameterTypeTokenRange": {
+                        "startIndex": 3,
+                        "endIndex": 4
+                      },
+                      "isOptional": false
+                    },
+                    {
+                      "parameterName": "options",
+                      "parameterTypeTokenRange": {
+                        "startIndex": 5,
+                        "endIndex": 9
+                      },
+                      "isOptional": true
+                    }
+                  ],
+                  "name": "save"
+                }
+              ]
+            },
+            {
+              "kind": "Namespace",
+              "canonicalReference": "@anagolay/api!pallets.statements:namespace",
+              "docComment": "",
+              "excerptTokens": [],
+              "releaseTag": "None",
+              "name": "statements",
+              "preserveMemberOrder": false,
+              "members": [
+                {
+                  "kind": "Namespace",
+                  "canonicalReference": "@anagolay/api!pallets.statements.config:namespace",
+                  "docComment": "",
+                  "excerptTokens": [],
+                  "releaseTag": "None",
+                  "name": "config",
+                  "preserveMemberOrder": false,
+                  "members": [
+                    {
+                      "kind": "Variable",
+                      "canonicalReference": "@anagolay/api!pallets.statements.config.EVENT_NAME_BATCH:var",
+                      "docComment": "",
+                      "excerptTokens": [
+                        {
+                          "kind": "Content",
+                          "text": "EVENT_NAME_BATCH: "
+                        },
+                        {
+                          "kind": "Content",
+                          "text": "string"
+                        }
+                      ],
+                      "isReadonly": true,
+                      "releaseTag": "Public",
+                      "name": "EVENT_NAME_BATCH",
+                      "variableTypeTokenRange": {
+                        "startIndex": 1,
+                        "endIndex": 2
+                      }
+                    },
+                    {
+                      "kind": "Variable",
+                      "canonicalReference": "@anagolay/api!pallets.statements.config.EVENT_NAME_ERROR:var",
+                      "docComment": "",
+                      "excerptTokens": [
+                        {
+                          "kind": "Content",
+                          "text": "EVENT_NAME_ERROR: "
+                        },
+                        {
+                          "kind": "Content",
+                          "text": "string"
+                        }
+                      ],
+                      "isReadonly": true,
+                      "releaseTag": "Public",
+                      "name": "EVENT_NAME_ERROR",
+                      "variableTypeTokenRange": {
+                        "startIndex": 1,
+                        "endIndex": 2
+                      }
+                    },
+                    {
+                      "kind": "Variable",
+                      "canonicalReference": "@anagolay/api!pallets.statements.config.EVENT_NAME_SINGLE:var",
+                      "docComment": "",
+                      "excerptTokens": [
+                        {
+                          "kind": "Content",
+                          "text": "EVENT_NAME_SINGLE: "
+                        },
+                        {
+                          "kind": "Content",
+                          "text": "string"
+                        }
+                      ],
+                      "isReadonly": true,
+                      "releaseTag": "Public",
+                      "name": "EVENT_NAME_SINGLE",
+                      "variableTypeTokenRange": {
+                        "startIndex": 1,
+                        "endIndex": 2
+                      }
+                    }
+                  ]
+                },
+                {
+                  "kind": "Function",
+                  "canonicalReference": "@anagolay/api!pallets.statements.createSubmittableExtrinsicOfCopyright:function(1)",
+                  "docComment": "/**\n * Helper function for creating the Submittable result. This can be easily used in the `ramda.map` function with the list of AnStatementData[]. Returns the Submittable statement object\n * ```ts\n * import { map } from 'ramda'\n * const txs = map(createSubmittableExtrinsicOfCopyright, d)\n * ```\n *\n * @param d - \n */\n",
+                  "excerptTokens": [
+                    {
+                      "kind": "Content",
+                      "text": "export declare function createSubmittableExtrinsicOfCopyright(d: "
+                    },
+                    {
+                      "kind": "Reference",
+                      "text": "AnStatementData",
+                      "canonicalReference": "@anagolay/types!AnStatementData:interface"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "): "
+                    },
+                    {
+                      "kind": "Reference",
+                      "text": "SubmittableExtrinsic",
+                      "canonicalReference": "@polkadot/api-base!SubmittableExtrinsic:interface"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "<'promise'>"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ";"
+                    }
+                  ],
+                  "returnTypeTokenRange": {
+                    "startIndex": 3,
+                    "endIndex": 5
+                  },
+                  "releaseTag": "Public",
+                  "overloadIndex": 1,
+                  "parameters": [
+                    {
+                      "parameterName": "d",
+                      "parameterTypeTokenRange": {
+                        "startIndex": 1,
+                        "endIndex": 2
+                      },
+                      "isOptional": false
+                    }
+                  ],
+                  "name": "createSubmittableExtrinsicOfCopyright"
+                },
+                {
+                  "kind": "Function",
+                  "canonicalReference": "@anagolay/api!pallets.statements.createSubmittableExtrinsicOfOwnership:function(1)",
+                  "docComment": "/**\n * Helper function for creating the Submittable result. This can be easily used in the `ramda.map` function with the list of AnStatementData. Returns the Submittable statement object\n * ```ts\n * import { map } from 'ramda'\n * const txs = map(createSubmittableExtrinsicOfOwnership, d)\n * ```\n *\n * @param d - \n */\n",
+                  "excerptTokens": [
+                    {
+                      "kind": "Content",
+                      "text": "export declare function createSubmittableExtrinsicOfOwnership(d: "
+                    },
+                    {
+                      "kind": "Reference",
+                      "text": "AnStatementData",
+                      "canonicalReference": "@anagolay/types!AnStatementData:interface"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "): "
+                    },
+                    {
+                      "kind": "Reference",
+                      "text": "SubmittableExtrinsic",
+                      "canonicalReference": "@polkadot/api-base!SubmittableExtrinsic:interface"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "<'promise'>"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ";"
+                    }
+                  ],
+                  "returnTypeTokenRange": {
+                    "startIndex": 3,
+                    "endIndex": 5
+                  },
+                  "releaseTag": "Public",
+                  "overloadIndex": 1,
+                  "parameters": [
+                    {
+                      "parameterName": "d",
+                      "parameterTypeTokenRange": {
+                        "startIndex": 1,
+                        "endIndex": 2
+                      },
+                      "isOptional": false
+                    }
+                  ],
+                  "name": "createSubmittableExtrinsicOfOwnership"
+                },
+                {
+                  "kind": "Variable",
+                  "canonicalReference": "@anagolay/api!pallets.statements.palletName:var",
+                  "docComment": "",
+                  "excerptTokens": [
+                    {
+                      "kind": "Content",
+                      "text": "palletName: "
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "string"
+                    }
+                  ],
+                  "isReadonly": true,
+                  "releaseTag": "Public",
+                  "name": "palletName",
+                  "variableTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                },
+                {
+                  "kind": "Function",
+                  "canonicalReference": "@anagolay/api!pallets.statements.saveOwnership:function(1)",
+                  "docComment": "/**\n * Save a single poe to the chain. You need to provide the data, the ID is calculated before saving.\n *\n * @NOTE calculating the ID inside allows us to decouple the ID generation from the rest of the code and potentially the calculation of the ID on the chain\n *\n * @param d - Proof data that we want to save to the chain.\n *\n * @param signer - Account that will be owner of the transaction and ones who pays the fees\n *\n * @param options - Signer options\n *\n * @returns the custom event emitter\n *\n * Example:\n * ```ts\n * import { pallets } from '@anagolay/api';\n * const broadcast = await pallets.statements.saveOwnership(data, signer)\n *\n * broadcast.on(pallets.statements.config.EVENT_NAME_SINGLE, (p) => {\n *   console.log('[statements:save]', p.message)\n *   if (p.finalized) {\n *     process.exit(0)\n *   }\n * })\n * ```\n *\n */\n",
+                  "excerptTokens": [
+                    {
+                      "kind": "Content",
+                      "text": "export declare function saveOwnership(d: "
+                    },
+                    {
+                      "kind": "Reference",
+                      "text": "AnStatementData",
+                      "canonicalReference": "@anagolay/types!AnStatementData:interface"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ", signer: "
+                    },
+                    {
+                      "kind": "Reference",
+                      "text": "AddressOrPair",
+                      "canonicalReference": "@polkadot/api-base!AddressOrPair:type"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ", options?: "
+                    },
+                    {
+                      "kind": "Reference",
+                      "text": "Partial",
+                      "canonicalReference": "!Partial:type"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "<"
+                    },
+                    {
+                      "kind": "Reference",
+                      "text": "SignerOptions",
+                      "canonicalReference": "@polkadot/api!SignerOptions:interface"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ">"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "): "
+                    },
+                    {
+                      "kind": "Reference",
+                      "text": "Promise",
+                      "canonicalReference": "!Promise:interface"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "<"
+                    },
+                    {
+                      "kind": "Reference",
+                      "text": "ICustomEventEmitter",
+                      "canonicalReference": "@anagolay/api!ICustomEventEmitter:interface"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ">"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ";"
+                    }
+                  ],
+                  "returnTypeTokenRange": {
+                    "startIndex": 10,
+                    "endIndex": 14
+                  },
+                  "releaseTag": "Public",
+                  "overloadIndex": 1,
+                  "parameters": [
+                    {
+                      "parameterName": "d",
+                      "parameterTypeTokenRange": {
+                        "startIndex": 1,
+                        "endIndex": 2
+                      },
+                      "isOptional": false
+                    },
+                    {
+                      "parameterName": "signer",
+                      "parameterTypeTokenRange": {
+                        "startIndex": 3,
+                        "endIndex": 4
+                      },
+                      "isOptional": false
+                    },
+                    {
+                      "parameterName": "options",
+                      "parameterTypeTokenRange": {
+                        "startIndex": 5,
+                        "endIndex": 9
+                      },
+                      "isOptional": true
+                    }
+                  ],
+                  "name": "saveOwnership"
+                }
+              ]
+            }
+          ]
         }
       ]
     }

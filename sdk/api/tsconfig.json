@@ -1,11 +1,9 @@
 {
-  "extends": "./node_modules/@rushstack/heft-node-rig/profiles/default/tsconfig-base.json",
+  "extends": "./node_modules/@rushstack/heft-web-rig/profiles/library/tsconfig-base.json",
   "compilerOptions": {
     "types": ["heft-jest", "node"],
-    "moduleResolution": "node",
-    "skipLibCheck": true,
-    "noUnusedLocals": false,
-    "composite": true,
-    "module": "ES2020"
+    "target": "esnext",
+    "lib": ["esnext", "scripthost", "dom", "WebWorker"],
+    "skipLibCheck": true
   }
 }

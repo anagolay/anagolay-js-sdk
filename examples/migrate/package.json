@@ -27,7 +27,7 @@
     "@rushstack/heft-node-rig": "1.10.2",
     "@microsoft/api-extractor": "7.29.2",
     "@rushstack/eslint-config": "3.0.0",
-    "@rushstack/heft": "0.47.2",
+    "@rushstack/heft": "0.47.3",
     "@rushstack/heft-jest-plugin": "0.3.25",
     "@types/heft-jest": "1.0.3",
     "@types/node": "18.7.6",

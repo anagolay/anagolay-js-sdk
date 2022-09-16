@@ -4,10 +4,14 @@ import { writable } from 'svelte/store';
 
 export type InfoLevel = 'info' | 'success' | 'warning' | 'error' | '';
 
+export interface AutoClose {
+  close: boolean;
+  time?: number;
+}
 export interface Alert {
   id: string;
   text: string;
-  autoclose: boolean;
+  autoclose: AutoClose;
   infoLevel: InfoLevel;
   closeFn: () => void;
 }
@@ -25,7 +29,7 @@ function alertsFn() {
      * @param infoLevel - success, warn, or error
      * @param autoclose - default true after 2000 ms will close the alert
      */
-    add: (text: string, infoLevel: InfoLevel = '', autoclose = true) => {
+    add: (text: string, infoLevel: InfoLevel = '', autoclose?: AutoClose = { close: true, time: 3000 }) => {
       const id = nanoid();
       const a: Alert = {
         id,
@@ -39,13 +43,14 @@ function alertsFn() {
           });
         },
       };
-      if (autoclose) {
+
+      if (autoclose.close) {
         setTimeout(() => {
           update((cs) => {
             const idx = cs.findIndex((f) => f.id === id);
             return remove(idx, 1, cs);
           });
-        }, 2000);
+        }, autoclose.time);
       }
 
       update((cS) => [...cS, a]);

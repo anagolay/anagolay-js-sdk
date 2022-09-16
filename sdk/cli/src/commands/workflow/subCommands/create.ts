@@ -1,6 +1,5 @@
 import { connectToWs, defaultChainToConnect } from '@anagolay/api';
 import { AnWorkflowArtifactStructure, AnWorkflowData, AnWorkflowVersionData } from '@anagolay/types';
-import { createFileLogger, Logger } from '@anagolay/utils';
 import { ApiPromise } from '@polkadot/api';
 import { KeyringPair } from '@polkadot/keyring/types';
 import { EventRecord } from '@polkadot/types/interfaces';
@@ -17,6 +16,7 @@ import { ISignSubmitErrorReturn, ISignSubmitSuccessReturn, signAndSubmit } from 
 import { chooseAccount } from '$src/commonQuestions/account';
 import { askStarterQuestions } from '$src/commonQuestions/common';
 import { websocketURL, workflowBuilderURL } from '$src/config';
+import { createFileLogger, Logger } from '$src/logger';
 import { callPublishService, ISuccessfulResponse } from '$src/publish';
 import { ensureBalance, logsDir, showArtifactTable } from '$src/utils';
 import { connectToWebsocketRelayAndListenFowWorkflow, IWorkflowBuild } from '$src/websocketService';

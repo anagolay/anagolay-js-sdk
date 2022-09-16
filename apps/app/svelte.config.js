@@ -6,15 +6,19 @@ import preprocess from 'svelte-preprocess';
 const config = {
   // Consult https://github.com/sveltejs/svelte-preprocess
   // for more information about preprocessors
-  preprocess: preprocess(),
+  preprocess: preprocess({
+    preserve: ['ld+json'],
+  }),
   kit: {
-    adapter: adapter(),
-    // adapter: adapter_ipfs({}),
+    adapter: adapter({
+      fallback: '200.html',
+    }),
     trailingSlash: 'always',
     prerender: {
-      default: true,
+      default: false,
     },
   },
 };
 
 export default config;
+// export AN_IPFS_API_URL="https://2214-anagolay-microservices-1s38l5204zr.ws-us62.gitpod.io/api/v0"

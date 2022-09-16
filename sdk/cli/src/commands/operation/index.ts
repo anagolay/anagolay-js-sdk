@@ -6,7 +6,7 @@
 
 import { connectToWs as connectToChainViaWs } from '@anagolay/api';
 import { AnOperationArtifactStructure, AnOperationData, AnOperationVersionData } from '@anagolay/types';
-import { allCommitsPushed, createFileLogger, lastRevision, Logger, urlForRemote } from '@anagolay/utils';
+import { allCommitsPushed, lastRevision, urlForRemote } from '@anagolay/utils';
 import { ApiPromise } from '@polkadot/api';
 import { KeyringPair } from '@polkadot/keyring/types';
 import { EventRecord } from '@polkadot/types/interfaces';
@@ -21,6 +21,7 @@ import signale from 'signale';
 import { ISignSubmitErrorReturn, ISignSubmitSuccessReturn, signAndSubmit } from '$src/api';
 import { chooseAccount } from '$src/commonQuestions/account';
 import { askStarterQuestions } from '$src/commonQuestions/common';
+import { createFileLogger, Logger } from '$src/logger';
 import { callPublishService, ISuccessfulResponse } from '$src/publish';
 import { ensureBalance, logsDir, showArtifactTable } from '$src/utils';
 

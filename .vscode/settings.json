@@ -42,6 +42,7 @@
     "clui",
     "destructure",
     "grayscale",
+    "ipfs",
     "Jsonify",
     "multihashes",
     "pnpm",
@@ -76,5 +77,6 @@
   "workbench.colorCustomizations": {
     "titleBar.activeBackground": "#3659c2"
   },
-  "terminal.integrated.scrollback": 10000
+  "terminal.integrated.scrollback": 10000,
+  "editor.stickyScroll.enabled": true
 }

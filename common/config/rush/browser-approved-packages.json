@@ -35,12 +35,24 @@
       "allowedCategories": [ "libraries", "webapp" ]
     },
     {
+      "name": "@anagolay/wf_cidv1_from_array",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
       "name": "@docusaurus/core",
       "allowedCategories": [ "websites" ]
     },
     {
       "name": "@docusaurus/preset-classic",
       "allowedCategories": [ "websites" ]
+    },
+    {
+      "name": "@esbuild-plugins/node-globals-polyfill",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
+      "name": "@esbuild-plugins/node-modules-polyfill",
+      "allowedCategories": [ "webapp" ]
     },
     {
       "name": "@fontsource/fira-mono",
@@ -69,6 +81,14 @@
     {
       "name": "@polkadot/api-base",
       "allowedCategories": [ "libraries" ]
+    },
+    {
+      "name": "@polkadot/extension-dapp",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
+      "name": "@polkadot/extension-inject",
+      "allowedCategories": [ "webapp" ]
     },
     {
       "name": "@polkadot/keyring",
@@ -223,6 +243,10 @@
       "allowedCategories": [ "libraries" ]
     },
     {
+      "name": "esbuild",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
       "name": "eslint",
       "allowedCategories": [ "libraries", "webapp" ]
     },
@@ -240,6 +264,10 @@
     },
     {
       "name": "eslint-plugin-unused-imports",
+      "allowedCategories": [ "libraries", "webapp" ]
+    },
+    {
+      "name": "events",
       "allowedCategories": [ "libraries", "webapp" ]
     },
     {
@@ -323,6 +351,10 @@
       "allowedCategories": [ "webapp" ]
     },
     {
+      "name": "rollup-plugin-node-polyfills",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
       "name": "signale",
       "allowedCategories": [ "libraries" ]
     },
@@ -335,6 +367,10 @@
       "allowedCategories": [ "libraries", "webapp" ]
     },
     {
+      "name": "surge",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
       "name": "svelte",
       "allowedCategories": [ "webapp" ]
     },
@@ -343,11 +379,19 @@
       "allowedCategories": [ "webapp" ]
     },
     {
+      "name": "svelte-confetti",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
       "name": "svelte-material-icons",
       "allowedCategories": [ "webapp" ]
     },
     {
       "name": "svelte-preprocess",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
+      "name": "svelte-seo",
       "allowedCategories": [ "webapp" ]
     },
     {
@@ -387,12 +431,32 @@
       "allowedCategories": [ "webapp" ]
     },
     {
+      "name": "vite-plugin-iso-import",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
+      "name": "vite-plugin-top-level-await",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
+      "name": "vite-plugin-wasm",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
       "name": "webpack",
       "allowedCategories": [ "libraries" ]
     },
     {
       "name": "webpack-node-externals",
       "allowedCategories": [ "libraries" ]
+    },
+    {
+      "name": "wf_cid_from_array",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
+      "name": "wf_cidv1_from_array",
+      "allowedCategories": [ "webapp" ]
     },
     {
       "name": "yargs",

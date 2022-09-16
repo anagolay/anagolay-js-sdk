@@ -5,7 +5,7 @@
 <script lang="ts">
   import type { OperationWithVersions } from '$src/api';
 
-  import MaterialIcon from '$src/components/MaterialIcon.svelte';
+  import MaterialIcon from '$src/components/base/MaterialIcon.svelte';
   import type { AnOperation, AnOperationVersion } from '@anagolay/types';
   import { isEmpty } from 'ramda';
   import { last } from 'remeda';

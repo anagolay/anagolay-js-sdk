@@ -1,11 +1,9 @@
 <script lang="ts">
-  import Code from '$src/components/Code.svelte';
-  import { workflow } from './stores';
-  import MaterialIcon from '$src/components/MaterialIcon.svelte';
-  import { wsConnected } from '$src/stores';
+  import MaterialIcon from '$src/components/base/MaterialIcon.svelte';
+  import { pageTitle, wsConnected } from '$src/stores';
 </script>
 
-<div class="navbar bg-base-100">
+<div class="navbar bg-base-300">
   <div class="navbar-start">
     <div class="dropdown">
       <label tabindex="0" class="btn btn-ghost btn-circle" for="">
@@ -28,40 +26,21 @@
         class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
       >
         <li>
-          <a href="/">/ <MaterialIcon iconName="home" /></a>
+          <a href="/" sveltekit:prefetch><MaterialIcon iconName="home" /> Home</a>
+        </li>
+        <li>
+          <a href="/workflow-builder" sveltekit:prefetch><MaterialIcon iconName="foundation" />Workflow builder</a>
+        </li>
+        <li>
+          <a href="/verify-your-domain" sveltekit:prefetch><MaterialIcon iconName="domain" />Verify a domain</a>
         </li>
       </ul>
     </div>
   </div>
   <div class="navbar-center">
-    <span class="p-1 normal-case text-xl">Anagolay Workflow Builder</span>
+    <span class="p-1 normal-case text-xl">{$pageTitle}</span>
   </div>
   <div class="navbar-end">
-    <div class="modalWindow mx-1">
-      <!-- The button to open modal -->
-      <label for="manifest-modal" class="btn modal-button">Show Manifest</label>
-
-      <input type="checkbox" id="manifest-modal" class="modal-toggle" />
-      <label for="manifest-modal" class="modal cursor-pointer">
-        <div class="modal-box w-11/12 max-w-5xl">
-          <label for="manifest-modal" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
-
-          <Code
-            code={JSON.parse(
-              JSON.stringify($workflow.manifestData, (key, value) => {
-                // @TODO here, again we need to serialize the object to JSON without alteration of the model
-                // serializeAndParse() cannot work here
-                if (value instanceof Map) {
-                  return Object.fromEntries(value);
-                } else {
-                  return value;
-                }
-              })
-            )}
-          />
-        </div>
-      </label>
-    </div>
     <div class="w-10 rounded-full mx-1">
       {#if $wsConnected}
         <MaterialIcon title="Websocket connected" class="cursor-help" iconName="wifi" />

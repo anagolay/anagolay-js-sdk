@@ -171,7 +171,336 @@
       "canonicalReference": "@anagolay/migrate!",
       "name": "",
       "preserveMemberOrder": false,
-      "members": []
+      "members": [
+        {
+          "kind": "Interface",
+          "canonicalReference": "@anagolay/migrate!OperationWithVersions:interface",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface OperationWithVersions "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "OperationWithVersions",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@anagolay/migrate!OperationWithVersions#accountId:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "accountId: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "AccountId",
+                  "canonicalReference": "@polkadot/types!AccountId:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "accountId",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@anagolay/migrate!OperationWithVersions#op:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "op: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Operation",
+                  "canonicalReference": "@anagolay/types!Operation:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "op",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@anagolay/migrate!OperationWithVersions#versions:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "versions: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "OperationVersion",
+                  "canonicalReference": "@anagolay/types!OperationVersion:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "versions",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              }
+            }
+          ],
+          "extendsTokenRanges": []
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "@anagolay/migrate!retrieveOperations:function(1)",
+          "docComment": "/**\n * Fetch the operations from the chain then format them.\n *\n * @param chain - Connected chain instance\n *\n * @returns \n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function retrieveOperations(chain: "
+            },
+            {
+              "kind": "Reference",
+              "text": "ApiPromise",
+              "canonicalReference": "@polkadot/api!ApiPromise:class"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Reference",
+              "text": "Promise",
+              "canonicalReference": "!Promise:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "<"
+            },
+            {
+              "kind": "Reference",
+              "text": "OperationWithVersions",
+              "canonicalReference": "@anagolay/migrate!OperationWithVersions:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "[]>"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 3,
+            "endIndex": 7
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "chain",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isOptional": false
+            }
+          ],
+          "name": "retrieveOperations"
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "@anagolay/migrate!retrieveWorkflows:function(1)",
+          "docComment": "/**\n * Fetch the workflows from the chain then format them.\n *\n * @param chain - Connected chain instance\n *\n * @returns \n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function retrieveWorkflows(chain: "
+            },
+            {
+              "kind": "Reference",
+              "text": "ApiPromise",
+              "canonicalReference": "@polkadot/api!ApiPromise:class"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Reference",
+              "text": "Promise",
+              "canonicalReference": "!Promise:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "<"
+            },
+            {
+              "kind": "Reference",
+              "text": "WorkflowWithVersions",
+              "canonicalReference": "@anagolay/migrate!WorkflowWithVersions:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "[]>"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 3,
+            "endIndex": 7
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "chain",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isOptional": false
+            }
+          ],
+          "name": "retrieveWorkflows"
+        },
+        {
+          "kind": "Interface",
+          "canonicalReference": "@anagolay/migrate!WorkflowWithVersions:interface",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface WorkflowWithVersions "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "WorkflowWithVersions",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@anagolay/migrate!WorkflowWithVersions#accountId:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "accountId: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "AccountId",
+                  "canonicalReference": "@polkadot/types!AccountId:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "accountId",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@anagolay/migrate!WorkflowWithVersions#versions:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "versions: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "WorkflowVersion",
+                  "canonicalReference": "@anagolay/types!WorkflowVersion:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "versions",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@anagolay/migrate!WorkflowWithVersions#wf:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "wf: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Workflow",
+                  "canonicalReference": "@anagolay/types!Workflow:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "wf",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "extendsTokenRanges": []
+        }
+      ]
     }
   ]
 }

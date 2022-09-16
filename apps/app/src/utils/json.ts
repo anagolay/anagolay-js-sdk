@@ -110,12 +110,14 @@ export function parse<T>(data: string, reviver?: ReplacerOrReviverAsFunction<T>)
 export function serialize<T>(
   data: T,
   space?: number,
-  replacer?: ReplacerOrReviverAsFunction<T> | ReplacerAsArray | undefined
+  replacer?: ReplacerOrReviverAsFunction<T> | ReplacerAsArray | undefined | null
 ): string {
   let repl = replacer;
 
-  if (isNil(repl)) {
+  if (!isNil(repl)) {
     repl = customReplacer;
+  } else {
+    repl = null;
   }
 
   const d = JSON.stringify(data, repl as any, space);

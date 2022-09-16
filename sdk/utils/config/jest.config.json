@@ -1,5 +1,5 @@
 {
-  "extends": "@rushstack/heft-node-rig/profiles/default/config/jest.config.json",
+  "extends": "@rushstack/heft-web-rig/profiles/library/config/jest.config.json",
   // Code coverage tracking is disabled by default; set this to true to enable it
   "collectCoverage": true
 }

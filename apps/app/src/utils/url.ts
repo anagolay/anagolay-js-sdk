@@ -11,7 +11,7 @@ import { alerts } from '$src/components/notifications/stores';
 export function getHashValue(fullHash: string, hashName: string, defaultValue = ''): string {
   console.debug('getHashValue', { hashName, fullHash });
 
-  if (isEmpty(fullHash)) return '';
+  if (isEmpty(fullHash)) return defaultValue;
 
   // remove the `#` from the string
   const parts = split('&')(fullHash.substring(1));

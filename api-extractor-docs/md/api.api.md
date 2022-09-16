@@ -4,13 +4,125 @@
 
 ```ts
 
+/// <reference types="node" />
+
+import { AddressOrPair } from '@polkadot/api/types';
+import { AnProofData } from '@anagolay/types';
+import { AnStatementData } from '@anagolay/types';
 import { ApiPromise } from '@polkadot/api';
+import { EventEmitter } from 'events';
+import type { ISubmittableResult } from '@polkadot/types/types';
+import { SignerOptions } from '@polkadot/api/types';
+import { SubmittableExtrinsic } from '@polkadot/api/types';
+
+declare namespace config {
+    export {
+        EVENT_NAME_BATCH,
+        EVENT_NAME_SINGLE,
+        EVENT_NAME_ERROR
+    }
+}
+
+declare namespace config_2 {
+    export {
+        EVENT_NAME_BATCH_2 as EVENT_NAME_BATCH,
+        EVENT_NAME_SINGLE_2 as EVENT_NAME_SINGLE,
+        EVENT_NAME_ERROR_2 as EVENT_NAME_ERROR
+    }
+}
 
 // @public
 export function connectToWs(connectTo?: string): Promise<ApiPromise>;
 
+// @public
+function createSubmittableExtrinsic(d: AnProofData): SubmittableExtrinsic<'promise'>;
+
+// @public
+function createSubmittableExtrinsicOfCopyright(d: AnStatementData): SubmittableExtrinsic<'promise'>;
+
+// @public
+function createSubmittableExtrinsicOfOwnership(d: AnStatementData): SubmittableExtrinsic<'promise'>;
+
 // @public (undocumented)
 export const defaultChainToConnect: string;
+
+// @public (undocumented)
+const EVENT_NAME_BATCH: string;
+
+// @public (undocumented)
+const EVENT_NAME_BATCH_2: string;
+
+// @public (undocumented)
+const EVENT_NAME_ERROR: string;
+
+// @public (undocumented)
+const EVENT_NAME_ERROR_2: string;
+
+// @public (undocumented)
+const EVENT_NAME_SINGLE: string;
+
+// @public (undocumented)
+const EVENT_NAME_SINGLE_2: string;
+
+// @public
+export function getCachedApi(): ApiPromise;
+
+// @public
+export interface IEventMessage {
+    // (undocumented)
+    error?: {
+        message: string;
+        extra?: any;
+    };
+    // (undocumented)
+    finalized?: boolean;
+    // (undocumented)
+    message?: string;
+}
+
+// Warning: (ae-forgotten-export) The symbol "ICustomEventEmitter" needs to be exported by the entry point index.d.ts
+//
+// @public
+export function networkCallback(params: ISubmittableResult, broadcast: ICustomEventEmitter, eventName: string): Promise<void>;
+
+// @public (undocumented)
+const palletName: string;
+
+// @public (undocumented)
+const palletName_2: string;
+
+declare namespace pallets {
+    export {
+        poe,
+        statements
+    }
+}
+export { pallets }
+
+declare namespace poe {
+    export {
+        palletName,
+        config,
+        save,
+        createSubmittableExtrinsic
+    }
+}
+
+// @public
+function save(d: AnProofData, signer: AddressOrPair, options?: Partial<SignerOptions>): Promise<ICustomEventEmitter>;
+
+// @public
+function saveOwnership(d: AnStatementData, signer: AddressOrPair, options?: Partial<SignerOptions>): Promise<ICustomEventEmitter>;
+
+declare namespace statements {
+    export {
+        palletName_2 as palletName,
+        config_2 as config,
+        saveOwnership,
+        createSubmittableExtrinsicOfCopyright,
+        createSubmittableExtrinsicOfOwnership
+    }
+}
 
 
 export * from "@polkadot/api";

@@ -10,11 +10,13 @@ import { DestinationStream } from 'pino';
 import { ExecOptions } from 'child_process';
 import { Logger as Logger_2 } from 'pino';
 import { LoggerOptions } from 'pino';
-import * as polkadot_util from '@polkadot/util';
 import { PromiseWithChild } from 'child_process';
 
 // @public
 export function allCommitsPushed(cwd: string): Promise<boolean>;
+
+// @public
+export function callApi(params: Record<string, string>, dohUrl?: string): Promise<IDoHResponse>;
 
 // @public
 export function cloneRepo(options: IGitCloneOptions, log?: Logger_2): Promise<{
@@ -28,6 +30,15 @@ export function createFileLogger(fileLocation: string, options?: LoggerOptions):
 export function createLogger(options?: LoggerOptions | DestinationStream): Logger;
 
 // @public
+export function customReplacer<V>(key: string, value: V): ISerializedMap<V> | V;
+
+// @public (undocumented)
+export function customReviver<T extends ISerializedMap<T>>(key: string, value: T): T | Map<any, any>;
+
+// @public
+export const defaultDohUrl: string;
+
+// @public
 export const defaultExecOptions: IExecOptions;
 
 // @public
@@ -39,8 +50,41 @@ export function exec(command: string, options?: IExecOptions): Promise<PromiseWi
 // @public
 export function gitCloneBare(options: IGitCloneBareOptions): Promise<string>;
 
+// @public (undocumented)
+export interface IDoHAnswer {
+    data: string;
+    name: string;
+    TTL: number;
+    type: number;
+}
+
+// @public (undocumented)
+export interface IDoHQuestion {
+    name: string;
+    type: number;
+}
+
 // @public
-export function hexToString(hexString: string): string;
+export interface IDoHRequest {
+    cd?: string;
+    do?: string;
+    name: string;
+    type: string;
+}
+
+// @public
+export interface IDoHResponse {
+    AD: boolean;
+    // (undocumented)
+    Answer: IDoHAnswer[];
+    CD: boolean;
+    // (undocumented)
+    Question: IDoHQuestion[];
+    RA: boolean;
+    RD: boolean;
+    Status: number;
+    TC: boolean;
+}
 
 // @public (undocumented)
 export interface IExecOptions extends ExecOptions {
@@ -74,11 +118,24 @@ export function isDirty(path: string): Promise<{
     changes: string;
 }>;
 
+// @public (undocumented)
+export interface ISerializedMap<T> {
+    // (undocumented)
+    data: T;
+    // (undocumented)
+    type: 'Map';
+}
+
 // @public
 export function isFalse(value: string | number): boolean;
 
 // @public
 export function isTrue(value: string | number): boolean;
+
+// @public (undocumented)
+export type Jsonify<T> = T extends Date ? string : T extends object ? {
+    [k in keyof T]: Jsonify<T[k]>;
+} : T;
 
 // @public
 export function lastRevision(repoPath: string): Promise<string>;
@@ -90,15 +147,12 @@ export type Logger = Logger_2;
 export function normalizeUrlPathname(pathName: string): string;
 
 // Warning: (ae-forgotten-export) The symbol "ReplacerOrReviverAsFunction" needs to be exported by the entry point index.d.ts
-// Warning: (ae-forgotten-export) The symbol "Jsonify" needs to be exported by the entry point index.d.ts
 //
 // @public
 export function parse<T>(data: string, reviver?: ReplacerOrReviverAsFunction<T>): Jsonify<T>;
 
 // @public
 export function parseURL(sourceURL: string): string;
-
-export { polkadot_util }
 
 // Warning: (ae-forgotten-export) The symbol "ReplacerAsArray" needs to be exported by the entry point index.d.ts
 //
@@ -109,6 +163,12 @@ export function serialize<T>(data: T, space?: number, replacer?: ReplacerOrReviv
 export function serializeThenParse<T>(data: T, toOriginal?: boolean): Jsonify<T>;
 
 // @public
+export function txtRecords(forDomain: string, dohUrl?: string): Promise<IDoHResponse>;
+
+// @public
 export function urlForRemote(remote?: string): Promise<string>;
+
+
+export * from "@polkadot/util";
 
 ```
