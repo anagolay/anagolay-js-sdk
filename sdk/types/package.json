@@ -15,18 +15,22 @@
   ],
   "exports": {
     ".": {
+      "types": "./lib/types.d.ts",
       "import": "./lib/index.js",
       "require": "./lib_cjs/index.js"
     },
     "./augment-api": {
+      "types": "./lib/types.d.ts",
       "import": "./lib/augment-api.js",
-      "require": "./lib_cjs/augment-api.js"
+      "default": "./lib/augment-api.js",
+      "require": "./lib_cjs/augment-api.js",
+      "node": "./lib_cjs/augment-api.js"
     }
   },
   "scripts": {
     "generate": "pnpm update:metadata && pnpm gen:defs && pnpm gen:meta && pnpm lint:fix",
     "gen:types": "pnpm gen:defs && pnpm gen:meta && pnpm lint:fix",
-    "build": "heft build --clean && echo '{\"type\":\"commonjs\"}' > ./lib_cjs/package.json && echo '{\"type\":\"module\"}' > ./lib/package.json",
+    "build": "heft build --clean",
     "watch": "heft build --clean --watch",
     "lint:fix": "eslint --quiet ./src --ext .js,.jsx,.ts,.tsx --fix",
     "gen:defs": "ts-node --skip-project node_modules/@polkadot/typegen/scripts/polkadot-types-from-defs.cjs --package @anagolay/types/interfaces --input ./src/interfaces --endpoint ./metadata/anagolay.json",
@@ -47,10 +51,10 @@
   "devDependencies": {
     "tslib": "2.4.0",
     "typescript": "4.7.4",
-    "@rushstack/heft-node-rig": "1.10.2",
+    "@rushstack/heft-web-rig": "0.11.3",
     "@microsoft/api-extractor": "7.29.2",
     "@rushstack/eslint-config": "3.0.0",
-    "@rushstack/heft": "0.47.2",
+    "@rushstack/heft": "0.47.3",
     "@rushstack/heft-jest-plugin": "0.3.25",
     "@types/heft-jest": "1.0.3",
     "@types/node": "18.7.6",

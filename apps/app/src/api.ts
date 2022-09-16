@@ -1,8 +1,12 @@
+/**
+ * REWRITE THIS!!!!! @TODO
+ */
+
 // https://polkadot.js.org/docs/api/FAQ/#since-upgrading-to-the-7x-series-typescript-augmentation-is-missing
-import '@polkadot/api-augment';
+// import '@polkadot/api-augment';
 // THIS MUST BE INCLUDED IF WE WANT AUGMENTED TYPES
-import '@anagolay/types/lib/interfaces/augment-api';
-import '@anagolay/types/lib/interfaces/augment-types';
+// import '@anagolay/types/lib/interfaces/augment-api';
+// import '@anagolay/types/lib/interfaces/augment-types';
 
 import {
   AnOperation,

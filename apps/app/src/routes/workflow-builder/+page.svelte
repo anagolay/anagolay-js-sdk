@@ -4,16 +4,16 @@
 
 <script script lang="ts">
   import { page } from '$app/stores';
+  import Navbar from '$src/components/base/Navbar.svelte';
 
   import { onMount } from 'svelte';
   import Drawflow from './drawflow.svelte';
   import { io, Socket } from 'socket.io-client';
   import { AnForWhat, type AnOperation, type AnOperationVersion } from '@anagolay/types';
-  import Navbar from './navbar.svelte';
-  import { wsConnected } from '$src/stores';
+  import { anagolayChainWSS, pageTitle, relayServiceWSS, wsConnected } from '$src/stores';
   import { workflow } from './stores';
   import OperationNode from './OperationNode.svelte';
-  import SkeletonLoader from '$src/components/SkeletonLoader.svelte';
+  import SkeletonLoader from '$src/components/base/SkeletonLoader.svelte';
   import { alerts } from '$src/components/notifications/stores';
   import { connectToApi, retrieveOperations, type OperationWithVersions } from '$src/api';
   import { ApiPromise } from '@polkadot/api';
@@ -21,6 +21,11 @@
   import { isEmpty } from 'ramda';
   import { getHashValue } from '$src/utils/url';
   import slug from 'slug';
+  import Code from '$src/components/base/CodeBlockWithSerialization.svelte';
+  import SvelteSeo from 'svelte-seo';
+  const title: string = 'Workflow builder';
+
+  pageTitle.set(title);
 
   /**
    * A value which we will sluggify and then add to the store value `$workflow.manifestData.name`.
@@ -77,12 +82,12 @@
   /**
    * Namespace to connect to. This is the shared namespace between this app and CLI
    */
-  let namespace: string = getHashValue($page.url.hash, 'ns');
+  let namespace: string = getHashValue($page.url.hash, 'ns', '');
 
   /**
    * Websocket server address without the client path.
    */
-  let ws: string = getHashValue($page.url.hash, 'ws', 'wss://ws.anagolay.io');
+  let ws: string = getHashValue($page.url.hash, 'ws', $relayServiceWSS);
 
   /**
    * This is the path where to get the socket.io client library
@@ -93,11 +98,7 @@
   /**
    * What is the Anagolay Chain ws url. Used for getting the operations
    */
-  let anagolay_chain_ws: string = getHashValue(
-    $page.url.hash,
-    'anagolay_chain_ws',
-    'wss://idiyanale-1.bootnode.dev.anagolay.io'
-  );
+  let anagolay_chain_ws: string = getHashValue($page.url.hash, 'anagolay_chain_ws', $anagolayChainWSS);
 
   // Operations with their respective versions from the chain
   let opvs: Promise<OperationWithVersions[]> = new Promise<OperationWithVersions[]>((res, rej) => {});
@@ -122,7 +123,7 @@
       path,
       reconnection: true,
       transports: ['websocket'],
-      secure: false,
+      secure: true,
     });
 
     opvs = retrieveOperations(chain);
@@ -173,9 +174,7 @@
   $: $workflow.manifestData.name = slug(workflowName, '_');
 </script>
 
-<svelte:head>
-  <title>Workflow builder</title>
-</svelte:head>
+<SvelteSeo {title} description="Workflow creation page. The most fun you had in years!" />
 
 <div>
   <Navbar />
@@ -184,6 +183,11 @@
     <aside
       class="w-64 lg:shadow transform -translate-x-full md:translate-x-0 transition-transform duration-150 ease-in bg-base-content"
     >
+      <!-- The button to open modal -->
+      <div class="p-4">
+        <label for="manifest-modal" class="btn modal-button btn-accent w-full">Show Manifest</label>
+      </div>
+
       <div class="px-4 my-2 min-h-12">
         <h2 class="text-base-300">Operations:</h2>
         <ul class="flex flex-col w-full">
@@ -268,6 +272,28 @@
       class="flex flex-col flex-grow -ml-64 md:ml-0 transition-all duration-150 ease-in h-auto  bg-gradient-to-b from-blue-500 to-green-500"
     >
       <Drawflow bind:this={bindedDf} />
+      <div class="modalWindow p-4">
+        <input type="checkbox" id="manifest-modal" class="modal-toggle" />
+        <label for="manifest-modal" class="modal cursor-pointer">
+          <div class="modal-box w-11/12 max-w-5xl">
+            <label for="manifest-modal" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+
+            <Code
+              code={JSON.parse(
+                JSON.stringify($workflow.manifestData, (key, value) => {
+                  // @TODO here, again we need to serialize the object to JSON without alteration of the model
+                  // serializeAndParse() cannot work here
+                  if (value instanceof Map) {
+                    return Object.fromEntries(value);
+                  } else {
+                    return value;
+                  }
+                })
+              )}
+            />
+          </div>
+        </label>
+      </div>
     </main>
   </div>
 </div>

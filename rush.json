@@ -304,7 +304,7 @@
     /**
      * The list of shell commands to run after the Rush build command finishes
      */
-    "postRushBuild": []
+    "postRushBuild": ["bash ./common/scripts/add-package-json-to-libs.sh"]
   },
   /**
    * Installation variants allow you to maintain a parallel set of configuration files that can be

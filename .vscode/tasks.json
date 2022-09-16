@@ -1,0 +1,11 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Add package.json to libs when watching ... ",
+      "type": "shell",
+      "command": "${workspaceFolder}/common/scripts/add-package-json-to-libs.sh",
+      "problemMatcher": []
+    }
+  ]
+}

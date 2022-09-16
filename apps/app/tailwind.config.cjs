@@ -7,7 +7,7 @@ module.exports = {
   plugins: [
     require('@tailwindcss/typography'),
     require('@tailwindcss/line-clamp'),
-    // require('@tailwindcss/forms'),
+    // require('@tailwindcss/forms'), // enabling this will mess up the daisyUI styles
     require('daisyui'),
   ],
   // daisyUI config (optional)

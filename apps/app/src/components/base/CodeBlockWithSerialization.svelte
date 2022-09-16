@@ -1,5 +1,6 @@
 <script lang="ts">
   import { serialize } from '$src/utils/json';
+  import Pre from './Pre.svelte';
 
   let classNames: string = '';
   export { classNames as class };
@@ -9,6 +10,4 @@
   export let space: number = 2;
 </script>
 
-<div class="lg:container mx-auto ">
-  <pre class={classNames}>{serialize(code, space)}</pre>
-</div>
+<Pre class={classNames}>{serialize(code, space)}</Pre>

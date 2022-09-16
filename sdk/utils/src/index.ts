@@ -27,28 +27,8 @@
  * @packageDocumentation
  */
 
-import * as polkadot_util from '@polkadot/util';
-
-/**
- * Re-export Polkadot utils
- * @public
- */
-export { polkadot_util };
-
-export { isFalse, isTrue } from './booleans';
-export { defaultExecOptions, exec, IExecOptions } from './exec';
-export {
-  allCommitsPushed,
-  cloneRepo,
-  gitCloneBare,
-  IGitCloneBareOptions,
-  IGitCloneOptions,
-  isDirty,
-  lastRevision,
-  normalizeUrlPathname,
-  parseURL,
-  urlForRemote,
-} from './git';
-export { hexToString } from './hex/hex';
-export { parse, serialize, serializeThenParse } from './json/json';
-export { createFileLogger, createLogger, Logger } from './logger';
+export * from './doh/doh.js';
+export * from './exec.js';
+export * from './git.js';
+export * from './index-web.js';
+export * from './logger.js';
