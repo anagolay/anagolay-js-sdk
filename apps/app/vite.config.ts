@@ -68,7 +68,7 @@ const config: UserConfig = {
         // NodeModulesPolyfillPlugin(),
       ],
     },
-    exclude: [],
+    // exclude: ['pino'],
   },
   build: {
     // warn on chunks above 1MB

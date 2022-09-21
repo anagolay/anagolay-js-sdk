@@ -1,19 +1,24 @@
 {
-  "name": "@anagolay/utils",
+  "name": "@anagolay/util",
   "version": "0.7.0",
   "author": "did:substrate:GHm6gp6khjcxQvnbnSsHdYejsFK1nNVxcGyGAsbDfsymtLr",
   "license": "GPL3",
   "licenseFile": "./LICENSE",
-  "description": "Various utils needed for Anagolay Network. They are carefully written to be fast and work in browser and nodejs env.",
+  "description": "Various utilities needed for Anagolay Network. They are carefully written to be fast and work in browser and nodejs env.",
   "module": "./lib/index.js",
   "main": "./lib_cjs/index.js",
-  "types": "./lib/utils.d.ts",
+  "types": "./lib/util.d.ts",
   "type": "module",
   "exports": {
     ".": {
-      "import": "./lib/index-web.js",
-      "require": "./lib_cjs/index-web.js",
+      "browser": "./lib/index.browser.js",
+      "import": "./lib/index.js",
+      "require": "./lib_cjs/index.js",
       "node": "./lib_cjs/index.js"
+    },
+    "./*": {
+      "require": "./lib_cjs/*.js",
+      "import": "./lib/*.js"
     },
     "./doh": {
       "types": "./lib/doh/doh.d.ts",
@@ -23,9 +28,9 @@
     }
   },
   "scripts": {
-    "test:watch": "heft test --watch",
-    "build": "heft test --clean",
-    "watch": "nodemon --watch ./src --ext ts --exec heft build"
+    "watch": "heft test --watch",
+    "build": "heft build --clean && pnpm fix-lib",
+    "fix-lib": "node ./config/add-js-to-esm.js"
   },
   "dependencies": {
     "@polkadot/util": "10.1.4",

@@ -38,6 +38,9 @@
    * The default value is "lib".
    */
   "emitFolderNameForTests": "lib_cjs"
+  // "emitMjsExtensionForESModule": true,
+  // "emitCjsExtensionForCommonJS": true
+
   /**
    * If set to "true", the TSlint task will not be invoked.
    */

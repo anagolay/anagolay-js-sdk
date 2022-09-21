@@ -6,7 +6,7 @@
 
 import { connectToWs as connectToChainViaWs } from '@anagolay/api';
 import { AnOperationArtifactStructure, AnOperationData, AnOperationVersionData } from '@anagolay/types';
-import { allCommitsPushed, lastRevision, urlForRemote } from '@anagolay/utils';
+import { allCommitsPushed, lastRevision, urlForRemote } from '@anagolay/util';
 import { ApiPromise } from '@polkadot/api';
 import { KeyringPair } from '@polkadot/keyring/types';
 import { EventRecord } from '@polkadot/types/interfaces';
@@ -28,7 +28,7 @@ import { ensureBalance, logsDir, showArtifactTable } from '$src/utils';
 // eslint-disable-next-line @rushstack/typedef-var
 const Spinner = clui.Spinner;
 
-const log: Logger = createFileLogger(`${logsDir()}/operation.log`, { name: 'operation' });
+let log: Logger;
 
 /**
  * Publish operation successful response
@@ -52,6 +52,8 @@ interface IOperationVersionSchema extends ISuccessfulResponse<AnOperationArtifac
  * @public
  */
 export default async function makeCommand(): Promise<Command> {
+  log = createFileLogger(`${logsDir()}/operation.log`, { name: 'operation' });
+
   const operationCmd = new Command('operation');
   operationCmd.description('All operation related commands');
 

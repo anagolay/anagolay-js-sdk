@@ -11,17 +11,17 @@ import {
   WorkflowRecord,
   WorkflowVersion,
 } from '@anagolay/types';
-import { ApiPromise } from '@anagolay/api';
+import { ApiPromise, connectToWs } from '@anagolay/api';
+
 import { Option } from '@polkadot/types';
 import { AccountId } from '@polkadot/types/interfaces';
 
-import { connectToWs } from '@anagolay/api';
 import { Keyring } from '@polkadot/api';
 import { AccountInfo } from '@polkadot/types/interfaces/types.js';
-import { hexToString } from '@anagolay/utils';
+import { hexToString } from '@polkadot/util';
 
-const fromApi: string = 'wss://9944-anagolay-poavalidatorte-7r6uzm14n48.ws-eu62.gitpod.io';
-const toApi: string = 'wss://idiyanale-1.bootnode.dev.anagolay.io';
+const fromApi: string = 'wss://9944-anagolay-poavalidatorte-a1njzzqy8op.ws-eu64.gitpod.io';
+const toApi: string = 'wss://idiyanale-testnet.anagolay.io';
 
 function forEachPromise<T>(items: T[], fn: any) {
   return items.reduce(function (promise: any, item: T) {
@@ -40,6 +40,8 @@ async function main() {
     // Super secret sudo account seed
     'private sheriff twelve time machine novel network drill knee horn club feature'
   );
+
+  console.log('sudoPair.address.toString()', sudoPair.address.toString());
   const {
     data: { free },
   } = await apiSource.query.system.account<AccountInfo>(sudoPair.address.toString());
@@ -181,6 +183,6 @@ async function sadas() {
     console.log('proof ID', hexToString(s.id.toString()));
   });
 }
-sadas();
+// sadas();
 // run the script
-// main();
+main();

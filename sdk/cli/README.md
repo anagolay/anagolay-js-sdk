@@ -1,7 +1,18 @@
 
 # Anagolay CLI
 
-> NOTE the git is assumed to be english language
+
+------
+The last published CLI is here
+
+```sh
+echo "Installing the Anagolay CLI"
+sudo sh -c 'curl https://bafybeibybur764gvodwjpzij4umjzr6knkpfcnil5sdmwfoysyfgi5gvre.ipfs.anagolay.network > /usr/local/bin/anagolay && chmod +x /usr/local/bin/anagolay'
+
+```
+
+------
+
 
 Current version is published on ipfs
 ```

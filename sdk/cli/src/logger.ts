@@ -23,6 +23,6 @@ export function createLogger(options?: LoggerOptions | DestinationStream): Logge
  * @public
  */
 export function createFileLogger(fileLocation: string, options: LoggerOptions = {}): Logger {
-  const logger = pino(options, pino.destination(`${fileLocation}`));
+  const logger = pino(options, pino.destination({ dest: fileLocation, sync: true }));
   return logger;
 }

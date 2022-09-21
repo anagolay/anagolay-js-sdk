@@ -1,5 +1,5 @@
-import { hexToString } from '@anagolay/utils';
 import { Bytes } from '@polkadot/types';
+import { hexToString } from '@polkadot/util';
 
 /**
  * Decode the Bytes to the string

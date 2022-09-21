@@ -20,15 +20,13 @@
  * A Utility library for anagolay js
  *
  * @remarks
- * We will re-export some of the packages that everbody will need.
- *
- * One of those libraries is `@polkadot/util` re-exported as `polkadot_util`.
+ * We will re-export some of the packages that everybody will need.
  *
  * @packageDocumentation
  */
 
-export * from './doh/doh.js';
-export * from './exec.js';
-export * from './git.js';
-export * from './index-web.js';
-export * from './logger.js';
+export * from './booleans';
+export * from './doh/doh';
+export * from './exec';
+export * from './git';
+export * from './json/json';

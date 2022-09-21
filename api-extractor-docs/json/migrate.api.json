@@ -226,7 +226,7 @@
                 {
                   "kind": "Reference",
                   "text": "Operation",
-                  "canonicalReference": "@anagolay/types!Operation:interface"
+                  "canonicalReference": "dummy_name!Operation:interface"
                 },
                 {
                   "kind": "Content",
@@ -254,7 +254,7 @@
                 {
                   "kind": "Reference",
                   "text": "OperationVersion",
-                  "canonicalReference": "@anagolay/types!OperationVersion:interface"
+                  "canonicalReference": "dummy_name!OperationVersion:interface"
                 },
                 {
                   "kind": "Content",
@@ -449,7 +449,7 @@
                 {
                   "kind": "Reference",
                   "text": "WorkflowVersion",
-                  "canonicalReference": "@anagolay/types!WorkflowVersion:interface"
+                  "canonicalReference": "dummy_name!WorkflowVersion:interface"
                 },
                 {
                   "kind": "Content",
@@ -481,7 +481,7 @@
                 {
                   "kind": "Reference",
                   "text": "Workflow",
-                  "canonicalReference": "@anagolay/types!Workflow:interface"
+                  "canonicalReference": "dummy_name!Workflow:interface"
                 },
                 {
                   "kind": "Content",

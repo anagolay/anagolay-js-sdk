@@ -161,20 +161,20 @@
     }
   },
   "kind": "Package",
-  "canonicalReference": "@anagolay/utils!",
-  "docComment": "/**\n * A Utility library for anagolay js\n *\n * @remarks\n *\n * We will re-export some of the packages that everbody will need.\n *\n * One of those libraries is `@polkadot/util` re-exported as `polkadot_util`.\n *\n * @packageDocumentation\n */\n",
-  "name": "@anagolay/utils",
+  "canonicalReference": "@anagolay/util!",
+  "docComment": "/**\n * A Utility library for anagolay js\n *\n * @remarks\n *\n * We will re-export some of the packages that everybody will need.\n *\n * @packageDocumentation\n */\n",
+  "name": "@anagolay/util",
   "preserveMemberOrder": false,
   "members": [
     {
       "kind": "EntryPoint",
-      "canonicalReference": "@anagolay/utils!",
+      "canonicalReference": "@anagolay/util!",
       "name": "",
       "preserveMemberOrder": false,
       "members": [
         {
           "kind": "Function",
-          "canonicalReference": "@anagolay/utils!allCommitsPushed:function(1)",
+          "canonicalReference": "@anagolay/util!allCommitsPushed:function(1)",
           "docComment": "/**\n * Did the user pushed all the commits? Returns true if yes, false if not\n *\n * @param cwd - \n *\n * @returns \n *\n * @public\n */\n",
           "excerptTokens": [
             {
@@ -223,7 +223,7 @@
         },
         {
           "kind": "Function",
-          "canonicalReference": "@anagolay/utils!callApi:function(1)",
+          "canonicalReference": "@anagolay/util!callApi:function(1)",
           "docComment": "/**\n * Generic function for the calling the DoH api\n *\n * @param params - An Object tat conforms with the {@link IDoHRequest} `name` and `value`\n *\n * @param dohUrl - for overriding the defaults which is\n *\n * @returns A DoH JSON response\n */\n",
           "excerptTokens": [
             {
@@ -263,7 +263,7 @@
             {
               "kind": "Reference",
               "text": "IDoHResponse",
-              "canonicalReference": "@anagolay/utils!IDoHResponse:interface"
+              "canonicalReference": "@anagolay/util!IDoHResponse:interface"
             },
             {
               "kind": "Content",
@@ -302,8 +302,8 @@
         },
         {
           "kind": "Function",
-          "canonicalReference": "@anagolay/utils!cloneRepo:function(1)",
-          "docComment": "/**\n * Clone repo as non-bare and return path\n *\n * @param options - {@link IGitCloneOptions}\n *\n * @param log - Optional {@link Logger}\n *\n * @returns the local cloned path, usually in the `/temp/anagolay` directory\n */\n",
+          "canonicalReference": "@anagolay/util!cloneRepo:function(1)",
+          "docComment": "/**\n * Clone repo as non-bare and return path\n *\n * @param options - {@link IGitCloneOptions}\n *\n * @returns the local cloned path, usually in the `/temp/anagolay` directory\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
@@ -312,16 +312,7 @@
             {
               "kind": "Reference",
               "text": "IGitCloneOptions",
-              "canonicalReference": "@anagolay/utils!IGitCloneOptions:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ", log?: "
-            },
-            {
-              "kind": "Reference",
-              "text": "Logger",
-              "canonicalReference": "pino!Logger:type"
+              "canonicalReference": "@anagolay/util!IGitCloneOptions:interface"
             },
             {
               "kind": "Content",
@@ -342,8 +333,8 @@
             }
           ],
           "returnTypeTokenRange": {
-            "startIndex": 5,
-            "endIndex": 7
+            "startIndex": 3,
+            "endIndex": 5
           },
           "releaseTag": "Public",
           "overloadIndex": 1,
@@ -355,138 +346,13 @@
                 "endIndex": 2
               },
               "isOptional": false
-            },
-            {
-              "parameterName": "log",
-              "parameterTypeTokenRange": {
-                "startIndex": 3,
-                "endIndex": 4
-              },
-              "isOptional": true
             }
           ],
           "name": "cloneRepo"
         },
         {
           "kind": "Function",
-          "canonicalReference": "@anagolay/utils!createFileLogger:function(1)",
-          "docComment": "/**\n * Create the PINO File logger, the abs path should exist before calling this\n *\n * @param options - All Pino options\n *\n * @returns \n *\n * @public\n */\n",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export declare function createFileLogger(fileLocation: "
-            },
-            {
-              "kind": "Content",
-              "text": "string"
-            },
-            {
-              "kind": "Content",
-              "text": ", options?: "
-            },
-            {
-              "kind": "Reference",
-              "text": "LoggerOptions",
-              "canonicalReference": "pino!LoggerOptions:interface"
-            },
-            {
-              "kind": "Content",
-              "text": "): "
-            },
-            {
-              "kind": "Reference",
-              "text": "Logger",
-              "canonicalReference": "@anagolay/utils!Logger:type"
-            },
-            {
-              "kind": "Content",
-              "text": ";"
-            }
-          ],
-          "returnTypeTokenRange": {
-            "startIndex": 5,
-            "endIndex": 6
-          },
-          "releaseTag": "Public",
-          "overloadIndex": 1,
-          "parameters": [
-            {
-              "parameterName": "fileLocation",
-              "parameterTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              },
-              "isOptional": false
-            },
-            {
-              "parameterName": "options",
-              "parameterTypeTokenRange": {
-                "startIndex": 3,
-                "endIndex": 4
-              },
-              "isOptional": true
-            }
-          ],
-          "name": "createFileLogger"
-        },
-        {
-          "kind": "Function",
-          "canonicalReference": "@anagolay/utils!createLogger:function(1)",
-          "docComment": "/**\n * Create the PINO logger\n *\n * @param options - \n *\n * @returns \n *\n * @public\n */\n",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export declare function createLogger(options?: "
-            },
-            {
-              "kind": "Reference",
-              "text": "LoggerOptions",
-              "canonicalReference": "pino!LoggerOptions:interface"
-            },
-            {
-              "kind": "Content",
-              "text": " | "
-            },
-            {
-              "kind": "Reference",
-              "text": "DestinationStream",
-              "canonicalReference": "pino!DestinationStream:interface"
-            },
-            {
-              "kind": "Content",
-              "text": "): "
-            },
-            {
-              "kind": "Reference",
-              "text": "Logger",
-              "canonicalReference": "@anagolay/utils!Logger:type"
-            },
-            {
-              "kind": "Content",
-              "text": ";"
-            }
-          ],
-          "returnTypeTokenRange": {
-            "startIndex": 5,
-            "endIndex": 6
-          },
-          "releaseTag": "Public",
-          "overloadIndex": 1,
-          "parameters": [
-            {
-              "parameterName": "options",
-              "parameterTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 4
-              },
-              "isOptional": true
-            }
-          ],
-          "name": "createLogger"
-        },
-        {
-          "kind": "Function",
-          "canonicalReference": "@anagolay/utils!customReplacer:function(1)",
+          "canonicalReference": "@anagolay/util!customReplacer:function(1)",
           "docComment": "/**\n * Custom replacer function to handle edge cases and types that don't have native serialization support.\n *\n * @remarks\n *\n * List of supported serializations that don't have native suport - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map\n *\n * @param key - First invocation this is empty, next ones is the `key` of the object\n *\n * @param value - First invocation is the full payload, nex ones is the object key value\n *\n * @returns \n */\n",
           "excerptTokens": [
             {
@@ -512,7 +378,7 @@
             {
               "kind": "Reference",
               "text": "ISerializedMap",
-              "canonicalReference": "@anagolay/utils!ISerializedMap:interface"
+              "canonicalReference": "@anagolay/util!ISerializedMap:interface"
             },
             {
               "kind": "Content",
@@ -564,7 +430,7 @@
         },
         {
           "kind": "Function",
-          "canonicalReference": "@anagolay/utils!customReviver:function(1)",
+          "canonicalReference": "@anagolay/util!customReviver:function(1)",
           "docComment": "",
           "excerptTokens": [
             {
@@ -574,7 +440,7 @@
             {
               "kind": "Reference",
               "text": "ISerializedMap",
-              "canonicalReference": "@anagolay/utils!ISerializedMap:interface"
+              "canonicalReference": "@anagolay/util!ISerializedMap:interface"
             },
             {
               "kind": "Content",
@@ -659,7 +525,7 @@
         },
         {
           "kind": "Variable",
-          "canonicalReference": "@anagolay/utils!defaultDohUrl:var",
+          "canonicalReference": "@anagolay/util!defaultDohUrl:var",
           "docComment": "/**\n * Default DoH url for cloudflare\n *\n * @public\n */\n",
           "excerptTokens": [
             {
@@ -681,7 +547,7 @@
         },
         {
           "kind": "Variable",
-          "canonicalReference": "@anagolay/utils!defaultExecOptions:var",
+          "canonicalReference": "@anagolay/util!defaultExecOptions:var",
           "docComment": "/**\n * Default exec options\n */\n",
           "excerptTokens": [
             {
@@ -691,7 +557,7 @@
             {
               "kind": "Reference",
               "text": "IExecOptions",
-              "canonicalReference": "@anagolay/utils!IExecOptions:interface"
+              "canonicalReference": "@anagolay/util!IExecOptions:interface"
             }
           ],
           "isReadonly": true,
@@ -704,7 +570,7 @@
         },
         {
           "kind": "Function",
-          "canonicalReference": "@anagolay/utils!exec:function(1)",
+          "canonicalReference": "@anagolay/util!exec:function(1)",
           "docComment": "/**\n * Async Exec with decent defaults\n *\n * @param command - \n *\n * @param options - \n *\n * @returns \n */\n",
           "excerptTokens": [
             {
@@ -722,7 +588,7 @@
             {
               "kind": "Reference",
               "text": "IExecOptions",
-              "canonicalReference": "@anagolay/utils!IExecOptions:interface"
+              "canonicalReference": "@anagolay/util!IExecOptions:interface"
             },
             {
               "kind": "Content",
@@ -779,8 +645,8 @@
         },
         {
           "kind": "Function",
-          "canonicalReference": "@anagolay/utils!gitCloneBare:function(1)",
-          "docComment": "/**\n * Clone bare repo and return path and by default use the unpacking of the objects\n *\n * @param repo - \n *\n * @returns \n */\n",
+          "canonicalReference": "@anagolay/util!gitCloneBare:function(1)",
+          "docComment": "/**\n * Clone bare repo and return path and by default use the unpacking of the objects\n *\n * @param options - \n *\n * @returns \n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
@@ -789,7 +655,7 @@
             {
               "kind": "Reference",
               "text": "IGitCloneBareOptions",
-              "canonicalReference": "@anagolay/utils!IGitCloneBareOptions:interface"
+              "canonicalReference": "@anagolay/util!IGitCloneBareOptions:interface"
             },
             {
               "kind": "Content",
@@ -829,7 +695,7 @@
         },
         {
           "kind": "Interface",
-          "canonicalReference": "@anagolay/utils!IDoHAnswer:interface",
+          "canonicalReference": "@anagolay/util!IDoHAnswer:interface",
           "docComment": "",
           "excerptTokens": [
             {
@@ -843,7 +709,7 @@
           "members": [
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/utils!IDoHAnswer#data:member",
+              "canonicalReference": "@anagolay/util!IDoHAnswer#data:member",
               "docComment": "/**\n * The value of the DNS record for the given name and type. The data will be in text for standardized record types and in hex for unknown types.\n */\n",
               "excerptTokens": [
                 {
@@ -870,7 +736,7 @@
             },
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/utils!IDoHAnswer#name:member",
+              "canonicalReference": "@anagolay/util!IDoHAnswer#name:member",
               "docComment": "/**\n * The record owner.\n */\n",
               "excerptTokens": [
                 {
@@ -897,7 +763,7 @@
             },
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/utils!IDoHAnswer#TTL:member",
+              "canonicalReference": "@anagolay/util!IDoHAnswer#TTL:member",
               "docComment": "/**\n * The number of seconds the answer can be stored in cache before it is considered stale.\n */\n",
               "excerptTokens": [
                 {
@@ -924,7 +790,7 @@
             },
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/utils!IDoHAnswer#type:member",
+              "canonicalReference": "@anagolay/util!IDoHAnswer#type:member",
               "docComment": "/**\n * The type of DNS record. These are defined here: https://www.iana.org/assignments/dns-parameters/dns-parameters.xhtml#dns-parameters-4.\n */\n",
               "excerptTokens": [
                 {
@@ -954,7 +820,7 @@
         },
         {
           "kind": "Interface",
-          "canonicalReference": "@anagolay/utils!IDoHQuestion:interface",
+          "canonicalReference": "@anagolay/util!IDoHQuestion:interface",
           "docComment": "",
           "excerptTokens": [
             {
@@ -968,7 +834,7 @@
           "members": [
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/utils!IDoHQuestion#name:member",
+              "canonicalReference": "@anagolay/util!IDoHQuestion#name:member",
               "docComment": "/**\n * The record name requested.\n */\n",
               "excerptTokens": [
                 {
@@ -995,7 +861,7 @@
             },
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/utils!IDoHQuestion#type:member",
+              "canonicalReference": "@anagolay/util!IDoHQuestion#type:member",
               "docComment": "/**\n * The type of DNS record requested. These are defined here: https://www.iana.org/assignments/dns-parameters/dns-parameters.xhtml#dns-parameters-4.\n */\n",
               "excerptTokens": [
                 {
@@ -1025,7 +891,7 @@
         },
         {
           "kind": "Interface",
-          "canonicalReference": "@anagolay/utils!IDoHRequest:interface",
+          "canonicalReference": "@anagolay/util!IDoHRequest:interface",
           "docComment": "/**\n * DNS over HTTPs request. Use this as the interfaces for your url search params\n *\n * @public\n */\n",
           "excerptTokens": [
             {
@@ -1039,7 +905,7 @@
           "members": [
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/utils!IDoHRequest#cd:member",
+              "canonicalReference": "@anagolay/util!IDoHRequest#cd:member",
               "docComment": "/**\n * `CD` bit - set to disable validation (either boolean or numeric value).\n *\n * Example: `false`\n */\n",
               "excerptTokens": [
                 {
@@ -1066,7 +932,7 @@
             },
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/utils!IDoHRequest#do:member",
+              "canonicalReference": "@anagolay/util!IDoHRequest#do:member",
               "docComment": "/**\n * `DO` bit - set if client wants DNSSEC data (either boolean or numeric value).\n *\n * Example: `true`\n */\n",
               "excerptTokens": [
                 {
@@ -1093,7 +959,7 @@
             },
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/utils!IDoHRequest#name:member",
+              "canonicalReference": "@anagolay/util!IDoHRequest#name:member",
               "docComment": "/**\n * Query name.\n *\n * Example: `woss.io`\n */\n",
               "excerptTokens": [
                 {
@@ -1120,7 +986,7 @@
             },
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/utils!IDoHRequest#type:member",
+              "canonicalReference": "@anagolay/util!IDoHRequest#type:member",
               "docComment": "/**\n * Query type (either a numeric value or text).\n *\n * Example: `AAAA`\n */\n",
               "excerptTokens": [
                 {
@@ -1150,7 +1016,7 @@
         },
         {
           "kind": "Interface",
-          "canonicalReference": "@anagolay/utils!IDoHResponse:interface",
+          "canonicalReference": "@anagolay/util!IDoHResponse:interface",
           "docComment": "/**\n * A response returned from the DoH query API\n *\n * @public\n */\n",
           "excerptTokens": [
             {
@@ -1164,7 +1030,7 @@
           "members": [
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/utils!IDoHResponse#AD:member",
+              "canonicalReference": "@anagolay/util!IDoHResponse#AD:member",
               "docComment": "/**\n * If true, it means that every record in the answer was verified with DNSSEC.\n */\n",
               "excerptTokens": [
                 {
@@ -1191,7 +1057,7 @@
             },
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/utils!IDoHResponse#Answer:member",
+              "canonicalReference": "@anagolay/util!IDoHResponse#Answer:member",
               "docComment": "",
               "excerptTokens": [
                 {
@@ -1201,7 +1067,7 @@
                 {
                   "kind": "Reference",
                   "text": "IDoHAnswer",
-                  "canonicalReference": "@anagolay/utils!IDoHAnswer:interface"
+                  "canonicalReference": "@anagolay/util!IDoHAnswer:interface"
                 },
                 {
                   "kind": "Content",
@@ -1223,7 +1089,7 @@
             },
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/utils!IDoHResponse#CD:member",
+              "canonicalReference": "@anagolay/util!IDoHResponse#CD:member",
               "docComment": "/**\n * If true, the client asked to disable DNSSEC validation. In this case, Cloudflare will still fetch the DNSSEC-related records, but it will not attempt to validate the records.\n */\n",
               "excerptTokens": [
                 {
@@ -1250,7 +1116,7 @@
             },
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/utils!IDoHResponse#Question:member",
+              "canonicalReference": "@anagolay/util!IDoHResponse#Question:member",
               "docComment": "",
               "excerptTokens": [
                 {
@@ -1260,7 +1126,7 @@
                 {
                   "kind": "Reference",
                   "text": "IDoHQuestion",
-                  "canonicalReference": "@anagolay/utils!IDoHQuestion:interface"
+                  "canonicalReference": "@anagolay/util!IDoHQuestion:interface"
                 },
                 {
                   "kind": "Content",
@@ -1282,7 +1148,7 @@
             },
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/utils!IDoHResponse#RA:member",
+              "canonicalReference": "@anagolay/util!IDoHResponse#RA:member",
               "docComment": "/**\n * If true, it means the Recursion Available bit was set. This is always set to true for Cloudflare DNS over HTTPS.\n */\n",
               "excerptTokens": [
                 {
@@ -1309,7 +1175,7 @@
             },
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/utils!IDoHResponse#RD:member",
+              "canonicalReference": "@anagolay/util!IDoHResponse#RD:member",
               "docComment": "/**\n * If true, it means the Recursive Desired bit was set. This is always set to true for Cloudflare DNS over HTTPS.\n */\n",
               "excerptTokens": [
                 {
@@ -1336,7 +1202,7 @@
             },
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/utils!IDoHResponse#Status:member",
+              "canonicalReference": "@anagolay/util!IDoHResponse#Status:member",
               "docComment": "/**\n * The Response Code of the DNS Query. These are defined here: https://www.iana.org/assignments/dns-parameters/dns-parameters.xhtml#dns-parameters-6.\n */\n",
               "excerptTokens": [
                 {
@@ -1363,7 +1229,7 @@
             },
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/utils!IDoHResponse#TC:member",
+              "canonicalReference": "@anagolay/util!IDoHResponse#TC:member",
               "docComment": "/**\n * If true, it means the truncated bit was set. This happens when the DNS answer is larger than a single UDP or TCP packet. TC will almost always be false with Cloudflare DNS over HTTPS because Cloudflare supports the maximum response size.\n */\n",
               "excerptTokens": [
                 {
@@ -1393,7 +1259,7 @@
         },
         {
           "kind": "Interface",
-          "canonicalReference": "@anagolay/utils!IExecOptions:interface",
+          "canonicalReference": "@anagolay/util!IExecOptions:interface",
           "docComment": "",
           "excerptTokens": [
             {
@@ -1416,7 +1282,7 @@
           "members": [
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/utils!IExecOptions#encoding:member",
+              "canonicalReference": "@anagolay/util!IExecOptions#encoding:member",
               "docComment": "",
               "excerptTokens": [
                 {
@@ -1452,7 +1318,7 @@
         },
         {
           "kind": "Interface",
-          "canonicalReference": "@anagolay/utils!IGitCloneBareOptions:interface",
+          "canonicalReference": "@anagolay/util!IGitCloneBareOptions:interface",
           "docComment": "",
           "excerptTokens": [
             {
@@ -1462,7 +1328,7 @@
             {
               "kind": "Reference",
               "text": "IGitCloneOptions",
-              "canonicalReference": "@anagolay/utils!IGitCloneOptions:interface"
+              "canonicalReference": "@anagolay/util!IGitCloneOptions:interface"
             },
             {
               "kind": "Content",
@@ -1475,7 +1341,7 @@
           "members": [
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/utils!IGitCloneBareOptions#unpack:member",
+              "canonicalReference": "@anagolay/util!IGitCloneBareOptions#unpack:member",
               "docComment": "",
               "excerptTokens": [
                 {
@@ -1510,7 +1376,7 @@
         },
         {
           "kind": "Interface",
-          "canonicalReference": "@anagolay/utils!IGitCloneOptions:interface",
+          "canonicalReference": "@anagolay/util!IGitCloneOptions:interface",
           "docComment": "",
           "excerptTokens": [
             {
@@ -1524,7 +1390,7 @@
           "members": [
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/utils!IGitCloneOptions#bare:member",
+              "canonicalReference": "@anagolay/util!IGitCloneOptions#bare:member",
               "docComment": "",
               "excerptTokens": [
                 {
@@ -1551,7 +1417,7 @@
             },
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/utils!IGitCloneOptions#branch:member",
+              "canonicalReference": "@anagolay/util!IGitCloneOptions#branch:member",
               "docComment": "",
               "excerptTokens": [
                 {
@@ -1578,7 +1444,7 @@
             },
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/utils!IGitCloneOptions#repo:member",
+              "canonicalReference": "@anagolay/util!IGitCloneOptions#repo:member",
               "docComment": "",
               "excerptTokens": [
                 {
@@ -1605,7 +1471,7 @@
             },
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/utils!IGitCloneOptions#rev:member",
+              "canonicalReference": "@anagolay/util!IGitCloneOptions#rev:member",
               "docComment": "",
               "excerptTokens": [
                 {
@@ -1632,7 +1498,7 @@
             },
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/utils!IGitCloneOptions#tag:member",
+              "canonicalReference": "@anagolay/util!IGitCloneOptions#tag:member",
               "docComment": "",
               "excerptTokens": [
                 {
@@ -1662,7 +1528,7 @@
         },
         {
           "kind": "Function",
-          "canonicalReference": "@anagolay/utils!isDirty:function(1)",
+          "canonicalReference": "@anagolay/util!isDirty:function(1)",
           "docComment": "/**\n * If there are modified or untracked files consider this a very _`dirty`_ repository\n *\n * @param path - string - Local path\n *\n * @returns `{ dirty: boolean; changes: string; }`\n */\n",
           "excerptTokens": [
             {
@@ -1711,7 +1577,7 @@
         },
         {
           "kind": "Interface",
-          "canonicalReference": "@anagolay/utils!ISerializedMap:interface",
+          "canonicalReference": "@anagolay/util!ISerializedMap:interface",
           "docComment": "",
           "excerptTokens": [
             {
@@ -1738,7 +1604,7 @@
           "members": [
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/utils!ISerializedMap#data:member",
+              "canonicalReference": "@anagolay/util!ISerializedMap#data:member",
               "docComment": "",
               "excerptTokens": [
                 {
@@ -1765,7 +1631,7 @@
             },
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@anagolay/utils!ISerializedMap#type:member",
+              "canonicalReference": "@anagolay/util!ISerializedMap#type:member",
               "docComment": "",
               "excerptTokens": [
                 {
@@ -1795,7 +1661,7 @@
         },
         {
           "kind": "Function",
-          "canonicalReference": "@anagolay/utils!isFalse:function(1)",
+          "canonicalReference": "@anagolay/util!isFalse:function(1)",
           "docComment": "/**\n * checks against the common value options for the false boolean value\n *\n * @param value - Can be `'false' | '0' | 0`\n *\n * @returns Boolean\n *\n * @public\n */\n",
           "excerptTokens": [
             {
@@ -1839,7 +1705,7 @@
         },
         {
           "kind": "Function",
-          "canonicalReference": "@anagolay/utils!isTrue:function(1)",
+          "canonicalReference": "@anagolay/util!isTrue:function(1)",
           "docComment": "/**\n * checks against the common value options for the true boolean value\n *\n * @param value - Can be `'true' | '1' | 1`\n *\n * @returns Boolean\n *\n * @public\n */\n",
           "excerptTokens": [
             {
@@ -1883,7 +1749,7 @@
         },
         {
           "kind": "TypeAlias",
-          "canonicalReference": "@anagolay/utils!Jsonify:type",
+          "canonicalReference": "@anagolay/util!Jsonify:type",
           "docComment": "",
           "excerptTokens": [
             {
@@ -1906,7 +1772,7 @@
             {
               "kind": "Reference",
               "text": "Jsonify",
-              "canonicalReference": "@anagolay/utils!Jsonify:type"
+              "canonicalReference": "@anagolay/util!Jsonify:type"
             },
             {
               "kind": "Content",
@@ -1939,7 +1805,7 @@
         },
         {
           "kind": "Function",
-          "canonicalReference": "@anagolay/utils!lastRevision:function(1)",
+          "canonicalReference": "@anagolay/util!lastRevision:function(1)",
           "docComment": "/**\n * Give me the Last revision from origin/main\n *\n * Currently assuming the `remote = origin` and `default_branch = main`\n *\n * @param repoPath - \n *\n * @returns a full length revision hash\n */\n",
           "excerptTokens": [
             {
@@ -1987,34 +1853,8 @@
           "name": "lastRevision"
         },
         {
-          "kind": "TypeAlias",
-          "canonicalReference": "@anagolay/utils!Logger:type",
-          "docComment": "/**\n * @public\n */\n",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export declare type Logger = "
-            },
-            {
-              "kind": "Reference",
-              "text": "PinoLogger",
-              "canonicalReference": "pino!Logger:type"
-            },
-            {
-              "kind": "Content",
-              "text": ";"
-            }
-          ],
-          "releaseTag": "Public",
-          "name": "Logger",
-          "typeTokenRange": {
-            "startIndex": 1,
-            "endIndex": 2
-          }
-        },
-        {
           "kind": "Function",
-          "canonicalReference": "@anagolay/utils!normalizeUrlPathname:function(1)",
+          "canonicalReference": "@anagolay/util!normalizeUrlPathname:function(1)",
           "docComment": "/**\n * Normalize Repository to be in a format `username_repo-name`\n *\n * @param pathName - \n *\n * @returns \n */\n",
           "excerptTokens": [
             {
@@ -2058,7 +1898,7 @@
         },
         {
           "kind": "Function",
-          "canonicalReference": "@anagolay/utils!parse:function(1)",
+          "canonicalReference": "@anagolay/util!parse:function(1)",
           "docComment": "/**\n * Wrapper around the JSON.parse with defaults for de-serialization of the non native object like `Map`.\n *\n * @remarks\n *\n * It's fully typed thanks to the generics. To get the type autocompletion see [test file](./index.test.ts)\n *\n * @param data - String data produced with `JSON.stringify`\n *\n * @param reviver - A function that knows how to handle custom de-serialization. Opposite of {@link customReplacer}\n *\n * @returns \n */\n",
           "excerptTokens": [
             {
@@ -2076,7 +1916,7 @@
             {
               "kind": "Reference",
               "text": "ReplacerOrReviverAsFunction",
-              "canonicalReference": "@anagolay/utils!~ReplacerOrReviverAsFunction:type"
+              "canonicalReference": "@anagolay/util!~ReplacerOrReviverAsFunction:type"
             },
             {
               "kind": "Content",
@@ -2089,7 +1929,7 @@
             {
               "kind": "Reference",
               "text": "Jsonify",
-              "canonicalReference": "@anagolay/utils!Jsonify:type"
+              "canonicalReference": "@anagolay/util!Jsonify:type"
             },
             {
               "kind": "Content",
@@ -2141,7 +1981,7 @@
         },
         {
           "kind": "Function",
-          "canonicalReference": "@anagolay/utils!parseURL:function(1)",
+          "canonicalReference": "@anagolay/util!parseURL:function(1)",
           "docComment": "/**\n * Parse git supported url to https scheme\n *\n * @remarks\n *\n * See `git.test.ts` for the examples\n *\n * @param sourceURL - string - Any of the [git supported url scheme](https://git-scm.com/docs/git-clone#_git_urls)\n *\n * @public\n */\n",
           "excerptTokens": [
             {
@@ -2185,7 +2025,7 @@
         },
         {
           "kind": "Function",
-          "canonicalReference": "@anagolay/utils!serialize:function(1)",
+          "canonicalReference": "@anagolay/util!serialize:function(1)",
           "docComment": "/**\n * Wraps the `JSON.stringify` with the replacer function which is aware of the javascript `Maps`\n *\n * @remarks\n *\n * This implementation can be used almost as a drop in replacement to native JSON.stringify with only one difference. Native JSON.stringify has following signature `(data,replacer,space)` where this function has `(data,space,replacer)`. This is done intentionally because most of the time we customize the `space` and not the `replacer`.\n *\n * @param data - `T` generic value. Same type as it is in the `JSON.stringify`\n *\n * @param space - How many spaces will be added to the serialization process.\n *\n * @param replacer - Accepts the same types as native implementation ({@link ReplacerOrReviverAsFunction} and {@link ReplacerAsArray}), by default will use {@link customReplacer}.\n *\n * @returns String with executed `replacer` function if no replacer is provided\n */\n",
           "excerptTokens": [
             {
@@ -2211,7 +2051,7 @@
             {
               "kind": "Reference",
               "text": "ReplacerOrReviverAsFunction",
-              "canonicalReference": "@anagolay/utils!~ReplacerOrReviverAsFunction:type"
+              "canonicalReference": "@anagolay/util!~ReplacerOrReviverAsFunction:type"
             },
             {
               "kind": "Content",
@@ -2220,7 +2060,7 @@
             {
               "kind": "Reference",
               "text": "ReplacerAsArray",
-              "canonicalReference": "@anagolay/utils!~ReplacerAsArray:type"
+              "canonicalReference": "@anagolay/util!~ReplacerAsArray:type"
             },
             {
               "kind": "Content",
@@ -2288,7 +2128,7 @@
         },
         {
           "kind": "Function",
-          "canonicalReference": "@anagolay/utils!serializeThenParse:function(1)",
+          "canonicalReference": "@anagolay/util!serializeThenParse:function(1)",
           "docComment": "/**\n * This does `JSON.parse(serialize(x))` with inferring the type. It doesn't use the custom reviver function. It just parses the serialized string.\n *\n * @remarks\n *\n * - The biggest use of this is to get the types autocompleted. - The performance is NOT tested, it might be really slow\n *\n * @param data - Any defined `T` or nothing, then the T will be inferred\n *\n * @param toOriginal - Use reviver function to return the JSON to it's original state\n *\n * @returns Parsed serialized data with type infering\n */\n",
           "excerptTokens": [
             {
@@ -2314,7 +2154,7 @@
             {
               "kind": "Reference",
               "text": "Jsonify",
-              "canonicalReference": "@anagolay/utils!Jsonify:type"
+              "canonicalReference": "@anagolay/util!Jsonify:type"
             },
             {
               "kind": "Content",
@@ -2366,7 +2206,7 @@
         },
         {
           "kind": "Function",
-          "canonicalReference": "@anagolay/utils!txtRecords:function(1)",
+          "canonicalReference": "@anagolay/util!txtRecords:function(1)",
           "docComment": "/**\n * Get DoH TXT record\n *\n * @param forDomain - \n *\n * @param dohUrl - \n *\n * @returns \n */\n",
           "excerptTokens": [
             {
@@ -2401,7 +2241,7 @@
             {
               "kind": "Reference",
               "text": "IDoHResponse",
-              "canonicalReference": "@anagolay/utils!IDoHResponse:interface"
+              "canonicalReference": "@anagolay/util!IDoHResponse:interface"
             },
             {
               "kind": "Content",
@@ -2440,7 +2280,7 @@
         },
         {
           "kind": "Function",
-          "canonicalReference": "@anagolay/utils!urlForRemote:function(1)",
+          "canonicalReference": "@anagolay/util!urlForRemote:function(1)",
           "docComment": "/**\n * Return the URL for the git remote.\n *\n * @remarks\n *\n * This function is using the `git remote get-url --all` then invokes the {@link parseURL}\n *\n * @param remote - An origin as defined in the .git/config\n *\n * @defaultValue\n *\n * for `remote` param is `origin`\n *\n * @public\n */\n",
           "excerptTokens": [
             {

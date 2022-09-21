@@ -4,7 +4,7 @@ import { io, Socket, SocketOptions } from 'socket.io-client';
 const Spinner = clui.Spinner;
 
 import { AnOperation, AnOperationVersion, AnWorkflowData } from '@anagolay/types';
-import { serializeThenParse } from '@anagolay/utils';
+import { serializeThenParse } from '@anagolay/util';
 
 import { websocketURL } from './config';
 

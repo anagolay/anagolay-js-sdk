@@ -201,7 +201,8 @@
       // Some example categories:
       "webapp", // all our Web applications
       "libraries", // our libraries that other stuff depend on
-      "websites" // our list of websites for anagolay
+      "websites", // our list of websites for anagolay
+      "demo" // our list of demos
     ],
     //
     //   /**
@@ -427,19 +428,19 @@
       "packageName": "@anagolay/cli",
       "projectFolder": "sdk/cli",
       "reviewCategory": "libraries",
-      "shouldPublish": false
+      "shouldPublish": true
     },
     {
-      "packageName": "@anagolay/utils",
-      "projectFolder": "sdk/utils",
+      "packageName": "@anagolay/util",
+      "projectFolder": "sdk/util",
       "reviewCategory": "libraries",
-      "shouldPublish": false
+      "shouldPublish": true
     },
     {
       "packageName": "@anagolay/types",
       "projectFolder": "sdk/types",
       "reviewCategory": "libraries",
-      "shouldPublish": false
+      "shouldPublish": true
     },
     {
       "packageName": "@anagolay/app",
@@ -450,7 +451,7 @@
     {
       "packageName": "@anagolay/migrate",
       "projectFolder": "examples/migrate",
-      "reviewCategory": "libraries",
+      "reviewCategory": "demo",
       "shouldPublish": false
     }
     // {

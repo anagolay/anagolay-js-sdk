@@ -21,7 +21,7 @@ import { callPublishService, ISuccessfulResponse } from '$src/publish';
 import { ensureBalance, logsDir, showArtifactTable } from '$src/utils';
 import { connectToWebsocketRelayAndListenFowWorkflow, IWorkflowBuild } from '$src/websocketService';
 
-const log: Logger = createFileLogger(`${logsDir()}/workflow.log`, { name: 'workflow' });
+let log: Logger;
 
 /**
  * Publish workflow successful response
@@ -32,6 +32,8 @@ export type IWorkflowVersionSchema = ISuccessfulResponse<AnWorkflowArtifactStruc
 const Spinner = clui.Spinner;
 
 export default async function createSubCommand(): Promise<Command> {
+  log = createFileLogger(`${logsDir()}/workflow.log`, { name: 'workflow' });
+
   const cmd = new Command('create');
   cmd
     .description('Create the Workflow in web UI. Logs are available here ~/.logs/anagolay/workflow.log')

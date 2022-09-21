@@ -23,6 +23,7 @@
   import slug from 'slug';
   import Code from '$src/components/base/CodeBlockWithSerialization.svelte';
   import SvelteSeo from 'svelte-seo';
+
   const title: string = 'Workflow builder';
 
   pageTitle.set(title);
@@ -62,7 +63,9 @@
    */
   function sendMessageToWs() {
     saveDisabled = true;
-    alerts.add('Workflow data sent to WS, please check the CLI.', 'success', false);
+    alerts.add('Workflow data sent to WS, please check the CLI.', 'success', {
+      close: false,
+    });
 
     // The serialization of the Map is not natively  supported. When we serialize we use the replacer and wnen parse we use the reviver
 
@@ -82,7 +85,7 @@
   /**
    * Namespace to connect to. This is the shared namespace between this app and CLI
    */
-  let namespace: string = getHashValue($page.url.hash, 'ns', '');
+  let namespace: string = getHashValue($page.url.hash, 'ns', $workflow.manifestData.name);
 
   /**
    * Websocket server address without the client path.
