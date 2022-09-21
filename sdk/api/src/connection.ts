@@ -3,7 +3,8 @@ import '@anagolay/types/augment-api';
 import { ApiPromise, WsProvider } from '@polkadot/api';
 import { isNil } from 'ramda';
 
-export const defaultChainToConnect: string = 'wss://idiyanale-1.bootnode.dev.anagolay.io';
+import rpcs from './temp_rpc';
+export const defaultChainToConnect: string = 'wss://idiyanale-testnet.anagolay.io';
 
 // Cached API connection
 let cachedApiInstance: ApiPromise | undefined;
@@ -31,6 +32,7 @@ export async function connectToWs(connectTo: string = defaultChainToConnect): Pr
     const provider = new WsProvider(connectTo);
     const api = await ApiPromise.create({
       provider,
+      rpc: rpcs,
     });
 
     cachedApiInstance = api;

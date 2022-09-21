@@ -4,7 +4,7 @@
   "packages": [
     {
       "name": "@anagolay/api",
-      "allowedCategories": [ "libraries", "webapp" ]
+      "allowedCategories": [ "demo", "libraries", "webapp" ]
     },
     {
       "name": "@anagolay/app",
@@ -24,15 +24,11 @@
     },
     {
       "name": "@anagolay/types",
-      "allowedCategories": [ "libraries", "webapp" ]
+      "allowedCategories": [ "demo", "libraries", "webapp" ]
     },
     {
       "name": "@anagolay/util",
-      "allowedCategories": [ "libraries" ]
-    },
-    {
-      "name": "@anagolay/utils",
-      "allowedCategories": [ "libraries", "webapp" ]
+      "allowedCategories": [ "demo", "libraries", "webapp" ]
     },
     {
       "name": "@anagolay/wf_cidv1_from_array",
@@ -64,7 +60,7 @@
     },
     {
       "name": "@microsoft/api-extractor",
-      "allowedCategories": [ "libraries", "webapp" ]
+      "allowedCategories": [ "demo", "libraries", "webapp" ]
     },
     {
       "name": "@playwright/test",
@@ -72,7 +68,7 @@
     },
     {
       "name": "@polkadot/api",
-      "allowedCategories": [ "libraries", "webapp" ]
+      "allowedCategories": [ "demo", "libraries", "webapp" ]
     },
     {
       "name": "@polkadot/api-augment",
@@ -108,15 +104,15 @@
     },
     {
       "name": "@polkadot/types",
-      "allowedCategories": [ "libraries", "webapp" ]
+      "allowedCategories": [ "demo", "libraries", "webapp" ]
     },
     {
       "name": "@polkadot/types-codec",
-      "allowedCategories": [ "libraries", "webapp" ]
+      "allowedCategories": [ "demo", "libraries", "webapp" ]
     },
     {
       "name": "@polkadot/util",
-      "allowedCategories": [ "libraries", "webapp" ]
+      "allowedCategories": [ "demo", "libraries", "webapp" ]
     },
     {
       "name": "@polkadot/util-crypto",
@@ -124,19 +120,19 @@
     },
     {
       "name": "@rushstack/eslint-config",
-      "allowedCategories": [ "libraries", "webapp" ]
+      "allowedCategories": [ "demo", "libraries", "webapp" ]
     },
     {
       "name": "@rushstack/heft",
-      "allowedCategories": [ "libraries", "webapp" ]
+      "allowedCategories": [ "demo", "libraries", "webapp" ]
     },
     {
       "name": "@rushstack/heft-jest-plugin",
-      "allowedCategories": [ "libraries", "webapp" ]
+      "allowedCategories": [ "demo", "libraries", "webapp" ]
     },
     {
       "name": "@rushstack/heft-node-rig",
-      "allowedCategories": [ "libraries", "webapp" ]
+      "allowedCategories": [ "demo", "libraries", "webapp" ]
     },
     {
       "name": "@rushstack/heft-web-rig",
@@ -240,7 +236,7 @@
     },
     {
       "name": "env-cmd",
-      "allowedCategories": [ "libraries" ]
+      "allowedCategories": [ "demo", "libraries" ]
     },
     {
       "name": "esbuild",
@@ -248,7 +244,7 @@
     },
     {
       "name": "eslint",
-      "allowedCategories": [ "libraries", "webapp" ]
+      "allowedCategories": [ "demo", "libraries", "webapp" ]
     },
     {
       "name": "eslint-config-prettier",
@@ -256,7 +252,7 @@
     },
     {
       "name": "eslint-plugin-simple-import-sort",
-      "allowedCategories": [ "libraries", "webapp" ]
+      "allowedCategories": [ "demo", "libraries", "webapp" ]
     },
     {
       "name": "eslint-plugin-svelte3",
@@ -264,7 +260,7 @@
     },
     {
       "name": "eslint-plugin-unused-imports",
-      "allowedCategories": [ "libraries", "webapp" ]
+      "allowedCategories": [ "demo", "libraries", "webapp" ]
     },
     {
       "name": "events",
@@ -287,6 +283,10 @@
       "allowedCategories": [ "libraries" ]
     },
     {
+      "name": "json5",
+      "allowedCategories": [ "libraries" ]
+    },
+    {
       "name": "multiformats",
       "allowedCategories": [ "webapp" ]
     },
@@ -300,7 +300,7 @@
     },
     {
       "name": "nodemon",
-      "allowedCategories": [ "libraries" ]
+      "allowedCategories": [ "demo", "libraries" ]
     },
     {
       "name": "ora",
@@ -336,7 +336,7 @@
     },
     {
       "name": "ramda",
-      "allowedCategories": [ "libraries", "webapp" ]
+      "allowedCategories": [ "demo", "libraries", "webapp" ]
     },
     {
       "name": "react",
@@ -420,11 +420,11 @@
     },
     {
       "name": "tslib",
-      "allowedCategories": [ "libraries", "webapp" ]
+      "allowedCategories": [ "demo", "libraries", "webapp" ]
     },
     {
       "name": "typescript",
-      "allowedCategories": [ "libraries", "webapp" ]
+      "allowedCategories": [ "demo", "libraries", "webapp" ]
     },
     {
       "name": "vite",

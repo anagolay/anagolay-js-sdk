@@ -15,11 +15,12 @@
   "dependencies": {
     "ramda": "0.28.0",
     "@anagolay/api": "workspace:*",
-    "@anagolay/utils": "workspace:*",
+    "@anagolay/util": "workspace:*",
     "@anagolay/types": "workspace:*",
     "@polkadot/api": "9.2.2",
     "@polkadot/types": "9.2.2",
-    "@polkadot/types-codec": "9.2.2"
+    "@polkadot/types-codec": "9.2.2",
+    "@polkadot/util": "10.1.4"
   },
   "devDependencies": {
     "tslib": "2.4.0",

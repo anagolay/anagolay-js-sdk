@@ -4,7 +4,7 @@ import { AnStatementData } from '@anagolay/types';
 import { AddressOrPair, SignerOptions, SubmittableExtrinsic } from '@polkadot/api/types';
 
 import { getCachedApi } from '../../connection';
-import createEventEmitter, { ICustomEventEmitter } from '../../utils/events';
+import createEventEmitter, { ICustomEventEmitter } from '../../utils/customEvents';
 import networkCallback from '../../utils/networkCallback';
 import { EVENT_NAME_SINGLE } from './config';
 

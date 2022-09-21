@@ -79,4 +79,6 @@
   },
   "terminal.integrated.scrollback": 10000,
   "editor.stickyScroll.enabled": true
+  // "javascript.preferences.importModuleSpecifierEnding": "js",
+  // "typescript.preferences.importModuleSpecifierEnding": "js"
 }

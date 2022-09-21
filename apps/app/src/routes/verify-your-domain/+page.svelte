@@ -8,6 +8,7 @@
   import Done from './steps/Done.svelte';
   import SvelteSeo from 'svelte-seo';
   import { pageTitle } from '$src/stores';
+  
   const title: string = 'Verify your domain';
 
   pageTitle.set(title);

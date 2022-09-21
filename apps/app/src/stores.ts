@@ -10,5 +10,5 @@ export const wsConnected: Writable<boolean> = writable(false);
  */
 export const pageTitle: Writable<string> = writable();
 
-export const anagolayChainWSS: Writable<string> = writable('wss://idiyanale-1.bootnode.dev.anagolay.io');
+export const anagolayChainWSS: Writable<string> = writable('wss://idiyanale-testnet.anagolay.io');
 export const relayServiceWSS: Writable<string> = writable('wss://ws.anagolay.io');

@@ -27,6 +27,6 @@
  * @packageDocumentation
  */
 
-export * from './booleans.js';
-export * from './json/json.js';
-export * from '@polkadot/util';
+export * from './booleans';
+export * from './doh/doh';
+export * from './json/json';

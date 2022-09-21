@@ -1,5 +1,5 @@
 import { AnGenericId } from '@anagolay/types';
-import { stringToHex } from '@anagolay/utils';
+import { stringToHex } from '@polkadot/util';
 import { startsWith } from 'ramda';
 
 /**

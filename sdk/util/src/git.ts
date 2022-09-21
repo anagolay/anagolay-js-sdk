@@ -1,13 +1,10 @@
 import { mkdir, rm } from 'fs/promises';
 import os from 'os';
-import { Logger } from 'pino';
+// import { Logger } from 'pino';
 import { isEmpty, isNil, trim } from 'ramda';
 import { URL } from 'url';
 
 import { exec } from './exec';
-import { createLogger } from './logger';
-
-const log: Logger = createLogger({ name: 'git' });
 
 export interface IGitCloneOptions {
   // this will be prefixed for the dir creation: string;
@@ -32,7 +29,7 @@ export function normalizeUrlPathname(pathName: string): string {
 
 /**
  * Clone bare repo and return path and by default use the unpacking of the objects
- * @param repo
+ * @param options -
  * @returns
  */
 export async function gitCloneBare(options: IGitCloneBareOptions): Promise<string> {
@@ -53,39 +50,34 @@ export async function gitCloneBare(options: IGitCloneBareOptions): Promise<strin
   // for some reason the failed jobs cannot create the empty dir
   await mkdir(`${tmp}/anagolay/rehost-repos`, { recursive: true });
 
-  log.info('Cloning the bare repo', repo, repoPath);
   await exec(`git clone --quiet --bare ${repo} ${repoPath}`, {
     ...execOptions,
     cwd: tmp,
   });
 
+  // need to do this for every bare repo
   await exec(`git update-server-info`, execOptions);
 
   if (!isNil(rev)) {
-    log.info(`Reseting to the revision ${rev}`);
     /**
      * this is the one  way i figured how to make a commit a HEAD!
      * other one is `git update-ref refs/heads/rehosted 20888c33cd0f6f897703198199f33369cba8639a` but that will not end up in the detached state. maybe that is what we need .... hmmm .....
      */
     await exec(`echo ${rev} > HEAD`, execOptions);
   } else if (!isNil(tag)) {
-    log.info(`Checking out the tag ${tag}`);
     await exec(`git symbolic-ref HEAD refs/tags/${tag.trim()}`, execOptions);
   } else if (!isNil(branch)) {
-    log.info(`Checking out the branch ${branch}`);
     await exec(`git symbolic-ref HEAD refs/heads/${branch.trim()}`, execOptions);
   } else {
     throw new Error('No default is set for the rehost!');
   }
 
   if (unpack) {
-    log.info('Unpacking ...');
     await exec(`mv objects/pack/*.pack .`, execOptions);
     // await exec(`cat *.pack | git unpack-objects`, execOptions);
     await exec(`git unpack-objects < *.pack`, execOptions);
     await exec(`rm -rf *.pack`, execOptions);
     await exec(`rm -rf objects/pack/*.idx`, execOptions);
-    log.info('Done unpacking.');
   }
 
   return repoPath;
@@ -94,13 +86,9 @@ export async function gitCloneBare(options: IGitCloneBareOptions): Promise<strin
 /**
  * Clone repo as non-bare and return path
  * @param options - {@link IGitCloneOptions}
- * @param log - Optional {@link Logger}
  * @returns the local cloned path, usually in the `/temp/anagolay` directory
  */
-export async function cloneRepo(
-  options: IGitCloneOptions,
-  log?: Logger
-): Promise<{
+export async function cloneRepo(options: IGitCloneOptions): Promise<{
   repoPath: string;
 }> {
   const { repo, rev } = options;
@@ -116,7 +104,6 @@ export async function cloneRepo(
   // for some reason the failed jobs cannot create the empty dir
 
   console.log(`Cloning the repo ${url.href}`);
-  log?.info(`Cloning the repo ${url.href}`);
 
   await exec(`git clone ${url.href} ${repoPath}`);
 
@@ -124,7 +111,6 @@ export async function cloneRepo(
     cwd: repoPath,
   });
 
-  log?.info(`Repo cloned ${repoPath}`);
   return { repoPath };
 }
 

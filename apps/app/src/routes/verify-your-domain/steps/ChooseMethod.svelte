@@ -3,7 +3,7 @@
 
   import TitleCard from '$src/components/base/TitleCard.svelte';
   import { alerts } from '$src/components/notifications/stores';
-  import { txtRecords, type IDohResponse, type IDoHAnswer } from '@anagolay/utils/doh';
+  import { txtRecords, type IDoHResponse, type IDoHAnswer } from '@anagolay/util';
   import { equals, filter, includes, isEmpty, isNil, length } from 'ramda';
   import { find } from 'remeda';
 
@@ -16,7 +16,7 @@
     verificationOnGoing = true;
     // it's too fast, slow it down for the better effect
     setTimeout(async () => {
-      const resp: IDohResponse = await txtRecords($mainStore.domain, 'https://dns.google/resolve');
+      const resp: IDoHResponse = await txtRecords($mainStore.domain, 'https://dns.google/resolve');
 
       const Answer = resp.Answer as IDoHAnswer[];
 

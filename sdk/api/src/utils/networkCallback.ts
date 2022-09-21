@@ -6,7 +6,7 @@ import type { ISubmittableResult, ITuple } from '@polkadot/types/types';
 import { isNil } from 'ramda';
 
 import { getCachedApi } from '../connection';
-import { ICustomEventEmitter } from './events';
+import { ICustomEventEmitter } from './customEvents';
 
 /**
  * Generic event message

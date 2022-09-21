@@ -2,12 +2,13 @@ import axios from 'axios';
 import { Agent } from 'node:http';
 // http Agent for the Axios
 const httpAgent: Agent = new Agent({ keepAlive: true });
-import { isFalse, isTrue, Logger } from '@anagolay/utils';
+import { isFalse, isTrue } from '@anagolay/util';
 import clui from 'clui';
 import { isEmpty, isNil } from 'ramda';
 import signale from 'signale';
 
 import { publishServiceURL } from './config';
+import { Logger } from './logger';
 
 // eslint-disable-next-line @rushstack/typedef-var
 const Spinner = clui.Spinner;

@@ -10,5 +10,5 @@ cp "$PKG_CJS" "$GITPOD_REPO_ROOT/sdk/api/lib_cjs/package.json"
 cp "$PKG_MODULE" "$GITPOD_REPO_ROOT/sdk/types/lib/package.json"
 cp "$PKG_CJS" "$GITPOD_REPO_ROOT/sdk/types/lib_cjs/package.json"
 
-cp "$PKG_MODULE" "$GITPOD_REPO_ROOT/sdk/utils/lib/package.json"
-cp "$PKG_CJS" "$GITPOD_REPO_ROOT/sdk/utils/lib_cjs/package.json"
+cp "$PKG_MODULE" "$GITPOD_REPO_ROOT/sdk/util/lib/package.json"
+cp "$PKG_CJS" "$GITPOD_REPO_ROOT/sdk/util/lib_cjs/package.json"
