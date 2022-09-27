@@ -1,17 +1,25 @@
 // Auto-generated via `yarn polkadot-types-from-defs`, do not edit
 /* eslint-disable */
 
-import type {
-  Characters,
-  CreatorId,
-  GenericId,
-  ProofId,
-  SignatureId,
-  StatementId,
-  WorkflowId,
-} from '@anagolay/types/interfaces/anagolaySupport';
+import type { Characters, CreatorId } from '@anagolay/types/interfaces/anagolaySupport';
+import type { ProofId } from '@anagolay/types/interfaces/poe';
+import type { WorkflowId } from '@anagolay/types/interfaces/workflows';
 import type { Bytes, Enum, Option, Struct } from '@polkadot/types-codec';
 import type { AccountId, BlockNumber } from '@polkadot/types/interfaces/runtime';
+
+/** @name AnagolaySignature */
+export interface AnagolaySignature extends Struct {
+  readonly sigKey: Characters;
+  readonly sig: Bytes;
+  readonly cid: SignatureId;
+}
+
+/** @name AnagolayStatement */
+export interface AnagolayStatement extends Struct {
+  readonly id: StatementId;
+  readonly data: StatementData;
+  readonly extra: Option<StatementExtra>;
+}
 
 /** @name Claim */
 export interface Claim extends Struct {
@@ -59,24 +67,13 @@ export interface Proportion extends Struct {
   readonly value: Characters;
 }
 
-/** @name Signature */
-export interface Signature extends Struct {
-  readonly sigKey: Characters;
-  readonly sig: Bytes;
-  readonly cid: SignatureId;
-}
+/** @name SignatureId */
+export interface SignatureId extends Struct {}
 
 /** @name Signatures */
 export interface Signatures extends Struct {
-  readonly holder: Signature;
-  readonly issuer: Signature;
-}
-
-/** @name Statement */
-export interface Statement extends Struct {
-  readonly id: GenericId;
-  readonly data: StatementData;
-  readonly extra: Option<StatementExtra>;
+  readonly holder: AnagolaySignature;
+  readonly issuer: AnagolaySignature;
 }
 
 /** @name StatementData */
@@ -88,9 +85,12 @@ export interface StatementData extends Struct {
 /** @name StatementExtra */
 export interface StatementExtra extends Struct {}
 
+/** @name StatementId */
+export interface StatementId extends Struct {}
+
 /** @name StatementRecord */
 export interface StatementRecord extends Struct {
-  readonly record: Statement;
+  readonly record: AnagolayStatement;
   readonly accountId: AccountId;
   readonly blockNumber: BlockNumber;
 }

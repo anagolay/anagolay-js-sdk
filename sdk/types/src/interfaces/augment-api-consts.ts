@@ -6,13 +6,15 @@
 import '@polkadot/api-base/types/consts';
 
 import type { ApiTypes, AugmentedConst } from '@polkadot/api-base/types';
-import type { u128, u16, u32, u64, u8 } from '@polkadot/types-codec';
+import type { Option, u128, u16, u32, u64, u8 } from '@polkadot/types-codec';
 import type { Codec } from '@polkadot/types-codec/types';
-import type {
-  FrameSupportWeightsRuntimeDbWeight,
+import type { Permill } from '@polkadot/types/interfaces/runtime';
+import {
   FrameSystemLimitsBlockLength,
   FrameSystemLimitsBlockWeights,
+  FrameSupportWeightsRuntimeDbWeight,
   SpVersionRuntimeVersion,
+  FrameSupportPalletId,
 } from '@polkadot/types/lookup';
 
 export type __AugmentedConst<ApiType extends ApiTypes> = AugmentedConst<ApiType>;
@@ -57,6 +59,22 @@ declare module '@polkadot/api-base/types/consts' {
     };
     operations: {
       maxVersionsPerOperation: u32 & AugmentedConst<ApiType>;
+      /**
+       * Generic const
+       **/
+      [key: string]: Codec;
+    };
+    scheduler: {
+      /**
+       * The maximum weight that may be scheduled per block for any dispatchables of less
+       * priority than `schedule::HARD_DEADLINE`.
+       **/
+      maximumWeight: u64 & AugmentedConst<ApiType>;
+      /**
+       * The maximum number of scheduled calls in the queue for a single block.
+       * Not strictly enforced, but used for weight estimation.
+       **/
+      maxScheduledPerBlock: u32 & AugmentedConst<ApiType>;
       /**
        * Generic const
        **/
@@ -141,6 +159,82 @@ declare module '@polkadot/api-base/types/consts' {
        * transactions.
        **/
       operationalFeeMultiplier: u8 & AugmentedConst<ApiType>;
+      /**
+       * Generic const
+       **/
+      [key: string]: Codec;
+    };
+    treasury: {
+      /**
+       * Percentage of spare funds (if any) that are burnt per spend period.
+       **/
+      burn: Permill & AugmentedConst<ApiType>;
+      /**
+       * The maximum number of approvals that can wait in the spending queue.
+       *
+       * NOTE: This parameter is also used within the Bounties Pallet extension if enabled.
+       **/
+      maxApprovals: u32 & AugmentedConst<ApiType>;
+      /**
+       * The treasury's pallet id, used for deriving its sovereign account ID.
+       **/
+      palletId: FrameSupportPalletId & AugmentedConst<ApiType>;
+      /**
+       * Fraction of a proposal's value that should be bonded in order to place the proposal.
+       * An accepted proposal gets these back. A rejected proposal does not.
+       **/
+      proposalBond: Permill & AugmentedConst<ApiType>;
+      /**
+       * Maximum amount of funds that should be placed in a deposit for making a proposal.
+       **/
+      proposalBondMaximum: Option<u128> & AugmentedConst<ApiType>;
+      /**
+       * Minimum amount of funds that should be placed in a deposit for making a proposal.
+       **/
+      proposalBondMinimum: u128 & AugmentedConst<ApiType>;
+      /**
+       * Period between successive spends.
+       **/
+      spendPeriod: u32 & AugmentedConst<ApiType>;
+      /**
+       * Generic const
+       **/
+      [key: string]: Codec;
+    };
+    uniques: {
+      /**
+       * The basic amount of funds that must be reserved when adding an attribute to an item.
+       **/
+      attributeDepositBase: u128 & AugmentedConst<ApiType>;
+      /**
+       * The basic amount of funds that must be reserved for collection.
+       **/
+      collectionDeposit: u128 & AugmentedConst<ApiType>;
+      /**
+       * The additional funds that must be reserved for the number of bytes store in metadata,
+       * either "normal" metadata or attribute metadata.
+       **/
+      depositPerByte: u128 & AugmentedConst<ApiType>;
+      /**
+       * The basic amount of funds that must be reserved for an item.
+       **/
+      itemDeposit: u128 & AugmentedConst<ApiType>;
+      /**
+       * The maximum length of an attribute key.
+       **/
+      keyLimit: u32 & AugmentedConst<ApiType>;
+      /**
+       * The basic amount of funds that must be reserved when adding metadata to your item.
+       **/
+      metadataDepositBase: u128 & AugmentedConst<ApiType>;
+      /**
+       * The maximum length of data stored on-chain.
+       **/
+      stringLimit: u32 & AugmentedConst<ApiType>;
+      /**
+       * The maximum length of an attribute value.
+       **/
+      valueLimit: u32 & AugmentedConst<ApiType>;
       /**
        * Generic const
        **/

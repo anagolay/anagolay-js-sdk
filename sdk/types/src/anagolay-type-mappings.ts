@@ -1,11 +1,10 @@
 import ImageMetadataTags from './imageMetadata';
-import { AnGenericId } from './interfaces/anagolaySupport/interfaces';
-import { AnClaim, AnStatement } from './interfaces/statements/interfaces';
-import { AnProofParams } from './types';
+import { AnClaim, AnStatement, AnStatementId } from './interfaces/statements/interfaces';
+import { AnProofId, AnProofParams } from './types';
 
 export interface SaveStatementReturn {
-  statement_id: AnGenericId;
-  poe_id: AnGenericId;
+  statement_id: AnStatementId;
+  poe_id: AnProofId;
 }
 
 export type output =
@@ -28,13 +27,11 @@ export type outputDecoded =
   | 'AnAny'
   | 'AnImageMetadata'
   | 'AnSplitParams'
-  | 'AnGenericId'
   | 'AnBoolean'
   | 'AnNull'
   | 'AnImageData'
   | 'AnOwnershipClaims'
   | 'AnCopyrightClaims'
-  | 'AnGenericIds'
   | 'AnClaim[]'
   | 'AnSignatures[]'
   | 'AnSigner'
@@ -95,7 +92,6 @@ export interface AnImageMetadata extends ImageMetadataTags {
   file: ExifFile;
 }
 
-export type AnGenericIds = AnGenericId[];
 export type AnBuffer = Buffer;
 export type AnByteArray = Uint8Array;
 export type AnFileBuffer = Buffer;

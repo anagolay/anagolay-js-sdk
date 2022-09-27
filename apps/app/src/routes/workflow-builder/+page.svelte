@@ -15,7 +15,7 @@
   import OperationNode from './OperationNode.svelte';
   import SkeletonLoader from '$src/components/base/SkeletonLoader.svelte';
   import { alerts } from '$src/components/notifications/stores';
-  import { connectToApi, retrieveOperations, type OperationWithVersions } from '$src/api';
+  import { retrieveOperations, type OperationWithVersions } from '$src/api';
   import { ApiPromise } from '@polkadot/api';
   import { serializeThenParse } from '$src/utils/json';
   import { isEmpty } from 'ramda';
@@ -23,6 +23,7 @@
   import slug from 'slug';
   import Code from '$src/components/base/CodeBlockWithSerialization.svelte';
   import SvelteSeo from 'svelte-seo';
+  import { connectToWs } from '@anagolay/api';
 
   const title: string = 'Workflow builder';
 
@@ -117,7 +118,7 @@
    * On the Component mount
    */
   onMount(async () => {
-    chain = await connectToApi(anagolay_chain_ws);
+    chain = await connectToWs(anagolay_chain_ws);
 
     // initial name is the namespace to connect to
     workflowName = namespace;
@@ -129,7 +130,8 @@
       secure: true,
     });
 
-    opvs = retrieveOperations(chain);
+    // @TODO pagination ui
+    opvs = retrieveOperations(chain, 0, 10);
 
     socket.on('connect', () => {
       console.debug('WS:: connected with id %s and namespace %s', socket.id, namespace);

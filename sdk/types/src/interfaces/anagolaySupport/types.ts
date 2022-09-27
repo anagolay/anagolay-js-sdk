@@ -9,7 +9,7 @@ export interface AnagolayVersionExtra extends Struct {
 }
 
 /** @name ArtifactId */
-export interface ArtifactId extends GenericId {}
+export interface ArtifactId extends Bytes {}
 
 /** @name Characters */
 export interface Characters extends Bytes {}
@@ -30,26 +30,8 @@ export interface ForWhat extends Enum {
   readonly type: 'Generic' | 'Photo' | 'Camera' | 'Lens' | 'Smartphone' | 'User' | 'Sys' | 'Flowcontrol';
 }
 
-/** @name GenericId */
-export interface GenericId extends Bytes {}
-
-/** @name OperationId */
-export interface OperationId extends GenericId {}
-
-/** @name ProofId */
-export interface ProofId extends GenericId {}
-
-/** @name SignatureId */
-export interface SignatureId extends GenericId {}
-
-/** @name StatementId */
-export interface StatementId extends GenericId {}
-
 /** @name TypeName */
 export interface TypeName extends Characters {}
-
-/** @name VersionId */
-export interface VersionId extends GenericId {}
 
 /** @name WasmArtifactSubType */
 export interface WasmArtifactSubType extends Enum {
@@ -59,8 +41,5 @@ export interface WasmArtifactSubType extends Enum {
   readonly isWeb: boolean;
   readonly type: 'Cjs' | 'Esm' | 'Wasm' | 'Web';
 }
-
-/** @name WorkflowId */
-export interface WorkflowId extends GenericId {}
 
 export type PHANTOM_ANAGOLAYSUPPORT = 'anagolaySupport';

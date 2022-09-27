@@ -6,37 +6,11 @@
 import '@polkadot/api-base/types/storage';
 
 import type { ApiTypes, AugmentedQuery, QueryableStorageEntry } from '@polkadot/api-base/types';
-import type { Bytes, Option, Struct, Vec, bool, u128, u32, u64 } from '@polkadot/types-codec';
+import type { Bytes, Null, Option, Vec, bool, u128, u32, u64 } from '@polkadot/types-codec';
 import type { AnyNumber, ITuple } from '@polkadot/types-codec/types';
 import type { AccountId32, H256 } from '@polkadot/types/interfaces/runtime';
-import type {
-  AnagolaySupportAnagolayRecord,
-  AnagolaySupportAnagolayStructureProofData,
-  AnagolaySupportAnagolayStructureStatementData,
-  AnagolaySupportAnagolayStructureWorkflowData,
-  AnagolaySupportAnagolayVersionDataOperationArtifactType,
-  AnagolaySupportAnagolayVersionExtra,
-  FrameSupportWeightsPerDispatchClassU64,
-  FrameSystemAccountInfo,
-  FrameSystemEventRecord,
-  FrameSystemLastRuntimeUpgradeInfo,
-  FrameSystemPhase,
-  OperationsOperationData,
-  OperationsOperationExtra,
-  PalletBalancesAccountData,
-  PalletBalancesBalanceLock,
-  PalletBalancesReleases,
-  PalletBalancesReserveData,
-  PalletGrandpaStoredPendingChange,
-  PalletGrandpaStoredState,
-  PalletTransactionPaymentReleases,
-  PalletVestingReleases,
-  PalletVestingVestingInfo,
-  PoePhashInfo,
-  SpConsensusAuraSr25519AppSr25519Public,
-  SpRuntimeDigest,
-} from '@polkadot/types/lookup';
 import type { Observable } from '@polkadot/types/types';
+import { SpConsensusAuraSr25519AppSr25519Public, PalletBalancesAccountData, PalletBalancesBalanceLock, PalletBalancesReserveData, PalletBalancesReleases, PalletGrandpaStoredPendingChange, PalletGrandpaStoredState, OperationsOperationRecord, OperationsOperationVersionRecord, PoePhashInfo, PoeProofRecord, PalletSchedulerScheduledV3, StatementsStatementRecord, FrameSystemAccountInfo, FrameSupportWeightsPerDispatchClassU64, SpRuntimeDigest, FrameSystemEventRecord, FrameSystemPhase, FrameSystemLastRuntimeUpgradeInfo, PalletTransactionPaymentReleases, PalletTreasuryProposal, PalletUniquesItemDetails, PalletUniquesCollectionDetails, PalletUniquesCollectionMetadata, PalletUniquesItemMetadata, PalletVestingReleases, PalletVestingVestingInfo, WorkflowsWorkflowVersionRecord, WorkflowsWorkflowRecord } from '@polkadot/types/lookup';
 
 export type __AugmentedQuery<ApiType extends ApiTypes> = AugmentedQuery<ApiType, () => unknown>;
 export type __QueryableStorageEntry<ApiType extends ApiTypes> = QueryableStorageEntry<ApiType>;
@@ -184,19 +158,7 @@ declare module '@polkadot/api-base/types/storage' {
         (
           arg1: Bytes | string | Uint8Array,
           arg2: AccountId32 | string | Uint8Array
-        ) => Observable<
-          Option<
-            {
-              readonly record: {
-                readonly id: Bytes;
-                readonly data: OperationsOperationData;
-                readonly extra: Option<OperationsOperationExtra>;
-              } & Struct;
-              readonly accountId: AccountId32;
-              readonly blockNumber: u32;
-            } & Struct
-          >
-        >,
+        ) => Observable<Option<OperationsOperationRecord>>,
         [Bytes, AccountId32]
       > &
         QueryableStorageEntry<ApiType, [Bytes, AccountId32]>;
@@ -209,19 +171,7 @@ declare module '@polkadot/api-base/types/storage' {
        **/
       versionByVersionId: AugmentedQuery<
         ApiType,
-        (arg: Bytes | string | Uint8Array) => Observable<
-          Option<
-            {
-              readonly record: {
-                readonly id: Bytes;
-                readonly data: AnagolaySupportAnagolayVersionDataOperationArtifactType;
-                readonly extra: Option<AnagolaySupportAnagolayVersionExtra>;
-              } & Struct;
-              readonly accountId: AccountId32;
-              readonly blockNumber: u32;
-            } & Struct
-          >
-        >,
+        (arg: Bytes | string | Uint8Array) => Observable<Option<OperationsOperationVersionRecord>>,
         [Bytes]
       > &
         QueryableStorageEntry<ApiType, [Bytes]>;
@@ -264,15 +214,7 @@ declare module '@polkadot/api-base/types/storage' {
         (
           arg1: Bytes | string | Uint8Array,
           arg2: AccountId32 | string | Uint8Array
-        ) => Observable<
-          Option<
-            {
-              readonly record: AnagolaySupportAnagolayStructureProofData;
-              readonly accountId: AccountId32;
-              readonly blockNumber: u32;
-            } & Struct
-          >
-        >,
+        ) => Observable<Option<PoeProofRecord>>,
         [Bytes, AccountId32]
       > &
         QueryableStorageEntry<ApiType, [Bytes, AccountId32]>;
@@ -293,6 +235,30 @@ declare module '@polkadot/api-base/types/storage' {
        **/
       randomMaterial: AugmentedQuery<ApiType, () => Observable<Vec<H256>>, []> &
         QueryableStorageEntry<ApiType, []>;
+      /**
+       * Generic query
+       **/
+      [key: string]: QueryableStorageEntry<ApiType>;
+    };
+    scheduler: {
+      /**
+       * Items to be executed, indexed by the block number that they should be executed on.
+       **/
+      agenda: AugmentedQuery<
+        ApiType,
+        (arg: u32 | AnyNumber | Uint8Array) => Observable<Vec<Option<PalletSchedulerScheduledV3>>>,
+        [u32]
+      > &
+        QueryableStorageEntry<ApiType, [u32]>;
+      /**
+       * Lookup from identity to the block number and index of the task.
+       **/
+      lookup: AugmentedQuery<
+        ApiType,
+        (arg: Bytes | string | Uint8Array) => Observable<Option<ITuple<[u32, u32]>>>,
+        [Bytes]
+      > &
+        QueryableStorageEntry<ApiType, [Bytes]>;
       /**
        * Generic query
        **/
@@ -334,15 +300,7 @@ declare module '@polkadot/api-base/types/storage' {
         (
           arg1: Bytes | string | Uint8Array,
           arg2: AccountId32 | string | Uint8Array
-        ) => Observable<
-          Option<
-            {
-              readonly record: AnagolaySupportAnagolayStructureStatementData;
-              readonly accountId: AccountId32;
-              readonly blockNumber: u32;
-            } & Struct
-          >
-        >,
+        ) => Observable<Option<StatementsStatementRecord>>,
         [Bytes, AccountId32]
       > &
         QueryableStorageEntry<ApiType, [Bytes, AccountId32]>;
@@ -515,6 +473,135 @@ declare module '@polkadot/api-base/types/storage' {
        **/
       [key: string]: QueryableStorageEntry<ApiType>;
     };
+    treasury: {
+      /**
+       * Proposal indices that have been approved but not yet awarded.
+       **/
+      approvals: AugmentedQuery<ApiType, () => Observable<Vec<u32>>, []> & QueryableStorageEntry<ApiType, []>;
+      /**
+       * Number of proposals that have been made.
+       **/
+      proposalCount: AugmentedQuery<ApiType, () => Observable<u32>, []> & QueryableStorageEntry<ApiType, []>;
+      /**
+       * Proposals that have been made.
+       **/
+      proposals: AugmentedQuery<
+        ApiType,
+        (arg: u32 | AnyNumber | Uint8Array) => Observable<Option<PalletTreasuryProposal>>,
+        [u32]
+      > &
+        QueryableStorageEntry<ApiType, [u32]>;
+      /**
+       * Generic query
+       **/
+      [key: string]: QueryableStorageEntry<ApiType>;
+    };
+    uniques: {
+      /**
+       * The items held by any given account; set out this way so that items owned by a single
+       * account can be enumerated.
+       **/
+      account: AugmentedQuery<
+        ApiType,
+        (
+          arg1: AccountId32 | string | Uint8Array,
+          arg2: u32 | AnyNumber | Uint8Array,
+          arg3: u32 | AnyNumber | Uint8Array
+        ) => Observable<Option<Null>>,
+        [AccountId32, u32, u32]
+      > &
+        QueryableStorageEntry<ApiType, [AccountId32, u32, u32]>;
+      /**
+       * The items in existence and their ownership details.
+       **/
+      asset: AugmentedQuery<
+        ApiType,
+        (
+          arg1: u32 | AnyNumber | Uint8Array,
+          arg2: u32 | AnyNumber | Uint8Array
+        ) => Observable<Option<PalletUniquesItemDetails>>,
+        [u32, u32]
+      > &
+        QueryableStorageEntry<ApiType, [u32, u32]>;
+      /**
+       * Attributes of a collection.
+       **/
+      attribute: AugmentedQuery<
+        ApiType,
+        (
+          arg1: u32 | AnyNumber | Uint8Array,
+          arg2: Option<u32> | null | Uint8Array | u32 | AnyNumber,
+          arg3: Bytes | string | Uint8Array
+        ) => Observable<Option<ITuple<[Bytes, u128]>>>,
+        [u32, Option<u32>, Bytes]
+      > &
+        QueryableStorageEntry<ApiType, [u32, Option<u32>, Bytes]>;
+      /**
+       * Details of a collection.
+       **/
+      class: AugmentedQuery<
+        ApiType,
+        (arg: u32 | AnyNumber | Uint8Array) => Observable<Option<PalletUniquesCollectionDetails>>,
+        [u32]
+      > &
+        QueryableStorageEntry<ApiType, [u32]>;
+      /**
+       * The collections owned by any given account; set out this way so that collections owned by
+       * a single account can be enumerated.
+       **/
+      classAccount: AugmentedQuery<
+        ApiType,
+        (
+          arg1: AccountId32 | string | Uint8Array,
+          arg2: u32 | AnyNumber | Uint8Array
+        ) => Observable<Option<Null>>,
+        [AccountId32, u32]
+      > &
+        QueryableStorageEntry<ApiType, [AccountId32, u32]>;
+      /**
+       * Metadata of a collection.
+       **/
+      classMetadataOf: AugmentedQuery<
+        ApiType,
+        (arg: u32 | AnyNumber | Uint8Array) => Observable<Option<PalletUniquesCollectionMetadata>>,
+        [u32]
+      > &
+        QueryableStorageEntry<ApiType, [u32]>;
+      /**
+       * Keeps track of the number of items a collection might have.
+       **/
+      collectionMaxSupply: AugmentedQuery<
+        ApiType,
+        (arg: u32 | AnyNumber | Uint8Array) => Observable<Option<u32>>,
+        [u32]
+      > &
+        QueryableStorageEntry<ApiType, [u32]>;
+      /**
+       * Metadata of an item.
+       **/
+      instanceMetadataOf: AugmentedQuery<
+        ApiType,
+        (
+          arg1: u32 | AnyNumber | Uint8Array,
+          arg2: u32 | AnyNumber | Uint8Array
+        ) => Observable<Option<PalletUniquesItemMetadata>>,
+        [u32, u32]
+      > &
+        QueryableStorageEntry<ApiType, [u32, u32]>;
+      /**
+       * The collection, if any, of which an account is willing to take ownership.
+       **/
+      ownershipAcceptance: AugmentedQuery<
+        ApiType,
+        (arg: AccountId32 | string | Uint8Array) => Observable<Option<u32>>,
+        [AccountId32]
+      > &
+        QueryableStorageEntry<ApiType, [AccountId32]>;
+      /**
+       * Generic query
+       **/
+      [key: string]: QueryableStorageEntry<ApiType>;
+    };
     vesting: {
       /**
        * Storage version of the pallet.
@@ -547,7 +634,7 @@ declare module '@polkadot/api-base/types/storage' {
        **/
       versionByVersionId: AugmentedQuery<
         ApiType,
-        (arg: Bytes | string | Uint8Array) => Observable<Option<AnagolaySupportAnagolayRecord>>,
+        (arg: Bytes | string | Uint8Array) => Observable<Option<WorkflowsWorkflowVersionRecord>>,
         [Bytes]
       > &
         QueryableStorageEntry<ApiType, [Bytes]>;
@@ -568,15 +655,7 @@ declare module '@polkadot/api-base/types/storage' {
         (
           arg1: Bytes | string | Uint8Array,
           arg2: AccountId32 | string | Uint8Array
-        ) => Observable<
-          Option<
-            {
-              readonly record: AnagolaySupportAnagolayStructureWorkflowData;
-              readonly accountId: AccountId32;
-              readonly blockNumber: u32;
-            } & Struct
-          >
-        >,
+        ) => Observable<Option<WorkflowsWorkflowRecord>>,
         [Bytes, AccountId32]
       > &
         QueryableStorageEntry<ApiType, [Bytes, AccountId32]>;

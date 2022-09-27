@@ -1,7 +1,8 @@
 import { Definitions, DefinitionsTypes } from '@polkadot/types/types';
 
 export const StatementsCustomTypes: DefinitionsTypes = {
-  Signature: {
+  SignatureId: {},
+  AnagolaySignature: {
     /// signing key in urn/did format 'urn:pgp:9cdf8dd38531511968c8d8cb524036585b62f15b'
     sigKey: 'Characters',
     /// Signature sign(prepared_statement, pvtKey(sigKey)) and encoded using multibase
@@ -11,8 +12,8 @@ export const StatementsCustomTypes: DefinitionsTypes = {
     cid: 'SignatureId',
   },
   Signatures: {
-    holder: 'Signature',
-    issuer: 'Signature',
+    holder: 'AnagolaySignature',
+    issuer: 'AnagolaySignature',
   },
   Proportion: {
     /// Proportion sign, can be %
@@ -62,23 +63,30 @@ export const StatementsCustomTypes: DefinitionsTypes = {
     /// What happens after the expiration? this is default rule or smart contract that automatically does stuff, like move it to the public domain, transfer to relatives etc... need better definition
     onExpiration: 'Characters',
   },
+  StatementId: {},
   StatementData: {
     signatures: 'Signatures',
     claim: 'Claim',
   },
   StatementExtra: {},
-  Statement: {
-    id: 'GenericId',
+  AnagolayStatement: {
+    id: 'StatementId',
     data: 'StatementData',
     extra: 'Option<StatementExtra>',
   },
   StatementRecord: {
-    record: 'Statement',
+    record: 'AnagolayStatement',
     accountId: 'AccountId',
     blockNumber: 'BlockNumber',
   },
 };
 
 export default {
+  typeAlias: {
+    statements: {
+      AngolaySignature: 'Signature',
+      AngolayStatement: 'Statement',
+    },
+  },
   types: StatementsCustomTypes,
 } as Definitions;

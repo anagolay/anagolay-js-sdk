@@ -5,66 +5,6 @@
 // this is required to allow for ambient/previous definitions
 import '@polkadot/types/types/registry';
 
-import type {
-  AnagolayVersionExtra,
-  ArtifactId,
-  Characters,
-  CreatorId,
-  ForWhat,
-  GenericId,
-  OperationId,
-  ProofId,
-  SignatureId,
-  StatementId,
-  TypeName,
-  VersionId,
-  WasmArtifactSubType,
-  WorkflowId,
-} from '@anagolay/types/interfaces/anagolaySupport';
-import type {
-  Operation,
-  OperationArtifactStructure,
-  OperationArtifactType,
-  OperationData,
-  OperationExtra,
-  OperationRecord,
-  OperationVersion,
-  OperationVersionData,
-  OperationVersionRecord,
-} from '@anagolay/types/interfaces/operations';
-import type {
-  PhashInfo,
-  Proof,
-  ProofData,
-  ProofExtra,
-  ProofParams,
-  ProofRecord,
-} from '@anagolay/types/interfaces/poe';
-import type {
-  Claim,
-  ClaimType,
-  Expiration,
-  ExpirationType,
-  Proportion,
-  Signatures,
-  StatementData,
-  StatementExtra,
-  StatementRecord,
-  Validity,
-} from '@anagolay/types/interfaces/statements';
-import type {
-  OperationVersionReference,
-  Workflow,
-  WorkflowArtifactStructure,
-  WorkflowArtifactType,
-  WorkflowData,
-  WorkflowExtra,
-  WorkflowRecord,
-  WorkflowSegment,
-  WorkflowVersion,
-  WorkflowVersionData,
-  WorkflowVersionRecord,
-} from '@anagolay/types/interfaces/workflows';
 import type { Data, StorageKey } from '@polkadot/types';
 import type {
   BitVec,
@@ -1261,7 +1201,6 @@ declare module '@polkadot/types/types/registry' {
     Address: Address;
     AliveContractInfo: AliveContractInfo;
     AllowedSlots: AllowedSlots;
-    AnagolayVersionExtra: AnagolayVersionExtra;
     AnySignature: AnySignature;
     ApiId: ApiId;
     ApplyExtrinsicResult: ApplyExtrinsicResult;
@@ -1269,7 +1208,6 @@ declare module '@polkadot/types/types/registry' {
     ApprovalFlag: ApprovalFlag;
     Approvals: Approvals;
     ArithmeticError: ArithmeticError;
-    ArtifactId: ArtifactId;
     AssetApproval: AssetApproval;
     AssetApprovalKey: AssetApprovalKey;
     AssetBalance: AssetBalance;
@@ -1378,10 +1316,7 @@ declare module '@polkadot/types/types/registry' {
     ChainType: ChainType;
     ChangesTrieConfiguration: ChangesTrieConfiguration;
     ChangesTrieSignal: ChangesTrieSignal;
-    Characters: Characters;
     CheckInherentsResult: CheckInherentsResult;
-    Claim: Claim;
-    ClaimType: ClaimType;
     ClassDetails: ClassDetails;
     ClassId: ClassId;
     ClassMetadata: ClassMetadata;
@@ -1479,7 +1414,6 @@ declare module '@polkadot/types/types/registry' {
     CoreState: CoreState;
     CrateVersion: CrateVersion;
     CreatedBlock: CreatedBlock;
-    CreatorId: CreatorId;
     Data: Data;
     DeferredOffenceOf: DeferredOffenceOf;
     DefunctVoter: DefunctVoter;
@@ -1606,8 +1540,6 @@ declare module '@polkadot/types/types/registry' {
     ExitReason: ExitReason;
     ExitRevert: ExitRevert;
     ExitSucceed: ExitSucceed;
-    Expiration: Expiration;
-    ExpirationType: ExpirationType;
     ExplicitDisputeStatement: ExplicitDisputeStatement;
     Exposure: Exposure;
     ExtendedBalance: ExtendedBalance;
@@ -1642,7 +1574,6 @@ declare module '@polkadot/types/types/registry' {
     Forcing: Forcing;
     ForkTreePendingChange: ForkTreePendingChange;
     ForkTreePendingChangeNode: ForkTreePendingChangeNode;
-    ForWhat: ForWhat;
     FullIdentification: FullIdentification;
     FunctionArgumentMetadataLatest: FunctionArgumentMetadataLatest;
     FunctionArgumentMetadataV10: FunctionArgumentMetadataV10;
@@ -1665,7 +1596,6 @@ declare module '@polkadot/types/types/registry' {
     FungibilityV1: FungibilityV1;
     FungibilityV2: FungibilityV2;
     Gas: Gas;
-    GenericId: GenericId;
     GiltBid: GiltBid;
     GlobalValidationData: GlobalValidationData;
     GlobalValidationSchedule: GlobalValidationSchedule;
@@ -1885,17 +1815,6 @@ declare module '@polkadot/types/types/registry' {
     OpenTipTip: OpenTipTip;
     OpenTipTo225: OpenTipTo225;
     OperatingMode: OperatingMode;
-    Operation: Operation;
-    OperationArtifactStructure: OperationArtifactStructure;
-    OperationArtifactType: OperationArtifactType;
-    OperationData: OperationData;
-    OperationExtra: OperationExtra;
-    OperationId: OperationId;
-    OperationRecord: OperationRecord;
-    OperationVersion: OperationVersion;
-    OperationVersionData: OperationVersionData;
-    OperationVersionRecord: OperationVersionRecord;
-    OperationVersionReference: OperationVersionReference;
     OptionBool: OptionBool;
     Origin: Origin;
     OriginCaller: OriginCaller;
@@ -1967,7 +1886,6 @@ declare module '@polkadot/types/types/registry' {
     Phantom: Phantom;
     PhantomData: PhantomData;
     Phase: Phase;
-    PhashInfo: PhashInfo;
     PhragmenScore: PhragmenScore;
     Points: Points;
     PortableType: PortableType;
@@ -1981,14 +1899,7 @@ declare module '@polkadot/types/types/registry' {
     Prevotes: Prevotes;
     Priority: Priority;
     PriorLock: PriorLock;
-    Proof: Proof;
-    ProofData: ProofData;
-    ProofExtra: ProofExtra;
-    ProofId: ProofId;
-    ProofParams: ProofParams;
-    ProofRecord: ProofRecord;
     PropIndex: PropIndex;
-    Proportion: Proportion;
     Proposal: Proposal;
     ProposalIndex: ProposalIndex;
     ProxyAnnouncement: ProxyAnnouncement;
@@ -2137,8 +2048,6 @@ declare module '@polkadot/types/types/registry' {
     Si1Variant: Si1Variant;
     SiField: SiField;
     Signature: Signature;
-    SignatureId: SignatureId;
-    Signatures: Signatures;
     SignedAvailabilityBitfield: SignedAvailabilityBitfield;
     SignedAvailabilityBitfields: SignedAvailabilityBitfields;
     SignedBlock: SignedBlock;
@@ -2186,11 +2095,7 @@ declare module '@polkadot/types/types/registry' {
     StakingLedgerTo223: StakingLedgerTo223;
     StakingLedgerTo240: StakingLedgerTo240;
     Statement: Statement;
-    StatementData: StatementData;
-    StatementExtra: StatementExtra;
-    StatementId: StatementId;
     StatementKind: StatementKind;
-    StatementRecord: StatementRecord;
     StorageChangeSet: StorageChangeSet;
     StorageData: StorageData;
     StorageDeposit: StorageDeposit;
@@ -2267,7 +2172,6 @@ declare module '@polkadot/types/types/registry' {
     TrieId: TrieId;
     TrieIndex: TrieIndex;
     Type: Type;
-    TypeName: TypeName;
     u128: u128;
     U128: U128;
     u16: u16;
@@ -2312,7 +2216,6 @@ declare module '@polkadot/types/types/registry' {
     ValidatorSetId: ValidatorSetId;
     ValidatorSignature: ValidatorSignature;
     ValidDisputeStatementKind: ValidDisputeStatementKind;
-    Validity: Validity;
     ValidityAttestation: ValidityAttestation;
     ValidTransaction: ValidTransaction;
     VecInboundHrmpMessage: VecInboundHrmpMessage;
@@ -2321,7 +2224,6 @@ declare module '@polkadot/types/types/registry' {
     VersionedMultiLocation: VersionedMultiLocation;
     VersionedResponse: VersionedResponse;
     VersionedXcm: VersionedXcm;
-    VersionId: VersionId;
     VersionMigrationStage: VersionMigrationStage;
     VestingInfo: VestingInfo;
     VestingSchedule: VestingSchedule;
@@ -2341,7 +2243,6 @@ declare module '@polkadot/types/types/registry' {
     VrfData: VrfData;
     VrfOutput: VrfOutput;
     VrfProof: VrfProof;
-    WasmArtifactSubType: WasmArtifactSubType;
     Weight: Weight;
     WeightLimitV2: WeightLimitV2;
     WeightMultiplier: WeightMultiplier;
@@ -2362,17 +2263,6 @@ declare module '@polkadot/types/types/registry' {
     WinningData10: WinningData10;
     WinningDataEntry: WinningDataEntry;
     WithdrawReasons: WithdrawReasons;
-    Workflow: Workflow;
-    WorkflowArtifactStructure: WorkflowArtifactStructure;
-    WorkflowArtifactType: WorkflowArtifactType;
-    WorkflowData: WorkflowData;
-    WorkflowExtra: WorkflowExtra;
-    WorkflowId: WorkflowId;
-    WorkflowRecord: WorkflowRecord;
-    WorkflowSegment: WorkflowSegment;
-    WorkflowVersion: WorkflowVersion;
-    WorkflowVersionData: WorkflowVersionData;
-    WorkflowVersionRecord: WorkflowVersionRecord;
     Xcm: Xcm;
     XcmAssetId: XcmAssetId;
     XcmError: XcmError;

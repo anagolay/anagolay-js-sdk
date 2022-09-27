@@ -175,7 +175,7 @@
         {
           "kind": "Function",
           "canonicalReference": "@anagolay/api!connectToWs:function(1)",
-          "docComment": "/**\n * Create a Websocket connection\n *\n * @param connectTo - A host to connect to, default is `wss://idiyanale.rpc.anagolay.io`\n *\n * Example: ```ts import {connectToWs} from '@anagolay/api' const api = await connectToWs() // Retrieve the chain & node information information via rpc calls const [chain, nodeName, nodeVersion] = await Promise.all([ api.rpc.system.chain(), api.rpc.system.name(), api.rpc.system.version(), ]);\n *\n * console.log(`You are connected to chain ${chain} using ${nodeName} v${nodeVersion}`); ```\n */\n",
+          "docComment": "/**\n * Create a Websocket connection\n *\n * @param connectTo - A host to connect to, default is `wss://idiyanale-testnet.anagolay.io`\n *\n * Example: ```ts import {connectToWs} from '@anagolay/api' const api = await connectToWs() // Retrieve the chain & node information information via rpc calls const [chain, nodeName, nodeVersion] = await Promise.all([ api.rpc.system.chain(), api.rpc.system.name(), api.rpc.system.version(), ]);\n *\n * console.log(`You are connected to chain ${chain} using ${nodeName} v${nodeVersion}`); ```\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",

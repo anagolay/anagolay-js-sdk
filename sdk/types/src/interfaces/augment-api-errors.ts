@@ -155,6 +155,28 @@ declare module '@polkadot/api-base/types/errors' {
        **/
       [key: string]: AugmentedError<ApiType>;
     };
+    scheduler: {
+      /**
+       * Failed to schedule a call
+       **/
+      FailedToSchedule: AugmentedError<ApiType>;
+      /**
+       * Cannot find the scheduled call.
+       **/
+      NotFound: AugmentedError<ApiType>;
+      /**
+       * Reschedule failed because it does not change scheduled time.
+       **/
+      RescheduleNoChange: AugmentedError<ApiType>;
+      /**
+       * Given target block number is in the past.
+       **/
+      TargetBlockNumberInPast: AugmentedError<ApiType>;
+      /**
+       * Generic error
+       **/
+      [key: string]: AugmentedError<ApiType>;
+    };
     statements: {
       /**
        * A parameter of the request is invalid or does not respect a given constraint
@@ -228,6 +250,99 @@ declare module '@polkadot/api-base/types/errors' {
        * and the new runtime.
        **/
       SpecVersionNeedsToIncrease: AugmentedError<ApiType>;
+      /**
+       * Generic error
+       **/
+      [key: string]: AugmentedError<ApiType>;
+    };
+    treasury: {
+      /**
+       * The spend origin is valid but the amount it is allowed to spend is lower than the
+       * amount to be spent.
+       **/
+      InsufficientPermission: AugmentedError<ApiType>;
+      /**
+       * Proposer's balance is too low.
+       **/
+      InsufficientProposersBalance: AugmentedError<ApiType>;
+      /**
+       * No proposal or bounty at that index.
+       **/
+      InvalidIndex: AugmentedError<ApiType>;
+      /**
+       * Proposal has not been approved.
+       **/
+      ProposalNotApproved: AugmentedError<ApiType>;
+      /**
+       * Too many approvals in the queue.
+       **/
+      TooManyApprovals: AugmentedError<ApiType>;
+      /**
+       * Generic error
+       **/
+      [key: string]: AugmentedError<ApiType>;
+    };
+    uniques: {
+      /**
+       * The item ID has already been used for an item.
+       **/
+      AlreadyExists: AugmentedError<ApiType>;
+      /**
+       * Invalid witness data given.
+       **/
+      BadWitness: AugmentedError<ApiType>;
+      /**
+       * The item or collection is frozen.
+       **/
+      Frozen: AugmentedError<ApiType>;
+      /**
+       * The item ID is already taken.
+       **/
+      InUse: AugmentedError<ApiType>;
+      /**
+       * The item is locked.
+       **/
+      Locked: AugmentedError<ApiType>;
+      /**
+       * The max supply has already been set.
+       **/
+      MaxSupplyAlreadySet: AugmentedError<ApiType>;
+      /**
+       * All items have been minted.
+       **/
+      MaxSupplyReached: AugmentedError<ApiType>;
+      /**
+       * The provided max supply is less to the amount of items a collection already has.
+       **/
+      MaxSupplyTooSmall: AugmentedError<ApiType>;
+      /**
+       * There is no delegate approved.
+       **/
+      NoDelegate: AugmentedError<ApiType>;
+      /**
+       * The signing account has no permission to do the operation.
+       **/
+      NoPermission: AugmentedError<ApiType>;
+      /**
+       * The named owner has not signed ownership of the collection is acceptable.
+       **/
+      Unaccepted: AugmentedError<ApiType>;
+      /**
+       * No approval exists that would allow the transfer.
+       **/
+      Unapproved: AugmentedError<ApiType>;
+      /**
+       * The given item ID is unknown.
+       **/
+      UnknownCollection: AugmentedError<ApiType>;
+      /**
+       * The delegate turned out to be different to what was expected.
+       **/
+      WrongDelegate: AugmentedError<ApiType>;
+      /**
+       * The owner turned out to be different to what was expected.
+       **/
+      WrongOwner: AugmentedError<ApiType>;
       /**
        * Generic error
        **/

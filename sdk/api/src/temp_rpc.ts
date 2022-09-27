@@ -24,6 +24,30 @@ export default {
       ],
       type: 'Vec<OperationsOperation>',
     },
+    getOperationVersionsByIds: {
+      description:
+        'Get a subset of OperationVersions representing a page, given the full set of the ids to paginate and the pagination information',
+      params: [
+        {
+          name: 'operation_version_ids',
+          type: 'Vec<OperationsOperationVersionId>',
+        },
+        {
+          name: 'offset',
+          type: 'u64',
+        },
+        {
+          name: 'limit',
+          type: 'u16',
+        },
+        {
+          name: 'at',
+          type: 'Hash',
+          isOptional: true,
+        },
+      ],
+      type: 'Vec<OperationsOperationVersion>',
+    },
   },
   workflows: {
     getWorkflowsByIds: {
@@ -49,6 +73,30 @@ export default {
         },
       ],
       type: 'Vec<WorkflowsWorkflow>',
+    },
+    getWorkflowVersionsByIds: {
+      description:
+        'Get a subset of WorkflowVersions representing a page, given the full set of the ids to paginate and the pagination information',
+      params: [
+        {
+          name: 'workflow_version_ids',
+          type: 'Vec<WorkflowsWorkflowVersionId>',
+        },
+        {
+          name: 'offset',
+          type: 'u64',
+        },
+        {
+          name: 'limit',
+          type: 'u16',
+        },
+        {
+          name: 'at',
+          type: 'Hash',
+          isOptional: true,
+        },
+      ],
+      type: 'Vec<WorkflowsWorkflowVersion>',
     },
   },
 };

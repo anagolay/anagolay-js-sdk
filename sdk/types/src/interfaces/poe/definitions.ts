@@ -8,6 +8,7 @@ export const PoECustomTypes: DefinitionsTypes = {
     pHash: 'BoundedVec<u8, Get<u32>>',
     proofId: 'ProofId',
   },
+  ProofId: {},
   ProofData: {
     workflowId: 'WorkflowId',
     prevId: 'WorkflowId',
@@ -17,7 +18,7 @@ export const PoECustomTypes: DefinitionsTypes = {
   },
   ProofExtra: {},
   Proof: {
-    id: 'GenericId',
+    id: 'ProofId',
     data: 'ProofData',
     extra: 'Option<ProofExtra>',
   },
