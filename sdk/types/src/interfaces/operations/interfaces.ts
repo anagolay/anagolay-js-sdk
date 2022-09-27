@@ -6,13 +6,11 @@
 import {
   AnAccountId,
   AnAnagolayVersionExtra,
+  AnArtifactId,
   AnBlockNumber,
   AnCharacters,
   AnForWhat,
-  AnGenericId,
-  AnOperationId,
   AnTypeName,
-  AnVersionId,
   AnWasmArtifactSubType,
 } from '../anagolaySupport/interfaces';
 
@@ -31,8 +29,10 @@ export interface AnOperationData {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type AnOperationExtra = Record<string, any>;
 
+export type AnOperationId = string;
+
 export interface AnOperation {
-  id: AnGenericId;
+  id: AnOperationId;
   data: AnOperationData;
   extra?: AnOperationExtra;
 }
@@ -59,20 +59,22 @@ export interface AnOperationArtifactType {
 export interface AnOperationArtifactStructure {
   artifactType: AnOperationArtifactType;
   fileExtension: AnCharacters;
-  ipfsCid: AnGenericId;
+  ipfsCid: AnArtifactId;
 }
+
+export type AnOperationVersionId = string;
 
 /**
  * Version data. It contains all the needed parameters which define the entity Version and is hashed to produce the Version id
  */
 export interface AnOperationVersionData {
   entityId?: AnOperationId;
-  parentId?: AnVersionId;
+  parentId?: AnOperationVersionId;
   artifacts: AnOperationArtifactStructure[];
 }
 
 export interface AnOperationVersion {
-  id: AnVersionId;
+  id: AnOperationVersionId;
   data: AnOperationVersionData;
   extra?: AnAnagolayVersionExtra;
 }

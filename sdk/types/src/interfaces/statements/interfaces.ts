@@ -1,13 +1,8 @@
-import {
-  AnAccountId,
-  AnBlockNumber,
-  AnCharacters,
-  AnCreatorId,
-  AnProofId,
-  AnSignatureId,
-  AnStatementId,
-  AnWorkflowId,
-} from '../anagolaySupport/interfaces';
+import { AnAccountId, AnBlockNumber, AnCharacters, AnCreatorId } from '../anagolaySupport/interfaces';
+import { AnProofId } from '../poe/interfaces';
+import { AnWorkflowId } from '../workflows/interfaces';
+
+export type AnSignatureId = string;
 
 export interface AnSignature {
   /// signing key in urn/did format 'urn:pgp:9cdf8dd38531511968c8d8cb524036585b62f15b'
@@ -90,6 +85,8 @@ export interface AnStatementData {
 }
 
 export interface AnStatementExtra {}
+
+export type AnStatementId = string;
 
 export interface AnStatement {
   id: AnStatementId;

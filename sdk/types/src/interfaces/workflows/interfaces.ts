@@ -6,20 +6,21 @@
 import {
   AnAccountId,
   AnAnagolayVersionExtra,
+  AnArtifactId,
   AnBlockNumber,
   AnCharacters,
   AnCreatorId,
   AnForWhat,
-  AnGenericId,
-  AnVersionId,
   AnWasmArtifactSubType,
-  AnWorkflowId,
 } from '../anagolaySupport/interfaces';
+import { AnOperationVersionId } from '../operations/interfaces';
 
 // Workflow
 
+export type AnWorkflowId = string;
+
 export interface AnOperationVersionReference {
-  versionId: AnVersionId;
+  versionId: AnOperationVersionId;
   config: Map<AnCharacters, AnCharacters>;
 }
 
@@ -52,6 +53,8 @@ export interface AnWorkflowRecord {
 
 // Workflow Version
 
+export type AnWorkflowVersionId = string;
+
 export interface AnWorkflowArtifactType {
   Docs: undefined;
   Git: undefined;
@@ -61,17 +64,17 @@ export interface AnWorkflowArtifactType {
 export interface AnWorkflowArtifactStructure {
   artifactType: AnWorkflowArtifactType;
   fileExtension: AnCharacters;
-  ipfsCid: AnGenericId;
+  ipfsCid: AnArtifactId;
 }
 
 export interface AnWorkflowVersionData {
   entityId?: AnWorkflowId;
-  parentId?: AnVersionId;
+  parentId?: AnWorkflowVersionId;
   artifacts: AnWorkflowArtifactStructure[];
 }
 
 export interface AnWorkflowVersion {
-  id: AnVersionId;
+  id: AnWorkflowVersionId;
   data: AnWorkflowVersionData;
   extra?: AnAnagolayVersionExtra;
 }

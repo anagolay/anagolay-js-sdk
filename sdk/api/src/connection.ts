@@ -11,7 +11,7 @@ let cachedApiInstance: ApiPromise | undefined;
 
 /**
  * Create a Websocket connection
- * @param connectTo - A host to connect to, default is `wss://idiyanale.rpc.anagolay.io`
+ * @param connectTo - A host to connect to, default is `wss://idiyanale-testnet.anagolay.io`
  *
  * Example:
  ```ts

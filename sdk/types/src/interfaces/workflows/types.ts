@@ -3,20 +3,19 @@
 
 import type {
   AnagolayVersionExtra,
+  ArtifactId,
   Characters,
   CreatorId,
   ForWhat,
-  GenericId,
-  VersionId,
   WasmArtifactSubType,
-  WorkflowId,
 } from '@anagolay/types/interfaces/anagolaySupport';
+import type { OperationVersionId } from '@anagolay/types/interfaces/operations';
 import type { BTreeMap, Enum, Option, Struct, Vec, i8 } from '@polkadot/types-codec';
 import type { AccountId, BlockNumber } from '@polkadot/types/interfaces/runtime';
 
 /** @name OperationVersionReference */
 export interface OperationVersionReference extends Struct {
-  readonly versionId: VersionId;
+  readonly versionId: OperationVersionId;
   readonly config: BTreeMap<Characters, Characters>;
 }
 
@@ -31,7 +30,7 @@ export interface Workflow extends Struct {
 export interface WorkflowArtifactStructure extends Struct {
   readonly artifactType: WorkflowArtifactType;
   readonly fileExtension: Characters;
-  readonly ipfsCid: GenericId;
+  readonly ipfsCid: ArtifactId;
 }
 
 /** @name WorkflowArtifactType */
@@ -55,6 +54,9 @@ export interface WorkflowData extends Struct {
 /** @name WorkflowExtra */
 export interface WorkflowExtra extends Struct {}
 
+/** @name WorkflowId */
+export interface WorkflowId extends Struct {}
+
 /** @name WorkflowRecord */
 export interface WorkflowRecord extends Struct {
   readonly record: Workflow;
@@ -70,7 +72,7 @@ export interface WorkflowSegment extends Struct {
 
 /** @name WorkflowVersion */
 export interface WorkflowVersion extends Struct {
-  readonly id: VersionId;
+  readonly id: WorkflowVersionId;
   readonly data: WorkflowVersionData;
   readonly extra: Option<AnagolayVersionExtra>;
 }
@@ -78,9 +80,12 @@ export interface WorkflowVersion extends Struct {
 /** @name WorkflowVersionData */
 export interface WorkflowVersionData extends Struct {
   readonly entityId: Option<WorkflowId>;
-  readonly parentId: Option<VersionId>;
+  readonly parentId: Option<WorkflowVersionId>;
   readonly artifacts: Vec<WorkflowArtifactStructure>;
 }
+
+/** @name WorkflowVersionId */
+export interface WorkflowVersionId extends Struct {}
 
 /** @name WorkflowVersionRecord */
 export interface WorkflowVersionRecord extends Struct {

@@ -1,16 +1,7 @@
-import '@anagolay/types/augment-api';
+// THIS MUST BE INCLUDED IF WE WANT AUGMENTED TYPES
+//import '@anagolay/types/lib/interfaces/augment-api';
+//import '@anagolay/types/lib/interfaces/augment-types';
 
-import {
-  Operation,
-  OperationRecord,
-  OperationVersion,
-  OperationVersionRecord,
-  ProofRecord,
-  VersionId,
-  Workflow,
-  WorkflowRecord,
-  WorkflowVersion,
-} from '@anagolay/types';
 import { ApiPromise, connectToWs } from '@anagolay/api';
 
 import { Option } from '@polkadot/types';
@@ -19,6 +10,19 @@ import { AccountId } from '@polkadot/types/interfaces';
 import { Keyring } from '@polkadot/api';
 import { AccountInfo } from '@polkadot/types/interfaces/types.js';
 import { hexToString } from '@polkadot/util';
+import {
+  Operation,
+  OperationVersion,
+  Workflow,
+  WorkflowVersion,
+  OperationRecord,
+  OperationVersionId,
+  OperationVersionRecord,
+  WorkflowRecord,
+  WorkflowVersionId,
+  ProofRecord,
+} from '@anagolay/types';
+import { find, findLast, indexOf, isNil, remove } from 'ramda';
 
 const fromApi: string = 'wss://9944-anagolay-poavalidatorte-a1njzzqy8op.ws-eu64.gitpod.io';
 const toApi: string = 'wss://idiyanale-testnet.anagolay.io';
@@ -31,13 +35,14 @@ function forEachPromise<T>(items: T[], fn: any) {
   }, Promise.resolve());
 }
 
-async function main() {
+async function migrate_wfs_and_ops() {
   let apiSource = await connectToWs(fromApi);
   let apiDest = await connectToWs(toApi);
 
   const keyring = new Keyring({ type: 'sr25519' });
   const sudoPair = keyring.createFromUri(
     // Super secret sudo account seed
+    // '//Alice'
     'private sheriff twelve time machine novel network drill knee horn club feature'
   );
 
@@ -50,13 +55,29 @@ async function main() {
   let ops = await retrieveOperations(apiSource);
   // console.log('Operations from the source', JSON.stringify(ops, null, 2));
 
+  function findLastVersion(
+    versions: OperationVersion[] | WorkflowVersion[]
+  ): OperationVersion | WorkflowVersion | undefined {
+    const root = find((v: OperationVersion | WorkflowVersion) => v.data.parentId.isNone)(versions);
+    let current = root;
+    const findChild = (parentId: OperationVersionId | WorkflowVersionId | undefined) =>
+      find((v: OperationVersion | WorkflowVersion) => parentId == v.data.parentId.unwrapOrDefault());
+    let child = findChild(current?.id)(versions);
+    while (!isNil(child)) {
+      remove(indexOf(child)(versions), 1, versions);
+      current = child;
+      child = findChild(current?.id)(versions);
+    }
+    return current;
+  }
+
   await forEachPromise(
     ops,
     (op: OperationWithVersions) =>
       new Promise<void>((resolve) => {
-        const submittable = apiDest.tx.operations.create(op.op.data, op.versions[0].data);
+        const submittable = apiDest.tx.operations.create(op.op.data, findLastVersion(op.versions)?.data);
         const asSubmittable = apiDest.tx.sudo.sudoAs(op.accountId, submittable);
-        asSubmittable.signAndSend(sudoPair, (result) => {
+        asSubmittable.signAndSend(sudoPair, (result: any) => {
           const { dispatchError, isError, status, isFinalized } = result;
           console.log(
             `Operation ${op.op.data.name} transaction status: (status=${status},isError=${isError},dispatchError=${dispatchError})`
@@ -75,9 +96,9 @@ async function main() {
     wfs,
     (wf: WorkflowWithVersions) =>
       new Promise<void>((resolve) => {
-        const submittable = apiDest.tx.workflows.create(wf.wf.data, wf.versions[0].data);
+        const submittable = apiDest.tx.workflows.create(wf.wf.data, findLastVersion(wf.versions)?.data);
         const asSubmittable = apiDest.tx.sudo.sudoAs(wf.accountId, submittable);
-        asSubmittable.signAndSend(sudoPair, (result) => {
+        asSubmittable.signAndSend(sudoPair, (result: any) => {
           const { dispatchError, isError, status, isFinalized } = result;
           console.log(
             `Workflow ${wf.wf.data.name} transaction status: (status=${status},isError=${isError},dispatchError=${dispatchError})`
@@ -122,10 +143,10 @@ export async function retrieveOperations(chain: ApiPromise): Promise<OperationWi
     operations.map(async ([, opRecord]: [unknown, Option<OperationRecord>]) => {
       const op: Operation = opRecord.unwrap().record;
 
-      const versionIds = await chain.query.operations.versionIdsByOperationId<VersionId[]>(op.id);
+      const versionIds = await chain.query.operations.versionIdsByOperationId<OperationVersionId[]>(op.id);
 
       const versions: OperationVersion[] = await Promise.all(
-        versionIds.map(async (versionId: VersionId) => {
+        versionIds.map(async (versionId: OperationVersionId) => {
           const opVerRecord = await chain.query.operations.versionByVersionId<Option<OperationVersionRecord>>(
             versionId
           );
@@ -156,10 +177,10 @@ export async function retrieveWorkflows(chain: ApiPromise): Promise<WorkflowWith
     workflows.map(async ([, wfRecord]: [unknown, Option<WorkflowRecord>]) => {
       const wf: Workflow = wfRecord.unwrap().record;
 
-      const versionIds = await chain.query.workflows.versionIdsByWorkflowId<VersionId[]>(wf.id);
+      const versionIds = await chain.query.workflows.versionIdsByWorkflowId<WorkflowVersionId[]>(wf.id);
 
       const versions: WorkflowVersion[] = await Promise.all(
-        versionIds.map(async (versionId: VersionId) => {
+        versionIds.map(async (versionId: WorkflowVersionId) => {
           const wfVerRecord = await chain.query.workflows.versionByVersionId<Option<OperationVersionRecord>>(
             versionId
           );
@@ -175,6 +196,16 @@ export async function retrieveWorkflows(chain: ApiPromise): Promise<WorkflowWith
   );
 }
 
+async function paginate() {
+  let apiSource = await connectToWs(toApi);
+
+  let ops = await (apiSource.rpc as any).operations.getOperationsByIds([], 0, 10);
+  console.log(ops.map((op: Operation) => JSON.stringify(op.toHuman()), null, 4));
+
+  let wfs = await (apiSource.rpc as any).workflows.getWorkflowsByIds([], 0, 10);
+  console.log(wfs.map((wf: Workflow) => JSON.stringify(wf.toHuman()), null, 4));
+}
+
 async function sadas() {
   let api = await connectToWs(toApi);
   const t = await api.query.poe.proofByProofIdAndAccountId.entries<Option<ProofRecord>>();
@@ -183,6 +214,10 @@ async function sadas() {
     console.log('proof ID', hexToString(s.id.toString()));
   });
 }
-// sadas();
-// run the script
+
+async function main() {
+  //migrate_wfs_and_ops();
+  //paginate();
+}
+
 main();

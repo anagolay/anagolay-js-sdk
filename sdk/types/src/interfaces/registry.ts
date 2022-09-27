@@ -10,22 +10,20 @@ import type {
   AnagolayRuntimeRuntime,
   AnagolaySupportAnagolayArtifactStructureOperationArtifactType,
   AnagolaySupportAnagolayArtifactStructureWorkflowArtifactType,
-  AnagolaySupportAnagolayRecord,
-  AnagolaySupportAnagolayStructureAnagolayVersionData,
-  AnagolaySupportAnagolayStructureProofData,
-  AnagolaySupportAnagolayStructureStatementData,
-  AnagolaySupportAnagolayStructureWorkflowData,
-  AnagolaySupportAnagolayVersionDataOperationArtifactType,
-  AnagolaySupportAnagolayVersionDataWorkflowArtifactType,
-  AnagolaySupportAnagolayVersionExtra,
+  AnagolaySupportConstantsMaxOperationConfigEntriesGet,
   AnagolaySupportError,
   AnagolaySupportForWhat,
+  AnagolaySupportMapsSerializableMaybeSerializableBoundedBTreeMapBoundedVec,
+  AnagolaySupportMapsSerializableMaybeSerializableBoundedBTreeMapCharacters,
   AnagolaySupportWasmArtifactSubType,
   FinalityGrandpaEquivocationPrecommit,
   FinalityGrandpaEquivocationPrevote,
   FinalityGrandpaPrecommit,
   FinalityGrandpaPrevote,
   FrameSupportDispatchRawOrigin,
+  FrameSupportPalletId,
+  FrameSupportScheduleLookupError,
+  FrameSupportScheduleMaybeHashed,
   FrameSupportTokensMiscBalanceStatus,
   FrameSupportWeightsDispatchClass,
   FrameSupportWeightsDispatchInfo,
@@ -53,9 +51,15 @@ import type {
   OperationsCall,
   OperationsError,
   OperationsEvent,
+  OperationsOperation,
   OperationsOperationArtifactType,
   OperationsOperationData,
   OperationsOperationExtra,
+  OperationsOperationRecord,
+  OperationsOperationVersion,
+  OperationsOperationVersionData,
+  OperationsOperationVersionExtra,
+  OperationsOperationVersionRecord,
   PalletBalancesAccountData,
   PalletBalancesBalanceLock,
   PalletBalancesCall,
@@ -69,6 +73,10 @@ import type {
   PalletGrandpaEvent,
   PalletGrandpaStoredPendingChange,
   PalletGrandpaStoredState,
+  PalletSchedulerCall,
+  PalletSchedulerError,
+  PalletSchedulerEvent,
+  PalletSchedulerScheduledV3,
   PalletSudoCall,
   PalletSudoError,
   PalletSudoEvent,
@@ -76,6 +84,18 @@ import type {
   PalletTransactionPaymentChargeTransactionPayment,
   PalletTransactionPaymentEvent,
   PalletTransactionPaymentReleases,
+  PalletTreasuryCall,
+  PalletTreasuryError,
+  PalletTreasuryEvent,
+  PalletTreasuryProposal,
+  PalletUniquesCall,
+  PalletUniquesCollectionDetails,
+  PalletUniquesCollectionMetadata,
+  PalletUniquesDestroyWitness,
+  PalletUniquesError,
+  PalletUniquesEvent,
+  PalletUniquesItemDetails,
+  PalletUniquesItemMetadata,
   PalletUtilityCall,
   PalletUtilityError,
   PalletUtilityEvent,
@@ -88,9 +108,11 @@ import type {
   PoeError,
   PoeEvent,
   PoePhashInfo,
+  PoeProof,
   PoeProofData,
   PoeProofExtra,
   PoeProofParams,
+  PoeProofRecord,
   SpConsensusAuraSr25519AppSr25519Public,
   SpCoreEcdsaSignature,
   SpCoreEd25519Public,
@@ -121,17 +143,25 @@ import type {
   StatementsProportion,
   StatementsSignature,
   StatementsSignatures,
+  StatementsStatement,
   StatementsStatementData,
   StatementsStatementExtra,
+  StatementsStatementRecord,
   StatementsValidity,
   WorkflowsCall,
   WorkflowsError,
   WorkflowsEvent,
   WorkflowsOperationVersionReference,
+  WorkflowsWorkflow,
   WorkflowsWorkflowArtifactType,
   WorkflowsWorkflowData,
   WorkflowsWorkflowExtra,
+  WorkflowsWorkflowRecord,
   WorkflowsWorkflowSegment,
+  WorkflowsWorkflowVersion,
+  WorkflowsWorkflowVersionData,
+  WorkflowsWorkflowVersionExtra,
+  WorkflowsWorkflowVersionRecord,
 } from '@polkadot/types/lookup';
 
 declare module '@polkadot/types/types/registry' {
@@ -140,22 +170,20 @@ declare module '@polkadot/types/types/registry' {
     AnagolayRuntimeRuntime: AnagolayRuntimeRuntime;
     AnagolaySupportAnagolayArtifactStructureOperationArtifactType: AnagolaySupportAnagolayArtifactStructureOperationArtifactType;
     AnagolaySupportAnagolayArtifactStructureWorkflowArtifactType: AnagolaySupportAnagolayArtifactStructureWorkflowArtifactType;
-    AnagolaySupportAnagolayRecord: AnagolaySupportAnagolayRecord;
-    AnagolaySupportAnagolayStructureAnagolayVersionData: AnagolaySupportAnagolayStructureAnagolayVersionData;
-    AnagolaySupportAnagolayStructureProofData: AnagolaySupportAnagolayStructureProofData;
-    AnagolaySupportAnagolayStructureStatementData: AnagolaySupportAnagolayStructureStatementData;
-    AnagolaySupportAnagolayStructureWorkflowData: AnagolaySupportAnagolayStructureWorkflowData;
-    AnagolaySupportAnagolayVersionDataOperationArtifactType: AnagolaySupportAnagolayVersionDataOperationArtifactType;
-    AnagolaySupportAnagolayVersionDataWorkflowArtifactType: AnagolaySupportAnagolayVersionDataWorkflowArtifactType;
-    AnagolaySupportAnagolayVersionExtra: AnagolaySupportAnagolayVersionExtra;
+    AnagolaySupportConstantsMaxOperationConfigEntriesGet: AnagolaySupportConstantsMaxOperationConfigEntriesGet;
     AnagolaySupportError: AnagolaySupportError;
     AnagolaySupportForWhat: AnagolaySupportForWhat;
+    AnagolaySupportMapsSerializableMaybeSerializableBoundedBTreeMapBoundedVec: AnagolaySupportMapsSerializableMaybeSerializableBoundedBTreeMapBoundedVec;
+    AnagolaySupportMapsSerializableMaybeSerializableBoundedBTreeMapCharacters: AnagolaySupportMapsSerializableMaybeSerializableBoundedBTreeMapCharacters;
     AnagolaySupportWasmArtifactSubType: AnagolaySupportWasmArtifactSubType;
     FinalityGrandpaEquivocationPrecommit: FinalityGrandpaEquivocationPrecommit;
     FinalityGrandpaEquivocationPrevote: FinalityGrandpaEquivocationPrevote;
     FinalityGrandpaPrecommit: FinalityGrandpaPrecommit;
     FinalityGrandpaPrevote: FinalityGrandpaPrevote;
     FrameSupportDispatchRawOrigin: FrameSupportDispatchRawOrigin;
+    FrameSupportPalletId: FrameSupportPalletId;
+    FrameSupportScheduleLookupError: FrameSupportScheduleLookupError;
+    FrameSupportScheduleMaybeHashed: FrameSupportScheduleMaybeHashed;
     FrameSupportTokensMiscBalanceStatus: FrameSupportTokensMiscBalanceStatus;
     FrameSupportWeightsDispatchClass: FrameSupportWeightsDispatchClass;
     FrameSupportWeightsDispatchInfo: FrameSupportWeightsDispatchInfo;
@@ -183,9 +211,15 @@ declare module '@polkadot/types/types/registry' {
     OperationsCall: OperationsCall;
     OperationsError: OperationsError;
     OperationsEvent: OperationsEvent;
+    OperationsOperation: OperationsOperation;
     OperationsOperationArtifactType: OperationsOperationArtifactType;
     OperationsOperationData: OperationsOperationData;
     OperationsOperationExtra: OperationsOperationExtra;
+    OperationsOperationRecord: OperationsOperationRecord;
+    OperationsOperationVersion: OperationsOperationVersion;
+    OperationsOperationVersionData: OperationsOperationVersionData;
+    OperationsOperationVersionExtra: OperationsOperationVersionExtra;
+    OperationsOperationVersionRecord: OperationsOperationVersionRecord;
     PalletBalancesAccountData: PalletBalancesAccountData;
     PalletBalancesBalanceLock: PalletBalancesBalanceLock;
     PalletBalancesCall: PalletBalancesCall;
@@ -199,6 +233,10 @@ declare module '@polkadot/types/types/registry' {
     PalletGrandpaEvent: PalletGrandpaEvent;
     PalletGrandpaStoredPendingChange: PalletGrandpaStoredPendingChange;
     PalletGrandpaStoredState: PalletGrandpaStoredState;
+    PalletSchedulerCall: PalletSchedulerCall;
+    PalletSchedulerError: PalletSchedulerError;
+    PalletSchedulerEvent: PalletSchedulerEvent;
+    PalletSchedulerScheduledV3: PalletSchedulerScheduledV3;
     PalletSudoCall: PalletSudoCall;
     PalletSudoError: PalletSudoError;
     PalletSudoEvent: PalletSudoEvent;
@@ -206,6 +244,18 @@ declare module '@polkadot/types/types/registry' {
     PalletTransactionPaymentChargeTransactionPayment: PalletTransactionPaymentChargeTransactionPayment;
     PalletTransactionPaymentEvent: PalletTransactionPaymentEvent;
     PalletTransactionPaymentReleases: PalletTransactionPaymentReleases;
+    PalletTreasuryCall: PalletTreasuryCall;
+    PalletTreasuryError: PalletTreasuryError;
+    PalletTreasuryEvent: PalletTreasuryEvent;
+    PalletTreasuryProposal: PalletTreasuryProposal;
+    PalletUniquesCall: PalletUniquesCall;
+    PalletUniquesCollectionDetails: PalletUniquesCollectionDetails;
+    PalletUniquesCollectionMetadata: PalletUniquesCollectionMetadata;
+    PalletUniquesDestroyWitness: PalletUniquesDestroyWitness;
+    PalletUniquesError: PalletUniquesError;
+    PalletUniquesEvent: PalletUniquesEvent;
+    PalletUniquesItemDetails: PalletUniquesItemDetails;
+    PalletUniquesItemMetadata: PalletUniquesItemMetadata;
     PalletUtilityCall: PalletUtilityCall;
     PalletUtilityError: PalletUtilityError;
     PalletUtilityEvent: PalletUtilityEvent;
@@ -218,9 +268,11 @@ declare module '@polkadot/types/types/registry' {
     PoeError: PoeError;
     PoeEvent: PoeEvent;
     PoePhashInfo: PoePhashInfo;
+    PoeProof: PoeProof;
     PoeProofData: PoeProofData;
     PoeProofExtra: PoeProofExtra;
     PoeProofParams: PoeProofParams;
+    PoeProofRecord: PoeProofRecord;
     SpConsensusAuraSr25519AppSr25519Public: SpConsensusAuraSr25519AppSr25519Public;
     SpCoreEcdsaSignature: SpCoreEcdsaSignature;
     SpCoreEd25519Public: SpCoreEd25519Public;
@@ -251,16 +303,24 @@ declare module '@polkadot/types/types/registry' {
     StatementsProportion: StatementsProportion;
     StatementsSignature: StatementsSignature;
     StatementsSignatures: StatementsSignatures;
+    StatementsStatement: StatementsStatement;
     StatementsStatementData: StatementsStatementData;
     StatementsStatementExtra: StatementsStatementExtra;
+    StatementsStatementRecord: StatementsStatementRecord;
     StatementsValidity: StatementsValidity;
     WorkflowsCall: WorkflowsCall;
     WorkflowsError: WorkflowsError;
     WorkflowsEvent: WorkflowsEvent;
     WorkflowsOperationVersionReference: WorkflowsOperationVersionReference;
+    WorkflowsWorkflow: WorkflowsWorkflow;
     WorkflowsWorkflowArtifactType: WorkflowsWorkflowArtifactType;
     WorkflowsWorkflowData: WorkflowsWorkflowData;
     WorkflowsWorkflowExtra: WorkflowsWorkflowExtra;
+    WorkflowsWorkflowRecord: WorkflowsWorkflowRecord;
     WorkflowsWorkflowSegment: WorkflowsWorkflowSegment;
+    WorkflowsWorkflowVersion: WorkflowsWorkflowVersion;
+    WorkflowsWorkflowVersionData: WorkflowsWorkflowVersionData;
+    WorkflowsWorkflowVersionExtra: WorkflowsWorkflowVersionExtra;
+    WorkflowsWorkflowVersionRecord: WorkflowsWorkflowVersionRecord;
   } // InterfaceTypes
 } // declare module

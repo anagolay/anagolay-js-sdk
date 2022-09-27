@@ -3,12 +3,10 @@
 
 import type {
   AnagolayVersionExtra,
+  ArtifactId,
   Characters,
   ForWhat,
-  GenericId,
-  OperationId,
   TypeName,
-  VersionId,
   WasmArtifactSubType,
 } from '@anagolay/types/interfaces/anagolaySupport';
 import type { BTreeMap, Enum, Option, Struct, Vec } from '@polkadot/types-codec';
@@ -16,7 +14,7 @@ import type { AccountId, BlockNumber } from '@polkadot/types/interfaces/runtime'
 
 /** @name Operation */
 export interface Operation extends Struct {
-  readonly id: GenericId;
+  readonly id: OperationId;
   readonly data: OperationData;
   readonly extra: Option<OperationExtra>;
 }
@@ -25,7 +23,7 @@ export interface Operation extends Struct {
 export interface OperationArtifactStructure extends Struct {
   readonly artifactType: OperationArtifactType;
   readonly fileExtension: Characters;
-  readonly ipfsCid: GenericId;
+  readonly ipfsCid: ArtifactId;
 }
 
 /** @name OperationArtifactType */
@@ -53,6 +51,9 @@ export interface OperationData extends Struct {
 /** @name OperationExtra */
 export interface OperationExtra extends Struct {}
 
+/** @name OperationId */
+export interface OperationId extends Struct {}
+
 /** @name OperationRecord */
 export interface OperationRecord extends Struct {
   readonly record: Operation;
@@ -62,7 +63,7 @@ export interface OperationRecord extends Struct {
 
 /** @name OperationVersion */
 export interface OperationVersion extends Struct {
-  readonly id: VersionId;
+  readonly id: OperationVersionId;
   readonly data: OperationVersionData;
   readonly extra: Option<AnagolayVersionExtra>;
 }
@@ -70,9 +71,12 @@ export interface OperationVersion extends Struct {
 /** @name OperationVersionData */
 export interface OperationVersionData extends Struct {
   readonly entityId: Option<OperationId>;
-  readonly parentId: Option<VersionId>;
+  readonly parentId: Option<OperationVersionId>;
   readonly artifacts: Vec<OperationArtifactStructure>;
 }
+
+/** @name OperationVersionId */
+export interface OperationVersionId extends Struct {}
 
 /** @name OperationVersionRecord */
 export interface OperationVersionRecord extends Struct {

@@ -2,13 +2,14 @@ import { Definitions, DefinitionsTypes } from '@polkadot/types/types';
 
 export const WorkflowsCustomTypes: DefinitionsTypes = {
   OperationVersionReference: {
-    versionId: 'VersionId',
+    versionId: 'OperationVersionId',
     config: 'BoundedBTreeMap<Characters, Characters, Get<u32>>',
   },
   WorkflowSegment: {
     inputs: 'BoundedVec<i8, Get<u32>>',
     sequence: 'BoundedVec<OperationVersionReference, Get<u32>>',
   },
+  WorkflowId: {},
   WorkflowData: {
     name: 'Characters',
     creators: 'BoundedVec<CreatorId, Get<u32>>',
@@ -27,6 +28,7 @@ export const WorkflowsCustomTypes: DefinitionsTypes = {
     accountId: 'AccountId',
     blockNumber: 'BlockNumber',
   },
+  WorkflowVersionId: {},
   WorkflowVersionRecord: {
     record: 'WorkflowVersion',
     accountId: 'AccountId',
@@ -42,15 +44,15 @@ export const WorkflowsCustomTypes: DefinitionsTypes = {
   WorkflowArtifactStructure: {
     artifactType: 'WorkflowArtifactType',
     fileExtension: 'Characters',
-    ipfsCid: 'GenericId',
+    ipfsCid: 'ArtifactId',
   },
   WorkflowVersionData: {
     entityId: 'Option<WorkflowId>',
-    parentId: 'Option<VersionId>',
+    parentId: 'Option<WorkflowVersionId>',
     artifacts: 'BoundedVec<WorkflowArtifactStructure, Get<u32>>',
   },
   WorkflowVersion: {
-    id: 'VersionId',
+    id: 'WorkflowVersionId',
     data: 'WorkflowVersionData',
     extra: 'Option<AnagolayVersionExtra>',
   },

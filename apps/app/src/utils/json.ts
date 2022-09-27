@@ -63,11 +63,7 @@ export function customReplacer<V>(key: string, value: V): ISerializedMap<V> | V 
 
 export function customReviver<T extends ISerializedMap<T>>(key: string, value: T): T | Map<any, any> {
   if (typeof value === 'object' && value !== null) {
-    // console.log('key', startsWith('0x', key), key);
-    if (startsWith('0x', key)) {
-      this[hexToString(key)] = value;
-      return undefined;
-    } else if (value.type === 'Map' || value.type === 'map') {
+    if (value.type === 'Map' || value.type === 'map') {
       return new Map(Object.entries(value.data));
     }
   }

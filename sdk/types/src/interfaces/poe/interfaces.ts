@@ -9,15 +9,15 @@ import {
   AnCharacters,
   AnCreatorId,
   AnForWhat,
-  AnGenericId,
-  AnProofId,
-  AnWorkflowId,
 } from '../anagolaySupport/interfaces';
+import { AnWorkflowId } from '../workflows/interfaces';
 
 export interface AnProofParams {
   k: AnCharacters;
   v: string;
 }
+
+export type AnProofId = string;
 
 export interface AnPhashInfo {
   pHash: string;
@@ -35,7 +35,7 @@ export interface AnProofData {
 export interface AnProofExtra {}
 
 export interface AnProof {
-  id: AnGenericId;
+  id: AnProofId;
   data: AnProofData;
   extra?: AnProofExtra;
 }

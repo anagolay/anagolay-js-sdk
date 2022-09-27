@@ -1,14 +1,8 @@
 // Auto-generated via `yarn polkadot-types-from-defs`, do not edit
 /* eslint-disable */
 
-import type {
-  Characters,
-  CreatorId,
-  ForWhat,
-  GenericId,
-  ProofId,
-  WorkflowId,
-} from '@anagolay/types/interfaces/anagolaySupport';
+import type { Characters, CreatorId, ForWhat } from '@anagolay/types/interfaces/anagolaySupport';
+import type { WorkflowId } from '@anagolay/types/interfaces/workflows';
 import type { Bytes, Option, Struct, Vec } from '@polkadot/types-codec';
 import type { AccountId, BlockNumber } from '@polkadot/types/interfaces/runtime';
 
@@ -20,7 +14,7 @@ export interface PhashInfo extends Struct {
 
 /** @name Proof */
 export interface Proof extends Struct {
-  readonly id: GenericId;
+  readonly id: ProofId;
   readonly data: ProofData;
   readonly extra: Option<ProofExtra>;
 }
@@ -36,6 +30,9 @@ export interface ProofData extends Struct {
 
 /** @name ProofExtra */
 export interface ProofExtra extends Struct {}
+
+/** @name ProofId */
+export interface ProofId extends Struct {}
 
 /** @name ProofParams */
 export interface ProofParams extends Struct {

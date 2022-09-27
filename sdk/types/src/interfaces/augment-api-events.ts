@@ -6,15 +6,10 @@
 import '@polkadot/api-base/types/events';
 
 import type { ApiTypes, AugmentedEvent } from '@polkadot/api-base/types';
-import type { Bytes, Null, Option, Result, Vec, u128, u32, u64 } from '@polkadot/types-codec';
+import type { Bytes, Null, Option, Result, Vec, bool, u128, u32, u64 } from '@polkadot/types-codec';
 import type { ITuple } from '@polkadot/types-codec/types';
 import type { AccountId32, H256 } from '@polkadot/types/interfaces/runtime';
-import type {
-  FrameSupportTokensMiscBalanceStatus,
-  FrameSupportWeightsDispatchInfo,
-  SpFinalityGrandpaAppPublic,
-  SpRuntimeDispatchError,
-} from '@polkadot/types/lookup';
+import { FrameSupportTokensMiscBalanceStatus, SpFinalityGrandpaAppPublic, FrameSupportScheduleLookupError, SpRuntimeDispatchError, FrameSupportWeightsDispatchInfo } from '@polkadot/types/lookup';
 
 export type __AugmentedEvent<ApiType extends ApiTypes> = AugmentedEvent<ApiType>;
 
@@ -156,6 +151,36 @@ declare module '@polkadot/api-base/types/events' {
        **/
       [key: string]: AugmentedEvent<ApiType>;
     };
+    scheduler: {
+      /**
+       * The call for the provided hash was not found so the task has been aborted.
+       **/
+      CallLookupFailed: AugmentedEvent<
+        ApiType,
+        [task: ITuple<[u32, u32]>, id: Option<Bytes>, error: FrameSupportScheduleLookupError],
+        { task: ITuple<[u32, u32]>; id: Option<Bytes>; error: FrameSupportScheduleLookupError }
+      >;
+      /**
+       * Canceled some task.
+       **/
+      Canceled: AugmentedEvent<ApiType, [when: u32, index: u32], { when: u32; index: u32 }>;
+      /**
+       * Dispatched some task.
+       **/
+      Dispatched: AugmentedEvent<
+        ApiType,
+        [task: ITuple<[u32, u32]>, id: Option<Bytes>, result: Result<Null, SpRuntimeDispatchError>],
+        { task: ITuple<[u32, u32]>; id: Option<Bytes>; result: Result<Null, SpRuntimeDispatchError> }
+      >;
+      /**
+       * Scheduled some task.
+       **/
+      Scheduled: AugmentedEvent<ApiType, [when: u32, index: u32], { when: u32; index: u32 }>;
+      /**
+       * Generic event
+       **/
+      [key: string]: AugmentedEvent<ApiType>;
+    };
     statements: {
       /**
        * Bad request error occurs and this event propagates a detailed description
@@ -259,6 +284,224 @@ declare module '@polkadot/api-base/types/events' {
         ApiType,
         [who: AccountId32, actualFee: u128, tip: u128],
         { who: AccountId32; actualFee: u128; tip: u128 }
+      >;
+      /**
+       * Generic event
+       **/
+      [key: string]: AugmentedEvent<ApiType>;
+    };
+    treasury: {
+      /**
+       * Some funds have been allocated.
+       **/
+      Awarded: AugmentedEvent<
+        ApiType,
+        [proposalIndex: u32, award: u128, account: AccountId32],
+        { proposalIndex: u32; award: u128; account: AccountId32 }
+      >;
+      /**
+       * Some of our funds have been burnt.
+       **/
+      Burnt: AugmentedEvent<ApiType, [burntFunds: u128], { burntFunds: u128 }>;
+      /**
+       * Some funds have been deposited.
+       **/
+      Deposit: AugmentedEvent<ApiType, [value: u128], { value: u128 }>;
+      /**
+       * New proposal.
+       **/
+      Proposed: AugmentedEvent<ApiType, [proposalIndex: u32], { proposalIndex: u32 }>;
+      /**
+       * A proposal was rejected; funds were slashed.
+       **/
+      Rejected: AugmentedEvent<
+        ApiType,
+        [proposalIndex: u32, slashed: u128],
+        { proposalIndex: u32; slashed: u128 }
+      >;
+      /**
+       * Spending has finished; this is the amount that rolls over until next spend.
+       **/
+      Rollover: AugmentedEvent<ApiType, [rolloverBalance: u128], { rolloverBalance: u128 }>;
+      /**
+       * A new spend proposal has been approved.
+       **/
+      SpendApproved: AugmentedEvent<
+        ApiType,
+        [proposalIndex: u32, amount: u128, beneficiary: AccountId32],
+        { proposalIndex: u32; amount: u128; beneficiary: AccountId32 }
+      >;
+      /**
+       * We have ended a spend period and will now allocate funds.
+       **/
+      Spending: AugmentedEvent<ApiType, [budgetRemaining: u128], { budgetRemaining: u128 }>;
+      /**
+       * Generic event
+       **/
+      [key: string]: AugmentedEvent<ApiType>;
+    };
+    uniques: {
+      /**
+       * An approval for a `delegate` account to transfer the `item` of an item
+       * `collection` was cancelled by its `owner`.
+       **/
+      ApprovalCancelled: AugmentedEvent<
+        ApiType,
+        [collection: u32, item: u32, owner: AccountId32, delegate: AccountId32],
+        { collection: u32; item: u32; owner: AccountId32; delegate: AccountId32 }
+      >;
+      /**
+       * An `item` of a `collection` has been approved by the `owner` for transfer by
+       * a `delegate`.
+       **/
+      ApprovedTransfer: AugmentedEvent<
+        ApiType,
+        [collection: u32, item: u32, owner: AccountId32, delegate: AccountId32],
+        { collection: u32; item: u32; owner: AccountId32; delegate: AccountId32 }
+      >;
+      /**
+       * Attribute metadata has been cleared for a `collection` or `item`.
+       **/
+      AttributeCleared: AugmentedEvent<
+        ApiType,
+        [collection: u32, maybeItem: Option<u32>, key: Bytes],
+        { collection: u32; maybeItem: Option<u32>; key: Bytes }
+      >;
+      /**
+       * New attribute metadata has been set for a `collection` or `item`.
+       **/
+      AttributeSet: AugmentedEvent<
+        ApiType,
+        [collection: u32, maybeItem: Option<u32>, key: Bytes, value: Bytes],
+        { collection: u32; maybeItem: Option<u32>; key: Bytes; value: Bytes }
+      >;
+      /**
+       * An `item` was destroyed.
+       **/
+      Burned: AugmentedEvent<
+        ApiType,
+        [collection: u32, item: u32, owner: AccountId32],
+        { collection: u32; item: u32; owner: AccountId32 }
+      >;
+      /**
+       * Some `collection` was frozen.
+       **/
+      CollectionFrozen: AugmentedEvent<ApiType, [collection: u32], { collection: u32 }>;
+      /**
+       * Max supply has been set for a collection.
+       **/
+      CollectionMaxSupplySet: AugmentedEvent<
+        ApiType,
+        [collection: u32, maxSupply: u32],
+        { collection: u32; maxSupply: u32 }
+      >;
+      /**
+       * Metadata has been cleared for a `collection`.
+       **/
+      CollectionMetadataCleared: AugmentedEvent<ApiType, [collection: u32], { collection: u32 }>;
+      /**
+       * New metadata has been set for a `collection`.
+       **/
+      CollectionMetadataSet: AugmentedEvent<
+        ApiType,
+        [collection: u32, data: Bytes, isFrozen: bool],
+        { collection: u32; data: Bytes; isFrozen: bool }
+      >;
+      /**
+       * Some `collection` was thawed.
+       **/
+      CollectionThawed: AugmentedEvent<ApiType, [collection: u32], { collection: u32 }>;
+      /**
+       * A `collection` was created.
+       **/
+      Created: AugmentedEvent<
+        ApiType,
+        [collection: u32, creator: AccountId32, owner: AccountId32],
+        { collection: u32; creator: AccountId32; owner: AccountId32 }
+      >;
+      /**
+       * A `collection` was destroyed.
+       **/
+      Destroyed: AugmentedEvent<ApiType, [collection: u32], { collection: u32 }>;
+      /**
+       * A `collection` was force-created.
+       **/
+      ForceCreated: AugmentedEvent<
+        ApiType,
+        [collection: u32, owner: AccountId32],
+        { collection: u32; owner: AccountId32 }
+      >;
+      /**
+       * Some `item` was frozen.
+       **/
+      Frozen: AugmentedEvent<ApiType, [collection: u32, item: u32], { collection: u32; item: u32 }>;
+      /**
+       * An `item` was issued.
+       **/
+      Issued: AugmentedEvent<
+        ApiType,
+        [collection: u32, item: u32, owner: AccountId32],
+        { collection: u32; item: u32; owner: AccountId32 }
+      >;
+      /**
+       * A `collection` has had its attributes changed by the `Force` origin.
+       **/
+      ItemStatusChanged: AugmentedEvent<ApiType, [collection: u32], { collection: u32 }>;
+      /**
+       * Metadata has been cleared for an item.
+       **/
+      MetadataCleared: AugmentedEvent<ApiType, [collection: u32, item: u32], { collection: u32; item: u32 }>;
+      /**
+       * New metadata has been set for an item.
+       **/
+      MetadataSet: AugmentedEvent<
+        ApiType,
+        [collection: u32, item: u32, data: Bytes, isFrozen: bool],
+        { collection: u32; item: u32; data: Bytes; isFrozen: bool }
+      >;
+      /**
+       * The owner changed.
+       **/
+      OwnerChanged: AugmentedEvent<
+        ApiType,
+        [collection: u32, newOwner: AccountId32],
+        { collection: u32; newOwner: AccountId32 }
+      >;
+      /**
+       * Ownership acceptance has changed for an account.
+       **/
+      OwnershipAcceptanceChanged: AugmentedEvent<
+        ApiType,
+        [who: AccountId32, maybeCollection: Option<u32>],
+        { who: AccountId32; maybeCollection: Option<u32> }
+      >;
+      /**
+       * Metadata has been cleared for an item.
+       **/
+      Redeposited: AugmentedEvent<
+        ApiType,
+        [collection: u32, successfulItems: Vec<u32>],
+        { collection: u32; successfulItems: Vec<u32> }
+      >;
+      /**
+       * The management team changed.
+       **/
+      TeamChanged: AugmentedEvent<
+        ApiType,
+        [collection: u32, issuer: AccountId32, admin: AccountId32, freezer: AccountId32],
+        { collection: u32; issuer: AccountId32; admin: AccountId32; freezer: AccountId32 }
+      >;
+      /**
+       * Some `item` was thawed.
+       **/
+      Thawed: AugmentedEvent<ApiType, [collection: u32, item: u32], { collection: u32; item: u32 }>;
+      /**
+       * An `item` was transferred.
+       **/
+      Transferred: AugmentedEvent<
+        ApiType,
+        [collection: u32, item: u32, from: AccountId32, to: AccountId32],
+        { collection: u32; item: u32; from: AccountId32; to: AccountId32 }
       >;
       /**
        * Generic event

@@ -27,8 +27,9 @@ export const OperationsCustomTypes: DefinitionsTypes = {
     features: 'BoundedVec<Characters, Get<u32>>',
   },
   OperationExtra: {},
+  OperationId: {},
   Operation: {
-    id: 'GenericId',
+    id: 'OperationId',
     data: 'OperationData',
     extra: 'Option<OperationExtra>',
   },
@@ -47,15 +48,16 @@ export const OperationsCustomTypes: DefinitionsTypes = {
   OperationArtifactStructure: {
     artifactType: 'OperationArtifactType',
     fileExtension: 'Characters',
-    ipfsCid: 'GenericId',
+    ipfsCid: 'ArtifactId',
   },
   OperationVersionData: {
     entityId: 'Option<OperationId>',
-    parentId: 'Option<VersionId>',
+    parentId: 'Option<OperationVersionId>',
     artifacts: 'BoundedVec<OperationArtifactStructure, Get<u32>>',
   },
+  OperationVersionId: {},
   OperationVersion: {
-    id: 'VersionId',
+    id: 'OperationVersionId',
     data: 'OperationVersionData',
     extra: 'Option<AnagolayVersionExtra>',
   },
