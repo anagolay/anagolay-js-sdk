@@ -444,7 +444,7 @@
     },
     {
       "packageName": "@anagolay/app",
-      "projectFolder": "apps/app",
+      "projectFolder": "app",
       "reviewCategory": "webapp",
       "shouldPublish": false
     },

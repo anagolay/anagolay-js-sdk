@@ -13,10 +13,10 @@ variables:
 cache:
   key: $CI_COMMIT_REF_SLUG
   paths:
-    - common/temp/
+    - common/temp
+    - apps/app/.svelte-kit
     - ANAGOLAY_CLI_JS_CID
     - ANAGOLAY_CLI_BIN_CID
-    - ANAGOLAY_CUSTOM_TYPES_CID
 
 # workflow:
 #   rules:
@@ -41,6 +41,7 @@ cache:
 # https://docs.gitlab.com/ee/ci/yaml/yaml_optimization.html#yaml-anchors-for-scripts
 .install-pnpm: &install-pnpm
   - |
+    set -e
     curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm@7
     pnpm config set store-dir common/temp/pnpm-store
     node --version
@@ -60,8 +61,18 @@ is-it-pretty:
     - echo 'Is our code pretty?'
     - node common/scripts/install-run-rush.js prettier:check
 
+changelogs:
+  before_script:
+    - *install-pnpm
+  stage: check
+  cache: {}
+  allow_failure: true
+  script:
+    - echo 'Checking for missing change logs...'
+    - node common/scripts/install-run-rush.js change --verify
+
 test-code:
-  needs: ['is-it-pretty']
+  needs: ['is-it-pretty', 'changelogs']
   stage: test
   before_script:
     - *install-pnpm
@@ -71,15 +82,12 @@ test-code:
     - echo 'Installing rush...'
     - node common/scripts/install-run-rush.js install
 
-    # - echo 'Checking for missing change logs...'
-    # - node common/scripts/install-run-rush.js change -v
-
     - echo 'Building and testing all packages...'
     - node common/scripts/install-run-rush.js rebuild --verbose
 
 test-code-node16-lts:
   image: node:16-bullseye
-  needs: ['is-it-pretty']
+  needs: ['is-it-pretty', 'changelogs']
   allow_failure: true
   stage: test
   before_script:
@@ -89,9 +97,6 @@ test-code-node16-lts:
 
     - echo 'Installing rush...'
     - node common/scripts/install-run-rush.js install
-
-    # - echo 'Checking for missing change logs...'
-    # - node common/scripts/install-run-rush.js change -v
 
     - echo 'Building and testing all packages...'
     - node common/scripts/install-run-rush.js rebuild --verbose
@@ -113,7 +118,7 @@ build-app:
     - node common/scripts/install-run-rush.js build --from @anagolay/api
 
     - echo 'Building Anagolay app ...'
-    - cd ./apps/app
+    - cd ./app
     - pnpm build:svelte
 
 # build-js-api-docs:

@@ -65,7 +65,7 @@ common/autoinstallers/*/.npmrc
 **/.rush/temp/
 
 lib
-lib_cjs
+lib-cjs
 dist
 temp
 core*
