@@ -6,16 +6,16 @@
   "licenseFile": "./LICENSE",
   "description": "Anagolay JS/TS API",
   "module": "./lib/index.js",
-  "main": "./lib_cjs/index.js",
+  "main": "./lib-cjs/index.js",
   "types": "./lib/api.d.ts",
   "type": "module",
   "exports": {
     ".": {
-      "require": "./lib_cjs/index.js",
+      "require": "./lib-cjs/index.js",
       "import": "./lib/index.js"
     },
     "./*": {
-      "require": "./lib_cjs/*.js",
+      "require": "./lib-cjs/*.js",
       "import": "./lib/*.js"
     }
   },

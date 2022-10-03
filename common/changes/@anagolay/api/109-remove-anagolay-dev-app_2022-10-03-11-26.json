@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@anagolay/api",
+      "comment": "dsa",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@anagolay/api"
+}

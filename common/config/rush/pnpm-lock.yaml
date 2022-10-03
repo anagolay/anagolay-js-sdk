@@ -5,7 +5,7 @@ importers:
   .:
     specifiers: {}
 
-  ../../apps/app:
+  ../../app:
     specifiers:
       '@anagolay/api': workspace:*
       '@anagolay/types': workspace:*
@@ -70,9 +70,9 @@ importers:
       vite-plugin-wasm: 2.1.0
       wf_cidv1_from_array: https://ipfs.anagolay.network/ipfs/bafybeiaaybkhln6hvfzh3cacos3km6bjqdmk4scfe2wite4g357owx5tma
     dependencies:
-      '@anagolay/api': link:../../sdk/api
-      '@anagolay/types': link:../../sdk/types
-      '@anagolay/util': link:../../sdk/util
+      '@anagolay/api': link:../sdk/api
+      '@anagolay/types': link:../sdk/types
+      '@anagolay/util': link:../sdk/util
       '@fontsource/fira-mono': 4.5.0
       '@polkadot/api': 9.2.2
       '@polkadot/api-augment': 8.14.1
@@ -1573,9 +1573,9 @@ packages:
       '@polkadot/types-support': 8.14.1
       '@polkadot/util': 10.1.4
       '@polkadot/util-crypto': 10.1.1
-      '@polkadot/x-fetch': 10.1.1
+      '@polkadot/x-fetch': 10.1.4
       '@polkadot/x-global': 10.1.4
-      '@polkadot/x-ws': 10.1.1
+      '@polkadot/x-ws': 10.1.4
       '@substrate/connect': 0.7.9
       eventemitter3: 4.0.7
       mock-socket: 9.1.5
@@ -2054,16 +2054,6 @@ packages:
       '@polkadot/x-global': 10.1.4
     dev: false
 
-  /@polkadot/x-fetch/10.1.1:
-    resolution: {integrity: sha512-xSKZClZBT3QSaJeEIZwzWPm/AdJ0pPCuUEhBv0e6XU2ANn1w+OAwwlNB94DEVzN+WouZqcNgE6mC2yVd5t7JZQ==}
-    engines: {node: '>=14.0.0'}
-    dependencies:
-      '@babel/runtime': 7.18.9
-      '@polkadot/x-global': 10.1.1
-      '@types/node-fetch': 2.6.2
-      node-fetch: 3.2.9
-    dev: false
-
   /@polkadot/x-fetch/10.1.4:
     resolution: {integrity: sha512-hVhLpOvx+ys6klkqWJnINi9FU/JcDnc+6cyU9fa+Dum3mqO1XnngOYDO9mpf5HODIwrFNFmohll9diRP+TW0yQ==}
     engines: {node: '>=14.0.0'}
@@ -2173,18 +2163,6 @@ packages:
     dependencies:
       '@babel/runtime': 7.18.9
       '@polkadot/x-global': 6.11.1
-    dev: false
-
-  /@polkadot/x-ws/10.1.1:
-    resolution: {integrity: sha512-IdakU22dcAqmLRNyL8oWUXxnHwnoUteoU3Xyc6W4wxJ8K6GNxjbUtSjoT/FTEW1JmxVVtFHu8kKRnKhu5WbWdg==}
-    engines: {node: '>=14.0.0'}
-    dependencies:
-      '@babel/runtime': 7.18.9
-      '@polkadot/x-global': 10.1.1
-      '@types/websocket': 1.0.5
-      websocket: 1.0.34
-    transitivePeerDependencies:
-      - supports-color
     dev: false
 
   /@polkadot/x-ws/10.1.4:
@@ -4010,8 +3988,8 @@ packages:
     peerDependencies:
       postcss: ^8.1.0
     dependencies:
-      browserslist: 4.20.2
-      caniuse-lite: 1.0.30001320
+      browserslist: 4.21.3
+      caniuse-lite: 1.0.30001373
       fraction.js: 4.2.0
       normalize-range: 0.1.2
       picocolors: 1.0.0
@@ -4239,18 +4217,6 @@ packages:
     resolution: {integrity: sha512-9o5UecI3GhkpM6DrXr69PblIuWxPKk9Y0jHBRhdocZ2y7YECBFCsHm79Pr3OyR2AvjhDkabFJaDJMYRazHgsow==}
     dev: true
 
-  /browserslist/4.20.2:
-    resolution: {integrity: sha512-CQOBCqp/9pDvDbx3xfMi+86pr4KXIf2FDkTTdeuYw8OxS9t898LA1Khq57gtufFILXpfgsSx5woNgsBgvGjpsA==}
-    engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
-    hasBin: true
-    dependencies:
-      caniuse-lite: 1.0.30001320
-      electron-to-chromium: 1.4.95
-      escalade: 3.1.1
-      node-releases: 2.0.2
-      picocolors: 1.0.0
-    dev: true
-
   /browserslist/4.21.3:
     resolution: {integrity: sha512-898rgRXLAyRkM1GryrrBHGkqA5hlpkV5MhtZwg9QXeiyLUYs2k00Un05aX5l2/yJIOObYKOpS2JNo8nJDE7fWQ==}
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
@@ -4360,10 +4326,6 @@ packages:
       caniuse-lite: 1.0.30001373
       lodash.memoize: 4.1.2
       lodash.uniq: 4.5.0
-    dev: true
-
-  /caniuse-lite/1.0.30001320:
-    resolution: {integrity: sha512-MWPzG54AGdo3nWx7zHZTefseM5Y1ccM7hlQKHRqJkPozUaw3hNbBTMmLn16GG2FUzjR13Cr3NPfhIieX5PzXDA==}
     dev: true
 
   /caniuse-lite/1.0.30001373:
@@ -5205,7 +5167,7 @@ packages:
     dependencies:
       acorn-node: 1.8.2
       defined: 1.0.0
-      minimist: 1.2.5
+      minimist: 1.2.6
     dev: true
 
   /devalue/2.0.1:
@@ -5347,10 +5309,6 @@ packages:
 
   /electron-to-chromium/1.4.204:
     resolution: {integrity: sha512-5Ojjtw9/c9HCXtMVE6SXVSHSNjmbFOXpKprl6mY/5moLSxLeWatuYA7KTD+RzJMxLRH6yNNQrqGz9p6IoNBMgw==}
-
-  /electron-to-chromium/1.4.95:
-    resolution: {integrity: sha512-h2VAMV/hPtmAeiDkwA8c5sjS+cWt6GlQL4ERdrOUWu7cRIG5IRk9uwR9f0utP+hPJ9ZZsADTq9HpbuT46eBYAg==}
-    dev: true
 
   /elliptic/6.5.4:
     resolution: {integrity: sha512-iLhC6ULemrljPZb+QutR5TQGB+pdW6KGD5RSegS+8sorOZT+rdQFbsQFJgvN3eRqNALqJer4oQ16YvJHlU8hzQ==}
@@ -7432,12 +7390,6 @@ packages:
       ci-info: 2.0.0
     dev: true
 
-  /is-core-module/2.8.1:
-    resolution: {integrity: sha512-SdNCUs284hr40hFTFP6l0IfZ/RSrMXF3qgoRHd3/79unUTvrFO/JoXwkGm+5J/Oe3E/b5GsnG330uUNgRpu1PA==}
-    dependencies:
-      has: 1.0.3
-    dev: true
-
   /is-core-module/2.9.0:
     resolution: {integrity: sha512-+5FPy5PnwmO3lvfMb0AsoPaBG+5KHUI0wYFXOtYPnVVVspTFUuMZNfNaNVRt3FZadstu2c8x23vykRW/NBoU6A==}
     dependencies:
@@ -8815,6 +8767,7 @@ packages:
 
   /minimist/1.2.5:
     resolution: {integrity: sha512-FM9nNUYrRBAELZQT3xeZQ7fmMOBg6nWNmJKTcgsJeaLstP/UODVpGsr5OhXhhXg6f+qtJ8uiZ+PUxkDWcgIXLw==}
+    dev: false
 
   /minimist/1.2.6:
     resolution: {integrity: sha512-Jsjnk4bw3YJqYzbdyBiNsPWHPfO++UGG749Cxs6peCu5Xg4nrena6OVxOYxrQTqww0Jmwt+Ref8rggumkTLz9Q==}
@@ -8843,7 +8796,7 @@ packages:
     resolution: {integrity: sha512-NKmAlESf6jMGym1++R0Ra7wvhV+wFW63FaSOFPwRahvea0gMUcGUhVeAg/0BC0wiv9ih5NYPB1Wn1UEI1/L+xQ==}
     hasBin: true
     dependencies:
-      minimist: 1.2.5
+      minimist: 1.2.6
     dev: true
 
   /mkdirp/1.0.4:
@@ -9004,15 +8957,6 @@ packages:
       fetch-blob: 3.2.0
       formdata-polyfill: 4.0.10
 
-  /node-fetch/3.2.9:
-    resolution: {integrity: sha512-/2lI+DBecVvVm9tDhjziTVjo2wmTsSxSk58saUYP0P/fRJ3xxtfMDY24+CKTkfm0Dlhyn3CSXNL0SoRiCZ8Rzg==}
-    engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
-    dependencies:
-      data-uri-to-buffer: 4.0.0
-      fetch-blob: 3.2.0
-      formdata-polyfill: 4.0.10
-    dev: false
-
   /node-forge/1.2.1:
     resolution: {integrity: sha512-Fcvtbb+zBcZXbTTVwqGA5W+MKBj56UjVRevvchv5XrcyXbmNdesfZL37nlcWOfpgHhgmxApw3tQbTr4CqNmX4w==}
     engines: {node: '>= 6.13.0'}
@@ -9042,10 +8986,6 @@ packages:
 
   /node-int64/0.4.0:
     resolution: {integrity: sha512-O5lz91xSOeoXP6DulyHfllpq+Eg00MWitZIbtPfoSEvqIHdl5gfcY6hYzDWnj0qD5tz52PI08u9qUvSVeUBeHw==}
-    dev: true
-
-  /node-releases/2.0.2:
-    resolution: {integrity: sha512-XxYDdcQ6eKqp/YjI+tb2C5WM2LgjnZrfYg4vgQt49EK268b6gYCHsBLrK2qvJo4FmCtqmKezb0WZFK4fkrZNsg==}
     dev: true
 
   /node-releases/2.0.6:
@@ -10508,15 +10448,6 @@ packages:
       path-parse: 1.0.7
     dev: true
 
-  /resolve/1.22.0:
-    resolution: {integrity: sha512-Hhtrw0nLeSrFQ7phPp4OOcVjLPIeMnRlr5mcnVuMe7M/7eBn98A3hmFRLoFo3DLZkivSYwhRUJTyPyWAk56WLw==}
-    hasBin: true
-    dependencies:
-      is-core-module: 2.8.1
-      path-parse: 1.0.7
-      supports-preserve-symlinks-flag: 1.0.0
-    dev: true
-
   /resolve/1.22.1:
     resolution: {integrity: sha512-nBpuuYuY5jFsli/JIs1oldw6fOQCBioohqWZg/2hiaOybXOft4lonv85uDOKXdf8rhyK159cxU5cDcK/NKk8zw==}
     hasBin: true
@@ -11004,7 +10935,7 @@ packages:
     hasBin: true
     dependencies:
       buffer-crc32: 0.2.13
-      minimist: 1.2.5
+      minimist: 1.2.6
       sander: 0.5.1
       sourcemap-codec: 1.4.8
     dev: true
@@ -11575,7 +11506,7 @@ packages:
       postcss-selector-parser: 6.0.9
       postcss-value-parser: 4.2.0
       quick-lru: 5.1.1
-      resolve: 1.22.0
+      resolve: 1.22.1
     transitivePeerDependencies:
       - ts-node
     dev: true

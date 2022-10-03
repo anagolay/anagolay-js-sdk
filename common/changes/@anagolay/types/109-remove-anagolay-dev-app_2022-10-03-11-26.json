@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@anagolay/types",
+      "comment": "dasda",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@anagolay/types"
+}

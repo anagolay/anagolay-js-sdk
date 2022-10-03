@@ -6,7 +6,7 @@
   "licenseFile": "./LICENSE",
   "description": "CHANGE MEEEEE",
   "module": "./lib/index.js",
-  "main": "./lib_cjs/index.js",
+  "main": "./lib-cjs/index.js",
   "types": "./lib/CHANGE_ME.d.ts",
   "type": "module",
   "scripts": {

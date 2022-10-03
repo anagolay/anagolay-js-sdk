@@ -6,25 +6,25 @@
   "licenseFile": "./LICENSE",
   "description": "Various utilities needed for Anagolay Network. They are carefully written to be fast and work in browser and nodejs env.",
   "module": "./lib/index.js",
-  "main": "./lib_cjs/index.js",
+  "main": "./lib-cjs/index.js",
   "types": "./lib/util.d.ts",
   "type": "module",
   "exports": {
     ".": {
       "browser": "./lib/index.browser.js",
       "import": "./lib/index.js",
-      "require": "./lib_cjs/index.js",
-      "node": "./lib_cjs/index.js"
+      "require": "./lib-cjs/index.js",
+      "node": "./lib-cjs/index.js"
     },
     "./*": {
-      "require": "./lib_cjs/*.js",
+      "require": "./lib-cjs/*.js",
       "import": "./lib/*.js"
     },
     "./doh": {
       "types": "./lib/doh/doh.d.ts",
       "import": "./lib/doh/doh.js",
-      "require": "./lib_cjs/doh/doh.js",
-      "node": "./lib_cjs/doh/doh.js"
+      "require": "./lib-cjs/doh/doh.js",
+      "node": "./lib-cjs/doh/doh.js"
     }
   },
   "scripts": {

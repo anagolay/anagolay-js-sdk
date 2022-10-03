@@ -6,7 +6,7 @@
   "description": "Anagolay Custom and Auto-generated types and interfaces",
   "author": "did:substrate:GHm6gp6khjcxQvnbnSsHdYejsFK1nNVxcGyGAsbDfsymtLr",
   "module": "./lib/index.js",
-  "main": "./lib_cjs/index.js",
+  "main": "./lib-cjs/index.js",
   "types": "./lib/types.d.ts",
   "type": "module",
   "keywords": [
@@ -18,14 +18,14 @@
     ".": {
       "types": "./lib/types.d.ts",
       "import": "./lib/index.js",
-      "require": "./lib_cjs/index.js"
+      "require": "./lib-cjs/index.js"
     },
     "./augment-api": {
       "types": "./lib/types.d.ts",
       "import": "./lib/augment-api.js",
       "default": "./lib/augment-api.js",
-      "require": "./lib_cjs/augment-api.js",
-      "node": "./lib_cjs/augment-api.js"
+      "require": "./lib-cjs/augment-api.js",
+      "node": "./lib-cjs/augment-api.js"
     }
   },
   "scripts": {
