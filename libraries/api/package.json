@@ -1,0 +1,66 @@
+{
+  "name": "@anagolay/api",
+  "version": "0.2.0",
+  "author": "did:substrate:GHm6gp6khjcxQvnbnSsHdYejsFK1nNVxcGyGAsbDfsymtLr",
+  "license": "Apache2",
+  "licenseFile": "./LICENSE",
+  "description": "Anagolay JS/TS API",
+  "module": "./lib/index.js",
+  "main": "./lib-commonjs/index.js",
+  "types": "./lib/api.d.ts",
+  "type": "module",
+  "exports": {
+    ".": {
+      "require": "./lib-commonjs/index.js",
+      "import": "./lib/index.js"
+    },
+    "./*": {
+      "require": "./lib-commonjs/*.js",
+      "import": "./lib/*.js"
+    }
+  },
+  "scripts": {
+    "test": "heft test --clean",
+    "watch": "heft test --watch",
+    "build": "heft build --clean && pnpm fix-lib",
+    "fix-lib": "node ./config/add-js-to-esm.js"
+  },
+  "dependencies": {
+    "@anagolay/types": "workspace:*",
+    "@anagolay/util": "workspace:*",
+    "@polkadot/util": "10.1.4",
+    "@polkadot/api": "9.2.2",
+    "ramda": "0.28.0",
+    "@polkadot/keyring": "10.1.4",
+    "@polkadot/types": "9.2.2",
+    "events": "3.3.0"
+  },
+  "devDependencies": {
+    "tslib": "2.4.0",
+    "typescript": "4.7.4",
+    "@rushstack/heft-web-rig": "0.11.3",
+    "@rushstack/heft-node-rig": "1.10.2",
+    "@microsoft/api-extractor": "7.29.2",
+    "@rushstack/eslint-config": "3.0.0",
+    "@rushstack/heft": "0.47.3",
+    "@rushstack/heft-jest-plugin": "0.3.25",
+    "@types/heft-jest": "1.0.3",
+    "@types/node": "18.7.6",
+    "@types/ramda": "0.27.64",
+    "eslint": "8.22.0",
+    "eslint-plugin-simple-import-sort": "7.0.0",
+    "eslint-plugin-unused-imports": "2.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.com/anagolay/anagolay-js.git",
+    "directory": "sdk/api"
+  },
+  "bugs": {
+    "url": "https://gitlab.com/anagolay/anagolay-js/issues"
+  },
+  "homepage": "https://gitlab.com/anagolay/anagolay-js/-/tree/main/sdk/api#readme",
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}

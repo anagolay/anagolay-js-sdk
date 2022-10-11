@@ -16,7 +16,7 @@
   import SkeletonLoader from '$src/components/base/SkeletonLoader.svelte';
   import { alerts } from '$src/components/notifications/stores';
   import { retrieveOperations, type OperationWithVersions } from '$src/api';
-  import { ApiPromise } from '@polkadot/api';
+  import { ApiPromise } from '@anagolay/api';
   import { serializeThenParse } from '$src/utils/json';
   import { isEmpty } from 'ramda';
   import { getHashValue } from '$src/utils/url';

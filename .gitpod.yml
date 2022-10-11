@@ -1,13 +1,16 @@
 image: docker.io/woss/gitpod-workspace:gitpod_workspace-full_2022-05-08-14-31-53
 tasks:
   - name: prep-env
-    init: node $GITPOD_REPO_ROOT/common/scripts/install-run-rush.js update && exit
+    init: |
+      node $GITPOD_REPO_ROOT/common/scripts/install-run-rush.js update
+      node $GITPOD_REPO_ROOT/common/scripts/install-run-rush.js build
+      exit
 
 ports:
   - port: 7766
     visibility: public
     onOpen: ignore
-    # onOpen: open-preview
+# onOpen: open-preview
 
 vscode:
   extensions:
@@ -24,3 +27,4 @@ vscode:
     - eg2.vscode-npm-script
     - pflannery.vscode-versionlens
     - formulahendry.auto-rename-tag
+    - asciidoctor.asciidoctor-vscode

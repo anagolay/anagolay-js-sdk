@@ -8,9 +8,9 @@
   import {
     AnClaim,
     AnClaimType,
+    AnExpirationType,
     AnForWhat,
     AnProofData,
-    AnSignature,
     AnSignatures,
     AnStatementData,
   } from '@anagolay/types';
@@ -18,7 +18,12 @@
   import { isNil, split, startsWith } from 'ramda';
   import Code from '$src/components/base/Code.svelte';
   import CodeBlockWithSerialization from '$src/components/base/CodeBlockWithSerialization.svelte';
-  import { hexToString, stringToHex } from '@polkadot/util';
+  import { hexToString, u8aToHex } from '@polkadot/util';
+  import { signatureVerify } from '@polkadot/util-crypto';
+  import { retrieveWorkflows } from '$src/api';
+
+  // this might break when new genesis comes in and we regen the workflows
+  const workflowId = 'bafkr4icflbi5pbomtcyejivr4l7dcdvcmvcsviwmnn7qp52flfnkvy2ebe';
 
   const idPlaceholder = `__it's calculated on-chain using our workflow__`;
 
@@ -29,14 +34,16 @@
   onMount(async () => {
     api = await connectToWs();
     apiConnected = api.isConnected;
-    const [chain, nodeName, nodeVersion] = await Promise.all([
-      api.rpc.system.chain(),
-      api.rpc.system.name(),
-      api.rpc.system.version(),
-    ]);
+    // const [chain, nodeName, nodeVersion] = await Promise.all([
+    //   api.rpc.system.chain(),
+    //   api.rpc.system.name(),
+    //   api.rpc.system.version(),
+    // ]);
+
+    console.log(await retrieveWorkflows(api, 0, 10));
 
     const proofData: AnProofData = {
-      workflowId: 'bafkr4icijxzickvfhqfc4gef6exesry32rhyprv6piimbrigk37hagja3i',
+      workflowId,
       prevId: '',
       creator: $mainStore.account,
       groups: [AnForWhat.GENERIC],
@@ -120,7 +127,8 @@
      */
     const claim: AnClaim = {
       poeId: $mainStore.proof.id,
-      workflowId: 'bafkr4icijxzickvfhqfc4gef6exesry32rhyprv6piimbrigk37hagja3i',
+      // this
+      workflowId,
       proportion: {
         name: 'percentage',
         sign: '%',
@@ -132,9 +140,12 @@
       claimType: AnClaimType.OWNERSHIP,
       valid: {
         from: `${Date.now()}`,
-        until: undefined,
+        until: '',
       },
-      expiration: undefined,
+      expiration: {
+        expirationType: AnExpirationType.FOREVER,
+        value: '',
+      },
       onExpiration: '',
     };
 
@@ -147,17 +158,32 @@
       console.log(`Signing the claim`);
       // after making sure that signRaw is defined
       // we can use it to sign our message
-      const { signature: holderSignature } = await signRaw({
-        address: $mainStore.account,
-        data: stringToHex(JSON.stringify(claim)),
+
+      const payload = api.createType('StatementsClaim', claim);
+      const account = mainStore.selectedAccount();
+      const hexPublicKey = u8aToHex(account.publicKey);
+
+      const data = payload.toHex();
+      const message = {
+        address: account.address,
+        data,
         type: 'bytes',
-      });
+      };
+      const { signature: holderSignature } = await signRaw(message);
 
       const sig = {
         sig: holderSignature,
-        sigKey: `urn:anagolay:${$mainStore.account}`,
+        sigKey: `urn:substrate:${hexPublicKey}`,
         cid: await calculateCid(holderSignature),
       };
+
+      console.log(
+        holderSignature,
+        payload,
+        data,
+        payload.toHex(),
+        signatureVerify(message.data, holderSignature, hexPublicKey)
+      );
 
       const signatures: AnSignatures = {
         holder: sig,

@@ -202,7 +202,7 @@
       "webapp", // all our Web applications
       "libraries", // our libraries that other stuff depend on
       "websites", // our list of websites for anagolay
-      "demo" // our list of demos
+      "tools" // our list of tools
     ],
     //
     //   /**
@@ -420,27 +420,27 @@
     //
     {
       "packageName": "@anagolay/api",
-      "projectFolder": "sdk/api",
+      "projectFolder": "libraries/api",
       "reviewCategory": "libraries",
-      "shouldPublish": true
-    },
-    {
-      "packageName": "@anagolay/cli",
-      "projectFolder": "sdk/cli",
-      "reviewCategory": "libraries",
-      "shouldPublish": true
-    },
-    {
-      "packageName": "@anagolay/util",
-      "projectFolder": "sdk/util",
-      "reviewCategory": "libraries",
-      "shouldPublish": true
+      "versionPolicyName": "anagolayApi"
     },
     {
       "packageName": "@anagolay/types",
-      "projectFolder": "sdk/types",
+      "projectFolder": "libraries/types",
       "reviewCategory": "libraries",
-      "shouldPublish": true
+      "versionPolicyName": "anagolayApi"
+    },
+    {
+      "packageName": "@anagolay/cli",
+      "projectFolder": "tools/cli",
+      "reviewCategory": "tools",
+      "versionPolicyName": "unstable"
+    },
+    {
+      "packageName": "@anagolay/util",
+      "projectFolder": "libraries/util",
+      "reviewCategory": "libraries",
+      "versionPolicyName": "unstable"
     },
     {
       "packageName": "@anagolay/app",
@@ -450,15 +450,9 @@
     },
     {
       "packageName": "@anagolay/migrate",
-      "projectFolder": "examples/migrate",
-      "reviewCategory": "demo",
+      "projectFolder": "tools/migrate",
+      "reviewCategory": "tools",
       "shouldPublish": false
     }
-    // {
-    //   "packageName": "anagolay.dev",
-    //   "projectFolder": "apps/anagolay.dev",
-    //   "reviewCategory": "websites",
-    //   "shouldPublish": false
-    // }
   ]
 }

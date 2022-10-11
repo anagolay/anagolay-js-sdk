@@ -18,12 +18,13 @@ cache:
     - ANAGOLAY_CLI_JS_CID
     - ANAGOLAY_CLI_BIN_CID
 
-# workflow:
-#   rules:
-#     - if: $CI_COMMIT_MESSAGE =~ /-draft$/
-#       when: never
-#     - if: $CI_MERGE_REQUEST_IID
-#     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+workflow:
+  rules:
+    - if: $FORCE_START
+    - if: $CI_COMMIT_TAG
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+    - if: $CI_COMMIT_MESSAGE =~ /^.*\[mellon\].*$]/ # a friendly tag so we can test it
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event" ## this is the same as $CI_MERGE_REQUEST_IID
 
 # include:
 #   - template: Security/Dependency-Scanning.gitlab-ci.yml
@@ -52,6 +53,8 @@ is-it-pretty:
   stage: check
   before_script:
     - *install-pnpm
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
   script:
     - set -e
 
@@ -67,6 +70,8 @@ changelogs:
   stage: check
   cache: {}
   allow_failure: true
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
   script:
     - echo 'Checking for missing change logs...'
     - node common/scripts/install-run-rush.js change --verify
@@ -92,6 +97,8 @@ test-code-node16-lts:
   stage: test
   before_script:
     - *install-pnpm
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
   script:
     - set -e
 
@@ -108,6 +115,10 @@ build-app:
   stage: build
   before_script:
     - *install-pnpm
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      changes:
+        - ./app/src/**/*.{ts, css, svelte, html, d.ts} # ...source files
   script:
     - set -e
 

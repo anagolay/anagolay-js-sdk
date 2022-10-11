@@ -99,4 +99,19 @@
   // 
   //   // "includeEmailInChangeFile": true
   // }
+
+  // for now we want to keep the versions locked to 0
+  {
+    "policyName": "anagolayApi",
+    "definitionName": "lockStepVersion",
+    "version": "0.1.0"
+  }, 
+  // this is generally unstable and lockedMajor will NEVER change
+  {
+    "policyName": "unstable",
+    "definitionName": "individualVersion",
+    "lockedMajor": 0
+  }
+
+
 ]
