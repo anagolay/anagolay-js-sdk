@@ -1,0 +1,76 @@
+{
+  "name": "@anagolay/cli",
+  "description": "Anagolay CLI",
+  "author": "did:substrate:GHm6gp6khjcxQvnbnSsHdYejsFK1nNVxcGyGAsbDfsymtLr",
+  "license": "GPL3",
+  "licenseFile": "./LICENSE",
+  "keywords": [],
+  "version": "0.1.0",
+  "bin": {
+    "anagolay": "./lib/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.com/anagolay/network-js-sdk.git",
+    "directory": "sdk/cli"
+  },
+  "bugs": {
+    "url": "https://gitlab.com/anagolay/network-js-sdk/issues"
+  },
+  "homepage": "https://gitlab.com/anagolay/network-js-sdk/-/tree/main/sdk/cli#readme",
+  "scripts": {
+    "build:bin": "pkg --targets node16-linux ./dist/anagolay.js --out-path binaries",
+    "build": "NODE_ENV=production heft test --clean",
+    "watch:test": "heft test --clean --watch",
+    "watch": "heft build --clean --watch",
+    "lint:fix": "eslint ./src --ext .js,.jsx,.ts,.tsx",
+    "start": "heft start",
+    "link:bin:lib": "sudo ln -sf $GITPOD_REPO_ROOT/sdk/cli/lib/index.js /usr/local/bin/anagolay-lib && sudo chmod +x /usr/local/bin/anagolay-lib",
+    "link:bin": "sudo ln -sf $GITPOD_REPO_ROOT/sdk/cli/dist/anagolay.js /usr/local/bin/anagolay && sudo chmod +x /usr/local/bin/anagolay"
+  },
+  "dependencies": {
+    "@anagolay/api": "workspace:*",
+    "@anagolay/util": "workspace:*",
+    "@anagolay/types": "workspace:*",
+    "@polkadot/types": "9.2.2",
+    "clui": "0.3.6",
+    "commander": "9.0.0",
+    "ramda": "0.28.0",
+    "@polkadot/util": "10.1.4",
+    "inquirer": "8.2.0",
+    "cli-color": "2.0.1",
+    "signale": "1.4.0",
+    "axios": "0.25.0",
+    "@polkadot/api": "9.2.2",
+    "@polkadot/keyring": "10.1.4",
+    "@polkadot/util-crypto": "10.1.4",
+    "socket.io-client": "4.4.1",
+    "@polkadot/api-augment": "9.2.2",
+    "pino": "8.4.2"
+  },
+  "devDependencies": {
+    "tslib": "2.4.0",
+    "typescript": "4.7.4",
+    "@rushstack/heft-node-rig": "1.10.2",
+    "@microsoft/api-extractor": "7.29.2",
+    "@rushstack/eslint-config": "3.0.0",
+    "@rushstack/heft": "0.47.3",
+    "@rushstack/heft-jest-plugin": "0.3.25",
+    "@types/heft-jest": "1.0.3",
+    "@types/node": "18.7.6",
+    "@types/ramda": "0.27.64",
+    "eslint": "8.22.0",
+    "eslint-plugin-simple-import-sort": "7.0.0",
+    "eslint-plugin-unused-imports": "2.0.0",
+    "env-cmd": "10.1.0",
+    "@types/inquirer": "8.2.0",
+    "@types/clui": "0.3.1",
+    "@types/signale": "1.4.4",
+    "@rushstack/heft-webpack5-plugin": "0.5.40",
+    "webpack-node-externals": "3.0.0",
+    "@types/webpack-env": "1.18.0",
+    "webpack": "5.68.0",
+    "ts-loader": "9.3.1",
+    "pkg": "5.8.0"
+  }
+}

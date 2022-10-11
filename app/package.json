@@ -1,6 +1,6 @@
 {
   "name": "@anagolay/app",
-  "version": "0.7.0",
+  "version": "0.1.0",
   "description": "Anagolay Web App",
   "type": "module",
   "license": "AGPLv3",
@@ -29,7 +29,6 @@
     "postcss": "8.4.12",
     "tailwindcss": "3.0.23",
     "daisyui": "2.13.4",
-    "multiformats": "9.6.4",
     "nanoid": "3.3.2",
     "@tailwindcss/typography": "0.5.2",
     "@tailwindcss/forms": "0.5.0",
@@ -79,11 +78,13 @@
     "socket.io-client": "4.4.1",
     "@polkadot/api": "9.2.2",
     "@polkadot/types": "9.2.2",
-    "@polkadot/api-augment": "8.14.1",
+    "@polkadot/api-augment": "9.2.2",
     "@polkadot/util": "10.1.4",
     "@polkadot/types-codec": "9.2.2",
     "@polkadot/extension-inject": "0.44.5",
     "@polkadot/extension-dapp": "0.44.5",
-    "svelte-confetti": "1.2.0"
+    "svelte-confetti": "1.2.0",
+    "@polkadot/keyring": "10.1.4",
+    "@polkadot/util-crypto": "10.1.4"
   }
 }

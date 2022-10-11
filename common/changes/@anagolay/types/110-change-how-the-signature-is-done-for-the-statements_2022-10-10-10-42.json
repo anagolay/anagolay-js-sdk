@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@anagolay/types",
+      "comment": "removed comments referencing sensio",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@anagolay/types"
+}

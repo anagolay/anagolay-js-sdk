@@ -1,0 +1,10 @@
+= Developer oriented stuff
+:toc:
+
+== Notes
+
+=== @anagolay/types issue
+
+when running the type generation make sure that you return the `types.ts` to orig state and go through the changes int he generated code and return the lookup imports
+
+

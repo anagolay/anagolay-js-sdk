@@ -5,24 +5,25 @@
 
 ## Anagolay Network JS/TS SDK for lazy devs 👩‍💻🚀👨‍💻
 
-This is the monorepo for ALL Anagolay packages. This includes following list:
+This is the monorepo for ALL Anagolay packages. This includes the following list:
 
-1. Anagolay Network CLI located under `<root>/sdk/cli`
-2. Anagolay Network Types located under `<root>/sdk/types`
-3. All utils are located under `<root>/sdk/utils`
-4. Anagolay Application is located in `<root>/apps/app`
+1. Anagolay Network JS SDK located under `<root>/libraries/api`
+2. Anagolay Network CLI located under `<root>/tools/cli`
+3. Anagolay Network Types located under `<root>/libraries/types`
+4. All utils are located under `<root>/tools/utils`
+5. Anagolay Application is located in `<root>/app`
 
 ## Development
 
-We are using VSCode as our main IDE and for that reason we are including the recommended extensions and settings that will help you get started. 
+We are using VSCode as our main IDE and for that reason, we are including the recommended extensions and settings that will help you get started. 
 
 The structure is following:
 
-**sdk/cli**
+**libraries/cli**
 
-Generic CLI for Anagolay Network. Current use is limited only to creation default operations.
+Generic CLI for Anagolay Network. Current use is limited only to the creation of default operations.
 
-**sdk/types**
+**libraries/types**
 
 ### Building 
 

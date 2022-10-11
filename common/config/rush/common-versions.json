@@ -24,6 +24,30 @@
      * instead of the latest version.
      */
     // "some-library": "1.2.3"
+
+    // unknown versioning rule
+    "@polkadot/metadata": "4.17.1",
+
+    // these follow same versioning
+    "@polkadot/util": "10.1.4",
+    "@polkadot/util-crypto": "10.1.4",
+    "@polkadot/keyring": "10.1.4",
+    // these follow same versioning
+    
+    
+    // these follow same versioning
+    "@polkadot/api": "9.2.2",
+    "@polkadot/types": "9.2.2",
+    "@polkadot/api-augment": "9.2.2",
+    "@polkadot/types-codec": "9.2.2",
+    "@polkadot/api-base": "9.2.2",
+    "@polkadot/rpc-core": "9.2.2",
+    "@polkadot/typegen": "9.2.2",
+    // these follow same versioning
+    
+    // extension
+    "@polkadot/extension-inject": "0.44.5",
+    "@polkadot/extension-dapp": "0.44.5",
   },
 
   /**

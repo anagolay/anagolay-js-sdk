@@ -3,8 +3,10 @@ import init, { Workflow } from 'wf_cidv1_from_array';
 import wasm from 'wf_cidv1_from_array/wf_cidv1_from_array_bg.wasm?url';
 import { equals, isNil, last } from 'ramda';
 import { get, writable } from 'svelte/store';
-
+import Keyring from '@polkadot/keyring';
+import { KeyringPair } from '@polkadot/keyring/types';
 import type { IDoHResponse } from '@anagolay/util';
+import { u8aToHex } from '@polkadot/util';
 
 /**
  * A simple wrapper for Anagolay CID Workflow that is using the TextEncoder to create a Uint8Array, optimized for the Web. It also init the wasm
@@ -99,6 +101,12 @@ function mainStoreFn() {
           return { ...curState, verificationCode };
         });
       }
+    },
+    selectedAccount: () => {
+      const curState = get(mainStore);
+      const keyring: Keyring = new Keyring({ ss58Format: 42, type: 'sr25519' });
+      const addr = keyring.addFromAddress(curState.account);
+      return addr;
     },
   };
 }
