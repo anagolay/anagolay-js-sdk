@@ -2,6 +2,7 @@
   "editor.codeActionsOnSave": {
     "source.fixAll": true
   },
+  "workbench.sideBar.location": "right",
   "eslint.format.enable": true,
   "editor.wordWrap": "bounded",
   "editor.wordWrapColumn": 110,
