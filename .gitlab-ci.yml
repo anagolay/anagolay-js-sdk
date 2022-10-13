@@ -55,6 +55,8 @@ is-it-pretty:
     - *install-pnpm
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+
   script:
     - set -e
 
@@ -72,6 +74,8 @@ changelogs:
   allow_failure: true
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+
   script:
     - echo 'Checking for missing change logs...'
     - node common/scripts/install-run-rush.js change --verify
@@ -99,6 +103,7 @@ test-code-node16-lts:
     - *install-pnpm
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
   script:
     - set -e
 
@@ -117,8 +122,7 @@ build-app:
     - *install-pnpm
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
-      changes:
-        - ./app/src/**/*.{ts, css, svelte, html, d.ts} # ...source files
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
   script:
     - set -e
 
