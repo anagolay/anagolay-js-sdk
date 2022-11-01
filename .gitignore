@@ -71,7 +71,7 @@ temp
 core*
 
 # Heft
-*/*/.heft/build-cache/**
-*/*/.heft/temp/**
+.heft
 .pnpm-store
 binaries
+tsconfig.tsbuildinfo

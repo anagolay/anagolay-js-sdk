@@ -1,17 +1,16 @@
 {
-  "extends": "./.svelte-kit/tsconfig.json",
-  "compilerOptions": {
-    "resolveJsonModule": true,
-    "preserveValueImports": false,
-    "esModuleInterop": true,
-    "importsNotUsedAsValues": "preserve",
-    "types": ["node"],
-    "typeRoots": ["src/@types", "node_modules/@types"],
-    "paths": {
-      "$src": ["./src/"],
-      "$src/*": ["./src/*"],
-      "$lib": ["./src/lib"],
-      "$lib/*": ["./src/lib/*"]
-    }
-  }
+	"extends": "./.svelte-kit/tsconfig.json",
+	"compilerOptions": {
+		"resolveJsonModule": true,
+		"preserveValueImports": false,
+		"esModuleInterop": true,
+		"importsNotUsedAsValues": "preserve",
+		"types": ["node"],
+		"typeRoots": ["src/@types", "node_modules/@types"],
+		"paths": {
+			"$src": ["./src/"],
+			"$src/*": ["./src/*"],
+			"@anagolay/types/augment-api": ["../libraries/types/lib/augment-api"]
+		}
+	}
 }

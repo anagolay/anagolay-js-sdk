@@ -5,7 +5,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import { dirname, resolve } from 'path';
-import { fileURLToPath } from 'url';
+// import { fileURLToPath } from 'url';
 
 // https://gist.github.com/lovasoa/8691344
 async function* walk(dir) {
@@ -54,14 +54,29 @@ function resolveImportPath(sourceFile, importPath, options) {
 
 function replace(filePath, outFilePath, options) {
   const code = fs.readFileSync(filePath).toString();
-  const newCode = code.replace(
-    /(import|export) (.+?) from ('[^\n']+'|"[^\n"]+");/gs,
+  let newCode = code;
+
+  // only imports
+  newCode = code.replace(/(import) ('[^\n']+'|"[^\n"]+");?/gs, function (found, importString, imported) {
+    const importPath = imported.slice(1, -1);
+    const resolvedPath = resolveImportPath(filePath, importPath, options);
+    if (resolvedPath) {
+      console.debug('\t import %s -> %s', importPath, resolvedPath);
+      return `${importString} '${resolvedPath}';`;
+    }
+    // return what you found
+    return found;
+  });
+
+  newCode = newCode.replace(
+    /(import|export) (.+?) from ('[^\n']+'|"[^\n"]+");?/gs,
     function (found, action, imported, from) {
+      // console.log('import/export', { found, action, imported, from });
       const importPath = from.slice(1, -1);
       const resolvedPath = resolveImportPath(filePath, importPath, options);
 
       if (resolvedPath) {
-        console.debug('\t', importPath, resolvedPath);
+        console.debug('\t %s %s -> %s', action, importPath, resolvedPath);
         return `${action} ${imported} from '${resolvedPath}';`;
       }
 
@@ -80,7 +95,7 @@ async function run(srcDir, options = defaultOptions) {
 
   for await (const entry of walk(srcDir)) {
     if (sourceFileFilter(entry)) {
-      console.debug(entry);
+      console.debug('entry', entry);
       replace(entry, entry, options);
     }
   }
@@ -101,14 +116,17 @@ const defaultOptions = {
   moduleFilter: defaultModuleFilter,
 };
 
-// Switch this to test on one file or directly run on a directory.
-// const DEBUG = true;
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+// const __filename = fileURLToPath(import.meta.url);
+// const __dirname = dirname(__filename);
 
-// if (DEBUG) {
-//   replace('./path/to/an/esm/module/index.ts', './out.ts', defaultOptions);
-// } else {
-await run(resolve(__dirname, '../lib'), defaultOptions);
-// }
-//
+// console.log(__filename);
+// console.log(__dirname);
+
+// console.log(resolve(process.cwd(), process.argv[2] || './lib'));
+
+const libPath = resolve(process.cwd(), 'lib');
+
+/**
+ * RUN THE STUFF
+ */
+await run(libPath, defaultOptions);

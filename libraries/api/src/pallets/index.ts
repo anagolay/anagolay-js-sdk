@@ -1,4 +1,5 @@
-import * as poe from './poe/index';
-import * as statements from './statements/index';
+import * as operations from './operations';
+import * as poe from './poe';
+import * as statements from './statements';
 
-export { poe, statements };
+export { operations, poe, statements };

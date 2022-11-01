@@ -1,9 +1,8 @@
-import '@anagolay/types/augment-api';
-
+import { anagolaySchema, rpcDefinitions, rpcDefinitionsTemp, runtimeDefinitions } from '@anagolay/types';
 import { ApiPromise, WsProvider } from '@polkadot/api';
+import { ApiOptions } from '@polkadot/api/types';
 import { isNil } from 'ramda';
 
-import rpcs from './temp_rpc';
 export const defaultChainToConnect: string = 'wss://idiyanale-testnet.anagolay.io';
 
 // Cached API connection
@@ -28,19 +27,51 @@ let cachedApiInstance: ApiPromise | undefined;
  * ```
  */
 export async function connectToWs(connectTo: string = defaultChainToConnect): Promise<ApiPromise> {
-  try {
-    const provider = new WsProvider(connectTo);
-    const api = await ApiPromise.create({
-      provider,
-      rpc: rpcs,
-    });
+  // try {
+  const provider = new WsProvider(connectTo);
+  const opts: ApiOptions = {
+    provider,
+    rpc: rpcDefinitionsTemp,
+    runtime: runtimeDefinitions,
+  };
 
-    cachedApiInstance = api;
-    return api;
-  } catch (error) {
-    console.error(error);
-    throw new Error(error.message);
-  }
+  const api = await ApiPromise.create(opts);
+  await api.isReady;
+  cachedApiInstance = api;
+  return api;
+  // } catch (error) {
+  //   console.error('Error in connection.ts', error);
+  //   throw new Error(error.message);
+  // }
+}
+
+/**
+ * THIS IS THE CONNECTION WITH REAL RPCS FROM THE DEFINITIONS. IT IS FAILING NOW, SO I MADE IT FOR TESTING
+ * This includes the types as well
+ * @param connectTo -
+ * @returns
+ */
+export async function connectToWsWithCorrectRpc(
+  connectTo: string = defaultChainToConnect
+): Promise<ApiPromise> {
+  // try {
+  const provider = new WsProvider(connectTo);
+  const opts: ApiOptions = {
+    provider,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    types: anagolaySchema.types,
+    rpc: rpcDefinitions,
+    runtime: runtimeDefinitions,
+  };
+
+  const api = await ApiPromise.create(opts);
+  await api.isReady;
+  cachedApiInstance = api;
+  return api;
+  // } catch (error) {
+  //   console.error(error);
+  //   throw new Error(error.message);
+  // }
 }
 
 /**

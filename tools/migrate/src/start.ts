@@ -1,28 +1,31 @@
-// THIS MUST BE INCLUDED IF WE WANT AUGMENTED TYPES
-//import '@anagolay/types/lib/interfaces/augment-api';
-//import '@anagolay/types/lib/interfaces/augment-types';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/naming-convention */
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+// import '@polkadot/api-augment';
 
-import { ApiPromise, connectToWs } from '@anagolay/api';
+import '@anagolay/types/augment-api';
 
-import { Option } from '@polkadot/types';
-import { AccountId } from '@polkadot/types/interfaces';
-
-import { Keyring } from '@polkadot/api';
-import { AccountInfo } from '@polkadot/types/interfaces/types.js';
-import { hexToString } from '@polkadot/util';
+import { connectToWs } from '@anagolay/api';
 import {
   Operation,
-  OperationVersion,
-  Workflow,
-  WorkflowVersion,
   OperationRecord,
+  OperationVersion,
   OperationVersionId,
   OperationVersionRecord,
-  WorkflowRecord,
-  WorkflowVersionId,
   ProofRecord,
+  Workflow,
+  WorkflowRecord,
+  WorkflowVersion,
+  WorkflowVersionId,
 } from '@anagolay/types';
-import { find, findLast, indexOf, isNil, remove } from 'ramda';
+import { Keyring } from '@polkadot/api/bundle';
+import { ApiPromise } from '@polkadot/api/promise/Api';
+import { AccountId } from '@polkadot/types/interfaces/runtime/types';
+import { AccountInfo } from '@polkadot/types/interfaces/system/types';
+import { Option } from '@polkadot/types-codec/base/Option';
+import { hexToString } from '@polkadot/util/hex/toString';
+import { find, indexOf, isNil, remove } from 'ramda';
 
 const fromApi: string = 'wss://9944-anagolay-poavalidatorte-a1njzzqy8op.ws-eu64.gitpod.io';
 const toApi: string = 'wss://idiyanale-testnet.anagolay.io';
@@ -36,8 +39,8 @@ function forEachPromise<T>(items: T[], fn: any) {
 }
 
 async function migrate_wfs_and_ops() {
-  let apiSource = await connectToWs(fromApi);
-  let apiDest = await connectToWs(toApi);
+  const apiSource = await connectToWs(fromApi);
+  const apiDest = await connectToWs(toApi);
 
   const keyring = new Keyring({ type: 'sr25519' });
   const sudoPair = keyring.createFromUri(
@@ -61,7 +64,7 @@ async function migrate_wfs_and_ops() {
     const root = find((v: OperationVersion | WorkflowVersion) => v.data.parentId.isNone)(versions);
     let current = root;
     const findChild = (parentId: OperationVersionId | WorkflowVersionId | undefined) =>
-      find((v: OperationVersion | WorkflowVersion) => parentId == v.data.parentId.unwrapOrDefault());
+      find((v: OperationVersion | WorkflowVersion) => parentId === v.data.parentId.unwrapOrDefault());
     let child = findChild(current?.id)(versions);
     while (!isNil(child)) {
       remove(indexOf(child)(versions), 1, versions);
@@ -197,17 +200,17 @@ export async function retrieveWorkflows(chain: ApiPromise): Promise<WorkflowWith
 }
 
 async function paginate() {
-  let apiSource = await connectToWs(toApi);
+  const apiSource = await connectToWs(toApi);
 
-  let ops = await (apiSource.rpc as any).operations.getOperationsByIds([], 0, 10);
+  const ops = await (apiSource.rpc as any).operations.getOperationsByIds([], 0, 10);
   console.log(ops.map((op: Operation) => JSON.stringify(op.toHuman()), null, 4));
 
-  let wfs = await (apiSource.rpc as any).workflows.getWorkflowsByIds([], 0, 10);
+  const wfs = await (apiSource.rpc as any).workflows.getWorkflowsByIds([], 0, 10);
   console.log(wfs.map((wf: Workflow) => JSON.stringify(wf.toHuman()), null, 4));
 }
 
 async function sadas() {
-  let api = await connectToWs(toApi);
+  const api = await connectToWs(toApi);
   const t = await api.query.poe.proofByProofIdAndAccountId.entries<Option<ProofRecord>>();
   t.map(async ([, proof]: [unknown, Option<ProofRecord>]) => {
     const s = proof.unwrap().record;

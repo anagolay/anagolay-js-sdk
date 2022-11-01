@@ -5,8 +5,20 @@
 // this is required to allow for ambient/previous definitions
 import '@polkadot/api-base/types/calls';
 
+import type {
+  Operation,
+  OperationId,
+  OperationVersion,
+  OperationVersionId,
+} from '@anagolay/types/interfaces/operations';
+import type {
+  Workflow,
+  WorkflowId,
+  WorkflowVersion,
+  WorkflowVersionId,
+} from '@anagolay/types/interfaces/workflows';
 import type { ApiTypes, AugmentedCall, DecoratedCallBase } from '@polkadot/api-base/types';
-import type { Bytes, Null, Option, Vec, u32 } from '@polkadot/types-codec';
+import type { Bytes, Null, Option, Vec, u16, u32, u64 } from '@polkadot/types-codec';
 import type { AnyNumber, ITuple } from '@polkadot/types-codec/types';
 import type { OpaqueKeyOwnershipProof } from '@polkadot/types/interfaces/babe';
 import type { CheckInherentsResult, InherentData } from '@polkadot/types/interfaces/blockbuilder';
@@ -19,6 +31,7 @@ import type { FeeDetails, RuntimeDispatchInfo } from '@polkadot/types/interfaces
 import type {
   AccountId,
   Block,
+  Hash,
   Header,
   Index,
   KeyTypeId,
@@ -196,6 +209,37 @@ declare module '@polkadot/api-base/types/calls' {
        **/
       [key: string]: DecoratedCallBase<ApiType>;
     };
+    /** 0xd0b20503a4d3bbc9/1 */
+    operationsApi: {
+      /**
+       * Get a subset of Operations representing a page, given the full set of the ids to paginate and the pagination information
+       **/
+      getOperationsByIds: AugmentedCall<
+        ApiType,
+        (
+          operation_ids: Vec<OperationId> | (OperationId | {} | string | Uint8Array)[],
+          offset: u64 | AnyNumber | Uint8Array,
+          limit: u16 | AnyNumber | Uint8Array,
+          at: Hash | string | Uint8Array
+        ) => Observable<Vec<Operation>>
+      >;
+      /**
+       * Get a subset of OperationVersions representing a page, given the full set of the ids to paginate and the pagination information
+       **/
+      getOperationVersionsByIds: AugmentedCall<
+        ApiType,
+        (
+          operation_version_ids: Vec<OperationVersionId> | (OperationVersionId | {} | string | Uint8Array)[],
+          offset: u64 | AnyNumber | Uint8Array,
+          limit: u16 | AnyNumber | Uint8Array,
+          at: Hash | string | Uint8Array
+        ) => Observable<Vec<OperationVersion>>
+      >;
+      /**
+       * Generic call
+       **/
+      [key: string]: DecoratedCallBase<ApiType>;
+    };
     /** 0xab3c0572291feb8b/1 */
     sessionKeys: {
       /**
@@ -256,6 +300,37 @@ declare module '@polkadot/api-base/types/calls' {
           uxt: Extrinsic | IExtrinsic | string | Uint8Array,
           len: u32 | AnyNumber | Uint8Array
         ) => Observable<RuntimeDispatchInfo>
+      >;
+      /**
+       * Generic call
+       **/
+      [key: string]: DecoratedCallBase<ApiType>;
+    };
+    /** 0xf1ecacfc40875385/1 */
+    workflowsApi: {
+      /**
+       * Get a subset of Workflows representing a page, given the full set of the ids to paginate and the pagination information
+       **/
+      getWorkflowsByIds: AugmentedCall<
+        ApiType,
+        (
+          workflow_ids: Vec<WorkflowId> | (WorkflowId | {} | string | Uint8Array)[],
+          offset: u64 | AnyNumber | Uint8Array,
+          limit: u16 | AnyNumber | Uint8Array,
+          at: Hash | string | Uint8Array
+        ) => Observable<Vec<Workflow>>
+      >;
+      /**
+       * Get a subset of WorkflowVersions representing a page, given the full set of the ids to paginate and the pagination information
+       **/
+      getWorkflowVersionsByIds: AugmentedCall<
+        ApiType,
+        (
+          workflow_version_ids: Vec<WorkflowVersionId> | (WorkflowVersionId | {} | string | Uint8Array)[],
+          offset: u64 | AnyNumber | Uint8Array,
+          limit: u16 | AnyNumber | Uint8Array,
+          at: Hash | string | Uint8Array
+        ) => Observable<Vec<WorkflowVersion>>
       >;
       /**
        * Generic call

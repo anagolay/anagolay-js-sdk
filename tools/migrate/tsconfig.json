@@ -3,7 +3,7 @@
   "compilerOptions": {
     "types": ["heft-jest", "node"],
     "moduleResolution": "node",
-    "module": "esnext",
+    "module": "ES2020",
     "skipLibCheck": true,
     "noUnusedLocals": false
   }

@@ -21,5 +21,15 @@
     //    */
     //   "autoinstallerName": "plugins"
     // }
+    {
+      "autoinstallerName": "rush-plugins",
+      "packageName": "rush-sort-package-json",
+      "pluginName": "rush-sort-package-json"
+    },
+    {
+      "packageName": "rush-init-project-plugin",
+      "pluginName": "rush-init-project-plugin",
+      "autoinstallerName": "rush-plugins" 
+    },
   ]
 }

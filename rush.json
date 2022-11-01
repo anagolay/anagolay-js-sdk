@@ -453,6 +453,11 @@
       "projectFolder": "tools/migrate",
       "reviewCategory": "tools",
       "shouldPublish": false
+    },
+    {
+      "packageName": "testing-package",
+      "reviewCategory": "tools",
+      "projectFolder": "testing-package"
     }
   ]
 }

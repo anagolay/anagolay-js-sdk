@@ -1,4 +1,10 @@
-import { Definitions, DefinitionsTypes } from '@polkadot/types/types';
+import {
+  DefinitionRpc,
+  DefinitionRpcSub,
+  Definitions,
+  DefinitionsCall,
+  DefinitionsTypes,
+} from '@polkadot/types/types';
 
 export const WorkflowsCustomTypes: DefinitionsTypes = {
   OperationVersionReference: {
@@ -58,6 +64,67 @@ export const WorkflowsCustomTypes: DefinitionsTypes = {
   },
 };
 
+const rpc: Record<string, DefinitionRpc | DefinitionRpcSub> = {
+  getWorkflowsByIds: {
+    description:
+      'Get a subset of Workflows representing a page, given the full set of the ids to paginate and the pagination information',
+    params: [
+      {
+        name: 'workflow_ids',
+        type: 'Vec<WorkflowId>',
+      },
+      {
+        name: 'offset',
+        type: 'u64',
+      },
+      {
+        name: 'limit',
+        type: 'u16',
+      },
+      {
+        name: 'at',
+        type: 'Hash',
+        isOptional: true,
+      },
+    ],
+    type: 'Vec<Workflow>',
+  },
+  getWorkflowVersionsByIds: {
+    description:
+      'Get a subset of WorkflowVersions representing a page, given the full set of the ids to paginate and the pagination information',
+    params: [
+      {
+        name: 'workflow_version_ids',
+        type: 'Vec<WorkflowVersionId>',
+      },
+      {
+        name: 'offset',
+        type: 'u64',
+      },
+      {
+        name: 'limit',
+        type: 'u16',
+      },
+      {
+        name: 'at',
+        type: 'Hash',
+        isOptional: true,
+      },
+    ],
+    type: 'Vec<WorkflowVersion>',
+  },
+};
+
+const runtime: DefinitionsCall = {
+  WorkflowsApi: [
+    {
+      methods: rpc,
+      version: 1,
+    },
+  ],
+};
 export default {
   types: WorkflowsCustomTypes,
+  runtime,
+  rpc,
 } as Definitions;
