@@ -1,3 +1,3 @@
 <div class="lg:container mx-auto">
-  <slot />
+	<slot />
 </div>

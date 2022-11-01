@@ -79,11 +79,11 @@ export const StatementsCustomTypes: DefinitionsTypes = {
 };
 
 export default {
-  typeAlias: {
-    statements: {
-      AngolaySignature: 'Signature',
-      AngolayStatement: 'Statement',
-    },
-  },
+  // typeAlias: {
+  //   statements: {
+  //     AnagolaySignature: 'Signature',
+  //     AnagolayStatement: 'Statement',
+  //   },
+  // },
   types: StatementsCustomTypes,
 } as Definitions;

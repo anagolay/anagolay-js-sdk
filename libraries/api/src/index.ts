@@ -1,11 +1,11 @@
 /**
  * @module @anagolay/api
  */
-import '@anagolay/types/augment-api';
 
 export * from './connection';
-export * from './utils/index';
-import * as pallets from './pallets/index';
+export * from './utils';
+import * as pallets from './pallets';
+export * from './pallets/operations/interfaces';
 
 // this is NOT smart
 export * from '@polkadot/api';

@@ -143,12 +143,16 @@
       "allowedCategories": [ "libraries", "tools" ]
     },
     {
+      "name": "@sentry/browser",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
       "name": "@sentry/node",
       "allowedCategories": [ "libraries" ]
     },
     {
       "name": "@sentry/tracing",
-      "allowedCategories": [ "libraries" ]
+      "allowedCategories": [ "libraries", "webapp" ]
     },
     {
       "name": "@sveltejs/adapter-auto",
@@ -160,6 +164,10 @@
     },
     {
       "name": "@sveltejs/kit",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
+      "name": "@sveltejs/package",
       "allowedCategories": [ "webapp" ]
     },
     {
@@ -231,6 +239,10 @@
       "allowedCategories": [ "webapp" ]
     },
     {
+      "name": "debug",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
       "name": "drawflow",
       "allowedCategories": [ "webapp" ]
     },
@@ -279,6 +291,10 @@
       "allowedCategories": [ "libraries" ]
     },
     {
+      "name": "identicon.js",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
       "name": "inquirer",
       "allowedCategories": [ "libraries", "tools" ]
     },
@@ -319,6 +335,14 @@
       "allowedCategories": [ "webapp" ]
     },
     {
+      "name": "postcss-import",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
+      "name": "postcss-nesting",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
       "name": "prettier",
       "allowedCategories": [ "webapp" ]
     },
@@ -345,6 +369,10 @@
     {
       "name": "remeda",
       "allowedCategories": [ "webapp" ]
+    },
+    {
+      "name": "resolve.exports",
+      "allowedCategories": [ "tools" ]
     },
     {
       "name": "rollup-plugin-node-polyfills",
@@ -399,12 +427,16 @@
       "allowedCategories": [ "webapp" ]
     },
     {
+      "name": "theme-change",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
       "name": "ts-loader",
       "allowedCategories": [ "libraries", "tools" ]
     },
     {
       "name": "ts-node",
-      "allowedCategories": [ "libraries" ]
+      "allowedCategories": [ "libraries", "tools" ]
     },
     {
       "name": "ts-node-dev",
@@ -424,6 +456,10 @@
     },
     {
       "name": "vite",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
+      "name": "vite-plugin-externals",
       "allowedCategories": [ "webapp" ]
     },
     {

@@ -7,4 +7,10 @@
 
 when running the type generation make sure that you return the `types.ts` to orig state and go through the changes int he generated code and return the lookup imports
 
+== Resources
 
+
+- https://substrate.stackexchange.com/questions/2210/custom-rpcs-not-decorated
+- https://polkadot.js.org/docs/api/start/rpc.custom/
+- https://github.dev/polkadot-js/apps/tree/master/packages/apps-config/src/api/spec
+- https://substrate.stackexchange.com/questions/1470/polkadotjs-how-to-properly-setup-api-for-custom-rpc-invocation

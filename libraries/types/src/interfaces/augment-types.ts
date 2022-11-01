@@ -290,6 +290,7 @@ import type {
   ContractContractSpecV1,
   ContractContractSpecV2,
   ContractContractSpecV3,
+  ContractContractSpecV4,
   ContractCryptoHasher,
   ContractDiscriminant,
   ContractDisplayName,
@@ -321,6 +322,7 @@ import type {
   ContractMetadataV1,
   ContractMetadataV2,
   ContractMetadataV3,
+  ContractMetadataV4,
   ContractProject,
   ContractProjectContract,
   ContractProjectInfo,
@@ -780,6 +782,7 @@ import type {
   AccountId,
   AccountId20,
   AccountId32,
+  AccountId33,
   AccountIdOf,
   AccountIndex,
   Address,
@@ -871,6 +874,8 @@ import type {
   ValidatorIdOf,
   Weight,
   WeightMultiplier,
+  WeightV1,
+  WeightV2,
 } from '@polkadot/types/interfaces/runtime';
 import type {
   Si0Field,
@@ -1242,6 +1247,7 @@ declare module '@polkadot/types/types/registry' {
     AccountId: AccountId;
     AccountId20: AccountId20;
     AccountId32: AccountId32;
+    AccountId33: AccountId33;
     AccountIdOf: AccountIdOf;
     AccountIndex: AccountIndex;
     AccountInfo: AccountInfo;
@@ -1423,6 +1429,7 @@ declare module '@polkadot/types/types/registry' {
     ContractContractSpecV1: ContractContractSpecV1;
     ContractContractSpecV2: ContractContractSpecV2;
     ContractContractSpecV3: ContractContractSpecV3;
+    ContractContractSpecV4: ContractContractSpecV4;
     ContractCryptoHasher: ContractCryptoHasher;
     ContractDiscriminant: ContractDiscriminant;
     ContractDisplayName: ContractDisplayName;
@@ -1466,6 +1473,7 @@ declare module '@polkadot/types/types/registry' {
     ContractMetadataV1: ContractMetadataV1;
     ContractMetadataV2: ContractMetadataV2;
     ContractMetadataV3: ContractMetadataV3;
+    ContractMetadataV4: ContractMetadataV4;
     ContractProject: ContractProject;
     ContractProjectContract: ContractProjectContract;
     ContractProjectInfo: ContractProjectInfo;
@@ -2350,6 +2358,8 @@ declare module '@polkadot/types/types/registry' {
     WeightMultiplier: WeightMultiplier;
     WeightPerClass: WeightPerClass;
     WeightToFeeCoefficient: WeightToFeeCoefficient;
+    WeightV1: WeightV1;
+    WeightV2: WeightV2;
     WildFungibility: WildFungibility;
     WildFungibilityV0: WildFungibilityV0;
     WildFungibilityV1: WildFungibilityV1;

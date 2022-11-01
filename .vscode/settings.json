@@ -1,4 +1,11 @@
 {
+  "files.associations": {
+    "*.json": "jsonc",
+    "**/config/*.json": "jsonc",
+    "package.json": "json",
+    "*.cjs": "javascript",
+    ".devops/ci/*.gitlab-ci.yml": "yaml"
+  },
   "editor.codeActionsOnSave": {
     "source.fixAll": true
   },
@@ -29,13 +36,7 @@
     },
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "javascript.validate.enable": false,
-  "files.associations": {
-    "*.json": "jsonc",
-    "**/config/*.json": "jsonc",
-    "package.json": "json",
-    "*.cjs": "javascript"
-  },
+  // "javascript.validate.enable": false,
   "npm.packageManager": "pnpm",
   "cSpell.words": [
     "anagolay",
@@ -60,9 +61,14 @@
     "**/*.code-search": true,
     "/tmp": true,
     "temp": true,
-    "apps/app/.svelte-kit": true,
-    "apps/app/build": true
+    "app/.svelte-kit": true,
+    "app/build": true
   },
+  "eslint.enable": true,
+  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
+  "eslint.packageManager": "pnpm",
+  "terminal.integrated.lineHeight": 1.2,
+  "terminal.integrated.letterSpacing": 1,
   "eslint.alwaysShowStatus": true,
   "eslint.lintTask.enable": true,
   "eslint.probe": [
@@ -80,7 +86,11 @@
     "titleBar.activeBackground": "#3659c2"
   },
   "terminal.integrated.scrollback": 10000,
-  "editor.stickyScroll.enabled": true
+  "editor.stickyScroll.enabled": true,
+  "zenMode.hideTabs": false,
+  "zenMode.fullScreen": false,
+  "git.autofetch": true,
+  "scm.defaultViewMode": "tree"
   // "javascript.preferences.importModuleSpecifierEnding": "js",
   // "typescript.preferences.importModuleSpecifierEnding": "js"
 }

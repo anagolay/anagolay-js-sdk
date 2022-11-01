@@ -4,6 +4,13 @@
     "types": ["heft-jest", "node"],
     "target": "esnext",
     "lib": ["esnext", "scripthost", "dom", "WebWorker"],
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      // "@anagolay/types": ["../types/lib"],
+      // "@anagolay/types/*": ["../types/lib/*"],
+      "@anagolay/types/augment-api": ["../types/lib/augment-api"]
+    }
   }
+  // "references": [{ "path": "../types/tsconfig.json" }]
 }

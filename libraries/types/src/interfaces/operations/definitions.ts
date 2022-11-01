@@ -1,6 +1,14 @@
-import { Definitions, DefinitionsTypes } from '@polkadot/types/types';
+import {
+  DefinitionRpc,
+  DefinitionRpcSub,
+  Definitions,
+  DefinitionsCall,
+  RegistryTypes,
+} from '@polkadot/types/types';
 
-export const OperationsCustomTypes: DefinitionsTypes = {
+const OperationsCustomTypes: RegistryTypes = {
+  OperationId: {},
+  OperationVersionId: {},
   OperationData: {
     /// max 128(0.12kb) characters, slugify to use _
     name: 'Characters',
@@ -27,7 +35,6 @@ export const OperationsCustomTypes: DefinitionsTypes = {
     features: 'BoundedVec<Characters, Get<u32>>',
   },
   OperationExtra: {},
-  OperationId: {},
   Operation: {
     id: 'OperationId',
     data: 'OperationData',
@@ -45,6 +52,11 @@ export const OperationsCustomTypes: DefinitionsTypes = {
       Wasm: 'WasmArtifactSubType',
     },
   },
+  OperationVersion: {
+    id: 'OperationVersionId',
+    data: 'OperationVersionData',
+    extra: 'Option<AnagolayVersionExtra>',
+  },
   OperationArtifactStructure: {
     artifactType: 'OperationArtifactType',
     fileExtension: 'Characters',
@@ -55,12 +67,6 @@ export const OperationsCustomTypes: DefinitionsTypes = {
     parentId: 'Option<OperationVersionId>',
     artifacts: 'BoundedVec<OperationArtifactStructure, Get<u32>>',
   },
-  OperationVersionId: {},
-  OperationVersion: {
-    id: 'OperationVersionId',
-    data: 'OperationVersionData',
-    extra: 'Option<AnagolayVersionExtra>',
-  },
   OperationVersionRecord: {
     record: 'OperationVersion',
     accountId: 'AccountId',
@@ -68,7 +74,68 @@ export const OperationsCustomTypes: DefinitionsTypes = {
   },
 };
 
-// For the Network
+const rpc: Record<string, DefinitionRpc | DefinitionRpcSub> = {
+  getOperationsByIds: {
+    description:
+      'Get a subset of Operations representing a page, given the full set of the ids to paginate and the pagination information',
+    params: [
+      {
+        name: 'operation_ids',
+        type: 'Vec<OperationId>',
+      },
+      {
+        name: 'offset',
+        type: 'u64',
+      },
+      {
+        name: 'limit',
+        type: 'u16',
+      },
+      {
+        name: 'at',
+        type: 'Hash',
+        isOptional: true,
+      },
+    ],
+    type: 'Vec<Operation>',
+  },
+  getOperationVersionsByIds: {
+    description:
+      'Get a subset of OperationVersions representing a page, given the full set of the ids to paginate and the pagination information',
+    params: [
+      {
+        name: 'operation_version_ids',
+        type: 'Vec<OperationVersionId>',
+      },
+      {
+        name: 'offset',
+        type: 'u64',
+      },
+      {
+        name: 'limit',
+        type: 'u16',
+      },
+      {
+        name: 'at',
+        type: 'Hash',
+        isOptional: true,
+      },
+    ],
+    type: 'Vec<OperationVersion>',
+  },
+};
+
+const runtime: DefinitionsCall = {
+  OperationsApi: [
+    {
+      methods: rpc,
+      version: 1,
+    },
+  ],
+};
+
 export default {
   types: OperationsCustomTypes,
+  runtime,
+  rpc,
 } as Definitions;

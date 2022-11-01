@@ -1,6 +1,8 @@
 module.exports = {
-  plugins: {
-    tailwindcss: { config: './tailwind.config.cjs' },
-    autoprefixer: {},
-  },
+	plugins: [
+		process.env.NODE_ENV === 'production' ? null : require('postcss-import'),
+		require('tailwindcss/nesting'),
+		require('tailwindcss'),
+		require('autoprefixer')
+	]
 };

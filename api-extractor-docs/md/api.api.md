@@ -7,11 +7,16 @@
 /// <reference types="node" />
 
 import { AddressOrPair } from '@polkadot/api/types';
+import { AnOperation } from '@anagolay/types';
+import { AnOperationVersion } from '@anagolay/types';
 import { AnProofData } from '@anagolay/types';
 import { AnStatementData } from '@anagolay/types';
 import { ApiPromise } from '@polkadot/api';
+import { Codec } from '@polkadot/types/types';
 import { EventEmitter } from 'events';
 import type { ISubmittableResult } from '@polkadot/types/types';
+import { OperationData } from '@anagolay/types';
+import { OperationVersionData } from '@anagolay/types';
 import { SignerOptions } from '@polkadot/api/types';
 import { SubmittableExtrinsic } from '@polkadot/api/types';
 
@@ -31,17 +36,38 @@ declare namespace config_2 {
     }
 }
 
+declare namespace config_3 {
+    export {
+        EVENT_NAME_BATCH_3 as EVENT_NAME_BATCH,
+        EVENT_NAME_SINGLE_3 as EVENT_NAME_SINGLE,
+        EVENT_NAME_ERROR_3 as EVENT_NAME_ERROR
+    }
+}
+
 // @public
 export function connectToWs(connectTo?: string): Promise<ApiPromise>;
 
 // @public
-function createSubmittableExtrinsic(d: AnProofData): SubmittableExtrinsic<'promise'>;
+export function connectToWsWithCorrectRpc(connectTo?: string): Promise<ApiPromise>;
+
+// @public
+export function convertModel<T>(polkadotModel: Codec, isExtended?: boolean): T;
+
+// @public
+function createSubmittableExtrinsic(operationData: OperationData, versionData: OperationVersionData): SubmittableExtrinsic<'promise'>;
+
+// @public
+function createSubmittableExtrinsic_2(d: AnProofData): SubmittableExtrinsic<'promise'>;
 
 // @public
 function createSubmittableExtrinsicOfCopyright(d: AnStatementData): SubmittableExtrinsic<'promise'>;
 
 // @public
 function createSubmittableExtrinsicOfOwnership(d: AnStatementData): SubmittableExtrinsic<'promise'>;
+
+// @public (undocumented)
+export class CustomEventEmitter extends EventEmitter {
+}
 
 // @public (undocumented)
 export const defaultChainToConnect: string;
@@ -53,10 +79,16 @@ const EVENT_NAME_BATCH: string;
 const EVENT_NAME_BATCH_2: string;
 
 // @public (undocumented)
+const EVENT_NAME_BATCH_3: string;
+
+// @public (undocumented)
 const EVENT_NAME_ERROR: string;
 
 // @public (undocumented)
 const EVENT_NAME_ERROR_2: string;
+
+// @public (undocumented)
+const EVENT_NAME_ERROR_3: string;
 
 // @public (undocumented)
 const EVENT_NAME_SINGLE: string;
@@ -64,8 +96,19 @@ const EVENT_NAME_SINGLE: string;
 // @public (undocumented)
 const EVENT_NAME_SINGLE_2: string;
 
+// @public (undocumented)
+const EVENT_NAME_SINGLE_3: string;
+
 // @public
 export function getCachedApi(): ApiPromise;
+
+// @public (undocumented)
+export interface ICustomEventEmitter extends EventEmitter {
+    // (undocumented)
+    emit(event: string | symbol, payload: IEventMessage): boolean;
+    // (undocumented)
+    on(event: string, listener: (data: IEventMessage) => void): this;
+}
 
 // @public
 export interface IEventMessage {
@@ -80,10 +123,26 @@ export interface IEventMessage {
     message?: string;
 }
 
-// Warning: (ae-forgotten-export) The symbol "ICustomEventEmitter" needs to be exported by the entry point index.d.ts
-//
+// @public (undocumented)
+export interface IOperationWithVersions {
+    // (undocumented)
+    operation: AnOperation;
+    // (undocumented)
+    versions: AnOperationVersion[];
+}
+
 // @public
 export function networkCallback(params: ISubmittableResult, broadcast: ICustomEventEmitter, eventName: string): Promise<void>;
+
+declare namespace operations {
+    export {
+        palletName,
+        config,
+        save,
+        createSubmittableExtrinsic,
+        retrieveOperationsPaged
+    }
+}
 
 // @public (undocumented)
 const palletName: string;
@@ -91,8 +150,12 @@ const palletName: string;
 // @public (undocumented)
 const palletName_2: string;
 
+// @public (undocumented)
+const palletName_3: string;
+
 declare namespace pallets {
     export {
+        operations,
         poe,
         statements
     }
@@ -101,23 +164,29 @@ export { pallets }
 
 declare namespace poe {
     export {
-        palletName,
-        config,
-        save,
-        createSubmittableExtrinsic
+        palletName_2 as palletName,
+        config_2 as config,
+        save_2 as save,
+        createSubmittableExtrinsic_2 as createSubmittableExtrinsic
     }
 }
 
 // @public
-function save(d: AnProofData, signer: AddressOrPair, options?: Partial<SignerOptions>): Promise<ICustomEventEmitter>;
+function retrieveOperationsPaged(pageNum: number, pageSize: number): Promise<IOperationWithVersions[]>;
+
+// @public
+function save(operationData: OperationData, versionData: OperationVersionData, signer: AddressOrPair, options?: Partial<SignerOptions>): Promise<ICustomEventEmitter>;
+
+// @public
+function save_2(d: AnProofData, signer: AddressOrPair, options?: Partial<SignerOptions>): Promise<ICustomEventEmitter>;
 
 // @public
 function saveOwnership(d: AnStatementData, signer: AddressOrPair, options?: Partial<SignerOptions>): Promise<ICustomEventEmitter>;
 
 declare namespace statements {
     export {
-        palletName_2 as palletName,
-        config_2 as config,
+        palletName_3 as palletName,
+        config_3 as config,
         saveOwnership,
         createSubmittableExtrinsicOfCopyright,
         createSubmittableExtrinsicOfOwnership

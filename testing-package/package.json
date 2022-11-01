@@ -1,0 +1,59 @@
+{
+  "name": "testing-package",
+  "version": "0.0.0",
+  "description": "we are testing bunch of things here. some things end up in the gitlab test.",
+  "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.com/anagolay/network-js-sdk.git",
+    "directory": ""
+  },
+  "license": "AGPL3",
+  "author": "did:substrate:GHm6gp6khjcxQvnbnSsHdYejsFK1nNVxcGyGAsbDfsymtLr",
+  "type": "module",
+  "exports": {
+    ".": {
+      "require": "./lib-commonjs/index.js",
+      "import": "./lib/index.js"
+    },
+    "./*": {
+      "require": "./lib-commonjs/*.js",
+      "import": "./lib/*.js"
+    }
+  },
+  "main": "./lib-commonjs/index.js",
+  "module": "./lib/index.js",
+  "types": "./lib/api.d.ts",
+  "scripts": {
+    "build": "heft build --clean",
+    "start": "heft start",
+    "watch": "heft build --clean --watch",
+    "watch:test": "heft test --clean --watch",
+    "serve": "node ./lib/start.js",
+    "fix-lib": "node ./config/add-js-to-esm.mjs ./lib"
+  },
+  "dependencies": {
+    "@anagolay/api": "workspace:*",
+    "@anagolay/types": "workspace:*",
+    "@anagolay/util": "workspace:*",
+    "@polkadot/api-augment": "9.6.1",
+    "resolve.exports": "1.1.0",
+    "ramda": "0.28.0"
+  },
+  "devDependencies": {
+    "@microsoft/api-extractor": "7.29.2",
+    "@rushstack/eslint-config": "3.0.0",
+    "@rushstack/heft": "0.47.3",
+    "@rushstack/heft-jest-plugin": "0.3.25",
+    "@rushstack/heft-node-rig": "1.10.2",
+    "@types/heft-jest": "1.0.3",
+    "@types/node": "18.7.6",
+    "eslint": "8.22.0",
+    "eslint-plugin-simple-import-sort": "7.0.0",
+    "eslint-plugin-unused-imports": "2.0.0",
+    "typescript": "4.7.4",
+    "nodemon": "2.0.15",
+    "ts-node": "10.9.1",
+    "@types/ramda": "0.27.64"
+  }
+}

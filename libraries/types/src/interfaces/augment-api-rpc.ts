@@ -5,6 +5,18 @@
 // this is required to allow for ambient/previous definitions
 import '@polkadot/rpc-core/types/jsonrpc';
 
+import type {
+  Operation,
+  OperationId,
+  OperationVersion,
+  OperationVersionId,
+} from '@anagolay/types/interfaces/operations';
+import type {
+  Workflow,
+  WorkflowId,
+  WorkflowVersion,
+  WorkflowVersionId,
+} from '@anagolay/types/interfaces/workflows';
 import type { AugmentedRpc } from '@polkadot/rpc-core/types';
 import type { Metadata, StorageKey } from '@polkadot/types';
 import type {
@@ -19,6 +31,7 @@ import type {
   Vec,
   bool,
   f64,
+  u16,
   u32,
   u64,
 } from '@polkadot/types-codec';
@@ -267,6 +280,7 @@ declare module '@polkadot/rpc-core/types/jsonrpc' {
     };
     contracts: {
       /**
+       * @deprecated Use the runtime interface `api.call.contractsApi.call` instead
        * Executes a call to a contract
        **/
       call: AugmentedRpc<
@@ -287,6 +301,7 @@ declare module '@polkadot/rpc-core/types/jsonrpc' {
         ) => Observable<ContractExecResult>
       >;
       /**
+       * @deprecated Use the runtime interface `api.call.contractsApi.getStorage` instead
        * Returns the value under a specified storage key in a contract
        **/
       getStorage: AugmentedRpc<
@@ -297,6 +312,7 @@ declare module '@polkadot/rpc-core/types/jsonrpc' {
         ) => Observable<Option<Bytes>>
       >;
       /**
+       * @deprecated Use the runtime interface `api.call.contractsApi.instantiate` instead
        * Instantiate a new contract
        **/
       instantiate: AugmentedRpc<
@@ -318,6 +334,7 @@ declare module '@polkadot/rpc-core/types/jsonrpc' {
         ) => Observable<ContractInstantiateResult>
       >;
       /**
+       * @deprecated Not available in newer versions of the contracts interfaces
        * Returns the projected time a given contract will be able to sustain paying its rent
        **/
       rentProjection: AugmentedRpc<
@@ -327,6 +344,7 @@ declare module '@polkadot/rpc-core/types/jsonrpc' {
         ) => Observable<Option<BlockNumber>>
       >;
       /**
+       * @deprecated Use the runtime interface `api.call.contractsApi.uploadCode` instead
        * Upload new code without instantiating a contract from it
        **/
       uploadCode: AugmentedRpc<
@@ -722,6 +740,30 @@ declare module '@polkadot/rpc-core/types/jsonrpc' {
         ) => Observable<Null>
       >;
     };
+    operations: {
+      /**
+       * Get a subset of OperationVersions representing a page, given the full set of the ids to paginate and the pagination information
+       **/
+      getOperationVersionsByIds: AugmentedRpc<
+        (
+          operation_version_ids: Vec<OperationVersionId> | (OperationVersionId | {} | string | Uint8Array)[],
+          offset: u64 | AnyNumber | Uint8Array,
+          limit: u16 | AnyNumber | Uint8Array,
+          at?: Hash | string | Uint8Array
+        ) => Observable<Vec<OperationVersion>>
+      >;
+      /**
+       * Get a subset of Operations representing a page, given the full set of the ids to paginate and the pagination information
+       **/
+      getOperationsByIds: AugmentedRpc<
+        (
+          operation_ids: Vec<OperationId> | (OperationId | {} | string | Uint8Array)[],
+          offset: u64 | AnyNumber | Uint8Array,
+          limit: u16 | AnyNumber | Uint8Array,
+          at?: Hash | string | Uint8Array
+        ) => Observable<Vec<Operation>>
+      >;
+    };
     payment: {
       /**
        * Query the detailed fee of a given encoded extrinsic
@@ -818,6 +860,7 @@ declare module '@polkadot/rpc-core/types/jsonrpc' {
         ) => Observable<u64>
       >;
       /**
+       * @deprecated Use `api.rpc.state.getKeysPaged` to retrieve keys
        * Retrieves the keys with a certain prefix
        **/
       getKeys: AugmentedRpc<
@@ -842,6 +885,7 @@ declare module '@polkadot/rpc-core/types/jsonrpc' {
        **/
       getMetadata: AugmentedRpc<(at?: BlockHash | string | Uint8Array) => Observable<Metadata>>;
       /**
+       * @deprecated Use `api.rpc.state.getKeysPaged` to retrieve keys
        * Returns the keys with prefix, leave empty to get all the keys (deprecated: Use getKeysPaged)
        **/
       getPairs: AugmentedRpc<
@@ -1032,6 +1076,30 @@ declare module '@polkadot/rpc-core/types/jsonrpc' {
        * Returns sha3 of the given data
        **/
       sha3: AugmentedRpc<(data: Bytes | string | Uint8Array) => Observable<H256>>;
+    };
+    workflows: {
+      /**
+       * Get a subset of WorkflowVersions representing a page, given the full set of the ids to paginate and the pagination information
+       **/
+      getWorkflowVersionsByIds: AugmentedRpc<
+        (
+          workflow_version_ids: Vec<WorkflowVersionId> | (WorkflowVersionId | {} | string | Uint8Array)[],
+          offset: u64 | AnyNumber | Uint8Array,
+          limit: u16 | AnyNumber | Uint8Array,
+          at?: Hash | string | Uint8Array
+        ) => Observable<Vec<WorkflowVersion>>
+      >;
+      /**
+       * Get a subset of Workflows representing a page, given the full set of the ids to paginate and the pagination information
+       **/
+      getWorkflowsByIds: AugmentedRpc<
+        (
+          workflow_ids: Vec<WorkflowId> | (WorkflowId | {} | string | Uint8Array)[],
+          offset: u64 | AnyNumber | Uint8Array,
+          limit: u16 | AnyNumber | Uint8Array,
+          at?: Hash | string | Uint8Array
+        ) => Observable<Vec<Workflow>>
+      >;
     };
   } // RpcInterface
 } // declare module

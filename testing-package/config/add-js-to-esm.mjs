@@ -1,0 +1,1 @@
+../../common/scripts/add-js-to-esm.mjs

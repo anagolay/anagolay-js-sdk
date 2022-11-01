@@ -1,72 +1,76 @@
 {
   "name": "@anagolay/types",
   "version": "0.2.0",
-  "license": "GPL3",
-  "licenseFile": "./LICENSE",
   "description": "Anagolay Custom and Auto-generated types and interfaces",
-  "author": "did:substrate:GHm6gp6khjcxQvnbnSsHdYejsFK1nNVxcGyGAsbDfsymtLr",
-  "module": "./lib/index.js",
-  "main": "./lib-commonjs/index.js",
-  "types": "./lib/types.d.ts",
   "keywords": [
     "anagolay",
     "blockchain",
     "network"
   ],
-  "exports": {
-    ".": {
-      "require": "./lib-commonjs/index.js",
-      "import": "./lib/index.js"
-    },
-    "./*": {
-      "require": "./lib-commonjs/*.js",
-      "import": "./lib/*.js"
-    }
-  },
-  "scripts": {
-    "generate": "pnpm update:metadata && pnpm gen:defs && pnpm gen:meta && pnpm lint:fix && rush prettyquick",
-    "gen:types": "pnpm gen:defs && pnpm gen:meta && pnpm lint:fix",
-    "build": "heft build --clean && pnpm fix-lib",
-    "fix-lib": "node ./config/add-js-to-esm.mjs",
-    "watch": "heft build --clean --watch",
-    "lint:fix": "eslint --quiet ./src --ext .js,.jsx,.ts,.tsx --fix",
-    "gen:defs": "ts-node --skip-project node_modules/@polkadot/typegen/scripts/polkadot-types-from-defs.cjs --package @anagolay/types/interfaces --input ./src/interfaces --endpoint ./metadata/anagolay.json",
-    "gen:meta": "ts-node --skip-project node_modules/@polkadot/typegen/scripts/polkadot-types-from-chain.cjs --package @anagolay/types/interfaces --endpoint ./metadata/anagolay.json --output ./src/interfaces",
-    "package": "bash ../../common/scripts/package.sh",
-    "update:metadata": "node ./scripts/fetchMetadata.cjs -o './metadata/anagolay.json' -e 'wss://idiyanale-testnet.anagolay.io'"
-  },
-  "dependencies": {
-    "@polkadot/api": "9.2.2",
-    "@polkadot/metadata": "4.17.1",
-    "@polkadot/rpc-core": "9.2.2",
-    "@polkadot/types": "9.2.2",
-    "@polkadot/api-base": "9.2.2",
-    "@polkadot/typegen": "9.2.2",
-    "yargs": "17.5.1",
-    "@polkadot/types-codec": "9.2.2"
-  },
-  "devDependencies": {
-    "tslib": "2.4.0",
-    "typescript": "4.7.4",
-    "@rushstack/heft-web-rig": "0.11.3",
-    "@microsoft/api-extractor": "7.29.2",
-    "@rushstack/eslint-config": "3.0.0",
-    "@rushstack/heft": "0.47.3",
-    "@rushstack/heft-jest-plugin": "0.3.25",
-    "@types/heft-jest": "1.0.3",
-    "@types/node": "18.7.6",
-    "eslint": "8.22.0",
-    "eslint-plugin-simple-import-sort": "7.0.0",
-    "eslint-plugin-unused-imports": "2.0.0",
-    "ts-node": "10.9.1"
+  "homepage": "https://gitlab.com/anagolay/network-js-sdk/-/tree/master/sdk/types#readme",
+  "bugs": {
+    "url": "https://gitlab.com/anagolay/network-js-sdk/issues"
   },
   "repository": {
     "type": "git",
     "url": "https://gitlab.com/anagolay/network-js-sdk.git",
     "directory": "sdk/types"
   },
-  "bugs": {
-    "url": "https://gitlab.com/anagolay/network-js-sdk/issues"
+  "license": "GPL3",
+  "author": "did:substrate:GHm6gp6khjcxQvnbnSsHdYejsFK1nNVxcGyGAsbDfsymtLr",
+  "exports": {
+    ".": {
+      "require": "./lib-commonjs/index.js",
+      "import": "./lib/index.js"
+    },
+    "./augment-api": {
+      "require": "./lib-commonjs/augment-api.js",
+      "import": "./lib/augment-api.js"
+    },
+    "./*": {
+      "require": "./lib-commonjs/*.js",
+      "import": "./lib/*.js"
+    }
   },
-  "homepage": "https://gitlab.com/anagolay/network-js-sdk/-/tree/master/sdk/types#readme"
+  "main": "./lib-commonjs/index.js",
+  "module": "./lib/index.js",
+  "types": "./lib/types.d.ts",
+  "scripts": {
+    "build": "heft build --clean && pnpm fix-lib",
+    "fix-lib": "node ./config/add-js-to-esm.mjs ./lib",
+    "gen:defs": "ts-node --skip-project node_modules/@polkadot/typegen/scripts/polkadot-types-from-defs.cjs --package @anagolay/types/interfaces --input ./src/interfaces --endpoint ./metadata/anagolay.json",
+    "gen:meta": "ts-node --skip-project node_modules/@polkadot/typegen/scripts/polkadot-types-from-chain.cjs --package @anagolay/types/interfaces --endpoint ./metadata/anagolay.json --output ./src/interfaces",
+    "gen:types": "pnpm gen:defs && pnpm gen:meta && pnpm lint:fix",
+    "generate": "pnpm update:metadata && pnpm gen:defs && pnpm gen:meta && pnpm lint:fix && rush prettyquick",
+    "lint:fix": "eslint --quiet ./src --ext .js,.jsx,.ts,.tsx --fix",
+    "package": "bash ../../common/scripts/package.sh",
+    "update:metadata": "node ./scripts/fetchMetadata.cjs -o './metadata/anagolay.json' -e 'wss://idiyanale-testnet.anagolay.io'",
+    "watch": "heft build --clean --watch"
+  },
+  "dependencies": {
+    "@polkadot/api": "9.6.1",
+    "@polkadot/api-base": "9.6.1",
+    "@polkadot/metadata": "4.17.1",
+    "@polkadot/rpc-core": "9.6.1",
+    "@polkadot/typegen": "9.6.1",
+    "@polkadot/types": "9.6.1",
+    "@polkadot/types-codec": "9.6.1",
+    "yargs": "17.5.1"
+  },
+  "devDependencies": {
+    "@microsoft/api-extractor": "7.29.2",
+    "@rushstack/eslint-config": "3.0.0",
+    "@rushstack/heft": "0.47.3",
+    "@rushstack/heft-jest-plugin": "0.3.25",
+    "@rushstack/heft-web-rig": "0.11.3",
+    "@types/heft-jest": "1.0.3",
+    "@types/node": "18.7.6",
+    "eslint": "8.22.0",
+    "eslint-plugin-simple-import-sort": "7.0.0",
+    "eslint-plugin-unused-imports": "2.0.0",
+    "ts-node": "10.9.1",
+    "tslib": "2.4.0",
+    "typescript": "4.7.4"
+  },
+  "licenseFile": "./LICENSE"
 }

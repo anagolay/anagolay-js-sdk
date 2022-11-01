@@ -29,20 +29,20 @@
     "@polkadot/metadata": "4.17.1",
 
     // these follow same versioning
-    "@polkadot/util": "10.1.4",
-    "@polkadot/util-crypto": "10.1.4",
-    "@polkadot/keyring": "10.1.4",
+    "@polkadot/util": "10.1.11",
+    "@polkadot/util-crypto": "10.1.11",
+    "@polkadot/keyring": "10.1.11",
     // these follow same versioning
     
     
     // these follow same versioning
-    "@polkadot/api": "9.2.2",
-    "@polkadot/types": "9.2.2",
-    "@polkadot/api-augment": "9.2.2",
-    "@polkadot/types-codec": "9.2.2",
-    "@polkadot/api-base": "9.2.2",
-    "@polkadot/rpc-core": "9.2.2",
-    "@polkadot/typegen": "9.2.2",
+    "@polkadot/api": "9.6.1",
+    "@polkadot/types": "9.6.1",
+    "@polkadot/api-augment": "9.6.1",
+    "@polkadot/types-codec": "9.6.1",
+    "@polkadot/api-base": "9.6.1",
+    "@polkadot/rpc-core": "9.6.1",
+    "@polkadot/typegen": "9.6.1",
     // these follow same versioning
     
     // extension

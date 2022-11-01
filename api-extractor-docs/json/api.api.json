@@ -231,6 +231,167 @@
           "name": "connectToWs"
         },
         {
+          "kind": "Function",
+          "canonicalReference": "@anagolay/api!connectToWsWithCorrectRpc:function(1)",
+          "docComment": "/**\n * THIS IS THE CONNECTION WITH REAL RPCS FROM THE DEFINITIONS. IT IS FAILING NOW, SO I MADE IT FOR TESTING This includes the types as well\n *\n * @param connectTo - \n *\n * @returns \n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function connectToWsWithCorrectRpc(connectTo?: "
+            },
+            {
+              "kind": "Content",
+              "text": "string"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Reference",
+              "text": "Promise",
+              "canonicalReference": "!Promise:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "<"
+            },
+            {
+              "kind": "Reference",
+              "text": "ApiPromise",
+              "canonicalReference": "@polkadot/api!ApiPromise:class"
+            },
+            {
+              "kind": "Content",
+              "text": ">"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 3,
+            "endIndex": 7
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "connectTo",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isOptional": true
+            }
+          ],
+          "name": "connectToWsWithCorrectRpc"
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "@anagolay/api!convertModel:function(1)",
+          "docComment": "/**\n * Converts the model from polkadot to anagolay\n *\n * @remarks\n *\n * https://ipfs.anagolay.network/ipfs/QmNuZM4KGfyTMZr8DSrN5xgaMShHgCyXuDCP7AseAFHxuF?filename=BtreeMap%20hashing%20the%20key.png\n *\n * @param polkadotModel - \n *\n * @returns \n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function convertModel<T>(polkadotModel: "
+            },
+            {
+              "kind": "Reference",
+              "text": "Codec",
+              "canonicalReference": "@polkadot/types-codec!Codec:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ", isExtended?: "
+            },
+            {
+              "kind": "Content",
+              "text": "boolean"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Content",
+              "text": "T"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 5,
+            "endIndex": 6
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "polkadotModel",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isOptional": false
+            },
+            {
+              "parameterName": "isExtended",
+              "parameterTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "isOptional": true
+            }
+          ],
+          "typeParameters": [
+            {
+              "typeParameterName": "T",
+              "constraintTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              }
+            }
+          ],
+          "name": "convertModel"
+        },
+        {
+          "kind": "Class",
+          "canonicalReference": "@anagolay/api!CustomEventEmitter:class",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare class CustomEventEmitter extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "EventEmitter",
+              "canonicalReference": "!\"\\\"events\\\"\"~EventEmitter:class"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "CustomEventEmitter",
+          "preserveMemberOrder": false,
+          "members": [],
+          "extendsTokenRange": {
+            "startIndex": 1,
+            "endIndex": 2
+          },
+          "implementsTokenRanges": []
+        },
+        {
           "kind": "Variable",
           "canonicalReference": "@anagolay/api!defaultChainToConnect:var",
           "docComment": "",
@@ -279,6 +440,169 @@
           "overloadIndex": 1,
           "parameters": [],
           "name": "getCachedApi"
+        },
+        {
+          "kind": "Interface",
+          "canonicalReference": "@anagolay/api!ICustomEventEmitter:interface",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare interface ICustomEventEmitter extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "EventEmitter",
+              "canonicalReference": "!\"\\\"events\\\"\"~EventEmitter:class"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "ICustomEventEmitter",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "MethodSignature",
+              "canonicalReference": "@anagolay/api!ICustomEventEmitter#emit:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "emit(event: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string | symbol"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", payload: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "IEventMessage",
+                  "canonicalReference": "@anagolay/api!IEventMessage:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "returnTypeTokenRange": {
+                "startIndex": 5,
+                "endIndex": 6
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "event",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                },
+                {
+                  "parameterName": "payload",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 3,
+                    "endIndex": 4
+                  },
+                  "isOptional": false
+                }
+              ],
+              "name": "emit"
+            },
+            {
+              "kind": "MethodSignature",
+              "canonicalReference": "@anagolay/api!ICustomEventEmitter#on:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "on(event: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", listener: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "(data: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "IEventMessage",
+                  "canonicalReference": "@anagolay/api!IEventMessage:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ") => void"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "this"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "returnTypeTokenRange": {
+                "startIndex": 7,
+                "endIndex": 8
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "event",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                },
+                {
+                  "parameterName": "listener",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 3,
+                    "endIndex": 6
+                  },
+                  "isOptional": false
+                }
+              ],
+              "name": "on"
+            }
+          ],
+          "extendsTokenRanges": [
+            {
+              "startIndex": 1,
+              "endIndex": 2
+            }
+          ]
         },
         {
           "kind": "Interface",
@@ -379,6 +703,83 @@
           "extendsTokenRanges": []
         },
         {
+          "kind": "Interface",
+          "canonicalReference": "@anagolay/api!IOperationWithVersions:interface",
+          "docComment": "/**\n * @public\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface IOperationWithVersions "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "IOperationWithVersions",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@anagolay/api!IOperationWithVersions#operation:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "operation: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "AnOperation",
+                  "canonicalReference": "@anagolay/api!AnOperation:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "operation",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@anagolay/api!IOperationWithVersions#versions:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "versions: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "AnOperationVersion",
+                  "canonicalReference": "@anagolay/api!AnOperationVersion:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "versions",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              }
+            }
+          ],
+          "extendsTokenRanges": []
+        },
+        {
           "kind": "Function",
           "canonicalReference": "@anagolay/api!networkCallback:function(1)",
           "docComment": "/**\n * Generic callback for all `tx.signAndSend` methods Usage:\n * ```ts\n *   import createEventEmitter from '@anagolay/api/events'\n *   const broadcast = createEventEmitter()\n *   const receivedInstance = await api.tx.utility\n *     .batch(txs)\n *     .signAndSend(signer, {}, params =>\n *       networkCallback(params, broadcast, EVENT_NAME_BATCH)\n *     )\n *\n *     // usage\n *      receivedInstance.on(EVENT_NAME_BATCH, p => console.log(p))\n * ```\n *\n * @param params - [ISubmittableResult] callback params from the call\n *\n * @param broadcast - EventEmitter instance\n *\n * @param eventName - the event name for each pallet. available in `./config.ts`\n */\n",
@@ -470,6 +871,380 @@
           "name": "pallets",
           "preserveMemberOrder": false,
           "members": [
+            {
+              "kind": "Namespace",
+              "canonicalReference": "@anagolay/api!pallets.operations:namespace",
+              "docComment": "",
+              "excerptTokens": [],
+              "releaseTag": "None",
+              "name": "operations",
+              "preserveMemberOrder": false,
+              "members": [
+                {
+                  "kind": "Namespace",
+                  "canonicalReference": "@anagolay/api!pallets.operations.config:namespace",
+                  "docComment": "",
+                  "excerptTokens": [],
+                  "releaseTag": "None",
+                  "name": "config",
+                  "preserveMemberOrder": false,
+                  "members": [
+                    {
+                      "kind": "Variable",
+                      "canonicalReference": "@anagolay/api!pallets.operations.config.EVENT_NAME_BATCH:var",
+                      "docComment": "",
+                      "excerptTokens": [
+                        {
+                          "kind": "Content",
+                          "text": "EVENT_NAME_BATCH: "
+                        },
+                        {
+                          "kind": "Content",
+                          "text": "string"
+                        }
+                      ],
+                      "isReadonly": true,
+                      "releaseTag": "Public",
+                      "name": "EVENT_NAME_BATCH",
+                      "variableTypeTokenRange": {
+                        "startIndex": 1,
+                        "endIndex": 2
+                      }
+                    },
+                    {
+                      "kind": "Variable",
+                      "canonicalReference": "@anagolay/api!pallets.operations.config.EVENT_NAME_ERROR:var",
+                      "docComment": "",
+                      "excerptTokens": [
+                        {
+                          "kind": "Content",
+                          "text": "EVENT_NAME_ERROR: "
+                        },
+                        {
+                          "kind": "Content",
+                          "text": "string"
+                        }
+                      ],
+                      "isReadonly": true,
+                      "releaseTag": "Public",
+                      "name": "EVENT_NAME_ERROR",
+                      "variableTypeTokenRange": {
+                        "startIndex": 1,
+                        "endIndex": 2
+                      }
+                    },
+                    {
+                      "kind": "Variable",
+                      "canonicalReference": "@anagolay/api!pallets.operations.config.EVENT_NAME_SINGLE:var",
+                      "docComment": "",
+                      "excerptTokens": [
+                        {
+                          "kind": "Content",
+                          "text": "EVENT_NAME_SINGLE: "
+                        },
+                        {
+                          "kind": "Content",
+                          "text": "string"
+                        }
+                      ],
+                      "isReadonly": true,
+                      "releaseTag": "Public",
+                      "name": "EVENT_NAME_SINGLE",
+                      "variableTypeTokenRange": {
+                        "startIndex": 1,
+                        "endIndex": 2
+                      }
+                    }
+                  ]
+                },
+                {
+                  "kind": "Function",
+                  "canonicalReference": "@anagolay/api!pallets.operations.createSubmittableExtrinsic:function(1)",
+                  "docComment": "/**\n * Helper function for creating the Submittable result. This can be easily used in the `ramda.map`.\n * ```ts\n * import { map } from 'ramda'\n * const txs = map(createSubmittableExtrinsic, d)\n * ```\n *\n * @param operationData - \n *\n * @param versionData - \n */\n",
+                  "excerptTokens": [
+                    {
+                      "kind": "Content",
+                      "text": "export declare function createSubmittableExtrinsic(operationData: "
+                    },
+                    {
+                      "kind": "Reference",
+                      "text": "OperationData",
+                      "canonicalReference": "@anagolay/api!OperationData:interface"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ", versionData: "
+                    },
+                    {
+                      "kind": "Reference",
+                      "text": "OperationVersionData",
+                      "canonicalReference": "@anagolay/api!OperationVersionData:interface"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "): "
+                    },
+                    {
+                      "kind": "Reference",
+                      "text": "SubmittableExtrinsic",
+                      "canonicalReference": "@polkadot/api-base!SubmittableExtrinsic:interface"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "<'promise'>"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ";"
+                    }
+                  ],
+                  "returnTypeTokenRange": {
+                    "startIndex": 5,
+                    "endIndex": 7
+                  },
+                  "releaseTag": "Public",
+                  "overloadIndex": 1,
+                  "parameters": [
+                    {
+                      "parameterName": "operationData",
+                      "parameterTypeTokenRange": {
+                        "startIndex": 1,
+                        "endIndex": 2
+                      },
+                      "isOptional": false
+                    },
+                    {
+                      "parameterName": "versionData",
+                      "parameterTypeTokenRange": {
+                        "startIndex": 3,
+                        "endIndex": 4
+                      },
+                      "isOptional": false
+                    }
+                  ],
+                  "name": "createSubmittableExtrinsic"
+                },
+                {
+                  "kind": "Variable",
+                  "canonicalReference": "@anagolay/api!pallets.operations.palletName:var",
+                  "docComment": "",
+                  "excerptTokens": [
+                    {
+                      "kind": "Content",
+                      "text": "palletName: "
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "string"
+                    }
+                  ],
+                  "isReadonly": true,
+                  "releaseTag": "Public",
+                  "name": "palletName",
+                  "variableTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                },
+                {
+                  "kind": "Function",
+                  "canonicalReference": "@anagolay/api!pallets.operations.retrieveOperationsPaged:function(1)",
+                  "docComment": "/**\n * Fetch the operations and their versions.\n *\n * @param pageNum - \n *\n * @param pageSize - \n *\n * @returns Decoded structure {@link IOperationWithVersions}\n */\n",
+                  "excerptTokens": [
+                    {
+                      "kind": "Content",
+                      "text": "export declare function retrieveOperationsPaged(pageNum: "
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "number"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ", pageSize: "
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "number"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "): "
+                    },
+                    {
+                      "kind": "Reference",
+                      "text": "Promise",
+                      "canonicalReference": "!Promise:interface"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "<"
+                    },
+                    {
+                      "kind": "Reference",
+                      "text": "IOperationWithVersions",
+                      "canonicalReference": "@anagolay/api!IOperationWithVersions:interface"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "[]>"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ";"
+                    }
+                  ],
+                  "returnTypeTokenRange": {
+                    "startIndex": 5,
+                    "endIndex": 9
+                  },
+                  "releaseTag": "Public",
+                  "overloadIndex": 1,
+                  "parameters": [
+                    {
+                      "parameterName": "pageNum",
+                      "parameterTypeTokenRange": {
+                        "startIndex": 1,
+                        "endIndex": 2
+                      },
+                      "isOptional": false
+                    },
+                    {
+                      "parameterName": "pageSize",
+                      "parameterTypeTokenRange": {
+                        "startIndex": 3,
+                        "endIndex": 4
+                      },
+                      "isOptional": false
+                    }
+                  ],
+                  "name": "retrieveOperationsPaged"
+                },
+                {
+                  "kind": "Function",
+                  "canonicalReference": "@anagolay/api!pallets.operations.save:function(1)",
+                  "docComment": "/**\n * Save a single operation to the chain.\n *\n * @param operationData - Operation Data to save\n *\n * @param versionData - Operation Version Data to save\n *\n * @param signer - Account that will be owner of the transaction and ones who pays the fees\n *\n * @param options - Signer options\n *\n * @returns the custom event emitter\n *\n * Example:\n * ```ts\n * import { pallets } from '@anagolay/api';\n * const broadcast = await pallets.operations.save(operationData, versionData, signer)\n *\n * broadcast.on(pallets.operations.config.EVENT_NAME_SINGLE, (p) => {\n *   console.log('[operations:save]', p.message)\n *   if (p.finalized) {\n *     process.exit(0)\n *   }\n * })\n * ```\n *\n */\n",
+                  "excerptTokens": [
+                    {
+                      "kind": "Content",
+                      "text": "export declare function save(operationData: "
+                    },
+                    {
+                      "kind": "Reference",
+                      "text": "OperationData",
+                      "canonicalReference": "@anagolay/api!OperationData:interface"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ", versionData: "
+                    },
+                    {
+                      "kind": "Reference",
+                      "text": "OperationVersionData",
+                      "canonicalReference": "@anagolay/api!OperationVersionData:interface"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ", signer: "
+                    },
+                    {
+                      "kind": "Reference",
+                      "text": "AddressOrPair",
+                      "canonicalReference": "@polkadot/api-base!AddressOrPair:type"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ", options?: "
+                    },
+                    {
+                      "kind": "Reference",
+                      "text": "Partial",
+                      "canonicalReference": "!Partial:type"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "<"
+                    },
+                    {
+                      "kind": "Reference",
+                      "text": "SignerOptions",
+                      "canonicalReference": "@polkadot/api!SignerOptions:interface"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ">"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "): "
+                    },
+                    {
+                      "kind": "Reference",
+                      "text": "Promise",
+                      "canonicalReference": "!Promise:interface"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "<"
+                    },
+                    {
+                      "kind": "Reference",
+                      "text": "ICustomEventEmitter",
+                      "canonicalReference": "@anagolay/api!ICustomEventEmitter:interface"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ">"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ";"
+                    }
+                  ],
+                  "returnTypeTokenRange": {
+                    "startIndex": 12,
+                    "endIndex": 16
+                  },
+                  "releaseTag": "Public",
+                  "overloadIndex": 1,
+                  "parameters": [
+                    {
+                      "parameterName": "operationData",
+                      "parameterTypeTokenRange": {
+                        "startIndex": 1,
+                        "endIndex": 2
+                      },
+                      "isOptional": false
+                    },
+                    {
+                      "parameterName": "versionData",
+                      "parameterTypeTokenRange": {
+                        "startIndex": 3,
+                        "endIndex": 4
+                      },
+                      "isOptional": false
+                    },
+                    {
+                      "parameterName": "signer",
+                      "parameterTypeTokenRange": {
+                        "startIndex": 5,
+                        "endIndex": 6
+                      },
+                      "isOptional": false
+                    },
+                    {
+                      "parameterName": "options",
+                      "parameterTypeTokenRange": {
+                        "startIndex": 7,
+                        "endIndex": 11
+                      },
+                      "isOptional": true
+                    }
+                  ],
+                  "name": "save"
+                }
+              ]
+            },
             {
               "kind": "Namespace",
               "canonicalReference": "@anagolay/api!pallets.poe:namespace",
@@ -568,7 +1343,7 @@
                     {
                       "kind": "Reference",
                       "text": "AnProofData",
-                      "canonicalReference": "@anagolay/types!AnProofData:interface"
+                      "canonicalReference": "@anagolay/api!AnProofData:interface"
                     },
                     {
                       "kind": "Content",
@@ -640,7 +1415,7 @@
                     {
                       "kind": "Reference",
                       "text": "AnProofData",
-                      "canonicalReference": "@anagolay/types!AnProofData:interface"
+                      "canonicalReference": "@anagolay/api!AnProofData:interface"
                     },
                     {
                       "kind": "Content",
@@ -834,7 +1609,7 @@
                     {
                       "kind": "Reference",
                       "text": "AnStatementData",
-                      "canonicalReference": "@anagolay/types!AnStatementData:interface"
+                      "canonicalReference": "@anagolay/api!AnStatementData:interface"
                     },
                     {
                       "kind": "Content",
@@ -884,7 +1659,7 @@
                     {
                       "kind": "Reference",
                       "text": "AnStatementData",
-                      "canonicalReference": "@anagolay/types!AnStatementData:interface"
+                      "canonicalReference": "@anagolay/api!AnStatementData:interface"
                     },
                     {
                       "kind": "Content",
@@ -956,7 +1731,7 @@
                     {
                       "kind": "Reference",
                       "text": "AnStatementData",
-                      "canonicalReference": "@anagolay/types!AnStatementData:interface"
+                      "canonicalReference": "@anagolay/api!AnStatementData:interface"
                     },
                     {
                       "kind": "Content",
