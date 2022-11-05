@@ -6,7 +6,7 @@ import { chainStore } from '$src/appStore';
  * @returns The url like  `https://polkadot.js.org/apps/?rpc=wss://${connectedChain}#/explorer/query/0xBlockHash`
  */
 export function makeBlockUrl(hash: string): string {
-	const url = chainStore.makePolkadotJsAppUrl();
-	url.hash = `#/explorer/query/${hash}`;
-	return url.toString();
+  const url = chainStore.makePolkadotJsAppUrl();
+  url.hash = `#/explorer/query/${hash}`;
+  return url.toString();
 }

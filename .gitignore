@@ -75,3 +75,5 @@ core*
 .pnpm-store
 binaries
 tsconfig.tsbuildinfo
+.svelte-kit
+build

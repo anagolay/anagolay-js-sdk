@@ -6,6 +6,8 @@ tasks:
       node $GITPOD_REPO_ROOT/common/scripts/install-run-rush.js update
       node $GITPOD_REPO_ROOT/common/scripts/install-run-rush.js build
       exit
+  - name: Start stuff
+    command: bash $GITPOD_REPO_ROOT/.devops/gitpod/start-cmd.sh && exit
 
 ports:
   - port: 7766

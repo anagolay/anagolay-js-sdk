@@ -14,19 +14,20 @@ pageTitle.set(title);
 </script>
 
 <SvelteSeo
-	title="{title}"
-	description="Companion application for Anagolay network. You can create Workflows, claim domains and much more." />
+  title="{title}"
+  description="Companion application for Anagolay network. You can create Workflows, claim domains and much more."
+/>
 
 <div class="p-4">
-	<div class="flex flex-row content-evenly gap-2 flex-wrap w-full">
-		<TotalOperations />
-		<TotalWorkflows />
-		<TotalPoe />
-		<TotalStatements />
-		<BlockStats />
-		<TotalIssuance />
-	</div>
-	<div class="mt-4 grid grid-cols-1 w-full">
-		<BlockHeaders />
-	</div>
+  <div class="flex flex-row content-evenly gap-2 flex-wrap w-full">
+    <TotalOperations />
+    <TotalWorkflows />
+    <TotalPoe />
+    <TotalStatements />
+    <BlockStats />
+    <TotalIssuance />
+  </div>
+  <div class="mt-4 grid grid-cols-1 w-full">
+    <BlockHeaders />
+  </div>
 </div>

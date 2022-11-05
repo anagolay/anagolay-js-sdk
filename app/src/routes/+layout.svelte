@@ -21,53 +21,53 @@ import { forEach } from 'ramda';
 let unsubscribes: any[] = [];
 
 async function setupChainData() {
-	const { api } = $chainStore;
-	console.groupCollapsed('setupChainData');
-	console.log('Chain constants', api.consts);
-	console.log('registry', api.registry);
+  const { api } = $chainStore;
+  console.groupCollapsed('setupChainData');
+  console.log('Chain constants', api.consts);
+  console.log('registry', api.registry);
 
-	const bestBlockUnsub = await $chainStore.api.rpc.chain.subscribeNewHeads((header) => {
-		bestBlock.set(parseInt(header.number.toString(), 10));
-	});
-	unsubscribes.push(bestBlockUnsub);
+  const bestBlockUnsub = await $chainStore.api.rpc.chain.subscribeNewHeads((header) => {
+    bestBlock.set(parseInt(header.number.toString(), 10));
+  });
+  unsubscribes.push(bestBlockUnsub);
 
-	const finBlockUnsub = await $chainStore.api.derive.chain.bestNumberFinalized((res) => {
-		finalizedBlock.set(res.toNumber());
-	});
-	unsubscribes.push(finBlockUnsub);
-	console.groupEnd();
+  const finBlockUnsub = await $chainStore.api.derive.chain.bestNumberFinalized((res) => {
+    finalizedBlock.set(res.toNumber());
+  });
+  unsubscribes.push(finBlockUnsub);
+  console.groupEnd();
 }
 
 onMount(async () => {
-	// connect to the chain at the start of the app. the rest
-	await chainStore.connect();
-	return () => {
-		if (!dev) {
-			console.log('calling unmount');
-			forEach((u) => u(), unsubscribes);
-		}
-	};
+  // connect to the chain at the start of the app. the rest
+  await chainStore.connect();
+  return () => {
+    if (!dev) {
+      console.log('calling unmount');
+      forEach((u) => u(), unsubscribes);
+    }
+  };
 });
 
 $: {
-	if ($chainConnected) {
-		setupChainData();
-	}
+  if ($chainConnected) {
+    setupChainData();
+  }
 }
 </script>
 
 <!-- we want notifications to be first to load! -->
 <div class="flex flex-row" data-sveltekit-prefetch>
-	<Notifications />
-	<div class="{$showSidebar ? '' : 'hidden'}">
-		<Sidebar />
-	</div>
+  <Notifications />
+  <div class="{$showSidebar ? '' : 'hidden'}">
+    <Sidebar />
+  </div>
 
-	<div class="w-full">
-		<Navbar />
+  <div class="w-full">
+    <Navbar />
 
-		<!-- here be content -->
-		<slot />
-		<!-- here be content -->
-	</div>
+    <!-- here be content -->
+    <slot />
+    <!-- here be content -->
+  </div>
 </div>

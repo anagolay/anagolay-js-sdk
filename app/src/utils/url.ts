@@ -9,32 +9,32 @@ import { notifications } from '$src/components/notifications/stores';
  * @returns decoded value via `decodeURIComponent` or default value
  */
 export function getHashValue(fullHash: string, hashName: string, defaultValue = ''): string {
-	// console.debug('getHashValue', { hashName, fullHash });
+  // console.debug('getHashValue', { hashName, fullHash });
 
-	if (isEmpty(fullHash)) return defaultValue;
+  if (isEmpty(fullHash)) return defaultValue;
 
-	// remove the `#` from the string
-	const parts = split('&')(fullHash.substring(1));
+  // remove the `#` from the string
+  const parts = split('&')(fullHash.substring(1));
 
-	const foundValue = filter((p) => startsWith(hashName, p), parts);
+  const foundValue = filter((p) => startsWith(hashName, p), parts);
 
-	if (isEmpty(foundValue)) {
-		if (isEmpty(defaultValue)) {
-			const message = `${hashName} hash name cannot be found and default value is not provided`;
-			notifications.addNew({
-				text: message,
-				infoLevel: 'error',
-				autoclose: {
-					close: false
-				}
-			});
-			console.error(message);
-			return '';
-		} else {
-			return defaultValue;
-		}
-	} else {
-		const foundParts = split('=')(foundValue[0]);
-		return decodeURIComponent(foundParts[1]);
-	}
+  if (isEmpty(foundValue)) {
+    if (isEmpty(defaultValue)) {
+      const message = `${hashName} hash name cannot be found and default value is not provided`;
+      notifications.addNew({
+        text: message,
+        infoLevel: 'error',
+        autoclose: {
+          close: false
+        }
+      });
+      console.error(message);
+      return '';
+    } else {
+      return defaultValue;
+    }
+  } else {
+    const foundParts = split('=')(foundValue[0]);
+    return decodeURIComponent(foundParts[1]);
+  }
 }

@@ -1,11 +1,10 @@
 #!/bin/zsh
 tmux new-session -n htop -d 'htop'
-tmux new-window -n workspace -c /workspace
-tmux new-window -n utils -c /workspace/sdk/utils
-tmux new-window -n cli -c /workspace/sdk/cli
-tmux new-window -n types -c /workspace/sdk/types
-tmux new-window -n cli -c /workspace/sdk/cli
-tmux new-window -n app -c /workspace/apps/app
+tmux new-window -n workspace -c /workspace/anagolay-js
+tmux new-window -n utils -c /workspace/anagolay-js/libraries/utils
+tmux new-window -n cli -c /workspace/anagolay-js/tools/cli
+tmux new-window -n types -c /workspace/anagolay-js/libraries/types
+tmux new-window -n app -c /workspace/anagolay-js/app
 tmux -2 attach-session -d
 
 # https://man7.org/linux/man-pages/man1/tmux.1.html#HOOKS

@@ -84,162 +84,162 @@ export const connectedChainName: Writable<string | undefined> = writable(undefin
  * Return type for the store
  */
 interface IChainStoreReturn extends Writable<IChainStore> {
-	/**
-	 * When adding custom Anagolay chain to connect. Very useful in dev
-	 */
-	addCustomChain: (chainWs: string) => void;
-	/**
-	 * Call this to connect to provided chain or to default. This doesn't return anything, it updates the `api` store object. Once connected use it like any other Substrate based api. Real example is in [`BlocStats.svelte`](./components/base/BlockStats.svelte) file.
-	 *
-	 * ```ts
-	 * import { chainStore } from '$src/appStore';
-	 * const lastHeader = await $chainStore.api.rpc.chain.getHeader();
-	 * console.log(lastHeader)
-	 * ```
-	 *
-	 * When the chain is connected this method will set the `chainConnected = true` so you can react when that store variable is changed in your reactive section:
-	 *
-	 * ```ts
-	 * $: chainConnected ? console.log('yeah, use api from the store') : ''
-	 * ```
-	 */
-	connect: (chainWs?: string, connectionType?: 'ws' | 'rx') => Promise<void>;
-	reconnect: (chainWs: string, connectionType?: 'ws' | 'rx') => Promise<void>;
-	makePolkadotJsAppUrl: () => URL;
+  /**
+   * When adding custom Anagolay chain to connect. Very useful in dev
+   */
+  addCustomChain: (chainWs: string) => void;
+  /**
+   * Call this to connect to provided chain or to default. This doesn't return anything, it updates the `api` store object. Once connected use it like any other Substrate based api. Real example is in [`BlocStats.svelte`](./components/base/BlockStats.svelte) file.
+   *
+   * ```ts
+   * import { chainStore } from '$src/appStore';
+   * const lastHeader = await $chainStore.api.rpc.chain.getHeader();
+   * console.log(lastHeader)
+   * ```
+   *
+   * When the chain is connected this method will set the `chainConnected = true` so you can react when that store variable is changed in your reactive section:
+   *
+   * ```ts
+   * $: chainConnected ? console.log('yeah, use api from the store') : ''
+   * ```
+   */
+  connect: (chainWs?: string, connectionType?: 'ws' | 'rx') => Promise<void>;
+  reconnect: (chainWs: string, connectionType?: 'ws' | 'rx') => Promise<void>;
+  makePolkadotJsAppUrl: () => URL;
 }
 
 interface IChainStore {
-	/**
-	 * Helper to get the connected chain name
-	 */
-	connectedChainName: string;
-	/**
-	 * Connectable chains
-	 */
-	chainList: string[];
-	/**
-	 * index of the chain we wish to connect to. From the `chainList`
-	 */
-	connectedTo: string;
-	/**
-	 * The connected API. Use this to query the chain
-	 */
-	api: ApiPromise | undefined;
+  /**
+   * Helper to get the connected chain name
+   */
+  connectedChainName: string;
+  /**
+   * Connectable chains
+   */
+  chainList: string[];
+  /**
+   * index of the chain we wish to connect to. From the `chainList`
+   */
+  connectedTo: string;
+  /**
+   * The connected API. Use this to query the chain
+   */
+  api: ApiPromise | undefined;
 }
 
 function chainConnectionStore(): IChainStoreReturn {
-	let customChains: string[] = [];
-	let connectedTo: string = chainList[0];
-	if (browser) {
-		const cc = window.localStorage.getItem(localStorageCustomChainsKey);
-		customChains = !isNil(cc) && !isEmpty(cc) ? JSON.parse(cc) : [];
+  let customChains: string[] = [];
+  let connectedTo: string = chainList[0];
+  if (browser) {
+    const cc = window.localStorage.getItem(localStorageCustomChainsKey);
+    customChains = !isNil(cc) && !isEmpty(cc) ? JSON.parse(cc) : [];
 
-		const ccTo = window.localStorage.getItem(localStorageConnectToKey);
-		connectedTo = !isNil(ccTo) && !isEmpty(ccTo) ? ccTo : chainList[0];
-	}
+    const ccTo = window.localStorage.getItem(localStorageConnectToKey);
+    connectedTo = !isNil(ccTo) && !isEmpty(ccTo) ? ccTo : chainList[0];
+  }
 
-	const defaultState: IChainStore = {
-		chainList: uniq([...chainList, ...customChains]),
-		connectedTo,
-		api: undefined,
-		connectedChainName: undefined
-	};
+  const defaultState: IChainStore = {
+    chainList: uniq([...chainList, ...customChains]),
+    connectedTo,
+    api: undefined,
+    connectedChainName: undefined
+  };
 
-	console.log('defaultState', defaultState);
+  console.log('defaultState', defaultState);
 
-	const { subscribe, update, set } = writable<IChainStore>(defaultState);
+  const { subscribe, update, set } = writable<IChainStore>(defaultState);
 
-	/**
-	 * Connect to Anagolay Chains. If no chain is provided the first item (index 0) in the `chainList` is used
-	 * @param chainWs - chain WS
-	 * @param connectionType - either `ws` or `rx` strings
-	 */
-	async function connect(
-		chainWs: string = defaultState.connectedTo,
-		connectionType: 'ws' | 'rx' = 'ws'
-	): Promise<void> {
-		connectingToChain.set(true);
+  /**
+   * Connect to Anagolay Chains. If no chain is provided the first item (index 0) in the `chainList` is used
+   * @param chainWs - chain WS
+   * @param connectionType - either `ws` or `rx` strings
+   */
+  async function connect(
+    chainWs: string = defaultState.connectedTo,
+    connectionType: 'ws' | 'rx' = 'ws'
+  ): Promise<void> {
+    connectingToChain.set(true);
 
-		const { connectedTo } = defaultState;
-		log('Connecting to', chainWs);
-		const closeNotification = notifications.addNew({
-			text: `Connecting to ${connectedTo}`,
-			infoLevel: 'info',
-			showSpinner: true
-		});
+    const { connectedTo } = defaultState;
+    log('Connecting to', chainWs);
+    const closeNotification = notifications.addNew({
+      text: `Connecting to ${connectedTo}`,
+      infoLevel: 'info',
+      showSpinner: true
+    });
 
-		let api: ApiPromise;
+    let api: ApiPromise;
 
-		if (equals(connectionType, 'ws')) {
-			api = await connectToWs(connectedTo);
-		} else if (equals(connectionType, 'rx')) {
-			console.error('RXjs connection not implemented');
-		}
+    if (equals(connectionType, 'ws')) {
+      api = await connectToWs(connectedTo);
+    } else if (equals(connectionType, 'rx')) {
+      console.error('RXjs connection not implemented');
+    }
 
-		// wait then update
-		await api.isReady;
+    // wait then update
+    await api.isReady;
 
-		// set the connected Token Short name
-		connectedTokenShortName.set(api.registry.chainTokens[0].toString());
+    // set the connected Token Short name
+    connectedTokenShortName.set(api.registry.chainTokens[0].toString());
 
-		connectedChainName.set((await api.rpc.system.chain()).toString());
+    connectedChainName.set((await api.rpc.system.chain()).toString());
 
-		update((curState) => {
-			chainConnected.set(api.isConnected);
-			connectingToChain.set(false);
+    update((curState) => {
+      chainConnected.set(api.isConnected);
+      connectingToChain.set(false);
 
-			return { ...curState, api, connectedTo: chainWs };
-		});
-		closeNotification();
-		notifications.addNew({ text: 'Connected', infoLevel: 'success' });
-	}
+      return { ...curState, api, connectedTo: chainWs };
+    });
+    closeNotification();
+    notifications.addNew({ text: 'Connected', infoLevel: 'success' });
+  }
 
-	async function reconnect(chainWs: string, connectionType: 'ws' | 'rx' = 'ws'): Promise<void> {
-		log('Reconnecting to %s', chainWs);
-		// eslint-disable-next-line @typescript-eslint/no-use-before-define
-		const state = get(chainStore);
-		const chainConnectedState = get(chainConnected);
-		if (chainConnectedState) {
-			log('Disconnecting from previous api instance.');
-			await state.api.disconnect();
-		}
-		chainConnected.set(false);
-		await connect(chainWs, connectionType);
-	}
+  async function reconnect(chainWs: string, connectionType: 'ws' | 'rx' = 'ws'): Promise<void> {
+    log('Reconnecting to %s', chainWs);
+    // eslint-disable-next-line @typescript-eslint/no-use-before-define
+    const state = get(chainStore);
+    const chainConnectedState = get(chainConnected);
+    if (chainConnectedState) {
+      log('Disconnecting from previous api instance.');
+      await state.api.disconnect();
+    }
+    chainConnected.set(false);
+    await connect(chainWs, connectionType);
+  }
 
-	return {
-		subscribe,
-		set,
-		update,
-		makePolkadotJsAppUrl: () => {
-			// eslint-disable-next-line @typescript-eslint/no-use-before-define
-			const curState = get(chainStore);
-			const url = new URL('https://polkadot.js.org/apps/');
-			const connectedChainUrl = curState.chainList.find((e) => e === curState.connectedTo);
-			url.searchParams.set('rpc', connectedChainUrl);
+  return {
+    subscribe,
+    set,
+    update,
+    makePolkadotJsAppUrl: () => {
+      // eslint-disable-next-line @typescript-eslint/no-use-before-define
+      const curState = get(chainStore);
+      const url = new URL('https://polkadot.js.org/apps/');
+      const connectedChainUrl = curState.chainList.find((e) => e === curState.connectedTo);
+      url.searchParams.set('rpc', connectedChainUrl);
 
-			return url;
-		},
-		addCustomChain: (chainWs: string) => {
-			// eslint-disable-next-line @typescript-eslint/no-use-before-define
-			update((state) => {
-				const { chainList } = state;
-				const alreadyExists = find((c) => equals(c, chainWs), chainList);
-				if (!isNil(alreadyExists)) {
-					log('not adding, chain on list ', chainWs);
-					return state;
-				}
-				const newChainList = append(chainWs, chainList);
-				if (browser) {
-					window.localStorage.setItem(localStorageCustomChainsKey, JSON.stringify(newChainList));
-					window.localStorage.setItem(localStorageConnectToKey, chainWs);
-				}
-				return { ...state, chainList: newChainList };
-			});
-		},
-		reconnect,
-		connect
-	};
+      return url;
+    },
+    addCustomChain: (chainWs: string) => {
+      // eslint-disable-next-line @typescript-eslint/no-use-before-define
+      update((state) => {
+        const { chainList } = state;
+        const alreadyExists = find((c) => equals(c, chainWs), chainList);
+        if (!isNil(alreadyExists)) {
+          log('not adding, chain on list ', chainWs);
+          return state;
+        }
+        const newChainList = append(chainWs, chainList);
+        if (browser) {
+          window.localStorage.setItem(localStorageCustomChainsKey, JSON.stringify(newChainList));
+          window.localStorage.setItem(localStorageConnectToKey, chainWs);
+        }
+        return { ...state, chainList: newChainList };
+      });
+    },
+    reconnect,
+    connect
+  };
 }
 
 /**
