@@ -5,17 +5,17 @@ import StatisticBox from './base/StatisticBox.svelte';
 let total: string = '';
 
 async function run() {
-	const { api } = $chainStore;
-	total = (await api.query.operations.total()).toString();
+  const { api } = $chainStore;
+  total = (await api.query.operations.total()).toString();
 }
 
 $: {
-	if ($chainConnected) {
-		run();
-	}
+  if ($chainConnected) {
+    run();
+  }
 }
 </script>
 
 <StatisticBox title="Operations" class="shadow">
-	{total}
+  {total}
 </StatisticBox>

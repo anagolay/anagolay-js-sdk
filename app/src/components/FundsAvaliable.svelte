@@ -6,23 +6,23 @@ import { polkadotAccountsStore } from './polkadotAccounts/store';
 let freeBalance: string = '0 IDI';
 
 async function getFunds() {
-	const { api } = $chainStore;
+  const { api } = $chainStore;
 
-	await api.query.system.account(
-		$polkadotAccountsStore.selectedAccount.address,
-		({ nonce, data: balance }) => {
-			freeBalance = formatBalance(balance.free, { decimals: 12 }).replace('Unit', $connectedTokenShortName);
-		}
-	);
+  await api.query.system.account(
+    $polkadotAccountsStore.selectedAccount.address,
+    ({ nonce, data: balance }) => {
+      freeBalance = formatBalance(balance.free, { decimals: 12 }).replace('Unit', $connectedTokenShortName);
+    }
+  );
 }
 
 $: {
-	if ($chainConnected && $polkadotAccountsStore.selectedAccount) {
-		getFunds();
-	}
+  if ($chainConnected && $polkadotAccountsStore.selectedAccount) {
+    getFunds();
+  }
 }
 </script>
 
 <div class="flex flex-row pl-4">
-	<span>Funds Avaliable: {freeBalance}</span>
+  <span>Funds Avaliable: {freeBalance}</span>
 </div>

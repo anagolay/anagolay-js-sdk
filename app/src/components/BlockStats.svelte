@@ -5,9 +5,9 @@ import StatisticBox from './base/StatisticBox.svelte';
 </script>
 
 <StatisticBox title="Best block">
-	<Digits digits="{$bestBlock}" />
+  <Digits digits="{$bestBlock}" />
 </StatisticBox>
 
 <StatisticBox title="Finalized block">
-	<Digits digits="{$finalizedBlock}" />
+  <Digits digits="{$finalizedBlock}" />
 </StatisticBox>

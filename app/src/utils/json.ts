@@ -3,25 +3,25 @@
 import { isNil } from 'ramda';
 
 export declare type Jsonify<T> = T extends Date
-	? string
-	: T extends object
-	? {
-			[k in keyof T]: Jsonify<T[k]>;
-	  }
-	: T extends Record<any, AnyJson>
-	? any
-	: T;
+  ? string
+  : T extends object
+  ? {
+      [k in keyof T]: Jsonify<T[k]>;
+    }
+  : T extends Record<any, AnyJson>
+  ? any
+  : T;
 
 export declare type AnyJson =
-	| string
-	| number
-	| boolean
-	| null
-	| undefined
-	| AnyJson[]
-	| {
-			[index: string]: AnyJson;
-	  };
+  | string
+  | number
+  | boolean
+  | null
+  | undefined
+  | AnyJson[]
+  | {
+      [index: string]: AnyJson;
+    };
 /**
  * Taken from the native types
  */
@@ -33,8 +33,8 @@ type ReplacerOrReviverAsFunction<V> = (key: string, value: V) => ISerializedMap<
 type ReplacerAsArray = (number | string)[] | undefined;
 
 export interface ISerializedMap<T> {
-	type: 'Map';
-	data: T;
+  type: 'Map';
+  data: T;
 }
 
 /**
@@ -50,23 +50,23 @@ export interface ISerializedMap<T> {
  * @returns
  */
 export function customReplacer<V>(key: string, value: V): ISerializedMap<V> | V {
-	if (value instanceof Map) {
-		return {
-			type: 'Map',
-			data: Object.fromEntries(value)
-		};
-	} else {
-		return value;
-	}
+  if (value instanceof Map) {
+    return {
+      type: 'Map',
+      data: Object.fromEntries(value)
+    };
+  } else {
+    return value;
+  }
 }
 
 export function customReviver<T extends ISerializedMap<T>>(key: string, value: T): T | Map<any, any> {
-	if (typeof value === 'object' && value !== null) {
-		if (value.type === 'Map' || value.type === 'map') {
-			return new Map(Object.entries(value.data));
-		}
-	}
-	return value;
+  if (typeof value === 'object' && value !== null) {
+    if (value.type === 'Map' || value.type === 'map') {
+      return new Map(Object.entries(value.data));
+    }
+  }
+  return value;
 }
 
 /**
@@ -79,15 +79,15 @@ export function customReviver<T extends ISerializedMap<T>>(key: string, value: T
  * @returns
  */
 export function parse<T>(data: string, reviver?: ReplacerOrReviverAsFunction<T>): T {
-	let reviverParam = reviver;
+  let reviverParam = reviver;
 
-	if (isNil(reviverParam)) {
-		reviverParam = customReviver as any;
-	}
+  if (isNil(reviverParam)) {
+    reviverParam = customReviver as any;
+  }
 
-	const parsed = JSON.parse(data, reviverParam as any);
+  const parsed = JSON.parse(data, reviverParam as any);
 
-	return parsed;
+  return parsed;
 }
 
 /**
@@ -103,20 +103,20 @@ export function parse<T>(data: string, reviver?: ReplacerOrReviverAsFunction<T>)
  * @returns String with executed `replacer` function if no replacer is provided
  */
 export function serialize<T>(
-	data: T,
-	space?: number,
-	replacer?: ReplacerOrReviverAsFunction<T> | ReplacerAsArray | undefined | null
+  data: T,
+  space?: number,
+  replacer?: ReplacerOrReviverAsFunction<T> | ReplacerAsArray | undefined | null
 ): string {
-	let repl = replacer;
+  let repl = replacer;
 
-	if (!isNil(repl)) {
-		repl = customReplacer;
-	} else {
-		repl = null;
-	}
+  if (!isNil(repl)) {
+    repl = customReplacer;
+  } else {
+    repl = null;
+  }
 
-	const d = JSON.stringify(data, repl as any, space);
-	return d;
+  const d = JSON.stringify(data, repl as any, space);
+  return d;
 }
 
 /**
@@ -132,9 +132,9 @@ export function serialize<T>(
  * @returns Parsed serialized data with type inferring
  */
 export function serializeThenParse<T>(data: T, toOriginal: boolean = false): T {
-	if (toOriginal) {
-		return parse<T>(serialize<T>(data));
-	} else {
-		return JSON.parse(serialize<T>(data));
-	}
+  if (toOriginal) {
+    return parse<T>(serialize<T>(data));
+  } else {
+    return JSON.parse(serialize<T>(data));
+  }
 }

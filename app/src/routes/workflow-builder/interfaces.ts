@@ -16,80 +16,80 @@ import type { AnCharacters, AnOperation, AnOperationData, AnOperationVersion } f
  * ```
  */
 export interface NodeToAdd {
-	id: string;
-	data: [string, number, number, number, number, string, any, string, string | boolean];
+  id: string;
+  data: [string, number, number, number, number, string, any, string, string | boolean];
 }
 
 export interface Connection {
-	nodeId: string;
-	nameOrIndex?: string;
+  nodeId: string;
+  nameOrIndex?: string;
 }
 export interface WorkflowNodeConnection {
-	/**
-	 * Latest Version id
-	 */
-	id: string;
-	config: Map<AnCharacters, AnCharacters>;
-	/**
-	 * An edge is a connection between two nodes. All edges are directed
-	 */
-	edges: {
-		/**
-		 * All the nodes FROM this node.
-		 */
-		out: string[];
-		/**
-		 * All the nodes TO this node.
-		 */
-		in: string[];
-	};
-	/**
-	 * Operation Data type
-	 */
-	data: AnOperationData;
-	/**
-	 * Operation manifest
-	 */
-	operation: AnOperation;
-	/**
-	 * Operation version manifest
-	 */
-	version: AnOperationVersion;
+  /**
+   * Latest Version id
+   */
+  id: string;
+  config: Map<AnCharacters, AnCharacters>;
+  /**
+   * An edge is a connection between two nodes. All edges are directed
+   */
+  edges: {
+    /**
+     * All the nodes FROM this node.
+     */
+    out: string[];
+    /**
+     * All the nodes TO this node.
+     */
+    in: string[];
+  };
+  /**
+   * Operation Data type
+   */
+  data: AnOperationData;
+  /**
+   * Operation manifest
+   */
+  operation: AnOperation;
+  /**
+   * Operation version manifest
+   */
+  version: AnOperationVersion;
 }
 
 export interface DrawflowNode {
-	class: string;
-	data: any;
-	html: string;
-	id: string;
-	inputs: Record<string, DrawflowConnection>;
-	name: string;
-	outputs: Record<string, DrawflowConnection>;
-	pos_x: number;
-	pos_y: number;
-	typenode: boolean;
+  class: string;
+  data: any;
+  html: string;
+  id: string;
+  inputs: Record<string, DrawflowConnection>;
+  name: string;
+  outputs: Record<string, DrawflowConnection>;
+  pos_x: number;
+  pos_y: number;
+  typenode: boolean;
 }
 
 export interface DrawflowConnection {
-	connections: DrawflowConnectionDetail[];
+  connections: DrawflowConnectionDetail[];
 }
 
 export interface DrawflowConnectionDetail {
-	input: string;
-	node: string;
+  input: string;
+  node: string;
 }
 
 export interface Segment {
-	inputs: number[];
-	sequence: SegmentData[];
+  inputs: number[];
+  sequence: SegmentData[];
 }
 
 export interface SegmentData {
-	node: WorkflowNodeConnection;
-	representation: [string, any];
+  node: WorkflowNodeConnection;
+  representation: [string, any];
 }
 
 export interface Sequence {
-	versionId: string;
-	config: Record<string, any>;
+  versionId: string;
+  config: Record<string, any>;
 }

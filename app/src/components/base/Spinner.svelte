@@ -18,11 +18,11 @@ export let innerBorder: string = 'border-gray-200';
 </script>
 
 <div>
-	<!-- Outer Ring-->
-	<div class="w-{size} h-{size} rounded-full absolute file:border-{size} border-solid {innerBorder}"></div>
+  <!-- Outer Ring-->
+  <div class="w-{size} h-{size} rounded-full absolute file:border-{size} border-solid {innerBorder}"></div>
 
-	<!-- Inner Ring -->
-	<div
-		class="w-{size} h-{size} rounded-full animate-spin absolute border-8 border-solid {outerBorder} border-t-transparent shadow-md">
-	</div>
+  <!-- Inner Ring -->
+  <div
+    class="w-{size} h-{size} rounded-full animate-spin absolute border-8 border-solid {outerBorder} border-t-transparent shadow-md"
+  ></div>
 </div>

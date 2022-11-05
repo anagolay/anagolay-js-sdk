@@ -5,5 +5,5 @@ export let digits: number;
 </script>
 
 <span class="">
-	{formatNumber(digits)}
+  {formatNumber(digits)}
 </span>
