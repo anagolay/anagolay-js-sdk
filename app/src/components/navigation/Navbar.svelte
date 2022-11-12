@@ -1,8 +1,9 @@
 <script lang="ts">
-import MaterialIcon from '$src/components/base/MaterialIcon.svelte';
-import ThemeChange from '$src/components/themeChange/ThemeChange.svelte';
-import { showSidebar } from '$src/appStore';
-import SelectNetwork from '../selectNetwork/SelectNetwork.svelte';
+  import { showSidebar } from '$src/appStore';
+  import MaterialIcon from '$src/components/base/MaterialIcon.svelte';
+  import ThemeChange from '$src/components/themeChange/ThemeChange.svelte';
+
+  import SelectNetwork from '../selectNetwork/SelectNetwork.svelte';
 </script>
 
 <!-- <div
@@ -11,10 +12,11 @@ import SelectNetwork from '../selectNetwork/SelectNetwork.svelte';
 <div class="navbar bg-base-200 shadow z-50">
   <div class="flex flex-1 md:gap-1 lg:gap-2">
     <span class="tooltip tooltip-bottom before:text-xs before:content-[attr(data-tip)]" data-tip="Menu">
+      <!-- svelte-ignore a11y-click-events-have-key-events -->
       <label
         for="drawer"
         class="btn btn-square btn-ghost drawer-button"
-        on:click="{() => showSidebar.set(!$showSidebar)}"
+        on:click={() => showSidebar.set(!$showSidebar)}
       >
         <MaterialIcon iconName="menu" />
       </label>

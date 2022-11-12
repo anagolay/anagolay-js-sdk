@@ -2,7 +2,7 @@
 
 const webpack = require('webpack');
 
-const nodeExternals = require('webpack-node-externals');
+// const nodeExternals = require('webpack-node-externals');
 const { resolve } = require('path');
 
 const isProduction = process.env.NODE_ENV == 'production';
@@ -29,42 +29,42 @@ console.log('Webpack is running in %s mode', process.env.NODE_ENV);
 
 const config = {
   entry: {
-    anagolay: './src/index.ts',
+    anagolay: './src/index.ts'
   },
   output: {
     // library: 'signer',
     // libraryTarget: 'umd',
     path: resolve(__dirname, './dist'),
     // filename: '[name].js',
-    clean: true,
+    clean: true
   },
   // the plugins are executed from last to first
   plugins: [
     new webpack.BannerPlugin({
       banner: copyrightSnippet,
-      raw: true,
+      raw: true
     }),
     new webpack.BannerPlugin({
       banner: '#!/usr/bin/env node',
-      raw: true,
+      raw: true
     }),
     new webpack.optimize.LimitChunkCountPlugin({
-      maxChunks: 1,
-    }),
+      maxChunks: 1
+    })
   ],
   mode: isProduction ? 'production' : 'development',
   target: 'node',
   optimization: {
-    minimize: false,
+    minimize: false
   },
   externalsPresets: {
-    node: true,
+    node: true
   },
   resolve: {
     extensions: ['.ts', '.js'],
     alias: {
-      $src: resolve(__dirname, 'src'),
-    },
+      $src: resolve(__dirname, 'src')
+    }
   },
   module: {
     rules: [
@@ -74,16 +74,16 @@ const config = {
           {
             loader: 'ts-loader',
             options: {
-              transpileOnly: true, // https://github.com/TypeStrong/ts-loader#transpileonly
-            },
-          },
+              transpileOnly: true // https://github.com/TypeStrong/ts-loader#transpileonly
+            }
+          }
         ],
-        exclude: /node_modules/,
-      },
-    ],
+        exclude: /node_modules/
+      }
+    ]
   },
   devtool: 'source-map',
-  ignoreWarnings: [() => true],
+  ignoreWarnings: [() => true]
 };
 
 module.exports = config;

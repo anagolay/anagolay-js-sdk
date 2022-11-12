@@ -10,8 +10,11 @@ import type {
   AnagolayRuntimeRuntime,
   AnagolaySupportAnagolayArtifactStructureOperationArtifactType,
   AnagolaySupportAnagolayArtifactStructureWorkflowArtifactType,
+  AnagolaySupportConstantsMaxOperationConfigEntriesGet,
   AnagolaySupportError,
   AnagolaySupportForWhat,
+  AnagolaySupportMapsSerializableMaybeSerializableBoundedBTreeMapBoundedVec,
+  AnagolaySupportMapsSerializableMaybeSerializableBoundedBTreeMapCharacters,
   AnagolaySupportWasmArtifactSubType,
   FinalityGrandpaEquivocationPrecommit,
   FinalityGrandpaEquivocationPrevote,
@@ -108,7 +111,6 @@ import type {
   PoeProof,
   PoeProofData,
   PoeProofExtra,
-  PoeProofParams,
   PoeProofRecord,
   SpConsensusAuraSr25519AppSr25519Public,
   SpCoreEcdsaSignature,
@@ -145,6 +147,14 @@ import type {
   StatementsStatementExtra,
   StatementsStatementRecord,
   StatementsValidity,
+  VerificationCall,
+  VerificationError,
+  VerificationEvent,
+  VerificationOffchainVerificationIndexingData,
+  VerificationVerificationAction,
+  VerificationVerificationContext,
+  VerificationVerificationRequest,
+  VerificationVerificationStatus,
   WorkflowsCall,
   WorkflowsError,
   WorkflowsEvent,
@@ -158,7 +168,7 @@ import type {
   WorkflowsWorkflowVersion,
   WorkflowsWorkflowVersionData,
   WorkflowsWorkflowVersionExtra,
-  WorkflowsWorkflowVersionRecord,
+  WorkflowsWorkflowVersionRecord
 } from '@polkadot/types/lookup';
 
 declare module '@polkadot/types/types/registry' {
@@ -167,8 +177,11 @@ declare module '@polkadot/types/types/registry' {
     AnagolayRuntimeRuntime: AnagolayRuntimeRuntime;
     AnagolaySupportAnagolayArtifactStructureOperationArtifactType: AnagolaySupportAnagolayArtifactStructureOperationArtifactType;
     AnagolaySupportAnagolayArtifactStructureWorkflowArtifactType: AnagolaySupportAnagolayArtifactStructureWorkflowArtifactType;
+    AnagolaySupportConstantsMaxOperationConfigEntriesGet: AnagolaySupportConstantsMaxOperationConfigEntriesGet;
     AnagolaySupportError: AnagolaySupportError;
     AnagolaySupportForWhat: AnagolaySupportForWhat;
+    AnagolaySupportMapsSerializableMaybeSerializableBoundedBTreeMapBoundedVec: AnagolaySupportMapsSerializableMaybeSerializableBoundedBTreeMapBoundedVec;
+    AnagolaySupportMapsSerializableMaybeSerializableBoundedBTreeMapCharacters: AnagolaySupportMapsSerializableMaybeSerializableBoundedBTreeMapCharacters;
     AnagolaySupportWasmArtifactSubType: AnagolaySupportWasmArtifactSubType;
     FinalityGrandpaEquivocationPrecommit: FinalityGrandpaEquivocationPrecommit;
     FinalityGrandpaEquivocationPrevote: FinalityGrandpaEquivocationPrevote;
@@ -265,7 +278,6 @@ declare module '@polkadot/types/types/registry' {
     PoeProof: PoeProof;
     PoeProofData: PoeProofData;
     PoeProofExtra: PoeProofExtra;
-    PoeProofParams: PoeProofParams;
     PoeProofRecord: PoeProofRecord;
     SpConsensusAuraSr25519AppSr25519Public: SpConsensusAuraSr25519AppSr25519Public;
     SpCoreEcdsaSignature: SpCoreEcdsaSignature;
@@ -302,6 +314,14 @@ declare module '@polkadot/types/types/registry' {
     StatementsStatementExtra: StatementsStatementExtra;
     StatementsStatementRecord: StatementsStatementRecord;
     StatementsValidity: StatementsValidity;
+    VerificationCall: VerificationCall;
+    VerificationError: VerificationError;
+    VerificationEvent: VerificationEvent;
+    VerificationOffchainVerificationIndexingData: VerificationOffchainVerificationIndexingData;
+    VerificationVerificationAction: VerificationVerificationAction;
+    VerificationVerificationContext: VerificationVerificationContext;
+    VerificationVerificationRequest: VerificationVerificationRequest;
+    VerificationVerificationStatus: VerificationVerificationStatus;
     WorkflowsCall: WorkflowsCall;
     WorkflowsError: WorkflowsError;
     WorkflowsEvent: WorkflowsEvent;

@@ -25,7 +25,7 @@ export async function askStarterQuestions(): Promise<void> {
       type: 'confirm',
       name: 'proceedWithPublish',
       message: 'Do you want to proceed?',
-      default: true,
+      default: true
     },
     // {
     //   type: 'confirm',
@@ -37,13 +37,13 @@ export async function askStarterQuestions(): Promise<void> {
       type: 'confirm',
       name: 'disableStartupQuestions',
       message: 'Do you want to disable startup questions?',
-      default: false,
-    },
+      default: false
+    }
   ]);
 
   await createSettingsFile({
     fts: fts || true,
-    disableStartupQuestions: startAnswers.disableStartupQuestions,
+    disableStartupQuestions: startAnswers.disableStartupQuestions
     // enableTelemetry: startAnswers.enableTelemetry,
   });
 

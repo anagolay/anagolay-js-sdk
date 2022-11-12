@@ -17,8 +17,8 @@ module.exports = {
         vars: 'all',
         varsIgnorePattern: '^_',
         args: 'after-used',
-        argsIgnorePattern: '^_',
-      },
-    ],
-  },
+        argsIgnorePattern: '^_'
+      }
+    ]
+  }
 };

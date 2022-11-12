@@ -1,27 +1,29 @@
 <script lang="ts">
-import { chainStore, connectedChainName, connectingToChain, localStorageConnectToKey } from '$src/appStore';
-import { isValidUrl } from '$src/utils/utils';
-import { equals, isNil } from 'ramda';
-import MaterialIcon from '../base/MaterialIcon.svelte';
-import { notifications } from '../notifications/stores';
+  import { equals, isNil } from 'ramda';
 
-let classNames: string = '';
-export { classNames as class };
+  import { chainStore, connectedChainName, connectingToChain, localStorageConnectToKey } from '$src/appStore';
+  import { isValidUrl } from '$src/utils/utils';
 
-let customChain: string = 'ws://localhost:9944';
+  import MaterialIcon from '../base/MaterialIcon.svelte';
 
-let urlValid: boolean = false;
+  let classNames: string = '';
+  export { classNames as class };
 
-$: customChain && (urlValid = isValidUrl(customChain));
+  let customChain: string = 'ws://localhost:9944';
+
+  let urlValid: boolean = false;
+
+  $: customChain && (urlValid = isValidUrl(customChain));
 </script>
 
 <div class="dropdown {classNames}">
   <div class="w-full md:w-96 flex items-center gap-2">
     <!-- svelte-ignore a11y-label-has-associated-control -->
+    <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
     <label tabindex="0" class="btn-group">
       <span class="btn btn-accent btn-sm ">{$connectedChainName}</span>
       <span class="btn btn-sm"
-        ><MaterialIcon class="{$connectingToChain ? 'animate-spin' : ''}" iconName="cached" /></span
+        ><MaterialIcon class={$connectingToChain ? 'animate-spin' : ''} iconName="cached" /></span
       >
     </label>
   </div>
@@ -32,33 +34,35 @@ $: customChain && (urlValid = isValidUrl(customChain));
       <label class="input-group">
         <input
           type="text"
-          bind:value="{customChain}"
+          bind:value={customChain}
           placeholder="ws://localhost:9944"
           class="input input-bordered w-full"
         />
         <button
           class="btn btn-primary"
-          disabled="{!urlValid}"
-          on:click="{async () => {
+          disabled={!urlValid}
+          on:click={async () => {
             chainStore.addCustomChain(customChain);
             // we reload the page because it doesn't work with reconnect. the api just doesn't want to backout
             window.location.reload();
-          }}">Switch</button
+          }}>Switch</button
         >
       </label>
     </div>
+    <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
     <ul tabindex="0" class="menu menu-compact gap-2">
       {#each $chainStore.chainList as network}
         <li class="shadow">
+          <!-- svelte-ignore a11y-click-events-have-key-events -->
           <div
             class="flex flex-row {!isNil($chainStore.connectedTo) &&
               equals(network, $chainStore.connectedTo) &&
               'active'}"
-            on:click="{() => {
+            on:click={() => {
               window.localStorage.setItem(localStorageConnectToKey, network);
               // chainStore.reconnect(network);
               window.location.reload();
-            }}"
+            }}
           >
             <span class="m-2 flex flex-col justify-start items-start">
               <span class="text-md">{network}</span>

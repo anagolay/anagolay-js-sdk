@@ -1,12 +1,8 @@
 import { Definitions, DefinitionsTypes } from '@polkadot/types/types';
 export const PoECustomTypes: DefinitionsTypes = {
-  ProofParams: {
-    k: 'Characters',
-    v: 'BoundedVec<u8, Get<u32>>',
-  },
   PhashInfo: {
     pHash: 'BoundedVec<u8, Get<u32>>',
-    proofId: 'ProofId',
+    proofId: 'ProofId'
   },
   ProofId: {},
   ProofData: {
@@ -14,21 +10,21 @@ export const PoECustomTypes: DefinitionsTypes = {
     prevId: 'WorkflowId',
     creator: 'CreatorId',
     groups: 'BoundedVec<ForWhat, Get<u32>>',
-    params: 'BoundedVec<ProofParams, Get<u32>>',
+    params: 'BoundedVec<Characters, Get<u32>>'
   },
   ProofExtra: {},
   Proof: {
     id: 'ProofId',
     data: 'ProofData',
-    extra: 'Option<ProofExtra>',
+    extra: 'Option<ProofExtra>'
   },
   ProofRecord: {
     record: 'Proof',
     accountId: 'AccountId',
-    blockNumber: 'BlockNumber',
-  },
+    blockNumber: 'BlockNumber'
+  }
 };
 
 export default {
-  types: PoECustomTypes,
+  types: PoECustomTypes
 } as Definitions;

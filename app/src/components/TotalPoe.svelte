@@ -1,19 +1,20 @@
 <script lang="ts">
-import { chainConnected, chainStore, totalIssuanceWithName } from '$src/appStore';
-import StatisticBox from './base/StatisticBox.svelte';
+  import { chainConnected, chainStore } from '$src/appStore';
 
-let total: string = '';
+  import StatisticBox from './base/StatisticBox.svelte';
 
-async function run() {
-  const { api } = $chainStore;
-  total = (await api.query.poe.proofTotal()).toString();
-}
+  let total: string = '';
 
-$: {
-  if ($chainConnected) {
-    run();
+  async function run() {
+    const { api } = $chainStore;
+    total = (await api.query.poe.proofTotal()).toString();
   }
-}
+
+  $: {
+    if ($chainConnected) {
+      run();
+    }
+  }
 </script>
 
 <StatisticBox title="PoEs" class="shadow">

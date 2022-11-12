@@ -7,13 +7,17 @@
 /// <reference types="node" />
 
 import type { AccountId } from '@polkadot/types/interfaces/runtime';
+import { ApiOptions } from '@polkadot/api/types';
 import type { BlockNumber } from '@polkadot/types/interfaces/runtime';
 import type { BTreeMap } from '@polkadot/types-codec';
 import type { Bytes } from '@polkadot/types-codec';
-import { Codec } from '@polkadot/types/types';
-import { CodecClass } from '@polkadot/types/types';
+import { DefinitionRpc } from '@polkadot/types/types';
+import { DefinitionRpcSub } from '@polkadot/types/types';
+import { Definitions } from '@polkadot/types/types';
+import { DefinitionsCall } from '@polkadot/types/types';
 import type { Enum } from '@polkadot/types-codec';
 import type { i8 } from '@polkadot/types-codec';
+import type { ITuple } from '@polkadot/types-codec/types';
 import type { Option as Option_2 } from '@polkadot/types-codec';
 import type { Struct } from '@polkadot/types-codec';
 import type { u64 } from '@polkadot/types-codec';
@@ -22,16 +26,32 @@ import type { Vec } from '@polkadot/types-codec';
 // @public (undocumented)
 export type AnAccountId = string;
 
-// @public (undocumented)
-export const anagolaySupport: {
-    types: {
-        [x: string]: string | Record<string, string> | CodecClass<Codec> | {
-            _enum: string[] | Record<string, number> | Record<string, string | null>;
-        } | {
-            _set: Record<string, number>;
-        };
-    };
-};
+// Warning: (ae-forgotten-export) The symbol "AnagolaySchemaType" needs to be exported by the entry point index.d.ts
+//
+// @public
+export const anagolaySchema: AnagolaySchemaType;
+
+// @public
+export interface AnagolaySignature extends Struct {
+    // (undocumented)
+    readonly cid: SignatureId;
+    // (undocumented)
+    readonly sig: Bytes;
+    // Warning: (ae-forgotten-export) The symbol "Characters" needs to be exported by the entry point index.d.ts
+    //
+    // (undocumented)
+    readonly sigKey: Characters_2;
+}
+
+// @public
+export interface AnagolayStatement extends Struct {
+    // (undocumented)
+    readonly data: StatementData;
+    // (undocumented)
+    readonly extra: Option_2<StatementExtra>;
+    // (undocumented)
+    readonly id: StatementId;
+}
 
 // @public
 export interface AnagolayVersionExtra extends Struct {
@@ -49,7 +69,7 @@ export interface AnAnagolayVersionExtra {
 export type AnAny = any;
 
 // @public (undocumented)
-export type AnArtifactId = AnGenericId;
+export type AnArtifactId = string;
 
 // @public (undocumented)
 export type AnBlockNumber = number;
@@ -63,7 +83,7 @@ export type AnBuffer = Buffer;
 // @public (undocumented)
 export type AnByteArray = Uint8Array;
 
-// @public (undocumented)
+// @public
 export type AnCharacters = string;
 
 // @public (undocumented)
@@ -88,8 +108,6 @@ export interface AnClaim {
     subjectId: AnProofId;
     // (undocumented)
     valid: AnValidity;
-    // (undocumented)
-    workflowId: AnWorkflowId;
 }
 
 // @public (undocumented)
@@ -153,12 +171,6 @@ export enum AnForWhat {
     'USER' = 5
 }
 
-// @public
-export type AnGenericId = string;
-
-// @public (undocumented)
-export type AnGenericIds = AnGenericId[];
-
 // @public (undocumented)
 export interface AnImageData {
     // (undocumented)
@@ -203,7 +215,7 @@ export interface AnOperation {
     // (undocumented)
     extra?: AnOperationExtra;
     // (undocumented)
-    id: AnGenericId;
+    id: AnOperationId;
 }
 
 // @public (undocumented)
@@ -213,7 +225,7 @@ export interface AnOperationArtifactStructure {
     // (undocumented)
     fileExtension: AnCharacters;
     // (undocumented)
-    ipfsCid: AnGenericId;
+    ipfsCid: AnArtifactId;
 }
 
 // @public (undocumented)
@@ -252,7 +264,7 @@ export interface AnOperationData {
 export type AnOperationExtra = Record<string, any>;
 
 // @public (undocumented)
-export type AnOperationId = AnGenericId;
+export type AnOperationId = string;
 
 // @public (undocumented)
 export interface AnOperationRecord {
@@ -271,7 +283,7 @@ export interface AnOperationVersion {
     // (undocumented)
     extra?: AnAnagolayVersionExtra;
     // (undocumented)
-    id: AnVersionId;
+    id: AnOperationVersionId;
 }
 
 // @public
@@ -281,7 +293,7 @@ export interface AnOperationVersionData {
     // (undocumented)
     entityId?: AnOperationId;
     // (undocumented)
-    parentId?: AnVersionId;
+    parentId?: AnOperationVersionId;
 }
 
 // @public (undocumented)
@@ -289,6 +301,9 @@ export interface AnOperationVersionExtra {
     // (undocumented)
     createdAt: number;
 }
+
+// @public (undocumented)
+export type AnOperationVersionId = string;
 
 // @public (undocumented)
 export interface AnOperationVersionRecord {
@@ -305,7 +320,7 @@ export interface AnOperationVersionReference {
     // (undocumented)
     config: Map<AnCharacters, AnCharacters>;
     // (undocumented)
-    versionId: AnVersionId;
+    versionId: AnOperationVersionId;
 }
 
 // @public (undocumented)
@@ -331,7 +346,7 @@ export interface AnProof {
     // (undocumented)
     extra?: AnProofExtra;
     // (undocumented)
-    id: AnGenericId;
+    id: AnProofId;
 }
 
 // @public (undocumented)
@@ -340,10 +355,8 @@ export interface AnProofData {
     creator: AnCreatorId;
     // (undocumented)
     groups: AnForWhat[];
-    // Warning: (ae-forgotten-export) The symbol "AnProofParams" needs to be exported by the entry point index.d.ts
-    //
     // (undocumented)
-    params: AnProofParams_2[];
+    params: AnProofParams[];
     // (undocumented)
     prevId: AnWorkflowId;
     // (undocumented)
@@ -355,10 +368,15 @@ export interface AnProofExtra {
 }
 
 // @public (undocumented)
-export type AnProofId = AnGenericId;
+export type AnProofId = string;
 
 // @public (undocumented)
-export type AnProofParams = AnProofParams_2;
+export interface AnProofParams {
+    // (undocumented)
+    k: AnCharacters;
+    // (undocumented)
+    v: string;
+}
 
 // @public (undocumented)
 export interface AnProofRecord {
@@ -391,7 +409,7 @@ export interface AnSignature {
 }
 
 // @public (undocumented)
-export type AnSignatureId = AnGenericId;
+export type AnSignatureId = string;
 
 // @public (undocumented)
 export interface AnSignatures {
@@ -412,10 +430,15 @@ export interface AnSplitParams {
     opName: AnString;
 }
 
-// Warning: (ae-forgotten-export) The symbol "AnStatement" needs to be exported by the entry point index.d.ts
-//
 // @public (undocumented)
-export type AnStatement = AnStatement_2;
+export interface AnStatement {
+    // (undocumented)
+    data: AnStatementData;
+    // (undocumented)
+    extra?: AnStatementExtra;
+    // (undocumented)
+    id: AnStatementId;
+}
 
 // @public (undocumented)
 export interface AnStatementData {
@@ -430,7 +453,7 @@ export interface AnStatementExtra {
 }
 
 // @public (undocumented)
-export type AnStatementId = AnGenericId;
+export type AnStatementId = string;
 
 // @public (undocumented)
 export interface AnStatementRecord {
@@ -439,7 +462,7 @@ export interface AnStatementRecord {
     // (undocumented)
     blockNumber: AnBlockNumber;
     // (undocumented)
-    statement: AnStatement_2;
+    statement: AnStatement;
 }
 
 // @public (undocumented)
@@ -460,7 +483,50 @@ export interface AnValidity {
 }
 
 // @public (undocumented)
-export type AnVersionId = AnGenericId;
+export enum AnVerificationAction {
+    // (undocumented)
+    DnsTxtRecord = "DnsTxtRecord"
+}
+
+// @public
+export interface AnVerificationContext {
+    // (undocumented)
+    UrlForDomain?: [string, string];
+    // (undocumented)
+    UrlForDomainWithSubdomain?: [string, string, string];
+    // (undocumented)
+    UrlForDomainWithUsername?: [string, string, string];
+    // (undocumented)
+    UrlForDomainWithUsernameAndRepository?: [string, string, string, string];
+}
+
+// @public (undocumented)
+export interface AnVerificationRequest {
+    // (undocumented)
+    action: AnVerificationAction;
+    // (undocumented)
+    context: AnVerificationContext;
+    // (undocumented)
+    holder: AnAccountId;
+    // (undocumented)
+    id?: string;
+    // (undocumented)
+    key: string;
+    // (undocumented)
+    status: AnVerificationStatus;
+}
+
+// @public (undocumented)
+export interface AnVerificationStatus {
+    // (undocumented)
+    Failure?: string;
+    // (undocumented)
+    Pending?: undefined;
+    // (undocumented)
+    Success?: undefined;
+    // (undocumented)
+    Waiting?: undefined;
+}
 
 // @public (undocumented)
 export enum AnWasmArtifactSubType {
@@ -491,7 +557,7 @@ export interface AnWorkflowArtifactStructure {
     // (undocumented)
     fileExtension: AnCharacters;
     // (undocumented)
-    ipfsCid: AnGenericId;
+    ipfsCid: AnArtifactId;
 }
 
 // @public (undocumented)
@@ -522,7 +588,7 @@ export interface AnWorkflowData {
 export type AnWorkflowExtra = Record<string, any>;
 
 // @public (undocumented)
-export type AnWorkflowId = AnGenericId;
+export type AnWorkflowId = string;
 
 // @public (undocumented)
 export interface AnWorkflowRecord {
@@ -549,7 +615,7 @@ export interface AnWorkflowVersion {
     // (undocumented)
     extra?: AnAnagolayVersionExtra;
     // (undocumented)
-    id: AnVersionId;
+    id: AnWorkflowVersionId;
 }
 
 // @public (undocumented)
@@ -559,7 +625,7 @@ export interface AnWorkflowVersionData {
     // (undocumented)
     entityId?: AnWorkflowId;
     // (undocumented)
-    parentId?: AnVersionId;
+    parentId?: AnWorkflowVersionId;
 }
 
 // @public (undocumented)
@@ -567,6 +633,9 @@ export interface AnWorkflowVersionExtra {
     // (undocumented)
     createdAt: number;
 }
+
+// @public (undocumented)
+export type AnWorkflowVersionId = string;
 
 // @public (undocumented)
 export interface AnWorkflowVersionRecord {
@@ -579,7 +648,7 @@ export interface AnWorkflowVersionRecord {
 }
 
 // @public
-export interface ArtifactId extends GenericId {
+export interface ArtifactId extends Bytes {
 }
 
 // @public
@@ -592,24 +661,26 @@ export interface Claim extends Struct {
     readonly claimType: ClaimType;
     // (undocumented)
     readonly expiration: Expiration;
+    // Warning: (ae-forgotten-export) The symbol "CreatorId" needs to be exported by the entry point index.d.ts
+    //
     // (undocumented)
-    readonly holder: CreatorId;
+    readonly holder: CreatorId_2;
     // (undocumented)
-    readonly issuer: CreatorId;
+    readonly issuer: CreatorId_2;
     // (undocumented)
-    readonly onExpiration: Characters;
+    readonly onExpiration: Characters_2;
+    // Warning: (ae-forgotten-export) The symbol "ProofId" needs to be exported by the entry point index.d.ts
+    //
     // (undocumented)
-    readonly poeId: ProofId;
+    readonly poeId: ProofId_2;
     // (undocumented)
     readonly prevId: Option_2<StatementId>;
     // (undocumented)
     readonly proportion: Proportion;
     // (undocumented)
-    readonly subjectId: ProofId;
+    readonly subjectId: ProofId_2;
     // (undocumented)
     readonly valid: Validity;
-    // (undocumented)
-    readonly workflowId: WorkflowId;
 }
 
 // @public
@@ -625,6 +696,36 @@ export interface ClaimType extends Enum {
 // @public
 export interface CreatorId extends Characters {
 }
+
+// @public (undocumented)
+const _default: Definitions;
+
+// @public (undocumented)
+const _default_2: Definitions;
+
+// @public (undocumented)
+const _default_3: Definitions;
+
+// @public (undocumented)
+const _default_4: Definitions;
+
+// @public (undocumented)
+const _default_5: Definitions;
+
+// @public (undocumented)
+const _default_6: Definitions;
+
+declare namespace definitions {
+    export {
+        _default as anagolaySupport,
+        _default_2 as operations,
+        _default_3 as poe,
+        _default_4 as statements,
+        _default_5 as workflows,
+        _default_6 as verification
+    }
+}
+export { definitions }
 
 // @public (undocumented)
 export interface ExifFile {
@@ -660,7 +761,7 @@ export interface Expiration extends Struct {
     // (undocumented)
     readonly expirationType: ExpirationType;
     // (undocumented)
-    readonly value: Characters;
+    readonly value: Characters_2;
 }
 
 // @public
@@ -704,17 +805,13 @@ export interface ForWhat extends Enum {
 }
 
 // @public
-export interface GenericId extends Bytes {
-}
-
-// @public
 export interface Operation extends Struct {
     // (undocumented)
     readonly data: OperationData;
     // (undocumented)
     readonly extra: Option_2<OperationExtra>;
     // (undocumented)
-    readonly id: GenericId;
+    readonly id: OperationId;
 }
 
 // @public
@@ -722,15 +819,19 @@ export interface OperationArtifactStructure extends Struct {
     // (undocumented)
     readonly artifactType: OperationArtifactType;
     // (undocumented)
-    readonly fileExtension: Characters;
+    readonly fileExtension: Characters_2;
+    // Warning: (ae-forgotten-export) The symbol "ArtifactId" needs to be exported by the entry point index.d.ts
+    //
     // (undocumented)
-    readonly ipfsCid: GenericId;
+    readonly ipfsCid: ArtifactId_2;
 }
 
 // @public
 export interface OperationArtifactType extends Enum {
+    // Warning: (ae-forgotten-export) The symbol "WasmArtifactSubType" needs to be exported by the entry point index.d.ts
+    //
     // (undocumented)
-    readonly asWasm: WasmArtifactSubType;
+    readonly asWasm: WasmArtifactSubType_2;
     // (undocumented)
     readonly isDocs: boolean;
     // (undocumented)
@@ -744,23 +845,27 @@ export interface OperationArtifactType extends Enum {
 // @public
 export interface OperationData extends Struct {
     // (undocumented)
-    readonly config: BTreeMap<Characters, Vec<Characters>>;
+    readonly config: BTreeMap<Characters_2, Vec<Characters_2>>;
     // (undocumented)
-    readonly description: Characters;
+    readonly description: Characters_2;
     // (undocumented)
-    readonly features: Vec<Characters>;
+    readonly features: Vec<Characters_2>;
+    // Warning: (ae-forgotten-export) The symbol "ForWhat" needs to be exported by the entry point index.d.ts
+    //
     // (undocumented)
-    readonly groups: Vec<ForWhat>;
+    readonly groups: Vec<ForWhat_2>;
+    // Warning: (ae-forgotten-export) The symbol "TypeName" needs to be exported by the entry point index.d.ts
+    //
     // (undocumented)
-    readonly inputs: Vec<TypeName>;
+    readonly inputs: Vec<TypeName_2>;
     // (undocumented)
-    readonly license: Characters;
+    readonly license: Characters_2;
     // (undocumented)
-    readonly name: Characters;
+    readonly name: Characters_2;
     // (undocumented)
-    readonly output: TypeName;
+    readonly output: TypeName_2;
     // (undocumented)
-    readonly repository: Characters;
+    readonly repository: Characters_2;
 }
 
 // @public
@@ -768,7 +873,7 @@ export interface OperationExtra extends Struct {
 }
 
 // @public
-export interface OperationId extends GenericId {
+export interface OperationId extends Struct {
 }
 
 // @public
@@ -781,25 +886,16 @@ export interface OperationRecord extends Struct {
     readonly record: Operation;
 }
 
-// @public (undocumented)
-export const operations: {
-    types: {
-        [x: string]: string | Record<string, string> | CodecClass<Codec> | {
-            _enum: string[] | Record<string, number> | Record<string, string | null>;
-        } | {
-            _set: Record<string, number>;
-        };
-    };
-};
-
 // @public
 export interface OperationVersion extends Struct {
     // (undocumented)
     readonly data: OperationVersionData;
+    // Warning: (ae-forgotten-export) The symbol "AnagolayVersionExtra" needs to be exported by the entry point index.d.ts
+    //
     // (undocumented)
-    readonly extra: Option_2<AnagolayVersionExtra>;
+    readonly extra: Option_2<AnagolayVersionExtra_2>;
     // (undocumented)
-    readonly id: VersionId;
+    readonly id: OperationVersionId;
 }
 
 // @public
@@ -809,7 +905,11 @@ export interface OperationVersionData extends Struct {
     // (undocumented)
     readonly entityId: Option_2<OperationId>;
     // (undocumented)
-    readonly parentId: Option_2<VersionId>;
+    readonly parentId: Option_2<OperationVersionId>;
+}
+
+// @public
+export interface OperationVersionId extends Struct {
 }
 
 // @public
@@ -825,16 +925,18 @@ export interface OperationVersionRecord extends Struct {
 // @public
 export interface OperationVersionReference extends Struct {
     // (undocumented)
-    readonly config: BTreeMap<Characters, Characters>;
+    readonly config: BTreeMap<Characters_2, Characters_2>;
+    // Warning: (ae-forgotten-export) The symbol "OperationVersionId" needs to be exported by the entry point index.d.ts
+    //
     // (undocumented)
-    readonly versionId: VersionId;
+    readonly versionId: OperationVersionId_2;
 }
 
 // @public (undocumented)
 export type output = 'AnByteArray' | 'AnProofParams[]' | 'AnBoolean' | 'AnString' | 'AnAny' | 'StringOrBuffer';
 
 // @public (undocumented)
-export type outputDecoded = 'AnBuffer' | 'AnByteArray' | 'AnFileBuffer' | 'AnStatement' | 'AnStatements' | 'AnProofParams' | 'AnProofParams[]' | 'AnString' | 'AnAny' | 'AnImageMetadata' | 'AnSplitParams' | 'AnGenericId' | 'AnBoolean' | 'AnNull' | 'AnImageData' | 'AnOwnershipClaims' | 'AnCopyrightClaims' | 'AnGenericIds' | 'AnClaim[]' | 'AnSignatures[]' | 'AnSigner' | '[AnClaim[],AnSignatures[]]' | 'StringOrBuffer' | 'SaveStatementReturn[]';
+export type outputDecoded = 'AnBuffer' | 'AnByteArray' | 'AnFileBuffer' | 'AnStatement' | 'AnStatements' | 'AnProofParams' | 'AnProofParams[]' | 'AnString' | 'AnAny' | 'AnImageMetadata' | 'AnSplitParams' | 'AnBoolean' | 'AnNull' | 'AnImageData' | 'AnOwnershipClaims' | 'AnCopyrightClaims' | 'AnClaim[]' | 'AnSignatures[]' | 'AnSigner' | '[AnClaim[],AnSignatures[]]' | 'StringOrBuffer' | 'SaveStatementReturn[]';
 
 // @public (undocumented)
 export type outputDecodedImplementation = AnBuffer | AnByteArray | AnFileBuffer | AnStatement | AnStatements | AnProofParams | AnBoolean | AnString | AnAny | AnImageMetadata | AnImageData;
@@ -855,6 +957,9 @@ export type PHANTOM_POE = 'poe';
 export type PHANTOM_STATEMENTS = 'statements';
 
 // @public (undocumented)
+export type PHANTOM_VERIFICATION = 'verification';
+
+// @public (undocumented)
 export type PHANTOM_WORKFLOWS = 'workflows';
 
 // @public
@@ -865,17 +970,6 @@ export interface PhashInfo extends Struct {
     readonly proofId: ProofId;
 }
 
-// @public (undocumented)
-export const poe: {
-    types: {
-        [x: string]: string | Record<string, string> | CodecClass<Codec> | {
-            _enum: string[] | Record<string, number> | Record<string, string | null>;
-        } | {
-            _set: Record<string, number>;
-        };
-    };
-};
-
 // @public
 export interface Proof extends Struct {
     // (undocumented)
@@ -883,21 +977,23 @@ export interface Proof extends Struct {
     // (undocumented)
     readonly extra: Option_2<ProofExtra>;
     // (undocumented)
-    readonly id: GenericId;
+    readonly id: ProofId;
 }
 
 // @public
 export interface ProofData extends Struct {
     // (undocumented)
-    readonly creator: CreatorId;
+    readonly creator: CreatorId_2;
     // (undocumented)
-    readonly groups: Vec<ForWhat>;
+    readonly groups: Vec<ForWhat_2>;
     // (undocumented)
     readonly params: Vec<ProofParams>;
     // (undocumented)
-    readonly prevId: WorkflowId;
+    readonly prevId: WorkflowId_2;
+    // Warning: (ae-forgotten-export) The symbol "WorkflowId" needs to be exported by the entry point index.d.ts
+    //
     // (undocumented)
-    readonly workflowId: WorkflowId;
+    readonly workflowId: WorkflowId_2;
 }
 
 // @public
@@ -905,13 +1001,13 @@ export interface ProofExtra extends Struct {
 }
 
 // @public
-export interface ProofId extends GenericId {
+export interface ProofId extends Struct {
 }
 
 // @public
 export interface ProofParams extends Struct {
     // (undocumented)
-    readonly k: Characters;
+    readonly k: Characters_2;
     // (undocumented)
     readonly v: Bytes;
 }
@@ -929,51 +1025,97 @@ export interface ProofRecord extends Struct {
 // @public
 export interface Proportion extends Struct {
     // (undocumented)
-    readonly name: Characters;
+    readonly name: Characters_2;
     // (undocumented)
-    readonly sign: Characters;
+    readonly sign: Characters_2;
     // (undocumented)
-    readonly value: Characters;
+    readonly value: Characters_2;
 }
+
+// @public
+export const rpcDefinitions: Record<string, Record<string, DefinitionRpc | DefinitionRpcSub>> | undefined;
+
+// @public (undocumented)
+export const rpcDefinitionsTemp: {
+    operations: {
+        getOperationsByIds: {
+            description: string;
+            params: ({
+                name: string;
+                type: string;
+                isOptional?: undefined;
+            } | {
+                name: string;
+                type: string;
+                isOptional: boolean;
+            })[];
+            type: string;
+        };
+        getOperationVersionsByIds: {
+            description: string;
+            params: ({
+                name: string;
+                type: string;
+                isOptional?: undefined;
+            } | {
+                name: string;
+                type: string;
+                isOptional: boolean;
+            })[];
+            type: string;
+        };
+    };
+    workflows: {
+        getWorkflowsByIds: {
+            description: string;
+            params: ({
+                name: string;
+                type: string;
+                isOptional?: undefined;
+            } | {
+                name: string;
+                type: string;
+                isOptional: boolean;
+            })[];
+            type: string;
+        };
+        getWorkflowVersionsByIds: {
+            description: string;
+            params: ({
+                name: string;
+                type: string;
+                isOptional?: undefined;
+            } | {
+                name: string;
+                type: string;
+                isOptional: boolean;
+            })[];
+            type: string;
+        };
+    };
+};
+
+// @public
+export const runtimeDefinitions: DefinitionsCall;
 
 // @public (undocumented)
 export interface SaveStatementReturn {
     // (undocumented)
-    poe_id: AnGenericId;
+    poe_id: AnProofId;
     // (undocumented)
-    statement_id: AnGenericId;
+    statement_id: AnStatementId;
 }
 
 // @public
-export interface Signature extends Struct {
-    // (undocumented)
-    readonly cid: SignatureId;
-    // (undocumented)
-    readonly sig: Bytes;
-    // (undocumented)
-    readonly sigKey: Characters;
-}
-
-// @public
-export interface SignatureId extends GenericId {
+export interface SignatureId extends Struct {
 }
 
 // @public
 export interface Signatures extends Struct {
     // (undocumented)
-    readonly holder: Signature;
+    readonly holder: AnagolaySignature;
     // (undocumented)
-    readonly issuer: Signature;
-}
-
-// @public
-export interface Statement extends Struct {
-    // (undocumented)
-    readonly data: StatementData;
-    // (undocumented)
-    readonly extra: Option_2<StatementExtra>;
-    // (undocumented)
-    readonly id: GenericId;
+    readonly issuer: AnagolaySignature;
 }
 
 // @public
@@ -989,7 +1131,7 @@ export interface StatementExtra extends Struct {
 }
 
 // @public
-export interface StatementId extends GenericId {
+export interface StatementId extends Struct {
 }
 
 // @public
@@ -999,19 +1141,8 @@ export interface StatementRecord extends Struct {
     // (undocumented)
     readonly blockNumber: BlockNumber;
     // (undocumented)
-    readonly record: Statement;
+    readonly record: AnagolayStatement;
 }
-
-// @public (undocumented)
-export const statements: {
-    types: {
-        [x: string]: string | Record<string, string> | CodecClass<Codec> | {
-            _enum: string[] | Record<string, number> | Record<string, string | null>;
-        } | {
-            _set: Record<string, number>;
-        };
-    };
-};
 
 // @public
 export type StringOrBuffer = AnString | AnBuffer;
@@ -1023,13 +1154,71 @@ export interface TypeName extends Characters {
 // @public
 export interface Validity extends Struct {
     // (undocumented)
-    readonly from: Characters;
+    readonly from: Characters_2;
     // (undocumented)
-    readonly until: Characters;
+    readonly until: Characters_2;
 }
 
 // @public
-export interface VersionId extends GenericId {
+export interface VerificationAction extends Enum {
+    // (undocumented)
+    readonly isDnsTxtRecord: boolean;
+    // (undocumented)
+    readonly type: 'DnsTxtRecord';
+}
+
+// @public
+export interface VerificationContext extends Enum {
+    // (undocumented)
+    readonly asUrlForDomain: ITuple<[Bytes, Bytes]>;
+    // (undocumented)
+    readonly asUrlForDomainWithSubdomain: ITuple<[Bytes, Bytes, Bytes]>;
+    // (undocumented)
+    readonly asUrlForDomainWithUsername: ITuple<[Bytes, Bytes, Bytes]>;
+    // (undocumented)
+    readonly asUrlForDomainWithUsernameAndRepository: ITuple<[Bytes, Bytes, Bytes, Bytes]>;
+    // (undocumented)
+    readonly isUrlForDomain: boolean;
+    // (undocumented)
+    readonly isUrlForDomainWithSubdomain: boolean;
+    // (undocumented)
+    readonly isUrlForDomainWithUsername: boolean;
+    // (undocumented)
+    readonly isUrlForDomainWithUsernameAndRepository: boolean;
+    // (undocumented)
+    readonly type: 'UrlForDomain' | 'UrlForDomainWithUsername' | 'UrlForDomainWithSubdomain' | 'UrlForDomainWithUsernameAndRepository';
+}
+
+// @public
+export interface VerificationRequest extends Struct {
+    // (undocumented)
+    readonly action: VerificationAction;
+    // (undocumented)
+    readonly context: VerificationContext;
+    // (undocumented)
+    readonly holder: AccountId;
+    // (undocumented)
+    readonly id: Option_2<Bytes>;
+    // (undocumented)
+    readonly key: Bytes;
+    // (undocumented)
+    readonly status: VerificationStatus;
+}
+
+// @public
+export interface VerificationStatus extends Enum {
+    // (undocumented)
+    readonly asFailure: Bytes;
+    // (undocumented)
+    readonly isFailure: boolean;
+    // (undocumented)
+    readonly isPending: boolean;
+    // (undocumented)
+    readonly isSuccess: boolean;
+    // (undocumented)
+    readonly isWaiting: boolean;
+    // (undocumented)
+    readonly type: 'Waiting' | 'Pending' | 'Failure' | 'Success';
 }
 
 // @public
@@ -1061,15 +1250,15 @@ export interface WorkflowArtifactStructure extends Struct {
     // (undocumented)
     readonly artifactType: WorkflowArtifactType;
     // (undocumented)
-    readonly fileExtension: Characters;
+    readonly fileExtension: Characters_2;
     // (undocumented)
-    readonly ipfsCid: GenericId;
+    readonly ipfsCid: ArtifactId_2;
 }
 
 // @public
 export interface WorkflowArtifactType extends Enum {
     // (undocumented)
-    readonly asWasm: WasmArtifactSubType;
+    readonly asWasm: WasmArtifactSubType_2;
     // (undocumented)
     readonly isDocs: boolean;
     // (undocumented)
@@ -1083,13 +1272,13 @@ export interface WorkflowArtifactType extends Enum {
 // @public
 export interface WorkflowData extends Struct {
     // (undocumented)
-    readonly creators: Vec<CreatorId>;
+    readonly creators: Vec<CreatorId_2>;
     // (undocumented)
-    readonly description: Characters;
+    readonly description: Characters_2;
     // (undocumented)
-    readonly groups: Vec<ForWhat>;
+    readonly groups: Vec<ForWhat_2>;
     // (undocumented)
-    readonly name: Characters;
+    readonly name: Characters_2;
     // (undocumented)
     readonly segments: Vec<WorkflowSegment>;
 }
@@ -1099,7 +1288,7 @@ export interface WorkflowExtra extends Struct {
 }
 
 // @public
-export interface WorkflowId extends GenericId {
+export interface WorkflowId extends Struct {
 }
 
 // @public
@@ -1111,17 +1300,6 @@ export interface WorkflowRecord extends Struct {
     // (undocumented)
     readonly record: Workflow;
 }
-
-// @public (undocumented)
-export const workflows: {
-    types: {
-        [x: string]: string | Record<string, string> | CodecClass<Codec> | {
-            _enum: string[] | Record<string, number> | Record<string, string | null>;
-        } | {
-            _set: Record<string, number>;
-        };
-    };
-};
 
 // @public
 export interface WorkflowSegment extends Struct {
@@ -1136,9 +1314,9 @@ export interface WorkflowVersion extends Struct {
     // (undocumented)
     readonly data: WorkflowVersionData;
     // (undocumented)
-    readonly extra: Option_2<AnagolayVersionExtra>;
+    readonly extra: Option_2<AnagolayVersionExtra_2>;
     // (undocumented)
-    readonly id: VersionId;
+    readonly id: WorkflowVersionId;
 }
 
 // @public
@@ -1148,7 +1326,11 @@ export interface WorkflowVersionData extends Struct {
     // (undocumented)
     readonly entityId: Option_2<WorkflowId>;
     // (undocumented)
-    readonly parentId: Option_2<VersionId>;
+    readonly parentId: Option_2<WorkflowVersionId>;
+}
+
+// @public
+export interface WorkflowVersionId extends Struct {
 }
 
 // @public

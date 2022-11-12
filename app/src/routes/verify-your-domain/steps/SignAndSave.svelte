@@ -1,186 +1,86 @@
 <script lang="ts">
-import '@anagolay/types/augment-api';
-import TitleCard from '$src/components/base/TitleCard.svelte';
-import { calculateCid, mainStore, steps } from '../store';
-import { pallets, connectToWs, ApiPromise } from '@anagolay/api';
-import { onDestroy, onMount } from 'svelte';
-import { notifications } from '$src/components/notifications/stores';
-import {
-  AnClaim,
-  AnClaimType,
-  AnExpirationType,
-  AnForWhat,
-  AnProofData,
-  AnSignatures,
-  AnStatementData
-} from '@anagolay/types';
-import { web3FromAddress } from '@polkadot/extension-dapp?client';
-import { isNil, split, startsWith } from 'ramda';
-import Code from '$src/components/base/Code.svelte';
-import CodeBlockWithSerialization from '$src/components/base/CodeBlockWithSerialization.svelte';
-import { hexToString, u8aToHex } from '@polkadot/util';
-import { signatureVerify } from '@polkadot/util-crypto';
+  import '@anagolay/types/augment-api';
 
-// this might break when new genesis comes in and we regen the workflows
-const workflowId = 'bafkr4icflbi5pbomtcyejivr4l7dcdvcmvcsviwmnn7qp52flfnkvy2ebe';
+  import { pallets } from '@anagolay/api';
+  import {
+    AnClaim,
+    AnClaimType,
+    AnExpirationType,
+    AnSignatures,
+    AnStatementData
+  } from '@anagolay/types/augment-api';
+  import { u8aToHex } from '@polkadot/util';
+  import { head, isEmpty } from 'ramda';
+  import { onMount } from 'svelte';
 
-const idPlaceholder = `__it's calculated on-chain using our workflow__`;
+  import { chainStore } from '$src/appStore';
+  import Code from '$src/components/base/Code.svelte';
+  import TitleCard from '$src/components/base/TitleCard.svelte';
+  import { notificationsStore } from '$src/components/notifications/store';
+  import { polkadotAccountsStore, signViaExtension } from '$src/components/polkadot/store';
 
-let api: ApiPromise | undefined;
-let apiConnected: boolean = false;
-let savingProof: boolean = false;
+  import { calculateCid, mainStore, steps } from '../store';
 
-onMount(async () => {
-  api = await connectToWs();
-  apiConnected = api.isConnected;
-  // const [chain, nodeName, nodeVersion] = await Promise.all([
-  //   api.rpc.system.chain(),
-  //   api.rpc.system.name(),
-  //   api.rpc.system.version(),
-  // ]);
+  let waitingForVerificationEvent: boolean = true;
 
-  const proofData: AnProofData = {
-    workflowId,
-    prevId: '',
-    creator: $mainStore.account,
-    groups: [AnForWhat.GENERIC],
-    params: [
-      { k: 'domain-verification-code', v: $mainStore.verificationCode },
-      { k: 'domain', v: $mainStore.domain }
-    ]
-  };
+  async function subToEvents() {
+    pallets.verification
+      .listenForEvent('VerificationSuccessful')
+      .once('VerificationSuccessful', async (d) => {
+        const poe = await $chainStore.api.query.poe.proofIdsByVerificationContext(d.data.context);
+        const poeDecoded: string[] = poe.toHuman() as unknown as string[];
 
-  $mainStore.proof = {
-    id: idPlaceholder,
-    data: proofData
-  };
-});
-
-/**
- * A method that will find format and invoke the polkadotJs Dapp for signing an Proof extrinsic
- */
-async function createProof() {
-  $mainStore.savingProof = true;
-  /**
-   * a dummy placeholder for the correct message
-   */
-  let proofHadErrors = false;
-  web3FromAddress($mainStore.account)
-    // import { InjectedExtension } from '@polkadot/extension-inject/types';
-    .then(async (injector) => {
-      const bc = await pallets.poe.save($mainStore.proof.data, $mainStore.account, {
-        signer: injector.signer
-      });
-      bc.on(pallets.poe.config.EVENT_NAME_SINGLE, (p) => {
-        console.log(p);
-
-        if (startsWith('poe.ProofCreated', p.message)) {
-          const d = split('::')(p.message)[1];
-          const eventRecord = JSON.parse(d);
-          const proofId = hexToString(eventRecord[1]);
-          $mainStore.proof = {
-            ...$mainStore.proof,
-            id: proofId
-          };
-          notifications.add('Proof saved but not finalized.');
-        }
-
-        if (!isNil(p.error)) {
-          console.error(p.error);
-          notifications.add(p.error.message, 'error', { close: true, time: 5000 });
-          $mainStore.savingProof = false;
-          proofHadErrors = true;
-        }
-        // else {
-        //   console.log('[poe:save]', p.message);
-        // }
-        if (p.finalized) {
-          console.log('[poe:save:fin]', p);
-          notifications.add('Proof saved and finalized.');
-          $mainStore.savingProof = false;
-          if (!proofHadErrors) {
-            $mainStore.proofCreated = true;
-            $mainStore.canSaveStatement = true;
-          }
+        if (!isEmpty(poeDecoded)) {
+          $mainStore.proofId = head(poeDecoded);
+          waitingForVerificationEvent = false;
+          $mainStore.canSaveStatement = true;
+        } else {
+          notificationsStore.add(`Proof doesn't exist!!!`);
         }
       });
+  }
 
-      // this is just an idea to listen to the events from the chain
-      bc.on('ProofCreated', () => {});
-    })
-    .catch((error: Error) => {
-      notifications.add(error.message, 'error', { close: true, time: 5000 });
-      $mainStore.savingProof = false;
-    });
-}
+  async function saveStatement() {
+    $mainStore.savingStatement = true;
+    /**
+     * We need to build a claim first
+     */
+    const claim: AnClaim = {
+      poeId: $mainStore.proofId,
+      // this
+      proportion: {
+        name: 'percentage',
+        sign: '%',
+        value: '100'
+      },
+      subjectId: $mainStore.proofId,
+      holder: $polkadotAccountsStore.selectedAccount.address,
+      issuer: $polkadotAccountsStore.selectedAccount.address, // for now they are one and the same, much easier, later remote-signer can help
+      claimType: AnClaimType.OWNERSHIP,
+      valid: {
+        from: `${Date.now()}`,
+        until: ''
+      },
+      expiration: {
+        expirationType: AnExpirationType.FOREVER,
+        value: ''
+      },
+      onExpiration: ''
+    };
 
-/**
- * Save the statement to the chain
- */
-async function saveStatement() {
-  $mainStore.savingStatement = true;
-  /**
-   * We need to build a claim first
-   */
-  const claim: AnClaim = {
-    poeId: $mainStore.proof.id,
-    // this
-    workflowId,
-    proportion: {
-      name: 'percentage',
-      sign: '%',
-      value: '100'
-    },
-    subjectId: $mainStore.proof.id,
-    holder: $mainStore.account,
-    issuer: $mainStore.account, // for now they are one and the same, much easier, later remote-signer can help
-    claimType: AnClaimType.OWNERSHIP,
-    valid: {
-      from: `${Date.now()}`,
-      until: ''
-    },
-    expiration: {
-      expirationType: AnExpirationType.FOREVER,
-      value: ''
-    },
-    onExpiration: ''
-  };
-
-  const injector = await web3FromAddress($mainStore.account);
-  // this injector object has a signer and a signRaw method
-  // to be able to sign raw bytes
-  const signRaw = injector?.signer?.signRaw;
-
-  if (!!signRaw) {
-    console.log(`Signing the claim`);
-    // after making sure that signRaw is defined
-    // we can use it to sign our message
-
-    const payload = api.createType('StatementsClaim', claim);
-    const account = mainStore.selectedAccount();
+    const payload = $chainStore.api.createType('StatementsClaim', claim);
+    const account = polkadotAccountsStore.selectedAccountAsKeyring();
     const hexPublicKey = u8aToHex(account.publicKey);
 
     const data = payload.toHex();
-    const message = {
-      address: account.address,
-      data,
-      type: 'bytes'
-    };
-    const { signature: holderSignature } = await signRaw(message);
+
+    const holderSignature = await signViaExtension($polkadotAccountsStore.selectedAccount.address, data);
 
     const sig = {
       sig: holderSignature,
       sigKey: `urn:substrate:${hexPublicKey}`,
       cid: await calculateCid(holderSignature)
     };
-
-    console.log(
-      holderSignature,
-      payload,
-      data,
-      payload.toHex(),
-      signatureVerify(message.data, holderSignature, hexPublicKey)
-    );
 
     const signatures: AnSignatures = {
       holder: sig,
@@ -192,116 +92,80 @@ async function saveStatement() {
       claim
     };
 
-    /**
-     * a dummy placeholder for the correct message
-     */
-    let statementHadErrors = false;
-    // here we start saving the statement
-    web3FromAddress($mainStore.account)
-      // import { InjectedExtension } from '@polkadot/extension-inject/types';
-      .then(async (injector: { signer: any }) => {
-        const bc = await pallets.statements.saveOwnership(statement, $mainStore.account, {
-          signer: injector.signer
-        });
+    const b = await pallets.statements.saveOwnership(
+      statement,
+      $polkadotAccountsStore.selectedAccount.address,
+      {
+        signer: $mainStore.signer
+      }
+    );
 
-        bc.on(pallets.statements.config.EVENT_NAME_SINGLE, (p) => {
-          console.log(p);
+    b.once('OwnershipCreated', (d) => {
+      $mainStore.statement = d.data;
+      $mainStore.statementCreated = true;
+      $mainStore.savingStatement = false;
+      if ($steps.currentStep < 6) {
+        steps.gotoStep(6);
+        setTimeout(() => {
+          document.querySelector(`#step_${6}`).scrollIntoView({
+            behavior: 'smooth'
+          });
+        }, 100);
+      }
+    });
 
-          if (startsWith('statements::OwnershipCreate', p.message)) {
-            const d = split('::')(p.message)[1];
-            const eventRecord = JSON.parse(d);
-            const recordId = hexToString(eventRecord[1]);
-
-            $mainStore.statement = {
-              id: recordId,
-              data: statement
-            };
-
-            notifications.add('Statement saved but not finalized.');
-          }
-
-          if (!isNil(p.error)) {
-            console.error(p.error);
-            notifications.add(p.error.message, 'error', { close: true, time: 5000 });
-            $mainStore.savingStatement = false;
-            statementHadErrors = true;
-          }
-          if (p.finalized) {
-            if (!statementHadErrors) {
-              $mainStore.statementCreated = true;
-              $mainStore.savingStatement = false;
-              notifications.add('Statement saved and finalized.');
-              if ($steps.currentStep < 6) {
-                steps.gotoStep(6);
-                setTimeout(() => {
-                  document.querySelector(`#step_${6}`).scrollIntoView({
-                    behavior: 'smooth'
-                  });
-                }, 100);
-              }
-            }
-          }
-        });
-      })
-      .catch((error: Error) => {
-        notifications.add(error.message, 'error', { close: true, time: 5000 });
-        $mainStore.savingStatement = false;
-      });
+    b.once('error', (error) => {
+      console.error(error);
+      notificationsStore.add(error.error.message, 'error');
+      $mainStore.savingStatement = false;
+    });
+    b.once('finalized', () => {
+      $mainStore.savingStatement = false;
+    });
   }
-}
-// cleanup
-onDestroy(async () => {
-  // await api.disconnect();
-  // apiConnected = !apiConnected;
-  // api = undefined;
-});
+
+  onMount(() => {
+    if ($chainStore.api) {
+      const unsub = subToEvents();
+      return unsub;
+    }
+  });
 </script>
 
-<TitleCard title="Sign and Save" step="{5}">
+<TitleCard title="Sign and Save" step={5}>
   <div class="flex flex-col">
-    <div class="flex flex-col gap-4">
-      <article class="w-full prose lg:prose-xl">
-        First we need to create a Proof of domain ownership on-chain so we can include it in the Claim. You
-        can read more on the Proofs <a
-          href="https://anagolay.dev/about/proof-of-existence/ "
-          target="_blank"
-          rel="noopener noreferrer">here</a
-        >
+    {#if waitingForVerificationEvent}
+      <article class="w-full">
+        <span class="w-full btn loading">Waiting for the verification event from the Anagolay.network</span>
       </article>
-      <TitleCard title="Proof Structure" hideContent="{true}" class="p-0">
-        <CodeBlockWithSerialization code="{$mainStore.proof}" />
-      </TitleCard>
-      <!-- save the proof button -->
-      <button
-        class="btn btn-outline btn-accent {$mainStore.savingProof && 'loading'}"
-        disabled="{!apiConnected || $mainStore.savingProof || $mainStore.proofCreated}"
-        on:click="{createProof}">First save the Proof</button
-      >
-    </div>
-    <div class="divider">THEN</div>
-    <div class="flex flex-col gap-4">
-      <article class="w-full prose lg:prose-xl">
-        Clicking on the <bold>Save the statement</bold> button will ask you to sign the claim and then submit it
-        to the Anagolay Network.
-      </article>
-      <div></div>
+    {:else}
+      <div class="flex flex-col gap-4">
+        <article class="w-full prose lg:prose-xl">
+          Clicking on the <bold>Save the statement</bold> button will ask you to sign the claim and then submit
+          it to the Anagolay Network.
+        </article>
+        <div />
 
-      <article class="w-full prose lg:prose-lg">
-        <blockquote>
-          I am Claiming that account <Code>{$mainStore.account}</Code> owns the domain
-          <a href="http://${$mainStore.domain}" target="_blank" rel="noopener noreferrer"
-            >{$mainStore.domain}</a
-          >
-          in a proportion of <Code>100%</Code>!
-        </blockquote>
-      </article>
-      <button
-        class="btn btn-success {$mainStore.savingStatement && 'loading'}"
-        disabled="{$mainStore.savingStatement || !$mainStore.canSaveStatement}"
-        on:click="{saveStatement}"
-      >
-        Save the statement
-      </button>
-    </div>
+        <article class="w-full prose lg:prose-lg">
+          <blockquote>
+            I am Claiming that account <Code
+              >{$polkadotAccountsStore.selectedAccount &&
+                $polkadotAccountsStore.selectedAccount.address}</Code
+            > owns the domain
+            <a href="http://${$mainStore.domain}" target="_blank" rel="noopener noreferrer"
+              >{$mainStore.domain}</a
+            >
+            in a proportion of <Code>100%</Code>!
+          </blockquote>
+        </article>
+        <button
+          class="btn btn-success {$mainStore.savingStatement && 'loading'}"
+          disabled={$mainStore.statementCreated || $mainStore.savingStatement || !$mainStore.canSaveStatement}
+          on:click={saveStatement}
+        >
+          Save the statement
+        </button>
+      </div>
+    {/if}
   </div>
 </TitleCard>

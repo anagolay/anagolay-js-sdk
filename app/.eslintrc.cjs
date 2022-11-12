@@ -1,12 +1,24 @@
-require('@rushstack/eslint-config/patch/modern-module-resolution');
 module.exports = {
   root: true,
-  extends: ['eslint:recommended', 'prettier', '@rushstack/eslint-config/profile/node'],
-  plugins: ['svelte3', 'unused-imports', 'simple-import-sort'],
+  parser: '@typescript-eslint/parser', // add the TypeScript parser
+
+  extends: [
+    'eslint:recommended',
+    'prettier',
+    'plugin:@typescript-eslint/recommended' // breaks the stuff for svelte
+    // 'plugin:@typescript-eslint/recommended-requiring-type-checking'
+  ],
+  plugins: [
+    'svelte3',
+    'unused-imports',
+    'simple-import-sort',
+    '@typescript-eslint' // add the TypeScript plugin
+  ],
   ignorePatterns: ['*.cjs'],
   overrides: [{ files: ['*.svelte'], processor: 'svelte3/svelte3' }],
 
   rules: {
+    '@typescript-eslint/no-inferrable-types': 'off',
     'simple-import-sort/exports': 'error',
     'simple-import-sort/imports': 'error',
     'unused-imports/no-unused-imports': 'error',
@@ -24,11 +36,13 @@ module.exports = {
     'svelte3/typescript': function () {
       return require('typescript');
     }
+    // 'svelte3/typescript': true // load TypeScript as peer dependency
   },
   parserOptions: {
     sourceType: 'module',
     ecmaVersion: 2020,
-    tsconfigRootDir: __dirname
+    tsconfigRootDir: __dirname,
+    extraFileExtensions: ['.svelte']
   },
   env: {
     browser: true,

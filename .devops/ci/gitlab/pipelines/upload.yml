@@ -1,0 +1,51 @@
+upload-cli-to-ipfs:
+  needs: ['retest']
+  stage: upload
+  extends:
+    - .install-pnpm
+    - .install-ipfs-cli-and-setup
+  cache:
+    policy: pull
+  when: manual
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_MESSAGE =~ /^.*\[build all\].*$/s
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+  script:
+    - !reference [.rush:install, script]
+    - !reference [.rush:build, script]
+
+    - echo "Uploading CLI to IPFS ..."
+    - ipfsCli add --pin --onlyCid sdk/cli/dist/anagolay.js > ANAGOLAY_CLI_JS_CID
+    - echo "The JS CLI version CID:" && cat ANAGOLAY_CLI_JS_CID
+    - echo "https://$(cat ANAGOLAY_CLI_JS_CID).ipfs.anagolay.network?filename=anagolay"
+
+    - ipfsCli add --pin --onlyCid sdk/cli/binaries/anagolay > ANAGOLAY_CLI_BIN_CID
+    - echo "The BINARY CLI version CID:" && cat ANAGOLAY_CLI_BIN_CID
+    - echo "https://$(cat ANAGOLAY_CLI_BIN_CID).ipfs.anagolay.network?filename=anagolay"
+
+upload-app-to-ipfs:
+  needs: ['retest']
+  stage: upload
+  extends:
+    - .install-pnpm
+    - .install-ipfs-cli-and-setup
+  cache:
+    policy: pull
+  when: manual
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_MESSAGE =~ /^.*\[build all\].*$/s
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+  script:
+    - !reference [.rush:install, script]
+    - !reference [.rush:build, script]
+
+    - echo 'Building Application...'
+    - cd app/
+    - pnpm build:app
+
+    - echo "Uploading to IPFS ..."
+    - IPFS_PIN=true ipfsCli add --pin --onlyCid build > ANAGOLAY_APP_CID
+    - echo "The Website is published with the CID:" && cat ANAGOLAY_APP_CID
+    - echo "https://$(cat ANAGOLAY_APP_CID).ipfs.anagolay.network/"

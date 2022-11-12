@@ -6,23 +6,23 @@ export default {
       params: [
         {
           name: 'operation_ids',
-          type: 'Vec<OperationsOperationId>',
+          type: 'Vec<OperationsOperationId>'
         },
         {
           name: 'offset',
-          type: 'u64',
+          type: 'u64'
         },
         {
           name: 'limit',
-          type: 'u16',
+          type: 'u16'
         },
         {
           name: 'at',
           type: 'Hash',
-          isOptional: true,
-        },
+          isOptional: true
+        }
       ],
-      type: 'Vec<OperationsOperation>',
+      type: 'Vec<OperationsOperation>'
     },
     getOperationVersionsByIds: {
       description:
@@ -30,24 +30,24 @@ export default {
       params: [
         {
           name: 'operation_version_ids',
-          type: 'Vec<OperationsOperationVersionId>',
+          type: 'Vec<OperationsOperationVersionId>'
         },
         {
           name: 'offset',
-          type: 'u64',
+          type: 'u64'
         },
         {
           name: 'limit',
-          type: 'u16',
+          type: 'u16'
         },
         {
           name: 'at',
           type: 'Hash',
-          isOptional: true,
-        },
+          isOptional: true
+        }
       ],
-      type: 'Vec<OperationsOperationVersion>',
-    },
+      type: 'Vec<OperationsOperationVersion>'
+    }
   },
   workflows: {
     getWorkflowsByIds: {
@@ -56,23 +56,23 @@ export default {
       params: [
         {
           name: 'workflow_ids',
-          type: 'Vec<WorkflowsWorkflowId>',
+          type: 'Vec<WorkflowsWorkflowId>'
         },
         {
           name: 'offset',
-          type: 'u64',
+          type: 'u64'
         },
         {
           name: 'limit',
-          type: 'u16',
+          type: 'u16'
         },
         {
           name: 'at',
           type: 'Hash',
-          isOptional: true,
-        },
+          isOptional: true
+        }
       ],
-      type: 'Vec<WorkflowsWorkflow>',
+      type: 'Vec<WorkflowsWorkflow>'
     },
     getWorkflowVersionsByIds: {
       description:
@@ -80,23 +80,23 @@ export default {
       params: [
         {
           name: 'workflow_version_ids',
-          type: 'Vec<WorkflowsWorkflowVersionId>',
+          type: 'Vec<WorkflowsWorkflowVersionId>'
         },
         {
           name: 'offset',
-          type: 'u64',
+          type: 'u64'
         },
         {
           name: 'limit',
-          type: 'u16',
+          type: 'u16'
         },
         {
           name: 'at',
           type: 'Hash',
-          isOptional: true,
-        },
+          isOptional: true
+        }
       ],
-      type: 'Vec<WorkflowsWorkflowVersion>',
-    },
-  },
+      type: 'Vec<WorkflowsWorkflowVersion>'
+    }
+  }
 };

@@ -7,7 +7,7 @@ import type {
   Characters,
   CreatorId,
   ForWhat,
-  WasmArtifactSubType,
+  WasmArtifactSubType
 } from '@anagolay/types/interfaces/anagolaySupport';
 import type { OperationVersionId } from '@anagolay/types/interfaces/operations';
 import type { BTreeMap, Enum, Option, Struct, Vec, i8 } from '@polkadot/types-codec';

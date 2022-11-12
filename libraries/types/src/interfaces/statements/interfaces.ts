@@ -37,7 +37,7 @@ export enum AnExpirationType {
   MONTHS,
   DAYS,
   MINUTES,
-  SECONDS,
+  SECONDS
 }
 
 export interface AnExpiration {
@@ -49,7 +49,7 @@ export interface AnExpiration {
 
 export enum AnClaimType {
   COPYRIGHT,
-  OWNERSHIP,
+  OWNERSHIP
 }
 
 export interface AnClaim {

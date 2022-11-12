@@ -2,12 +2,14 @@
   "name": "at",
   "version": "0.0.0",
   "description": "TEMPLATE PROJECT",
-  "author": "did:substrate:GHm6gp6khjcxQvnbnSsHdYejsFK1nNVxcGyGAsbDfsymtLr",
+  "keywords": [],
   "repository": {
     "type": "git",
     "url": "https://gitlab.com/anagolay/network-js-sdk.git",
     "directory": ""
   },
+  "license": "AGPL3",
+  "author": "did:substrate:5Fn9SNUE8LihCm7Lq5dpPgBebGy5D7ZKWESDsWbdjsfV37d4",
   "type": "module",
   "exports": {
     ".": {
@@ -28,8 +30,6 @@
     "watch": "heft build --clean --watch",
     "watch:test": "heft test --clean --watch"
   },
-  "keywords": [],
-  "license": "AGPL3",
   "devDependencies": {
     "@microsoft/api-extractor": "7.29.2",
     "@rushstack/eslint-config": "3.0.0",

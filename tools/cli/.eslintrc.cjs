@@ -5,7 +5,7 @@ module.exports = {
   extends: [
     '@rushstack/eslint-config/profile/node',
     // '@rushstack/eslint-config/mixins/friendly-locals',
-    '@rushstack/eslint-config/mixins/tsdoc',
+    '@rushstack/eslint-config/mixins/tsdoc'
   ],
   parserOptions: { tsconfigRootDir: __dirname, ecmaVersion: 'latest' },
   plugins: ['simple-import-sort', 'unused-imports'],
@@ -20,8 +20,8 @@ module.exports = {
         vars: 'all',
         varsIgnorePattern: '^_',
         args: 'after-used',
-        argsIgnorePattern: '^_',
-      },
-    ],
-  },
+        argsIgnorePattern: '^_'
+      }
+    ]
+  }
 };

@@ -1,0 +1,274 @@
+# https://docs.gitlab.com/ee/ci/jobs/job_control.html
+image: node:18.4.0-bullseye
+stages:
+  - check
+  - test
+  - build
+  - release
+
+variables:
+  PNPM_IPFS_CID: QmeCUX9cK4YKdTbNVq3jg5cJPvz8uQiQmb4AKKd7niy4kY
+  ANAGOLAY_IPFS_CLI_CID: bafybeigiuuavnlqy7czvxlvxdrqzcsvm7ezfkbbq4jwksl77lk5f7tlhia
+
+cache:
+  key: $CI_COMMIT_REF_SLUG
+  paths:
+    - common/temp
+    - app/.svelte-kit
+    - ANAGOLAY_CLI_JS_CID
+    - ANAGOLAY_CLI_BIN_CID
+
+workflow:
+  rules:
+    - if: $FORCE_START
+    - if: $CI_COMMIT_TAG
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+    - if: $CI_COMMIT_MESSAGE =~ /^.*\[mellon\].*$]/ # a friendly tag so we can test it
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event" ## this is the same as $CI_MERGE_REQUEST_IID
+
+# include:
+#   - template: Security/Dependency-Scanning.gitlab-ci.yml
+#   - template: Security/License-Scanning.gitlab-ci.yml
+#   - template: Security/SAST.gitlab-ci.yml
+#   - template: Security/Secret-Detection.gitlab-ci.yml
+
+# include this where you need it. like in before_script
+.install-ipfs-cli-and-setup: &install-ipfs-cli-and-setup
+  - echo "Downloading anagolay ipfs CLI which works with the ipfsAuthProxy."
+  - |
+    wget https://ipfs.anagolay.network/ipfs/bafybeig634knkl57gqgkmh3fti6zxisfcd47swetf5lastcx2waboa4a4a > /usr/local/bin/ipfsCli
+    chmod +x /usr/local/bin/ipfsCli
+
+# https://docs.gitlab.com/ee/ci/yaml/yaml_optimization.html#yaml-anchors-for-scripts
+.install-pnpm: &install-pnpm
+  - |
+    set -e
+    curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm@7
+    pnpm config set store-dir common/temp/pnpm-store
+    node --version
+    pnpm --version
+    git --version
+
+changelogs:
+  before_script:
+    - *install-pnpm
+  stage: check
+  cache: {}
+  allow_failure: true
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+
+  script:
+    - echo 'Checking for missing change logs...'
+    - node common/scripts/install-run-rush.js change --verify
+
+test-code:
+  needs: ['changelogs']
+  stage: test
+  before_script:
+    - *install-pnpm
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+  script:
+    - set -e
+
+    - echo 'Installing rush...'
+    - node common/scripts/install-run-rush.js install
+
+    - echo 'Is our code pretty?'
+    - node common/scripts/install-run-rush.js prettier:check
+
+    - echo 'Building and testing all packages...'
+    - node common/scripts/install-run-rush.js build
+
+code-quality:
+  needs: ['test-code']
+  stage: test
+  before_script:
+    - *install-pnpm
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+  script:
+    - set -e
+
+    - echo 'Installing rush...'
+    - node common/scripts/install-run-rush.js install
+
+    - echo 'Does our code has proper quality?'
+    - node common/scripts/install-run-rush.js code-quality
+
+rpc-connection-from-definitions:
+  needs: ['test-code']
+  stage: test
+  allow_failure: true
+  before_script:
+    - *install-pnpm
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+  script:
+    - set -e
+
+    - echo 'Installing rush...'
+    - node common/scripts/install-run-rush.js install
+
+    - echo 'Building and testing all packages...'
+    # - node common/scripts/install-run-rush.js build
+    - node common/scripts/install-run-rush.js retest
+    - cd testing-package
+    - node lib/start.js
+
+test-code-node16-lts:
+  image: node:16-bullseye
+  needs: ['test-code', 'changelogs']
+  allow_failure: true
+  stage: test
+  before_script:
+    - *install-pnpm
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+  script:
+    - set -e
+
+    - echo 'Installing rush...'
+    - node common/scripts/install-run-rush.js install
+
+    - echo 'Building and testing all packages...'
+    - node common/scripts/install-run-rush.js build --verbose
+
+# We want to build this separately because the sveltekit breaks all the time
+
+# build-js-api-docs:
+#   stage: release
+#   before_script:
+#     - *install-pnpm
+#     - pnpm add -g @microsoft/api-documenter
+#     - *install-ipfs-cli-and-setup
+#   script:
+#     - set -e
+#     - api-documenter markdown -i ./api-extractor-docs/json -o ./apps/anagolay.dev/docs/js-api
+#     - ls -la ./apps/anagolay.dev/docs/js-api
+
+#     # - echo "Install the docusaurus dependencies"
+#     # - pnpm install
+
+#     # - echo "Build the docs website"
+#     # - pnpm build
+
+#     # - echo "Uploading CLI to IPFS ..."
+#     # - ipfs add --cid-version=1 --pin=false --recursive --quieter ./docs/published/build > ANAGOLAY_JS_API_DOCS
+#     # - echo "The docs are published here https://ipfs.anagolay.network/ipfs/$(cat ANAGOLAY_JS_API_DOCS)
+
+# build-anagolay-cli-binaries:
+#   needs: ['test-code']
+#   allow_failure: true
+#   stage: build
+#   before_script:
+#     - *install-pnpm
+#     - mkdir -p ./binaries
+#   script:
+#     - set -e
+
+#     - echo 'Installing rush...'
+#     - node common/scripts/install-run-rush.js install
+
+#     - echo 'Building Anagolay CLI binaries ...'
+#     - cd ./sdk/cli
+#     - node ./buildBinaries.js
+#   artifacts: ## paths are wrong
+#     name: 'anagolay'
+#     when: on_success
+#     paths:
+#       - binaries/anagolay-node16-linux-x64
+#       - binaries/anagolay-node18-linux-x64
+#     untracked: false
+#     expire_in: '30 days'
+
+upload-cli-to-ipfs:
+  needs: ['test-code']
+  stage: release
+  before_script:
+    - *install-pnpm
+    - *install-ipfs-cli-and-setup
+  when: manual
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_MESSAGE =~ /^.*\[build all\].*$/s
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+  script:
+    - set -e
+
+    - echo 'Installing rush...'
+    - node common/scripts/install-run-rush.js install
+
+    - echo 'Building from CLI ...'
+    - node common/scripts/install-run-rush.js build --from @anagolay/cli
+
+    - echo "Uploading CLI to IPFS ..."
+    - ipfsCli add --pin --onlyCid sdk/cli/dist/anagolay.js > ANAGOLAY_CLI_JS_CID
+    - echo "The JS CLI version CID:" && cat ANAGOLAY_CLI_JS_CID
+    - echo "https://$(cat ANAGOLAY_CLI_JS_CID).ipfs.anagolay.network?filename=anagolay"
+
+    - ipfsCli add --pin --onlyCid sdk/cli/binaries/anagolay > ANAGOLAY_CLI_BIN_CID
+    - echo "The BINARY CLI version CID:" && cat ANAGOLAY_CLI_BIN_CID
+    - echo "https://$(cat ANAGOLAY_CLI_BIN_CID).ipfs.anagolay.network?filename=anagolay"
+
+upload-app-to-ipfs:
+  needs: ['test-code']
+  stage: release
+  cache:
+    policy: pull
+  when: manual
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_MESSAGE =~ /^.*\[build all\].*$/s
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+  before_script:
+    - *install-pnpm
+    - *install-ipfs-cli-and-setup
+  script:
+    - set -e
+
+    - echo 'Installing rush...'
+    - node common/scripts/install-run-rush.js install
+
+    - echo 'Building deps ...'
+    - node common/scripts/install-run-rush.js build
+
+    - echo 'Building Application...'
+    - cd app/
+
+    - echo "Uploading to IPFS ..."
+    - IPFS_PIN=true ipfsCli add --pin --onlyCid build > ANAGOLAY_APP_CID
+    - echo "The Website is published with the CID:" && cat ANAGOLAY_APP_CID
+    - echo "https://$(cat ANAGOLAY_APP_CID).ipfs.anagolay.network/"
+
+# We want to build this separately because the sveltekit breaks all the time
+build-app:
+  needs: ['test-code']
+  allow_failure: true
+  stage: build
+  before_script:
+    - *install-pnpm
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+  script:
+    - set -e
+
+    - echo 'Installing rush...'
+    - node common/scripts/install-run-rush.js install
+
+    - echo 'Building deps ...'
+    - node common/scripts/install-run-rush.js build
+
+    - echo 'Building Anagolay app ...'
+    - cd ./app
+    - time pnpm build:app
+
+    - echo 'Code quality ...'
+    - pnpm check

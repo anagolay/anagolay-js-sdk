@@ -1,20 +1,21 @@
 <script lang="ts">
-import { pageTitle } from '$src/appStore';
-import SvelteSeo from 'svelte-seo';
-import BlockStats from '$src/components/BlockStats.svelte';
-import TotalIssuance from '$src/components/TotalIssuance.svelte';
-import TotalOperations from '$src/components/TotalOperations.svelte';
-import TotalWorkflows from '$src/components/TotalWorkflows.svelte';
-import TotalPoe from '$src/components/TotalPoe.svelte';
-import TotalStatements from '$src/components/TotalStatements.svelte';
-import BlockHeaders from '$src/components/BlockHeaders.svelte';
+  import SvelteSeo from 'svelte-seo';
 
-const title: string = 'Anagolay Application';
-pageTitle.set(title);
+  import { pageTitle } from '$src/appStore';
+  import BlockHeaders from '$src/components/BlockHeaders.svelte';
+  import BlockStats from '$src/components/BlockStats.svelte';
+  import TotalIssuance from '$src/components/TotalIssuance.svelte';
+  import TotalOperations from '$src/components/TotalOperations.svelte';
+  import TotalPoe from '$src/components/TotalPoe.svelte';
+  import TotalStatements from '$src/components/TotalStatements.svelte';
+  import TotalWorkflows from '$src/components/TotalWorkflows.svelte';
+
+  const title: string = 'Anagolay Application';
+  pageTitle.set(title);
 </script>
 
 <SvelteSeo
-  title="{title}"
+  {title}
   description="Companion application for Anagolay network. You can create Workflows, claim domains and much more."
 />
 

@@ -1,5 +1,5 @@
 <script>
-import './drawflow.css';
+  import './drawflow.css';
 </script>
 
 <slot />

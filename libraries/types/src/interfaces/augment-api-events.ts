@@ -15,6 +15,7 @@ import type {
   FrameSupportWeightsDispatchInfo,
   SpFinalityGrandpaAppPublic,
   SpRuntimeDispatchError,
+  VerificationVerificationRequest
 } from '@polkadot/types/lookup';
 
 export type __AugmentedEvent<ApiType extends ApiTypes> = AugmentedEvent<ApiType>;
@@ -548,6 +549,29 @@ declare module '@polkadot/api-base/types/events' {
        * A single item within a Batch of dispatches has completed with error.
        **/
       ItemFailed: AugmentedEvent<ApiType, [error: SpRuntimeDispatchError], { error: SpRuntimeDispatchError }>;
+      /**
+       * Generic event
+       **/
+      [key: string]: AugmentedEvent<ApiType>;
+    };
+    verification: {
+      /**
+       * Produced upon failed verification, intended to be received by both the verifier and the
+       * holder, also provides a textual explaination of what went wrong
+       **/
+      VerificationFailed: AugmentedEvent<
+        ApiType,
+        [AccountId32, AccountId32, VerificationVerificationRequest, Bytes]
+      >;
+      /**
+       * Produced upon newly requested verification to communicate to the holder the key to use for
+       * the agreed action or that the verification is ongoing
+       **/
+      VerificationRequested: AugmentedEvent<ApiType, [AccountId32, VerificationVerificationRequest]>;
+      /**
+       * Produced upon successful verification
+       **/
+      VerificationSuccessful: AugmentedEvent<ApiType, [AccountId32, VerificationVerificationRequest]>;
       /**
        * Generic event
        **/

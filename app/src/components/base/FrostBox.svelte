@@ -1,6 +1,6 @@
 <script lang="ts">
-let classNames: string = '';
-export { classNames as class };
+  let classNames: string = '';
+  export { classNames as class };
 </script>
 
 <div

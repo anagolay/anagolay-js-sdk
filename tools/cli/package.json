@@ -13,16 +13,19 @@
     "directory": "sdk/cli"
   },
   "license": "GPL3",
-  "author": "did:substrate:GHm6gp6khjcxQvnbnSsHdYejsFK1nNVxcGyGAsbDfsymtLr",
+  "author": "did:substrate:5Fn9SNUE8LihCm7Lq5dpPgBebGy5D7ZKWESDsWbdjsfV37d4",
   "bin": {
     "anagolay": "./lib/index.js"
   },
   "scripts": {
+    "_phase:build": "pnpm build",
+    "_phase:code-quality": "eslint --ignore-path ../../.eslintignore .",
+    "_phase:test": "heft test --no-build",
     "build": "NODE_ENV=production heft test --clean",
     "build:bin": "pkg --targets node16-linux ./dist/anagolay.js --out-path binaries",
     "link:bin": "sudo ln -sf $GITPOD_REPO_ROOT/sdk/cli/dist/anagolay.js /usr/local/bin/anagolay && sudo chmod +x /usr/local/bin/anagolay",
     "link:bin:lib": "sudo ln -sf $GITPOD_REPO_ROOT/sdk/cli/lib/index.js /usr/local/bin/anagolay-lib && sudo chmod +x /usr/local/bin/anagolay-lib",
-    "lint:fix": "eslint ./src --ext .js,.jsx,.ts,.tsx",
+    "lint": "eslint ./src --ext .js,.jsx,.ts,.tsx",
     "start": "heft start",
     "watch": "heft build --clean --watch",
     "watch:test": "heft test --clean --watch"

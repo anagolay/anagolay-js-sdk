@@ -4,7 +4,7 @@
 
 import '@anagolay/types/augment-api';
 
-import { type ApiPromise, connectToWs, connectToWsWithCorrectRpc, pallets } from '@anagolay/api';
+import { connectToWs, connectToWsWithCorrectRpc, pallets } from '@anagolay/api';
 
 /**
  *
@@ -12,12 +12,12 @@ import { type ApiPromise, connectToWs, connectToWsWithCorrectRpc, pallets } from
 async function main(): Promise<void> {
   try {
     // this will pass
-    const api: ApiPromise = await connectToWs();
+    await connectToWs();
     await pallets.operations.retrieveOperationsPaged(0, 10);
 
     // this will fail. the
     // pallets expect the cached api version
-    const apiCorrectRpc: ApiPromise = await connectToWsWithCorrectRpc();
+    await connectToWsWithCorrectRpc();
     await pallets.operations.retrieveOperationsPaged(0, 10);
 
     // console.log('anagolaySchema', JSON.stringify(anagolaySchema));

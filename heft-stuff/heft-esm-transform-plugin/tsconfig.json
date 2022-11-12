@@ -1,0 +1,7 @@
+{
+  "extends": "./node_modules/@kelp_digital/heft-library-rig/profiles/default/tsconfig-base.json",
+
+  "compilerOptions": {
+    "types": ["node"]
+  }
+}

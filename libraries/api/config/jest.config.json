@@ -1,4 +1,4 @@
 {
-  "extends": "@rushstack/heft-node-rig/profiles/default/config/jest.config.json",
+  "extends": "@kelp_digital/heft-library-rig/profiles/default/config/jest.config.json",
   "verbose": true
 }

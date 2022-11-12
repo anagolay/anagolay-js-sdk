@@ -10,7 +10,7 @@ export interface IExecOptions extends BaseExecOptions {
  */
 export const defaultExecOptions: IExecOptions = {
   cwd: '.',
-  encoding: 'utf8',
+  encoding: 'utf8'
 };
 
 /**

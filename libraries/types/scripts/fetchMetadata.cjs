@@ -14,14 +14,14 @@ const { argv } = yargs
     type: 'string',
     demandOption: true,
     requiresArg: true,
-    coerce: (val) => (Array.isArray(val) ? val.pop() : val),
+    coerce: (val) => (Array.isArray(val) ? val.pop() : val)
   })
   .option('outfile', {
     alias: 'o',
     description: 'path to output file',
     type: 'string',
     demandOption: true,
-    requiresArg: true,
+    requiresArg: true
   })
   .help()
   .alias('help', 'h');

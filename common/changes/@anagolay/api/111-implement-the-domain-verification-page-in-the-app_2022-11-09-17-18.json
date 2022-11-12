@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@anagolay/api",
+      "comment": "add new pallet. verification api",
+      "type": "minor"
+    }
+  ],
+  "packageName": "@anagolay/api"
+}

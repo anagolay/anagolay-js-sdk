@@ -1,6 +1,6 @@
 import { filter, isEmpty, split, startsWith } from 'ramda';
 
-import { notifications } from '$src/components/notifications/stores';
+import { notificationsStore } from '$src/components/notifications/store';
 /**
  * Parse the hash string and return the the value for the given name
  * @param fullHash - The value of `$page.url.hash`
@@ -21,7 +21,7 @@ export function getHashValue(fullHash: string, hashName: string, defaultValue = 
   if (isEmpty(foundValue)) {
     if (isEmpty(defaultValue)) {
       const message = `${hashName} hash name cannot be found and default value is not provided`;
-      notifications.addNew({
+      notificationsStore.addNew({
         text: message,
         infoLevel: 'error',
         autoclose: {

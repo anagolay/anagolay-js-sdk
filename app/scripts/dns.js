@@ -3,7 +3,6 @@
  */
 
 import { Resolver } from 'dns/promises';
-
 import { argv } from 'process';
 
 async function main() {

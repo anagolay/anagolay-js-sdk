@@ -1,0 +1,20 @@
+bump-versions:
+  extends:
+    - .install-pnpm
+  stage: pre-publish
+  needs: ['retest']
+  cache: {}
+  when: manual
+  variables:
+    VERSION_POLICY: unstable
+    # CI_DEBUG_TRACE: 'true'
+    # GIT_REMOTE_SIGN_URL: 'do not enable this' # all the changes will be signed with Daniels' key DO NOT UNCOMMENT THIS
+    # GPG_SIGN_KEY: 'do not enable this' # all the changes will be signed with Daniels' key DO NOT UNCOMMENT THIS
+  before_script:
+    - !reference [.setup-git-and-ssh, before_script]
+
+  script:
+    - set e
+
+    - git pull --rebase
+    - node common/scripts/install-run-rush.js version --bump --version-policy $VERSION_POLICY --target-branch $CI_COMMIT_REF_NAME

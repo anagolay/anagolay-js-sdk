@@ -83,7 +83,7 @@ export async function readSettingsFile(): Promise<ISettings> {
     return {
       fts: false,
       // enableTelemetry: true,
-      disableStartupQuestions: false,
+      disableStartupQuestions: false
     };
   }
 }
@@ -116,7 +116,7 @@ export async function ensureBalance(chainApi: ApiPromise, accountToUse: string):
     const {
       accountString,
       accountType,
-      seed,
+      seed
     }: { accountString: string; accountType: KeypairType; seed: string } = await inquirer.prompt([
       {
         name: 'accountString',
@@ -124,14 +124,14 @@ export async function ensureBalance(chainApi: ApiPromise, accountToUse: string):
         type: 'input',
         validate: (input) => {
           return isEmpty(input) ? 'Account cannot be empty' : true;
-        },
+        }
       },
       {
         name: 'accountType',
         message: 'Account type',
         type: 'list',
         choices: ['sr25519', 'ed25519'],
-        default: 'sr25519',
+        default: 'sr25519'
       },
       {
         name: 'seed',
@@ -139,12 +139,12 @@ export async function ensureBalance(chainApi: ApiPromise, accountToUse: string):
         type: 'password',
         validate: (input) => {
           return isEmpty(input) ? 'Seed cannot be empty' : true;
-        },
-      },
+        }
+      }
     ]);
 
     const {
-      data: { free },
+      data: { free }
     } = await chainApi.query.system.account<AccountInfo>(accountString);
 
     // assign the initial balance

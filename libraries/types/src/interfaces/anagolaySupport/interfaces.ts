@@ -19,14 +19,14 @@ export enum AnForWhat {
   'SMARTPHONE',
   'USER',
   'SYS',
-  'FLOWCONTROL',
+  'FLOWCONTROL'
 }
 
 export enum AnWasmArtifactSubType {
   'Cjs',
   'Esm',
   'Wasm',
-  'Web',
+  'Web'
 }
 
 export interface AnAnagolayVersionExtra {

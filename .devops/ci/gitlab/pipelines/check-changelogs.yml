@@ -1,0 +1,9 @@
+changelogs:
+  extends:
+    - .install-pnpm
+  stage: lint
+  cache: {}
+  allow_failure: true
+  script:
+    - !reference [.rush:change-verify, script]
+    - git tag -l

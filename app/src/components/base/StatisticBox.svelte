@@ -1,12 +1,12 @@
 <script lang="ts">
-/**
- * any class name
- */
-let classNames: string = '';
+  /**
+   * any class name
+   */
+  let classNames: string = '';
 
-export { classNames as class };
+  export { classNames as class };
 
-export let title: string;
+  export let title: string;
 </script>
 
 <div

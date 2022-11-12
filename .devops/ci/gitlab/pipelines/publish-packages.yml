@@ -1,0 +1,38 @@
+publish-to-anagolay-registry:
+  extends:
+    - .install-pnpm
+  stage: publish
+  needs: ['bump-versions']
+  cache: {}
+  allow_failure: true
+  # when: manual
+  variables:
+    NPM_REGISTRY_URL: npm-registry.anagolay.network
+  before_script:
+    - !reference [.setup-git-and-ssh, before_script]
+  script:
+    - set e
+    - !reference [.rush:install, script]
+    - !reference [.rush:retest, script]
+
+    - node common/scripts/install-run-rush.js publish --apply --publish --add-commit-details --include-all --target-branch $CI_COMMIT_REF_NAME --add-commit-details --set-access-level public
+###
+### This will not be enabled for the time being
+###
+# publish-to-npm-registry:
+#   extends:
+#     - .install-pnpm
+#   stage: publish
+#   needs: ['bump-versions']
+#   cache: {}
+#   allow_failure: true
+#   when: manual
+#   variables:
+#     NPM_REGISTRY_URL: registry.npmjs.org
+#     AN_NPM_AUTH_TOKEN: $NPM_ACCESS_TOKEN
+#   script:
+#     - set e
+#     - !reference [.rush:install, script]
+#     - !reference [.rush:retest, script]
+
+#     - node common/scripts/install-run-rush.js publish --apply --publish --add-commit-details --include-all --target-branch $CI_COMMIT_REF_NAME --add-commit-details --set-access-level public

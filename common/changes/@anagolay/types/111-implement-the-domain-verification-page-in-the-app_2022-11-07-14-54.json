@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@anagolay/types",
+      "comment": "add new types for verification pallet",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@anagolay/types"
+}

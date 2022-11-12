@@ -41,7 +41,7 @@ export function customReplacer<V>(key: string, value: V): ISerializedMap<V> | V 
   if (value instanceof Map) {
     return {
       type: 'Map',
-      data: Object.fromEntries(value),
+      data: Object.fromEntries(value)
     };
   } else {
     return value;

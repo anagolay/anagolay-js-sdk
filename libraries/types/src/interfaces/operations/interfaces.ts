@@ -11,7 +11,7 @@ import {
   AnCharacters,
   AnForWhat,
   AnTypeName,
-  AnWasmArtifactSubType,
+  AnWasmArtifactSubType
 } from '../anagolaySupport/interfaces';
 
 export interface AnOperationData {

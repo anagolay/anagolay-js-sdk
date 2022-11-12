@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@kelp_digital/heft-library-rig",
+      "comment": "init",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@kelp_digital/heft-library-rig"
+}

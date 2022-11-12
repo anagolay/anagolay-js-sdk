@@ -1,3 +1,5 @@
+
+set -g default-shell /bin/zsh
 # : << EOF
 # https://github.com/gpakosz/.tmux
 # (‑●‑●)> dual licensed under the WTFPL v2 license and the MIT license,

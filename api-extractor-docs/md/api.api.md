@@ -6,11 +6,16 @@
 
 /// <reference types="node" />
 
+import { AccountId32 } from '@polkadot/types/interfaces';
 import { AddressOrPair } from '@polkadot/api/types';
 import { AnOperation } from '@anagolay/types';
 import { AnOperationVersion } from '@anagolay/types';
 import { AnProofData } from '@anagolay/types';
+import { AnStatement } from '@anagolay/types';
 import { AnStatementData } from '@anagolay/types';
+import { AnVerificationAction } from '@anagolay/types';
+import { AnVerificationContext } from '@anagolay/types';
+import { AnVerificationRequest } from '@anagolay/types';
 import { ApiPromise } from '@polkadot/api';
 import { Codec } from '@polkadot/types/types';
 import { EventEmitter } from 'events';
@@ -41,6 +46,14 @@ declare namespace config_3 {
         EVENT_NAME_BATCH_3 as EVENT_NAME_BATCH,
         EVENT_NAME_SINGLE_3 as EVENT_NAME_SINGLE,
         EVENT_NAME_ERROR_3 as EVENT_NAME_ERROR
+    }
+}
+
+declare namespace config_4 {
+    export {
+        EVENT_NAME_BATCH_4 as EVENT_NAME_BATCH,
+        EVENT_NAME_SINGLE_4 as EVENT_NAME_SINGLE,
+        EVENT_NAME_ERROR_4 as EVENT_NAME_ERROR
     }
 }
 
@@ -82,6 +95,9 @@ const EVENT_NAME_BATCH_2: string;
 const EVENT_NAME_BATCH_3: string;
 
 // @public (undocumented)
+const EVENT_NAME_BATCH_4: string;
+
+// @public (undocumented)
 const EVENT_NAME_ERROR: string;
 
 // @public (undocumented)
@@ -89,6 +105,9 @@ const EVENT_NAME_ERROR_2: string;
 
 // @public (undocumented)
 const EVENT_NAME_ERROR_3: string;
+
+// @public (undocumented)
+const EVENT_NAME_ERROR_4: string;
 
 // @public (undocumented)
 const EVENT_NAME_SINGLE: string;
@@ -99,26 +118,31 @@ const EVENT_NAME_SINGLE_2: string;
 // @public (undocumented)
 const EVENT_NAME_SINGLE_3: string;
 
+// @public (undocumented)
+const EVENT_NAME_SINGLE_4: string;
+
 // @public
 export function getCachedApi(): ApiPromise;
 
-// @public (undocumented)
-export interface ICustomEventEmitter extends EventEmitter {
+// @public
+export interface ICustomEventEmitter<T> extends EventEmitter {
     // (undocumented)
-    emit(event: string | symbol, payload: IEventMessage): boolean;
+    emit(event: string | symbol, payload: IEventMessage<T>): boolean;
     // (undocumented)
-    on(event: string, listener: (data: IEventMessage) => void): this;
+    on(event: string, listener: (data: IEventMessage<T>) => void): this;
+    // (undocumented)
+    once(event: string, listener: (data: IEventMessage<T>) => void): this;
 }
 
 // @public
-export interface IEventMessage {
+export interface IEventMessage<T> {
+    // (undocumented)
+    data?: T;
     // (undocumented)
     error?: {
         message: string;
-        extra?: any;
+        extra?: unknown;
     };
-    // (undocumented)
-    finalized?: boolean;
     // (undocumented)
     message?: string;
 }
@@ -132,7 +156,13 @@ export interface IOperationWithVersions {
 }
 
 // @public
-export function networkCallback(params: ISubmittableResult, broadcast: ICustomEventEmitter, eventName: string): Promise<void>;
+function listenForEvent(eventName: 'OwnershipCreated' | 'CopyrightCreated' | 'StatementRevoked'): ICustomEventEmitter<AnStatement>;
+
+// @public
+function listenForEvent_2(eventName: 'VerificationRequested' | 'VerificationSuccessful' | 'VerificationFailed'): ICustomEventEmitter<AnVerificationRequest>;
+
+// @public
+export function networkCallback<T>(params: ISubmittableResult, broadcast: ICustomEventEmitter<T>): Promise<void>;
 
 declare namespace operations {
     export {
@@ -153,14 +183,21 @@ const palletName_2: string;
 // @public (undocumented)
 const palletName_3: string;
 
+// @public (undocumented)
+const palletName_4: string;
+
 declare namespace pallets {
     export {
         operations,
         poe,
-        statements
+        statements,
+        verification
     }
 }
 export { pallets }
+
+// @public
+function performVerificationAndSend(context: AnVerificationRequest, signer: AddressOrPair, options?: Partial<SignerOptions>): Promise<ICustomEventEmitter<[AccountId32, AnVerificationRequest]>>;
 
 declare namespace poe {
     export {
@@ -171,17 +208,23 @@ declare namespace poe {
     }
 }
 
+// @public (undocumented)
+function requestVerificationAndSend(params: {
+    context: AnVerificationContext;
+    action: AnVerificationAction;
+}, signer: AddressOrPair, options?: Partial<SignerOptions>): Promise<ICustomEventEmitter<[AccountId32, AnVerificationRequest]>>;
+
 // @public
 function retrieveOperationsPaged(pageNum: number, pageSize: number): Promise<IOperationWithVersions[]>;
 
 // @public
-function save(operationData: OperationData, versionData: OperationVersionData, signer: AddressOrPair, options?: Partial<SignerOptions>): Promise<ICustomEventEmitter>;
+function save(operationData: OperationData, versionData: OperationVersionData, signer: AddressOrPair, options?: Partial<SignerOptions>): Promise<ICustomEventEmitter<unknown>>;
 
 // @public
-function save_2(d: AnProofData, signer: AddressOrPair, options?: Partial<SignerOptions>): Promise<ICustomEventEmitter>;
+function save_2(d: AnProofData, signer: AddressOrPair, options?: Partial<SignerOptions>): Promise<ICustomEventEmitter<unknown>>;
 
 // @public
-function saveOwnership(d: AnStatementData, signer: AddressOrPair, options?: Partial<SignerOptions>): Promise<ICustomEventEmitter>;
+function saveOwnership(d: AnStatementData, signer: AddressOrPair, options?: Partial<SignerOptions>): Promise<ICustomEventEmitter<AnStatement>>;
 
 declare namespace statements {
     export {
@@ -189,12 +232,20 @@ declare namespace statements {
         config_3 as config,
         saveOwnership,
         createSubmittableExtrinsicOfCopyright,
-        createSubmittableExtrinsicOfOwnership
+        createSubmittableExtrinsicOfOwnership,
+        listenForEvent
     }
 }
 
-
-export * from "@polkadot/api";
+declare namespace verification {
+    export {
+        palletName_4 as palletName,
+        config_4 as config,
+        requestVerificationAndSend,
+        performVerificationAndSend,
+        listenForEvent_2 as listenForEvent
+    }
+}
 
 // (No @packageDocumentation comment for this package)
 

@@ -28,16 +28,18 @@
       "import": "./lib/augment-api.js"
     },
     "./*": {
-      "require": "./lib-commonjs/*.js",
-      "import": "./lib/*.js"
+      "require": "./lib-commonjs/*",
+      "import": "./lib/*"
     }
   },
   "main": "./lib-commonjs/index.js",
   "module": "./lib/index.js",
   "types": "./lib/types.d.ts",
   "scripts": {
-    "build": "heft build --clean && pnpm fix-lib",
-    "fix-lib": "node ./config/add-js-to-esm.mjs ./lib",
+    "_phase:build": "pnpm build",
+    "_phase:code-quality": "eslint --ignore-path ../../.eslintignore .",
+    "_phase:test": "heft test --no-build",
+    "build": "heft build --clean",
     "gen:defs": "ts-node --skip-project node_modules/@polkadot/typegen/scripts/polkadot-types-from-defs.cjs --package @anagolay/types/interfaces --input ./src/interfaces --endpoint ./metadata/anagolay.json",
     "gen:meta": "ts-node --skip-project node_modules/@polkadot/typegen/scripts/polkadot-types-from-chain.cjs --package @anagolay/types/interfaces --endpoint ./metadata/anagolay.json --output ./src/interfaces",
     "gen:types": "pnpm gen:defs && pnpm gen:meta && pnpm lint:fix",
@@ -58,11 +60,13 @@
     "yargs": "17.5.1"
   },
   "devDependencies": {
+    "@kelp_digital/heft-esm-transform-plugin": "workspace:*",
+    "@kelp_digital/heft-library-rig": "workspace:*",
     "@microsoft/api-extractor": "7.29.2",
     "@rushstack/eslint-config": "3.0.0",
     "@rushstack/heft": "0.47.3",
     "@rushstack/heft-jest-plugin": "0.3.25",
-    "@rushstack/heft-web-rig": "0.11.3",
+    "@rushstack/heft-node-rig": "1.10.2",
     "@types/heft-jest": "1.0.3",
     "@types/node": "18.7.6",
     "eslint": "8.22.0",

@@ -1,0 +1,81 @@
+.setup-git-and-ssh:
+  before_script:
+    # setup the ssh
+    - apt-get update -y && apt-get install openssh-client -y
+    - eval $(ssh-agent -s)
+    - ssh -V
+    - ssh-add - <<< "${SSH_DEPLOY_PRIVATE_KEY}"
+
+    - echo "${SSH_DEPLOY_PRIVATE_KEY}" | tr -d '\r' | ssh-add - > /dev/null
+
+    - mkdir -p ~/.ssh
+    - ssh-keyscan gitlab.com >> ~/.ssh/known_hosts
+
+    - chmod 700 ~/.ssh
+    - chmod 644 ~/.ssh/known_hosts
+    # setup the ssh
+
+    # setup the remote signer
+    - echo "***** Installing the Remote Signer"
+    - wget --no-verbose https://ipfs.anagolay.network/ipfs/bafybeiarhwobvpvz76iy6clqaf3ub7yc4rvvkydmimh652r2svdaznubrq -O /usr/local/bin/remote-signer
+    - chmod +x /usr/local/bin/remote-signer
+    # setup the remote signer
+
+    # git setup
+    - git config --local user.email kelpbot@noreply.kelp.digital # kelpbot will sign commits like daniel
+    - git config --local user.name KelpBot
+    - git config --local pull.rebase true # rebase
+
+    # this is because we are using the ssh for the push and the gitlab is using the access token
+    - git remote set-url origin git@${CI_SERVER_HOST}:${CI_PROJECT_PATH}.git
+    # - git remote add origin git@${CI_SERVER_HOST}:${CI_PROJECT_PATH}.git
+    # - git remote add origin git@gitlab.com:kelp_digital/oss.git
+
+    # git setup
+
+    # setup git config to work with remote signer
+    - git config --local gpg.program "remote-signer"
+    - git config --local commit.gpgsign true
+    # setup git config to work with remote signer
+    # - cat .git/config
+
+.install-pnpm:
+  before_script:
+    - |
+      set -e
+      curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm@7
+      pnpm config set store-dir ./common/temp/pnpm-store
+      node --version
+      pnpm --version
+      git --version
+# include this where you need it. like in before_script
+.install-ipfs-cli-and-setup:
+  before_script:
+    - echo "Downloading anagolay ipfs CLI which works with the ipfsAuthProxy."
+    - |
+      wget https://ipfs.anagolay.network/ipfs/bafybeig634knkl57gqgkmh3fti6zxisfcd47swetf5lastcx2waboa4a4a > /usr/local/bin/ipfsCli
+      chmod +x /usr/local/bin/ipfsCli
+.rush:install:
+  script:
+    - echo 'Installing rush...'
+    - node common/scripts/install-run-rush.js install
+
+.rush:change-verify:
+  script:
+    - echo 'Checking for missing change logs...'
+    - node common/scripts/install-run-rush.js change --verify
+
+.rush:rebuild:
+  script:
+    - echo 'Re-Building ...'
+    - node common/scripts/install-run-rush.js rebuild --verbose
+
+.rush:retest:
+  script:
+    - echo 'Re-testing ...'
+    - node common/scripts/install-run-rush.js retest
+
+.rush:build:
+  script:
+    - echo 'Building ...'
+    - node common/scripts/install-run-rush.js build --verbose

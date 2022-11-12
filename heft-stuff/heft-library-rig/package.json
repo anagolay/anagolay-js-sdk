@@ -1,0 +1,26 @@
+{
+  "name": "@kelp_digital/heft-library-rig",
+  "version": "0.1.0",
+  "description": "A rig package for libraries that build using Heft. ESM and CommonJS supported",
+  "license": "MIT",
+  "author": "did:substrate:5Fn9SNUE8LihCm7Lq5dpPgBebGy5D7ZKWESDsWbdjsfV37d4",
+  "type": "module",
+  "scripts": {
+    "_phase:build": "",
+    "build": ""
+  },
+  "dependencies": {
+    "@microsoft/api-extractor": "7.29.2",
+    "@rushstack/heft-jest-plugin": "0.3.25",
+    "eslint": "8.22.0",
+    "jest-environment-jsdom": "27.4.2",
+    "jest-environment-node": "27.4.2",
+    "typescript": "4.7.4"
+  },
+  "devDependencies": {
+    "@rushstack/heft": "0.47.3"
+  },
+  "peerDependencies": {
+    "@rushstack/heft": "~0.47.3"
+  }
+}

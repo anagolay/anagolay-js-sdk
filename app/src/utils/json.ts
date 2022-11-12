@@ -45,11 +45,11 @@ export interface ISerializedMap<T> {
  * - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map
  *
  *
- * @param key - First invocation this is empty, next ones is the `key` of the object
+ * @param _key - First invocation this is empty, next ones is the `key` of the object
  * @param value - First invocation is the full payload, nex ones is the object key value
  * @returns
  */
-export function customReplacer<V>(key: string, value: V): ISerializedMap<V> | V {
+export function customReplacer<V>(_key: string, value: V): ISerializedMap<V> | V {
   if (value instanceof Map) {
     return {
       type: 'Map',
@@ -60,7 +60,13 @@ export function customReplacer<V>(key: string, value: V): ISerializedMap<V> | V 
   }
 }
 
-export function customReviver<T extends ISerializedMap<T>>(key: string, value: T): T | Map<any, any> {
+/**
+ *
+ * @param _key -
+ * @param value -
+ * @returns
+ */
+export function customReviver<T extends ISerializedMap<T>>(_key: string, value: T): T | Map<any, any> {
   if (typeof value === 'object' && value !== null) {
     if (value.type === 'Map' || value.type === 'map') {
       return new Map(Object.entries(value.data));

@@ -41,7 +41,7 @@ export async function gitCloneBare(options: IGitCloneBareOptions): Promise<strin
 
   const execOptions = {
     cwd: repoPath,
-    shell: '/bin/bash',
+    shell: '/bin/bash'
   };
 
   // remove path if exists
@@ -52,7 +52,7 @@ export async function gitCloneBare(options: IGitCloneBareOptions): Promise<strin
 
   await exec(`git clone --quiet --bare ${repo} ${repoPath}`, {
     ...execOptions,
-    cwd: tmp,
+    cwd: tmp
   });
 
   // need to do this for every bare repo
@@ -108,7 +108,7 @@ export async function cloneRepo(options: IGitCloneOptions): Promise<{
   await exec(`git clone ${url.href} ${repoPath}`);
 
   await exec(`git checkout ${rev}`, {
-    cwd: repoPath,
+    cwd: repoPath
   });
 
   return { repoPath };
@@ -142,7 +142,7 @@ export async function isDirty(path: string): Promise<{
  */
 export async function lastRevision(repoPath: string): Promise<string> {
   const { stdout: lastRevision } = await exec(`git log --oneline --pretty=format:"%H" -n 1 origin/main`, {
-    cwd: repoPath,
+    cwd: repoPath
   });
   return lastRevision;
 }

@@ -9,7 +9,7 @@ import type {
   ApiTypes,
   AugmentedSubmittable,
   SubmittableExtrinsic,
-  SubmittableExtrinsicFunction,
+  SubmittableExtrinsicFunction
 } from '@polkadot/api-base/types';
 import type { Bytes, Compact, Option, Vec, bool, u128, u16, u32, u64, u8 } from '@polkadot/types-codec';
 import type { AnyNumber, IMethod, ITuple } from '@polkadot/types-codec/types';
@@ -26,8 +26,12 @@ import type {
   SpCoreVoid,
   SpFinalityGrandpaEquivocationProof,
   StatementsStatementData,
+  VerificationOffchainVerificationIndexingData,
+  VerificationVerificationAction,
+  VerificationVerificationContext,
+  VerificationVerificationRequest,
   WorkflowsWorkflowData,
-  WorkflowsWorkflowVersionData,
+  WorkflowsWorkflowVersionData
 } from '@polkadot/types/lookup';
 
 export type __AugmentedSubmittable = AugmentedSubmittable<() => unknown>;
@@ -1697,6 +1701,127 @@ declare module '@polkadot/api-base/types/submittable' {
       forceBatch: AugmentedSubmittable<
         (calls: Vec<Call> | (Call | IMethod | string | Uint8Array)[]) => SubmittableExtrinsic<ApiType>,
         [Vec<Call>]
+      >;
+      /**
+       * Generic tx
+       **/
+      [key: string]: SubmittableExtrinsicFunction<ApiType>;
+    };
+    verification: {
+      /**
+       * Accepts a [`VerificationRequest`] that may contain some `id` and signals that the holder has
+       * taken the appropriate action in order for the verification to succeed. The respective
+       * VerificationRequest from VerificationRequestByContext is stored in the off-chain
+       * worker indexing database with the status `Pending`. As soon as the off-chain worker runs, it
+       * finds the pending request in the off-chain worker indexing database and instantiates the
+       * required strategy to perform the verification, which depends on the
+       * specific implementation. At this point, an unsigned local transaction is submitted to
+       * `submit_verification_status()`, passing the VerificationStatus.
+       *
+       * # Arguments
+       * * origin - the call origin
+       * * request - the [`VerificationRequest`] returned by `request_verification`, optionally
+       * augmented with some value for the `id` field
+       *
+       * # Errors
+       * * `NoSuchVerificationRequest` - if the request context is not associated to any stored
+       * [`VerificationRequest`]
+       * * `NoMatchingVerificationStrategy` - if none of the registered verification strategies is
+       * suitable to respond to the request
+       *
+       * # Events
+       * * `VerificationRequested` - having `Pending` status and awaiting to be processed off-chain
+       *
+       * # Return
+       * `DispatchResultWithPostInfo` containing Unit type
+       **/
+      performVerification: AugmentedSubmittable<
+        (
+          request:
+            | VerificationVerificationRequest
+            | { context?: any; action?: any; status?: any; holder?: any; key?: any; id?: any }
+            | string
+            | Uint8Array
+        ) => SubmittableExtrinsic<ApiType>,
+        [VerificationVerificationRequest]
+      >;
+      /**
+       * Accepts a [`VerificationContext`] and a desired [`VerificationAction`] and
+       * produces the information for the holder about the action to take in order for the
+       * verification to succeed. The registration fee is reserved on the holder funds: it will be
+       * possible to claim this amount back later.
+       *
+       * A [`VerificationRequest`] is initialized, iterating through all known
+       * [`VerificationStrategy`] in order to find the one that supports the
+       * [`VerificationContext`] the [`VerificationRequest`] is stored in.
+       *
+       * # Arguments
+       * * origin - the call origin
+       * * context - the [`VerificationContext`]
+       * * action - the [`VerificationAction`]
+       *
+       * # Errors
+       * * `VerificationAlreadyIssued` - if a request for the same context was already created by the
+       * caller or by another user
+       * * `CannotReserveRegistrationFee` - if the holder does not have enough funds to reserve the
+       * required registration fee
+       * * `NoMatchingVerificationStrategy` - if none of the registered verification strategies is
+       * suitable to respond to the request
+       *
+       * # Events
+       * * `VerificationRequested` - having `Waiting` status and providing further verification
+       * instructions
+       *
+       * # Return
+       * `DispatchResultWithPostInfo` containing Unit type
+       **/
+      requestVerification: AugmentedSubmittable<
+        (
+          context:
+            | VerificationVerificationContext
+            | { UrlForDomain: any }
+            | { UrlForDomainWithUsername: any }
+            | { UrlForDomainWithSubdomain: any }
+            | { UrlForDomainWithUsernameAndRepository: any }
+            | string
+            | Uint8Array,
+          action: VerificationVerificationAction | 'DnsTxtRecord' | number | Uint8Array
+        ) => SubmittableExtrinsic<ApiType>,
+        [VerificationVerificationContext, VerificationVerificationAction]
+      >;
+      /**
+       * Accepts a [`VerificationIndexingData`] from an unsigned local transaction submitted by
+       * the off-chain worker. This will unreserve the registration fee of the holder, and will try
+       * to transfer it to the verifier if they are not the same account.
+       *
+       * # Arguments
+       * * origin - the None origin
+       * * verification_data - the [`VerificationIndexingData`] structure updated by the off-chain
+       * worker
+       *
+       * # Errors
+       * * `NoSuchVerificationRequest` - if the request context is not associated to any stored
+       * [`VerificationRequest`]
+       * * `InvalidVerificationStatus` - if the request does not have status `Success` or `Failure`
+       *
+       * # Events
+       * * `VerificationSuccessful` - for the verifier account to indicate that his verification
+       * request was successful
+       * * `VerificationFailed` - for the verifier account and for the holder account to indicate the
+       * verification is no longer valid and the registration fee has been claimed
+       *
+       * # Return
+       * `DispatchResultWithPostInfo` containing Unit type
+       **/
+      submitVerificationStatus: AugmentedSubmittable<
+        (
+          verificationData:
+            | VerificationOffchainVerificationIndexingData
+            | { verifier?: any; request?: any }
+            | string
+            | Uint8Array
+        ) => SubmittableExtrinsic<ApiType>,
+        [VerificationOffchainVerificationIndexingData]
       >;
       /**
        * Generic tx

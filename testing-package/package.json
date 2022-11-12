@@ -9,8 +9,7 @@
     "directory": ""
   },
   "license": "AGPL3",
-  "author": "did:substrate:GHm6gp6khjcxQvnbnSsHdYejsFK1nNVxcGyGAsbDfsymtLr",
-  "type": "module",
+  "author": "did:substrate:5Fn9SNUE8LihCm7Lq5dpPgBebGy5D7ZKWESDsWbdjsfV37d4",
   "exports": {
     ".": {
       "require": "./lib-commonjs/index.js",
@@ -21,26 +20,30 @@
       "import": "./lib/*.js"
     }
   },
-  "main": "./lib-commonjs/index.js",
-  "module": "./lib/index.js",
-  "types": "./lib/api.d.ts",
+  "main": "./lib-commonjs/start.js",
+  "module": "./lib/start.js",
+  "types": "./lib/start.d.ts",
   "scripts": {
+    "_phase:build": "pnpm build",
+    "_phase:code-quality": "eslint --ignore-path ../.eslintignore .",
+    "_phase:test": "heft test --no-build",
     "build": "heft build --clean",
+    "serve": "node ./lib-commonjs/start.js",
     "start": "heft start",
     "watch": "heft build --clean --watch",
-    "watch:test": "heft test --clean --watch",
-    "serve": "node ./lib/start.js",
-    "fix-lib": "node ./config/add-js-to-esm.mjs ./lib"
+    "watch:test": "heft test --clean --watch"
   },
   "dependencies": {
     "@anagolay/api": "workspace:*",
     "@anagolay/types": "workspace:*",
     "@anagolay/util": "workspace:*",
     "@polkadot/api-augment": "9.6.1",
-    "resolve.exports": "1.1.0",
-    "ramda": "0.28.0"
+    "ramda": "0.28.0",
+    "resolve.exports": "1.1.0"
   },
   "devDependencies": {
+    "@kelp_digital/heft-esm-transform-plugin": "workspace:*",
+    "@kelp_digital/heft-library-rig": "workspace:*",
     "@microsoft/api-extractor": "7.29.2",
     "@rushstack/eslint-config": "3.0.0",
     "@rushstack/heft": "0.47.3",
@@ -48,12 +51,12 @@
     "@rushstack/heft-node-rig": "1.10.2",
     "@types/heft-jest": "1.0.3",
     "@types/node": "18.7.6",
+    "@types/ramda": "0.27.64",
     "eslint": "8.22.0",
     "eslint-plugin-simple-import-sort": "7.0.0",
     "eslint-plugin-unused-imports": "2.0.0",
-    "typescript": "4.7.4",
     "nodemon": "2.0.15",
     "ts-node": "10.9.1",
-    "@types/ramda": "0.27.64"
+    "typescript": "4.7.4"
   }
 }

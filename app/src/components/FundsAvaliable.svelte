@@ -1,26 +1,25 @@
 <script lang="ts">
-import { chainConnected, chainStore, connectedTokenShortName } from '$src/appStore';
-import { formatBalance } from '@polkadot/util';
-import { polkadotAccountsStore } from './polkadotAccounts/store';
+  import { formatBalance } from '@polkadot/util';
 
-let freeBalance: string = '0 IDI';
+  import { chainConnected, chainStore, connectedTokenShortName } from '$src/appStore';
 
-async function getFunds() {
-  const { api } = $chainStore;
+  import { polkadotAccountsStore } from './polkadot/store';
 
-  await api.query.system.account(
-    $polkadotAccountsStore.selectedAccount.address,
-    ({ nonce, data: balance }) => {
+  let freeBalance: string = '0 IDI';
+
+  async function getFunds() {
+    const { api } = $chainStore;
+
+    await api.query.system.account($polkadotAccountsStore.selectedAccount.address, ({ data: balance }) => {
       freeBalance = formatBalance(balance.free, { decimals: 12 }).replace('Unit', $connectedTokenShortName);
-    }
-  );
-}
-
-$: {
-  if ($chainConnected && $polkadotAccountsStore.selectedAccount) {
-    getFunds();
+    });
   }
-}
+
+  $: {
+    if ($chainConnected && $polkadotAccountsStore.selectedAccount) {
+      getFunds();
+    }
+  }
 </script>
 
 <div class="flex flex-row pl-4">

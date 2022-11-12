@@ -1,11 +1,12 @@
 <script lang="ts">
-import { page } from '$app/stores';
-import MaterialIcon from '$src/components/base/MaterialIcon.svelte';
-import { appPages } from './data';
-import { version } from '$src/../package.json';
-import PolkadotAccounts from '$src/components/polkadotAccounts/PolkadotAccounts.svelte';
-import NetworkQuickInfo from '$src/components/selectNetwork/NetworkQuickInfo.svelte';
-import FundsAvaliable from '../FundsAvaliable.svelte';
+  import { page } from '$app/stores';
+  import { version } from '$src/../package.json';
+  import MaterialIcon from '$src/components/base/MaterialIcon.svelte';
+  import PolkadotAccounts from '$src/components/polkadot/Accounts.svelte';
+  import NetworkQuickInfo from '$src/components/selectNetwork/NetworkQuickInfo.svelte';
+
+  import FundsAvaliable from '../FundsAvaliable.svelte';
+  import { appPages } from './data';
 </script>
 
 <!-- this doesn't need the class drawer, it messes up the overlay -->
@@ -16,17 +17,18 @@ import FundsAvaliable from '../FundsAvaliable.svelte';
       <FundsAvaliable />
     </div>
     <div>
+      <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
       <ul tabindex="0" class="menu menu-compact mt-3 p-2 rounded-box gap-2 flex-1">
         {#each appPages as { name, iconClassName, href }}
           <li>
             <a
-              href="{href}"
-              id="{$page.url.pathname.startsWith(href + '/') ? 'active-menu' : ''}"
-              class="{`flex ${$page.url.pathname == href ? 'active' : ''} ${
+              {href}
+              id={$page.url.pathname.startsWith(href + '/') ? 'active-menu' : ''}
+              class={`flex ${$page.url.pathname == href ? 'active' : ''} ${
                 $page.url.pathname.startsWith(href + '/') ? 'active' : ''
-              }`}"
+              }`}
             >
-              <MaterialIcon iconName="{iconClassName}" />
+              <MaterialIcon iconName={iconClassName} />
               {name}
             </a>
           </li>

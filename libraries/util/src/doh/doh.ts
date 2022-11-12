@@ -110,7 +110,7 @@ export async function txtRecords(forDomain: string, dohUrl: string = defaultDohU
   return callApi(
     {
       name: forDomain,
-      type: 'txt',
+      type: 'txt'
     },
     dohUrl
   );
@@ -137,8 +137,8 @@ export async function callApi(
   const doh = await fetch(url, {
     method: 'GET',
     headers: {
-      accept: 'application/dns-json',
-    },
+      accept: 'application/dns-json'
+    }
   });
   return doh.json();
 }

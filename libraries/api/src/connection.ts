@@ -32,7 +32,7 @@ export async function connectToWs(connectTo: string = defaultChainToConnect): Pr
   const opts: ApiOptions = {
     provider,
     rpc: rpcDefinitionsTemp,
-    runtime: runtimeDefinitions,
+    runtime: runtimeDefinitions
   };
 
   const api = await ApiPromise.create(opts);
@@ -61,7 +61,7 @@ export async function connectToWsWithCorrectRpc(
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     types: anagolaySchema.types,
     rpc: rpcDefinitions,
-    runtime: runtimeDefinitions,
+    runtime: runtimeDefinitions
   };
 
   const api = await ApiPromise.create(opts);

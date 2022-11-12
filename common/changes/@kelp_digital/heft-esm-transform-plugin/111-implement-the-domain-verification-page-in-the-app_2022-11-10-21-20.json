@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@kelp_digital/heft-esm-transform-plugin",
+      "comment": "init the features",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@kelp_digital/heft-esm-transform-plugin"
+}

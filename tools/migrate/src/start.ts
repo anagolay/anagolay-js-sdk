@@ -17,7 +17,7 @@ import {
   Workflow,
   WorkflowRecord,
   WorkflowVersion,
-  WorkflowVersionId,
+  WorkflowVersionId
 } from '@anagolay/types';
 import { Keyring } from '@polkadot/api/bundle';
 import { ApiPromise } from '@polkadot/api/promise/Api';
@@ -51,7 +51,7 @@ async function migrate_wfs_and_ops() {
 
   console.log('sudoPair.address.toString()', sudoPair.address.toString());
   const {
-    data: { free },
+    data: { free }
   } = await apiSource.query.system.account<AccountInfo>(sudoPair.address.toString());
   console.log('Free balance', free.toString());
 
@@ -159,7 +159,7 @@ export async function retrieveOperations(chain: ApiPromise): Promise<OperationWi
       return {
         op,
         versions,
-        accountId: opRecord.unwrap().accountId,
+        accountId: opRecord.unwrap().accountId
       };
     })
   );
@@ -193,7 +193,7 @@ export async function retrieveWorkflows(chain: ApiPromise): Promise<WorkflowWith
       return {
         wf,
         versions,
-        accountId: wfRecord.unwrap().accountId,
+        accountId: wfRecord.unwrap().accountId
       };
     })
   );

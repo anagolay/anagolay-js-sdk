@@ -2,18 +2,18 @@ import '@anagolay/types/augment-api';
 
 import { connectToWs } from '@anagolay/api';
 import { ApiPromise } from '@polkadot/api';
-import debug, { Debugger } from 'debug';
+import debugLib, { Debugger } from 'debug';
 import { append, equals, find, isEmpty, isNil, uniq } from 'ramda';
 import { type Writable, get, writable } from 'svelte/store';
 
 import { browser } from '$app/environment';
 
-import { notifications } from './components/notifications/stores';
-import { chainList } from './data/appData';
+import { notificationsStore } from './components/notifications/store';
+import { chainList } from './config';
 
 export const debugName: string = 'stores:app';
 
-const log: Debugger = debug(debugName);
+const debug: Debugger = debugLib(debugName);
 
 const localStorageCustomChainsKey: string = 'anagolayJs:customChains';
 export const localStorageConnectToKey: string = 'anagolayJs:connectTo';
@@ -145,42 +145,33 @@ function chainConnectionStore(): IChainStoreReturn {
     connectedChainName: undefined
   };
 
-  console.log('defaultState', defaultState);
+  debug('defaultState', defaultState);
 
   const { subscribe, update, set } = writable<IChainStore>(defaultState);
 
   /**
    * Connect to Anagolay Chains. If no chain is provided the first item (index 0) in the `chainList` is used
    * @param chainWs - chain WS
-   * @param connectionType - either `ws` or `rx` strings
    */
-  async function connect(
-    chainWs: string = defaultState.connectedTo,
-    connectionType: 'ws' | 'rx' = 'ws'
-  ): Promise<void> {
+  async function connect(chainWs: string = defaultState.connectedTo): Promise<void> {
     connectingToChain.set(true);
 
     const { connectedTo } = defaultState;
-    log('Connecting to', chainWs);
-    const closeNotification = notifications.addNew({
+    debug('Connecting to', chainWs);
+    const closeNotification = notificationsStore.addNew({
       text: `Connecting to ${connectedTo}`,
       infoLevel: 'info',
       showSpinner: true
     });
 
-    let api: ApiPromise;
-
-    if (equals(connectionType, 'ws')) {
-      api = await connectToWs(connectedTo);
-    } else if (equals(connectionType, 'rx')) {
-      console.error('RXjs connection not implemented');
-    }
+    const api: ApiPromise = await connectToWs(connectedTo);
 
     // wait then update
     await api.isReady;
 
     // set the connected Token Short name
     connectedTokenShortName.set(api.registry.chainTokens[0].toString());
+    // console.log((await api.rpc.system.chain()).toString());
 
     connectedChainName.set((await api.rpc.system.chain()).toString());
 
@@ -191,20 +182,20 @@ function chainConnectionStore(): IChainStoreReturn {
       return { ...curState, api, connectedTo: chainWs };
     });
     closeNotification();
-    notifications.addNew({ text: 'Connected', infoLevel: 'success' });
+    notificationsStore.addNew({ text: 'Connected', infoLevel: 'success' });
   }
 
-  async function reconnect(chainWs: string, connectionType: 'ws' | 'rx' = 'ws'): Promise<void> {
-    log('Reconnecting to %s', chainWs);
+  async function reconnect(chainWs: string): Promise<void> {
+    debug('Reconnecting to %s', chainWs);
     // eslint-disable-next-line @typescript-eslint/no-use-before-define
     const state = get(chainStore);
     const chainConnectedState = get(chainConnected);
     if (chainConnectedState) {
-      log('Disconnecting from previous api instance.');
+      debug('Disconnecting from previous api instance.');
       await state.api.disconnect();
     }
     chainConnected.set(false);
-    await connect(chainWs, connectionType);
+    await connect(chainWs);
   }
 
   return {
@@ -226,7 +217,7 @@ function chainConnectionStore(): IChainStoreReturn {
         const { chainList } = state;
         const alreadyExists = find((c) => equals(c, chainWs), chainList);
         if (!isNil(alreadyExists)) {
-          log('not adding, chain on list ', chainWs);
+          debug('not adding, chain on list ', chainWs);
           return state;
         }
         const newChainList = append(chainWs, chainList);
