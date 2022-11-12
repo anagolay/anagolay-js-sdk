@@ -3,17 +3,17 @@ import {
   DefinitionRpcSub,
   Definitions,
   DefinitionsCall,
-  DefinitionsTypes,
+  DefinitionsTypes
 } from '@polkadot/types/types';
 
 export const WorkflowsCustomTypes: DefinitionsTypes = {
   OperationVersionReference: {
     versionId: 'OperationVersionId',
-    config: 'BoundedBTreeMap<Characters, Characters, Get<u32>>',
+    config: 'BoundedBTreeMap<Characters, Characters, Get<u32>>'
   },
   WorkflowSegment: {
     inputs: 'BoundedVec<i8, Get<u32>>',
-    sequence: 'BoundedVec<OperationVersionReference, Get<u32>>',
+    sequence: 'BoundedVec<OperationVersionReference, Get<u32>>'
   },
   WorkflowId: {},
   WorkflowData: {
@@ -21,47 +21,47 @@ export const WorkflowsCustomTypes: DefinitionsTypes = {
     creators: 'BoundedVec<CreatorId, Get<u32>>',
     description: 'Characters',
     groups: 'BoundedVec<ForWhat, Get<u32>>',
-    segments: 'BoundedVec<WorkflowSegment, Get<u32>>',
+    segments: 'BoundedVec<WorkflowSegment, Get<u32>>'
   },
   WorkflowExtra: {},
   Workflow: {
     id: 'WorkflowId',
     data: 'WorkflowData',
-    extra: 'Option<WorkflowExtra>',
+    extra: 'Option<WorkflowExtra>'
   },
   WorkflowRecord: {
     record: 'Workflow',
     accountId: 'AccountId',
-    blockNumber: 'BlockNumber',
+    blockNumber: 'BlockNumber'
   },
   WorkflowVersionId: {},
   WorkflowVersionRecord: {
     record: 'WorkflowVersion',
     accountId: 'AccountId',
-    blockNumber: 'BlockNumber',
+    blockNumber: 'BlockNumber'
   },
   WorkflowArtifactType: {
     _enum: {
       Docs: null,
       Git: null,
-      Wasm: 'WasmArtifactSubType',
-    },
+      Wasm: 'WasmArtifactSubType'
+    }
   },
   WorkflowArtifactStructure: {
     artifactType: 'WorkflowArtifactType',
     fileExtension: 'Characters',
-    ipfsCid: 'ArtifactId',
+    ipfsCid: 'ArtifactId'
   },
   WorkflowVersionData: {
     entityId: 'Option<WorkflowId>',
     parentId: 'Option<WorkflowVersionId>',
-    artifacts: 'BoundedVec<WorkflowArtifactStructure, Get<u32>>',
+    artifacts: 'BoundedVec<WorkflowArtifactStructure, Get<u32>>'
   },
   WorkflowVersion: {
     id: 'WorkflowVersionId',
     data: 'WorkflowVersionData',
-    extra: 'Option<AnagolayVersionExtra>',
-  },
+    extra: 'Option<AnagolayVersionExtra>'
+  }
 };
 
 const rpc: Record<string, DefinitionRpc | DefinitionRpcSub> = {
@@ -71,23 +71,23 @@ const rpc: Record<string, DefinitionRpc | DefinitionRpcSub> = {
     params: [
       {
         name: 'workflow_ids',
-        type: 'Vec<WorkflowId>',
+        type: 'Vec<WorkflowId>'
       },
       {
         name: 'offset',
-        type: 'u64',
+        type: 'u64'
       },
       {
         name: 'limit',
-        type: 'u16',
+        type: 'u16'
       },
       {
         name: 'at',
         type: 'Hash',
-        isOptional: true,
-      },
+        isOptional: true
+      }
     ],
-    type: 'Vec<Workflow>',
+    type: 'Vec<Workflow>'
   },
   getWorkflowVersionsByIds: {
     description:
@@ -95,36 +95,36 @@ const rpc: Record<string, DefinitionRpc | DefinitionRpcSub> = {
     params: [
       {
         name: 'workflow_version_ids',
-        type: 'Vec<WorkflowVersionId>',
+        type: 'Vec<WorkflowVersionId>'
       },
       {
         name: 'offset',
-        type: 'u64',
+        type: 'u64'
       },
       {
         name: 'limit',
-        type: 'u16',
+        type: 'u16'
       },
       {
         name: 'at',
         type: 'Hash',
-        isOptional: true,
-      },
+        isOptional: true
+      }
     ],
-    type: 'Vec<WorkflowVersion>',
-  },
+    type: 'Vec<WorkflowVersion>'
+  }
 };
 
 const runtime: DefinitionsCall = {
   WorkflowsApi: [
     {
       methods: rpc,
-      version: 1,
-    },
-  ],
+      version: 1
+    }
+  ]
 };
 export default {
   types: WorkflowsCustomTypes,
   runtime,
-  rpc,
+  rpc
 } as Definitions;

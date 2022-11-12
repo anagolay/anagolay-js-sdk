@@ -1,0 +1,15 @@
+version: '3'
+services:
+  idiyanale:
+    image: registry.gitlab.com/anagolay/anagolay/idiyanale:8dad9e18 # this is 4.x
+    container_name: idiyanale_testet
+    volumes:
+      - idiyanale_data:/data
+    ports:
+      - 30333:30333
+      - 9933:9933
+      - 9944:9944
+    # command: purge-chain --dev -y --base-path /data
+    command: --dev --no-telemetry --rpc-external --unsafe-ws-external --rpc-cors all --base-path /data --enable-offchain-indexing /tmp
+volumes:
+  idiyanale_data: {}

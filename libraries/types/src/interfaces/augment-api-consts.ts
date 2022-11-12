@@ -14,7 +14,7 @@ import type {
   FrameSupportWeightsRuntimeDbWeight,
   FrameSystemLimitsBlockLength,
   FrameSystemLimitsBlockWeights,
-  SpVersionRuntimeVersion,
+  SpVersionRuntimeVersion
 } from '@polkadot/types/lookup';
 
 export type __AugmentedConst<ApiType extends ApiTypes> = AugmentedConst<ApiType>;
@@ -59,6 +59,13 @@ declare module '@polkadot/api-base/types/consts' {
     };
     operations: {
       maxVersionsPerOperation: u32 & AugmentedConst<ApiType>;
+      /**
+       * Generic const
+       **/
+      [key: string]: Codec;
+    };
+    poe: {
+      maxProofsPerWorkflow: u32 & AugmentedConst<ApiType>;
       /**
        * Generic const
        **/
@@ -245,6 +252,20 @@ declare module '@polkadot/api-base/types/consts' {
        * The limit on the number of batched calls.
        **/
       batchedCallsLimit: u32 & AugmentedConst<ApiType>;
+      /**
+       * Generic const
+       **/
+      [key: string]: Codec;
+    };
+    verification: {
+      /**
+       * The amount to pay in order to issue a verification. It will be refunded to any account that
+       * update the verification status to invalid. Thus, the higher the amount, the more
+       * incentive for external actors to validate the verification status and for the holder
+       * to keep the verification status valid; the lower the amount, the more encouraging to issue a
+       * verification.
+       **/
+      registrationFee: u128 & AugmentedConst<ApiType>;
       /**
        * Generic const
        **/

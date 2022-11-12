@@ -3,11 +3,11 @@
  */
 
 export * from './connection';
+export * from './pallets/interfaces';
 export * from './utils';
 import * as pallets from './pallets';
-export * from './pallets/operations/interfaces';
 
 // this is NOT smart
-export * from '@polkadot/api';
+// export * from '@polkadot/api';
 
 export { pallets };

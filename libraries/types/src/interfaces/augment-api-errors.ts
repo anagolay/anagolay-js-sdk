@@ -370,6 +370,42 @@ declare module '@polkadot/api-base/types/errors' {
        **/
       [key: string]: AugmentedError<ApiType>;
     };
+    verification: {
+      /**
+       * The holder can't afford to reserve the amount requested for the verification registration
+       * fee
+       **/
+      CannotReserveRegistrationFee: AugmentedError<ApiType>;
+      /**
+       * Some processing was attempted on a ['VerificationRequest`] which has an inappropriate status
+       **/
+      InvalidVerificationStatus: AugmentedError<ApiType>;
+      /**
+       * No registered [`VerificationStrategy'] could match the request
+       **/
+      NoMatchingVerificationStrategy: AugmentedError<ApiType>;
+      /**
+       * The [`VerificationRequest'] is expected to be stored for the given [`VerificationContext`]
+       * but none could be found
+       **/
+      NoSuchVerificationRequest: AugmentedError<ApiType>;
+      /**
+       * The off-chain worker encountered an error while attempting verification
+       **/
+      OffChainVerificationError: AugmentedError<ApiType>;
+      /**
+       * The VerificationContext is submitted twice, no matter the VerificationStatus
+       **/
+      VerificationAlreadyIssued: AugmentedError<ApiType>;
+      /**
+       * The verification key generation failed
+       **/
+      VerificationKeyGenerationError: AugmentedError<ApiType>;
+      /**
+       * Generic error
+       **/
+      [key: string]: AugmentedError<ApiType>;
+    };
     vesting: {
       /**
        * Amount being transferred is too low to create a vesting schedule.

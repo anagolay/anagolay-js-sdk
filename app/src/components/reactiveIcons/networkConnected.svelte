@@ -1,6 +1,7 @@
 <script>
-import { chainConnected } from '$src/appStore';
-import MaterialIcon from '../base/MaterialIcon.svelte';
+  import { chainConnected } from '$src/appStore';
+
+  import MaterialIcon from '../base/MaterialIcon.svelte';
 </script>
 
 <div class="w-10 rounded-full mx-1">

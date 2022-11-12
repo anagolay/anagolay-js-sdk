@@ -1,0 +1,44 @@
+# Get editor completions based on the config schema
+# "$schema" = 'https://starship.rs/config-schema.json'
+
+
+# Inserts a blank line between shell prompts
+add_newline = true
+
+# Replace the "❯" symbol in the prompt with "➜"
+[character] # The name of the module we are configuring is "character"
+success_symbol = "[➜](bold green)" # The "success_symbol" segment is being set to "➜" with the color "bold green"
+
+# Disable the package module, hiding it from the prompt completely
+[package]
+disabled = true
+
+[ruby]
+disabled = true
+
+[nix_shell]
+disabled = true
+impure_msg = "[impure shell](bold red)"
+pure_msg = "[pure shell](bold green)"
+format = 'via [☃️ $state( \($name\))](bold blue) '
+
+[rust]
+format = "via [⚙️ $version](red bold)"
+
+
+[git_branch]
+symbol = "🌱 "
+# truncation_length = 14
+# truncation_symbol = ""
+ignore_branches = ["master", "main"]
+
+[git_metrics]
+added_style = "bold blue"
+format = '[+$added]($added_style)/[-$deleted]($deleted_style) '
+
+[directory]
+truncation_length = 8
+# truncation_symbol = "…/"
+
+[docker_context]
+format = "via [🐋 $context](blue bold)"

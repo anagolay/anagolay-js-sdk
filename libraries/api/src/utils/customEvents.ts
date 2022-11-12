@@ -1,10 +1,24 @@
 import { EventEmitter } from 'events';
 
-import { IEventMessage } from './networkCallback';
-
-export declare interface ICustomEventEmitter extends EventEmitter {
-  on(event: string, listener: (data: IEventMessage) => void): this;
-  emit(event: string | symbol, payload: IEventMessage): boolean;
+/**
+ * Generic event message
+ * @typeParam T is the type of the DATA field
+ */
+export interface IEventMessage<T> {
+  error?: {
+    message: string;
+    extra?: unknown;
+  };
+  message?: string;
+  data?: T;
+}
+/**
+ * Custom event emitter which is used in the api callback
+ */
+export declare interface ICustomEventEmitter<T> extends EventEmitter {
+  on(event: string, listener: (data: IEventMessage<T>) => void): this;
+  once(event: string, listener: (data: IEventMessage<T>) => void): this;
+  emit(event: string | symbol, payload: IEventMessage<T>): boolean;
 }
 
 export class CustomEventEmitter extends EventEmitter {}
@@ -18,9 +32,9 @@ export class CustomEventEmitter extends EventEmitter {}
   ```
  * @returns EventEmitter
  */
-export default function createEventEmitter(): ICustomEventEmitter {
+export default function createEventEmitter<T>(): ICustomEventEmitter<T> {
   const e = new CustomEventEmitter({
-    captureRejections: true,
+    captureRejections: true
   });
   return e;
 }

@@ -6,16 +6,16 @@ export const AnagolayCustomTypes: DefinitionsTypes = {
   ArtifactId: 'BoundedVec<u8, Get<u32>>',
   TypeName: 'Characters',
   ForWhat: {
-    _enum: ['GENERIC', 'PHOTO', 'CAMERA', 'LENS', 'SMARTPHONE', 'USER', 'SYS', 'FLOWCONTROL'],
+    _enum: ['GENERIC', 'PHOTO', 'CAMERA', 'LENS', 'SMARTPHONE', 'USER', 'SYS', 'FLOWCONTROL']
   },
   WasmArtifactSubType: {
-    _enum: ['Cjs', 'Esm', 'Wasm', 'Web'],
+    _enum: ['Cjs', 'Esm', 'Wasm', 'Web']
   },
   AnagolayVersionExtra: {
-    createdAt: 'u64',
-  },
+    createdAt: 'u64'
+  }
 };
 
 export default {
-  types: AnagolayCustomTypes,
+  types: AnagolayCustomTypes
 } as Definitions;

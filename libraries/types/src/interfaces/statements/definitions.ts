@@ -8,35 +8,35 @@ export const StatementsCustomTypes: DefinitionsTypes = {
     /// Signature sign(prepared_statement, pvtKey(sigKey))
     sig: 'BoundedVec<u8, Get<u32>>',
     /// Content identifier of the sig field -- CID(sig)
-    cid: 'SignatureId',
+    cid: 'SignatureId'
   },
   Signatures: {
     holder: 'AnagolaySignature',
-    issuer: 'AnagolaySignature',
+    issuer: 'AnagolaySignature'
   },
   Proportion: {
     /// Proportion sign, can be %
     sign: 'Characters',
     name: 'Characters',
-    value: 'Characters',
+    value: 'Characters'
   },
   Validity: {
     /// When the validity starts, this should be DATE_TIME
     from: 'Characters',
     /// When validity ends, this is calculate Validity.from + Expiration.value
-    until: 'Characters',
+    until: 'Characters'
   },
   ExpirationType: {
-    _enum: ['FOREVER', 'YEARS', 'MONTHS', 'DAYS', 'MINUTES', 'SECONDS'],
+    _enum: ['FOREVER', 'YEARS', 'MONTHS', 'DAYS', 'MINUTES', 'SECONDS']
   },
   Expiration: {
     /// Proportion sign, can be %
     expirationType: 'ExpirationType',
     /// How long is the expiration, if  ExpirationType::FOREVER then this is empty
-    value: 'Characters',
+    value: 'Characters'
   },
   ClaimType: {
-    _enum: ['COPYRIGHT', 'OWNERSHIP'],
+    _enum: ['COPYRIGHT', 'OWNERSHIP']
   },
   Claim: {
     /// Prev Anagolay Statement id in case this statement is revoked or changed
@@ -58,24 +58,24 @@ export const StatementsCustomTypes: DefinitionsTypes = {
     /// Setting when the statement should end
     expiration: 'Expiration',
     /// What happens after the expiration? this is default rule or smart contract that automatically does stuff, like move it to the public domain, transfer to relatives etc... need better definition
-    onExpiration: 'Characters',
+    onExpiration: 'Characters'
   },
   StatementId: {},
   StatementData: {
     signatures: 'Signatures',
-    claim: 'Claim',
+    claim: 'Claim'
   },
   StatementExtra: {},
   AnagolayStatement: {
     id: 'StatementId',
     data: 'StatementData',
-    extra: 'Option<StatementExtra>',
+    extra: 'Option<StatementExtra>'
   },
   StatementRecord: {
     record: 'AnagolayStatement',
     accountId: 'AccountId',
-    blockNumber: 'BlockNumber',
-  },
+    blockNumber: 'BlockNumber'
+  }
 };
 
 export default {
@@ -85,5 +85,5 @@ export default {
   //     AnagolayStatement: 'Statement',
   //   },
   // },
-  types: StatementsCustomTypes,
+  types: StatementsCustomTypes
 } as Definitions;

@@ -1,53 +1,55 @@
 <script context="module">
-export const prerender = false;
+  export const prerender = false;
 </script>
 
 <script lang="ts">
-import MaterialIcon from '$src/components/base/MaterialIcon.svelte';
-import { IOperationWithVersions } from '@anagolay/api';
-import type { AnOperation, AnOperationVersion } from '@anagolay/types';
-import { isEmpty } from 'ramda';
-import { last } from 'remeda';
-import { addedNodesIds, workflowGraph, workflow } from './stores';
-/**
- * Operation and versions from the chain
- */
-export let opv: IOperationWithVersions;
+  import { IOperationWithVersions } from '@anagolay/api';
+  import type { AnOperation, AnOperationVersion } from '@anagolay/types';
+  import { isEmpty } from 'ramda';
+  import { last } from 'remeda';
 
-/**
- * Add Node to the Drawflow
- */
-export let addNode: (op: AnOperation, versions: AnOperationVersion[]) => void;
+  import MaterialIcon from '$src/components/base/MaterialIcon.svelte';
 
-/**
- * Show Oepration info Prop
- */
-export let showOperationInfo: (id: string) => void;
+  import { addedNodesIds, workflow, workflowGraph } from './stores';
+  /**
+   * Operation and versions from the chain
+   */
+  export let opv: IOperationWithVersions;
 
-/**
- * Set the config for the node. This method sets the config to the Store
- * @param key
- * @param value
- */
-function selectConfig(key: string, value: string) {
-  workflowGraph.setConfigToNode({
-    nodeId: last(opv.versions).id,
-    configKey: key,
-    configValue: value
-  });
+  /**
+   * Add Node to the Drawflow
+   */
+  export let addNode: (op: AnOperation, versions: AnOperationVersion[]) => void;
 
-  workflow.generate();
-}
+  /**
+   * Show Oepration info Prop
+   */
+  export let showOperationInfo: (id: string) => void;
 
-let roundedClassName: string = 'rounded-md';
-$: isEmpty(opv.operation.data.config) || (roundedClassName = 'rounded-t-md');
+  /**
+   * Set the config for the node. This method sets the config to the Store
+   * @param key
+   * @param value
+   */
+  function selectConfig(key: string, value: string) {
+    workflowGraph.setConfigToNode({
+      nodeId: last(opv.versions).id,
+      configKey: key,
+      configValue: value
+    });
+
+    workflow.generate();
+  }
+
+  let roundedClassName: string = 'rounded-md';
+  $: isEmpty(opv.operation.data.config) || (roundedClassName = 'rounded-t-md');
 </script>
 
 <div class="flex flex-col w-full rounded-md bg-base-content my-1">
   <div class="flex flex-row bg-base-200 p-2 {roundedClassName}">
     <button
-      disabled="{$addedNodesIds.includes(last(opv.versions).id)}"
-      on:click="{() => addNode(opv.operation, opv.versions)}"
+      disabled={$addedNodesIds.includes(last(opv.versions).id)}
+      on:click={() => addNode(opv.operation, opv.versions)}
       class=" flex flex-row items-center justify-start h-10 rounded-md w-full {$addedNodesIds.includes(
         last(opv.versions).id
       )
@@ -56,7 +58,7 @@ $: isEmpty(opv.operation.data.config) || (roundedClassName = 'rounded-t-md');
     >
       <span class="px-2">{opv.operation.data.name}</span>
     </button>
-    <button on:click="{() => showOperationInfo(opv.operation.id)}" class="flex items-center text-lg">
+    <button on:click={() => showOperationInfo(opv.operation.id)} class="flex items-center text-lg">
       <MaterialIcon class="text-slate-500" iconName="info" />
     </button>
   </div>
@@ -71,11 +73,11 @@ $: isEmpty(opv.operation.data.config) || (roundedClassName = 'rounded-t-md');
               <label class="label cursor-pointer">
                 <span class="text-sm">{item}</span>
                 <input
-                  disabled="{!$addedNodesIds.includes(last(opv.versions).id)}"
-                  on:click="{() => selectConfig(key, item)}"
+                  disabled={!$addedNodesIds.includes(last(opv.versions).id)}
+                  on:click={() => selectConfig(key, item)}
                   type="radio"
-                  name="{key}"
-                  value="{item}"
+                  name={key}
+                  value={item}
                   class="radio radio-primary outline-dashed"
                 />
               </label>

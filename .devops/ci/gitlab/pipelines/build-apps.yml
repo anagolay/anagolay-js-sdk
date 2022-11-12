@@ -1,0 +1,20 @@
+build_app:
+  extends:
+    - .install-pnpm
+  stage: build
+  needs: ['changelogs', 'retest']
+  allow_failure: true
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      # changes:
+      # - ./app/*.{ts, css, svelte, html, d.ts} # ...source files
+  script:
+    - !reference [.rush:install, script]
+    - !reference [.rush:build, script]
+
+    - echo 'Building Anagolay JS app ...'
+    - cd ./app
+    - pnpm build:app
+
+    - echo 'Doing check Anagolay JS app ...'
+    - pnpm check

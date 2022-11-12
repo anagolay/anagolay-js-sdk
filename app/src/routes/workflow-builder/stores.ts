@@ -141,7 +141,6 @@ export const workflowGraph = workflowGraphFn();
 
 /**
  * Workflow Manifest
- * @param initialData - Initial data
  * @returns
  */
 function workflowFn() {

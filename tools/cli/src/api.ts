@@ -171,7 +171,7 @@ export async function signAndSubmit(
               spinner.stop();
               reject({
                 message: trim(docs.join(', ')),
-                errorType: `${section}.${name}`,
+                errorType: `${section}.${name}`
               });
               unSub();
             } else if (value.isToken) {
@@ -179,7 +179,7 @@ export async function signAndSubmit(
               spinner.stop();
               reject({
                 message: value.asToken.type,
-                errorType: value.type,
+                errorType: value.type
               });
               unSub();
             } else {

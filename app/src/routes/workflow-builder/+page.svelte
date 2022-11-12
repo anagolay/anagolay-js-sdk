@@ -1,194 +1,194 @@
 <script context="module" lang="ts">
-export const prerender = true;
+  export const prerender = true;
 
-import Debugger, { type Debugger as DebuggerType } from 'debug';
+  import Debugger, { type Debugger as DebuggerType } from 'debug';
 
-export const debugName: string = 'pages:workflowBuilder';
+  export const debugName: string = 'pages:workflowBuilder';
 
-const debug: DebuggerType = Debugger(debugName);
+  const debug: DebuggerType = Debugger(debugName);
 </script>
 
 <script script lang="ts">
-import { page } from '$app/stores';
-import Code from '$src/components/base/CodeBlockWithSerialization.svelte';
-import SkeletonLoader from '$src/components/base/SkeletonLoader.svelte';
-import { notifications } from '$src/components/notifications/stores';
-import {
-  chainConnected,
-  chainStore,
-  pageTitle,
-  relayServiceWSS,
-  showSidebar,
-  websocketRelayConnected
-} from '$src/appStore';
-import { serializeThenParse } from '$src/utils/json';
-import { getHashValue } from '$src/utils/url';
+  import { type IOperationWithVersions, pallets } from '@anagolay/api';
+  import { type AnOperation, type AnOperationVersion, AnForWhat } from '@anagolay/types';
+  import { isEmpty } from 'ramda';
+  import slug from 'slug';
+  import { io, Socket } from 'socket.io-client';
+  import { onMount } from 'svelte';
+  import SvelteSeo from 'svelte-seo';
 
-import { AnForWhat, type AnOperation, type AnOperationVersion } from '@anagolay/types';
-import { isEmpty } from 'ramda';
-import slug from 'slug';
-import { io, Socket } from 'socket.io-client';
-import { onMount } from 'svelte';
-import SvelteSeo from 'svelte-seo';
-import Drawflow from './drawflow.svelte';
-import OperationNode from './OperationNode.svelte';
-import { workflow } from './stores';
-import { IOperationWithVersions, pallets } from '@anagolay/api';
+  import { page } from '$app/stores';
+  import {
+    chainConnected,
+    pageTitle,
+    relayServiceWSS,
+    showSidebar,
+    websocketRelayConnected
+  } from '$src/appStore';
+  import Code from '$src/components/base/CodeBlockWithSerialization.svelte';
+  import SkeletonLoader from '$src/components/base/SkeletonLoader.svelte';
+  import { notificationsStore } from '$src/components/notifications/store';
+  import { serializeThenParse } from '$src/utils/json';
+  import { getHashValue } from '$src/utils/url';
 
-// we don't want sidebar here
-showSidebar.set(false);
+  import Drawflow from './drawflow.svelte';
+  import OperationNode from './OperationNode.svelte';
+  import { workflow } from './stores';
 
-const title: string = 'Workflow builder';
+  // we don't want sidebar here
+  showSidebar.set(false);
 
-pageTitle.set(title);
+  const title: string = 'Workflow builder';
 
-/**
- * A value which we will sluggify and then add to the store value `$workflow.manifestData.name`.
- * This acts as a package name, so choose wisely
- */
-let workflowName: string = '';
+  pageTitle.set(title);
 
-/**
- * This is how we build the actual VALUES! i had to change the output of the types to be ES2020
- */
-const groupsAll = Object.entries(AnForWhat);
+  /**
+   * A value which we will sluggify and then add to the store value `$workflow.manifestData.name`.
+   * This acts as a package name, so choose wisely
+   */
+  let workflowName: string = '';
 
-const Groups: { id: number; name: string }[] = groupsAll
-  // check the console.log(groupsAll) for the reason why slice and divide by 2
-  .slice(groupsAll.length / 2, groupsAll.length)
-  .map((g) => {
-    return {
-      id: g[1] as number,
-      name: g[0]
-    };
+  /**
+   * This is how we build the actual VALUES! i had to change the output of the types to be ES2020
+   */
+  const groupsAll = Object.entries(AnForWhat);
+
+  const Groups: { id: number; name: string }[] = groupsAll
+    // check the console.log(groupsAll) for the reason why slice and divide by 2
+    .slice(groupsAll.length / 2, groupsAll.length)
+    .map((g) => {
+      return {
+        id: g[1] as number,
+        name: g[0]
+      };
+    });
+
+  let socket: Socket;
+
+  let saveDisabled: boolean = true;
+
+  /**
+   * Send the Manifest to WS.
+   *
+   * @remarks
+   * The commented code lines are left like this intentionally.
+   */
+  function sendMessageToWs() {
+    saveDisabled = true;
+    notificationsStore.add('Workflow data sent to WS, please check the CLI.', 'success', {
+      close: false
+    });
+
+    // The serialization of the Map is not natively  supported. When we serialize we use the replacer and wnen parse we use the reviver
+
+    const workflowBuild = serializeThenParse($workflow);
+
+    socket.emit('continueWithWorkflow', workflowBuild);
+
+    socket.disconnect();
+  }
+
+  function cancelTheCreation() {
+    notificationsStore.add('Workflow canceled', 'warning');
+    socket.emit('cancelWorkflowBuilding', {});
+    socket.disconnect();
+  }
+
+  /**
+   * Namespace to connect to. This is the shared namespace between this app and CLI
+   */
+  let namespace: string = getHashValue($page.url.hash, 'ns', $workflow.manifestData.name);
+
+  /**
+   * Websocket server address without the client path.
+   */
+  let ws: string = getHashValue($page.url.hash, 'ws', $relayServiceWSS);
+
+  /**
+   * This is the path where to get the socket.io client library
+   * https://socket.io/docs/v4/client-options/#path
+   */
+  let path: string = '/' + getHashValue($page.url.hash, 'path', 'ws');
+
+  // Operations with their respective versions from the chain
+  let operationsWithVersions: IOperationWithVersions[] = [];
+
+  // add the node to the drawer
+  function addNode(op: AnOperation, versions: AnOperationVersion[]) {
+    bindedDf.addNode(op, versions);
+  }
+
+  async function run() {
+    // @TODO pagination ui
+    operationsWithVersions = await pallets.operations.retrieveOperationsPaged(0, 10);
+  }
+
+  /**
+   * On the Component mount
+   */
+  onMount(async () => {
+    // initial name is the namespace to connect to
+    workflowName = namespace;
+
+    socket = io(ws + '/' + namespace, {
+      path,
+      reconnection: true,
+      transports: ['websocket'],
+      secure: true
+    });
+
+    socket.on('connect', () => {
+      debug('WS:: connected with id %s and namespace %s', socket.id, namespace);
+      websocketRelayConnected.set(true);
+    });
+
+    socket.on('disconnect', () => {
+      websocketRelayConnected.set(false);
+    });
+
+    socket.on('connect_error', () => {
+      console.error('socket error');
+      socket.connect();
+    });
   });
 
-let socket: Socket;
+  // Bind the drawFlow.svelte to this bariable so we can use it
+  let bindedDf: Drawflow;
 
-let saveDisabled: boolean = true;
+  /**
+   * Opens the Operarion Info modal window
+   * @param id
+   */
+  function showOperationInfo(id: string) {
+    console.log('operation version ID is %s', id);
+    console.log('this should open the modal');
+  }
 
-/**
- * Send the Manifest to WS.
- *
- * @remarks
- * The commented code lines are left like this intentionally.
- */
-function sendMessageToWs() {
-  saveDisabled = true;
-  notifications.add('Workflow data sent to WS, please check the CLI.', 'success', {
-    close: false
-  });
-
-  // The serialization of the Map is not natively  supported. When we serialize we use the replacer and wnen parse we use the reviver
-
-  const workflowBuild = serializeThenParse($workflow);
-
-  socket.emit('continueWithWorkflow', workflowBuild);
-
-  socket.disconnect();
-}
-
-function cancelTheCreation() {
-  notifications.add('Workflow canceled', 'warning');
-  socket.emit('cancelWorkflowBuilding', {});
-  socket.disconnect();
-}
-
-/**
- * Namespace to connect to. This is the shared namespace between this app and CLI
- */
-let namespace: string = getHashValue($page.url.hash, 'ns', $workflow.manifestData.name);
-
-/**
- * Websocket server address without the client path.
- */
-let ws: string = getHashValue($page.url.hash, 'ws', $relayServiceWSS);
-
-/**
- * This is the path where to get the socket.io client library
- * https://socket.io/docs/v4/client-options/#path
- */
-let path: string = '/' + getHashValue($page.url.hash, 'path', 'ws');
-
-// Operations with their respective versions from the chain
-let operationsWithVersions: IOperationWithVersions[] = [];
-
-// add the node to the drawer
-function addNode(op: AnOperation, versions: AnOperationVersion[]) {
-  bindedDf.addNode(op, versions);
-}
-
-async function run() {
-  // @TODO pagination ui
-  operationsWithVersions = await pallets.operations.retrieveOperationsPaged(0, 10);
-}
-
-/**
- * On the Component mount
- */
-onMount(async () => {
-  // initial name is the namespace to connect to
-  workflowName = namespace;
-
-  socket = io(ws + '/' + namespace, {
-    path,
-    reconnection: true,
-    transports: ['websocket'],
-    secure: true
-  });
-
-  socket.on('connect', () => {
-    debug('WS:: connected with id %s and namespace %s', socket.id, namespace);
-    websocketRelayConnected.set(true);
-  });
-
-  socket.on('disconnect', () => {
-    websocketRelayConnected.set(false);
-  });
-
-  socket.on('connect_error', () => {
-    console.error('socket error');
-    socket.connect();
-  });
-});
-
-// Bind the drawFlow.svelte to this bariable so we can use it
-let bindedDf: Drawflow;
-
-/**
- * Opens the Operarion Info modal window
- * @param id
- */
-function showOperationInfo(id: string) {
-  console.log('operation version ID is %s', id);
-  console.log('this should open the modal');
-}
-
-// make check when wen can enable save button
-$: {
-  const { segments, groups, name, description } = $workflow.manifestData;
-  saveDisabled = true;
-  if (groups.length > 0 && name.length > 7 && description.length > 7 && segments.length > 0) {
-    const heads = segments.filter((s) => s.inputs.every((i) => i == -1));
-    const firstSegment = segments[0];
-    if (heads.length == 1 && firstSegment.inputs.includes(-1) && firstSegment.sequence.length > 0) {
-      saveDisabled = false;
+  // make check when wen can enable save button
+  $: {
+    const { segments, groups, name, description } = $workflow.manifestData;
+    saveDisabled = true;
+    if (groups.length > 0 && name.length > 7 && description.length > 7 && segments.length > 0) {
+      const heads = segments.filter((s) => s.inputs.every((i) => i == -1));
+      const firstSegment = segments[0];
+      if (heads.length == 1 && firstSegment.inputs.includes(-1) && firstSegment.sequence.length > 0) {
+        saveDisabled = false;
+      }
     }
   }
-}
 
-/**
- * Listen for the changes and then slug the name
- */
-$: $workflow.manifestData.name = slug(workflowName, '_');
-$: {
-  if ($chainConnected) {
-    run();
+  /**
+   * Listen for the changes and then slug the name
+   */
+  $: $workflow.manifestData.name = slug(workflowName, '_');
+  $: {
+    if ($chainConnected) {
+      run();
+    }
   }
-}
 </script>
 
-<SvelteSeo title="{title}" description="Workflow creation page. The most fun you had in years!" />
+<SvelteSeo {title} description="Workflow creation page. The most fun you had in years!" />
 
 <div class="flex flex-row">
   <aside
@@ -212,11 +212,11 @@ $: {
           {/if}
           {#each opvs as opv}
             <li>
-              <OperationNode opv="{opv}" addNode="{addNode}" showOperationInfo="{showOperationInfo}" />
+              <OperationNode {opv} {addNode} {showOperationInfo} />
             </li>
           {/each}
         {:catch error}
-          <p class="text-red-900">${error.message}</p>
+          <p class="text-red-900">${error}</p>
         {/await}
       </ul>
     </div>
@@ -229,7 +229,7 @@ $: {
           <input
             type="text"
             name="workflowName"
-            bind:value="{workflowName}"
+            bind:value={workflowName}
             class="input bg-slate-200 input-bordered w-full max-w-xs text-slate-800 focus:text-slate-100 focus:bg-primary-focus"
           />
         </div>
@@ -240,7 +240,7 @@ $: {
           <input
             type="text"
             name="workflowDesc"
-            bind:value="{$workflow.manifestData.description}"
+            bind:value={$workflow.manifestData.description}
             class="input bg-slate-200 input-bordered w-full max-w-xs text-slate-800 focus:text-slate-100  focus:bg-primary-focus"
           />
         </div>
@@ -256,11 +256,11 @@ $: {
                 <label class="label cursor-pointer">
                   <span class="label-text text-black">{group.name}</span>
                   <input
-                    bind:group="{$workflow.manifestData.groups}"
+                    bind:group={$workflow.manifestData.groups}
                     type="checkbox"
                     name="groups"
                     class="checkbox outline checkbox-primary"
-                    value="{group.name}"
+                    value={group.name}
                   />
                 </label>
               </div>
@@ -270,17 +270,17 @@ $: {
       </div>
       <div class="px-4 py-6 btn-group w-full bottom-0">
         <button
-          disabled="{saveDisabled}"
-          on:click="{sendMessageToWs}"
+          disabled={saveDisabled}
+          on:click={sendMessageToWs}
           class="btn w-1/2 btn-primary  disabled:text-slate-500">Save</button
         >
-        <button on:click="{cancelTheCreation}" class="btn w-1/2 btn-error">Cancel</button>
+        <button on:click={cancelTheCreation} class="btn w-1/2 btn-error">Cancel</button>
       </div>
     </div>
   </aside>
 
   <main class="flex flex-col flex-grow -ml-64 md:ml-0">
-    <Drawflow bind:this="{bindedDf}" />
+    <Drawflow bind:this={bindedDf} />
     <div class="modalWindow p-4">
       <input type="checkbox" id="manifest-modal" class="modal-toggle" />
       <label for="manifest-modal" class="modal cursor-pointer">
@@ -288,8 +288,8 @@ $: {
           <label for="manifest-modal" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
 
           <Code
-            code="{JSON.parse(
-              JSON.stringify($workflow.manifestData, (key, value) => {
+            code={JSON.parse(
+              JSON.stringify($workflow.manifestData, (_, value) => {
                 // @TODO here, again we need to serialize the object to JSON without alteration of the model
                 // serializeAndParse() cannot work here
                 if (value instanceof Map) {
@@ -298,7 +298,7 @@ $: {
                   return value;
                 }
               })
-            )}"
+            )}
           />
         </div>
       </label>

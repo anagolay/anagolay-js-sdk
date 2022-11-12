@@ -37,8 +37,10 @@ import type {
   SpConsensusAuraSr25519AppSr25519Public,
   SpRuntimeDigest,
   StatementsStatementRecord,
+  VerificationVerificationContext,
+  VerificationVerificationRequest,
   WorkflowsWorkflowRecord,
-  WorkflowsWorkflowVersionRecord,
+  WorkflowsWorkflowVersionRecord
 } from '@polkadot/types/lookup';
 import type { Observable } from '@polkadot/types/types';
 
@@ -248,6 +250,24 @@ declare module '@polkadot/api-base/types/storage' {
         [Bytes, AccountId32]
       > &
         QueryableStorageEntry<ApiType, [Bytes, AccountId32]>;
+      /**
+       * Retrieve the ProofIds with the [`VerificationContext`]
+       **/
+      proofIdsByVerificationContext: AugmentedQuery<
+        ApiType,
+        (
+          arg:
+            | VerificationVerificationContext
+            | { UrlForDomain: any }
+            | { UrlForDomainWithUsername: any }
+            | { UrlForDomainWithSubdomain: any }
+            | { UrlForDomainWithUsernameAndRepository: any }
+            | string
+            | Uint8Array
+        ) => Observable<Option<Vec<Bytes>>>,
+        [VerificationVerificationContext]
+      > &
+        QueryableStorageEntry<ApiType, [VerificationVerificationContext]>;
       /**
        * Amount of saved Proofs
        **/
@@ -627,6 +647,32 @@ declare module '@polkadot/api-base/types/storage' {
         [AccountId32]
       > &
         QueryableStorageEntry<ApiType, [AccountId32]>;
+      /**
+       * Generic query
+       **/
+      [key: string]: QueryableStorageEntry<ApiType>;
+    };
+    verification: {
+      /**
+       * The map of verification requests indexed by the account id of the holder and the
+       * associated verification context
+       **/
+      verificationRequestByAccountIdAndVerificationContext: AugmentedQuery<
+        ApiType,
+        (
+          arg1: AccountId32 | string | Uint8Array,
+          arg2:
+            | VerificationVerificationContext
+            | { UrlForDomain: any }
+            | { UrlForDomainWithUsername: any }
+            | { UrlForDomainWithSubdomain: any }
+            | { UrlForDomainWithUsernameAndRepository: any }
+            | string
+            | Uint8Array
+        ) => Observable<Option<VerificationVerificationRequest>>,
+        [AccountId32, VerificationVerificationContext]
+      > &
+        QueryableStorageEntry<ApiType, [AccountId32, VerificationVerificationContext]>;
       /**
        * Generic query
        **/

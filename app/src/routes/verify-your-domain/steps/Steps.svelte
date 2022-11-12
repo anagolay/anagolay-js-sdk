@@ -1,5 +1,5 @@
 <script>
-import { steps } from '../store';
+  import { steps } from '../store';
 </script>
 
 <ul class="steps steps-vertical w-1/4 sticky top-0 h-fit">

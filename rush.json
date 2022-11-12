@@ -15,7 +15,7 @@
    * path segment in the "$schema" field for all your Rush config files.  This will ensure
    * correct error-underlining and tab-completion for editors such as VS Code.
    */
-  "rushVersion": "5.71.0",
+  "rushVersion": "5.80.0",
   /**
    * The next field selects which package manager should be installed and determines its version.
    * Rush installs its own local copy of the package manager to ensure that your build process
@@ -24,7 +24,7 @@
    * Specify one of: "pnpmVersion", "npmVersion", or "yarnVersion".  See the Rush documentation
    * for details about these alternatives.
    */
-  "pnpmVersion": "7.3.0",
+  "pnpmVersion": "7.9.0",
   // "npmVersion": "6.14.15",
   // "yarnVersion": "1.9.4",
   /**
@@ -305,7 +305,8 @@
     /**
      * The list of shell commands to run after the Rush build command finishes
      */
-    "postRushBuild": ["bash ./common/scripts/add-package-json-to-libs.sh"]
+    // "postRushBuild": ["bash ./common/scripts/add-package-json-to-libs.sh"]
+    "postRushBuild": []
   },
   /**
    * Installation variants allow you to maintain a parallel set of configuration files that can be
@@ -384,7 +385,7 @@
     //    * locally linked because it would create a cyclic dependency; instead, the last published
     //    * version will be installed in the Common folder.
     //    */
-    //   "cyclicDependencyProjects": [
+    //   "decoupledLocalDependencies": [
     //     // "my-toolchain"
     //   ],
     //
@@ -457,7 +458,21 @@
     {
       "packageName": "testing-package",
       "reviewCategory": "tools",
-      "projectFolder": "testing-package"
+      "projectFolder": "testing-package",
+      "shouldPublish": false
+    },
+    {
+      "packageName": "@kelp_digital/heft-library-rig",
+      "reviewCategory": "libraries",
+      "projectFolder": "heft-stuff/heft-library-rig",
+      "versionPolicyName": "unstable"
+    },
+    {
+      "packageName": "@kelp_digital/heft-esm-transform-plugin",
+      "reviewCategory": "libraries",
+      "projectFolder": "heft-stuff/heft-esm-transform-plugin",
+      "decoupledLocalDependencies": ["@kelp_digital/heft-library-rig"],
+      "versionPolicyName": "unstable"
     }
   ]
 }

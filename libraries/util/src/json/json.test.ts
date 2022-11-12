@@ -15,7 +15,7 @@ const firstObject = {
   n: 7,
   b: true,
   ar: [],
-  config: new Map().set('d', 12),
+  config: new Map().set('d', 12)
 };
 
 const firstObjectParsed = {
@@ -26,9 +26,9 @@ const firstObjectParsed = {
   config: {
     type: 'Map',
     data: {
-      d: 12,
-    },
-  },
+      d: 12
+    }
+  }
 };
 
 describe('JSON test suite', () => {
@@ -50,7 +50,7 @@ describe('JSON test suite', () => {
         n: 7,
         b: true,
         ar: [],
-        config: { d: 12 },
+        config: { d: 12 }
       })
     ).toEqual('{"s":"s","n":7,"b":true,"ar":[],"config":{"d":12}}');
   });
@@ -59,7 +59,7 @@ describe('JSON test suite', () => {
       serialize(
         {
           s: 's',
-          n: 7,
+          n: 7
         },
         0,
         ['s']

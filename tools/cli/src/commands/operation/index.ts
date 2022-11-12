@@ -105,8 +105,8 @@ async function publishSubcmd(): Promise<void> {
     context: 'operation',
     payload: {
       repository,
-      revision,
-    },
+      revision
+    }
   };
 
   const publishResponse = await callPublishService<AnOperationArtifactStructure, IOperationVersionSchema>(
@@ -118,7 +118,7 @@ async function publishSubcmd(): Promise<void> {
   const versionData: AnOperationVersionData = {
     entityId: undefined,
     parentId: undefined,
-    artifacts: publishResponse.artifacts.items,
+    artifacts: publishResponse.artifacts.items
   };
 
   const chain = await connectToChainViaWs();

@@ -1,10 +1,11 @@
 <script>
-import TitleCard from '$src/components/base/TitleCard.svelte';
-import { notifications } from '$src/components/notifications/stores';
-import { mainStore } from '../store';
+  import TitleCard from '$src/components/base/TitleCard.svelte';
+  import { notificationsStore } from '$src/components/notifications/store';
+
+  import { mainStore } from '../store';
 </script>
 
-<TitleCard title="All done and saved!" step="{6}">
+<TitleCard title="All done and saved!" step={6}>
   <div class="hero bg-base-200">
     <div class="hero-content text-center">
       <div class="max-w-md">
@@ -18,8 +19,8 @@ import { mainStore } from '../store';
         </p>
         <button
           class="btn btn-primary"
-          on:click="{() =>
-            notifications.add('Yeah, sorry about that, this is not implemented yet 😉', 'info')}"
+          on:click={() =>
+            notificationsStore.add('Yeah, sorry about that, this is not implemented yet 😉', 'info')}
           >Share on twitter</button
         >
       </div>

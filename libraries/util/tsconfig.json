@@ -1,6 +1,9 @@
 {
-  "extends": "./node_modules/@rushstack/heft-web-rig/profiles/library/tsconfig-base.json",
+  "extends": "./node_modules/@kelp_digital/heft-library-rig/profiles/default/tsconfig-base.json",
   "compilerOptions": {
+    "importHelpers": true,
+    "lib": ["esnext", "scripthost", "dom", "WebWorker"],
+
     "types": ["heft-jest", "node"],
     "module": "esnext",
     "target": "esnext",

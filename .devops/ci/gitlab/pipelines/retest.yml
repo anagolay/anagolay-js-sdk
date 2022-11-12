@@ -1,0 +1,10 @@
+retest:
+  extends:
+    - .install-pnpm
+  stage: test
+  needs: ['changelogs']
+  script:
+    - !reference [.rush:install, script]
+    # - !reference [.rush:build, script]
+    - !reference [.rush:retest, script]
+    - node common/scripts/install-run-rush.js code-quality

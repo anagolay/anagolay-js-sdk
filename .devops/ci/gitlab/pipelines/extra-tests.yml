@@ -1,0 +1,30 @@
+rpc-connection-from-definitions:
+  needs: ['retest']
+  stage: test
+  allow_failure: true
+  extends:
+    - .install-pnpm
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+  script:
+    - !reference [.rush:install, script]
+    - !reference [.rush:retest, script]
+
+    - cd testing-package
+    - pnpm serve
+
+test-code-node16-lts:
+  image: node:16-bullseye
+  needs: ['retest', 'changelogs']
+  allow_failure: true
+  cache: {}
+  stage: test
+  extends:
+    - .install-pnpm
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+  script:
+    - !reference [.rush:install, script]
+    - !reference [.rush:retest, script]

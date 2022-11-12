@@ -1,85 +1,163 @@
 <script lang="ts">
-import Code from '$src/components/base/Code.svelte';
+  import { pallets } from '@anagolay/api';
+  import { AnVerificationAction } from '@anagolay/types';
+  import { equals, length, split } from 'ramda';
 
-import TitleCard from '$src/components/base/TitleCard.svelte';
-import { notifications } from '$src/components/notifications/stores';
-import { txtRecords, type IDoHResponse, type IDoHAnswer } from '@anagolay/util';
-import { equals, filter, includes, isEmpty, isNil, length } from 'ramda';
-import { find } from 'remeda';
+  import Code from '$src/components/base/Code.svelte';
+  import TitleCard from '$src/components/base/TitleCard.svelte';
+  import { notificationsStore } from '$src/components/notifications/store';
+  import { polkadotAccountsStore } from '$src/components/polkadot/store';
 
-import { mainStore, steps } from '../store';
+  import { mainStore, steps } from '../store';
 
-let selectedMethod: 'dns' | 'well-known' = 'dns';
-let verificationOnGoing: boolean = false;
+  let selectedMethod: 'dns' | 'well-known' = 'dns';
+  let verificationOnGoing: boolean = false;
+  let requestingKey: boolean = false;
+  let hostName: string = '@';
 
-async function verifyDomainDNS() {
-  verificationOnGoing = true;
-  // it's too fast, slow it down for the better effect
-  setTimeout(async () => {
-    const resp: IDoHResponse = await txtRecords($mainStore.domain, 'https://dns.google/resolve');
+  // async function _verifyDomainDNSFrontend() {
+  //   verificationOnGoing = true;
+  //   // it's too fast, slow it down for the better effect
+  //   setTimeout(async () => {
+  //     const resp: IDoHResponse = await txtRecords($mainStore.domain, 'https://dns.google/resolve');
 
-    const Answer = resp.Answer as IDoHAnswer[];
+  //     const Answer = resp.Answer as IDoHAnswer[];
 
-    console.log('Answer', Answer);
+  //     console.log('Answer', Answer);
 
-    if (isNil(Answer) || isEmpty(Answer)) {
-      verificationOnGoing = false;
-      notifications.add(
-        `Cannot verify, try again in few minutes. It's normal that the DNS propagation takes up to 48h. When you want, close this message and try again.`,
-        'warning',
-        { close: false }
-      );
-      return;
-    }
+  //     if (isNil(Answer) || isEmpty(Answer)) {
+  //       verificationOnGoing = false;
+  //       notificationsStore.add(
+  //         `Cannot verify, try again in few minutes. It's normal that the DNS propagation takes up to 48h. When you want, close this message and try again.`,
+  //         'warning',
+  //         { close: false }
+  //       );
+  //       return;
+  //     }
 
-    const anagolayAnswerForDifferentAccount: IDoHAnswer = filter(
-      (n: IDoHAnswer) => includes('anagolay-domain-verification')(n.data),
-      Answer as IDoHAnswer
+  //     const anagolayAnswerForDifferentAccount: IDoHAnswer[] = filter(
+  //       (n: IDoHAnswer) => includes('anagolay-domain-verification')(n.data),
+  //       Answer
+  //     );
+
+  //     console.log('anagolayAnswerForDifferentAccount', anagolayAnswerForDifferentAccount);
+
+  //     // this causes a bug
+  //     if (length(anagolayAnswerForDifferentAccount) > 1) {
+  //       verificationOnGoing = false;
+  //       notificationsStore.add(`Cannot verify, the ownership is already claimed by someone else!`, 'error');
+  //       return;
+  //     }
+
+  //     const anagolayAnswer: IDoHAnswer = find(anagolayAnswerForDifferentAccount, (i) =>
+  //       includes($mainStore.verificationCode)(i.data)
+  //     );
+
+  //     if (!isNil(anagolayAnswer) && !isEmpty(anagolayAnswer)) {
+  //       // const { data } = anagolayAnswer;
+  //       // this is required becuase the TXT record gets surrounded by double quotes like
+  //       // '"anagolay-domain-verification=asdsdasdasdsaasweewq"'
+  //       // const cleanData = replace(/\"/g, '', data);
+
+  //       // if (equals(cleanData, $mainStore.verificationCode)) {
+  //       steps.gotoStep(5);
+  //       setTimeout(() => {
+  //         document.querySelector(`#step_${5}`).scrollIntoView({
+  //           behavior: 'smooth'
+  //         });
+  //       }, 100);
+  //       // } else {
+  //       // alerts.add(`Cannot verify, the ownership is already claimed`, 'error');
+  //       // }
+  //     } else {
+  //       notificationsStore.add(
+  //         `Cannot verify, try again in few minutes. It's normal that the DNS propagation takes up to 48h. When you want, close this message and try again.`,
+  //         'warning',
+  //         { close: false }
+  //       );
+  //     }
+
+  //     verificationOnGoing = false;
+  //   }, 1000);
+  // }
+
+  async function perfomVerificationOnChain() {
+    verificationOnGoing = true;
+    $mainStore.signer = (await polkadotAccountsStore.getInjectorForSelectedAccount()).signer;
+
+    const b = await pallets.verification.performVerificationAndSend(
+      $mainStore.verificationRequest,
+      $polkadotAccountsStore.selectedAccount.address,
+      { signer: $mainStore.signer }
     );
 
-    console.log('anagolayAnswerForDifferentAccount', anagolayAnswerForDifferentAccount);
-
-    // this causes a bug
-    if (length(anagolayAnswerForDifferentAccount) > 1) {
-      verificationOnGoing = false;
-      notifications.add(`Cannot verify, the ownership is already claimed by someone else!`, 'error');
-      return;
-    }
-
-    const anagolayAnswer: IDoHAnswer = find(anagolayAnswerForDifferentAccount, (i) =>
-      includes($mainStore.verificationCode)(i.data)
-    );
-
-    if (!isNil(anagolayAnswer) && !isEmpty(anagolayAnswer)) {
-      const { data } = anagolayAnswer;
-      // this is required becuase the TXT record gets surrounded by double quotes like
-      // '"anagolay-domain-verification=asdsdasdasdsaasweewq"'
-      // const cleanData = replace(/\"/g, '', data);
-
-      // if (equals(cleanData, $mainStore.verificationCode)) {
+    b.on('VerificationRequested', (e) => {
+      const { key, status } = e.data[1];
+      $mainStore.verificationCode = key;
+      $mainStore.verificationRequest = e.data[1];
+      notificationsStore.add(`Verification is  ${status}`, 'info');
       steps.gotoStep(5);
       setTimeout(() => {
         document.querySelector(`#step_${5}`).scrollIntoView({
           behavior: 'smooth'
         });
       }, 100);
-      // } else {
-      // alerts.add(`Cannot verify, the ownership is already claimed`, 'error');
-      // }
-    } else {
-      notifications.add(
-        `Cannot verify, try again in few minutes. It's normal that the DNS propagation takes up to 48h. When you want, close this message and try again.`,
-        'warning',
-        { close: false }
-      );
+      verificationOnGoing = false;
+    });
+  }
+
+  /**
+   * Calls the `request_verification` extrinsic
+   */
+  async function requestVerificationKey() {
+    if (equals(3, length(split('.', $mainStore.domain)))) {
+      notificationsStore.addNew({
+        text: 'You cannot verify subdomains ATM',
+        infoLevel: 'error'
+      });
+      return;
     }
 
-    verificationOnGoing = false;
-  }, 1000);
-}
+    requestingKey = true;
+    $mainStore.signer = (await polkadotAccountsStore.getInjectorForSelectedAccount()).signer;
+
+    const b = await pallets.verification.requestVerificationAndSend(
+      {
+        context: {
+          UrlForDomain: [`https://${$mainStore.domain}`, $mainStore.domain]
+        },
+        action: AnVerificationAction.DnsTxtRecord
+      },
+      $polkadotAccountsStore.selectedAccount.address,
+      {
+        signer: $mainStore.signer
+      }
+    );
+
+    b.on('error', (e) => {
+      notificationsStore.addNew({
+        text: e.error.message,
+        infoLevel: 'error'
+      });
+      requestingKey = false;
+      b.removeAllListeners();
+    });
+
+    b.on('VerificationRequested', (e) => {
+      const { key } = e.data[1];
+      $mainStore.verificationCode = key;
+      $mainStore.verificationRequest = e.data[1];
+      requestingKey = false;
+    });
+
+    b.on('finalized', () => {
+      requestingKey = false;
+      b.removeAllListeners();
+    });
+  }
 </script>
 
-<TitleCard title="Choose verification method" step="{4}">
+<TitleCard title="Choose verification method" step={4}>
   <div class="flex w-full">
     <div class="grid h-20 flex-grow card bg-base-300 rounded-box place-items-center">
       <div class="form-control">
@@ -90,7 +168,7 @@ async function verifyDomainDNS() {
             value="dns"
             name="dns"
             class="radio radio-primary"
-            bind:group="{selectedMethod}"
+            bind:group={selectedMethod}
           />
         </label>
       </div>
@@ -100,7 +178,7 @@ async function verifyDomainDNS() {
       <label class="label cursor-pointer">
         <span class="btn mr-4">.well-known</span>
         <input
-          bind:group="{selectedMethod}"
+          bind:group={selectedMethod}
           type="radio"
           value="well-known"
           name="well-known"
@@ -144,25 +222,39 @@ async function verifyDomainDNS() {
       <div class="flex flex-col gap-4">
         <div class="flex flex-row justify-between w-full items-center">
           <h1 class="">Type:</h1>
-          <Code class="p-4">TXT</Code>
+          <Code class="p-4" value="TXT" />
         </div>
         <div class="flex flex-row justify-between w-full items-center">
           <h1 class="">Host (Name):</h1>
-          <Code class="p-4">@</Code>
+          <Code class="p-4" value={hostName} />
         </div>
         <div class="flex flex-row justify-between w-full items-center flex-wrap">
           <h1 class="">Value (Content):</h1>
-          <Code class="p-4">{$mainStore.verificationCode}</Code>
+          <!-- <Code withCopy class="p-4" value={$mainStore.verificationCode} /> -->
+          <Code withCopy class="p-4" value={$mainStore.verificationCode} />
         </div>
       </div>
-
-      <button
-        class="btn btn-primary {verificationOnGoing && 'loading'}"
-        disabled="{verificationOnGoing || $mainStore.savingProof || $mainStore.proofCreated}"
-        on:click="{verifyDomainDNS}"
-      >
-        I have updated the DNS. Please Verify
-      </button>
+      <div class="flex flex-col w-full lg:flex-row">
+        <div class="grid flex-grow h-32 card bg-base-300 rounded-box place-items-center">
+          <button
+            class="btn btn-primary {requestingKey && 'loading'}"
+            disabled={!!$mainStore.verificationCode}
+            on:click={requestVerificationKey}
+          >
+            Request the verification key
+          </button>
+        </div>
+        <div class="divider lg:divider-horizontal">THEN</div>
+        <div class="grid flex-grow h-32 card bg-base-300 rounded-box place-items-center">
+          <button
+            class="btn btn-primary {verificationOnGoing && 'loading'}"
+            disabled={!$mainStore.verificationCode || verificationOnGoing || $mainStore.savingProof}
+            on:click={perfomVerificationOnChain}
+          >
+            I have updated the DNS. Please Verify
+          </button>
+        </div>
+      </div>
     </div>
   {/if}
   {#if equals(selectedMethod, 'well-known')}

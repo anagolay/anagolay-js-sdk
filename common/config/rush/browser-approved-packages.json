@@ -55,6 +55,14 @@
       "allowedCategories": [ "webapp" ]
     },
     {
+      "name": "@kelp_digital/heft-esm-transform-plugin",
+      "allowedCategories": [ "libraries", "tools" ]
+    },
+    {
+      "name": "@kelp_digital/heft-library-rig",
+      "allowedCategories": [ "libraries", "tools" ]
+    },
+    {
       "name": "@mdx-js/react",
       "allowedCategories": [ "websites" ]
     },
@@ -141,6 +149,10 @@
     {
       "name": "@rushstack/heft-webpack5-plugin",
       "allowedCategories": [ "libraries", "tools" ]
+    },
+    {
+      "name": "@rushstack/node-core-library",
+      "allowedCategories": [ "libraries" ]
     },
     {
       "name": "@sentry/browser",
@@ -240,7 +252,7 @@
     },
     {
       "name": "debug",
-      "allowedCategories": [ "webapp" ]
+      "allowedCategories": [ "libraries", "webapp" ]
     },
     {
       "name": "drawflow",
@@ -297,6 +309,14 @@
     {
       "name": "inquirer",
       "allowedCategories": [ "libraries", "tools" ]
+    },
+    {
+      "name": "jest-environment-jsdom",
+      "allowedCategories": [ "libraries" ]
+    },
+    {
+      "name": "jest-environment-node",
+      "allowedCategories": [ "libraries" ]
     },
     {
       "name": "json5",

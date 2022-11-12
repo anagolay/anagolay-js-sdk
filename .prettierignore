@@ -83,6 +83,7 @@ temp
 common/changes/
 common/scripts/
 common/config/
+common/autoinstallers/
 CHANGELOG.*
 
 # Package manager files
@@ -100,3 +101,11 @@ lib-
 *.md
 
 .pnpm-store
+
+binaries/
+tsconfig.tsbuildinfo
+**/.svelte-kit/
+build/
+lib-*/
+lib/
+old-stuff/

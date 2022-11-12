@@ -27,7 +27,7 @@ export function connectToWebsocketRelay(url: string, options?: SocketOptions): S
     reconnection: true,
     transports: ['websocket'],
     secure: true,
-    ...options,
+    ...options
   });
   return socket;
 }

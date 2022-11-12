@@ -33,8 +33,7 @@
     "@polkadot/util-crypto": "10.1.11",
     "@polkadot/keyring": "10.1.11",
     // these follow same versioning
-    
-    
+
     // these follow same versioning
     "@polkadot/api": "9.6.1",
     "@polkadot/types": "9.6.1",
@@ -44,10 +43,10 @@
     "@polkadot/rpc-core": "9.6.1",
     "@polkadot/typegen": "9.6.1",
     // these follow same versioning
-    
+
     // extension
     "@polkadot/extension-inject": "0.44.5",
-    "@polkadot/extension-dapp": "0.44.5",
+    "@polkadot/extension-dapp": "0.44.5"
   },
 
   /**

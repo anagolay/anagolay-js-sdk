@@ -8,7 +8,6 @@ import { getCachedApi } from '../../connection';
 import { convertModel } from '../../utils/convert';
 import createEventEmitter, { ICustomEventEmitter } from '../../utils/customEvents';
 import networkCallback from '../../utils/networkCallback';
-import { EVENT_NAME_SINGLE } from './config';
 import { IOperationWithVersions } from './interfaces';
 
 /**
@@ -37,13 +36,13 @@ export async function save(
   versionData: OperationVersionData,
   signer: AddressOrPair,
   options: Partial<SignerOptions> = {}
-): Promise<ICustomEventEmitter> {
-  const broadcast = createEventEmitter();
+): Promise<ICustomEventEmitter<unknown>> {
+  const broadcast = createEventEmitter<unknown>();
 
   // @TODO if we need nonce in the future, this doesn't work
   // const nonce = await api.rpc.system.accountNextIndex(signer.address)
   await createSubmittableExtrinsic(operationData, versionData).signAndSend(signer, options, (params) =>
-    networkCallback(params, broadcast, EVENT_NAME_SINGLE)
+    networkCallback(params, broadcast)
   );
 
   // return the event emitter
@@ -91,7 +90,7 @@ export async function retrieveOperationsPaged(
     const versionsFromChain = await api.rpc.operations.getOperationVersionsByIds(versionIds, 0, totalVers);
     return {
       operation: convertModel(op),
-      versions: map(convertModel)(versionsFromChain),
+      versions: map(convertModel)(versionsFromChain)
     } as IOperationWithVersions;
   })(operationsRaw);
   return await Promise.all(t);

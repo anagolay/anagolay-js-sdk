@@ -1,7 +1,7 @@
 <script lang="ts">
-import { formatNumber } from '@polkadot/util';
+  import { formatNumber } from '@polkadot/util';
 
-export let digits: number;
+  export let digits: number;
 </script>
 
 <span class="">

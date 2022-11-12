@@ -59,9 +59,9 @@ export async function callPublishService<T, U extends ISuccessfulResponse<T>>(
           headers: {
             'x-api-key': apiKey,
             'User-Agent': `Anagolay CLI v${7}`,
-            'Content-Type': 'application/json',
+            'Content-Type': 'application/json'
           },
-          httpAgent,
+          httpAgent
         }
       );
 
@@ -74,13 +74,13 @@ export async function callPublishService<T, U extends ISuccessfulResponse<T>>(
               headers: {
                 'x-api-key': apiKey,
                 'User-Agent': `Anagolay CLI v${7}`,
-                'Content-Type': 'application/json',
+                'Content-Type': 'application/json'
               },
-              httpAgent,
+              httpAgent
             });
 
             const {
-              data: { done: jobDone, version: responseData },
+              data: { done: jobDone, version: responseData }
             } = response;
 
             if (jobDone) {
@@ -149,7 +149,7 @@ async function getPublishApiInfo(log: Logger): Promise<{ apiKey: string; baseUrl
     POSTMAN_MOCK_API_KEY,
     ANAGOLAY_PUBLISH_SERVICE_API_KEY,
     POSTMAN_MOCK_API_URL,
-    ENABLE_API_KEY_SUPPORT,
+    ENABLE_API_KEY_SUPPORT
   } = process.env;
 
   let apiKey: string = '';
@@ -190,6 +190,6 @@ async function getPublishApiInfo(log: Logger): Promise<{ apiKey: string; baseUrl
 
   return {
     apiKey,
-    baseUrl,
+    baseUrl
   };
 }

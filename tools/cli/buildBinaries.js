@@ -10,7 +10,7 @@ async function main() {
     '--target',
     'node18-linux-x64',
     '--output',
-    resolve(__dirname, './binaries/anagolay-node18-linux-x64'),
+    resolve(__dirname, './binaries/anagolay-node18-linux-x64')
   ]);
   console.log(`Binary is here %s`, resolve(__dirname, './binaries/anagolay-node18-linux-x64'));
   console.log(`🎉 done`);
@@ -21,7 +21,7 @@ async function main() {
     '--target',
     'node16-linux-x64',
     '--output',
-    resolve(__dirname, './binaries/anagolay-node16-linux-x64'),
+    resolve(__dirname, './binaries/anagolay-node16-linux-x64')
   ]);
 
   console.log(`Binary is here %s`, resolve(__dirname, './binaries/anagolay-node16-linux-x64'));

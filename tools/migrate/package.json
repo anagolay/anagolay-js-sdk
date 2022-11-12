@@ -4,7 +4,7 @@
   "description": "",
   "keywords": [],
   "license": "GPL3",
-  "author": "did:substrate:GHm6gp6khjcxQvnbnSsHdYejsFK1nNVxcGyGAsbDfsymtLr",
+  "author": "did:substrate:5Fn9SNUE8LihCm7Lq5dpPgBebGy5D7ZKWESDsWbdjsfV37d4",
   "type": "module",
   "scripts": {
     "build": "exit 0;",

@@ -1,4 +1,7 @@
 node_modules
 lib
+lib-*
 coverage
 assets
+*.cjs
+dist

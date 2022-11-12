@@ -3,19 +3,8 @@
  * THE POLKADOT API TYPES ARE IN THE definitions.ts file
  */
 
-import {
-  AnAccountId,
-  AnBlockNumber,
-  AnCharacters,
-  AnCreatorId,
-  AnForWhat,
-} from '../anagolaySupport/interfaces';
+import { AnAccountId, AnBlockNumber, AnCreatorId, AnForWhat } from '../anagolaySupport/interfaces';
 import { AnWorkflowId } from '../workflows/interfaces';
-
-export interface AnProofParams {
-  k: AnCharacters;
-  v: string;
-}
 
 export type AnProofId = string;
 
@@ -29,7 +18,7 @@ export interface AnProofData {
   prevId: AnWorkflowId;
   creator: AnCreatorId;
   groups: AnForWhat[];
-  params: AnProofParams[];
+  params: string[];
 }
 
 export interface AnProofExtra {}

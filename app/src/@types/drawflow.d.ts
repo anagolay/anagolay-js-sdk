@@ -1,3 +1,4 @@
+/* eslint-disable no-dupe-class-members */
 declare module 'drawflow' {
   // Type definitions for drawflow 0.0
   // Project: https://github.com/jerosoler/Drawflow

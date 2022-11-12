@@ -13,15 +13,15 @@ export async function chooseAccount(): Promise<IAccountToUse> {
         {
           key: 'withAlice',
           value: 'alice',
-          name: 'Use Alice',
+          name: 'Use Alice'
         },
         {
           key: 'withPersonal',
           value: 'personal',
-          name: 'Use my personal account',
-        },
-      ],
-    },
+          name: 'Use my personal account'
+        }
+      ]
+    }
   ]);
   return answers;
 }

@@ -9,11 +9,11 @@ describe('Hex module test', () => {
     const res = hexToString(prefixedHexString);
     expect(res).toEqual('woss');
   });
-  it('correctly return and decode not prefixed hex string', () => {
+  it('should correctly return and decode not prefixed hex string', () => {
     const res = hexToString(baseHexString);
     expect(res).toEqual('woss');
   });
-  it('correctly return empty hex 0x', () => {
+  it('should correctly return empty hex 0x', () => {
     const res = hexToString('0x');
     expect(res).toEqual('');
   });

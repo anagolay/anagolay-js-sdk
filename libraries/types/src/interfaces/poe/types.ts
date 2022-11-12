@@ -25,7 +25,7 @@ export interface ProofData extends Struct {
   readonly prevId: WorkflowId;
   readonly creator: CreatorId;
   readonly groups: Vec<ForWhat>;
-  readonly params: Vec<ProofParams>;
+  readonly params: Vec<Characters>;
 }
 
 /** @name ProofExtra */
@@ -33,12 +33,6 @@ export interface ProofExtra extends Struct {}
 
 /** @name ProofId */
 export interface ProofId extends Struct {}
-
-/** @name ProofParams */
-export interface ProofParams extends Struct {
-  readonly k: Characters;
-  readonly v: Bytes;
-}
 
 /** @name ProofRecord */
 export interface ProofRecord extends Struct {

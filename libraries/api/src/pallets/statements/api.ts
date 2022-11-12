@@ -1,12 +1,12 @@
 import '@anagolay/types/augment-api';
 
-import { AnStatementData } from '@anagolay/types';
+import { AnStatement, AnStatementData } from '@anagolay/types';
 import { AddressOrPair, SignerOptions, SubmittableExtrinsic } from '@polkadot/api/types';
+import { equals } from 'ramda';
 
 import { getCachedApi } from '../../connection';
 import createEventEmitter, { ICustomEventEmitter } from '../../utils/customEvents';
 import networkCallback from '../../utils/networkCallback';
-import { EVENT_NAME_SINGLE } from './config';
 
 /**
  * Save a single poe to the chain. You need to provide the data, the ID is calculated before saving.
@@ -34,13 +34,12 @@ export async function saveOwnership(
   d: AnStatementData,
   signer: AddressOrPair,
   options: Partial<SignerOptions> = {}
-): Promise<ICustomEventEmitter> {
-  const broadcast = createEventEmitter();
-
+): Promise<ICustomEventEmitter<AnStatement>> {
+  const broadcast = createEventEmitter<AnStatement>();
   // @TODO if we need nonce in the future, this doesn't work
   // const nonce = await api.rpc.system.accountNextIndex(signer.address)
   await createSubmittableExtrinsicOfOwnership(d).signAndSend(signer, options, (params) =>
-    networkCallback(params, broadcast, EVENT_NAME_SINGLE)
+    networkCallback(params, broadcast)
   );
 
   // return the event emitter
@@ -77,4 +76,25 @@ export function createSubmittableExtrinsicOfOwnership(d: AnStatementData): Submi
   const api = getCachedApi();
 
   return api.tx.statements.createOwnership(d);
+}
+
+/**
+ * Listen to pallets events
+ * @param eventName - one of the  `'OwnershipCreated' | 'CopyrightCreated' | 'StatementRevoked'`
+ * @returns EventEmitter  {@link ICustomEventEmitter} that returns {@link AnStatement}
+ */
+export function listenForEvent(
+  eventName: 'OwnershipCreated' | 'CopyrightCreated' | 'StatementRevoked'
+): ICustomEventEmitter<AnStatement> {
+  const broadcast = createEventEmitter<AnStatement>();
+  const api = getCachedApi();
+  api.query.system.events((r) => {
+    r.forEach(({ event }) => {
+      const { data, method } = event;
+      if (equals(method, eventName)) {
+        broadcast.emit(eventName, { data: data[1].toHuman() as unknown as AnStatement });
+      }
+    });
+  });
+  return broadcast;
 }

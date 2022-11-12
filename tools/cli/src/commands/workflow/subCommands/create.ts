@@ -97,7 +97,7 @@ async function create(): Promise<void> {
 
   const payloadData = {
     context: 'workflow',
-    payload,
+    payload
   };
 
   const publishResponse = await callPublishService<AnWorkflowArtifactStructure, IWorkflowVersionSchema>(
@@ -108,7 +108,7 @@ async function create(): Promise<void> {
   const versionData: AnWorkflowVersionData = {
     entityId: undefined,
     parentId: undefined,
-    artifacts: publishResponse.artifacts.items,
+    artifacts: publishResponse.artifacts.items
   };
 
   const extrinsics = await submitTheExtrinsicCall(chain, account, workflowBuild.manifestData, versionData);

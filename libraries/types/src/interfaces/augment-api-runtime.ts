@@ -9,13 +9,13 @@ import type {
   Operation,
   OperationId,
   OperationVersion,
-  OperationVersionId,
+  OperationVersionId
 } from '@anagolay/types/interfaces/operations';
 import type {
   Workflow,
   WorkflowId,
   WorkflowVersion,
-  WorkflowVersionId,
+  WorkflowVersionId
 } from '@anagolay/types/interfaces/workflows';
 import type { ApiTypes, AugmentedCall, DecoratedCallBase } from '@polkadot/api-base/types';
 import type { Bytes, Null, Option, Vec, u16, u32, u64 } from '@polkadot/types-codec';
@@ -35,7 +35,7 @@ import type {
   Header,
   Index,
   KeyTypeId,
-  SlotDuration,
+  SlotDuration
 } from '@polkadot/types/interfaces/runtime';
 import type { RuntimeVersion } from '@polkadot/types/interfaces/state';
 import type { ApplyExtrinsicResult } from '@polkadot/types/interfaces/system';

@@ -6,7 +6,6 @@ import { AddressOrPair, SignerOptions, SubmittableExtrinsic } from '@polkadot/ap
 import { getCachedApi } from '../../connection';
 import createEventEmitter, { ICustomEventEmitter } from '../../utils/customEvents';
 import networkCallback from '../../utils/networkCallback';
-import { EVENT_NAME_SINGLE } from './config';
 
 /**
  * Save a single poe to the chain. You need to provide the data, the ID is calculated before saving.
@@ -34,13 +33,13 @@ export async function save(
   d: AnProofData,
   signer: AddressOrPair,
   options: Partial<SignerOptions> = {}
-): Promise<ICustomEventEmitter> {
-  const broadcast = createEventEmitter();
+): Promise<ICustomEventEmitter<unknown>> {
+  const broadcast = createEventEmitter<unknown>();
 
   // @TODO if we need nonce in the future, this doesn't work
   // const nonce = await api.rpc.system.accountNextIndex(signer.address)
   await createSubmittableExtrinsic(d).signAndSend(signer, options, (params) =>
-    networkCallback(params, broadcast, EVENT_NAME_SINGLE)
+    networkCallback(params, broadcast)
   );
 
   // return the event emitter

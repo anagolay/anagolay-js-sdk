@@ -1,17 +1,17 @@
 {
-  "extends": "./node_modules/@rushstack/heft-node-rig/profiles/default/tsconfig-base.json",
+  "extends": "./node_modules/@kelp_digital/heft-library-rig/profiles/without-extractor/tsconfig-base.json",
   "compilerOptions": {
     "types": ["heft-jest", "node"],
     "baseUrl": ".",
     "paths": {
       "@anagolay/types/augment-api": ["../libraries/types/lib/augment-api"]
     },
-    "lib": ["esnext", "scripthost", "dom", "WebWorker"],
+    // "lib": ["esnext", "scripthost", "dom", "WebWorker"],
     // "moduleResolution": "Node16",
     "moduleResolution": "node",
     "skipLibCheck": true,
     "noUnusedLocals": false,
-    "composite": true,
-    "module": "ESNext"
+    "composite": true
+    // "module": "ESNext"
   }
 }

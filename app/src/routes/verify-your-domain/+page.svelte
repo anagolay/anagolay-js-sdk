@@ -1,25 +1,40 @@
 <script context="module">
-export const prerender = true;
+  export const prerender = true;
 </script>
 
 <script lang="ts">
-import Accounts from './steps/Accounts.svelte';
-import Steps from './steps/Steps.svelte';
-import AddDomain from './steps/AddDomain.svelte';
-import ChooseMethod from './steps/ChooseMethod.svelte';
-import SignandSave from './steps/SignAndSave.svelte';
-import { steps } from './store';
-import Done from './steps/Done.svelte';
-import SvelteSeo from 'svelte-seo';
-import { pageTitle } from '$src/appStore';
+  import { onMount } from 'svelte';
+  import SvelteSeo from 'svelte-seo';
 
-const title: string = 'Verify your domain';
+  import { browser } from '$app/environment';
+  import { pageTitle } from '$src/appStore';
 
-pageTitle.set(title);
+  import Accounts from './steps/Accounts.svelte';
+  import AddDomain from './steps/AddDomain.svelte';
+  import ChooseMethod from './steps/ChooseMethod.svelte';
+  import Done from './steps/Done.svelte';
+  import SignandSave from './steps/SignAndSave.svelte';
+  import Steps from './steps/Steps.svelte';
+  import { mainStore, steps } from './store';
+
+  const title: string = 'Verify your domain';
+
+  // showSidebar.set(false);
+  pageTitle.set(title);
+
+  onMount(() => {
+    return mainStore.reset;
+  });
+
+  $: {
+    if (browser) {
+      window.localStorage.setItem('verificationStore', JSON.stringify($mainStore));
+    }
+  }
 </script>
 
 <SvelteSeo
-  title="{title}"
+  {title}
   description="A must have proof for all content creators and people who build their personal brand with their personal website."
 />
 

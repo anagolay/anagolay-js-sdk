@@ -7,16 +7,19 @@
     ".devops/ci/*.gitlab-ci.yml": "yaml",
     ".tmux.conf.local": "properties"
   },
+  "terminal.integrated.defaultProfile.linux": "zsh",
   "editor.codeActionsOnSave": {
     "source.fixAll": true
   },
   "workbench.sideBar.location": "right",
-  "eslint.format.enable": true,
   "editor.wordWrap": "bounded",
   "editor.wordWrapColumn": 110,
   "editor.rulers": [110],
   "editor.formatOnSave": true,
   "editor.formatOnPaste": false,
+  "[svelte]": {
+    "editor.defaultFormatter": "svelte.svelte-vscode"
+  },
   "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.wordWrap": "off"
@@ -66,11 +69,14 @@
     "app/build": true
   },
   "eslint.enable": true,
-  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
+  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact", "svelte"],
+  "eslint.alwaysShowStatus": true,
+  "eslint.format.enable": true,
   "eslint.packageManager": "pnpm",
+  "eslint.useESLintClass": true,
+
   "terminal.integrated.lineHeight": 1.2,
   "terminal.integrated.letterSpacing": 1,
-  "eslint.alwaysShowStatus": true,
   "eslint.lintTask.enable": true,
   "eslint.probe": [
     "javascript",
@@ -82,7 +88,6 @@
     "markdown",
     "svelte"
   ],
-  "eslint.useESLintClass": true,
   "workbench.colorCustomizations": {
     "titleBar.activeBackground": "#3659c2"
   },
@@ -92,6 +97,7 @@
   "zenMode.fullScreen": false,
   "git.autofetch": true,
   "scm.defaultViewMode": "tree"
+  // "typescript.tsserver.log": "normal"
   // "javascript.preferences.importModuleSpecifierEnding": "js",
   // "typescript.preferences.importModuleSpecifierEnding": "js"
 }

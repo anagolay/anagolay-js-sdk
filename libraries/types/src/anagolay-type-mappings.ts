@@ -1,19 +1,13 @@
 import ImageMetadataTags from './imageMetadata';
 import { AnClaim, AnStatement, AnStatementId } from './interfaces/statements/interfaces';
-import { AnProofId, AnProofParams } from './types';
+import { AnProofId } from './types';
 
 export interface SaveStatementReturn {
   statement_id: AnStatementId;
   poe_id: AnProofId;
 }
 
-export type output =
-  | 'AnByteArray'
-  | 'AnProofParams[]'
-  | 'AnBoolean'
-  | 'AnString'
-  | 'AnAny'
-  | 'StringOrBuffer';
+export type output = 'AnByteArray' | 'AnBoolean' | 'AnString' | 'AnAny' | 'StringOrBuffer';
 
 export type outputDecoded =
   | 'AnBuffer'
@@ -21,8 +15,6 @@ export type outputDecoded =
   | 'AnFileBuffer'
   | 'AnStatement'
   | 'AnStatements'
-  | 'AnProofParams'
-  | 'AnProofParams[]'
   | 'AnString'
   | 'AnAny'
   | 'AnImageMetadata'
@@ -39,7 +31,7 @@ export type outputDecoded =
   | 'StringOrBuffer'
   | 'SaveStatementReturn[]';
 
-export type outputImplementation = AnByteArray | AnBoolean | AnProofParams[] | AnString;
+export type outputImplementation = AnByteArray | AnBoolean | AnString;
 
 /**
  * ATM workaround for the potential OR incoming params
@@ -52,7 +44,6 @@ export type outputDecodedImplementation =
   | AnFileBuffer
   | AnStatement
   | AnStatements
-  | AnProofParams
   | AnBoolean
   | AnString
   | AnAny

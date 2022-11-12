@@ -1,51 +1,53 @@
 <script lang="ts">
-import { bestBlock, chainConnected, chainStore, connectedChainName } from '$src/appStore';
-import MaterialIcon from '$src/components/base/MaterialIcon.svelte';
-import type { UnsubscribePromise } from '@polkadot/api/types';
-import { onMount } from 'svelte';
+  import type { UnsubscribePromise } from '@polkadot/api/types';
+  import { onMount } from 'svelte';
 
-let unsub: UnsubscribePromise;
+  import { bestBlock, chainConnected, chainStore, connectedChainName } from '$src/appStore';
+  import MaterialIcon from '$src/components/base/MaterialIcon.svelte';
 
-let specName: string = '';
-let specVersion: string = '100';
-let implVersion: number = 0;
+  let unsub: UnsubscribePromise;
 
-let addressPrefix: string = '42';
-let decimals: string = '12';
-let unit: string = 'IDI';
+  let specName: string = '';
+  let specVersion: string = '100';
+  let implVersion: number = 0;
 
-async function handleChainUpdate() {
-  const { api } = $chainStore;
+  let addressPrefix: string = '42';
+  let decimals: string = '12';
+  let unit: string = 'IDI';
 
-  unsub = api.rpc.state.subscribeRuntimeVersion((r) => {
-    unit = r.registry.chainTokens.toString();
-    addressPrefix = r.registry.chainSS58.toString();
-    decimals = r.registry.chainDecimals.toString();
-    specName = r.specName.toString();
-    specVersion = r.specVersion.toString();
-    implVersion = r.implVersion.toNumber();
-  });
-}
+  async function handleChainUpdate() {
+    const { api } = $chainStore;
 
-let badgeStatusClass: string = 'animate-pulse badge-info';
-
-onMount(() => {
-  return unsub;
-});
-
-$: {
-  if ($chainConnected) {
-    badgeStatusClass = 'badge-success';
-    handleChainUpdate();
+    unsub = api.rpc.state.subscribeRuntimeVersion((r) => {
+      unit = r.registry.chainTokens.toString();
+      addressPrefix = r.registry.chainSS58.toString();
+      decimals = r.registry.chainDecimals.toString();
+      specName = r.specName.toString();
+      specVersion = r.specVersion.toString();
+      implVersion = r.implVersion.toNumber();
+    });
   }
-}
+
+  let badgeStatusClass: string = 'animate-pulse badge-info';
+
+  onMount(() => {
+    return unsub;
+  });
+
+  $: {
+    if ($chainConnected) {
+      badgeStatusClass = 'badge-success';
+      handleChainUpdate();
+    }
+  }
 </script>
 
+<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
 <div tabindex="0" class="collapse collapse-arrow border border-base-300 bg-base-100 rounded-box w-full">
   <input type="checkbox" class="networkInfo" />
 
   <div class="collapse-title flex items-center gap-2 networkInfo-checked">
-    <div class="badge {badgeStatusClass}"></div>
+    <div class="badge {badgeStatusClass}" />
     <div class="font-medium text">{$connectedChainName} #{$bestBlock}</div>
   </div>
   <div class="collapse-content">
@@ -73,7 +75,8 @@ $: {
         </div>
         <div class="flex flex-row justify-between items-center p-1">
           <span>Check on PolkadotJS:</span>
-          <a href="{chainStore.makePolkadotJsAppUrl().toString()}" target="_blank" class="text-sm"
+          <!-- svelte-ignore security-anchor-rel-noreferrer -->
+          <a href={chainStore.makePolkadotJsAppUrl().toString()} target="_blank" class="text-sm"
             ><MaterialIcon iconName="link" /></a
           >
         </div>

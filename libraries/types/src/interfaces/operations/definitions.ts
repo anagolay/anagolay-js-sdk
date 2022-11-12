@@ -3,7 +3,7 @@ import {
   DefinitionRpcSub,
   Definitions,
   DefinitionsCall,
-  RegistryTypes,
+  RegistryTypes
 } from '@polkadot/types/types';
 
 const OperationsCustomTypes: RegistryTypes = {
@@ -32,46 +32,46 @@ const OperationsCustomTypes: RegistryTypes = {
     ///   operation is instantiated
     /// - `std` declares support for nostd as default and possibility to work with std. If this
     ///   feature is missing, the operation is intended to be working **only** in std
-    features: 'BoundedVec<Characters, Get<u32>>',
+    features: 'BoundedVec<Characters, Get<u32>>'
   },
   OperationExtra: {},
   Operation: {
     id: 'OperationId',
     data: 'OperationData',
-    extra: 'Option<OperationExtra>',
+    extra: 'Option<OperationExtra>'
   },
   OperationRecord: {
     record: 'Operation',
     accountId: 'AccountId',
-    blockNumber: 'BlockNumber',
+    blockNumber: 'BlockNumber'
   },
   OperationArtifactType: {
     _enum: {
       Docs: null,
       Git: null,
-      Wasm: 'WasmArtifactSubType',
-    },
+      Wasm: 'WasmArtifactSubType'
+    }
   },
   OperationVersion: {
     id: 'OperationVersionId',
     data: 'OperationVersionData',
-    extra: 'Option<AnagolayVersionExtra>',
+    extra: 'Option<AnagolayVersionExtra>'
   },
   OperationArtifactStructure: {
     artifactType: 'OperationArtifactType',
     fileExtension: 'Characters',
-    ipfsCid: 'ArtifactId',
+    ipfsCid: 'ArtifactId'
   },
   OperationVersionData: {
     entityId: 'Option<OperationId>',
     parentId: 'Option<OperationVersionId>',
-    artifacts: 'BoundedVec<OperationArtifactStructure, Get<u32>>',
+    artifacts: 'BoundedVec<OperationArtifactStructure, Get<u32>>'
   },
   OperationVersionRecord: {
     record: 'OperationVersion',
     accountId: 'AccountId',
-    blockNumber: 'BlockNumber',
-  },
+    blockNumber: 'BlockNumber'
+  }
 };
 
 const rpc: Record<string, DefinitionRpc | DefinitionRpcSub> = {
@@ -81,23 +81,23 @@ const rpc: Record<string, DefinitionRpc | DefinitionRpcSub> = {
     params: [
       {
         name: 'operation_ids',
-        type: 'Vec<OperationId>',
+        type: 'Vec<OperationId>'
       },
       {
         name: 'offset',
-        type: 'u64',
+        type: 'u64'
       },
       {
         name: 'limit',
-        type: 'u16',
+        type: 'u16'
       },
       {
         name: 'at',
         type: 'Hash',
-        isOptional: true,
-      },
+        isOptional: true
+      }
     ],
-    type: 'Vec<Operation>',
+    type: 'Vec<Operation>'
   },
   getOperationVersionsByIds: {
     description:
@@ -105,37 +105,37 @@ const rpc: Record<string, DefinitionRpc | DefinitionRpcSub> = {
     params: [
       {
         name: 'operation_version_ids',
-        type: 'Vec<OperationVersionId>',
+        type: 'Vec<OperationVersionId>'
       },
       {
         name: 'offset',
-        type: 'u64',
+        type: 'u64'
       },
       {
         name: 'limit',
-        type: 'u16',
+        type: 'u16'
       },
       {
         name: 'at',
         type: 'Hash',
-        isOptional: true,
-      },
+        isOptional: true
+      }
     ],
-    type: 'Vec<OperationVersion>',
-  },
+    type: 'Vec<OperationVersion>'
+  }
 };
 
 const runtime: DefinitionsCall = {
   OperationsApi: [
     {
       methods: rpc,
-      version: 1,
-    },
-  ],
+      version: 1
+    }
+  ]
 };
 
 export default {
   types: OperationsCustomTypes,
   runtime,
-  rpc,
+  rpc
 } as Definitions;

@@ -6,16 +6,12 @@
       "module": "commonjs"
     }
   },
-  "extends": "./node_modules/@rushstack/heft-web-rig/profiles/library/tsconfig-base.json",
+  "extends": "./node_modules/@kelp_digital/heft-library-rig/profiles/without-extractor/tsconfig-base.json",
   "compilerOptions": {
-    "composite": true,
     "types": ["heft-jest", "node"],
+    "baseUrl": ".",
     "paths": {
       "@anagolay/types/interfaces/*": ["./src/interfaces/*"]
-    },
-    // "moduleResolution": "NodeNext",
-    "target": "esnext",
-    "lib": ["esnext", "scripthost", "dom", "WebWorker"],
-    "skipLibCheck": true
+    }
   }
 }

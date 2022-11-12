@@ -3,7 +3,8 @@ tasks:
   - name: prep-env
     init: |
       nix-env -f '<nixpkgs>' -iA nix-direnv nixpkgs-fmt
-      node $GITPOD_REPO_ROOT/common/scripts/install-run-rush.js update
+      brew install romkatv/powerlevel10k/powerlevel10k neovim
+      node $GITPOD_REPO_ROOT/common/scripts/install-run-rush.js install
       node $GITPOD_REPO_ROOT/common/scripts/install-run-rush.js build
       exit
   - name: Start stuff
@@ -13,7 +14,15 @@ ports:
   - port: 7766
     visibility: public
     onOpen: ignore
-# onOpen: open-preview
+  - port: 9944
+    visibility: public
+    onOpen: ignore
+  - port: 9933
+    visibility: public
+    onOpen: ignore
+  - port: 30333
+    visibility: public
+    onOpen: ignore
 
 vscode:
   extensions:

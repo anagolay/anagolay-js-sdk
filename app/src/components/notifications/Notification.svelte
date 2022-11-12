@@ -1,22 +1,21 @@
 <script lang="ts">
-import MaterialIcon from '$src/components/base/MaterialIcon.svelte';
-import type { INotification } from './stores';
-import { fade } from 'svelte/transition';
-import CircleSpinner from '../base/Spinners/Circle.svelte';
+  import { fade } from 'svelte/transition';
 
-let classNames: string = '';
-export { classNames as class };
+  import MaterialIcon from '$src/components/base/MaterialIcon.svelte';
 
-export let infoLevel: 'info' | 'success' | 'warning' | 'error' | '' = '';
+  import CircleSpinner from '../base/Spinners/Circle.svelte';
+  import type { INotification } from './store';
 
-export let data: INotification;
+  let classNames: string = '';
+  export { classNames as class };
 
-let disableButton: boolean = false;
+  export let infoLevel: 'info' | 'success' | 'warning' | 'error' | '' = '';
 
-let notificationsCss: string;
+  export let data: INotification;
 
-$: notificationsCss = infoLevel !== '' ? `alert-${infoLevel}` : '';
-$: disableButton = data.showSpinner;
+  let notificationsCss: string;
+
+  $: notificationsCss = infoLevel !== '' ? `alert-${infoLevel}` : '';
 </script>
 
 {#if infoLevel === ''}
@@ -28,7 +27,7 @@ $: disableButton = data.showSpinner;
       <span>{data.text}</span>
     </div>
     {#if !data.showSpinner}
-      <button on:click="{data.closeFn}">
+      <button on:click={data.closeFn}>
         <MaterialIcon iconName="cancel" />
       </button>
     {/if}
@@ -42,7 +41,7 @@ $: disableButton = data.showSpinner;
       <span>{data.text}</span>
     </div>
     {#if !data.showSpinner}
-      <button on:click="{data.closeFn}">
+      <button on:click={data.closeFn}>
         <MaterialIcon iconName="cancel" />
       </button>
     {/if}
@@ -56,7 +55,7 @@ $: disableButton = data.showSpinner;
       <span>{data.text}</span>
     </div>
     {#if !data.showSpinner}
-      <button on:click="{data.closeFn}">
+      <button on:click={data.closeFn}>
         <MaterialIcon iconName="cancel" />
       </button>
     {/if}
@@ -73,7 +72,7 @@ $: disableButton = data.showSpinner;
       <span>{data.text}</span>
     </div>
     {#if !data.showSpinner}
-      <button on:click="{data.closeFn}">
+      <button on:click={data.closeFn}>
         <MaterialIcon iconName="cancel" />
       </button>
     {/if}
@@ -90,7 +89,7 @@ $: disableButton = data.showSpinner;
       <span>{data.text}</span>
     </div>
     {#if !data.showSpinner}
-      <button on:click="{data.closeFn}">
+      <button on:click={data.closeFn}>
         <MaterialIcon iconName="cancel" />
       </button>
     {/if}
