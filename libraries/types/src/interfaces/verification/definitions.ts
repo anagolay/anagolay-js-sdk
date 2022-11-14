@@ -11,6 +11,7 @@ export const VerificationCustomTypes: DefinitionsTypes = {
   },
   VerificationContext: {
     _enum: {
+      Unbounded: null,
       UrlForDomain: '(Bytes, Bytes)',
       UrlForDomainWithUsername: '(Bytes, Bytes, Bytes)',
       UrlForDomainWithSubdomain: '(Bytes, Bytes, Bytes)',

@@ -4,6 +4,7 @@
  */
 
 import { AnAccountId, AnBlockNumber, AnCreatorId, AnForWhat } from '../anagolaySupport/interfaces';
+import { AnVerificationContext } from '../verification/interfaces';
 import { AnWorkflowId } from '../workflows/interfaces';
 
 export type AnProofId = string;
@@ -19,6 +20,7 @@ export interface AnProofData {
   creator: AnCreatorId;
   groups: AnForWhat[];
   params: string[];
+  context: AnVerificationContext;
 }
 
 export interface AnProofExtra {}

@@ -191,6 +191,10 @@ declare module '@polkadot/api-base/types/errors' {
        **/
       InvalidSignature: AugmentedError<ApiType>;
       /**
+       * Verification context is not valid
+       **/
+      InvalidVerificationContext: AugmentedError<ApiType>;
+      /**
        * Insertion of Statement failed since MaxStatementsPerProof limit is reached
        **/
       MaxStatementsPerProofLimitReached: AugmentedError<ApiType>;

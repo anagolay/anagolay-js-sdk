@@ -677,6 +677,7 @@ declare module '@polkadot/types/lookup' {
 
   /** @name VerificationVerificationContext (66) */
   interface VerificationVerificationContext extends Enum {
+    readonly isUnbounded: boolean;
     readonly isUrlForDomain: boolean;
     readonly asUrlForDomain: ITuple<[Bytes, Bytes]>;
     readonly isUrlForDomainWithUsername: boolean;
@@ -686,6 +687,7 @@ declare module '@polkadot/types/lookup' {
     readonly isUrlForDomainWithUsernameAndRepository: boolean;
     readonly asUrlForDomainWithUsernameAndRepository: ITuple<[Bytes, Bytes, Bytes, Bytes]>;
     readonly type:
+      | 'Unbounded'
       | 'UrlForDomain'
       | 'UrlForDomainWithUsername'
       | 'UrlForDomainWithSubdomain'
@@ -1449,7 +1451,7 @@ declare module '@polkadot/types/lookup' {
     readonly name: Bytes;
     readonly description: Bytes;
     readonly inputs: Vec<Bytes>;
-    readonly config: AnagolaySupportMapsSerializableMaybeSerializableBoundedBTreeMapBoundedVec;
+    readonly config: BTreeMap<Bytes, Vec<Bytes>>;
     readonly groups: Vec<AnagolaySupportForWhat>;
     readonly output: Bytes;
     readonly repository: Bytes;
@@ -1457,14 +1459,7 @@ declare module '@polkadot/types/lookup' {
     readonly features: Vec<Bytes>;
   }
 
-  /** @name AnagolaySupportMapsSerializableMaybeSerializableBoundedBTreeMapBoundedVec (157) */
-  interface AnagolaySupportMapsSerializableMaybeSerializableBoundedBTreeMapBoundedVec
-    extends BTreeMap<Bytes, Vec<Bytes>> {}
-
-  /** @name AnagolaySupportConstantsMaxOperationConfigEntriesGet (159) */
-  type AnagolaySupportConstantsMaxOperationConfigEntriesGet = Null;
-
-  /** @name AnagolaySupportForWhat (165) */
+  /** @name AnagolaySupportForWhat (163) */
   interface AnagolaySupportForWhat extends Enum {
     readonly isGeneric: boolean;
     readonly isPhoto: boolean;
@@ -1477,21 +1472,21 @@ declare module '@polkadot/types/lookup' {
     readonly type: 'Generic' | 'Photo' | 'Camera' | 'Lens' | 'Smartphone' | 'User' | 'Sys' | 'Flowcontrol';
   }
 
-  /** @name OperationsOperationVersionData (168) */
+  /** @name OperationsOperationVersionData (166) */
   interface OperationsOperationVersionData extends Struct {
     readonly entityId: Option<Bytes>;
     readonly parentId: Option<Bytes>;
     readonly artifacts: Vec<AnagolaySupportAnagolayArtifactStructureOperationArtifactType>;
   }
 
-  /** @name AnagolaySupportAnagolayArtifactStructureOperationArtifactType (173) */
+  /** @name AnagolaySupportAnagolayArtifactStructureOperationArtifactType (171) */
   interface AnagolaySupportAnagolayArtifactStructureOperationArtifactType extends Struct {
     readonly artifactType: OperationsOperationArtifactType;
     readonly fileExtension: Bytes;
     readonly ipfsCid: Bytes;
   }
 
-  /** @name OperationsOperationArtifactType (174) */
+  /** @name OperationsOperationArtifactType (172) */
   interface OperationsOperationArtifactType extends Enum {
     readonly isDocs: boolean;
     readonly isGit: boolean;
@@ -1500,7 +1495,7 @@ declare module '@polkadot/types/lookup' {
     readonly type: 'Docs' | 'Git' | 'Wasm';
   }
 
-  /** @name AnagolaySupportWasmArtifactSubType (175) */
+  /** @name AnagolaySupportWasmArtifactSubType (173) */
   interface AnagolaySupportWasmArtifactSubType extends Enum {
     readonly isCjs: boolean;
     readonly isEsm: boolean;
@@ -1509,7 +1504,7 @@ declare module '@polkadot/types/lookup' {
     readonly type: 'Cjs' | 'Esm' | 'Wasm' | 'Web';
   }
 
-  /** @name PoeCall (178) */
+  /** @name PoeCall (176) */
   interface PoeCall extends Enum {
     readonly isCreateProof: boolean;
     readonly asCreateProof: {
@@ -1522,22 +1517,23 @@ declare module '@polkadot/types/lookup' {
     readonly type: 'CreateProof' | 'SavePhash';
   }
 
-  /** @name PoeProofData (179) */
+  /** @name PoeProofData (177) */
   interface PoeProofData extends Struct {
     readonly workflowId: Bytes;
     readonly prevId: Bytes;
     readonly creator: Bytes;
     readonly groups: Vec<AnagolaySupportForWhat>;
     readonly params: Vec<Bytes>;
+    readonly context: VerificationVerificationContext;
   }
 
-  /** @name PoePhashInfo (181) */
+  /** @name PoePhashInfo (179) */
   interface PoePhashInfo extends Struct {
     readonly pHash: Bytes;
     readonly proofId: Bytes;
   }
 
-  /** @name StatementsCall (183) */
+  /** @name StatementsCall (181) */
   interface StatementsCall extends Enum {
     readonly isCreateCopyright: boolean;
     readonly asCreateCopyright: {
@@ -1554,26 +1550,26 @@ declare module '@polkadot/types/lookup' {
     readonly type: 'CreateCopyright' | 'CreateOwnership' | 'Revoke';
   }
 
-  /** @name StatementsStatementData (184) */
+  /** @name StatementsStatementData (182) */
   interface StatementsStatementData extends Struct {
     readonly signatures: StatementsSignatures;
     readonly claim: StatementsClaim;
   }
 
-  /** @name StatementsSignatures (185) */
+  /** @name StatementsSignatures (183) */
   interface StatementsSignatures extends Struct {
     readonly holder: StatementsSignature;
     readonly issuer: StatementsSignature;
   }
 
-  /** @name StatementsSignature (186) */
+  /** @name StatementsSignature (184) */
   interface StatementsSignature extends Struct {
     readonly sigKey: Bytes;
     readonly sig: Bytes;
     readonly cid: Bytes;
   }
 
-  /** @name StatementsClaim (189) */
+  /** @name StatementsClaim (187) */
   interface StatementsClaim extends Struct {
     readonly prevId: Option<Bytes>;
     readonly poeId: Bytes;
@@ -1587,33 +1583,33 @@ declare module '@polkadot/types/lookup' {
     readonly onExpiration: Bytes;
   }
 
-  /** @name StatementsProportion (191) */
+  /** @name StatementsProportion (189) */
   interface StatementsProportion extends Struct {
     readonly sign: Bytes;
     readonly name: Bytes;
     readonly value: Bytes;
   }
 
-  /** @name StatementsClaimType (192) */
+  /** @name StatementsClaimType (190) */
   interface StatementsClaimType extends Enum {
     readonly isCopyright: boolean;
     readonly isOwnership: boolean;
     readonly type: 'Copyright' | 'Ownership';
   }
 
-  /** @name StatementsValidity (193) */
+  /** @name StatementsValidity (191) */
   interface StatementsValidity extends Struct {
     readonly from: Bytes;
     readonly until: Bytes;
   }
 
-  /** @name StatementsExpiration (194) */
+  /** @name StatementsExpiration (192) */
   interface StatementsExpiration extends Struct {
     readonly expirationType: StatementsExpirationType;
     readonly value: Bytes;
   }
 
-  /** @name StatementsExpirationType (195) */
+  /** @name StatementsExpirationType (193) */
   interface StatementsExpirationType extends Enum {
     readonly isForever: boolean;
     readonly isYears: boolean;
@@ -1624,7 +1620,7 @@ declare module '@polkadot/types/lookup' {
     readonly type: 'Forever' | 'Years' | 'Months' | 'Days' | 'Minutes' | 'Seconds';
   }
 
-  /** @name WorkflowsCall (196) */
+  /** @name WorkflowsCall (194) */
   interface WorkflowsCall extends Enum {
     readonly isCreate: boolean;
     readonly asCreate: {
@@ -1634,7 +1630,7 @@ declare module '@polkadot/types/lookup' {
     readonly type: 'Create';
   }
 
-  /** @name WorkflowsWorkflowData (197) */
+  /** @name WorkflowsWorkflowData (195) */
   interface WorkflowsWorkflowData extends Struct {
     readonly name: Bytes;
     readonly creators: Vec<Bytes>;
@@ -1643,37 +1639,33 @@ declare module '@polkadot/types/lookup' {
     readonly segments: Vec<WorkflowsWorkflowSegment>;
   }
 
-  /** @name WorkflowsWorkflowSegment (200) */
+  /** @name WorkflowsWorkflowSegment (198) */
   interface WorkflowsWorkflowSegment extends Struct {
     readonly inputs: Vec<i8>;
     readonly sequence: Vec<WorkflowsOperationVersionReference>;
   }
 
-  /** @name WorkflowsOperationVersionReference (205) */
+  /** @name WorkflowsOperationVersionReference (203) */
   interface WorkflowsOperationVersionReference extends Struct {
     readonly versionId: Bytes;
-    readonly config: AnagolaySupportMapsSerializableMaybeSerializableBoundedBTreeMapCharacters;
+    readonly config: BTreeMap<Bytes, Bytes>;
   }
 
-  /** @name AnagolaySupportMapsSerializableMaybeSerializableBoundedBTreeMapCharacters (206) */
-  interface AnagolaySupportMapsSerializableMaybeSerializableBoundedBTreeMapCharacters
-    extends BTreeMap<Bytes, Bytes> {}
-
-  /** @name WorkflowsWorkflowVersionData (213) */
+  /** @name WorkflowsWorkflowVersionData (210) */
   interface WorkflowsWorkflowVersionData extends Struct {
     readonly entityId: Option<Bytes>;
     readonly parentId: Option<Bytes>;
     readonly artifacts: Vec<AnagolaySupportAnagolayArtifactStructureWorkflowArtifactType>;
   }
 
-  /** @name AnagolaySupportAnagolayArtifactStructureWorkflowArtifactType (218) */
+  /** @name AnagolaySupportAnagolayArtifactStructureWorkflowArtifactType (215) */
   interface AnagolaySupportAnagolayArtifactStructureWorkflowArtifactType extends Struct {
     readonly artifactType: WorkflowsWorkflowArtifactType;
     readonly fileExtension: Bytes;
     readonly ipfsCid: Bytes;
   }
 
-  /** @name WorkflowsWorkflowArtifactType (219) */
+  /** @name WorkflowsWorkflowArtifactType (216) */
   interface WorkflowsWorkflowArtifactType extends Enum {
     readonly isDocs: boolean;
     readonly isGit: boolean;
@@ -1682,7 +1674,7 @@ declare module '@polkadot/types/lookup' {
     readonly type: 'Docs' | 'Git' | 'Wasm';
   }
 
-  /** @name VerificationCall (221) */
+  /** @name VerificationCall (218) */
   interface VerificationCall extends Enum {
     readonly isRequestVerification: boolean;
     readonly asRequestVerification: {
@@ -1700,19 +1692,19 @@ declare module '@polkadot/types/lookup' {
     readonly type: 'RequestVerification' | 'PerformVerification' | 'SubmitVerificationStatus';
   }
 
-  /** @name VerificationOffchainVerificationIndexingData (222) */
+  /** @name VerificationOffchainVerificationIndexingData (219) */
   interface VerificationOffchainVerificationIndexingData extends Struct {
     readonly verifier: AccountId32;
     readonly request: VerificationVerificationRequest;
   }
 
-  /** @name PalletSudoError (223) */
+  /** @name PalletSudoError (220) */
   interface PalletSudoError extends Enum {
     readonly isRequireSudo: boolean;
     readonly type: 'RequireSudo';
   }
 
-  /** @name PalletTreasuryProposal (224) */
+  /** @name PalletTreasuryProposal (221) */
   interface PalletTreasuryProposal extends Struct {
     readonly proposer: AccountId32;
     readonly value: u128;
@@ -1720,10 +1712,10 @@ declare module '@polkadot/types/lookup' {
     readonly bond: u128;
   }
 
-  /** @name FrameSupportPalletId (228) */
+  /** @name FrameSupportPalletId (225) */
   interface FrameSupportPalletId extends U8aFixed {}
 
-  /** @name PalletTreasuryError (229) */
+  /** @name PalletTreasuryError (226) */
   interface PalletTreasuryError extends Enum {
     readonly isInsufficientProposersBalance: boolean;
     readonly isInvalidIndex: boolean;
@@ -1738,20 +1730,20 @@ declare module '@polkadot/types/lookup' {
       | 'ProposalNotApproved';
   }
 
-  /** @name PalletUtilityError (230) */
+  /** @name PalletUtilityError (227) */
   interface PalletUtilityError extends Enum {
     readonly isTooManyCalls: boolean;
     readonly type: 'TooManyCalls';
   }
 
-  /** @name PalletVestingReleases (233) */
+  /** @name PalletVestingReleases (230) */
   interface PalletVestingReleases extends Enum {
     readonly isV0: boolean;
     readonly isV1: boolean;
     readonly type: 'V0' | 'V1';
   }
 
-  /** @name PalletVestingError (234) */
+  /** @name PalletVestingError (231) */
   interface PalletVestingError extends Enum {
     readonly isNotVesting: boolean;
     readonly isAtMaxVestingSchedules: boolean;
@@ -1766,7 +1758,7 @@ declare module '@polkadot/types/lookup' {
       | 'InvalidScheduleParams';
   }
 
-  /** @name PalletSchedulerScheduledV3 (237) */
+  /** @name PalletSchedulerScheduledV3 (234) */
   interface PalletSchedulerScheduledV3 extends Struct {
     readonly maybeId: Option<Bytes>;
     readonly priority: u8;
@@ -1775,7 +1767,7 @@ declare module '@polkadot/types/lookup' {
     readonly origin: AnagolayRuntimeOriginCaller;
   }
 
-  /** @name PalletSchedulerError (238) */
+  /** @name PalletSchedulerError (235) */
   interface PalletSchedulerError extends Enum {
     readonly isFailedToSchedule: boolean;
     readonly isNotFound: boolean;
@@ -1784,7 +1776,7 @@ declare module '@polkadot/types/lookup' {
     readonly type: 'FailedToSchedule' | 'NotFound' | 'TargetBlockNumberInPast' | 'RescheduleNoChange';
   }
 
-  /** @name PalletUniquesCollectionDetails (239) */
+  /** @name PalletUniquesCollectionDetails (236) */
   interface PalletUniquesCollectionDetails extends Struct {
     readonly owner: AccountId32;
     readonly issuer: AccountId32;
@@ -1798,7 +1790,7 @@ declare module '@polkadot/types/lookup' {
     readonly isFrozen: bool;
   }
 
-  /** @name PalletUniquesItemDetails (242) */
+  /** @name PalletUniquesItemDetails (239) */
   interface PalletUniquesItemDetails extends Struct {
     readonly owner: AccountId32;
     readonly approved: Option<AccountId32>;
@@ -1806,21 +1798,21 @@ declare module '@polkadot/types/lookup' {
     readonly deposit: u128;
   }
 
-  /** @name PalletUniquesCollectionMetadata (243) */
+  /** @name PalletUniquesCollectionMetadata (240) */
   interface PalletUniquesCollectionMetadata extends Struct {
     readonly deposit: u128;
     readonly data: Bytes;
     readonly isFrozen: bool;
   }
 
-  /** @name PalletUniquesItemMetadata (244) */
+  /** @name PalletUniquesItemMetadata (241) */
   interface PalletUniquesItemMetadata extends Struct {
     readonly deposit: u128;
     readonly data: Bytes;
     readonly isFrozen: bool;
   }
 
-  /** @name PalletUniquesError (247) */
+  /** @name PalletUniquesError (244) */
   interface PalletUniquesError extends Enum {
     readonly isNoPermission: boolean;
     readonly isUnknownCollection: boolean;
@@ -1855,49 +1847,49 @@ declare module '@polkadot/types/lookup' {
       | 'MaxSupplyTooSmall';
   }
 
-  /** @name AnagolaySupportError (248) */
+  /** @name AnagolaySupportError (245) */
   interface AnagolaySupportError extends Enum {
     readonly isMaxArtifactsLimitReached: boolean;
     readonly type: 'MaxArtifactsLimitReached';
   }
 
-  /** @name OperationsOperationRecord (250) */
+  /** @name OperationsOperationRecord (247) */
   interface OperationsOperationRecord extends Struct {
     readonly record: OperationsOperation;
     readonly accountId: AccountId32;
     readonly blockNumber: u32;
   }
 
-  /** @name OperationsOperation (251) */
+  /** @name OperationsOperation (248) */
   interface OperationsOperation extends Struct {
     readonly id: Bytes;
     readonly data: OperationsOperationData;
     readonly extra: Option<OperationsOperationExtra>;
   }
 
-  /** @name OperationsOperationExtra (253) */
+  /** @name OperationsOperationExtra (250) */
   type OperationsOperationExtra = Null;
 
-  /** @name OperationsOperationVersionRecord (256) */
+  /** @name OperationsOperationVersionRecord (253) */
   interface OperationsOperationVersionRecord extends Struct {
     readonly record: OperationsOperationVersion;
     readonly accountId: AccountId32;
     readonly blockNumber: u32;
   }
 
-  /** @name OperationsOperationVersion (257) */
+  /** @name OperationsOperationVersion (254) */
   interface OperationsOperationVersion extends Struct {
     readonly id: Bytes;
     readonly data: OperationsOperationVersionData;
     readonly extra: Option<OperationsOperationVersionExtra>;
   }
 
-  /** @name OperationsOperationVersionExtra (259) */
+  /** @name OperationsOperationVersionExtra (256) */
   interface OperationsOperationVersionExtra extends Struct {
     readonly createdAt: u64;
   }
 
-  /** @name OperationsError (260) */
+  /** @name OperationsError (257) */
   interface OperationsError extends Enum {
     readonly isOperationAlreadyExists: boolean;
     readonly isOperationVersionPackageAlreadyExists: boolean;
@@ -1914,24 +1906,24 @@ declare module '@polkadot/types/lookup' {
       | 'MaxVersionsPerOperationLimitReached';
   }
 
-  /** @name PoeProofRecord (262) */
+  /** @name PoeProofRecord (259) */
   interface PoeProofRecord extends Struct {
     readonly record: PoeProof;
     readonly accountId: AccountId32;
     readonly blockNumber: u32;
   }
 
-  /** @name PoeProof (263) */
+  /** @name PoeProof (260) */
   interface PoeProof extends Struct {
     readonly id: Bytes;
     readonly data: PoeProofData;
     readonly extra: Option<PoeProofExtra>;
   }
 
-  /** @name PoeProofExtra (265) */
+  /** @name PoeProofExtra (262) */
   type PoeProofExtra = Null;
 
-  /** @name PoeError (269) */
+  /** @name PoeError (266) */
   interface PoeError extends Enum {
     readonly isProofAlreadyClaimed: boolean;
     readonly isNoSuchProof: boolean;
@@ -1948,29 +1940,30 @@ declare module '@polkadot/types/lookup' {
       | 'BadRequest';
   }
 
-  /** @name StatementsStatementRecord (271) */
+  /** @name StatementsStatementRecord (268) */
   interface StatementsStatementRecord extends Struct {
     readonly record: StatementsStatement;
     readonly accountId: AccountId32;
     readonly blockNumber: u32;
   }
 
-  /** @name StatementsStatement (272) */
+  /** @name StatementsStatement (269) */
   interface StatementsStatement extends Struct {
     readonly id: Bytes;
     readonly data: StatementsStatementData;
     readonly extra: Option<StatementsStatementExtra>;
   }
 
-  /** @name StatementsStatementExtra (274) */
+  /** @name StatementsStatementExtra (271) */
   type StatementsStatementExtra = Null;
 
-  /** @name StatementsError (277) */
+  /** @name StatementsError (274) */
   interface StatementsError extends Enum {
     readonly isWrongClaimType: boolean;
     readonly isStatementAlreadyExists: boolean;
     readonly isProofHasStatements: boolean;
     readonly isNoSuchStatement: boolean;
+    readonly isInvalidVerificationContext: boolean;
     readonly isStatementHasChildStatement: boolean;
     readonly isCreatingChildStatementNotSupported: boolean;
     readonly isBadRequest: boolean;
@@ -1982,6 +1975,7 @@ declare module '@polkadot/types/lookup' {
       | 'StatementAlreadyExists'
       | 'ProofHasStatements'
       | 'NoSuchStatement'
+      | 'InvalidVerificationContext'
       | 'StatementHasChildStatement'
       | 'CreatingChildStatementNotSupported'
       | 'BadRequest'
@@ -1990,43 +1984,43 @@ declare module '@polkadot/types/lookup' {
       | 'UnrecognizedSignature';
   }
 
-  /** @name WorkflowsWorkflowRecord (279) */
+  /** @name WorkflowsWorkflowRecord (276) */
   interface WorkflowsWorkflowRecord extends Struct {
     readonly record: WorkflowsWorkflow;
     readonly accountId: AccountId32;
     readonly blockNumber: u32;
   }
 
-  /** @name WorkflowsWorkflow (280) */
+  /** @name WorkflowsWorkflow (277) */
   interface WorkflowsWorkflow extends Struct {
     readonly id: Bytes;
     readonly data: WorkflowsWorkflowData;
     readonly extra: Option<WorkflowsWorkflowExtra>;
   }
 
-  /** @name WorkflowsWorkflowExtra (282) */
+  /** @name WorkflowsWorkflowExtra (279) */
   type WorkflowsWorkflowExtra = Null;
 
-  /** @name WorkflowsWorkflowVersionRecord (285) */
+  /** @name WorkflowsWorkflowVersionRecord (282) */
   interface WorkflowsWorkflowVersionRecord extends Struct {
     readonly record: WorkflowsWorkflowVersion;
     readonly accountId: AccountId32;
     readonly blockNumber: u32;
   }
 
-  /** @name WorkflowsWorkflowVersion (286) */
+  /** @name WorkflowsWorkflowVersion (283) */
   interface WorkflowsWorkflowVersion extends Struct {
     readonly id: Bytes;
     readonly data: WorkflowsWorkflowVersionData;
     readonly extra: Option<WorkflowsWorkflowVersionExtra>;
   }
 
-  /** @name WorkflowsWorkflowVersionExtra (288) */
+  /** @name WorkflowsWorkflowVersionExtra (285) */
   interface WorkflowsWorkflowVersionExtra extends Struct {
     readonly createdAt: u64;
   }
 
-  /** @name WorkflowsError (289) */
+  /** @name WorkflowsError (286) */
   interface WorkflowsError extends Enum {
     readonly isWorkflowAlreadyExists: boolean;
     readonly isWorkflowVersionPackageAlreadyExists: boolean;
@@ -2043,7 +2037,7 @@ declare module '@polkadot/types/lookup' {
       | 'MaxVersionsPerWorkflowLimitReached';
   }
 
-  /** @name VerificationError (291) */
+  /** @name VerificationError (288) */
   interface VerificationError extends Enum {
     readonly isVerificationAlreadyIssued: boolean;
     readonly isCannotReserveRegistrationFee: boolean;
@@ -2062,7 +2056,7 @@ declare module '@polkadot/types/lookup' {
       | 'InvalidVerificationStatus';
   }
 
-  /** @name SpRuntimeMultiSignature (293) */
+  /** @name SpRuntimeMultiSignature (290) */
   interface SpRuntimeMultiSignature extends Enum {
     readonly isEd25519: boolean;
     readonly asEd25519: SpCoreEd25519Signature;
@@ -2073,33 +2067,33 @@ declare module '@polkadot/types/lookup' {
     readonly type: 'Ed25519' | 'Sr25519' | 'Ecdsa';
   }
 
-  /** @name SpCoreSr25519Signature (294) */
+  /** @name SpCoreSr25519Signature (291) */
   interface SpCoreSr25519Signature extends U8aFixed {}
 
-  /** @name SpCoreEcdsaSignature (295) */
+  /** @name SpCoreEcdsaSignature (292) */
   interface SpCoreEcdsaSignature extends U8aFixed {}
 
-  /** @name FrameSystemExtensionsCheckNonZeroSender (298) */
+  /** @name FrameSystemExtensionsCheckNonZeroSender (295) */
   type FrameSystemExtensionsCheckNonZeroSender = Null;
 
-  /** @name FrameSystemExtensionsCheckSpecVersion (299) */
+  /** @name FrameSystemExtensionsCheckSpecVersion (296) */
   type FrameSystemExtensionsCheckSpecVersion = Null;
 
-  /** @name FrameSystemExtensionsCheckTxVersion (300) */
+  /** @name FrameSystemExtensionsCheckTxVersion (297) */
   type FrameSystemExtensionsCheckTxVersion = Null;
 
-  /** @name FrameSystemExtensionsCheckGenesis (301) */
+  /** @name FrameSystemExtensionsCheckGenesis (298) */
   type FrameSystemExtensionsCheckGenesis = Null;
 
-  /** @name FrameSystemExtensionsCheckNonce (304) */
+  /** @name FrameSystemExtensionsCheckNonce (301) */
   interface FrameSystemExtensionsCheckNonce extends Compact<u32> {}
 
-  /** @name FrameSystemExtensionsCheckWeight (305) */
+  /** @name FrameSystemExtensionsCheckWeight (302) */
   type FrameSystemExtensionsCheckWeight = Null;
 
-  /** @name PalletTransactionPaymentChargeTransactionPayment (306) */
+  /** @name PalletTransactionPaymentChargeTransactionPayment (303) */
   interface PalletTransactionPaymentChargeTransactionPayment extends Compact<u128> {}
 
-  /** @name AnagolayRuntimeRuntime (307) */
+  /** @name AnagolayRuntimeRuntime (304) */
   type AnagolayRuntimeRuntime = Null;
 } // declare module

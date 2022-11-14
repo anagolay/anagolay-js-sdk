@@ -13,6 +13,7 @@ export interface VerificationAction extends Enum {
 
 /** @name VerificationContext */
 export interface VerificationContext extends Enum {
+  readonly isUnbounded: boolean;
   readonly isUrlForDomain: boolean;
   readonly asUrlForDomain: ITuple<[Bytes, Bytes]>;
   readonly isUrlForDomainWithUsername: boolean;
@@ -22,6 +23,7 @@ export interface VerificationContext extends Enum {
   readonly isUrlForDomainWithUsernameAndRepository: boolean;
   readonly asUrlForDomainWithUsernameAndRepository: ITuple<[Bytes, Bytes, Bytes, Bytes]>;
   readonly type:
+    | 'Unbounded'
     | 'UrlForDomain'
     | 'UrlForDomainWithUsername'
     | 'UrlForDomainWithSubdomain'

@@ -537,6 +537,7 @@ export default {
    **/
   VerificationVerificationContext: {
     _enum: {
+      Unbounded: 'Null',
       UrlForDomain: '(Bytes,Bytes)',
       UrlForDomainWithUsername: '(Bytes,Bytes,Bytes)',
       UrlForDomainWithSubdomain: '(Bytes,Bytes,Bytes)',
@@ -1224,7 +1225,7 @@ export default {
     name: 'Bytes',
     description: 'Bytes',
     inputs: 'Vec<Bytes>',
-    config: 'AnagolaySupportMapsSerializableMaybeSerializableBoundedBTreeMapBoundedVec',
+    config: 'BTreeMap<Bytes, Vec<Bytes>>',
     groups: 'Vec<AnagolaySupportForWhat>',
     output: 'Bytes',
     repository: 'Bytes',
@@ -1232,21 +1233,13 @@ export default {
     features: 'Vec<Bytes>'
   },
   /**
-   * Lookup157: anagolay_support::types::maps::serializable::MaybeSerializableBoundedBTreeMap<anagolay_support::types::characters::Characters, sp_runtime::bounded::bounded_vec::BoundedVec<anagolay_support::types::characters::Characters, S>, anagolay_support::constants::MaxOperationConfigEntriesGet>
-   **/
-  AnagolaySupportMapsSerializableMaybeSerializableBoundedBTreeMapBoundedVec: 'BTreeMap<Bytes, Vec<Bytes>>',
-  /**
-   * Lookup159: anagolay_support::constants::MaxOperationConfigEntriesGet
-   **/
-  AnagolaySupportConstantsMaxOperationConfigEntriesGet: 'Null',
-  /**
-   * Lookup165: anagolay_support::types::ForWhat
+   * Lookup163: anagolay_support::types::ForWhat
    **/
   AnagolaySupportForWhat: {
     _enum: ['GENERIC', 'PHOTO', 'CAMERA', 'LENS', 'SMARTPHONE', 'USER', 'SYS', 'FLOWCONTROL']
   },
   /**
-   * Lookup168: operations::types::OperationVersionData
+   * Lookup166: operations::types::OperationVersionData
    **/
   OperationsOperationVersionData: {
     entityId: 'Option<Bytes>',
@@ -1254,7 +1247,7 @@ export default {
     artifacts: 'Vec<AnagolaySupportAnagolayArtifactStructureOperationArtifactType>'
   },
   /**
-   * Lookup173: anagolay_support::types::AnagolayArtifactStructure<operations::types::OperationArtifactType>
+   * Lookup171: anagolay_support::types::AnagolayArtifactStructure<operations::types::OperationArtifactType>
    **/
   AnagolaySupportAnagolayArtifactStructureOperationArtifactType: {
     artifactType: 'OperationsOperationArtifactType',
@@ -1262,7 +1255,7 @@ export default {
     ipfsCid: 'Bytes'
   },
   /**
-   * Lookup174: operations::types::OperationArtifactType
+   * Lookup172: operations::types::OperationArtifactType
    **/
   OperationsOperationArtifactType: {
     _enum: {
@@ -1272,13 +1265,13 @@ export default {
     }
   },
   /**
-   * Lookup175: anagolay_support::types::WasmArtifactSubType
+   * Lookup173: anagolay_support::types::WasmArtifactSubType
    **/
   AnagolaySupportWasmArtifactSubType: {
     _enum: ['Cjs', 'Esm', 'Wasm', 'Web']
   },
   /**
-   * Lookup178: poe::pallet::Call<T>
+   * Lookup176: poe::pallet::Call<T>
    **/
   PoeCall: {
     _enum: {
@@ -1291,24 +1284,25 @@ export default {
     }
   },
   /**
-   * Lookup179: poe::types::ProofData
+   * Lookup177: poe::types::ProofData
    **/
   PoeProofData: {
     workflowId: 'Bytes',
     prevId: 'Bytes',
     creator: 'Bytes',
     groups: 'Vec<AnagolaySupportForWhat>',
-    params: 'Vec<Bytes>'
+    params: 'Vec<Bytes>',
+    context: 'VerificationVerificationContext'
   },
   /**
-   * Lookup181: poe::types::PhashInfo
+   * Lookup179: poe::types::PhashInfo
    **/
   PoePhashInfo: {
     pHash: 'Bytes',
     proofId: 'Bytes'
   },
   /**
-   * Lookup183: statements::pallet::Call<T>
+   * Lookup181: statements::pallet::Call<T>
    **/
   StatementsCall: {
     _enum: {
@@ -1324,21 +1318,21 @@ export default {
     }
   },
   /**
-   * Lookup184: statements::types::StatementData
+   * Lookup182: statements::types::StatementData
    **/
   StatementsStatementData: {
     signatures: 'StatementsSignatures',
     claim: 'StatementsClaim'
   },
   /**
-   * Lookup185: statements::types::Signatures
+   * Lookup183: statements::types::Signatures
    **/
   StatementsSignatures: {
     holder: 'StatementsSignature',
     issuer: 'StatementsSignature'
   },
   /**
-   * Lookup186: statements::types::Signature
+   * Lookup184: statements::types::Signature
    **/
   StatementsSignature: {
     sigKey: 'Bytes',
@@ -1346,7 +1340,7 @@ export default {
     cid: 'Bytes'
   },
   /**
-   * Lookup189: statements::types::Claim
+   * Lookup187: statements::types::Claim
    **/
   StatementsClaim: {
     prevId: 'Option<Bytes>',
@@ -1361,7 +1355,7 @@ export default {
     onExpiration: 'Bytes'
   },
   /**
-   * Lookup191: statements::types::Proportion
+   * Lookup189: statements::types::Proportion
    **/
   StatementsProportion: {
     sign: 'Bytes',
@@ -1369,33 +1363,33 @@ export default {
     value: 'Bytes'
   },
   /**
-   * Lookup192: statements::types::ClaimType
+   * Lookup190: statements::types::ClaimType
    **/
   StatementsClaimType: {
     _enum: ['Copyright', 'Ownership']
   },
   /**
-   * Lookup193: statements::types::Validity
+   * Lookup191: statements::types::Validity
    **/
   StatementsValidity: {
     from: 'Bytes',
     until: 'Bytes'
   },
   /**
-   * Lookup194: statements::types::Expiration
+   * Lookup192: statements::types::Expiration
    **/
   StatementsExpiration: {
     expirationType: 'StatementsExpirationType',
     value: 'Bytes'
   },
   /**
-   * Lookup195: statements::types::ExpirationType
+   * Lookup193: statements::types::ExpirationType
    **/
   StatementsExpirationType: {
     _enum: ['Forever', 'Years', 'Months', 'Days', 'Minutes', 'Seconds']
   },
   /**
-   * Lookup196: workflows::pallet::Call<T>
+   * Lookup194: workflows::pallet::Call<T>
    **/
   WorkflowsCall: {
     _enum: {
@@ -1406,7 +1400,7 @@ export default {
     }
   },
   /**
-   * Lookup197: workflows::types::WorkflowData
+   * Lookup195: workflows::types::WorkflowData
    **/
   WorkflowsWorkflowData: {
     name: 'Bytes',
@@ -1416,25 +1410,21 @@ export default {
     segments: 'Vec<WorkflowsWorkflowSegment>'
   },
   /**
-   * Lookup200: workflows::types::WorkflowSegment
+   * Lookup198: workflows::types::WorkflowSegment
    **/
   WorkflowsWorkflowSegment: {
     inputs: 'Vec<i8>',
     sequence: 'Vec<WorkflowsOperationVersionReference>'
   },
   /**
-   * Lookup205: workflows::types::OperationVersionReference
+   * Lookup203: workflows::types::OperationVersionReference
    **/
   WorkflowsOperationVersionReference: {
     versionId: 'Bytes',
-    config: 'AnagolaySupportMapsSerializableMaybeSerializableBoundedBTreeMapCharacters'
+    config: 'BTreeMap<Bytes, Bytes>'
   },
   /**
-   * Lookup206: anagolay_support::types::maps::serializable::MaybeSerializableBoundedBTreeMap<anagolay_support::types::characters::Characters, anagolay_support::types::characters::Characters, anagolay_support::constants::MaxOperationConfigEntriesGet>
-   **/
-  AnagolaySupportMapsSerializableMaybeSerializableBoundedBTreeMapCharacters: 'BTreeMap<Bytes, Bytes>',
-  /**
-   * Lookup213: workflows::types::WorkflowVersionData
+   * Lookup210: workflows::types::WorkflowVersionData
    **/
   WorkflowsWorkflowVersionData: {
     entityId: 'Option<Bytes>',
@@ -1442,7 +1432,7 @@ export default {
     artifacts: 'Vec<AnagolaySupportAnagolayArtifactStructureWorkflowArtifactType>'
   },
   /**
-   * Lookup218: anagolay_support::types::AnagolayArtifactStructure<workflows::types::WorkflowArtifactType>
+   * Lookup215: anagolay_support::types::AnagolayArtifactStructure<workflows::types::WorkflowArtifactType>
    **/
   AnagolaySupportAnagolayArtifactStructureWorkflowArtifactType: {
     artifactType: 'WorkflowsWorkflowArtifactType',
@@ -1450,7 +1440,7 @@ export default {
     ipfsCid: 'Bytes'
   },
   /**
-   * Lookup219: workflows::types::WorkflowArtifactType
+   * Lookup216: workflows::types::WorkflowArtifactType
    **/
   WorkflowsWorkflowArtifactType: {
     _enum: {
@@ -1460,7 +1450,7 @@ export default {
     }
   },
   /**
-   * Lookup221: verification::pallet::Call<T>
+   * Lookup218: verification::pallet::Call<T>
    **/
   VerificationCall: {
     _enum: {
@@ -1477,20 +1467,20 @@ export default {
     }
   },
   /**
-   * Lookup222: verification::types::offchain::VerificationIndexingData<T>
+   * Lookup219: verification::types::offchain::VerificationIndexingData<T>
    **/
   VerificationOffchainVerificationIndexingData: {
     verifier: 'AccountId32',
     request: 'VerificationVerificationRequest'
   },
   /**
-   * Lookup223: pallet_sudo::pallet::Error<T>
+   * Lookup220: pallet_sudo::pallet::Error<T>
    **/
   PalletSudoError: {
     _enum: ['RequireSudo']
   },
   /**
-   * Lookup224: pallet_treasury::Proposal<sp_core::crypto::AccountId32, Balance>
+   * Lookup221: pallet_treasury::Proposal<sp_core::crypto::AccountId32, Balance>
    **/
   PalletTreasuryProposal: {
     proposer: 'AccountId32',
@@ -1499,11 +1489,11 @@ export default {
     bond: 'u128'
   },
   /**
-   * Lookup228: frame_support::PalletId
+   * Lookup225: frame_support::PalletId
    **/
   FrameSupportPalletId: '[u8;8]',
   /**
-   * Lookup229: pallet_treasury::pallet::Error<T, I>
+   * Lookup226: pallet_treasury::pallet::Error<T, I>
    **/
   PalletTreasuryError: {
     _enum: [
@@ -1515,19 +1505,19 @@ export default {
     ]
   },
   /**
-   * Lookup230: pallet_utility::pallet::Error<T>
+   * Lookup227: pallet_utility::pallet::Error<T>
    **/
   PalletUtilityError: {
     _enum: ['TooManyCalls']
   },
   /**
-   * Lookup233: pallet_vesting::Releases
+   * Lookup230: pallet_vesting::Releases
    **/
   PalletVestingReleases: {
     _enum: ['V0', 'V1']
   },
   /**
-   * Lookup234: pallet_vesting::pallet::Error<T>
+   * Lookup231: pallet_vesting::pallet::Error<T>
    **/
   PalletVestingError: {
     _enum: [
@@ -1539,7 +1529,7 @@ export default {
     ]
   },
   /**
-   * Lookup237: pallet_scheduler::ScheduledV3<frame_support::traits::schedule::MaybeHashed<anagolay_runtime::Call, primitive_types::H256>, BlockNumber, anagolay_runtime::OriginCaller, sp_core::crypto::AccountId32>
+   * Lookup234: pallet_scheduler::ScheduledV3<frame_support::traits::schedule::MaybeHashed<anagolay_runtime::Call, primitive_types::H256>, BlockNumber, anagolay_runtime::OriginCaller, sp_core::crypto::AccountId32>
    **/
   PalletSchedulerScheduledV3: {
     maybeId: 'Option<Bytes>',
@@ -1549,13 +1539,13 @@ export default {
     origin: 'AnagolayRuntimeOriginCaller'
   },
   /**
-   * Lookup238: pallet_scheduler::pallet::Error<T>
+   * Lookup235: pallet_scheduler::pallet::Error<T>
    **/
   PalletSchedulerError: {
     _enum: ['FailedToSchedule', 'NotFound', 'TargetBlockNumberInPast', 'RescheduleNoChange']
   },
   /**
-   * Lookup239: pallet_uniques::types::CollectionDetails<sp_core::crypto::AccountId32, DepositBalance>
+   * Lookup236: pallet_uniques::types::CollectionDetails<sp_core::crypto::AccountId32, DepositBalance>
    **/
   PalletUniquesCollectionDetails: {
     owner: 'AccountId32',
@@ -1570,7 +1560,7 @@ export default {
     isFrozen: 'bool'
   },
   /**
-   * Lookup242: pallet_uniques::types::ItemDetails<sp_core::crypto::AccountId32, DepositBalance>
+   * Lookup239: pallet_uniques::types::ItemDetails<sp_core::crypto::AccountId32, DepositBalance>
    **/
   PalletUniquesItemDetails: {
     owner: 'AccountId32',
@@ -1579,7 +1569,7 @@ export default {
     deposit: 'u128'
   },
   /**
-   * Lookup243: pallet_uniques::types::CollectionMetadata<DepositBalance, StringLimit>
+   * Lookup240: pallet_uniques::types::CollectionMetadata<DepositBalance, StringLimit>
    **/
   PalletUniquesCollectionMetadata: {
     deposit: 'u128',
@@ -1587,7 +1577,7 @@ export default {
     isFrozen: 'bool'
   },
   /**
-   * Lookup244: pallet_uniques::types::ItemMetadata<DepositBalance, StringLimit>
+   * Lookup241: pallet_uniques::types::ItemMetadata<DepositBalance, StringLimit>
    **/
   PalletUniquesItemMetadata: {
     deposit: 'u128',
@@ -1595,7 +1585,7 @@ export default {
     isFrozen: 'bool'
   },
   /**
-   * Lookup247: pallet_uniques::pallet::Error<T, I>
+   * Lookup244: pallet_uniques::pallet::Error<T, I>
    **/
   PalletUniquesError: {
     _enum: [
@@ -1617,13 +1607,13 @@ export default {
     ]
   },
   /**
-   * Lookup248: anagolay_support::pallet::Error<T>
+   * Lookup245: anagolay_support::pallet::Error<T>
    **/
   AnagolaySupportError: {
     _enum: ['MaxArtifactsLimitReached']
   },
   /**
-   * Lookup250: operations::types::OperationRecord<T>
+   * Lookup247: operations::types::OperationRecord<T>
    **/
   OperationsOperationRecord: {
     record: 'OperationsOperation',
@@ -1631,7 +1621,7 @@ export default {
     blockNumber: 'u32'
   },
   /**
-   * Lookup251: operations::types::Operation
+   * Lookup248: operations::types::Operation
    **/
   OperationsOperation: {
     id: 'Bytes',
@@ -1639,11 +1629,11 @@ export default {
     extra: 'Option<OperationsOperationExtra>'
   },
   /**
-   * Lookup253: operations::types::OperationExtra
+   * Lookup250: operations::types::OperationExtra
    **/
   OperationsOperationExtra: 'Null',
   /**
-   * Lookup256: operations::types::OperationVersionRecord<T>
+   * Lookup253: operations::types::OperationVersionRecord<T>
    **/
   OperationsOperationVersionRecord: {
     record: 'OperationsOperationVersion',
@@ -1651,7 +1641,7 @@ export default {
     blockNumber: 'u32'
   },
   /**
-   * Lookup257: operations::types::OperationVersion
+   * Lookup254: operations::types::OperationVersion
    **/
   OperationsOperationVersion: {
     id: 'Bytes',
@@ -1659,13 +1649,13 @@ export default {
     extra: 'Option<OperationsOperationVersionExtra>'
   },
   /**
-   * Lookup259: operations::types::OperationVersionExtra
+   * Lookup256: operations::types::OperationVersionExtra
    **/
   OperationsOperationVersionExtra: {
     createdAt: 'u64'
   },
   /**
-   * Lookup260: operations::pallet::Error<T>
+   * Lookup257: operations::pallet::Error<T>
    **/
   OperationsError: {
     _enum: [
@@ -1678,7 +1668,7 @@ export default {
     ]
   },
   /**
-   * Lookup262: poe::types::ProofRecord<T>
+   * Lookup259: poe::types::ProofRecord<T>
    **/
   PoeProofRecord: {
     record: 'PoeProof',
@@ -1686,7 +1676,7 @@ export default {
     blockNumber: 'u32'
   },
   /**
-   * Lookup263: poe::types::Proof
+   * Lookup260: poe::types::Proof
    **/
   PoeProof: {
     id: 'Bytes',
@@ -1694,11 +1684,11 @@ export default {
     extra: 'Option<PoeProofExtra>'
   },
   /**
-   * Lookup265: poe::types::ProofExtra
+   * Lookup262: poe::types::ProofExtra
    **/
   PoeProofExtra: 'Null',
   /**
-   * Lookup269: poe::pallet::Error<T>
+   * Lookup266: poe::pallet::Error<T>
    **/
   PoeError: {
     _enum: [
@@ -1711,7 +1701,7 @@ export default {
     ]
   },
   /**
-   * Lookup271: statements::types::StatementRecord<T>
+   * Lookup268: statements::types::StatementRecord<T>
    **/
   StatementsStatementRecord: {
     record: 'StatementsStatement',
@@ -1719,7 +1709,7 @@ export default {
     blockNumber: 'u32'
   },
   /**
-   * Lookup272: statements::types::Statement
+   * Lookup269: statements::types::Statement
    **/
   StatementsStatement: {
     id: 'Bytes',
@@ -1727,11 +1717,11 @@ export default {
     extra: 'Option<StatementsStatementExtra>'
   },
   /**
-   * Lookup274: statements::types::StatementExtra
+   * Lookup271: statements::types::StatementExtra
    **/
   StatementsStatementExtra: 'Null',
   /**
-   * Lookup277: statements::pallet::Error<T>
+   * Lookup274: statements::pallet::Error<T>
    **/
   StatementsError: {
     _enum: [
@@ -1739,6 +1729,7 @@ export default {
       'StatementAlreadyExists',
       'ProofHasStatements',
       'NoSuchStatement',
+      'InvalidVerificationContext',
       'StatementHasChildStatement',
       'CreatingChildStatementNotSupported',
       'BadRequest',
@@ -1748,7 +1739,7 @@ export default {
     ]
   },
   /**
-   * Lookup279: workflows::types::WorkflowRecord<T>
+   * Lookup276: workflows::types::WorkflowRecord<T>
    **/
   WorkflowsWorkflowRecord: {
     record: 'WorkflowsWorkflow',
@@ -1756,7 +1747,7 @@ export default {
     blockNumber: 'u32'
   },
   /**
-   * Lookup280: workflows::types::Workflow
+   * Lookup277: workflows::types::Workflow
    **/
   WorkflowsWorkflow: {
     id: 'Bytes',
@@ -1764,11 +1755,11 @@ export default {
     extra: 'Option<WorkflowsWorkflowExtra>'
   },
   /**
-   * Lookup282: workflows::types::WorkflowExtra
+   * Lookup279: workflows::types::WorkflowExtra
    **/
   WorkflowsWorkflowExtra: 'Null',
   /**
-   * Lookup285: workflows::types::WorkflowVersionRecord<T>
+   * Lookup282: workflows::types::WorkflowVersionRecord<T>
    **/
   WorkflowsWorkflowVersionRecord: {
     record: 'WorkflowsWorkflowVersion',
@@ -1776,7 +1767,7 @@ export default {
     blockNumber: 'u32'
   },
   /**
-   * Lookup286: workflows::types::WorkflowVersion
+   * Lookup283: workflows::types::WorkflowVersion
    **/
   WorkflowsWorkflowVersion: {
     id: 'Bytes',
@@ -1784,13 +1775,13 @@ export default {
     extra: 'Option<WorkflowsWorkflowVersionExtra>'
   },
   /**
-   * Lookup288: workflows::types::WorkflowVersionExtra
+   * Lookup285: workflows::types::WorkflowVersionExtra
    **/
   WorkflowsWorkflowVersionExtra: {
     createdAt: 'u64'
   },
   /**
-   * Lookup289: workflows::pallet::Error<T>
+   * Lookup286: workflows::pallet::Error<T>
    **/
   WorkflowsError: {
     _enum: [
@@ -1803,7 +1794,7 @@ export default {
     ]
   },
   /**
-   * Lookup291: verification::pallet::Error<T>
+   * Lookup288: verification::pallet::Error<T>
    **/
   VerificationError: {
     _enum: [
@@ -1817,7 +1808,7 @@ export default {
     ]
   },
   /**
-   * Lookup293: sp_runtime::MultiSignature
+   * Lookup290: sp_runtime::MultiSignature
    **/
   SpRuntimeMultiSignature: {
     _enum: {
@@ -1827,43 +1818,43 @@ export default {
     }
   },
   /**
-   * Lookup294: sp_core::sr25519::Signature
+   * Lookup291: sp_core::sr25519::Signature
    **/
   SpCoreSr25519Signature: '[u8;64]',
   /**
-   * Lookup295: sp_core::ecdsa::Signature
+   * Lookup292: sp_core::ecdsa::Signature
    **/
   SpCoreEcdsaSignature: '[u8;65]',
   /**
-   * Lookup298: frame_system::extensions::check_non_zero_sender::CheckNonZeroSender<T>
+   * Lookup295: frame_system::extensions::check_non_zero_sender::CheckNonZeroSender<T>
    **/
   FrameSystemExtensionsCheckNonZeroSender: 'Null',
   /**
-   * Lookup299: frame_system::extensions::check_spec_version::CheckSpecVersion<T>
+   * Lookup296: frame_system::extensions::check_spec_version::CheckSpecVersion<T>
    **/
   FrameSystemExtensionsCheckSpecVersion: 'Null',
   /**
-   * Lookup300: frame_system::extensions::check_tx_version::CheckTxVersion<T>
+   * Lookup297: frame_system::extensions::check_tx_version::CheckTxVersion<T>
    **/
   FrameSystemExtensionsCheckTxVersion: 'Null',
   /**
-   * Lookup301: frame_system::extensions::check_genesis::CheckGenesis<T>
+   * Lookup298: frame_system::extensions::check_genesis::CheckGenesis<T>
    **/
   FrameSystemExtensionsCheckGenesis: 'Null',
   /**
-   * Lookup304: frame_system::extensions::check_nonce::CheckNonce<T>
+   * Lookup301: frame_system::extensions::check_nonce::CheckNonce<T>
    **/
   FrameSystemExtensionsCheckNonce: 'Compact<u32>',
   /**
-   * Lookup305: frame_system::extensions::check_weight::CheckWeight<T>
+   * Lookup302: frame_system::extensions::check_weight::CheckWeight<T>
    **/
   FrameSystemExtensionsCheckWeight: 'Null',
   /**
-   * Lookup306: pallet_transaction_payment::ChargeTransactionPayment<T>
+   * Lookup303: pallet_transaction_payment::ChargeTransactionPayment<T>
    **/
   PalletTransactionPaymentChargeTransactionPayment: 'Compact<u128>',
   /**
-   * Lookup307: anagolay_runtime::Runtime
+   * Lookup304: anagolay_runtime::Runtime
    **/
   AnagolayRuntimeRuntime: 'Null'
 };

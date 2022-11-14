@@ -10,11 +10,8 @@ import type {
   AnagolayRuntimeRuntime,
   AnagolaySupportAnagolayArtifactStructureOperationArtifactType,
   AnagolaySupportAnagolayArtifactStructureWorkflowArtifactType,
-  AnagolaySupportConstantsMaxOperationConfigEntriesGet,
   AnagolaySupportError,
   AnagolaySupportForWhat,
-  AnagolaySupportMapsSerializableMaybeSerializableBoundedBTreeMapBoundedVec,
-  AnagolaySupportMapsSerializableMaybeSerializableBoundedBTreeMapCharacters,
   AnagolaySupportWasmArtifactSubType,
   FinalityGrandpaEquivocationPrecommit,
   FinalityGrandpaEquivocationPrevote,
@@ -177,11 +174,8 @@ declare module '@polkadot/types/types/registry' {
     AnagolayRuntimeRuntime: AnagolayRuntimeRuntime;
     AnagolaySupportAnagolayArtifactStructureOperationArtifactType: AnagolaySupportAnagolayArtifactStructureOperationArtifactType;
     AnagolaySupportAnagolayArtifactStructureWorkflowArtifactType: AnagolaySupportAnagolayArtifactStructureWorkflowArtifactType;
-    AnagolaySupportConstantsMaxOperationConfigEntriesGet: AnagolaySupportConstantsMaxOperationConfigEntriesGet;
     AnagolaySupportError: AnagolaySupportError;
     AnagolaySupportForWhat: AnagolaySupportForWhat;
-    AnagolaySupportMapsSerializableMaybeSerializableBoundedBTreeMapBoundedVec: AnagolaySupportMapsSerializableMaybeSerializableBoundedBTreeMapBoundedVec;
-    AnagolaySupportMapsSerializableMaybeSerializableBoundedBTreeMapCharacters: AnagolaySupportMapsSerializableMaybeSerializableBoundedBTreeMapCharacters;
     AnagolaySupportWasmArtifactSubType: AnagolaySupportWasmArtifactSubType;
     FinalityGrandpaEquivocationPrecommit: FinalityGrandpaEquivocationPrecommit;
     FinalityGrandpaEquivocationPrevote: FinalityGrandpaEquivocationPrevote;

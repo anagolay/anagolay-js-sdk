@@ -11,6 +11,7 @@ export interface AnVerificationStatus {
  * ONLY ONE OF THEM
  */
 export interface AnVerificationContext {
+  Unbounded?: [];
   UrlForDomain?: [string, string];
   UrlForDomainWithUsername?: [string, string, string];
   UrlForDomainWithSubdomain?: [string, string, string];
