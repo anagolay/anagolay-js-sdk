@@ -258,6 +258,7 @@ declare module '@polkadot/api-base/types/storage' {
         (
           arg:
             | VerificationVerificationContext
+            | { Unbounded: any }
             | { UrlForDomain: any }
             | { UrlForDomainWithUsername: any }
             | { UrlForDomainWithSubdomain: any }
@@ -663,6 +664,7 @@ declare module '@polkadot/api-base/types/storage' {
           arg1: AccountId32 | string | Uint8Array,
           arg2:
             | VerificationVerificationContext
+            | { Unbounded: any }
             | { UrlForDomain: any }
             | { UrlForDomainWithUsername: any }
             | { UrlForDomainWithSubdomain: any }

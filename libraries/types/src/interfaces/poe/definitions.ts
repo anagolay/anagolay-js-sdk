@@ -10,7 +10,8 @@ export const PoECustomTypes: DefinitionsTypes = {
     prevId: 'WorkflowId',
     creator: 'CreatorId',
     groups: 'BoundedVec<ForWhat, Get<u32>>',
-    params: 'BoundedVec<Characters, Get<u32>>'
+    params: 'BoundedVec<Characters, Get<u32>>',
+    context: 'VerificationContext'
   },
   ProofExtra: {},
   Proof: {

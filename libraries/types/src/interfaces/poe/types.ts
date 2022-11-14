@@ -2,6 +2,7 @@
 /* eslint-disable */
 
 import type { Characters, CreatorId, ForWhat } from '@anagolay/types/interfaces/anagolaySupport';
+import type { VerificationContext } from '@anagolay/types/interfaces/verification';
 import type { WorkflowId } from '@anagolay/types/interfaces/workflows';
 import type { Bytes, Option, Struct, Vec } from '@polkadot/types-codec';
 import type { AccountId, BlockNumber } from '@polkadot/types/interfaces/runtime';
@@ -26,6 +27,7 @@ export interface ProofData extends Struct {
   readonly creator: CreatorId;
   readonly groups: Vec<ForWhat>;
   readonly params: Vec<Characters>;
+  readonly context: VerificationContext;
 }
 
 /** @name ProofExtra */
