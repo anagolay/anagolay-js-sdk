@@ -1,7 +1,7 @@
 version: '3'
 services:
   idiyanale:
-    image: registry.gitlab.com/anagolay/anagolay/idiyanale:8dad9e18 # this is 4.x
+    image: registry.gitlab.com/anagolay/anagolay/idiyanale:5d1620bd
     container_name: idiyanale_testet
     volumes:
       - idiyanale_data:/data

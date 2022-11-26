@@ -497,57 +497,6 @@ importers:
       webpack: 5.68.0
       webpack-node-externals: 3.0.0
 
-  ../../tools/migrate:
-    specifiers:
-      '@anagolay/api': workspace:*
-      '@anagolay/types': workspace:*
-      '@anagolay/util': workspace:*
-      '@microsoft/api-extractor': 7.29.2
-      '@polkadot/api': 9.6.1
-      '@polkadot/types': 9.6.1
-      '@polkadot/types-codec': 9.6.1
-      '@polkadot/util': 10.1.11
-      '@rushstack/eslint-config': 3.0.0
-      '@rushstack/heft': 0.47.3
-      '@rushstack/heft-jest-plugin': 0.3.25
-      '@rushstack/heft-node-rig': 1.10.2
-      '@types/heft-jest': 1.0.3
-      '@types/node': 18.7.6
-      '@types/ramda': 0.27.64
-      env-cmd: 10.1.0
-      eslint: 8.22.0
-      eslint-plugin-simple-import-sort: 7.0.0
-      eslint-plugin-unused-imports: 2.0.0
-      nodemon: 2.0.15
-      ramda: 0.28.0
-      tslib: 2.4.0
-      typescript: 4.7.4
-    dependencies:
-      '@anagolay/api': link:../../libraries/api
-      '@anagolay/types': link:../../libraries/types
-      '@anagolay/util': link:../../libraries/util
-      '@polkadot/api': 9.6.1
-      '@polkadot/types': 9.6.1
-      '@polkadot/types-codec': 9.6.1
-      '@polkadot/util': 10.1.11
-      ramda: 0.28.0
-    devDependencies:
-      '@microsoft/api-extractor': 7.29.2
-      '@rushstack/eslint-config': 3.0.0_4rv7y5c6xz3vfxwhbrcxxi73bq
-      '@rushstack/heft': 0.47.3
-      '@rushstack/heft-jest-plugin': 0.3.25_@rushstack+heft@0.47.3
-      '@rushstack/heft-node-rig': 1.10.2_@rushstack+heft@0.47.3
-      '@types/heft-jest': 1.0.3
-      '@types/node': 18.7.6
-      '@types/ramda': 0.27.64
-      env-cmd: 10.1.0
-      eslint: 8.22.0
-      eslint-plugin-simple-import-sort: 7.0.0_eslint@8.22.0
-      eslint-plugin-unused-imports: 2.0.0_eslint@8.22.0
-      nodemon: 2.0.15
-      tslib: 2.4.0
-      typescript: 4.7.4
-
 packages:
 
   /@ampproject/remapping/2.1.2:

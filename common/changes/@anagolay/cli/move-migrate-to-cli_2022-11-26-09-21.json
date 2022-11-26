@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@anagolay/cli",
+      "comment": "add migration cli ",
+      "type": "minor"
+    }
+  ],
+  "packageName": "@anagolay/cli"
+}

@@ -104,7 +104,8 @@
   {
     "policyName": "anagolayApi",
     "definitionName": "lockStepVersion",
-    "version": "0.1.0"
+    "version": "0.1.0",
+    "nextBump": "minor"
   },
   // this is generally unstable and lockedMajor will NEVER change
   {

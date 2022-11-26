@@ -1,3 +1,5 @@
+import { defaultTo } from 'ramda';
+
 // this cannot have the / at the end
 export const websocketURL: string = 'wss://ws.anagolay.io';
 
@@ -6,6 +8,6 @@ export const websocketURL: string = 'wss://ws.anagolay.io';
 
 // must end with the /
 export const workflowBuilderURL: string =
-  'https://bafybeidfaqle74e4gcbwf2pjfe3gedpbccwtsgttaev66mjq6xfhribfu4.ipfs.anagolay.network/workflow-builder/';
+  'https://bafybeiexksyj76zmsnsm6ew4eumidi75sigc2vchqqoeh2d3edxmorslxu.ipfs.anagolay.network/workflow-builder/';
 
-export const publishServiceURL: string = 'https://builder.anagolay.io';
+export const publishServiceURL: string = defaultTo('https://builder.anagolay.io', process.env.AN_BUILDER_URL);
