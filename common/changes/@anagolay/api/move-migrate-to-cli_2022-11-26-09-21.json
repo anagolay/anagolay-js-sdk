@@ -2,7 +2,7 @@
   "changes": [
     {
       "packageName": "@anagolay/api",
-      "comment": "dsa",
+      "comment": "add default values",
       "type": "patch"
     }
   ],

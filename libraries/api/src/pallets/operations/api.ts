@@ -72,13 +72,13 @@ export function createSubmittableExtrinsic(
 
 /**
  * Fetch the operations and their versions.
- * @param pageNum -
- * @param pageSize -
+ * @param pageNum - default is `0`
+ * @param pageSize - default is `100`
  * @returns Decoded structure {@link IOperationWithVersions}
  */
 export async function retrieveOperationsPaged(
-  pageNum: number,
-  pageSize: number
+  pageNum: number = 0,
+  pageSize: number = 100
 ): Promise<IOperationWithVersions[]> {
   const api = getCachedApi();
 

@@ -1,4 +1,4 @@
-import { connectToWs, defaultChainToConnect } from '@anagolay/api';
+import { connectToWs } from '@anagolay/api';
 import { AnWorkflowArtifactStructure, AnWorkflowData, AnWorkflowVersionData } from '@anagolay/types';
 import { ApiPromise } from '@polkadot/api';
 import { KeyringPair } from '@polkadot/keyring/types';
@@ -15,7 +15,7 @@ import signale from 'signale';
 import { ISignSubmitErrorReturn, ISignSubmitSuccessReturn, signAndSubmit } from '$src/api';
 import { chooseAccount } from '$src/commonQuestions/account';
 import { askStarterQuestions } from '$src/commonQuestions/common';
-import { websocketURL, workflowBuilderURL } from '$src/config';
+import { workflowBuilderURL } from '$src/config';
 import { createFileLogger, Logger } from '$src/logger';
 import { callPublishService, ISuccessfulResponse } from '$src/publish';
 import { ensureBalance, logsDir, showArtifactTable } from '$src/utils';
@@ -57,8 +57,6 @@ async function create(): Promise<void> {
 
   // better link building
   const link = new URL(workflowBuilderURL as string);
-  link.searchParams.append('ws', websocketURL);
-  link.searchParams.append('anagolay_chain_ws', defaultChainToConnect);
   link.searchParams.append('ns', namespace);
   link.searchParams.append('path', 'ws');
 

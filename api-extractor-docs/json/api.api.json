@@ -1150,11 +1150,11 @@
                 {
                   "kind": "Function",
                   "canonicalReference": "@anagolay/api!pallets.operations.retrieveOperationsPaged:function(1)",
-                  "docComment": "/**\n * Fetch the operations and their versions.\n *\n * @param pageNum - \n *\n * @param pageSize - \n *\n * @returns Decoded structure {@link IOperationWithVersions}\n */\n",
+                  "docComment": "/**\n * Fetch the operations and their versions.\n *\n * @param pageNum - default is `0`\n *\n * @param pageSize - default is `100`\n *\n * @returns Decoded structure {@link IOperationWithVersions}\n */\n",
                   "excerptTokens": [
                     {
                       "kind": "Content",
-                      "text": "export declare function retrieveOperationsPaged(pageNum: "
+                      "text": "export declare function retrieveOperationsPaged(pageNum?: "
                     },
                     {
                       "kind": "Content",
@@ -1162,7 +1162,7 @@
                     },
                     {
                       "kind": "Content",
-                      "text": ", pageSize: "
+                      "text": ", pageSize?: "
                     },
                     {
                       "kind": "Content",
@@ -1208,7 +1208,7 @@
                         "startIndex": 1,
                         "endIndex": 2
                       },
-                      "isOptional": false
+                      "isOptional": true
                     },
                     {
                       "parameterName": "pageSize",
@@ -1216,7 +1216,7 @@
                         "startIndex": 3,
                         "endIndex": 4
                       },
-                      "isOptional": false
+                      "isOptional": true
                     }
                   ],
                   "name": "retrieveOperationsPaged"

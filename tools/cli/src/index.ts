@@ -8,6 +8,7 @@
 
 import { Command } from 'commander';
 
+import makeMigrationCommand from './commands/migrate';
 import makeOperationCommand from './commands/operation';
 import makeWorkflowCommand from './commands/workflow';
 
@@ -18,7 +19,7 @@ async function main(): Promise<void> {
   // const program = commander.createCommand();
   const cmd = new Command();
 
-  cmd.version('0.7.0').description(`Welcome to Anagolay CLI.
+  cmd.version('0.2.0').description(`Welcome to Anagolay CLI.
 
 Logs dir                ~/.logs/anagolay
 Settings and cache dir  ~/.cache/anagolay
@@ -27,6 +28,7 @@ Settings and cache dir  ~/.cache/anagolay
   /// HERE we start with adding the 1st level commands
   cmd.addCommand(await makeOperationCommand());
   cmd.addCommand(await makeWorkflowCommand());
+  cmd.addCommand(await makeMigrationCommand());
 
   await cmd.parseAsync();
   // program.commands.map((cmd1) => {

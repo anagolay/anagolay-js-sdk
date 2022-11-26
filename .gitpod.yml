@@ -6,6 +6,7 @@ tasks:
       brew install romkatv/powerlevel10k/powerlevel10k neovim
       node $GITPOD_REPO_ROOT/common/scripts/install-run-rush.js install
       node $GITPOD_REPO_ROOT/common/scripts/install-run-rush.js build
+      node $GITPOD_REPO_ROOT/common/scripts/install-run-rush.js prettier
       exit
   - name: Start stuff
     command: bash $GITPOD_REPO_ROOT/.devops/gitpod/start-cmd.sh && exit

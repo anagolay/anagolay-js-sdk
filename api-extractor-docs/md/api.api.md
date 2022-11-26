@@ -215,7 +215,7 @@ function requestVerificationAndSend(params: {
 }, signer: AddressOrPair, options?: Partial<SignerOptions>): Promise<ICustomEventEmitter<[AccountId32, AnVerificationRequest]>>;
 
 // @public
-function retrieveOperationsPaged(pageNum: number, pageSize: number): Promise<IOperationWithVersions[]>;
+function retrieveOperationsPaged(pageNum?: number, pageSize?: number): Promise<IOperationWithVersions[]>;
 
 // @public
 function save(operationData: OperationData, versionData: OperationVersionData, signer: AddressOrPair, options?: Partial<SignerOptions>): Promise<ICustomEventEmitter<unknown>>;

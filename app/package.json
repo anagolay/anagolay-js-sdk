@@ -1,6 +1,6 @@
 {
   "name": "@anagolay/app",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Anagolay Web App",
   "license": "AGPLv3",
   "type": "module",
@@ -15,7 +15,7 @@
     "eslint:fix": "eslint --config ./.eslintrc.cjs --ignore-path ../.eslintignore --ext .svelte,.ts --fix .",
     "package": "svelte-kit package",
     "preview": "vite preview",
-    "publish:surge": "pnpm build:svelte && surge --domain anagolay.surge.sh",
+    "publish:surge": "pnpm build:app && surge --domain anagolay.surge.sh",
     "surge": "surge",
     "test": "playwright test"
   },

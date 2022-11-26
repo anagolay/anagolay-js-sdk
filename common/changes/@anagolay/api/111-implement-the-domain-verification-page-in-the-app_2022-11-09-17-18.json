@@ -3,7 +3,7 @@
     {
       "packageName": "@anagolay/api",
       "comment": "add new pallet. verification api",
-      "type": "minor"
+      "type": "patch"
     }
   ],
   "packageName": "@anagolay/api"

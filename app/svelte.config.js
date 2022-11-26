@@ -11,6 +11,7 @@ const config = {
   }),
   kit: {
     adapter: adapter({
+      // fallback: '200.html', // this is for the surge.sh
       fallback: 'index.html',
       precompress: true
     }),

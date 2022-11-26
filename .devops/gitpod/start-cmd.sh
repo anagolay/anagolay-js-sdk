@@ -4,6 +4,7 @@ PROJECT_ROOT=$(git rev-parse --show-toplevel)
 pnpm env use --global 18.4.0
 
 # brew install starship romkatv/powerlevel10k/powerlevel10k
+brew install romkatv/powerlevel10k/powerlevel10k
 
 # pnpm add --global @microsoft/rush
 

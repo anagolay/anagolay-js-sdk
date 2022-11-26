@@ -1,6 +1,6 @@
 {
   "name": "@anagolay/api",
-  "version": "0.2.0",
+  "version": "0.1.0",
   "description": "Anagolay JS/TS API",
   "homepage": "https://gitlab.com/anagolay/anagolay-js/-/tree/main/sdk/api#readme",
   "bugs": {
