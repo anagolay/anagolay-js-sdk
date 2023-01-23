@@ -4,7 +4,6 @@
  */
 {
   "$schema": "https://developer.microsoft.com/json-schemas/rush/v5/common-versions.schema.json",
-
   /**
    * A table that specifies a "preferred version" for a given NPM package.  This feature is typically used
    * to hold back an indirect dependency to a specific older version, or to reduce duplication of indirect dependencies.
@@ -24,31 +23,26 @@
      * instead of the latest version.
      */
     // "some-library": "1.2.3"
-
     // unknown versioning rule
     "@polkadot/metadata": "4.17.1",
-
     // these follow same versioning
-    "@polkadot/util": "10.1.11",
-    "@polkadot/util-crypto": "10.1.11",
-    "@polkadot/keyring": "10.1.11",
+    "@polkadot/util": "10.2.6",
+    "@polkadot/util-crypto": "10.2.6",
+    "@polkadot/keyring": "10.2.6",
+    "@polkadot/ui-shared": "2.9.12",
+    "@polkadot/ui-keyring": "2.9.12",
+    "@polkadot/api": "9.11.3",
+    "@polkadot/types": "9.11.3",
+    "@polkadot/api-augment": "9.11.3",
+    "@polkadot/types-codec": "9.11.3",
+    "@polkadot/api-base": "9.11.3",
+    "@polkadot/rpc-core": "9.11.3",
+    "@polkadot/typegen": "9.11.3",
     // these follow same versioning
-
-    // these follow same versioning
-    "@polkadot/api": "9.6.1",
-    "@polkadot/types": "9.6.1",
-    "@polkadot/api-augment": "9.6.1",
-    "@polkadot/types-codec": "9.6.1",
-    "@polkadot/api-base": "9.6.1",
-    "@polkadot/rpc-core": "9.6.1",
-    "@polkadot/typegen": "9.6.1",
-    // these follow same versioning
-
     // extension
     "@polkadot/extension-inject": "0.44.5",
     "@polkadot/extension-dapp": "0.44.5"
   },
-
   /**
    * When set to true, for all projects in the repo, all dependencies will be automatically added as preferredVersions,
    * except in cases where different projects specify different version ranges for a given dependency.  For older
@@ -62,7 +56,6 @@
    * will recalculate all version selections.
    */
   // "implicitlyPreferredVersions": false,
-
   /**
    * The "rush check" command can be used to enforce that every project in the repo must specify
    * the same SemVer range for a given dependency.  However, sometimes exceptions are needed.

@@ -141,6 +141,13 @@ declare module '@polkadot/api-base/types/consts' {
        **/
       [key: string]: Codec;
     };
+    tipping: {
+      maxTipsPerVerificationContext: u32 & AugmentedConst<ApiType>;
+      /**
+       * Generic const
+       **/
+      [key: string]: Codec;
+    };
     transactionPayment: {
       /**
        * A fee mulitplier for `Operational` extrinsics to compute "virtual tip" to boost their
@@ -258,6 +265,12 @@ declare module '@polkadot/api-base/types/consts' {
       [key: string]: Codec;
     };
     verification: {
+      /**
+       * The maximum number of accounts requesting verification for the same context. It should be
+       * high enough to prevent a malicious actor controlling several accounts to lock the
+       * verification of a given context to failed status
+       **/
+      maxRequestsPerContext: u32 & AugmentedConst<ApiType>;
       /**
        * The amount to pay in order to issue a verification. It will be refunded to any account that
        * update the verification status to invalid. Thus, the higher the amount, the more

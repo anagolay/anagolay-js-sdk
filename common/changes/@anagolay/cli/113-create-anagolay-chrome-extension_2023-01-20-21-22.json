@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@anagolay/cli",
+      "comment": "update",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@anagolay/cli"
+}

@@ -15,13 +15,17 @@ module.exports = {
   trailingComma: 'none',
   semi: true,
   bracketSpacing: true,
+  bracketLint: false,
   overrides: [{ files: '*.svelte', options: { parser: 'svelte' } }],
   plugins: [
     './common/autoinstallers/rush-prettier/node_modules/prettier-plugin-svelte',
     './common/autoinstallers/rush-prettier/node_modules/prettier-plugin-packagejson'
-  ]
-  // svelteSortOrder: 'options-styles-scripts-markup',
-  // svelteStrictMode: true,
-  // svelteAllowShorthand: false,
-  // svelteIndentScriptAndStyle: false
+    // // MUST come last, also this doesn't work yet
+    // './common/autoinstallers/rush-prettier/node_modules/prettier-plugin-tailwindcss'
+  ],
+  pluginSearchDirs: false,
+  svelteSortOrder: 'options-scripts-markup-styles',
+  svelteStrictMode: true,
+  svelteAllowShorthand: false,
+  svelteIndentScriptAndStyle: false
 };

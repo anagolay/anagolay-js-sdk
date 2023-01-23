@@ -1,0 +1,38 @@
+{
+  "extends": "./.svelte-kit/tsconfig.json",
+  "compilerOptions": {
+    "allowJs": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "importHelpers": true,
+    "noEmit": true,
+    "resolveJsonModule": true,
+    "preserveValueImports": true,
+    "esModuleInterop": true,
+    // "importsNotUsedAsValues": "preserve",
+    "lib": ["DOM", "ES2020"],
+    "types": ["node", "chrome", "vitest/globals"],
+    "paths": {
+      "$src": ["./src/"],
+      "$src/*": ["./src/*"],
+      "@anagolay/types/augment-api": ["../libraries/types/lib/augment-api"]
+    }
+  },
+  "include": [
+    "./src/apiExtractor.ts",
+    "./.svelte-kit/ambient.d.ts",
+    "./types/**/$types.d.ts",
+    "./vite.config.ts",
+    "./src/**/*.js",
+    "./src/**/*.ts",
+    "./src/**/*.svelte",
+    "./src/**/*.js",
+    "./src/**/*.ts",
+    "./src/**/*.svelte",
+    "./tests/**/*.js",
+    "./tests/**/*.ts",
+    "./tests/**/*.svelte",
+    "./package.json"
+  ]
+}

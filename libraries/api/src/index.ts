@@ -9,5 +9,5 @@ import * as pallets from './pallets';
 
 // this is NOT smart
 // export * from '@polkadot/api';
-
+export type { ApiPromise } from '@polkadot/api';
 export { pallets };

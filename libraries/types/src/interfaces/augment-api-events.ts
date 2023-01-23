@@ -15,6 +15,9 @@ import type {
   FrameSupportWeightsDispatchInfo,
   SpFinalityGrandpaAppPublic,
   SpRuntimeDispatchError,
+  TippingSortTips,
+  TippingTip,
+  TippingTippingSettings,
   VerificationVerificationRequest
 } from '@polkadot/types/lookup';
 
@@ -277,6 +280,27 @@ declare module '@polkadot/api-base/types/events' {
         [sender: AccountId32, hash_: H256],
         { sender: AccountId32; hash_: H256 }
       >;
+      /**
+       * Generic event
+       **/
+      [key: string]: AugmentedEvent<ApiType>;
+    };
+    tipping: {
+      /**
+       * This event is never raised: chain metadata does not include types used only in RPCs so as
+       * workaround we need to include it here
+       * also this is NEVER USED, we had massive issues with the deserialization of the enum on the
+       * JS side. Keeping this for now, to test the regressions
+       **/
+      __TippingLookupTypes: AugmentedEvent<ApiType, [TippingSortTips]>;
+      /**
+       * Produced upon the newly created tip
+       **/
+      TipCreated: AugmentedEvent<ApiType, [AccountId32, AccountId32, TippingTip]>;
+      /**
+       * Produced upon settings update
+       **/
+      TippingSettingsUpdated: AugmentedEvent<ApiType, [AccountId32, Vec<TippingTippingSettings>]>;
       /**
        * Generic event
        **/

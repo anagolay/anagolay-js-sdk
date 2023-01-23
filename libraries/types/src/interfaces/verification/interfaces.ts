@@ -25,7 +25,7 @@ export enum AnVerificationAction {
 export interface AnVerificationRequest {
   context: AnVerificationContext;
   action: AnVerificationAction;
-  status: AnVerificationStatus;
+  status: keyof AnVerificationStatus | AnVerificationStatus;
   holder: AnAccountId;
   key: string;
   id?: string;

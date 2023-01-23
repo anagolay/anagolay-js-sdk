@@ -1,4 +1,5 @@
-import { anagolaySchema, rpcDefinitions, rpcDefinitionsTemp, runtimeDefinitions } from '@anagolay/types';
+import { rpcDefinitionsTemp } from '@anagolay/types';
+import { anagolaySchema, rpcDefinitions, runtimeDefinitions } from '@anagolay/types';
 import { ApiPromise, WsProvider } from '@polkadot/api';
 import { ApiOptions } from '@polkadot/api/types';
 import { isNil } from 'ramda';

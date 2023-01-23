@@ -45,11 +45,16 @@
   "cSpell.words": [
     "anagolay",
     "bafy",
+    "cidv",
     "clui",
     "destructure",
+    "fontsource",
     "grayscale",
     "ipfs",
+    "jdenticon",
     "Jsonify",
+    "Keypair",
+    "millis",
     "multihashes",
     "pnpm",
     "pnpx",
@@ -57,7 +62,12 @@
     "rehosted",
     "remeda",
     "subsampling",
-    "tailwind"
+    "Suri",
+    "tailwind",
+    "Unsub",
+    "urijs",
+    "verif",
+    "webextension"
   ],
   "search.exclude": {
     "**/node_modules": true,
@@ -74,7 +84,6 @@
   "eslint.format.enable": true,
   "eslint.packageManager": "pnpm",
   "eslint.useESLintClass": true,
-
   "terminal.integrated.lineHeight": 1.2,
   "terminal.integrated.letterSpacing": 1,
   "eslint.lintTask.enable": true,

@@ -6,3 +6,4 @@ export { default as poe } from './poe/definitions';
 export { default as statements } from './statements/definitions';
 export { default as workflows } from './workflows/definitions';
 export { default as verification } from './verification/definitions';
+export { default as tipping } from './tipping/definitions';

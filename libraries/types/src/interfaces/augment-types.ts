@@ -51,6 +51,7 @@ import type {
   StatementRecord,
   Validity
 } from '@anagolay/types/interfaces/statements';
+import type { SortTips, Tip, TippingSettings } from '@anagolay/types/interfaces/tipping';
 import type {
   VerificationAction,
   VerificationContext,
@@ -254,10 +255,12 @@ import type {
   ContractExecResultTo255,
   ContractExecResultTo260,
   ContractExecResultTo267,
+  ContractExecResultU64,
   ContractInfo,
   ContractInstantiateResult,
   ContractInstantiateResultTo267,
   ContractInstantiateResultTo299,
+  ContractInstantiateResultU64,
   ContractReturnFlags,
   ContractStorageKey,
   DeletedContract,
@@ -777,7 +780,13 @@ import type {
   WinningData10,
   WinningDataEntry
 } from '@polkadot/types/interfaces/parachains';
-import type { FeeDetails, InclusionFee, RuntimeDispatchInfo } from '@polkadot/types/interfaces/payment';
+import type {
+  FeeDetails,
+  InclusionFee,
+  RuntimeDispatchInfo,
+  RuntimeDispatchInfoV1,
+  RuntimeDispatchInfoV2
+} from '@polkadot/types/interfaces/payment';
 import type { Approvals } from '@polkadot/types/interfaces/poll';
 import type { ProxyAnnouncement, ProxyDefinition, ProxyType } from '@polkadot/types/interfaces/proxy';
 import type { AccountStatus, AccountValidity } from '@polkadot/types/interfaces/purchase';
@@ -1453,10 +1462,12 @@ declare module '@polkadot/types/types/registry' {
     ContractExecResultTo255: ContractExecResultTo255;
     ContractExecResultTo260: ContractExecResultTo260;
     ContractExecResultTo267: ContractExecResultTo267;
+    ContractExecResultU64: ContractExecResultU64;
     ContractInfo: ContractInfo;
     ContractInstantiateResult: ContractInstantiateResult;
     ContractInstantiateResultTo267: ContractInstantiateResultTo267;
     ContractInstantiateResultTo299: ContractInstantiateResultTo299;
+    ContractInstantiateResultU64: ContractInstantiateResultU64;
     ContractLayoutArray: ContractLayoutArray;
     ContractLayoutCell: ContractLayoutCell;
     ContractLayoutEnum: ContractLayoutEnum;
@@ -2079,6 +2090,8 @@ declare module '@polkadot/types/types/registry' {
     RpcMethods: RpcMethods;
     RuntimeDbWeight: RuntimeDbWeight;
     RuntimeDispatchInfo: RuntimeDispatchInfo;
+    RuntimeDispatchInfoV1: RuntimeDispatchInfoV1;
+    RuntimeDispatchInfoV2: RuntimeDispatchInfoV2;
     RuntimeVersion: RuntimeVersion;
     RuntimeVersionApi: RuntimeVersionApi;
     RuntimeVersionPartial: RuntimeVersionPartial;
@@ -2194,6 +2207,7 @@ declare module '@polkadot/types/types/registry' {
     SolutionOrSnapshotSize: SolutionOrSnapshotSize;
     SolutionSupport: SolutionSupport;
     SolutionSupports: SolutionSupports;
+    SortTips: SortTips;
     SpanIndex: SpanIndex;
     SpanRecord: SpanRecord;
     SpecVersion: SpecVersion;
@@ -2262,6 +2276,8 @@ declare module '@polkadot/types/types/registry' {
     TAssetDepositBalance: TAssetDepositBalance;
     Text: Text;
     Timepoint: Timepoint;
+    Tip: Tip;
+    TippingSettings: TippingSettings;
     TokenError: TokenError;
     TombstoneContractInfo: TombstoneContractInfo;
     TraceBlockResponse: TraceBlockResponse;

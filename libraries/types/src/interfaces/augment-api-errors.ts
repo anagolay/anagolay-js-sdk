@@ -271,6 +271,21 @@ declare module '@polkadot/api-base/types/errors' {
        **/
       [key: string]: AugmentedError<ApiType>;
     };
+    tipping: {
+      /**
+       * The verification context is not set-up to enable tipping
+       **/
+      InvalidConfiguration: AugmentedError<ApiType>;
+      /**
+       * The verification context is not associated to a successful verification request and cannot
+       * be tipped
+       **/
+      InvalidVerificationContext: AugmentedError<ApiType>;
+      /**
+       * Generic error
+       **/
+      [key: string]: AugmentedError<ApiType>;
+    };
     treasury: {
       /**
        * The spend origin is valid but the amount it is allowed to spend is lower than the
@@ -385,6 +400,11 @@ declare module '@polkadot/api-base/types/errors' {
        **/
       InvalidVerificationStatus: AugmentedError<ApiType>;
       /**
+       * There are already a number of accounts attempting to verify the same context and no more
+       * will be accepted
+       **/
+      MaxVerificationRequestsPerContextLimitReached: AugmentedError<ApiType>;
+      /**
        * No registered [`VerificationStrategy'] could match the request
        **/
       NoMatchingVerificationStrategy: AugmentedError<ApiType>;
@@ -401,6 +421,10 @@ declare module '@polkadot/api-base/types/errors' {
        * The VerificationContext is submitted twice, no matter the VerificationStatus
        **/
       VerificationAlreadyIssued: AugmentedError<ApiType>;
+      /**
+       * The verification invalidation callback failed
+       **/
+      VerificationInvalidationError: AugmentedError<ApiType>;
       /**
        * The verification key generation failed
        **/

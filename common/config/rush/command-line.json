@@ -128,7 +128,7 @@
       "safeForSimultaneousRushProcesses": true,
       "autoinstallerName": "rush-prettier",
       // This will invoke common/autoinstallers/rush-prettier/node_modules/.bin/pretty
-      "shellCommand": "prettier --ignore-path .prettierignore --check --plugin-search-dir=. ."
+      "shellCommand": "prettier --ignore-path .prettierignore --check ."
     },
     {
       "name": "prettier:fmt",
@@ -137,7 +137,7 @@
       "safeForSimultaneousRushProcesses": false,
       "autoinstallerName": "rush-prettier",
       // This will invoke common/autoinstallers/rush-prettier/node_modules/.bin/pretty
-      "shellCommand": "prettier --ignore-path .prettierignore --write --plugin-search-dir=. ."
+      "shellCommand": "prettier --ignore-path .prettierignore --write ."
     },
     {
       "name": "prettyquick",

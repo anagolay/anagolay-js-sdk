@@ -2,14 +2,14 @@
   "name": "@anagolay/util",
   "version": "0.1.0",
   "description": "Various utilities needed for Anagolay Network. They are carefully written to be fast and work in browser and nodejs env.",
-  "homepage": "https://gitlab.com/anagolay/anagolay-js/-/tree/main/sdk/util#readme",
+  "homepage": "https://gitlab.com/anagolay/anagolay-js/-/tree/main/libraries/util#readme",
   "bugs": {
     "url": "https://gitlab.com/anagolay/anagolay-js/issues"
   },
   "repository": {
     "type": "git",
     "url": "https://gitlab.com/anagolay/anagolay-js.git",
-    "directory": "sdk/util"
+    "directory": "libraries/util"
   },
   "license": "GPL3",
   "author": "did:substrate:5Fn9SNUE8LihCm7Lq5dpPgBebGy5D7ZKWESDsWbdjsfV37d4",
@@ -44,16 +44,16 @@
     "watch": "heft test --watch"
   },
   "dependencies": {
-    "@polkadot/api": "9.6.1",
-    "@polkadot/types": "9.6.1",
-    "@polkadot/types-codec": "9.6.1",
-    "@polkadot/util": "10.1.11",
+    "@polkadot/api": "9.11.3",
+    "@polkadot/types": "9.11.3",
+    "@polkadot/types-codec": "9.11.3",
+    "@polkadot/util": "10.2.6",
     "pino": "8.4.2",
     "ramda": "0.28.0"
   },
   "devDependencies": {
-    "@kelp_digital/heft-esm-transform-plugin": "workspace:*",
-    "@kelp_digital/heft-library-rig": "workspace:*",
+    "@kelp_digital/heft-esm-transform-plugin": "https://ipfs.anagolay.network/ipfs/bafybeid2la5atzl4bvmoy4g3ok3qpdp6rriyd2j2w7pxh72rwvwkbdzova",
+    "@kelp_digital/heft-library-rig": "https://ipfs.anagolay.network/ipfs/bafybeiaczeebskjlgd2b7eukucgmx24vccas7mhlutvqrh6cwfqw7y4k2a",
     "@microsoft/api-extractor": "7.29.2",
     "@rushstack/eslint-config": "3.0.0",
     "@rushstack/heft": "0.47.3",
@@ -61,7 +61,7 @@
     "@rushstack/heft-node-rig": "1.10.2",
     "@types/heft-jest": "1.0.3",
     "@types/node": "18.7.6",
-    "@types/ramda": "0.27.64",
+    "@types/ramda": "0.28.20",
     "env-cmd": "10.1.0",
     "eslint": "8.22.0",
     "eslint-plugin-simple-import-sort": "7.0.0",

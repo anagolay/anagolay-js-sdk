@@ -1,6 +1,7 @@
 // import { NodeGlobalsPolyfillPlugin } from '@esbuild-plugins/node-globals-polyfill';
 
 import { sveltekit } from '@sveltejs/kit/vite';
+import { SvelteKitPWA } from '@vite-pwa/sveltekit';
 import { resolve } from 'path';
 // import rollupNodePolyFills from 'rollup-plugin-node-polyfills';
 import { type UserConfig, defineConfig } from 'vite';
@@ -12,7 +13,26 @@ import wasm from 'vite-plugin-wasm';
 
 const config: UserConfig = {
   logLevel: 'info',
-  plugins: [isoImport(), sveltekit(), wasm(), topLevelAwait()],
+  plugins: [
+    isoImport(),
+    wasm(),
+    topLevelAwait(),
+    sveltekit(),
+    SvelteKitPWA({
+      includeAssets: ['favicon.ico', 'robots.txt', 'apple-touch-icon.png'],
+
+      manifest: {
+        name: 'Anagolay App',
+        short_name: 'anagolay.js',
+        description: 'Explorer app for all who want to interact with Anagolay Network',
+        theme_color: '#ffffff'
+      },
+      workbox: {
+        cleanupOutdatedCaches: false,
+        sourcemap: true
+      }
+    })
+  ],
   resolve: {
     alias: {
       $src: resolve('./src')
@@ -54,7 +74,7 @@ const config: UserConfig = {
 };
 
 export default defineConfig(({ mode }) => {
-  let conf = config;
+  const conf = config;
   // const { command, mode, ssrBuild } = opts;
   // if (command === 'serve') {
   // 	return {

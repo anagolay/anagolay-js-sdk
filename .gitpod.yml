@@ -41,3 +41,4 @@ vscode:
     - pflannery.vscode-versionlens
     - formulahendry.auto-rename-tag
     - asciidoctor.asciidoctor-vscode
+    - ZixuanChen.vitest-explorer

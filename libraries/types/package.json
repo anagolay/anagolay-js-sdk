@@ -7,25 +7,25 @@
     "blockchain",
     "network"
   ],
-  "homepage": "https://gitlab.com/anagolay/network-js-sdk/-/tree/master/sdk/types#readme",
+  "homepage": "https://gitlab.com/anagolay/anagolay-js/-/tree/master/sdk/types#readme",
   "bugs": {
-    "url": "https://gitlab.com/anagolay/network-js-sdk/issues"
+    "url": "https://gitlab.com/anagolay/anagolay-js/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://gitlab.com/anagolay/network-js-sdk.git",
+    "url": "https://gitlab.com/anagolay/anagolay-js.git",
     "directory": "sdk/types"
   },
   "license": "GPL3",
-  "author": "did:substrate:GHm6gp6khjcxQvnbnSsHdYejsFK1nNVxcGyGAsbDfsymtLr",
+  "author": "did:substrate:5Fn9SNUE8LihCm7Lq5dpPgBebGy5D7ZKWESDsWbdjsfV37d4",
   "exports": {
-    ".": {
-      "require": "./lib-commonjs/index.js",
-      "import": "./lib/index.js"
-    },
     "./augment-api": {
       "require": "./lib-commonjs/augment-api.js",
       "import": "./lib/augment-api.js"
+    },
+    ".": {
+      "require": "./lib-commonjs/index.js",
+      "import": "./lib/index.js"
     },
     "./*": {
       "require": "./lib-commonjs/*",
@@ -44,24 +44,25 @@
     "gen:meta": "ts-node --skip-project node_modules/@polkadot/typegen/scripts/polkadot-types-from-chain.cjs --package @anagolay/types/interfaces --endpoint ./metadata/anagolay.json --output ./src/interfaces",
     "gen:types": "pnpm gen:defs && pnpm gen:meta && pnpm lint:fix",
     "generate": "pnpm update:metadata && pnpm gen:defs && pnpm gen:meta && pnpm lint:fix && rush prettyquick",
-    "lint:fix": "eslint --quiet ./src --ext .js,.jsx,.ts,.tsx --fix",
+    "lint:fix": "eslint --quiet ./src --ext .js,.ts --fix",
     "package": "bash ../../common/scripts/package.sh",
     "update:metadata": "node ./scripts/fetchMetadata.cjs -o './metadata/anagolay.json' -e 'wss://idiyanale-testnet.anagolay.io'",
     "watch": "heft build --clean --watch"
   },
   "dependencies": {
-    "@polkadot/api": "9.6.1",
-    "@polkadot/api-base": "9.6.1",
+    "@polkadot/api": "9.11.3",
+    "@polkadot/api-base": "9.11.3",
     "@polkadot/metadata": "4.17.1",
-    "@polkadot/rpc-core": "9.6.1",
-    "@polkadot/typegen": "9.6.1",
-    "@polkadot/types": "9.6.1",
-    "@polkadot/types-codec": "9.6.1",
+    "@polkadot/rpc-core": "9.11.3",
+    "@polkadot/typegen": "9.11.3",
+    "@polkadot/types": "9.11.3",
+    "@polkadot/types-codec": "9.11.3",
+    "@polkadot/util": "10.2.6",
     "yargs": "17.5.1"
   },
   "devDependencies": {
-    "@kelp_digital/heft-esm-transform-plugin": "workspace:*",
-    "@kelp_digital/heft-library-rig": "workspace:*",
+    "@kelp_digital/heft-esm-transform-plugin": "https://ipfs.anagolay.network/ipfs/bafybeid2la5atzl4bvmoy4g3ok3qpdp6rriyd2j2w7pxh72rwvwkbdzova",
+    "@kelp_digital/heft-library-rig": "https://ipfs.anagolay.network/ipfs/bafybeiaczeebskjlgd2b7eukucgmx24vccas7mhlutvqrh6cwfqw7y4k2a",
     "@microsoft/api-extractor": "7.29.2",
     "@rushstack/eslint-config": "3.0.0",
     "@rushstack/heft": "0.47.3",

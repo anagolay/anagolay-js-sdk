@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@anagolay/util",
+      "comment": "add few more functoins",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@anagolay/util"
+}

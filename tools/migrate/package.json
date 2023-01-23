@@ -1,0 +1,61 @@
+{
+  "name": "@anagolay/migrate",
+  "version": "0.1.0",
+  "description": "Migrate data from one chain to another",
+  "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.com/anagolay/anagolay-js.git",
+    "directory": "tools/migrate"
+  },
+  "license": "AGPL3",
+  "author": "did:substrate:5Fn9SNUE8LihCm7Lq5dpPgBebGy5D7ZKWESDsWbdjsfV37d4",
+  "exports": {
+    ".": {
+      "require": "./lib-commonjs/index.js",
+      "import": "./lib/index.js"
+    },
+    "./*": {
+      "require": "./lib-commonjs/*.js",
+      "import": "./lib/*.js"
+    }
+  },
+  "main": "./lib-commonjs/start.js",
+  "module": "./lib/start.js",
+  "types": "./lib/start.d.ts",
+  "scripts": {
+    "_phase:build": "pnpm build",
+    "_phase:test": "heft test --no-build",
+    "build": "heft build --clean",
+    "serve": "node ./lib-commonjs/start.js",
+    "start": "heft start",
+    "watch": "heft build --clean --watch",
+    "watch:test": "heft test --clean --watch"
+  },
+  "dependencies": {
+    "@anagolay/api": "workspace:*",
+    "@anagolay/types": "workspace:*",
+    "@anagolay/util": "workspace:*",
+    "@polkadot/api-augment": "9.11.3",
+    "ramda": "0.28.0",
+    "resolve.exports": "1.1.0"
+  },
+  "devDependencies": {
+    "@kelp_digital/heft-esm-transform-plugin": "https://ipfs.anagolay.network/ipfs/bafybeid2la5atzl4bvmoy4g3ok3qpdp6rriyd2j2w7pxh72rwvwkbdzova",
+    "@kelp_digital/heft-library-rig": "https://ipfs.anagolay.network/ipfs/bafybeiaczeebskjlgd2b7eukucgmx24vccas7mhlutvqrh6cwfqw7y4k2a",
+    "@microsoft/api-extractor": "7.29.2",
+    "@rushstack/eslint-config": "3.0.0",
+    "@rushstack/heft": "0.47.3",
+    "@rushstack/heft-jest-plugin": "0.3.25",
+    "@rushstack/heft-node-rig": "1.10.2",
+    "@types/heft-jest": "1.0.3",
+    "@types/node": "18.7.6",
+    "@types/ramda": "0.28.20",
+    "eslint": "8.22.0",
+    "eslint-plugin-simple-import-sort": "7.0.0",
+    "eslint-plugin-unused-imports": "2.0.0",
+    "nodemon": "2.0.15",
+    "ts-node": "10.9.1",
+    "typescript": "4.7.4"
+  }
+}

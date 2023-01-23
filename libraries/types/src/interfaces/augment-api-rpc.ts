@@ -11,6 +11,12 @@ import type {
   OperationVersion,
   OperationVersionId
 } from '@anagolay/types/interfaces/operations';
+import type { Tip } from '@anagolay/types/interfaces/tipping';
+import type {
+  VerificationContext,
+  VerificationRequest,
+  VerificationStatus
+} from '@anagolay/types/interfaces/verification';
 import type {
   Workflow,
   WorkflowId,
@@ -48,7 +54,7 @@ import type {
   ContractCallRequest,
   ContractExecResult,
   ContractInstantiateResult,
-  InstantiateRequest
+  InstantiateRequestV1
 } from '@polkadot/types/interfaces/contracts';
 import type { BlockStats } from '@polkadot/types/interfaces/dev';
 import type { CreatedBlock } from '@polkadot/types/interfaces/engine';
@@ -76,10 +82,11 @@ import type {
 } from '@polkadot/types/interfaces/grandpa';
 import type { MmrLeafBatchProof, MmrLeafProof } from '@polkadot/types/interfaces/mmr';
 import type { StorageKind } from '@polkadot/types/interfaces/offchain';
-import type { FeeDetails, RuntimeDispatchInfo } from '@polkadot/types/interfaces/payment';
+import type { FeeDetails, RuntimeDispatchInfoV1 } from '@polkadot/types/interfaces/payment';
 import type { RpcMethods } from '@polkadot/types/interfaces/rpc';
 import type {
   AccountId,
+  Balance,
   BlockNumber,
   H160,
   H256,
@@ -318,16 +325,8 @@ declare module '@polkadot/rpc-core/types/jsonrpc' {
       instantiate: AugmentedRpc<
         (
           request:
-            | InstantiateRequest
-            | {
-                origin?: any;
-                value?: any;
-                gasLimit?: any;
-                storageDepositLimit?: any;
-                code?: any;
-                data?: any;
-                salt?: any;
-              }
+            | InstantiateRequestV1
+            | { origin?: any; value?: any; gasLimit?: any; code?: any; data?: any; salt?: any }
             | string
             | Uint8Array,
           at?: BlockHash | string | Uint8Array
@@ -766,6 +765,7 @@ declare module '@polkadot/rpc-core/types/jsonrpc' {
     };
     payment: {
       /**
+       * @deprecated Use `api.call.transactionPaymentApi.queryFeeDetails` instead
        * Query the detailed fee of a given encoded extrinsic
        **/
       queryFeeDetails: AugmentedRpc<
@@ -775,13 +775,14 @@ declare module '@polkadot/rpc-core/types/jsonrpc' {
         ) => Observable<FeeDetails>
       >;
       /**
+       * @deprecated Use `api.call.transactionPaymentApi.queryInfo` instead
        * Retrieves the fee information for an encoded extrinsic
        **/
       queryInfo: AugmentedRpc<
         (
           extrinsic: Bytes | string | Uint8Array,
           at?: BlockHash | string | Uint8Array
-        ) => Observable<RuntimeDispatchInfo>
+        ) => Observable<RuntimeDispatchInfoV1>
       >;
     };
     rpc: {
@@ -1066,6 +1067,118 @@ declare module '@polkadot/rpc-core/types/jsonrpc' {
        * Retrieves the version of the node
        **/
       version: AugmentedRpc<() => Observable<Text>>;
+    };
+    tipping: {
+      /**
+       * Retrieve tips for specific account and verification context. It is sorted by createdAt DESC. New tips come first.
+       **/
+      getTips: AugmentedRpc<
+        (
+          account_id: AccountId | string | Uint8Array,
+          verification_context:
+            | VerificationContext
+            | { Unbounded: any }
+            | { UrlForDomain: any }
+            | { UrlForDomainWithUsername: any }
+            | { UrlForDomainWithSubdomain: any }
+            | { UrlForDomainWithUsernameAndRepository: any }
+            | string
+            | Uint8Array,
+          offset: u64 | AnyNumber | Uint8Array,
+          limit: u16 | AnyNumber | Uint8Array,
+          at?: BlockHash | string | Uint8Array
+        ) => Observable<Vec<Tip>>
+      >;
+      /**
+       * Get the count of tips for a [`VerificationContext`]
+       **/
+      total: AugmentedRpc<
+        (
+          account_id: AccountId | string | Uint8Array,
+          verification_context:
+            | VerificationContext
+            | { Unbounded: any }
+            | { UrlForDomain: any }
+            | { UrlForDomainWithUsername: any }
+            | { UrlForDomainWithSubdomain: any }
+            | { UrlForDomainWithUsernameAndRepository: any }
+            | string
+            | Uint8Array,
+          at?: BlockHash | string | Uint8Array
+        ) => Observable<u64>
+      >;
+      /**
+       * Get the total balance of tips received for a [`VerificationContext`]
+       **/
+      totalReceived: AugmentedRpc<
+        (
+          account_id: AccountId | string | Uint8Array,
+          verification_context:
+            | VerificationContext
+            | { Unbounded: any }
+            | { UrlForDomain: any }
+            | { UrlForDomainWithUsername: any }
+            | { UrlForDomainWithSubdomain: any }
+            | { UrlForDomainWithUsernameAndRepository: any }
+            | string
+            | Uint8Array,
+          at?: BlockHash | string | Uint8Array
+        ) => Observable<Balance>
+      >;
+    };
+    verification: {
+      /**
+       * Retrieve verification context data
+       **/
+      getRequests: AugmentedRpc<
+        (
+          contexts:
+            | Vec<VerificationContext>
+            | (
+                | VerificationContext
+                | { Unbounded: any }
+                | { UrlForDomain: any }
+                | { UrlForDomainWithUsername: any }
+                | { UrlForDomainWithSubdomain: any }
+                | { UrlForDomainWithUsernameAndRepository: any }
+                | string
+                | Uint8Array
+              )[],
+          status:
+            | Option<VerificationStatus>
+            | null
+            | Uint8Array
+            | VerificationStatus
+            | { Waiting: any }
+            | { Pending: any }
+            | { Failure: any }
+            | { Success: any }
+            | string,
+          offset: u64 | AnyNumber | Uint8Array,
+          limit: u16 | AnyNumber | Uint8Array,
+          at?: BlockHash | string | Uint8Array
+        ) => Observable<Vec<VerificationRequest>>
+      >;
+      /**
+       * Retrieve verification contexts for a specific account
+       **/
+      getRequestsForAccount: AugmentedRpc<
+        (
+          account: AccountId | string | Uint8Array,
+          status:
+            | Option<VerificationStatus>
+            | null
+            | Uint8Array
+            | VerificationStatus
+            | { Waiting: any }
+            | { Pending: any }
+            | { Failure: any }
+            | { Success: any }
+            | string,
+          offset: u64 | AnyNumber | Uint8Array,
+          limit: u16 | AnyNumber | Uint8Array
+        ) => Observable<Vec<VerificationRequest>>
+      >;
     };
     web3: {
       /**

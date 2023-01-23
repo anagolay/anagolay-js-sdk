@@ -11,6 +11,12 @@ import type {
   OperationVersion,
   OperationVersionId
 } from '@anagolay/types/interfaces/operations';
+import type { Tip } from '@anagolay/types/interfaces/tipping';
+import type {
+  VerificationContext,
+  VerificationRequest,
+  VerificationStatus
+} from '@anagolay/types/interfaces/verification';
 import type {
   Workflow,
   WorkflowId,
@@ -30,6 +36,7 @@ import type { OpaqueMetadata } from '@polkadot/types/interfaces/metadata';
 import type { FeeDetails, RuntimeDispatchInfo } from '@polkadot/types/interfaces/payment';
 import type {
   AccountId,
+  Balance,
   Block,
   Hash,
   Header,
@@ -279,6 +286,72 @@ declare module '@polkadot/api-base/types/calls' {
        **/
       [key: string]: DecoratedCallBase<ApiType>;
     };
+    /** 0xa44ef6da77a84d88/1 */
+    tippingApi: {
+      /**
+       * Retrieve tips for specific account and verification context. It is sorted by createdAt DESC. New tips come first.
+       **/
+      getTips: AugmentedCall<
+        ApiType,
+        (
+          account_id: AccountId | string | Uint8Array,
+          verification_context:
+            | VerificationContext
+            | { Unbounded: any }
+            | { UrlForDomain: any }
+            | { UrlForDomainWithUsername: any }
+            | { UrlForDomainWithSubdomain: any }
+            | { UrlForDomainWithUsernameAndRepository: any }
+            | string
+            | Uint8Array,
+          offset: u64 | AnyNumber | Uint8Array,
+          limit: u16 | AnyNumber | Uint8Array,
+          at: BlockHash | string | Uint8Array
+        ) => Observable<Vec<Tip>>
+      >;
+      /**
+       * Get the count of tips for a [`VerificationContext`]
+       **/
+      total: AugmentedCall<
+        ApiType,
+        (
+          account_id: AccountId | string | Uint8Array,
+          verification_context:
+            | VerificationContext
+            | { Unbounded: any }
+            | { UrlForDomain: any }
+            | { UrlForDomainWithUsername: any }
+            | { UrlForDomainWithSubdomain: any }
+            | { UrlForDomainWithUsernameAndRepository: any }
+            | string
+            | Uint8Array,
+          at: BlockHash | string | Uint8Array
+        ) => Observable<u64>
+      >;
+      /**
+       * Get the total balance of tips received for a [`VerificationContext`]
+       **/
+      totalReceived: AugmentedCall<
+        ApiType,
+        (
+          account_id: AccountId | string | Uint8Array,
+          verification_context:
+            | VerificationContext
+            | { Unbounded: any }
+            | { UrlForDomain: any }
+            | { UrlForDomainWithUsername: any }
+            | { UrlForDomainWithSubdomain: any }
+            | { UrlForDomainWithUsernameAndRepository: any }
+            | string
+            | Uint8Array,
+          at: BlockHash | string | Uint8Array
+        ) => Observable<Balance>
+      >;
+      /**
+       * Generic call
+       **/
+      [key: string]: DecoratedCallBase<ApiType>;
+    };
     /** 0x37c8bb1350a9a2a8/1 */
     transactionPaymentApi: {
       /**
@@ -300,6 +373,67 @@ declare module '@polkadot/api-base/types/calls' {
           uxt: Extrinsic | IExtrinsic | string | Uint8Array,
           len: u32 | AnyNumber | Uint8Array
         ) => Observable<RuntimeDispatchInfo>
+      >;
+      /**
+       * Generic call
+       **/
+      [key: string]: DecoratedCallBase<ApiType>;
+    };
+    /** 0xa78c229d7d8522c8/1 */
+    verificationApi: {
+      /**
+       * Retrieve verification context data
+       **/
+      getRequests: AugmentedCall<
+        ApiType,
+        (
+          contexts:
+            | Vec<VerificationContext>
+            | (
+                | VerificationContext
+                | { Unbounded: any }
+                | { UrlForDomain: any }
+                | { UrlForDomainWithUsername: any }
+                | { UrlForDomainWithSubdomain: any }
+                | { UrlForDomainWithUsernameAndRepository: any }
+                | string
+                | Uint8Array
+              )[],
+          status:
+            | Option<VerificationStatus>
+            | null
+            | Uint8Array
+            | VerificationStatus
+            | { Waiting: any }
+            | { Pending: any }
+            | { Failure: any }
+            | { Success: any }
+            | string,
+          offset: u64 | AnyNumber | Uint8Array,
+          limit: u16 | AnyNumber | Uint8Array,
+          at: BlockHash | string | Uint8Array
+        ) => Observable<Vec<VerificationRequest>>
+      >;
+      /**
+       * Retrieve verification contexts for a specific account
+       **/
+      getRequestsForAccount: AugmentedCall<
+        ApiType,
+        (
+          account: AccountId | string | Uint8Array,
+          status:
+            | Option<VerificationStatus>
+            | null
+            | Uint8Array
+            | VerificationStatus
+            | { Waiting: any }
+            | { Pending: any }
+            | { Failure: any }
+            | { Success: any }
+            | string,
+          offset: u64 | AnyNumber | Uint8Array,
+          limit: u16 | AnyNumber | Uint8Array
+        ) => Observable<Vec<VerificationRequest>>
       >;
       /**
        * Generic call

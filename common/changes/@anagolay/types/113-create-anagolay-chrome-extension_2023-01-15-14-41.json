@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@anagolay/types",
+      "comment": "new types",
+      "type": "none"
+    }
+  ],
+  "packageName": "@anagolay/types"
+}

@@ -1,4 +1,112 @@
 export default {
+  tipping: {
+    getTips: {
+      description: 'Retrieve tips for specific account and verification context.',
+      params: [
+        {
+          name: 'account_id',
+          type: 'AccountId'
+        },
+        {
+          name: 'verification_context',
+          type: 'VerificationVerificationContext'
+        },
+        {
+          name: 'offset',
+          type: 'u64'
+        },
+        {
+          name: 'limit',
+          type: 'u16'
+        },
+        {
+          name: 'at',
+          type: 'BlockHash',
+          isOptional: true
+        }
+      ],
+      type: 'Vec<TippingTip<Balance, AccountId, BlockNumber>>'
+    },
+    total: {
+      description: 'Get the total balance of tips received for a [`VerificationContext`]',
+      params: [
+        {
+          name: 'account_id',
+          type: 'AccountId'
+        },
+        {
+          name: 'verification_context',
+          type: 'VerificationVerificationContext'
+        }
+      ],
+      type: 'u64'
+    },
+    totalReceived: {
+      description: 'Get the total balance of tips received for a [`VerificationContext`]',
+      params: [
+        {
+          name: 'account_id',
+          type: 'AccountId'
+        },
+        {
+          name: 'verification_context',
+          type: 'VerificationVerificationContext'
+        }
+      ],
+      type: 'Balance'
+    }
+  },
+  verification: {
+    getRequests: {
+      description: 'Retrieve verification context data.',
+      params: [
+        {
+          name: 'contexts',
+          type: 'Vec<VerificationVerificationContext>'
+        },
+        {
+          name: 'status',
+          type: 'Option<VerificationVerificationStatus>'
+        },
+        {
+          name: 'offset',
+          type: 'u64'
+        },
+        {
+          name: 'limit',
+          type: 'u16'
+        },
+        {
+          name: 'at',
+          type: 'BlockHash',
+          isOptional: true
+        }
+      ],
+      type: 'Vec<VerificationVerificationRequest<AccountId>>'
+    },
+    getRequestsForAccount: {
+      description: 'Retrieve verification contexts for a specific account',
+      params: [
+        {
+          name: 'account',
+          type: 'AccountId'
+        },
+        {
+          name: 'status',
+          type: 'Option<VerificationVerificationStatus>'
+        },
+        {
+          name: 'offset',
+          type: 'u64'
+        },
+        {
+          name: 'limit',
+          type: 'u16'
+        }
+      ],
+      type: 'Vec<VerificationVerificationRequest<AccountId>>'
+    }
+  },
   operations: {
     getOperationsByIds: {
       description:

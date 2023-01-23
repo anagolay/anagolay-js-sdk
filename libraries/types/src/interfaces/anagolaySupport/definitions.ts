@@ -9,6 +9,7 @@ export const AnagolayCustomTypes: DefinitionsTypes = {
     _enum: ['GENERIC', 'PHOTO', 'CAMERA', 'LENS', 'SMARTPHONE', 'USER', 'SYS', 'FLOWCONTROL']
   },
   WasmArtifactSubType: {
+    // maybe this should be camelCase
     _enum: ['Cjs', 'Esm', 'Wasm', 'Web']
   },
   AnagolayVersionExtra: {

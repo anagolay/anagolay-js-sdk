@@ -20,7 +20,7 @@
  * A Utility library for anagolay js
  *
  * @remarks
- * We will re-export some of the packages that everbody will need.
+ * We will re-export some of the packages that everybody will need.
  *
  * One of those libraries is `@polkadot/util` re-exported as `polkadot_util`.
  *
@@ -30,3 +30,4 @@
 export * from './booleans';
 export * from './doh/doh';
 export * from './json/json';
+export * from './polkadotJsApp';
