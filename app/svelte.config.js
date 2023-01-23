@@ -17,8 +17,7 @@ const config = {
     }),
     prerender: {
       concurrency: 10
-    },
-    trailingSlash: 'always'
+    }
   }
 };
 

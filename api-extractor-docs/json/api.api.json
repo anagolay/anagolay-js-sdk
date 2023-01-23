@@ -882,7 +882,7 @@
         {
           "kind": "Function",
           "canonicalReference": "@anagolay/api!networkCallback:function(1)",
-          "docComment": "/**\n * Generic callback for all `tx.signAndSend` methods Usage:\n * ```ts\n *   import createEventEmitter from '@anagolay/api/events'\n *   const broadcast = createEventEmitter()\n *   const receivedInstance = await api.tx.utility\n *     .batch(txs)\n *     .signAndSend(signer, {}, params =>\n *       networkCallback(params, broadcast, EVENT_NAME_BATCH)\n *     )\n *\n *     // usage\n *      receivedInstance.on(EVENT_NAME_BATCH, p => logger(p))\n * ```\n *\n * @param params - [ISubmittableResult] callback params from the call\n *\n * @param broadcast - EventEmitter instance\n */\n",
+          "docComment": "/**\n * Generic callback for all `tx.signAndSend` methods\n *\n * @param params - [ISubmittableResult] callback params from the call\n *\n * @param broadcast - EventEmitter instance\n *\n * @typeParam T - The data structure that is expected on the event listener\n *\n * * Example:\n * ```ts\n *   import createEventEmitter from '@anagolay/api/events'\n *   const broadcast = createEventEmitter()\n *   const receivedInstance = await api.tx.utility\n *     .batch(txs)\n *     .signAndSend(signer, {}, params =>\n *       networkCallback(params, broadcast, EVENT_NAME_BATCH)\n *     )\n *\n *     // usage\n *      receivedInstance.on(EVENT_NAME_BATCH, p => logger(p))\n * ```\n *\n * @public\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
@@ -1992,6 +1992,419 @@
                     }
                   ],
                   "name": "saveOwnership"
+                }
+              ]
+            },
+            {
+              "kind": "Namespace",
+              "canonicalReference": "@anagolay/api!pallets.tipping:namespace",
+              "docComment": "",
+              "excerptTokens": [],
+              "releaseTag": "None",
+              "name": "tipping",
+              "preserveMemberOrder": false,
+              "members": [
+                {
+                  "kind": "Namespace",
+                  "canonicalReference": "@anagolay/api!pallets.tipping.config:namespace",
+                  "docComment": "",
+                  "excerptTokens": [],
+                  "releaseTag": "None",
+                  "name": "config",
+                  "preserveMemberOrder": false,
+                  "members": [
+                    {
+                      "kind": "Variable",
+                      "canonicalReference": "@anagolay/api!pallets.tipping.config.EVENT_NAME_BATCH:var",
+                      "docComment": "",
+                      "excerptTokens": [
+                        {
+                          "kind": "Content",
+                          "text": "EVENT_NAME_BATCH: "
+                        },
+                        {
+                          "kind": "Content",
+                          "text": "string"
+                        }
+                      ],
+                      "isReadonly": true,
+                      "releaseTag": "Public",
+                      "name": "EVENT_NAME_BATCH",
+                      "variableTypeTokenRange": {
+                        "startIndex": 1,
+                        "endIndex": 2
+                      }
+                    },
+                    {
+                      "kind": "Variable",
+                      "canonicalReference": "@anagolay/api!pallets.tipping.config.EVENT_NAME_ERROR:var",
+                      "docComment": "",
+                      "excerptTokens": [
+                        {
+                          "kind": "Content",
+                          "text": "EVENT_NAME_ERROR: "
+                        },
+                        {
+                          "kind": "Content",
+                          "text": "string"
+                        }
+                      ],
+                      "isReadonly": true,
+                      "releaseTag": "Public",
+                      "name": "EVENT_NAME_ERROR",
+                      "variableTypeTokenRange": {
+                        "startIndex": 1,
+                        "endIndex": 2
+                      }
+                    },
+                    {
+                      "kind": "Variable",
+                      "canonicalReference": "@anagolay/api!pallets.tipping.config.EVENT_NAME_SINGLE:var",
+                      "docComment": "",
+                      "excerptTokens": [
+                        {
+                          "kind": "Content",
+                          "text": "EVENT_NAME_SINGLE: "
+                        },
+                        {
+                          "kind": "Content",
+                          "text": "string"
+                        }
+                      ],
+                      "isReadonly": true,
+                      "releaseTag": "Public",
+                      "name": "EVENT_NAME_SINGLE",
+                      "variableTypeTokenRange": {
+                        "startIndex": 1,
+                        "endIndex": 2
+                      }
+                    }
+                  ]
+                },
+                {
+                  "kind": "Interface",
+                  "canonicalReference": "@anagolay/api!pallets.tipping.ITipExtrinsic:interface",
+                  "docComment": "/**\n * @public\n */\n",
+                  "excerptTokens": [
+                    {
+                      "kind": "Content",
+                      "text": "export interface ITipExtrinsic "
+                    }
+                  ],
+                  "releaseTag": "Public",
+                  "name": "ITipExtrinsic",
+                  "preserveMemberOrder": false,
+                  "members": [
+                    {
+                      "kind": "PropertySignature",
+                      "canonicalReference": "@anagolay/api!pallets.tipping.ITipExtrinsic#amount:member",
+                      "docComment": "/**\n * Use the real world number here, it will be transformed to chain decimals\n */\n",
+                      "excerptTokens": [
+                        {
+                          "kind": "Content",
+                          "text": "amount: "
+                        },
+                        {
+                          "kind": "Reference",
+                          "text": "AnyNumber",
+                          "canonicalReference": "@polkadot/types-codec!AnyNumber:type"
+                        },
+                        {
+                          "kind": "Content",
+                          "text": ";"
+                        }
+                      ],
+                      "isReadonly": false,
+                      "isOptional": false,
+                      "releaseTag": "Public",
+                      "name": "amount",
+                      "propertyTypeTokenRange": {
+                        "startIndex": 1,
+                        "endIndex": 2
+                      }
+                    },
+                    {
+                      "kind": "PropertySignature",
+                      "canonicalReference": "@anagolay/api!pallets.tipping.ITipExtrinsic#context:member",
+                      "docComment": "",
+                      "excerptTokens": [
+                        {
+                          "kind": "Content",
+                          "text": "context: "
+                        },
+                        {
+                          "kind": "Reference",
+                          "text": "AnVerificationContext",
+                          "canonicalReference": "@anagolay/api!AnVerificationContext:interface"
+                        },
+                        {
+                          "kind": "Content",
+                          "text": ";"
+                        }
+                      ],
+                      "isReadonly": false,
+                      "isOptional": false,
+                      "releaseTag": "Public",
+                      "name": "context",
+                      "propertyTypeTokenRange": {
+                        "startIndex": 1,
+                        "endIndex": 2
+                      }
+                    }
+                  ],
+                  "extendsTokenRanges": []
+                },
+                {
+                  "kind": "Variable",
+                  "canonicalReference": "@anagolay/api!pallets.tipping.palletName:var",
+                  "docComment": "",
+                  "excerptTokens": [
+                    {
+                      "kind": "Content",
+                      "text": "palletName: "
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "string"
+                    }
+                  ],
+                  "isReadonly": true,
+                  "releaseTag": "Public",
+                  "name": "palletName",
+                  "variableTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                },
+                {
+                  "kind": "Function",
+                  "canonicalReference": "@anagolay/api!pallets.tipping.tip:function(1)",
+                  "docComment": "/**\n * Make a tip\n *\n * @param params - \n *\n * @param signer - \n *\n * @param options - \n *\n * @returns \n */\n",
+                  "excerptTokens": [
+                    {
+                      "kind": "Content",
+                      "text": "export declare function tip(params: "
+                    },
+                    {
+                      "kind": "Reference",
+                      "text": "ITipExtrinsic",
+                      "canonicalReference": "@anagolay/api!ITipExtrinsic:interface"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ", signer: "
+                    },
+                    {
+                      "kind": "Reference",
+                      "text": "AddressOrPair",
+                      "canonicalReference": "@polkadot/api-base!AddressOrPair:type"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ", options?: "
+                    },
+                    {
+                      "kind": "Reference",
+                      "text": "Partial",
+                      "canonicalReference": "!Partial:type"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "<"
+                    },
+                    {
+                      "kind": "Reference",
+                      "text": "SignerOptions",
+                      "canonicalReference": "@polkadot/api!SignerOptions:interface"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ">"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "): "
+                    },
+                    {
+                      "kind": "Reference",
+                      "text": "Promise",
+                      "canonicalReference": "!Promise:interface"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "<"
+                    },
+                    {
+                      "kind": "Reference",
+                      "text": "ICustomEventEmitter",
+                      "canonicalReference": "@anagolay/api!ICustomEventEmitter:interface"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "<"
+                    },
+                    {
+                      "kind": "Reference",
+                      "text": "TippingEvent",
+                      "canonicalReference": "@anagolay/api!~\"\\\"@polkadot/types/lookup\\\"\".TippingEvent:interface"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ">>"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ";"
+                    }
+                  ],
+                  "returnTypeTokenRange": {
+                    "startIndex": 10,
+                    "endIndex": 16
+                  },
+                  "releaseTag": "Public",
+                  "overloadIndex": 1,
+                  "parameters": [
+                    {
+                      "parameterName": "params",
+                      "parameterTypeTokenRange": {
+                        "startIndex": 1,
+                        "endIndex": 2
+                      },
+                      "isOptional": false
+                    },
+                    {
+                      "parameterName": "signer",
+                      "parameterTypeTokenRange": {
+                        "startIndex": 3,
+                        "endIndex": 4
+                      },
+                      "isOptional": false
+                    },
+                    {
+                      "parameterName": "options",
+                      "parameterTypeTokenRange": {
+                        "startIndex": 5,
+                        "endIndex": 9
+                      },
+                      "isOptional": true
+                    }
+                  ],
+                  "name": "tip"
+                },
+                {
+                  "kind": "Function",
+                  "canonicalReference": "@anagolay/api!pallets.tipping.updateSettings:function(1)",
+                  "docComment": "/**\n * Update the settings\n *\n * @param params - \n *\n * @param signer - \n *\n * @param options - \n *\n * @returns \n */\n",
+                  "excerptTokens": [
+                    {
+                      "kind": "Content",
+                      "text": "export declare function updateSettings(params: "
+                    },
+                    {
+                      "kind": "Reference",
+                      "text": "AnTippingSettings",
+                      "canonicalReference": "@anagolay/api!AnTippingSettings:interface"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ", signer: "
+                    },
+                    {
+                      "kind": "Reference",
+                      "text": "AddressOrPair",
+                      "canonicalReference": "@polkadot/api-base!AddressOrPair:type"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ", options?: "
+                    },
+                    {
+                      "kind": "Reference",
+                      "text": "Partial",
+                      "canonicalReference": "!Partial:type"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "<"
+                    },
+                    {
+                      "kind": "Reference",
+                      "text": "SignerOptions",
+                      "canonicalReference": "@polkadot/api!SignerOptions:interface"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ">"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "): "
+                    },
+                    {
+                      "kind": "Reference",
+                      "text": "Promise",
+                      "canonicalReference": "!Promise:interface"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "<"
+                    },
+                    {
+                      "kind": "Reference",
+                      "text": "ICustomEventEmitter",
+                      "canonicalReference": "@anagolay/api!ICustomEventEmitter:interface"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "<"
+                    },
+                    {
+                      "kind": "Reference",
+                      "text": "TippingEvent",
+                      "canonicalReference": "@anagolay/api!~\"\\\"@polkadot/types/lookup\\\"\".TippingEvent:interface"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ">>"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ";"
+                    }
+                  ],
+                  "returnTypeTokenRange": {
+                    "startIndex": 10,
+                    "endIndex": 16
+                  },
+                  "releaseTag": "Public",
+                  "overloadIndex": 1,
+                  "parameters": [
+                    {
+                      "parameterName": "params",
+                      "parameterTypeTokenRange": {
+                        "startIndex": 1,
+                        "endIndex": 2
+                      },
+                      "isOptional": false
+                    },
+                    {
+                      "parameterName": "signer",
+                      "parameterTypeTokenRange": {
+                        "startIndex": 3,
+                        "endIndex": 4
+                      },
+                      "isOptional": false
+                    },
+                    {
+                      "parameterName": "options",
+                      "parameterTypeTokenRange": {
+                        "startIndex": 5,
+                        "endIndex": 9
+                      },
+                      "isOptional": true
+                    }
+                  ],
+                  "name": "updateSettings"
                 }
               ]
             },

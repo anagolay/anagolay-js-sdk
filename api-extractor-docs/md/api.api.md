@@ -13,9 +13,11 @@ import { AnOperationVersion } from '@anagolay/types';
 import { AnProofData } from '@anagolay/types';
 import { AnStatement } from '@anagolay/types';
 import { AnStatementData } from '@anagolay/types';
+import { AnTippingSettings } from '@anagolay/types';
 import { AnVerificationAction } from '@anagolay/types';
 import { AnVerificationContext } from '@anagolay/types';
 import { AnVerificationRequest } from '@anagolay/types';
+import { AnyNumber } from '@polkadot/types/types';
 import { ApiPromise } from '@polkadot/api';
 import { Codec } from '@polkadot/types/types';
 import { EventEmitter } from 'events';
@@ -24,6 +26,9 @@ import { OperationData } from '@anagolay/types';
 import { OperationVersionData } from '@anagolay/types';
 import { SignerOptions } from '@polkadot/api/types';
 import { SubmittableExtrinsic } from '@polkadot/api/types';
+import { TippingEvent } from '@polkadot/types/lookup';
+
+export { ApiPromise }
 
 declare namespace config {
     export {
@@ -54,6 +59,14 @@ declare namespace config_4 {
         EVENT_NAME_BATCH_4 as EVENT_NAME_BATCH,
         EVENT_NAME_SINGLE_4 as EVENT_NAME_SINGLE,
         EVENT_NAME_ERROR_4 as EVENT_NAME_ERROR
+    }
+}
+
+declare namespace config_5 {
+    export {
+        EVENT_NAME_BATCH_5 as EVENT_NAME_BATCH,
+        EVENT_NAME_SINGLE_5 as EVENT_NAME_SINGLE,
+        EVENT_NAME_ERROR_5 as EVENT_NAME_ERROR
     }
 }
 
@@ -98,6 +111,9 @@ const EVENT_NAME_BATCH_3: string;
 const EVENT_NAME_BATCH_4: string;
 
 // @public (undocumented)
+const EVENT_NAME_BATCH_5: string;
+
+// @public (undocumented)
 const EVENT_NAME_ERROR: string;
 
 // @public (undocumented)
@@ -110,6 +126,9 @@ const EVENT_NAME_ERROR_3: string;
 const EVENT_NAME_ERROR_4: string;
 
 // @public (undocumented)
+const EVENT_NAME_ERROR_5: string;
+
+// @public (undocumented)
 const EVENT_NAME_SINGLE: string;
 
 // @public (undocumented)
@@ -120,6 +139,9 @@ const EVENT_NAME_SINGLE_3: string;
 
 // @public (undocumented)
 const EVENT_NAME_SINGLE_4: string;
+
+// @public (undocumented)
+const EVENT_NAME_SINGLE_5: string;
 
 // @public
 export function getCachedApi(): ApiPromise;
@@ -155,6 +177,13 @@ export interface IOperationWithVersions {
     versions: AnOperationVersion[];
 }
 
+// @public (undocumented)
+interface ITipExtrinsic {
+    amount: AnyNumber;
+    // (undocumented)
+    context: AnVerificationContext;
+}
+
 // @public
 function listenForEvent(eventName: 'OwnershipCreated' | 'CopyrightCreated' | 'StatementRevoked'): ICustomEventEmitter<AnStatement>;
 
@@ -186,11 +215,15 @@ const palletName_3: string;
 // @public (undocumented)
 const palletName_4: string;
 
+// @public (undocumented)
+const palletName_5: string;
+
 declare namespace pallets {
     export {
         operations,
         poe,
         statements,
+        tipping,
         verification
     }
 }
@@ -237,10 +270,26 @@ declare namespace statements {
     }
 }
 
-declare namespace verification {
+// @public
+function tip(params: ITipExtrinsic, signer: AddressOrPair, options?: Partial<SignerOptions>): Promise<ICustomEventEmitter<TippingEvent>>;
+
+declare namespace tipping {
     export {
         palletName_4 as palletName,
         config_4 as config,
+        tip,
+        updateSettings,
+        ITipExtrinsic
+    }
+}
+
+// @public
+function updateSettings(params: AnTippingSettings, signer: AddressOrPair, options?: Partial<SignerOptions>): Promise<ICustomEventEmitter<TippingEvent>>;
+
+declare namespace verification {
+    export {
+        palletName_5 as palletName,
+        config_5 as config,
         requestVerificationAndSend,
         performVerificationAndSend,
         listenForEvent_2 as listenForEvent

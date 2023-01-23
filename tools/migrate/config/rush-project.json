@@ -1,0 +1,13 @@
+{
+  "operationSettings": [
+    {
+      "operationName": "_phase:build",
+      "outputFolderNames": ["lib", "lib-commonjs"]
+    },
+
+    {
+      "operationName": "_phase:test",
+      "outputFolderNames": ["temp/coverage", "temp/jest-reports", ".heft"]
+    }
+  ]
+}

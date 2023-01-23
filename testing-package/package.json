@@ -5,8 +5,8 @@
   "keywords": [],
   "repository": {
     "type": "git",
-    "url": "https://gitlab.com/anagolay/network-js-sdk.git",
-    "directory": ""
+    "url": "https://gitlab.com/anagolay/anagolay-js.git",
+    "directory": "testing-package"
   },
   "license": "AGPL3",
   "author": "did:substrate:5Fn9SNUE8LihCm7Lq5dpPgBebGy5D7ZKWESDsWbdjsfV37d4",
@@ -37,13 +37,13 @@
     "@anagolay/api": "workspace:*",
     "@anagolay/types": "workspace:*",
     "@anagolay/util": "workspace:*",
-    "@polkadot/api-augment": "9.6.1",
+    "@polkadot/api-augment": "9.11.3",
     "ramda": "0.28.0",
     "resolve.exports": "1.1.0"
   },
   "devDependencies": {
-    "@kelp_digital/heft-esm-transform-plugin": "workspace:*",
-    "@kelp_digital/heft-library-rig": "workspace:*",
+    "@kelp_digital/heft-esm-transform-plugin": "https://ipfs.anagolay.network/ipfs/bafybeid2la5atzl4bvmoy4g3ok3qpdp6rriyd2j2w7pxh72rwvwkbdzova",
+    "@kelp_digital/heft-library-rig": "https://ipfs.anagolay.network/ipfs/bafybeiaczeebskjlgd2b7eukucgmx24vccas7mhlutvqrh6cwfqw7y4k2a",
     "@microsoft/api-extractor": "7.29.2",
     "@rushstack/eslint-config": "3.0.0",
     "@rushstack/heft": "0.47.3",
@@ -51,7 +51,7 @@
     "@rushstack/heft-node-rig": "1.10.2",
     "@types/heft-jest": "1.0.3",
     "@types/node": "18.7.6",
-    "@types/ramda": "0.27.64",
+    "@types/ramda": "0.28.20",
     "eslint": "8.22.0",
     "eslint-plugin-simple-import-sort": "7.0.0",
     "eslint-plugin-unused-imports": "2.0.0",

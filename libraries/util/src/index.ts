@@ -30,3 +30,4 @@ export * from './doh/doh';
 export * from './exec';
 export * from './git';
 export * from './json/json';
+export * from './polkadotJsApp';

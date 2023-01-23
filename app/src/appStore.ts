@@ -4,19 +4,29 @@ import { connectToWs } from '@anagolay/api';
 import { ApiPromise } from '@polkadot/api';
 import debugLib, { Debugger } from 'debug';
 import { append, equals, find, isEmpty, isNil, uniq } from 'ramda';
-import { type Writable, get, writable } from 'svelte/store';
+import { type Writable, derived, get, writable } from 'svelte/store';
 
 import { browser } from '$app/environment';
 
 import { notificationsStore } from './components/notifications/store';
 import { chainList } from './config';
 
-export const debugName: string = 'stores:app';
+export const appWideDebug: string = 'appWide';
+export const appDebug: Debugger = debugLib(appWideDebug);
 
+/**
+ * this is exported because we can include in the button action
+ */
+export const debugName: string = 'stores:app';
 const debug: Debugger = debugLib(debugName);
 
 const localStorageCustomChainsKey: string = 'anagolayJs:customChains';
 export const localStorageConnectToKey: string = 'anagolayJs:connectTo';
+
+/**
+ * if not changes it will be 12. 1 UNIT has this many decimals
+ */
+export const chainDecimalsStore = writable(12);
 
 /**
  * Cross application state for the info is the WS connected or not
@@ -27,11 +37,6 @@ export const connectingToChain: Writable<boolean> = writable(false);
  * Our websocket relay
  */
 export const websocketRelayConnected: Writable<boolean> = writable(false);
-
-/**
- * Cross application state for the info is the WS connected or not to the blockchain
- */
-export const chainConnected: Writable<boolean> = writable(false);
 
 /**
  * Cross application state for the the page title in the Navbar
@@ -145,7 +150,7 @@ function chainConnectionStore(): IChainStoreReturn {
     connectedChainName: undefined
   };
 
-  debug('defaultState', defaultState);
+  // debug('defaultState', defaultState);
 
   const { subscribe, update, set } = writable<IChainStore>(defaultState);
 
@@ -156,15 +161,14 @@ function chainConnectionStore(): IChainStoreReturn {
   async function connect(chainWs: string = defaultState.connectedTo): Promise<void> {
     connectingToChain.set(true);
 
-    const { connectedTo } = defaultState;
     debug('Connecting to', chainWs);
     const closeNotification = notificationsStore.addNew({
-      text: `Connecting to ${connectedTo}`,
+      text: `Connecting to ${chainWs}`,
       infoLevel: 'info',
       showSpinner: true
     });
 
-    const api: ApiPromise = await connectToWs(connectedTo);
+    const api: ApiPromise = await connectToWs(chainWs);
 
     // wait then update
     await api.isReady;
@@ -174,9 +178,9 @@ function chainConnectionStore(): IChainStoreReturn {
     // console.log((await api.rpc.system.chain()).toString());
 
     connectedChainName.set((await api.rpc.system.chain()).toString());
+    chainDecimalsStore.set(api.registry.chainDecimals[0]);
 
     update((curState) => {
-      chainConnected.set(api.isConnected);
       connectingToChain.set(false);
 
       return { ...curState, api, connectedTo: chainWs };
@@ -194,7 +198,6 @@ function chainConnectionStore(): IChainStoreReturn {
       debug('Disconnecting from previous api instance.');
       await state.api.disconnect();
     }
-    chainConnected.set(false);
     await connect(chainWs);
   }
 
@@ -213,19 +216,19 @@ function chainConnectionStore(): IChainStoreReturn {
     },
     addCustomChain: (chainWs: string) => {
       // eslint-disable-next-line @typescript-eslint/no-use-before-define
-      update((state) => {
-        const { chainList } = state;
+      update((oldState) => {
+        const { chainList } = oldState;
         const alreadyExists = find((c) => equals(c, chainWs), chainList);
         if (!isNil(alreadyExists)) {
           debug('not adding, chain on list ', chainWs);
-          return state;
+          return oldState;
         }
         const newChainList = append(chainWs, chainList);
         if (browser) {
           window.localStorage.setItem(localStorageCustomChainsKey, JSON.stringify(newChainList));
           window.localStorage.setItem(localStorageConnectToKey, chainWs);
         }
-        return { ...state, chainList: newChainList };
+        return { ...oldState, chainList: newChainList };
       });
     },
     reconnect,
@@ -237,3 +240,13 @@ function chainConnectionStore(): IChainStoreReturn {
  * Connectable Chain store. Use this to connect to the chain, set custom one and listen the connected or disconnected state
  */
 export const chainStore: IChainStoreReturn = chainConnectionStore();
+/**
+ * Cross application state for the info is the WS connected or not to the blockchain
+ */
+export const chainConnected = derived(chainStore, ($chainStore) => {
+  if (!isNil($chainStore.api)) {
+    return $chainStore.api.isConnected;
+  } else {
+    return false;
+  }
+});

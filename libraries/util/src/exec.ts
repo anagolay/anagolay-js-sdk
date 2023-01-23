@@ -6,7 +6,7 @@ export interface IExecOptions extends BaseExecOptions {
 }
 
 /**
- * Default exec options
+ * Default exec options. A drop-in async replacement for native exec
  */
 export const defaultExecOptions: IExecOptions = {
   cwd: '.',

@@ -1,11 +1,34 @@
 = Developer oriented stuff
 :toc:
 
+== Env setup
+
+If you are running this repo on Gitpod, all things are installed for you and the build is executed. If you are not then these are the requirements:
+
+- node 18.4.0
+- pnpm
+- knowledge about https://rushstack.io
+- rush package installed
+
+This is the monorepo built with the RushStack, and we are using it to build and deploy. The testing is done using heft and jest. This means that you will need to build the projects before.
+
+Common commands per project are `pnpm build` and `pnpm watch`. There are few other commands that are useful such as `pnpm watch:test` which will execute the `heft test` and watch.
+
+Before you start 
+
+```bash
+rush install
+rush build
+```
+
+Now you are ready to start, go to the project and start developing :)
+
+If you are working on different projects you can always use the `tmux` and run the watch commands. In gitpod env we are using the https://github.com/gpakosz/.tmux , we cannot guarantee that you will have the tmux and that the bindings are the same as what we are using.
+
+
 == Notes
 
-=== @anagolay/types issue
 
-when running the type generation make sure that you return the `types.ts` to orig state and go through the changes int he generated code and return the lookup imports
 
 == Resources
 

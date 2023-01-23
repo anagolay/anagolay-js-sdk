@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import '@anagolay/types/augment-api';
 
 import { AnStatement, AnStatementData } from '@anagolay/types';
@@ -88,8 +89,8 @@ export function listenForEvent(
 ): ICustomEventEmitter<AnStatement> {
   const broadcast = createEventEmitter<AnStatement>();
   const api = getCachedApi();
-  api.query.system.events((r) => {
-    r.forEach(({ event }) => {
+  api.query.system.events((r: any) => {
+    r.forEach(({ event }: any) => {
       const { data, method } = event;
       if (equals(method, eventName)) {
         broadcast.emit(eventName, { data: data[1].toHuman() as unknown as AnStatement });

@@ -1,56 +1,59 @@
 <script lang="ts">
-  import type { UnsubscribePromise } from '@polkadot/api/types';
-  import { onMount } from 'svelte';
+import '@anagolay/types/augment-api';
 
-  import { bestBlock, chainConnected, chainStore, connectedChainName } from '$src/appStore';
-  import MaterialIcon from '$src/components/base/MaterialIcon.svelte';
+import type { UnsubscribePromise } from '@polkadot/api/types';
+import { onMount } from 'svelte';
 
-  let unsub: UnsubscribePromise;
+import { bestBlock, chainConnected, chainStore, connectedChainName } from '$src/appStore';
+import MaterialIcon from '$src/components/base/MaterialIcon.svelte';
 
-  let specName: string = '';
-  let specVersion: string = '100';
-  let implVersion: number = 0;
+import Accordion from '../base/Accordion.svelte';
 
-  let addressPrefix: string = '42';
-  let decimals: string = '12';
-  let unit: string = 'IDI';
+let unsub: UnsubscribePromise;
 
-  async function handleChainUpdate() {
-    const { api } = $chainStore;
+let specName: string = '';
+let specVersion: string = '100';
+let implVersion: number = 0;
 
-    unsub = api.rpc.state.subscribeRuntimeVersion((r) => {
-      unit = r.registry.chainTokens.toString();
-      addressPrefix = r.registry.chainSS58.toString();
-      decimals = r.registry.chainDecimals.toString();
-      specName = r.specName.toString();
-      specVersion = r.specVersion.toString();
-      implVersion = r.implVersion.toNumber();
-    });
-  }
+let addressPrefix: string = '42';
+let decimals: string = '12';
+let unit: string = 'IDI';
 
-  let badgeStatusClass: string = 'animate-pulse badge-info';
-
-  onMount(() => {
-    return unsub;
+async function handleChainUpdate() {
+  const { api } = $chainStore;
+  unsub = api.rpc.state.subscribeRuntimeVersion((r) => {
+    unit = r.registry.chainTokens.toString();
+    addressPrefix = r.registry.chainSS58.toString();
+    decimals = r.registry.chainDecimals.toString();
+    specName = r.specName.toString();
+    specVersion = r.specVersion.toString();
+    implVersion = r.implVersion.toNumber();
   });
+}
 
-  $: {
-    if ($chainConnected) {
-      badgeStatusClass = 'badge-success';
-      handleChainUpdate();
-    }
+let badgeStatusClass: string = 'animate-pulse badge-info';
+
+onMount(() => {
+  return unsub;
+});
+
+$: {
+  if ($chainConnected) {
+    badgeStatusClass = 'badge-success';
+    handleChainUpdate();
   }
+}
 </script>
 
 <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
-<div tabindex="0" class="collapse collapse-arrow border border-base-300 bg-base-100 rounded-box w-full">
-  <input type="checkbox" class="networkInfo" />
-
-  <div class="collapse-title flex items-center gap-2 networkInfo-checked">
-    <div class="badge {badgeStatusClass}" />
-    <div class="font-medium text">{$connectedChainName} #{$bestBlock}</div>
-  </div>
-  <div class="collapse-content">
+<Accordion>
+  <svelte:fragment slot="title">
+    <div class="flex items-center gap-2 networkInfo-checked">
+      <div class="badge {badgeStatusClass}"></div>
+      <div class="font-medium text">{$connectedChainName} #{$bestBlock}</div>
+    </div>
+  </svelte:fragment>
+  <svelte:fragment slot="content">
     <div class="flex flex-col">
       <div class="flex flex-col text-right">
         <div class="flex flex-row justify-between items-center p-1">
@@ -76,11 +79,11 @@
         <div class="flex flex-row justify-between items-center p-1">
           <span>Check on PolkadotJS:</span>
           <!-- svelte-ignore security-anchor-rel-noreferrer -->
-          <a href={chainStore.makePolkadotJsAppUrl().toString()} target="_blank" class="text-sm"
+          <a href="{chainStore.makePolkadotJsAppUrl().toString()}" target="_blank" class="text-sm"
             ><MaterialIcon iconName="link" /></a
           >
         </div>
       </div>
     </div>
-  </div>
-</div>
+  </svelte:fragment>
+</Accordion>

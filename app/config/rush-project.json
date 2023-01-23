@@ -1,9 +1,8 @@
 {
   "operationSettings": [
-    // New configuration (after phases)
     {
       "operationName": "_phase:build",
-      "outputFolderNames": ["lib", "build"]
+      "outputFolderNames": [".svelte-kit", ".rush", "build"]
     }
   ]
 }

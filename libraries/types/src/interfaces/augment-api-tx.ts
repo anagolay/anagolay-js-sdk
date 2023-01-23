@@ -26,6 +26,7 @@ import type {
   SpCoreVoid,
   SpFinalityGrandpaEquivocationProof,
   StatementsStatementData,
+  TippingTippingSettings,
   VerificationOffchainVerificationIndexingData,
   VerificationVerificationAction,
   VerificationVerificationContext,
@@ -807,6 +808,74 @@ declare module '@polkadot/api-base/types/submittable' {
       set: AugmentedSubmittable<
         (now: Compact<u64> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>,
         [Compact<u64>]
+      >;
+      /**
+       * Generic tx
+       **/
+      [key: string]: SubmittableExtrinsicFunction<ApiType>;
+    };
+    tipping: {
+      /**
+       * Accepts a [`Tip`] for a [`VerificationContext`] and stores them in the
+       * `TipsByAccountIdAndVerificationContext` while it transfers of the required amount from
+       * the account of the sender to the account of the receiver.
+       *
+       * # Arguments
+       * * origin - the call origin
+       * * tip - the [`Tip`]
+       * * context - the [`VerificationContext`]
+       *
+       * # Errors
+       * * `InvalidVerificationContext` - If the [`VerificationContext`] is not available for tipping
+       * * `InvalidConfiguration` - If tipping is disabled or not configured for the context
+       *
+       * # Events
+       * * `TipCreated` - when the [`Tip`] is successfully created
+       *
+       * # Return
+       * `DispatchResultWithPostInfo` containing Unit type
+       **/
+      tip: AugmentedSubmittable<
+        (
+          amount: u128 | AnyNumber | Uint8Array,
+          context:
+            | VerificationVerificationContext
+            | { Unbounded: any }
+            | { UrlForDomain: any }
+            | { UrlForDomainWithUsername: any }
+            | { UrlForDomainWithSubdomain: any }
+            | { UrlForDomainWithUsernameAndRepository: any }
+            | string
+            | Uint8Array
+        ) => SubmittableExtrinsic<ApiType>,
+        [u128, VerificationVerificationContext]
+      >;
+      /**
+       * Accepts a collection of [`TippingSettings`] and stores it. A coherency check is performed
+       * on the rightfulness of the caller to configure each setting
+       *
+       * # Arguments
+       * * origin - the call origin
+       * * tipping_settings - the [`TippingSettings`]
+       *
+       * # Events
+       * * `SettingsUpdated` - when the [`TippingSettings`] is successfully updated
+       *
+       * # Return
+       * `DispatchResultWithPostInfo` containing Unit type
+       **/
+      updateSettings: AugmentedSubmittable<
+        (
+          tippingSettings:
+            | Vec<TippingTippingSettings>
+            | (
+                | TippingTippingSettings
+                | { context?: any; enabled?: any; account?: any }
+                | string
+                | Uint8Array
+              )[]
+        ) => SubmittableExtrinsic<ApiType>,
+        [Vec<TippingTippingSettings>]
       >;
       /**
        * Generic tx
@@ -1769,6 +1838,8 @@ declare module '@polkadot/api-base/types/submittable' {
        * required registration fee
        * * `NoMatchingVerificationStrategy` - if none of the registered verification strategies is
        * suitable to respond to the request
+       * * `MaxVerificationRequestsPerContextLimitReached` - if the maximum number of verification
+       * requests has already been submitted for this context
        *
        * # Events
        * * `VerificationRequested` - having `Waiting` status and providing further verification

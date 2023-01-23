@@ -1,7 +1,7 @@
 /**
  * application name
  */
-export const applicationName: string = 'anagolay.js';
+export const applicationName: string = 'anagolay{.js}';
 
 export interface IConnectableChain {
   alias: string;

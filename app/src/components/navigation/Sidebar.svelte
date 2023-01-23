@@ -5,7 +5,7 @@
   import PolkadotAccounts from '$src/components/polkadot/Accounts.svelte';
   import NetworkQuickInfo from '$src/components/selectNetwork/NetworkQuickInfo.svelte';
 
-  import FundsAvaliable from '../FundsAvaliable.svelte';
+  import FundsAvailable from '../FundsAvailable.svelte';
   import { appPages } from './data';
 </script>
 
@@ -14,7 +14,7 @@
   <div class="flex flex-col">
     <div class="flex flex-col">
       <PolkadotAccounts class="p-4" />
-      <FundsAvaliable />
+      <FundsAvailable />
     </div>
     <div>
       <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
@@ -22,13 +22,13 @@
         {#each appPages as { name, iconClassName, href }}
           <li>
             <a
-              {href}
-              id={$page.url.pathname.startsWith(href + '/') ? 'active-menu' : ''}
-              class={`flex ${$page.url.pathname == href ? 'active' : ''} ${
-                $page.url.pathname.startsWith(href + '/') ? 'active' : ''
-              }`}
+              href="{href}"
+              id="{$page.url.pathname.startsWith(href + '/') ? 'active-menu' : ''}"
+              class="{`flex ${$page.url.pathname == href ? 'active' : ''} ${
+                $page.url.pathname.startsWith(href) && href != '/' ? 'active' : ''
+              }`}"
             >
-              <MaterialIcon iconName={iconClassName} />
+              <MaterialIcon iconName="{iconClassName}" />
               {name}
             </a>
           </li>

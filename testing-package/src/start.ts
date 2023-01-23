@@ -4,30 +4,47 @@
 
 import '@anagolay/types/augment-api';
 
-import { connectToWs, connectToWsWithCorrectRpc, pallets } from '@anagolay/api';
-
 /**
  *
  */
 async function main(): Promise<void> {
   try {
     // this will pass
-    await connectToWs();
-    await pallets.operations.retrieveOperationsPaged(0, 10);
+    // const api = await connectToWsWithCorrectRpc();
+    // // await pallets.operations.retrieveOperationsPaged(0, 10);
+    // const t: any = await api.rpc.tipping.getTips(
+    //   '5EJA1oSrTx7xYMBerrUHLNktA3P89YHJBeTrevotTQab6gEY',
+    //   {
+    //     UrlForDomain: ['https://woss.io', 'woss.io']
+    //   },
+    //   0,
+    //   100,
+    //   AnSortTips.desc
+    // );
 
-    // this will fail. the
-    // pallets expect the cached api version
-    await connectToWsWithCorrectRpc();
-    await pallets.operations.retrieveOperationsPaged(0, 10);
-
+    // console.log('tips', t.toHuman());
     // console.log('anagolaySchema', JSON.stringify(anagolaySchema));
 
     // const rpcMethods = await api.rpc.rpc.methods();
     // for (const [version, methods] of rpcMethods) {
     //   console.log(version, methods);
     //   const m = methods.toJSON();
-    //   console.log('m', m);
+    //   console.log('m', m?.toString());
     // }
+
+    // const allCtxs = await api.rpc.verification.getRequests([], null, 0, 100);
+    // console.log('available contexts', JSON.stringify(allCtxs.toHuman(), null, 2));
+
+    // const ctxs: AnVerificationContext[] = [
+    //   {
+    //     UrlForDomain: ['https://macula.link', 'macula.link']
+    //   }
+    // ];
+    // const status: AnVerificationStatus = {
+    //   Success: undefined
+    // };
+    // const verifCtx = await api.rpc.verification.getRequests(ctxs, status, 0, 10);
+    // console.log('verifCtx', verifCtx.toHuman());
 
     // const ops = map(convertModel)(operationsRaw);
     // console.log('operations', ops);
@@ -49,10 +66,16 @@ async function main(): Promise<void> {
     // The amount required to create a new account
     // console.log('Existential Deposit %sIDI', api.consts.balances.existentialDeposit.toNumber());
 
+    // this will fail. the
+    // pallets expect the cached api version
+    // await connectToWsWithCorrectRpc();
+    // await pallets.operations.retrieveOperationsPaged(0, 10);
+
     console.log('DONE');
+    process.exit(0);
   } catch (error) {
-    console.log('error on connecting', error);
+    // console.log('error on connecting', error);
     process.exit(0);
   }
 }
-main().catch(console.error);
+main().catch();
