@@ -1,0 +1,34 @@
+{
+  "manifest_version": 3,
+  "author": "Daniel Maricic <daniel@woss.io>",
+  "name": "Anagolay web wallet",
+  "description": "Send tips to verified creators, license content directly from verified creators, manage your accounts and much more.",
+  "short_name": "anagolay_js",
+  "version": "0.1.0",
+  "action": {
+    "default_title": "anagolay{.js} web wallet",
+    "default_popup": "index.html"
+  },
+  "background": {
+    "service_worker": "src/extensionFiles/serviceWorker.ts",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "js": ["src/extensionFiles/contentScript.ts"],
+      "matches": ["http://*/*", "https://*/*"],
+      "run_at": "document_start"
+    }
+  ],
+  "permissions": ["unlimitedStorage", "storage", "activeTab", "scripting"],
+  "icons": {
+    "16": "assets/icon16.png",
+    "32": "assets/icon32.png",
+    "48": "assets/icon48.png",
+    "64": "assets/icon64.png",
+    "128": "assets/icon128.png"
+  },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self' 'wasm-unsafe-eval' ; object-src 'self'"
+  }
+}

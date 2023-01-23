@@ -37,6 +37,8 @@ import type {
   SpConsensusAuraSr25519AppSr25519Public,
   SpRuntimeDigest,
   StatementsStatementRecord,
+  TippingTip,
+  TippingTippingSettings,
   VerificationVerificationContext,
   VerificationVerificationRequest,
   WorkflowsWorkflowRecord,
@@ -514,6 +516,53 @@ declare module '@polkadot/api-base/types/storage' {
        **/
       [key: string]: QueryableStorageEntry<ApiType>;
     };
+    tipping: {
+      /**
+       * The map of TippingSettings indexed by their respective AccountId and VerificationContext
+       **/
+      tippingSettingsByAccountIdAndVerificationContext: AugmentedQuery<
+        ApiType,
+        (
+          arg1: AccountId32 | string | Uint8Array,
+          arg2:
+            | VerificationVerificationContext
+            | { Unbounded: any }
+            | { UrlForDomain: any }
+            | { UrlForDomainWithUsername: any }
+            | { UrlForDomainWithSubdomain: any }
+            | { UrlForDomainWithUsernameAndRepository: any }
+            | string
+            | Uint8Array
+        ) => Observable<TippingTippingSettings>,
+        [AccountId32, VerificationVerificationContext]
+      > &
+        QueryableStorageEntry<ApiType, [AccountId32, VerificationVerificationContext]>;
+      /**
+       * The map of collection of Tips indexed by their respective receiver AccountId and
+       * VerificationContext
+       **/
+      tipsByAccountIdAndVerificationContext: AugmentedQuery<
+        ApiType,
+        (
+          arg1: AccountId32 | string | Uint8Array,
+          arg2:
+            | VerificationVerificationContext
+            | { Unbounded: any }
+            | { UrlForDomain: any }
+            | { UrlForDomainWithUsername: any }
+            | { UrlForDomainWithSubdomain: any }
+            | { UrlForDomainWithUsernameAndRepository: any }
+            | string
+            | Uint8Array
+        ) => Observable<Vec<TippingTip>>,
+        [AccountId32, VerificationVerificationContext]
+      > &
+        QueryableStorageEntry<ApiType, [AccountId32, VerificationVerificationContext]>;
+      /**
+       * Generic query
+       **/
+      [key: string]: QueryableStorageEntry<ApiType>;
+    };
     transactionPayment: {
       nextFeeMultiplier: AugmentedQuery<ApiType, () => Observable<u128>, []> &
         QueryableStorageEntry<ApiType, []>;
@@ -654,6 +703,26 @@ declare module '@polkadot/api-base/types/storage' {
       [key: string]: QueryableStorageEntry<ApiType>;
     };
     verification: {
+      /**
+       * The map of account id of the holder indexed by the verification contexts of the
+       * correspondent verification request
+       **/
+      accountIdsByVerificationContext: AugmentedQuery<
+        ApiType,
+        (
+          arg:
+            | VerificationVerificationContext
+            | { Unbounded: any }
+            | { UrlForDomain: any }
+            | { UrlForDomainWithUsername: any }
+            | { UrlForDomainWithSubdomain: any }
+            | { UrlForDomainWithUsernameAndRepository: any }
+            | string
+            | Uint8Array
+        ) => Observable<Vec<AccountId32>>,
+        [VerificationVerificationContext]
+      > &
+        QueryableStorageEntry<ApiType, [VerificationVerificationContext]>;
       /**
        * The map of verification requests indexed by the account id of the holder and the
        * associated verification context

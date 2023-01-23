@@ -77,3 +77,9 @@ binaries
 tsconfig.tsbuildinfo
 .svelte-kit
 build
+.macula
+**/*.timestamp*
+*.zip
+*.pem
+*.key
+zipped

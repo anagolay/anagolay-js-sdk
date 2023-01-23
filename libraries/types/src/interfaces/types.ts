@@ -7,3 +7,4 @@ export * from './poe/types';
 export * from './statements/types';
 export * from './workflows/types';
 export * from './verification/types';
+export * from './tipping/types';

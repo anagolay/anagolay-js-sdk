@@ -16,5 +16,5 @@ bump-versions:
   script:
     - set e
 
-    - git pull --rebase
+    # - git pull --rebase
     - node common/scripts/install-run-rush.js version --bump --version-policy $VERSION_POLICY --target-branch $CI_COMMIT_REF_NAME

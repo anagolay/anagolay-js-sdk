@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { AnVerificationAction, AnVerificationContext, AnVerificationRequest } from '@anagolay/types';
 import { AddressOrPair, SignerOptions } from '@polkadot/api/types';
 import { AccountId32 } from '@polkadot/types/interfaces';
@@ -69,8 +70,8 @@ export function listenForEvent(
 ): ICustomEventEmitter<AnVerificationRequest> {
   const broadcast = createEventEmitter<AnVerificationRequest>();
   const api = getCachedApi();
-  api.query.system.events((r) => {
-    r.forEach(({ event }) => {
+  api.query.system.events((r: any) => {
+    r.forEach(({ event }: any) => {
       const { data, method } = event;
       if (equals(method, eventName)) {
         broadcast.emit(eventName, { data: data[1].toHuman() as unknown as AnVerificationRequest });

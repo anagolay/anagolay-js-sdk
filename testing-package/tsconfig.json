@@ -4,7 +4,8 @@
     "types": ["heft-jest", "node"],
     "baseUrl": ".",
     "paths": {
-      "@anagolay/types/augment-api": ["../libraries/types/lib/augment-api"]
+      "@anagolay/types/augment-api": ["../libraries/types/lib/augment-api"],
+      "@anagolay/types/interfaces/augment-api": ["../libraries/types/lib/interfaces/augment-api"]
     },
     // "lib": ["esnext", "scripthost", "dom", "WebWorker"],
     // "moduleResolution": "Node16",

@@ -5,15 +5,12 @@
     <meta name="description" content="Anagolay Protocol App" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-    <link
-      rel="icon"
-      href="https://bafybeibabyx7nwvio2uqkxxjdx46h6olcybzjkpv54q6rcw4e7a2b4f5im.ipfs.anagolay.network"
-    />
+    <link rel="icon" href="/favicon.ico" />
 
     %sveltekit.head%
   </head>
 
-  <body>
-    %sveltekit.body%
+  <body data-sveltekit-preload-data data-sveltekit-preload-code>
+    <div id="app">%sveltekit.body%</div>
   </body>
 </html>

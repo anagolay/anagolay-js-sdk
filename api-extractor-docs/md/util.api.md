@@ -132,6 +132,12 @@ export type Jsonify<T> = T extends Date ? string : T extends object ? {
 export function lastRevision(repoPath: string): Promise<string>;
 
 // @public
+export function makeBlockUrl(chainWs: string, hash: string): URL;
+
+// @public
+export function makeRpcUrl(chainWs: string): URL;
+
+// @public
 export function normalizeUrlPathname(pathName: string): string;
 
 // Warning: (ae-forgotten-export) The symbol "ReplacerOrReviverAsFunction" needs to be exported by the entry point index.d.ts

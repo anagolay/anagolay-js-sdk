@@ -144,6 +144,12 @@ import type {
   StatementsStatementExtra,
   StatementsStatementRecord,
   StatementsValidity,
+  TippingCall,
+  TippingError,
+  TippingEvent,
+  TippingSortTips,
+  TippingTip,
+  TippingTippingSettings,
   VerificationCall,
   VerificationError,
   VerificationEvent,
@@ -308,6 +314,12 @@ declare module '@polkadot/types/types/registry' {
     StatementsStatementExtra: StatementsStatementExtra;
     StatementsStatementRecord: StatementsStatementRecord;
     StatementsValidity: StatementsValidity;
+    TippingCall: TippingCall;
+    TippingError: TippingError;
+    TippingEvent: TippingEvent;
+    TippingSortTips: TippingSortTips;
+    TippingTip: TippingTip;
+    TippingTippingSettings: TippingTippingSettings;
     VerificationCall: VerificationCall;
     VerificationError: VerificationError;
     VerificationEvent: VerificationEvent;

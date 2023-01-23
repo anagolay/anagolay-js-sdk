@@ -13,7 +13,12 @@ const logger: Debugger = debugOriginal('anagolayjs:networkCallback');
 
 /**
  * Generic callback for all `tx.signAndSend` methods
- * Usage:
+ * @param params [ISubmittableResult] callback params from the call
+ * @param broadcast EventEmitter instance
+ * @typeParam T - The data structure that is expected on the event listener
+ * @public
+ * 
+ *  * Example:
  * ```ts
   import createEventEmitter from '@anagolay/api/events'
   const broadcast = createEventEmitter()
@@ -26,8 +31,6 @@ const logger: Debugger = debugOriginal('anagolayjs:networkCallback');
     // usage
      receivedInstance.on(EVENT_NAME_BATCH, p => logger(p))
  * ```
- * @param params [ISubmittableResult] callback params from the call
- * @param broadcast EventEmitter instance
  */
 export async function networkCallback<T>(
   params: ISubmittableResult,
@@ -137,6 +140,7 @@ export async function networkCallback<T>(
         const error = data as unknown as ITuple<[DispatchError]>[1];
 
         logger('method', method, data.toHuman() as unknown as T);
+        // console.log('method', method, data.toHuman() as unknown as T);
 
         if (!isNil(error) && !isNil(error.isModule)) {
           const decoded = error.registry.findMetaError(error.asModule);
@@ -175,6 +179,7 @@ export async function networkCallback<T>(
           broadcast.emit(method, {
             ...eventMessage,
             message: `${section}.${method}::${data.toString()}`,
+            // THIS SHOULD BE IMPROVED, CHANGING THIS WILL BREAK EVERYTHING
             data: data.toHuman() as unknown as T
           });
         }
@@ -183,7 +188,10 @@ export async function networkCallback<T>(
       logger('finalized', `Finalized block hash ${status.asFinalized.toHex()}`);
       broadcast.emit('finalized', {
         ...eventMessage,
-        message: `Finalized block hash ${status.asFinalized.toHex()}`
+        message: `Finalized block hash ${status.asFinalized.toHex()}`,
+        data: {
+          hash: status.asFinalized.toHex()
+        } as unknown as T
       });
     }
   }

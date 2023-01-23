@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-namespace */
 
 // @TODO fix this properly or replace it with something that doesn't suck
-// https://gitlab.com/anagolay/network-js-sdk/-/issues/68
+// https://gitlab.com/anagolay/anagolay-js/-/issues/68
 
 interface FileTags {
   'Bits Per Sample'?: NumberFileTag;

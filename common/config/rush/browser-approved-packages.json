@@ -35,6 +35,10 @@
       "allowedCategories": [ "webapp" ]
     },
     {
+      "name": "@crxjs/vite-plugin",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
       "name": "@docusaurus/core",
       "allowedCategories": [ "websites" ]
     },
@@ -55,12 +59,24 @@
       "allowedCategories": [ "webapp" ]
     },
     {
+      "name": "@fortawesome/free-regular-svg-icons",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
       "name": "@kelp_digital/heft-esm-transform-plugin",
       "allowedCategories": [ "libraries", "tools" ]
     },
     {
       "name": "@kelp_digital/heft-library-rig",
       "allowedCategories": [ "libraries", "tools" ]
+    },
+    {
+      "name": "@kelp_digital/sveltekit-adapter-chrome-extension",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
+      "name": "@kelp_digital/sveltekit-adapter-macula",
+      "allowedCategories": [ "webapp" ]
     },
     {
       "name": "@mdx-js/react",
@@ -85,6 +101,10 @@
     {
       "name": "@polkadot/api-base",
       "allowedCategories": [ "libraries" ]
+    },
+    {
+      "name": "@polkadot/extension-base",
+      "allowedCategories": [ "webapp" ]
     },
     {
       "name": "@polkadot/extension-dapp",
@@ -119,12 +139,32 @@
       "allowedCategories": [ "demo", "libraries", "tools", "webapp" ]
     },
     {
+      "name": "@polkadot/ui-keyring",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
+      "name": "@polkadot/ui-shared",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
       "name": "@polkadot/util",
       "allowedCategories": [ "demo", "libraries", "tools", "webapp" ]
     },
     {
       "name": "@polkadot/util-crypto",
       "allowedCategories": [ "libraries", "tools", "webapp" ]
+    },
+    {
+      "name": "@polkadot/x-global",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
+      "name": "@rollup/plugin-commonjs",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
+      "name": "@rollup/plugin-node-resolve",
+      "allowedCategories": [ "webapp" ]
     },
     {
       "name": "@rushstack/eslint-config",
@@ -148,7 +188,7 @@
     },
     {
       "name": "@rushstack/heft-webpack5-plugin",
-      "allowedCategories": [ "libraries", "tools" ]
+      "allowedCategories": [ "libraries", "tools", "webapp" ]
     },
     {
       "name": "@rushstack/node-core-library",
@@ -161,6 +201,10 @@
     {
       "name": "@sentry/node",
       "allowedCategories": [ "libraries" ]
+    },
+    {
+      "name": "@sentry/svelte",
+      "allowedCategories": [ "webapp" ]
     },
     {
       "name": "@sentry/tracing",
@@ -183,6 +227,10 @@
       "allowedCategories": [ "webapp" ]
     },
     {
+      "name": "@sveltejs/vite-plugin-svelte",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
       "name": "@tailwindcss/forms",
       "allowedCategories": [ "webapp" ]
     },
@@ -195,11 +243,19 @@
       "allowedCategories": [ "webapp" ]
     },
     {
+      "name": "@tsconfig/svelte",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
       "name": "@typescript-eslint/eslint-plugin",
       "allowedCategories": [ "webapp" ]
     },
     {
       "name": "@typescript-eslint/parser",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
+      "name": "@vite-pwa/sveltekit",
       "allowedCategories": [ "webapp" ]
     },
     {
@@ -213,6 +269,10 @@
     {
       "name": "chalk",
       "allowedCategories": [ "libraries" ]
+    },
+    {
+      "name": "chrome-types",
+      "allowedCategories": [ "webapp" ]
     },
     {
       "name": "cids",
@@ -247,7 +307,23 @@
       "allowedCategories": [ "libraries", "tools" ]
     },
     {
+      "name": "copy-to-clipboard",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
+      "name": "copy-webpack-plugin",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
+      "name": "css-loader",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
       "name": "daisyui",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
+      "name": "dayjs",
       "allowedCategories": [ "webapp" ]
     },
     {
@@ -299,8 +375,16 @@
       "allowedCategories": [ "libraries" ]
     },
     {
+      "name": "file-loader",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
       "name": "fs-extra",
       "allowedCategories": [ "libraries" ]
+    },
+    {
+      "name": "html-webpack-plugin",
+      "allowedCategories": [ "webapp" ]
     },
     {
       "name": "identicon.js",
@@ -309,6 +393,10 @@
     {
       "name": "inquirer",
       "allowedCategories": [ "libraries", "tools" ]
+    },
+    {
+      "name": "jdenticon",
+      "allowedCategories": [ "webapp" ]
     },
     {
       "name": "jest-environment-jsdom",
@@ -321,6 +409,14 @@
     {
       "name": "json5",
       "allowedCategories": [ "libraries" ]
+    },
+    {
+      "name": "lottie-web",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
+      "name": "mini-css-extract-plugin",
+      "allowedCategories": [ "webapp" ]
     },
     {
       "name": "multihashing-async",
@@ -356,6 +452,10 @@
     },
     {
       "name": "postcss-import",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
+      "name": "postcss-loader",
       "allowedCategories": [ "webapp" ]
     },
     {
@@ -395,12 +495,36 @@
       "allowedCategories": [ "tools" ]
     },
     {
+      "name": "rollup",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
+      "name": "rollup-plugin-css-only",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
+      "name": "rollup-plugin-livereload",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
       "name": "rollup-plugin-node-polyfills",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
+      "name": "rollup-plugin-svelte",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
+      "name": "rollup-plugin-terser",
       "allowedCategories": [ "webapp" ]
     },
     {
       "name": "signale",
       "allowedCategories": [ "libraries", "tools" ]
+    },
+    {
+      "name": "sirv-cli",
+      "allowedCategories": [ "webapp" ]
     },
     {
       "name": "slug",
@@ -411,6 +535,10 @@
       "allowedCategories": [ "libraries", "tools", "webapp" ]
     },
     {
+      "name": "style-loader",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
       "name": "surge",
       "allowedCategories": [ "webapp" ]
     },
@@ -419,11 +547,27 @@
       "allowedCategories": [ "webapp" ]
     },
     {
+      "name": "svelte-awesome",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
       "name": "svelte-check",
       "allowedCategories": [ "webapp" ]
     },
     {
+      "name": "svelte-check-plugin",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
       "name": "svelte-confetti",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
+      "name": "svelte-hmr",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
+      "name": "svelte-loader",
       "allowedCategories": [ "webapp" ]
     },
     {
@@ -452,7 +596,7 @@
     },
     {
       "name": "ts-loader",
-      "allowedCategories": [ "libraries", "tools" ]
+      "allowedCategories": [ "libraries", "tools", "webapp" ]
     },
     {
       "name": "ts-node",
@@ -475,7 +619,15 @@
       "allowedCategories": [ "demo", "libraries", "tools", "webapp" ]
     },
     {
+      "name": "urijs",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
       "name": "vite",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
+      "name": "vite-plugin-banner",
       "allowedCategories": [ "webapp" ]
     },
     {
@@ -487,6 +639,10 @@
       "allowedCategories": [ "webapp" ]
     },
     {
+      "name": "vite-plugin-static-copy",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
       "name": "vite-plugin-top-level-await",
       "allowedCategories": [ "webapp" ]
     },
@@ -495,12 +651,36 @@
       "allowedCategories": [ "webapp" ]
     },
     {
+      "name": "vitest",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
+      "name": "webextension-polyfill",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
       "name": "webpack",
-      "allowedCategories": [ "libraries", "tools" ]
+      "allowedCategories": [ "libraries", "tools", "webapp" ]
+    },
+    {
+      "name": "webpack-cli",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
+      "name": "webpack-dev-server",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
+      "name": "webpack-extension-manifest-plugin",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
+      "name": "webpack-hot-middleware",
+      "allowedCategories": [ "webapp" ]
     },
     {
       "name": "webpack-node-externals",
-      "allowedCategories": [ "libraries", "tools" ]
+      "allowedCategories": [ "libraries", "tools", "webapp" ]
     },
     {
       "name": "wf_cid_from_array",
@@ -508,6 +688,10 @@
     },
     {
       "name": "wf_cidv1_from_array",
+      "allowedCategories": [ "webapp" ]
+    },
+    {
+      "name": "workbox-window",
       "allowedCategories": [ "webapp" ]
     },
     {

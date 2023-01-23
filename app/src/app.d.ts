@@ -1,4 +1,7 @@
 /// <reference types="@sveltejs/kit" />
+/// <reference types="svelte" />
+/// <reference types="vite/client" />
+/// <reference types="vite-plugin-pwa/client" />
 
 // See https://kit.svelte.dev/docs/types#the-app-namespace
 // for information about these interfaces

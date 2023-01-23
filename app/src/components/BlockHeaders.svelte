@@ -1,122 +1,123 @@
 <script lang="ts">
-  import type { UnsubscribePromise } from '@polkadot/api/types';
-  import { clone, equals, isNil, prepend, take } from 'ramda';
-  import { onMount } from 'svelte';
+import type { UnsubscribePromise } from '@polkadot/api/types';
+import { clone, equals, isNil, prepend, take } from 'ramda';
+import { onMount } from 'svelte';
 
-  import { chainConnected, chainStore } from '$src/appStore';
-  import { makeBlockUrl } from '$src/utils/polkdotUrls';
-  import { msToSec } from '$src/utils/utils';
+import { chainConnected, chainStore } from '$src/appStore';
+import { makeBlockUrl } from '$src/utils/polkadotUrls';
+import { msToSec } from '$src/utils/utils';
 
-  import Digits from './base/Digits.svelte';
+import Digits from './base/Digits.svelte';
 
-  /**
-   * How many records we will show in the list
-   */
-  const maxRecords = 52;
+/**
+ * How many records we will show in the list
+ */
+const maxRecords = 52;
 
-  let unsub: UnsubscribePromise;
-  let cancelInterval: any;
+let unsub: UnsubscribePromise;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+let cancelInterval: any;
 
-  let lastBlocks: { blockNumber: number; hash: string; twoBlocksTimeDiff: number }[] = [];
+let lastBlocks: { blockNumber: number; hash: string; twoBlocksTimeDiff: number }[] = [];
 
-  /**
-   * Aura slot duration in miliseconds
-   */
-  let slotDuration: number;
+/**
+ * Aura slot duration in milliseconds
+ */
+let slotDuration: number;
 
-  /**
-   * diff in seconds between lastBlock and LastBlock - 1
-   */
-  let elapsedBetweenBlocks: number;
+/**
+ * diff in seconds between lastBlock and LastBlock - 1
+ */
+let elapsedBetweenBlocks: number;
 
-  async function run() {
-    const { api } = $chainStore;
-    const d = await api.call.auraApi.slotDuration();
-    slotDuration = parseInt(d.toString(), 10);
+async function run() {
+  const { api } = $chainStore;
+  const d = await api.call.auraApi.slotDuration();
+  slotDuration = d.toNumber();
 
-    let lastBlockTime: number;
-    let prevBlockTime: number;
+  let lastBlockTime: number;
+  let prevBlockTime: number;
 
-    // Subscribe to the new headers
-    const u = await api.rpc.chain.subscribeNewHeads(async (lastHeader) => {
-      // console.debug(`last block #${lastHeader.number} has hash ${lastHeader.hash}`);
+  // Subscribe to the new headers
+  const u = await api.rpc.chain.subscribeNewHeads(async (lastHeader) => {
+    // console.debug(`last block #${lastHeader.number} has hash ${lastHeader.hash}`);
 
-      // get the last block time
-      const t = await api.query.timestamp.now();
+    // get the last block time
+    const t = await api.query.timestamp.now();
 
-      if (isNil(prevBlockTime) && isNil(lastBlockTime)) {
-        lastBlockTime = t.toNumber();
-        prevBlockTime = lastBlockTime - slotDuration;
-      } else {
-        prevBlockTime = clone(lastBlockTime);
-      }
-      // set this after the prev time so we can use old value
+    if (isNil(prevBlockTime) && isNil(lastBlockTime)) {
       lastBlockTime = t.toNumber();
+      prevBlockTime = lastBlockTime - slotDuration;
+    } else {
+      prevBlockTime = clone(lastBlockTime);
+    }
+    // set this after the prev time so we can use old value
+    lastBlockTime = t.toNumber();
 
-      // used to start countdown
-      elapsedBetweenBlocks = Math.floor((lastBlockTime - prevBlockTime) / 1000);
+    // used to start countdown
+    elapsedBetweenBlocks = Math.floor((lastBlockTime - prevBlockTime) / 1000);
 
-      // must clear interval otherwise the countdown goes crazy
-      clearInterval(cancelInterval);
+    // must clear interval otherwise the countdown goes crazy
+    clearInterval(cancelInterval);
 
-      // take first amount of records specifid by maxRecords
-      lastBlocks = take(
-        maxRecords,
-        prepend(
-          {
-            blockNumber: lastHeader.number.toNumber(),
-            hash: lastHeader.hash.toString(),
-            twoBlocksTimeDiff: clone(elapsedBetweenBlocks)
-          },
-          lastBlocks
-        )
-      );
+    // take first amount of records specifid by maxRecords
+    lastBlocks = take(
+      maxRecords,
+      prepend(
+        {
+          blockNumber: lastHeader.number.toNumber(),
+          hash: lastHeader.hash.toString(),
+          twoBlocksTimeDiff: clone(elapsedBetweenBlocks)
+        },
+        lastBlocks
+      )
+    );
 
-      cancelInterval = setInterval(() => {
-        if (!equals(elapsedBetweenBlocks, 0)) {
-          elapsedBetweenBlocks -= 1;
-        }
-      }, 1000);
-    });
-    unsub = u as unknown as UnsubscribePromise;
-  }
+    cancelInterval = setInterval(() => {
+      if (!equals(elapsedBetweenBlocks, 0)) {
+        elapsedBetweenBlocks -= 1;
+      }
+    }, 1000);
+  });
+  unsub = u as unknown as UnsubscribePromise;
+}
 
-  function showTimeVariant(timeDiff: number): string {
-    const slotAsSeconds = slotDuration / 1000;
-    if (timeDiff > slotDuration) {
-      // return `${slotAsSeconds}s(+${timeDiff}s)`;
-      return `
+function showTimeVariant(timeDiff: number): string {
+  const slotAsSeconds = slotDuration / 1000;
+  if (timeDiff > slotDuration) {
+    // return `${slotAsSeconds}s(+${timeDiff}s)`;
+    return `
 <span class="gap-2">${timeDiff}
   <div class="badge badge-warning">+${timeDiff - slotAsSeconds}</div>
 </span>`;
-    } else if (equals(timeDiff, slotAsSeconds)) {
-      // return `${slotAsSeconds}s`;
-      return `
+  } else if (equals(timeDiff, slotAsSeconds)) {
+    // return `${slotAsSeconds}s`;
+    return `
 <span class="gap-2">${timeDiff}
   <div class="badge badge-success">${timeDiff - slotAsSeconds}</div>
 </span>`;
-    } else {
-      // return `${slotAsSeconds}s(-${timeDiff}s)`;
-      return `
+  } else {
+    // return `${slotAsSeconds}s(-${timeDiff}s)`;
+    return `
 <span class="gap-2">${timeDiff}
   <div class="badge badge-warning">${timeDiff - slotAsSeconds}</div>
 </span>`;
-    }
   }
+}
 
-  onMount(() => {
-    return () => {
-      console.log('unmounting');
+onMount(() => {
+  return () => {
+    console.log('unmounting');
 
-      unsub;
-    };
-  });
+    unsub;
+  };
+});
 
-  $: {
-    if ($chainConnected) {
-      run();
-    }
+$: {
+  if ($chainConnected) {
+    run();
   }
+}
 </script>
 
 <div class="mt-2">
@@ -146,8 +147,7 @@
                     stroke-linecap="round"
                     stroke-linejoin="round"
                     stroke-width="2"
-                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                  /></svg
+                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg
                 >
               </label>
               <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
@@ -156,7 +156,7 @@
                   <h2 class="card-title">Block production time</h2>
                   <p class="prose font-normal">
                     Target is {msToSec(slotDuration)}s. <br />
-                    The green means the block is produces in target time, orange that it's either faster or slower
+                    The green means the block is producing in target time, orange that it's either faster or slower
                   </p>
                 </div>
               </div>
@@ -170,8 +170,8 @@
         <tr>
           <td>
             <!-- svelte-ignore security-anchor-rel-noreferrer -->
-            <a href={makeBlockUrl(hash)} target="_blank" class="link">
-              <Digits digits={blockNumber} />
+            <a href="{makeBlockUrl(hash)}" target="_blank" class="link">
+              <Digits digits="{blockNumber}" />
             </a>
           </td>
           <td>{hash}</td>
