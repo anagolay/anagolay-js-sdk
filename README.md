@@ -1,7 +1,7 @@
 [![pipeline status](https://gitlab.com/anagolay/anagolay-js/badges/main/pipeline.svg)](https://gitlab.com/anagolay/anagolay-js/-/commits/main)
 [![coverage report](https://gitlab.com/anagolay/anagolay-js/badges/main/coverage.svg?job=test-and-build)](https://gitlab.com/anagolay/anagolay-js/-/commits/main)
 
-![Anagolay SDK banner](https://macula.kelp.digital/ipfs/bafybeih6hpvgetxd5uer6jv3ys3xtoyfrlk2x7okqmm6d4ci7dthigyvzm)
+![Anagolay SDK banner](https://ipfs.macula.link/ipfs/bafybeih6hpvgetxd5uer6jv3ys3xtoyfrlk2x7okqmm6d4ci7dthigyvzm)
 
 ## Anagolay Network JS/TS SDK for lazy devs 👩‍💻🚀👨‍💻
 
